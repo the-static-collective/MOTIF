@@ -293,6 +293,20 @@ class SkepticalScientistTests(unittest.TestCase):
         self.assertEqual(s["forced_baseline_wrong_total"],160)
         self.assertTrue(result["safety_audit"]["real_action_dispatched"] is False)
 
+    def test_committed_receipts_match_fresh_synthetic_reproduction(self):
+        import demo
+        location=Path(__file__).parent
+        measured=json.loads((location/"experiment-results.json").read_text())
+        transcript=json.loads((location/"example-skeptic.json").read_text())
+        router=json.loads((location/"example-derived-router.json").read_text())
+        self.assertEqual(measured,benchmark.benchmark())
+        self.assertEqual(transcript,demo.demonstrate())
+        self.assertEqual(router,transcript["portable_new_concept_router"])
+        self.assertEqual(skeptic.decode_extension(json.dumps(router)).id,
+                         router["id"])
+        self.assertEqual(transcript["heldout_router_correct"],16)
+        self.assertEqual(transcript["heldout_router_total"],16)
+
     def test_repeated_seed_is_deterministic(self):
         self.assertEqual(benchmark.evaluate("visible_third",11),
                          benchmark.evaluate("visible_third",11))
