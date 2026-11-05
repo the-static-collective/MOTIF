@@ -11,6 +11,11 @@ from dataclasses import dataclass
 from functools import lru_cache
 from itertools import product
 from random import Random
+from pathlib import Path
+import sys
+
+# The evaluator may be imported independently of the learner/cartridge.
+sys.path.append(str(Path(__file__).resolve().parents[1] / "law-forge-008"))
 from learner import (
     WIDTH, DOMAIN, SourceContract, Observation, Question,
     controls, question_cost, consequence_weight,
