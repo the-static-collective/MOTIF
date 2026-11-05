@@ -30,7 +30,7 @@ export function verifyMemorySourceOwners(){
  const mismatches=[];
  for(const [relative,expected] of Object.entries(PINNED)){
   const bytes=readFileSync(new URL(relative,import.meta.url));
-  const blob=createHash('sha1').update(Buffer.from('blob '+bytes.length+'\\0'))
+  const blob=createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0'))
    .update(bytes).digest('hex');
   if(blob!==expected)mismatches.push(relative);
  }
