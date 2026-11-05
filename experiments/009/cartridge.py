@@ -9,6 +9,9 @@ review admits *read-only prediction only*, never physical execution, consent,
 action dispatch, or an external authority. Python 3.10+ standard library.
 """
 from __future__ import annotations
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "008"))
 
 from collections import Counter
 from dataclasses import dataclass
