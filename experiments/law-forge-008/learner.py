@@ -204,6 +204,7 @@ def choose_question(rows, pool, method, budget, used):
         raise ValueError("Unknown method for frozen experiment-selection policy")
     if type(budget) is not int or budget < 0:
         raise ValueError("Invalid inquiry budget")
+    rows = tuple(rows)  # preserve witnesses for both exclusion and version-space fit
     seen = {x for x, _ in rows} | set(used)
     available = tuple(q for q in pool if q.x not in seen and q.unit_cost <= budget)
     if not available:
