@@ -46,6 +46,27 @@ The questions can be single edges or composed two-edge existential joins. The le
 
 The in-sample leaf probabilities are simple Laplace-smoothed *heuristics*, **not calibrated probabilities**.
 
+### A literal cartridge you can inspect
+
+The checked-in [example-tree-cartridge.json](example-tree-cartridge.json) is an actual CI-generated portable cartridge learned on the **synthetic XOR world**, not a hand-drawn design.
+
+It holds two role-relative unary questions over opaque graph predicates, with four Boolean leaves:
+
+```text
+                         TREE CARTRIDGE
+                      /                  \
+          property present for target?    property present for actor?
+                       \                /
+                        \              /
+                 [false, true, true, false]
+```
+
+This leaf table represents **exclusive OR**: success is predicted when exactly one tested property holds. The abstract predicate names are produced by the synthetic world, so the cartridge has not interpreted their meanings.
+
+The artifact includes source-claim evidence counts, a semantic ID and checksum. It is inspectable, transferable as JSON, and defaults to **HOLD** at a receiving bay. The separate [cartridge_demo.py](cartridge_demo.py) reproduces it, performs a local read-only review, and proposes the next *unlabeled* observation ticket.
+
+**One important distinction:** the cartridge itself predicts; the *experimenter* chooses what to observe next based on cartridges' disagreements and sparsely supported branches. It does not turn graph predicates into real-world executable operations.
+
 ### Portable but not authoritative
 
 [cartridge.py](cartridge.py) contains the source-defined **CartridgeBay**.
