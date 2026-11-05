@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { buildNativeEvidence } from './native_memento.mjs';
 import { checkUnderstory } from './understory.mjs';
+import { proposeNextProbe, executeNativeProbe } from './probe_selection.mjs';
 
 export async function runNativeBridge({
   mementoRoot = process.env.MEMENTO_ROOT,
@@ -31,6 +32,12 @@ export async function runNativeBridge({
       result.authority !== 'NONE' || result.external_actions !== 0)
     throw Error('Invalid or unsafe MOTIF interop result');
 
+  // The model's frozen validation-selected concept now determines which
+  // unexecuted Role Nursery probe may discriminate the remaining roles.
+  const proposedProbe = proposeNextProbe(result,source.nursery,source.coarse.probeKeys);
+  const measuredProbe = await executeNativeProbe(mementoRoot,source.nursery,proposedProbe,{
+    authorizeSyntheticProbe:true,
+  });
   const understory = await checkUnderstory(mementoRoot,result);
   return {
     schema:'motif019.memento-understory/v0',
@@ -44,11 +51,15 @@ export async function runNativeBridge({
       proposedAffordances:source.field.affordanceSchemas.length,
       proposedRoles:source.nursery.candidates.length,
       coarseProbeSeparates:source.coarse.separatesCandidates,
-      expandedProbeSeparates:source.expanded.separatesCandidates,
+      motifSelectedProbe: proposedProbe.selectedProbe,
+      nativeProbeStatus:measuredProbe.status,
+      nativeProbeSeparates:measuredProbe.receipt?.separatesCandidates ?? null,
       installedGrammarRules:source.grammar.rules.filter(r=>r.status==='admitted').length,
       admittedRoles:source.nursery.candidates.filter(c=>c.status==='admitted').length,
     },
     motif:result,
+    probeProposal:proposedProbe,
+    nativeProbeReceipt:measuredProbe.receipt,
     understory,
     sourceEvidenceAuthenticated:false,
     externalActions:0,
