@@ -58,7 +58,7 @@ class BoundaryTests(unittest.TestCase):
         self.assertFalse(result["independent_synthetic_run"]["authenticated_real_world"])
         self.assertEqual(result["bridge_kind"],"TRUSTED_STRUCTURE_NOT_REAL_CHORUS_WORKER")
         self.assertEqual(result["external_actions"],0)
-        self.assertFalse(result["permissions_inferred"])
+        self.assertFalse(result["human_permissions_inferred"])
         self.assertFalse(result["primary_native_plan_overwritten"])
 
     def test_audio_hint_refused_as_duplicate_native_probing(self):
