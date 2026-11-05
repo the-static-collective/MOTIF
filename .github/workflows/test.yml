@@ -44,6 +44,13 @@ jobs:
           echo '__MOTIF009_RESULT_START__'
           cat /tmp/motif009.json
           echo '__MOTIF009_RESULT_END__'
+      - name: Reproduce 009 development stress
+        working-directory: experiments/009
+        run: |
+          python stress.py > /tmp/motif009stress.json
+          echo '__MOTIF009_STRESS_START__'
+          cat /tmp/motif009stress.json
+          echo '__MOTIF009_STRESS_END__'
       - name: Reproduce 008
         working-directory: experiments/008
         run: |
