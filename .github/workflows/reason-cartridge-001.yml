@@ -1,0 +1,44 @@
+name: REASON-CARTRIDGE-001 synthetic learning
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-001-teacher-corrections
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-001/**'
+      - '.github/workflows/reason-cartridge-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reason-correction-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Teacher correction / adversarial regression suite
+        run: python -m unittest discover -s experiments/reason-cartridge-001 -p 'test_*.py' -v
+      - name: Generate and assert independent heldout receipt
+        run: |
+          python experiments/reason-cartridge-001/demo.py > reason-teaching-receipt.json
+          python - <<'PY'
+          import json
+          with open("reason-teaching-receipt.json", encoding="utf-8") as stream:
+              r = json.load(stream)
+          assert r["training_probes"] <= 10
+          assert r["heldout_cases"] == 16
+          assert r["learned_correct"] == 16
+          assert r["rote_baseline_correct"] == 5
+          assert r["full_knowledge_teacher_correct"] == 16
+          assert r["receiver_admitted_read_only"] is True
+          assert r["real_world_authority"] is False
+          print({k: r[k] for k in ("training_probes", "heldout_cases", "rote_baseline_correct", "learned_correct", "receiver_admitted_read_only")})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-cartridge-synthetic-receipt
+          path: reason-teaching-receipt.json
