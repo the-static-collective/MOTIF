@@ -37,6 +37,11 @@ copy any MEMENTO source code to MOTIF, or export private UNDERSTORY content.
   passed at `e9754bd5f16993b5eddd8071219756fbfd4780ed`.
 - MOTIF's separate Python `test_interop_stdio.py` checks isolation,
   type limits, schema rejection, holdout blindness and negative transfer.
+- The public pure-policy tests confirm the new probe is selected **because of
+  MOTIF's chosen program**: \`path2(carries,reaches)\` selects \`reaches\`,
+  while a distinct reviewable \`direct(marked)\` would select \`marked\`.
+  Unsupported or uninformative programs, rival models, unauthenticated
+  source flags and missing permission HOLD rather than executing.
 - The new JavaScript bridge contains a cross-repository **native execution
   test**. This test **skips unless MEMENTO_ROOT is supplied**. Public MOTIF
   Actions cannot access the private MEMENTO repo using the default token.
@@ -104,3 +109,24 @@ new observation, testing a proposed action, or retaining uncertainty. Compare
 with conventional experimental design and program synthesis on the identical
 observation budget. Only a separate reviewed threshold should install a
 learned route, grant power, or write persistent UNDERSTORY records.
+
+## Closed-loop result and limitations (019 follow-up)
+
+The initial bridge merely ran a **preselected** additional Role Nursery probe.
+That has now been removed. The current chain is:
+
+\`RFA witnesses → Role Nursery coarse collision → MOTIF training/validation concept → dynamic candidate probe → expected collision reduction → gated native MEMENTO probe → UNDERSTORY six-family HOLD/activation trace\`.
+
+**What is measured:** MOTIF chooses a probe *name* from its validated
+\`direct\` or \`path2\` program; a finite, already-defined Role Nursery
+profile supplies values for that probe. This is **not** invention of a
+physical sensor or independent measurement of the outside world. The
+probe-selection policy's public tests are actual executed tests; the private
+MEMENTO native end-to-end tests still require an owner checkout.
+
+**Falsifier:** A competing concept that fits training but fails validation
+must not be offered; if a valid concept's named fields do not distinguish
+MEMENTO's roles, the policy returns HOLD. Inverting sealed holdout outcomes
+must not alter which probe was selected, but must collapse predictive
+accuracy. The native integration test covers that once a private checkout is
+available. No private source is published here.
