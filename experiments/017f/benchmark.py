@@ -7,6 +7,7 @@ from statistics import mean
 
 from diagnostic import examine_room, run_policy
 from grower import draft_questions, review_question
+from frontier import inspect_diagnostic
 from oracle import TestWorld, problem, reviewed_receipts
 
 
@@ -14,6 +15,7 @@ def benchmark():
     hypotheses, roads, offers = problem()
     proposed = draft_questions([h.name for h in hypotheses], roads, offers)
     offers_by_name = {p.offer.name: p for p in proposed}
+    frontier_before = inspect_diagnostic(hypotheses, roads, proposed)
     admissions = {}
     opportunities = {}
     for proposal in proposed:
@@ -24,6 +26,7 @@ def benchmark():
             hypotheses, roads, proposal, result
         )
 
+    frontier_after = inspect_diagnostic(hypotheses, roads, proposed, admissions)
     heldout_worlds = [TestWorld(h.name, "TEST", 1000+i)
                       for i, h in enumerate(hypotheses)]
     old = [run_policy("FROZEN_FIXED", hypotheses, roads, w)
@@ -81,6 +84,10 @@ def benchmark():
                 "reviewed_count": admissions[p.offer.name].reviewed,
                 "review_counterexamples": admissions[p.offer.name].counterexamples,
             } for p in proposed
+        },
+        "method_frontier": {
+            "before_independent_review": asdict(frontier_before),
+            "after_independent_review": asdict(frontier_after),
         },
         "diagnostic": {
             name: asdict(assessment)
