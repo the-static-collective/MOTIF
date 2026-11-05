@@ -191,7 +191,7 @@ def route(data):
   }
  require(data["preview_id"]==stamp,
          "HOLD_CHANGED_MAIL_RECIPIENT_OR_MESSAGE_REVIEW_AGAIN")
- mailto="mailto:"+quote(recipient,safe="@._%+-") + "?" + urlencode(
+ mailto="mailto:"+quote(recipient,safe="@._+-") + "?" + urlencode(
     {"subject":subject,"body":message},quote_via=quote)
  require(len(mailto)<=MAX_MAILTO and mailto.startswith("mailto:") and
          not any(c in mailto for c in "\r\n"),"HOLD_UNSAFE_MAILTO_LENGTH")
