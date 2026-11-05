@@ -24,7 +24,7 @@ jobs:
         working-directory: experiments/018
         run: python -m unittest -v test_interop_stdio.py
       - name: JavaScript syntax and public boundary tests (native private tests require owner checkout)
-        run: node --test experiments/019/bridge.test.mjs
+        run: node --test experiments/019/bridge.test.mjs experiments/019/probe_selection.test.mjs
       - name: Python native MOTIF 018 regression tests
         working-directory: experiments/018
         run: python -m unittest -v test_unknown_unknown.py test_green_grammar.py
