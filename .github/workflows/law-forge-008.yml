@@ -1,0 +1,81 @@
+name: MOTIF Law Forge 008 — Unknown World Question Machine
+
+on:
+  push:
+    branches:
+      - research/law-forge-008-unknown-world-20261105
+    paths:
+      - 'experiments/law-forge-007/**'
+      - 'experiments/law-forge-008/**'
+      - '.github/workflows/law-forge-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-007/**'
+      - 'experiments/law-forge-008/**'
+      - '.github/workflows/law-forge-008.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unknown-world:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reverify all inherited Law Forge experiments
+        run: |
+          python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-006 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-007 -p 'test_*.py' -v
+      - name: Verify unknown-world question selection and abstention rules
+        run: python -m unittest discover -s experiments/law-forge-008 -p 'test_*.py' -v
+      - name: Generate frozen development and independent evaluation
+        run: |
+          mkdir -p law-forge-008-receipts
+          python experiments/law-forge-008/trial.py > law-forge-008-receipts/benchmark.json
+          python -m json.tool law-forge-008-receipts/benchmark.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("law-forge-008-receipts/benchmark.json"))
+          print(json.dumps({"development":r["development"],
+                            "evaluation":r["evaluation"],
+                            "frozen_decision":r["frozen_method_decision"]},indent=2))
+          PY
+      - name: Emit a real question desk packet without asking the owner
+        run: |
+          python - <<'PY'
+          import sys,json
+          sys.path.insert(0,"experiments/law-forge-008")
+          from owner import World
+          from desk import dispatch, SCHEMA
+          w=World("pair_xor",3)
+          rows=[{"x":list(o.x),"y":o.y,"contract_id":o.contract_id,
+                 "provenance":o.provenance} for o in w.initial()]
+          request={"schema":SCHEMA,"action":"propose",
+                   "contract":w.contract.packet(),
+                   "observations":rows,
+                   "catalog":[q.packet() for q in w.query_catalog()],
+                   "remaining_budget":24,"method":"motif_consequence"}
+          result=dispatch(request)
+          assert result["status"]=="PROPOSE_ONLY_SYNTHETIC_QUESTION"
+          assert result["owner_must_execute"] is True
+          open("law-forge-008-receipts/question-proposal.json","w").write(
+              json.dumps(result,indent=2,sort_keys=True)+"\n")
+          PY
+      - name: Retain inspectable trial, limitations and question proposal
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-008-unknown-world-receipts
+          path: law-forge-008-receipts/
+          retention-days: 30
