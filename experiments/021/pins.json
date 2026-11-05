@@ -1,0 +1,36 @@
+{
+  "schema": "motif021.pinned-organ-snapshots/v0",
+  "note": "These are exact public source-only Git blobs copied onto a draft experimental branch. Byte identity does not grant evidence or execution authority.",
+  "branches": {
+    "alex": {
+      "repository": "the-static-collective/ALEX.2",
+      "commit": "c697ce69258cf894be8e7323bd64c81093bd199c"
+    },
+    "planz": {
+      "repository": "the-static-collective/planZ",
+      "commit": "b4c954c628991acc9d9f41cd42c2b1951bc5855c"
+    },
+    "graft": {
+      "repository": "the-static-collective/GRAFT",
+      "commit": "d4cefba0151d4813f8589663de14e0fc7cf2c242"
+    }
+  },
+  "files": {
+    "alex-snapshot/tools/motif021-search.mjs": "95e4b0ea003550d0442e800a72289cf2f8698446",
+    "alex-snapshot/research/packets/MOTIF-021/source-manifest.json": "5f8195d2b2e8b73a1d84603a04a00c196b13aecf",
+    "alex-snapshot/research/packets/MOTIF-021/research-packet.json": "71485bd8327bb1bf320d00e0e6e1cee3449365b6",
+    "alex-snapshot/research/packets/MOTIF-021/sources/motif020-design.md": "0fd316f17d0a1e0a2d7dc956b83cece3d08dd494",
+    "alex-snapshot/research/packets/MOTIF-021/sources/motif019-design.md": "19dc84abca872aee4d111378da75e8942cce5a9a",
+    "alex-snapshot/research/packets/MOTIF-021/sources/alex-skill.md": "835543c250b76150953e89a5e6946a5ba50ae077",
+    "alex-snapshot/research/packets/MOTIF-021/sources/planz-readme.md": "519640da0d67d3ad31a75ae7215fe4e8171fc065",
+    "alex-snapshot/research/packets/MOTIF-021/sources/graft-readme.md": "a4a5ee55cf349edba34842a6bfa5313d6fdba4b9",
+    "planz-snapshot/scripts/motif-classical.mjs": "22d75c26039e5783b59cf71be02982428603128c",
+    "planz-snapshot/plans/MOTIF-021-classical.json": "ce8d9c2c67ccaedb748c50580e5a056f761c354b",
+    "planz-snapshot/intake/MOTIF-021/alex-research-packet.json": "71485bd8327bb1bf320d00e0e6e1cee3449365b6",
+    "graft-snapshot/src/motif021-composer.mjs": "423496e4eba46715839621cc51e024bd238aedf3",
+    "graft-snapshot/vendor/planZ/motif-classical.mjs": "22d75c26039e5783b59cf71be02982428603128c",
+    "graft-snapshot/inputs/MOTIF-021/alex-research-packet.json": "71485bd8327bb1bf320d00e0e6e1cee3449365b6",
+    "graft-snapshot/inputs/MOTIF-021/planz-classical-plan.json": "ce8d9c2c67ccaedb748c50580e5a056f761c354b",
+    "graft-snapshot/generated/motif021-source-review.mjs": "eb158807bbedc33ed75b1cd353c08d1a2d111ba1"
+  }
+}
