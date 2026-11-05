@@ -1,0 +1,46 @@
+name: MOTIF Law Forge 002 — bounded constructor synthesis
+
+on:
+  push:
+    branches:
+      - research/law-forge-002-constructor-20261105
+    paths:
+      - 'experiments/law-forge-001/**'
+      - 'experiments/law-forge-002/**'
+      - '.github/workflows/law-forge-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-001/**'
+      - 'experiments/law-forge-002/**'
+      - '.github/workflows/law-forge-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  constructor-forge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify inherited previous experiment
+        run: python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+      - name: Verify bounded constructor synthesis and adversarial review
+        run: python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+      - name: Generate full predeclared benchmark receipt
+        run: |
+          python experiments/law-forge-002/trial.py > law-forge-002-results.json
+          python -m json.tool law-forge-002-results.json > /dev/null
+      - name: Report predeclared method comparison
+        run: |
+          python -c "import json; r=json.load(open('law-forge-002-results.json')); print(json.dumps({'development': r['development'], 'evaluation': r['evaluation'], 'decision': r['frozen_method_decision']}, indent=2))"
+      - name: Preserve synthetic trial receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-002-receipt
+          path: law-forge-002-results.json
+          retention-days: 30
