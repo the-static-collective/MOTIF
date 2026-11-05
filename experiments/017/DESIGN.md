@@ -36,7 +36,7 @@ The separate exact **adaptive Bayesian two-step dynamic program** sees the same 
 5. Anti-reliable calibrated synthetic source: reverse the likelihood; no inference of malicious intent.
 6. Missing original source: National Treasure Question Box HOLD, and Dogram is not called.
 7. Independently disagreeing sources: return HOLD rather than manufacture certainty.
-8. **Unannounced inversion of a previously calibrated source:** a counterexample that may fool the Bayesian method. A declared historical calibration is not a guarantee about the next environment.
+8. **Unannounced inversion of a previously calibrated source:** a counterexample that may fool the Bayesian method. A declared historical calibration is not a guarantee about the next environment. A frozen 240-trial-per-regime evaluator records hypothetical candidate choices, incorrect choices, abstentions and realized synthetic loss including probe costs. It compares the strategy with the strong always-HOLD alternative; the hidden regime never enters the planner.
 9. Altered cartridge, outside-scope report, missing calibration, budget abuse: HOLD or reject.
 
 ## Run
