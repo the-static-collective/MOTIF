@@ -37,7 +37,7 @@ def githash(raw):
     return sha1(b"blob "+str(len(raw)).encode("ascii")+bytes([0])+raw).hexdigest()
 
 def read_pinned(path=SOURCE):
-    require(type(path) is Path and path.is_file() and not path.is_symlink(),
+    require(isinstance(path,Path) and path.is_file() and not path.is_symlink(),
             "LOCAL_PINNED_SOURCE_NOT_FOUND")
     require(0<path.stat().st_size<=MAX_BYTES,
             "RESOURCE_WITNESS_OVERSIZE_OR_EMPTY")
