@@ -37,6 +37,12 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 017F self-growing diagnostic, classical parity and honest drift failures
+        working-directory: experiments/017f
+        run: |
+          python -m unittest -v test_grow.py
+          python benchmark.py > /tmp/motif017f.json
+          cat /tmp/motif017f.json
       - name: Test 016 adaptive living forest and independent baselines
         working-directory: experiments/016
         run: |
