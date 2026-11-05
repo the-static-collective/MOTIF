@@ -46,39 +46,40 @@ def held_out_score(car, test):
     return round(balanced_accuracy(y, guess), 4)
 
 
-def experiment(family: str, seed: int) -> dict:
+def experiment(family: str, seed: int, *, initial=INITIAL,
+               requests=REQUESTS, pool_size=POOL) -> dict:
     """Fixed protocol. Neither active proposal nor random baseline sees answer."""
     spec = spec_for(family, seed)
-    generated = split(spec, "train", INITIAL + POOL)
+    generated = split(spec, "train", initial + pool_size)
     testing = split(spec, "test", TEST)
-    revealed = list(generated[:INITIAL])
+    revealed = list(generated[:initial])
     first = fit_cartridge(revealed)
     active = list(revealed)
     passive = list(revealed)
     candidates = [public_question(i, case.before, case.roles)
-                  for i, case in enumerate(generated[INITIAL:])]
-    secret = {q.ticket: generated[INITIAL + i] for i, q in enumerate(candidates)}
+                  for i, case in enumerate(generated[initial:])]
+    secret = {q.ticket: generated[initial + i] for i, q in enumerate(candidates)}
     # Test integrity: only unlabeled Question objects can enter selector.
     assert all(set(vars(q)) == {"ticket", "before", "roles"}
                for q in candidates)
 
     randomizer = Random(seed * 10007 + sum(ord(c) for c in family))
-    random_order = randomizer.sample(tuple(q.ticket for q in candidates), REQUESTS)
+    random_order = randomizer.sample(tuple(q.ticket for q in candidates), requests)
     available = tuple(candidates)
-    budget_active, budget_random = QueryBudget(REQUESTS), QueryBudget(REQUESTS)
+    budget_active, budget_random = QueryBudget(requests), QueryBudget(requests)
     checkpoints = {}
     query_receipts = []
     initial_tree = export_cartridge(first)
     assert validate_cartridge(initial_tree) == first
 
-    for step in range(REQUESTS + 1):
+    for step in range(requests + 1):
         if step in CHECKPOINTS:
             checkpoints[str(step)] = {
                 "active_balanced": held_out_score(fit_cartridge(active), testing),
                 "random_balanced": held_out_score(fit_cartridge(passive), testing),
                 "active_seen": len(active), "random_seen": len(passive)
             }
-        if step == REQUESTS:
+        if step == requests:
             break
         committee = train_committee(active, seed=seed * 1000 + step,
                                     members=3)
@@ -107,8 +108,8 @@ def experiment(family: str, seed: int) -> dict:
     end_active = fit_cartridge(active)
     end_random = fit_cartridge(passive)
     return {
-        "family": family, "seed": seed, "initial": INITIAL,
-        "requests_per_policy": REQUESTS,
+        "family": family, "seed": seed, "initial": initial,
+        "requests_per_policy": requests,
         "test_size": TEST,
         "oracle_answers_revealed_active": len(budget_active.used),
         "oracle_answers_revealed_random": len(budget_random.used),
@@ -119,14 +120,14 @@ def experiment(family: str, seed: int) -> dict:
         "random_fit_balanced": end_random.fit_balanced,
         "checkpoints": checkpoints,
         "active_vs_random_final": round(
-            checkpoints[str(REQUESTS)]["active_balanced"] -
-            checkpoints[str(REQUESTS)]["random_balanced"], 4),
+            checkpoints[str(requests)]["active_balanced"] -
+            checkpoints[str(requests)]["random_balanced"], 4),
         "questions": query_receipts
     }
 
 
-def summarize(worlds):
-    checkpoint = str(REQUESTS)
+def summarize(worlds, *, initial=INITIAL, requests=REQUESTS, version=VERSION):
+    checkpoint = str(requests)
     a = [x["checkpoints"][checkpoint]["active_balanced"] for x in worlds]
     b = [x["checkpoints"][checkpoint]["random_balanced"] for x in worlds]
     if len(a) != len(b) or len(a) != len(FAMILIES) * len(SEEDS):
@@ -152,10 +153,10 @@ def summarize(worlds):
             "losses": sum(x["active_vs_random_final"] < 0 for x in group),
         }
     return {
-        "version": VERSION,
+        "version": version,
         "scope": "POOL_BASED_SYNTHETIC_ACTIVE_OBSERVATIONS",
         "worlds": len(worlds), "families": list(FAMILIES), "seeds": list(SEEDS),
-        "initial_labeled_each": INITIAL, "additional_queries_each": REQUESTS,
+        "initial_labeled_each": initial, "additional_queries_each": requests,
         "unlabeled_pool_each": POOL, "held_out_test_each": TEST,
         "test_labels_available_to_selector": False,
         "oracle_rules_available_to_selector": False,
@@ -213,12 +214,15 @@ def cartridge_review_demo():
     }
 
 
-def report():
-    worlds = [experiment(family, seed)
+def report(*, initial=INITIAL, requests=REQUESTS, version=VERSION):
+    if requests != CHECKPOINTS[-1] or initial < 2 or initial + requests > 112:
+        raise ValueError("Unregistered observation budget; version protocol explicitly")
+    worlds = [experiment(family, seed, initial=initial, requests=requests)
               for family in FAMILIES for seed in SEEDS]
     return {
         "experiment": "MOTIF-009",
-        "summary": summarize(worlds),
+        "summary": summarize(worlds, initial=initial,
+                             requests=requests, version=version),
         "cartridge_local_review": cartridge_review_demo(),
         "worlds": worlds,
     }
