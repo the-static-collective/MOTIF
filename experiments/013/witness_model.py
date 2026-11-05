@@ -293,6 +293,27 @@ def confidence_intervals(fit_state,command,seed=0,draws=500):
             round(vals[int(.95*draws)],5))
 
 
+def source_reliability_intervals(fit_state,seed=0,draws=1000):
+    """90% Monte Carlo intervals from independently adjudicated Beta
+    source-reliability calibration posteriors. This estimates each witness
+    channel's report correctness, not truth probability or source identity.
+    """
+    if type(draws) is not int or not 100<=draws<=10000:
+        raise ValueError("Bounded source calibration interval sampling")
+    rng=Random(seed)
+    output={}
+    for name,a,b in fit_state.reliabilities:
+        sample=sorted(rng.betavariate(a,b) for _ in range(draws))
+        output[name]={
+            "posterior_mean":round(a/(a+b),5),
+            "interval_90":(round(sample[int(.05*draws)],5),
+                           round(sample[int(.95*draws)],5)),
+            "adjudicated_evidence":a+b-sum(SOURCE_PRIOR),
+            "real_world_source_identity_verified":False
+        }
+    return output
+
+
 def _source_likelihood_for_pattern(pattern,reliabilities,q):
     return _mixture_likelihood(
         tuple(zip(sorted(reliabilities),pattern)),reliabilities,q)
