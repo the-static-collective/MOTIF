@@ -1,0 +1,43 @@
+name: MOTIF 020 — GHoT embodied resource evidence
+
+on:
+  pull_request:
+    paths:
+      - "experiments/020/**"
+      - ".github/workflows/reality-iron-020.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  embodied-inquiry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch exact GHoT owner physical resource receipt
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 0cbd111a1f7d58a3e4d1dacaeb6be067cbffe9ad
+          persist-credentials: false
+          path: ghot-resource-source
+      - name: Verify source-owned receipt bytes, fail closed on changed evidence
+        run: |
+          test "$(git hash-object experiments/020/evidence/ghot-resource-witness-2026-11-05.json)" = "4c46c92b0529920f4b990d45b64a855abdb7d385"
+          cmp experiments/020/evidence/ghot-resource-witness-2026-11-05.json ghot-resource-source/evidence/resource-witness-2026-11-05.json
+      - name: Real receipt source and adversarial validation tests
+        run: python3 -m unittest discover -s experiments/020 -p "test_*.py" -v
+      - name: Emit held-for-replication measured resource decision
+        run: python3 experiments/020/ghot_resource_bridge.py --out motif-020-resource-question.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-020-ghot-measured-inquiry
+          path: motif-020-resource-question.json
+          retention-days: 30
