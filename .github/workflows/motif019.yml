@@ -1,0 +1,44 @@
+name: MOTIF-019 Hidden Common Ancestor
+on:
+  push:
+    branches:
+      - research/019-hidden-common-ancestor
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - 'experiments/016/**'
+      - 'experiments/017/**'
+      - 'experiments/018/**'
+      - 'experiments/019/**'
+      - '.github/workflows/motif019.yml'
+jobs:
+  native-source-lineage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original National Treasure and native Dogram
+        run: node --test experiments/014/test_garden.mjs
+      - name: Generated methods
+        run: node --test experiments/015/test_graft.mjs
+      - name: Generated meta-methods
+        run: node --test experiments/016/test_meta.mjs
+      - name: Question evidence acquisition
+        run: node --test experiments/017/test_question_machine.mjs
+      - name: Witness source drift and reference corruption
+        run: node --test experiments/018/test_witness_machine.mjs
+      - name: Conditional hidden shared-factor tests and genealogy refusals
+        run: node --test experiments/019/test_common_ancestor.mjs
+      - name: Generate reviewable synthetic ancestor dossier
+        run: node experiments/019/common_ancestor.mjs > motif019-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif019-hidden-common-ancestor-synthetic
+          path: motif019-research.json
+          retention-days: 14
