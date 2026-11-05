@@ -1,7 +1,7 @@
 # MOTIF — THE OUTERMOST CIRCLE
 ## A research program for native intelligence built from consequential change
 
-Status: **speculative architecture** with eight bounded, standard-library, synthetic experiments (001–008). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
+Status: **speculative architecture** with nine bounded, standard-library, synthetic experiments (001–009). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
 
 ### The fundamental wager
 
@@ -115,6 +115,7 @@ MOTIF-003 also counts remaining reachable simulated states (bounded, with trunca
 | 006 — Recursive capability | Can the system propose a new testable tool or composite operator? | **Composite macro induction and source-checked deterministic replay implemented**; true new executable tools remain future research | missing primitive guards, source tampering or claimed new external authority |
 | 007 — Federated inheritance | Can one world transfer useful motifs to another *without transferring its private states*? | **Unsigned, checksummed portable operator closure, local hold/review, and two-way synthetic inheritance implemented**. Authentication, secure private transfer and transitive revocation remain open. | leakage, attribution loss, authority confusion |
 | 008 — Unknown world | Can induced relational operators explain unseen graph configurations and correctly refuse unsupported cases? | **Six opaque synthetic rule families; 30 world splits; 2,400 holdouts; baseline tree nearly matches the covered learner.** | Fails across novel ontologies, partial sensing, hidden rules, or a stronger matched baseline |
+| 009 — The Experimenter | Can transferable, inspected decision-tree cartridges help select informative new observations? | **Portable local-reviewable two-question tree cartridges, three-tree query committee, 30-world active-versus-random synthetic benchmark; v1 ceiling null result, post-hoc v2 early improvement.** | No gain over random when already near ceiling; not actual interventions, calibrated probabilities, or cross-world zero-shot learning |
 
 Further horizons: continuous quantities, physical uncertainty, multiagent preferences, uncertain event duration, energy budgets, local processors, and transferable multimodal perception. None is implemented merely by documenting it.
 
