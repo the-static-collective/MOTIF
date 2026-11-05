@@ -124,16 +124,3 @@ def public_question(index: int, before, roles) -> Question:
     if not isinstance(roles, tuple) or len(roles) != 2:
         raise ValueError("Explicit two-role query required")
     return Question(f"Q{index:05d}", before, roles)
-
-
-def independent_oracle_answer(question: ProposedQuestion,
-                              secret_index: dict[str, object]):
-    """Only the EVALUATOR imports/calls this function.
-
-    The selector has no reference to secret_index or to answer fields.
-    Returns one independently generated synthetic episode when a ticket is
-    consumed. QueryBudget enforcement belongs to the caller.
-    """
-    if question.ticket not in secret_index:
-        raise ValueError("Unknown query ticket")
-    return secret_index[question.ticket]
