@@ -62,7 +62,8 @@ def inspect(data):
   data["initial"],data["corrected"],data["conditional"])
  for name,s in (("initial",initial),("corrected",corrected)):
   require(type(s) is dict and s.get("schema")==GHOT_002 and
-          s.get("authority") is False and
+          s.get("external_action") is False and
+          s.get("automatic_body_assignment") is False and
           s.get("automatic_model_promotion") is False and
           s.get("electrical_energy_measured") is False and
           s.get("research_only_not_flood_warning") is True and
