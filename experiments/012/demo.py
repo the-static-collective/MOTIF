@@ -14,7 +14,7 @@ import json
 from oracle import new_world,natural,intervene,independent_suite
 from benchmark import safe_scope_proof
 from cartographer import (opening_model_space,choose,revise,
-                          independent_review,_residual)
+                          independent_review,LocalCausalBay,_residual)
 from cartridge import export_cartridge
 
 
@@ -52,12 +52,21 @@ def walk(family,seed=11):
         space,independent_suite(world,"local_review"),world.controls)
     final=(json.loads(export_cartridge(space.models[0].tree))
            if len(space.models)==1 else None)
+    bay=LocalCausalBay()
+    ticket=bay.offer(space.models[0],review) if len(space.models)==1 else None
+    held_before_explicit_decision=(ticket not in bay.admitted
+                                   if ticket else None)
+    decision=(bay.decide(ticket,"ADMIT_PREDICT_ONLY","LOCAL_SYNTHETIC_REVIEWER")
+              if ticket and review.status==
+              "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION" else None)
     return {
         "source_description":"OPAQUE_TWO_CANDIDATE_OBSERVATIONAL_PROXIES",
         "source_training_observations":len(train),
         "initial_hypotheses":initial_cards,
         "interventions":trace,
         "provisional_cartridge":final,
+        "held_before_explicit_local_decision":held_before_explicit_decision,
+        "local_fixture_admission":decision,
         "local_review":{
             "status":reviewer.status,
             "separate_intervention_evidence":reviewer.independently_checked,
@@ -78,7 +87,9 @@ def demonstrate():
     supported=walk("cause_p")
     latent=walk("latent")
     noisy=walk("noisy_c")
-    if supported["local_review"]["status"]!="ADMIT_PREDICT_ONLY_IN_SYNTHETIC_LAB":
+    if (supported["local_review"]["status"]!=
+            "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION" or
+            supported["local_fixture_admission"] is None):
         raise AssertionError("Synthetic visible cause did not transfer to review")
     for rejected in (latent,noisy):
         if rejected["local_review"]["status"]!="HOLD_INDEPENDENT_FALSIFIER":
