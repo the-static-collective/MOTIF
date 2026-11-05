@@ -167,7 +167,7 @@ def generated_programs():
     """
     terms = tuple((i,) for i in range(EDGE_COUNT)) + tuple(
         combinations(range(EDGE_COUNT), 2))
-    candidates = (Instrument(tuple(c)) for n in range(1, MAX_CLAUSES + 1)
+    candidates = (Instrument(tuple(sorted(c))) for n in range(1, MAX_CLAUSES + 1)
                   for c in combinations(terms, n))
     return tuple(sorted(candidates,
                         key=lambda p: (p.complexity, p.clauses)))
