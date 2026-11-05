@@ -117,6 +117,12 @@ jobs:
           python field_protocol.py --as-of 2026-11-04T18:00:00Z > /tmp/motif-field-summary.json
           python build_field_desk.py --output field-witness.html
           test -s field-witness.html
+      - name: Native local Dogram calculation over synthetic field reports
+        working-directory: research/field-pilot
+        env:
+          DOGRAM_ROOT: ../../vendor/Dogram
+        run: |
+          python -m unittest -v test_field_dogram.py
       - name: Save offline real-world field witness page
         uses: actions/upload-artifact@v4
         with:
