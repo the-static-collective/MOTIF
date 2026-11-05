@@ -1,0 +1,23 @@
+{
+  "experiment": "MOTIF-006",
+  "scope": "synthetic graph simulation ONLY",
+  "training_traces": 3,
+  "two_level_macros": 2,
+  "first_macro": {
+    "id": "macro-44388984211f59d7",
+    "expanded_steps": 2,
+    "support": 3
+  },
+  "nested_macro": {
+    "id": "macro-142a372f3d774e81",
+    "expanded_steps": 3,
+    "support": 3
+  },
+  "holdout_new_entity_ids": true,
+  "macro_equals_primitive_replay": true,
+  "simulated_goal_utility": 24,
+  "single_macro_invocation": 1,
+  "underlying_primitive_transitions": 3,
+  "missing_permission_fixture_blocks": true,
+  "original_world_unchanged": true
+}

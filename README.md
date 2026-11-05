@@ -11,6 +11,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[003 — The affordance frontier](experiments/003/affordance.py):** Compare the immediate utility of hypothetical transitions with the new actions they enable; see [the outermost circle](docs/THE-OUTERMOST-CIRCLE.md).
 - **[004 — The first scar](experiments/004/DESIGN.md):** Record an attempted edit that did not occur, compare predicted and observed graphs, learn one provisional missing-context discriminator from contrasts, and explicitly abstain when evidence conflicts.
 - **[005 — The birth of a concept](experiments/005/DESIGN.md):** Propose an anonymous two-edge derived relation from successful and failed synthetic attempts; distinguish a shared intervening part from disconnected parts, and filter hypothetical actions without altering observed history.
+- **[006 — The composite verb](experiments/006/DESIGN.md):** Induce anonymous reusable operator programs from repeated synthetic traces, nest macros within macros, pin every dependency's source semantics, and recheck every primitive guard during hypothetical replay.
 
 ### Run (Python 3.10+, standard library only)
 
@@ -34,6 +35,10 @@ python -m unittest -v test_scar.py
 cd ../005
 python concept.py
 python -m unittest -v test_concept.py
+
+cd ../006
+python composition.py
+python -m unittest -v test_composition.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
@@ -44,6 +49,7 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 - **Structure ≠ causality.** Correlated transitions do not establish why events occur.
 - **Graph permission fact ≠ real-world consent.** The hard gate is a synthetic demonstration only.
 - **Learned rule ≠ capability to act.** Neither experiment can affect external systems.
+- **Compressed macro ≠ new external ability.** Reusing a sequence as one planning primitive does not bypass or reduce its underlying steps.
 - **New verb ≠ novel model architecture.** Program induction, graph rewriting, and planning have substantial prior art; originality remains to be proven through controlled benchmarks.
 
 ## Next frontier
