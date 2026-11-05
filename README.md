@@ -21,6 +21,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[013 — The Probabilistic Witness](experiments/013/DESIGN.md):** Replace exact outcomes with **sampled Bernoulli success/failure, unreliable and anti-reliable witnesses, forwarded hearsay, missing reports, and real synthetic actuator noncompliance**. Learn Beta-calibrated source/actuator uncertainty, weight four real 009 decision-tree cartridges plus unresolved OTHER mass, and issue probabilities or abstentions. In 3,600 held-out synthetic outcomes, **a flexible classical Bayesian four-cell baseline beats MOTIF on Brier score (0.224069 vs 0.228364)**. See the [verified probabilistic witness cartridge and admitted/missed failures](experiments/013/example-probabilistic-witness.json).
 - **[014W — The Witness of Witnesses](experiments/014w/DESIGN.md):** Treat the **auditor itself as another unreliable witness**, instead of assuming its adjudications are gold truth. Jointly enumerate source truthfulness, fallible audit reports, intervention compliance and causal-tree hypotheses in an exact **960-state finite Bayesian grid**, while integrating missing action receipts rather than treating requested actions as completed. The [actual probabilistic 009-tree ensemble, meta-witness credibility intervals and both caught/missed source drifts](experiments/014w/example-joint-credibility.json) are committed. Across **2,688 stochastic holdouts**, a broader **classical 16-Boolean-model joint Bayes wins** (Brier 0.197640 versus MOTIF 0.202442). This parallel research organ is isolated from the concurrent **014 Organ Gardener** branch.
 
+- **[015 — Many Roads / Multiplex Inquiry](experiments/015/DESIGN.md):** Select a budgeted **portfolio** of complementary `ANSWER` / `ASK` / `VERIFY` avenues by exact joint expected decision value, offer tentative answers while still investigating, and execute read-only synthetic probes concurrently. A tiny XOR counterexample shows two individually unhelpful questions beating a greedy single-probe choice; this is **not** evidence of general superiority or real-world agent authority.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -86,6 +88,9 @@ cd ../014w
 python benchmark.py  # exact finite-grid joint Bayes, stronger full-Boolean competitor
 python demo.py       # meta-auditor, model uncertainty, and missed reliability shifts
 python -m unittest -v test_joint.py
+cd ../015
+python -m unittest -v test_multiplex.py
+python demo.py      # greedy bait versus synergistic parallel inquiry
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
