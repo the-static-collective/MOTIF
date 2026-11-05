@@ -1,0 +1,25 @@
+name: MOTIF-026 Discovery of Discovery
+on:
+  push:
+    branches: [research/026-discovery-of-discovery]
+  pull_request:
+    paths:
+      - 'experiments/026/**'
+      - '.github/workflows/motif026.yml'
+permissions:
+  contents: read
+jobs:
+  original-source-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original MOTIF-023 source-owned regression
+        run: node --test experiments/023/test_open_field.mjs
+      - name: MOTIF-026 provider discovery, STRIPS review and executable fixture adapter
+        run: node --test experiments/026/test_discovery_machine.mjs
