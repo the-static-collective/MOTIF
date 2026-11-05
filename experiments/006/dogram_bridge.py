@@ -24,6 +24,7 @@ def analyze_with_dogram(dogram_root: str) -> dict[str, object]:
     sys.path.insert(0, str(root))
     try:
         from dogram.probe_cost_pareto import analyze_probe_costs
+        from dogram.anti_collapse_reachability import analyze_collapse
     finally:
         sys.path.pop(0)
 
@@ -42,8 +43,28 @@ def analyze_with_dogram(dogram_root: str) -> dict[str, object]:
             "target_distinguishing_pair": [left, right],
             "dogram_calculation": asdict(receipt),
         })
+    # The active MOTIF probe may leave mechanism identity unresolved even
+    # when its outcomes suffice for the one declared target. Dogram accounts
+    # for every lost distinction without grading its semantic importance.
+    from question import select_question, target_trial, candidate_trials
+    chosen = select_question(tuple(states), candidate_trials(),
+                             target_trial(), budget=1)
+    collapsed = tuple(probes[chosen.id]) if chosen else ()
+    rich = tuple(tuple(probes[name][i] for name in sorted(probes))
+                 for i in range(len(states)))
+    collapse = analyze_collapse(states, rich, collapsed) if chosen else None
+    target_sufficient = bool(chosen) and all(
+        collapsed[i] != collapsed[j]
+        or payload["target_labels"][i] == payload["target_labels"][j]
+        for i in range(len(states)) for j in range(i + 1, len(states))
+    )
     return {
         "schema": "motif.dogram-calculate-only/v0",
+        "collapse_analysis": {
+            "chosen_probe": chosen.id if chosen else None,
+            "dogram_calculation": asdict(collapse) if collapse else None,
+            "target_relative_sufficiency": target_sufficient,
+        },
         "source": payload,
         "pair_receipts": pair_receipts,
         "boundary": (
