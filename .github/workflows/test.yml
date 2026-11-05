@@ -44,6 +44,13 @@ jobs:
           echo '__MOTIF009_RESULT_START__'
           cat /tmp/motif009.json
           echo '__MOTIF009_RESULT_END__'
+      - name: Reproduce example decision tree cartridge
+        working-directory: experiments/009
+        run: |
+          python cartridge_demo.py > /tmp/motif009cartridge.json
+          echo '__MOTIF009_CARTRIDGE_START__'
+          cat /tmp/motif009cartridge.json
+          echo '__MOTIF009_CARTRIDGE_END__'
       - name: Reproduce 009 development stress
         working-directory: experiments/009
         run: |
