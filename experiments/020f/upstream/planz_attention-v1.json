@@ -1,0 +1,380 @@
+{
+  "schema": "planz/public-attention-v1",
+  "edition": "ATTENTION-2026-10-28-005",
+  "reviewedOn": "2026-10-28",
+  "authority": "INDEX_ONLY",
+  "disclosure": "Manually curated organizational plan pointers. planZ does not own local projects. Issue links show a plan exists, not that programs, partners or field acts are approved, funded or completed. This public map contains no resident, donor, contact or shelter-site records.",
+  "entries": [
+    {
+      "id": "REGIONAL-HELP-001",
+      "title": "Waseca–Mankato Neighbor Door",
+      "source": "https://github.com/the-static-collective/planZ/issues/21",
+      "region": "Waseca–Mankato, Minnesota",
+      "disposition": "AWAITING_LOCAL_STEWARD",
+      "tags": [
+        "waseca",
+        "mankato",
+        "food",
+        "pantry",
+        "volunteer",
+        "shelter",
+        "community"
+      ],
+      "nextGate": "Ask one existing local provider to choose and authorize one nonurgent in-kind supply task.",
+      "blockedBy": [
+        "LOCAL_PARTNER_PERMISSION",
+        "RECIPIENT_CONFIRMATION"
+      ],
+      "related": [
+        "GARDEN-TABLE-001",
+        "GLOBAL-CROSSING-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "GARDEN-TABLE-001",
+      "title": "Waseca Garden Table pilot",
+      "source": "https://github.com/the-static-collective/webZ/issues/149",
+      "region": "Waseca, Minnesota",
+      "disposition": "PROPOSED",
+      "tags": [
+        "garden",
+        "grocery",
+        "waseca",
+        "food",
+        "farm",
+        "co-op",
+        "market"
+      ],
+      "nextGate": "Ask one willing organizer and qualified food-service host to review a single safe tabletop trial.",
+      "blockedBy": [
+        "HOST_PERMISSION",
+        "FOOD_SAFETY_REVIEW"
+      ],
+      "related": [
+        "REGIONAL-HELP-001",
+        "GLOBAL-CROSSING-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "GLOBAL-CROSSING-001",
+      "title": "Porchlight Commons Minnesota–Ghana field proof",
+      "source": "https://github.com/the-static-collective/BananaSpork/issues/29",
+      "region": "Minnesota ↔ Ghana (prospective)",
+      "disposition": "AWAITING_LOCAL_STEWARD",
+      "tags": [
+        "ghana",
+        "minnesota",
+        "nima",
+        "accra",
+        "food",
+        "shelf",
+        "energy",
+        "solar",
+        "communication",
+        "shelter",
+        "porchlight",
+        "homelessness",
+        "resources"
+      ],
+      "nextGate": "With local operator permission, compare one real Ghana food need against local sourcing, lawful shipment and knowledge transfer.",
+      "blockedBy": [
+        "LOCAL_OPERATOR_PERMISSION",
+        "ACTUAL_COST_QUOTES",
+        "INDEPENDENT_CONFIRMATION"
+      ],
+      "related": [
+        "REGIONAL-HELP-001",
+        "GARDEN-TABLE-001",
+        "CHANNEL-KITS-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "CHANNEL-KITS-001",
+      "title": "Kinship and Rock Impact optional communications kits",
+      "source": "https://github.com/the-static-collective/planZ/issues/29",
+      "region": "Minnesota / Nigeria / Ghana (independent nodes)",
+      "disposition": "OWNER_REVIEW_REQUIRED",
+      "tags": [
+        "kinship",
+        "radio",
+        "rock",
+        "impact",
+        "nigeria",
+        "ghana",
+        "minnesota",
+        "media",
+        "communication",
+        "church",
+        "music",
+        "podcast"
+      ],
+      "nextGate": "Ask each media owner independently whether a review-only notice or recording workflow is useful; keep Ghana food operations separate.",
+      "blockedBy": [
+        "MEDIA_OWNER_PERMISSION",
+        "EDITORIAL_REVIEW",
+        "RIGHTS_SCOPE"
+      ],
+      "related": [
+        "GLOBAL-CROSSING-001",
+        "KINSHIP-RADIO-001",
+        "ROCK-IMPACT-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "KINSHIP-RADIO-001",
+      "title": "Kinship owner-reviewed community signal",
+      "source": "https://github.com/the-static-collective/static-live/issues/36",
+      "region": "Minnesota",
+      "disposition": "OWNER_REVIEW_REQUIRED",
+      "tags": [
+        "kinship",
+        "radio",
+        "waseca",
+        "mankato",
+        "community",
+        "volunteer",
+        "broadcast",
+        "music"
+      ],
+      "nextGate": "Request producer-defined permission for one nonurgent organization-level public-service notice; no automatic broadcast.",
+      "blockedBy": [
+        "STATION_EDITORIAL_PERMISSION",
+        "PUBLIC_NOTICE_CONSENT"
+      ],
+      "related": [
+        "CHANNEL-KITS-001",
+        "REGIONAL-HELP-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "ROCK-IMPACT-001",
+      "title": "Rock Impact locally owned media house",
+      "source": "https://github.com/the-static-collective/GHoT/issues/97",
+      "region": "Nigeria",
+      "disposition": "OWNER_REVIEW_REQUIRED",
+      "tags": [
+        "rock",
+        "impact",
+        "nigeria",
+        "church",
+        "media",
+        "recording",
+        "podcast",
+        "computer",
+        "offline",
+        "solar"
+      ],
+      "nextGate": "Ask Nigerian media operators whether an offline-first recording and training kit meets their actual workflow.",
+      "blockedBy": [
+        "MINISTRY_OPERATOR_PERMISSION",
+        "MEDIA_RIGHTS",
+        "HARDWARE_POWER_REVIEW"
+      ],
+      "related": [
+        "CHANNEL-KITS-001",
+        "GLOBAL-CROSSING-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "TRAVELING-JUBILEE-001",
+      "title": "Traveling Jubilee voluntary music and care night",
+      "source": "https://github.com/the-static-collective/planZ/issues/13",
+      "region": "Any willing community (no event confirmed)",
+      "disposition": "PROPOSED",
+      "tags": [
+        "festival",
+        "church",
+        "worship",
+        "music",
+        "community",
+        "food",
+        "giving",
+        "travel"
+      ],
+      "nextGate": "Find a willing host and independent safeguarding steward before proposing a real gathering.",
+      "blockedBy": [
+        "HOST_PERMISSION",
+        "SAFEGUARDING_REVIEW"
+      ],
+      "related": [
+        "REGIONAL-HELP-001",
+        "CHANNEL-KITS-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "BRIDGE-001",
+      "title": "Between Rooms — institution-specific, source-backed bridge proposal",
+      "source": "https://github.com/the-static-collective/planZ/issues/33",
+      "region": "Southern Minnesota / prospective national and global doors",
+      "disposition": "AWAITING_LOCAL_STEWARD",
+      "tags": [
+        "bridge",
+        "institution",
+        "food",
+        "grocery",
+        "waseca",
+        "rochester",
+        "homelessness",
+        "mit",
+        "civic",
+        "relatte",
+        "jarvis",
+        "planz",
+        "community"
+      ],
+      "nextGate": "Ask one willing, authorized local organizer to define one non-sensitive pilot need; then human-review exactly one institution-specific invitation.",
+      "blockedBy": [
+        "LOCAL_STEWARD_PERMISSION",
+        "FIELD_PROBLEM_OWNER",
+        "INSTITUTIONAL_OUTREACH_REVIEW",
+        "INDEPENDENT_CONFIRMATION"
+      ],
+      "related": [
+        "REGIONAL-HELP-001",
+        "GARDEN-TABLE-001",
+        "GLOBAL-CROSSING-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "ATLAS-BRIDGE-002",
+      "title": "Atlas 002: 89-source candidate composition and GHoT energy commons",
+      "source": "https://github.com/the-static-collective/planZ/issues/33",
+      "region": "Static Collective public Git atlas / proposed community pilots",
+      "disposition": "OWNER_REVIEW_REQUIRED",
+      "tags": [
+        "atlas",
+        "bridge",
+        "ghot",
+        "compute",
+        "energy",
+        "loadout",
+        "cannon",
+        "graft",
+        "public",
+        "food",
+        "civic",
+        "institutions"
+      ],
+      "nextGate": "Review one exact source cut, host/resource owner's informed permission, recipient authority and one source-backed synthetic cross-project test before presenting an integration as executable.",
+      "blockedBy": [
+        "SOURCE_PIN_REVIEW",
+        "DONOR_COMPATIBILITY",
+        "CAPABILITY_OWNER_PERMISSION",
+        "RECEIVER_AUTHORIZATION",
+        "INDEPENDENT_VERIFICATION"
+      ],
+      "related": [
+        "BRIDGE-001",
+        "GARDEN-TABLE-001",
+        "GLOBAL-CROSSING-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "SHELF-001",
+      "title": "One Waseca source-to-shelf handoff — documented demand, unconfirmed logistics fit",
+      "source": "https://github.com/the-static-collective/webZ/issues/175",
+      "region": "Waseca County, Minnesota / separate statewide & global practice comparators",
+      "disposition": "AWAITING_LOCAL_STEWARD",
+      "tags": [
+        "food",
+        "waseca",
+        "grocery",
+        "rescue",
+        "shelf",
+        "research",
+        "bridge",
+        "graft",
+        "ghot",
+        "planz",
+        "jarvis",
+        "student",
+        "pilot"
+      ],
+      "nextGate": "Ask WANSC whether ONE actual non-sensitive sourcing or receiving handoff is missing; ask Waseca co-op/MSU whether their food rescue work already covers it. Do not initiate a pilot until receiving organization chooses it.",
+      "blockedBy": [
+        "RECIPIENT_WILLINGNESS_UNKNOWN",
+        "DUPLICATION_WITH_COURSE_UNKNOWN",
+        "DONOR_SUPPLY_UNKNOWN",
+        "FOOD_HANDLING_REVIEW",
+        "CARRIER_PERMISSION",
+        "INDEPENDENT_DELIVERY_CONFIRMATION"
+      ],
+      "related": [
+        "BRIDGE-001",
+        "ATLAS-BRIDGE-002",
+        "GARDEN-TABLE-001"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "SUITCASE-001",
+      "title": "Suitcase Internet — church/campus/community host nodes",
+      "source": "https://github.com/the-static-collective/webZ/issues/181",
+      "region": "Waseca–Mankato area / globally portable prospect",
+      "disposition": "AWAITING_LOCAL_STEWARD",
+      "tags": [
+        "suitcase",
+        "offline",
+        "mobile",
+        "church",
+        "university",
+        "campus",
+        "co-op",
+        "festival",
+        "power",
+        "ghot",
+        "relatte",
+        "jarvis",
+        "graft",
+        "planz",
+        "host"
+      ],
+      "nextGate": "Choose one real willing host steward. First rehearse signed file crossing on two distinct devices, then review physical consent, safeguarding, power budgets, private-key custody and native reLATTE protocol translation before any actual node.",
+      "blockedBy": [
+        "HOST_PERMISSION_NOT_GIVEN",
+        "REAL_NODE_NOT_INSTALLED",
+        "DEVICE_KEY_RECOVERY_UNBUILT",
+        "CONFIDENTIAL_PACKET_ENCRYPTION_UNBUILT",
+        "NATIVE_RELATTE_INTEGRATION_NOT_PROVEN",
+        "INDEPENDENT_IDENTITY_UNVERIFIED"
+      ],
+      "related": [
+        "BRIDGE-001",
+        "SHELF-001",
+        "ATLAS-BRIDGE-002"
+      ],
+      "fieldOutcome": "NOT_VERIFIED",
+      "executionAllowed": false,
+      "thirdPartyApproval": "NOT_ESTABLISHED"
+    }
+  ]
+}
