@@ -1,0 +1,66 @@
+[
+  {
+    "id": "motif.002.derive-verbs",
+    "handler": "induce_original_002",
+    "requires": [],
+    "provides": "verbs",
+    "cost": 2,
+    "state": "MAIN_VERIFIED",
+    "source": "experiments/002/motif002.py",
+    "scope": "SYNTHETIC_PROPOSAL_ONLY"
+  },
+  {
+    "id": "motif.006.compile-macro",
+    "handler": "compile_original_006",
+    "requires": [
+      "verbs"
+    ],
+    "provides": "macro_catalog",
+    "cost": 3,
+    "state": "MAIN_VERIFIED",
+    "source": "experiments/006/composition.py",
+    "scope": "SYNTHETIC_PROPOSAL_ONLY"
+  },
+  {
+    "id": "motif.003.scan-affordances",
+    "handler": "frontier_original_003",
+    "requires": [
+      "world",
+      "verbs"
+    ],
+    "provides": "frontier",
+    "cost": 2,
+    "state": "MAIN_VERIFIED",
+    "source": "experiments/003/affordance.py",
+    "scope": "SYNTHETIC_PROPOSAL_ONLY"
+  },
+  {
+    "id": "motif.006.recheck-macro",
+    "handler": "replay_original_006",
+    "requires": [
+      "world",
+      "goal",
+      "macro_catalog"
+    ],
+    "provides": "macro_replay",
+    "cost": 2,
+    "state": "MAIN_VERIFIED",
+    "source": "experiments/006/composition.py",
+    "scope": "SYNTHETIC_PROPOSAL_ONLY"
+  },
+  {
+    "id": "motif.door.assemble",
+    "handler": "assemble_local_door",
+    "requires": [
+      "world",
+      "goal",
+      "frontier",
+      "macro_replay"
+    ],
+    "provides": "door",
+    "cost": 1,
+    "state": "EXPERIMENTAL_VERIFIED",
+    "source": null,
+    "scope": "SYNTHETIC_PROPOSAL_ONLY"
+  }
+]
