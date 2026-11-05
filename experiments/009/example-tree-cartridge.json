@@ -1,0 +1,57 @@
+{
+  "checksum_sha256": "cfa32ce9767cc8f0d4338923664ff81ac3e38a687d1ae6868bf09634132d35a1",
+  "counts": [
+    [
+      28,
+      0
+    ],
+    [
+      0,
+      19
+    ],
+    [
+      0,
+      12
+    ],
+    [
+      21,
+      0
+    ]
+  ],
+  "evidence_count": 80,
+  "first": [
+    [
+      "q0b0ba9f424afffc0dd1defe1",
+      "?1"
+    ]
+  ],
+  "fit_balanced": 1,
+  "id": "tree-b4b87457af412b02",
+  "leaves": [
+    false,
+    true,
+    true,
+    false
+  ],
+  "schema": "motif.decision-tree-cartridge.v0",
+  "second": [
+    [
+      "qf97dbaece6cc656c588c5bae",
+      "?0"
+    ]
+  ],
+  "source_digest": "76be295dd75d4ea8624c4fef3c48263b0b1eaa01c4ffe8a26cc7a0c469b59c6b",
+  "status": "PROPOSAL_ONLY",
+  "vocab": [
+    "pending",
+    "q0b0ba9f424afffc0dd1defe1",
+    "q2919cc331cf926267b88a323",
+    "q3b7048ae541228b1eedb40c1",
+    "q5c166d6430bce9a5232b53d0",
+    "q8db1b2d1fe3e170fe1dd5f86",
+    "qe41b969f2aedbe34cefd964f",
+    "qf97dbaece6cc656c588c5bae",
+    "role_actor",
+    "role_target"
+  ]
+}
