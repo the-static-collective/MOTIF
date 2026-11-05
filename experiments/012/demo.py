@@ -53,11 +53,11 @@ def walk(family,seed=11):
     final=(json.loads(export_cartridge(space.models[0].tree))
            if len(space.models)==1 else None)
     bay=LocalCausalBay()
-    ticket=bay.offer(space.models[0],review) if len(space.models)==1 else None
+    ticket=bay.offer(space.models[0],reviewer) if len(space.models)==1 else None
     held_before_explicit_decision=(ticket not in bay.admitted
                                    if ticket else None)
     decision=(bay.decide(ticket,"ADMIT_PREDICT_ONLY","LOCAL_SYNTHETIC_REVIEWER")
-              if ticket and review.status==
+              if ticket and reviewer.status==
               "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION" else None)
     return {
         "source_description":"OPAQUE_TWO_CANDIDATE_OBSERVATIONAL_PROXIES",
