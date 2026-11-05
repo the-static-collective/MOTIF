@@ -75,6 +75,25 @@ jobs:
           assert result['anti_collapse']['lawful_quotient'] is True
           assert len(result['anti_collapse']['lost_distinctions']) == 3
           PY
+      - name: Test generated cooperation bridge
+        working-directory: research/missing-bridge
+        run: |
+          python -m unittest -v test_bridge.py
+          python bridge.py > /tmp/motif-bridge.json
+      - name: Native Dogram inferred-bridge calculation
+        working-directory: research/missing-bridge
+        run: |
+          python dogram_bridge.py --dogram-root ../../vendor/Dogram > /tmp/motif-bridge-dogram.json
+          python - <<'PY'
+          import json
+          with open('/tmp/motif-bridge-dogram.json', encoding='utf-8') as f:
+              result = json.load(f)
+          assert result['schema'] == 'motif.bridge-dogram/v0'
+          assert result['rectangle']['mixed_delta'] == {'kind':'integer','value':1}
+          assert result['information_collapse']['lawful_quotient'] is True
+          assert len(result['information_collapse']['lost_distinctions']) == 3
+          assert len(result['binding_ids']) == 2
+          PY
       - name: Reproduce 007
         working-directory: experiments/007
         run: python inheritance.py
