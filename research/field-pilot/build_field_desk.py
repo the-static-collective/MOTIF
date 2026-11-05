@@ -165,9 +165,9 @@ footer p {font:11px/1.7 ui-monospace,monospace;color:var(--muted);
     <input required id="card-alias" type="text" maxlength="60" placeholder="e.g., neighbor-a" autocomplete="off">
     <div class="inline">
      <div><label for="card-topic">Matching topic · use the same word</label>
-      <input required id="card-topic" type="text" maxlength="40" placeholder="e.g., cooler" pattern="[a-zA-Z0-9 _-]+" autocomplete="off"></div>
+      <input required id="card-topic" type="text" maxlength="40" placeholder="e.g., cooler" autocomplete="off"></div>
      <div><label for="card-area">Broad local area · not an address</label>
-      <input required id="card-area" type="text" maxlength="40" placeholder="e.g., waseca" pattern="[a-zA-Z0-9 _-]+" autocomplete="off"></div>
+      <input required id="card-area" type="text" maxlength="40" placeholder="e.g., waseca" autocomplete="off"></div>
     </div>
     <div class="inline"><div><label for="card-hours">Expires after (hours) · 1–168</label>
        <input required id="card-hours" type="number" min="1" max="168" step="1" value="24"></div>
