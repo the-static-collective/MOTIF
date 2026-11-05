@@ -37,7 +37,8 @@ The prototype generates training (36), validation (24) and frozen holdout (36) w
 - **Always expected / always robust**: both fixed compiler-objective strategies.
 - **Classical Beta(1,1) posterior-predictive threshold**: separately written rule based on the *same* sample of 16; a strong statistical comparator, not a strawman.
 - **Per-case privileged oracle**: the evaluator's unattainable lower bound, never passed to the proposed meta-method.
-- **Hostile inverted sensor**: when observation integrity is marked failed, the meta-rule must HOLD, not issue a fake better choice.
+- **Hostile inverted sensor (flagged)**: when observation integrity is marked failed, the meta-rule must HOLD, not issue a fake better choice.
+- **Unflagged inverted sensor**: adversarial out-of-family cases retain the familiar validation-shaped report while their values are inverted. This MUST remain a counterexample: the meta-gardener cannot detect the bad witness from the input alone and may perform worse than the constant robust method. No robustness claim.
 - **Insufficient bidirectional failure evidence**: no conditional grammar extension.
 - **Repeated episode identity / training-validation overlap**: HOLD.
 - **Modified cartridge**: checksum validation refuses modified numbers, instructions, and automatic installation.
@@ -56,6 +57,6 @@ node experiments/016/meta_gardener.mjs > motif016-research.json
 The CI job also runs inherited MOTIF-014 and MOTIF-015 suites; the deterministic research JSON is uploaded as a GitHub Actions artifact. Do not describe those CI passes as live AI or external-world intelligence.
 
 ### Next hard frontier
-Rather than presupposing the one-dimensional drift sample, test **which observation to acquire** under budget; noisy/missing/misleading sources; multiple unknown method families; distribution-free or minimax-regret compiler objectives; *negative transfer* when the meta-rule trained on one family is moved to another; and the reliability of the source proposing meta-grammar changes. Source-owned bounded OpenManus edits remain only a **prepared operator request** until an independently verified actual model run under authority limits exists.
+Rather than presupposing the one-dimensional drift sample, test **which observation to acquire** under budget; noisy/missing/misleading sources, including the **unflagged inverted reporter** in this experiment; multiple unknown method families; distribution-free or minimax-regret compiler objectives; *negative transfer* when the meta-rule trained on one family is moved to another; and the reliability of the source proposing meta-grammar changes. Source-owned bounded OpenManus edits remain only a **prepared operator request** until an independently verified actual model run under authority limits exists.
 
 **ERROR IN OUTPUT != ERROR IN MODEL != ERROR IN OBJECTIVE != ERROR IN THE QUESTIONING METHOD.**

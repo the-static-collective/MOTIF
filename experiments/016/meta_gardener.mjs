@@ -14,7 +14,7 @@ const SELF=fileURLToPath(import.meta.url);
 const PROGRAM='motif016.generated-meta-inquiry-cartridge/v0';
 const COUNT=16;
 const PS=Object.freeze([0.06,0.13,0.20,0.32,0.63,0.82]);
-const SALTS=Object.freeze({training:30949,validation:62071,holdout:99191,hostile:11107});
+const SALTS=Object.freeze({training:30949,validation:62071,holdout:99191,hostile:11107,stealth:62137});
 
 function requirePositiveInteger(x) {
   if(!Number.isSafeInteger(x)||x<1||x>100)throw Error('HOLD_INVALID_SAMPLE_SIZE');
@@ -27,7 +27,7 @@ function seedRng(seed) {
   let state=seed>>>0;
   return ()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/4294967296);
 }
-function trial(id, priorA, rng, tamper=false) {
+function trial(id, priorA, rng, tamper=false, disclosure=true) {
   const truePrior=[priorA,(1-priorA)*0.36,(1-priorA)*0.34,(1-priorA)*0.30];
   const count=Array.from({length:COUNT},()=>rng()<(tamper ? 1-priorA:priorA)?1:0)
     .reduce((a,b)=>a+b,0);
@@ -37,7 +37,7 @@ function trial(id, priorA, rng, tamper=false) {
       id, sample_size:COUNT, a_count:count,
       source:'SYNTHETIC_SAMPLED_CATEGORICAL_REPORT',
       audit:'INVENTED_REGIME_SAMPLE_ONLY',
-      noise_warning:tamper?'KNOWN_SENSOR_FAILURE':'NONE_DECLARED'
+      noise_warning:(tamper && disclosure)?'KNOWN_SENSOR_FAILURE':'NONE_DECLARED'
     }),
     // Hidden world is available to evaluator, never passed to chooseMetaMethod.
     evaluator_only:Object.freeze({prior:truePrior,phase:id.split('-')[0]})
@@ -50,7 +50,7 @@ export function scenarioFamily(phase,count=36) {
   const shift=phase==='training'?0:phase==='validation'?2:phase==='holdout'?4:1;
   return Array.from({length:count},(_,i)=>{
     const p=PS[(i+shift)%PS.length];
-    return trial(phase+'-'+String(i).padStart(3,'0'),p,rng,phase==='hostile');
+    return trial(phase+'-'+String(i).padStart(3,'0'),p,rng,phase==='hostile'||phase==='stealth',phase!=='stealth');
   });
 }
 export function prepareMethodCartridges() {
@@ -337,6 +337,7 @@ export function metaExperiment() {
   if(learned.new_method!==null)validateMetaCartridge(learned);
   const fresh=gradeFuture(holdout,parents,learned);
   const hostile=gradeFuture(scenarioFamily('hostile',12),parents,learned);
+  const stealth=gradeFuture(scenarioFamily('stealth',24),parents,learned);
   return {
     schema:'motif016.self-revising-question-method-study/v0',
     status:'SYNTHETIC_INQUIRY_COMPILER_RESEARCH',
@@ -349,8 +350,9 @@ export function metaExperiment() {
     meta_revision:learned,
     frozen_holdout:fresh,
     hostile_inverted_report:hostile,
+    unflagged_inverted_report:stealth,
     next_question:{
-      question:'When is a source of feedback itself too unreliable to justify changing the inquiry-compiler grammar?',
+      question:'What independent observation distinguishes an unannounced inverted sensor from a real regime change, before rewriting the inquiry-compiler grammar?',
       method_change_candidate:'add source-reliability and abstention grammar',
       performed:false
     },

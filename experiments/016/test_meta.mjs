@@ -75,6 +75,13 @@ test('unseen hostile inverted sensor causes HOLD; no false robustness claim',()=
   assert.equal(e.hold_count,12);
   assert.ok(e.rows.every(r=>r.selection===null && r.status==='HOLD'));
 });
+test('undisclosed inverted sensor can fool this method: no universal self-repair claim',()=>{
+  const {parents,proposal}=full();
+  const result=gradeFuture(scenarioFamily('stealth',24),parents,proposal);
+  assert.equal(result.proposed_count,24);
+  assert.equal(result.hold_count,0);
+  assert.ok(result.mean_proposed_cost>result.mean_fixed_robust_cost+0.10);
+});
 test('missing or tampered sensor information cannot be passed as permission to guess',()=>{
   const x=full();
   const o=scenarioFamily('holdout',6)[0].observed;
@@ -122,6 +129,8 @@ test('study is reproducible and records limitations, sources, and holdout failur
   assert.equal(r.meta_revision.status,'HOLD_FOR_HUMAN_REVIEW');
   assert.equal(r.frozen_holdout.evaluated_trials,36);
   assert.equal(r.hostile_inverted_report.proposed_count,0);
+  assert.ok(r.unflagged_inverted_report.mean_proposed_cost>
+    r.unflagged_inverted_report.mean_fixed_robust_cost);
   assert.equal(r.no_production_mutation,true);
   assert.equal(r.no_autonomous_code_editing,true);
   assert.equal(r.no_recursive_intelligence_gain_claim,true);
