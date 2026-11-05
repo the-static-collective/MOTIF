@@ -124,7 +124,8 @@ class CorrectTheMachine(unittest.TestCase):
  def test_input_and_confirmation_are_bounded(self):
   with self.assertRaises(g.HOLD):self.ask("river",choice="invented")
   with self.assertRaises(g.HOLD):self.ask("river",choice="custom",own_example="a"*321)
-  with self.assertRaises(g.HOLD):self.ask("river",choice="one",freshness_hours=6)
+  self.assertEqual(self.ask("river",choice="one",freshness_hours=6)["status"],
+                   "HOLD_CONFLICTING_HUMAN_INTENT")
   with self.assertRaises(g.HOLD):self.ask("river",choice="both",confirmed=True,expected_contract_id="a")
   with self.assertRaises(g.HOLD):self.ask("river",choice="one",own_example="secret")
 
