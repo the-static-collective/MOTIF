@@ -37,6 +37,16 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Reproduce 010
+        working-directory: experiments/010
+        run: |
+          python benchmark.py > /tmp/motif010.json
+          echo '__MOTIF010_RESULT_START__'
+          cat /tmp/motif010.json
+          echo '__MOTIF010_RESULT_END__'
+      - name: Test 010
+        working-directory: experiments/010
+        run: python -m unittest -v test_scientist.py
       - name: Reproduce 009
         working-directory: experiments/009
         run: |
