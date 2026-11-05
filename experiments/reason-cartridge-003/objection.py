@@ -38,6 +38,7 @@ class Inquiry:
                        for e in self.universe)
                 or self.removed not in self.universe
                 or self.source not in self.nodes or self.target not in self.nodes
+                or self.source == self.target
                 or type(self.closed_scope) is not bool):
             raise HOLD("Invalid bounded inquiry or completeness assertion")
         for claim in self.claims:
@@ -98,6 +99,48 @@ def evidence(inquiry):
     return definite, possible, conflicted, unknown
 
 
+def minimum_break_set(nodes, edges, source, target):
+    """Unit-capacity max-flow/min-cut: smallest number of known edges whose
+    *retraction* would destroy every supported route. Structural sensitivity,
+    not a probability of failure or causal claim about an external world.
+    """
+    if source == target:
+        raise HOLD("Nontrivial distinct endpoints required for fragility")
+    capacities = {n: {} for n in nodes}
+    for a, b in edges:
+        capacities[a][b] = capacities[a].get(b, 0) + 1
+        capacities[b].setdefault(a, 0)
+    flow = 0
+    while True:
+        parent = {source: None}
+        queue = deque([source])
+        while queue and target not in parent:
+            here = queue.popleft()
+            for nxt in sorted(capacities[here]):
+                if nxt not in parent and capacities[here][nxt] > 0:
+                    parent[nxt] = here
+                    queue.append(nxt)
+        if target not in parent:
+            break
+        here = target
+        while parent[here] is not None:
+            prev = parent[here]
+            capacities[prev][here] -= 1
+            capacities[here][prev] += 1
+            here = prev
+        flow += 1
+    reached = visited_from(nodes, ((a, b) for a in nodes
+                                   for b, capacity in capacities[a].items()
+                                   if capacity > 0), source)
+    left = set(reached)
+    cut = tuple(sorted(e for e in edges if e[0] in left and e[1] not in left))
+    if len(cut) != flow or path(nodes, (e for e in edges if e not in cut),
+                               source, target) is not None:
+        raise HOLD("Max-flow/min-cut crosscheck failed")
+    return {"minimum_confirmed_edge_retractions": flow,
+            "counterfactual_break_edges": [list(e) for e in cut],
+            "scope": "GRAPH_STRUCTURE_ONLY_NOT_EMPIRICAL_FAILURE_PROBABILITY"}
+
 def question_value(inquiry, definite, uncertain, fn_cost, fp_cost, query_cost):
     if len(uncertain) > 8:
         return {"status": "HOLD_BUDGET", "reason": "More than 8 unresolved edges"}
@@ -147,6 +190,8 @@ def decide(inquiry, *, false_negative_cost=5.0, false_positive_cost=4.0,
         return {
             "status": "PROVED_REACHABLE",
             "certificate": {"kind": "WITNESSED_PATH", "nodes": list(real_path)},
+            "fragility": minimum_break_set(inquiry.nodes, definite,
+                                           inquiry.source, inquiry.target),
             "conflicts_preserved": [list(e) for e in sorted(conflicted)],
             "world_authority": False,
         }
