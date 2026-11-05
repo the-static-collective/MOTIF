@@ -1,0 +1,50 @@
+name: MOTIF Law Forge 005 — World Breaker and Ternary Hypothesis
+
+on:
+  push:
+    branches:
+      - research/law-forge-005-world-breaker-trinary-20261105
+    paths:
+      - 'experiments/law-forge-005/**'
+      - '.github/workflows/law-forge-005.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-005/**'
+      - '.github/workflows/law-forge-005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  world-breaker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify inherited Law Forge 001
+        run: python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+      - name: Verify inherited Law Forge 002
+        run: python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+      - name: Verify inherited Law Forge 003
+        run: python -m unittest discover -s experiments/law-forge-003 -p 'test_*.py' -v
+      - name: Verify inherited Law Forge 004
+        run: python -m unittest discover -s experiments/law-forge-004 -p 'test_*.py' -v
+      - name: Verify ternary versus binary and relational sensors
+        run: python -m unittest discover -s experiments/law-forge-005 -p 'test_*.py' -v
+      - name: Emit preregistered source-separated evaluation receipt
+        run: |
+          python experiments/law-forge-005/trial.py > law-forge-005-results.json
+          python -m json.tool law-forge-005-results.json > /dev/null
+      - name: Display hypothesis comparisons and cost-assumption ablation
+        run: |
+          python -c "import json; r=json.load(open('law-forge-005-results.json')); print(json.dumps({'development':r['development'],'evaluation':r['evaluation'],'capacity_ablation':r['binary_encoding_ablation'],'hypothesis_decision':r['frozen_trinary_promotion']},indent=2))"
+      - name: Preserve auditable experiment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-005-receipt
+          path: law-forge-005-results.json
+          retention-days: 30
