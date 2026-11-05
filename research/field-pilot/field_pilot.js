@@ -5,6 +5,7 @@
   const SCHEMA = "motif.field-log/v0";
   const ORIGINS = ["owner_self_report", "operator_heard_owner", "third_party_unverified"];
   const EVENTS = [
+    "candidate_proposed",
     "provider_yes_reported", "requester_yes_reported",
     "provider_no_reported", "requester_no_reported", "handoff_reported",
     "benefit_reported", "no_benefit_reported", "unknown_reported",
@@ -58,16 +59,27 @@
     for (const a of log.cards) for (const b of log.cards) {
       if (a.kind==="offer" && b.kind==="need" && compatible(a,b)) pairs.add(pairId(a,b));
     }
-    const eventIds = new Set();
+    const eventIds = new Set(), proposalSeen=new Set(), observedSubjects=new Set();
+    let lastRecorded=-Infinity;
     for (const e of log.events) {
       exact(e,EVENT_KEYS,"event");
       if (!id(e.id) || eventIds.has(e.id) || !EVENTS.includes(e.kind)
-          || !ORIGINS.includes(e.source) || !text(e.reporter,60,false)
+          || ![...ORIGINS,"operator_generated"].includes(e.source)
+          || (e.kind==="candidate_proposed") !== (e.source==="operator_generated")
+          || !text(e.reporter,60,false)
           || !text(e.note,360,true)) fail("invalid or duplicate event");
       eventIds.add(e.id);
-      if (stamp(e.occurred_at)>stamp(e.recorded_at)) fail("future occurrence is not an observation");
+      const recorded=stamp(e.recorded_at);
+      if (stamp(e.occurred_at)>recorded) fail("future occurrence is not an observation");
+      if(recorded<lastRecorded)fail("event recording order must be append-only");
+      lastRecorded=recorded;
       if (e.kind==="card_withdrawn" ? !cards.has(e.subject) : !pairs.has(e.subject))
         fail("event references unknown card or unsupported pair");
+      if(e.kind==="candidate_proposed") {
+        if(proposalSeen.has(e.subject)||observedSubjects.has(e.subject))
+          fail("cannot backdate or duplicate a prospective model proposal");
+        proposalSeen.add(e.subject);
+      } else if(e.kind!=="card_withdrawn") observedSubjects.add(e.subject);
     }
     return log;
   }
@@ -164,7 +176,11 @@
   function summary(log,now=utcNow()) {
     const pairs=eligible(log,now),counts={};
     for(const e of log.events) counts[e.kind]=(counts[e.kind]||0)+1;
+    const proposed=new Set(log.events.filter(e=>e.kind==="candidate_proposed").map(e=>e.subject));
+    const followed=new Set(log.events.filter(e=>e.kind!=="candidate_proposed"&&e.kind!=="card_withdrawn").map(e=>e.subject));
     return {
+      prospective_proposals_recorded:counts.candidate_proposed||0,
+      unresolved_proposals:[...proposed].filter(id=>!followed.has(id)).length,
       eligible_pairs:pairs.length,
       active_candidate_pairs:pairs.filter(x=>
         ["HOLD_CONFIRM_DIRECTLY","DUAL_YES_REPORTED_NOT_VERIFIED"].includes(x.disposition)).length,
