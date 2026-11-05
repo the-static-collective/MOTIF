@@ -26,8 +26,7 @@ from learner import features, observed_outcome, balanced_accuracy
 from cartridge import (fit_cartridge, export_cartridge, validate_cartridge,
                        CartridgeBay, HOLD)
 from experimenter import (Question, QueryBudget, public_question,
-                          propose_question, train_committee,
-                          independent_oracle_answer)
+                          propose_question, train_committee)
 
 VERSION = "active-tree-cartridges-v1"
 SEEDS = (11, 23, 37, 41, 59)
@@ -36,6 +35,13 @@ REQUESTS = 12
 POOL = 96
 TEST = 80
 CHECKPOINTS = (0, 6, 12)
+
+
+def reveal_answer(ticket, secret_index):
+    """Evaluator-only oracle boundary; the selector module cannot call this."""
+    if ticket not in secret_index:
+        raise ValueError("Unknown ticket")
+    return secret_index[ticket]
 
 
 def held_out_score(car, test):
@@ -85,7 +91,7 @@ def experiment(family: str, seed: int, *, initial=INITIAL,
                                     members=3)
         proposal = propose_question(available, tuple(active), committee)
         budget_active.consume(proposal.ticket)
-        revealed_case = independent_oracle_answer(proposal, secret)
+        revealed_case = reveal_answer(proposal.ticket, secret)
         active.append(revealed_case)
         available = tuple(q for q in available if q.ticket != proposal.ticket)
 
