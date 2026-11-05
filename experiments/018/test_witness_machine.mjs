@@ -46,6 +46,14 @@ test('bounded simultaneous independent-origin synthetic audit questions are prop
  ],.2,gate());
  assert.equal(p2.status,'HOLD_BUDGET');
 });
+test('two proposed audits never double-count one auditor origin as independent',()=>{
+ const p=auditPlan([
+  {origin:'north',auditor_origin:'synthetic_reference_alpha',impact:4,audit_cost:.2},
+  {origin:'south',auditor_origin:'synthetic_reference_alpha',impact:3,audit_cost:.2}
+ ],1,gate());
+ assert.equal(p.source_audits.length,1);
+ assert.equal(p.proposal_only,true);
+});
 test('unchanged observed source health does not become a claim of established stability',()=>{
  const r=healthy('stable');
  assert.equal(r.status,'HOLD_FOR_INDEPENDENT_SOURCE_REVIEW');
