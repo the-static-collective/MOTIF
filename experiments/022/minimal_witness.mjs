@@ -32,6 +32,8 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
   worldSetupCost=1.8,
   eachLampReadCost=.18,
   auditCost=.2,
+  currentBudget=seed.budget,
+  permittedTargets=seed.targets.map(key),
   sourceCertification='native-relatte-009-p256-verified-by-caller',
 }={}) {
   fail(seed?.schema==='motif.instrument-garden/v0','SEED_SCHEMA');
@@ -49,7 +51,8 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
   fail(interpreted.status==='RECEIPT_INTERPRETED_NOT_PROMOTED'&&
     interpreted.next_measurement?.status==='HOLD','UNEXPECTED_021_STATE');
   fail(Number.isFinite(reliability)&&reliability>0.5&&reliability<=1 &&
-    [worldSetupCost,eachLampReadCost,auditCost].every(x=>Number.isFinite(x)&&x>=0),
+    [worldSetupCost,eachLampReadCost,auditCost,currentBudget].every(x=>Number.isFinite(x)&&x>=0) &&
+    Array.isArray(permittedTargets) && permittedTargets.every(x=>typeof x==='string'),
     'COST_ASSUMPTIONS');
   const posterior=Object.fromEntries(interpreted.posterior.posterior.map(x=>[
     x.id,x.posterior,
@@ -58,7 +61,7 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
     verifiedReceipt.world+':'+verifiedReceipt.fault_x]);
   const candidates=[];
   for(const t of seed.targets) {
-    if(already.has(key(t)))continue;
+    if(already.has(key(t))||!permittedTargets.includes(key(t)))continue;
     const predictions=seed.hypotheses.map(h=>({
       id:h.id,
       prior:posterior[h.id],
@@ -76,7 +79,10 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
       const expense=worldSetupCost+selectedStages.length*eachLampReadCost+auditCost;
       const info=reducedObservationInformation(binary[0],binary[1],reliability);
       const inaction=seed.cost_of_inaction;
-      const utility=seed.value_per_bit*info-expense+inaction;
+      // Compare cost-adjusted action against HOLD(-cost_of_inaction).
+      // Do NOT also add avoided inaction to the action score: that
+      // would double-count the same forgone opportunity.
+      const utility=seed.value_per_bit*info-expense;
       const choice={
         world:t.world,
         world_seed:t.world==='A'?'381654729':'918273645',
@@ -108,7 +114,7 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
     b.expected_information_bits-a.expected_information_bits||
     a.estimated_cost_units-b.estimated_cost_units||
     a.world.localeCompare(b.world)||a.fault_x-b.fault_x);
-  const good=candidates.filter(x=>x.estimated_cost_units<=seed.budget&&
+  const good=candidates.filter(x=>x.estimated_cost_units<=currentBudget&&
     x.expected_information_bits>0.000001&&
     x.expected_net_value>-seed.cost_of_inaction);
   if(!good.length)return {
@@ -130,6 +136,7 @@ export function forgeMinimalWitness(seed,verifiedReceipt,actualGameTrace,{
     posterior_021:interpreted.posterior.posterior,
     first_seeded_composition:'minecraft.world-A.fault-minus28.two-lamp-witness/v0',
     inaction_cost_units:seed.cost_of_inaction,
+    current_budget_units:currentBudget,
     reliability_is_seeded_not_calibrated:reliability,
     cost_units_are_hypotheses_not_measured_walltime:true,
     full_nine_lamp_recheck_may_refute_prefix_assumption:true,
