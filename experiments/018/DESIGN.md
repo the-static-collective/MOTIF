@@ -35,7 +35,7 @@ The old diagnostic identifies irreducible surface collisions and produces HOLD. 
 
 ### Benchmark and classical control
 
-Run \`python benchmark.py\` to obtain a deterministic JSON receipt; values are recomputed, not hardcoded in the report. The intended outcomes, checked in unit tests, are:
+Run `python benchmark.py` to obtain a deterministic JSON receipt; values are recomputed, not hardcoded in the report. The intended outcomes, checked in unit tests, are:
 
 | Held-out outcome | Surface-only observer | Expanded graph program | Exhaustive classical feature selector |
 |---|---:|---:|---:|
@@ -45,7 +45,7 @@ Run \`python benchmark.py\` to obtain a deterministic JSON receipt; values are r
 
 The experiment records independently simulated actor→intermediate→goal toggles while x and the badge stay fixed. It scores whether the frozen candidate predicts the changed outcomes. These are synthetic simulator interventions, not real-world causal discovery.
 
-The held-out scoring also records correct *permitted* positive plans and wrong/unpermitted proposals. No plan executes. The toy authorization bit is supplied by the fixture and cannot be inferred into a real-world grant of authority.
+The held-out scoring records correct *permitted* positive plans, incorrect permitted positive proposals, and positive predictions blocked by the toy permission fence. No plan executes. The toy authorization bit is supplied by the fixture and cannot be inferred into a real-world grant of authority.
 
 ### Required negative results
 
@@ -59,11 +59,11 @@ The held-out scoring also records correct *permitted* positive plans and wrong/u
 
 Requires Python 3.10+; no packages, API keys, internet or paid compute.
 
-\`\`\`sh
+```sh
 cd experiments/018
 python -m unittest -v test_unknown_unknown.py
 python benchmark.py
-\`\`\`
+```
 
 CI runs these same scripts on pushes and pull requests.
 
