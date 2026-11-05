@@ -43,6 +43,14 @@ If the candidate loses accuracy, violates a safety gate, has insufficient eviden
 
 **Classical parity is essential:** an exact classical planner refitted on the SAME new provider offer and known hypothesis family also obtains 0.65 and **ties** the grown forest. This work does not exceed classical optimal planning, prove autonomous tool invention, or establish a universally superior intelligence. It only beats the *historical frozen diagnostic* with a newly reviewed question capability; the exact classical refit reveals the legitimate current ceiling.
 
+### 3a. The diagnostic can identify research opportunities before it has an upgrade
+
+The new DiagnosticFrontier inspector runs the incumbent planner over the *declared* world grammar, then temporarily imagines what would happen if each new question were admitted. It ranks *research tickets*, not installations, by possible modeled cost savings. It explicitly preserves these open dimensions: alternative question costs, new licensed questions, human attention, calibration, unknown mechanisms, negative transfer, and unlocked future capabilities.
+
+In the current constructed experiment, the cheapest FALSE_SHORTCUT looks like the most promising hypothetical improvement, **but fails independent review**. The research priority then excludes it and retains a verified FUSED_PORTS opportunity. This exposes why an optimizer must not turn an attractive forecast into authority.
+
+Even when there are no known offers, the diagnostic reports OPEN_METHOD_FRONTIER_NOT_A_PROVEN_CEILING, rather than claiming that 100% synthetic accuracy establishes global optimality. No numeric possible cost saving is asserted without a candidate provider contract. All shadow simulations are explicitly unverified.
+
 ### 4. A failure that the review cannot catch
 
 The DRIFT_FUSED_PORTS provider is correct on all REVIEW cases, and becomes misleading after review on one of the two mode families. The forest follows the misleading but still in-grammar report, so it may confidently select the wrong answer. In the eight TEST worlds, it predicts **only 4/8 correctly**. A perfectly syntactic, origin-labeled receipt does not establish truth or future reliability.
