@@ -147,13 +147,16 @@ def run(output):
     if len(original_red)!=4 or len(target_red)!=4 or original_red&target_red:
         raise HOLD('Proof of frozen add-only impossibility no longer applies')
     observed_counterfactuals=[]
+    imagined_first_frames=[]
     for delta,(status,nxt) in zip(MOVES,native_predict_batch(
           [(first,d) for d in MOVES])):
         observed_counterfactuals.append({
           'imagined_delta':list(delta),
           'prediction_status':status,
-          'predicted_frame_png_sha256':sha256(v.encode_png(nxt)).hexdigest() if nxt else None,
+          'predicted_frame_png_sha256':sha256(v.encode_png(nxt,scale=10)).hexdigest() if nxt else None,
           'real_action_executed':False})
+        if nxt is not None:
+            imagined_first_frames.append((delta,nxt))
     frames,steps,seen=imagine(first,goal,True)
     classic_frames,classic_steps,classic_seen=imagine(first,goal,False)
     if frames is None or classic_frames is None or len(steps)!=len(classic_steps):
@@ -161,6 +164,11 @@ def run(output):
     if len(frames)!=len(steps)+1 or frames[0]!=first or frames[-1]!=goal:
         raise HOLD('Visual imagination produces invalid path')
     output.mkdir(parents=True)
+    counter=output/'counterfactuals'
+    counter.mkdir()
+    for j,(delta,frame) in enumerate(imagined_first_frames):
+        (counter/f'choice-{j:02d}-dx{delta[0]}-dy{delta[1]}.png').write_bytes(
+            v.encode_png(frame,scale=10))
     clips=output/'frames'
     clips.mkdir()
     for i,frame in enumerate(frames):
@@ -183,6 +191,7 @@ def run(output):
       'imagined_moves':[list(x) for x in steps],
       'visited_imagined_worlds':seen,
       'counterfactual_first_moves':observed_counterfactuals,
+      'counterfactual_first_frames_rendered':len(imagined_first_frames),
       'classical_equal_information_goal_reached':True,
       'classical_minimum_steps':len(classic_steps),
       'classical_visited_worlds':classic_seen,
