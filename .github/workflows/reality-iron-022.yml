@@ -1,0 +1,43 @@
+name: MOTIF 022 — evaluate actual GHoT cost of knowing
+
+on:
+  pull_request:
+    paths:
+      - "experiments/022/**"
+      - ".github/workflows/reality-iron-022.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-owned-goal-inquiry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch exact GHoT-004 physical source-owner evidence
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: f6a36f5c9d8b567a69ead04ccf7641cba338a7f3
+          path: ghot-source-022
+          persist-credentials: false
+      - name: Verify Git blob and exact source-owner bytes before diagnosis
+        run: |
+          test "$(git hash-object experiments/022/evidence/ghot-004-actual-2026-11-05.json)" = "ee545add1b71f97eb3fae2e5151398f81814a89b"
+          cmp experiments/022/evidence/ghot-004-actual-2026-11-05.json ghot-source-022/evidence/004-goal-aware-actual-2026-11-05.json
+      - name: Test actual sourced decisions and attempts to forge utility / Joules
+        run: python3 -m unittest discover -s experiments/022 -p "test_*.py" -v
+      - name: Derive physical-cost, evidence-goal and next-question diagnostic
+        run: python3 experiments/022/cost_of_knowing.py --out motif-022-actual.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-022-cost-of-knowing
+          path: motif-022-actual.json
+          retention-days: 30

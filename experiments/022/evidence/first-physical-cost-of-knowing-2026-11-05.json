@@ -1,0 +1,156 @@
+{
+  "authority": false,
+  "automatic_promotion": false,
+  "counterhypothesis": "A shorter investigative path can be less useful if the declared answer contract omits a quality, safety, provenance or timeliness requirement the human actually needed.",
+  "dispatch": false,
+  "exact_test_scope": "TWO_EXPLICIT_EVIDENCE_CONTRACTS_FOUR_REAL_NETWORK_TRIALS",
+  "falsification_plan": "Freeze the human-confirmed goal before starting; prospectively log actual usefulness, all requests, unavailable responses, latency and separately metered Joules across devices and new task types.",
+  "goal_aware_vs_exhaustive_actual_resources": {
+    "any_fresh": {
+      "causal_performance_gain_demonstrated": false,
+      "contract_completed_in_both_actual_trials": true,
+      "exhaustive_real_requests": 3,
+      "goal_aware_observed_non_worse_on_all_measured_dimensions": true,
+      "human_usefulness_beyond_declared_binary_goal": false,
+      "matched_contemporaneous_randomized_trial": false,
+      "measured_energy_joules": null,
+      "observed_resource_differences_exhaustive_minus_goal_aware": {
+        "http_body_bytes": 551967,
+        "local_request_cpu_nanoseconds": 6902496,
+        "number_of_real_requests": 2,
+        "request_wall_nanoseconds": 1732148904
+      },
+      "optimized_real_requests": 1
+    },
+    "two_named_fresh": {
+      "causal_performance_gain_demonstrated": false,
+      "contract_completed_in_both_actual_trials": true,
+      "exhaustive_real_requests": 3,
+      "goal_aware_observed_non_worse_on_all_measured_dimensions": true,
+      "human_usefulness_beyond_declared_binary_goal": false,
+      "matched_contemporaneous_randomized_trial": false,
+      "measured_energy_joules": null,
+      "observed_resource_differences_exhaustive_minus_goal_aware": {
+        "http_body_bytes": 275917,
+        "local_request_cpu_nanoseconds": 5135984,
+        "number_of_real_requests": 1,
+        "request_wall_nanoseconds": 693179900
+      },
+      "optimized_real_requests": 2
+    }
+  },
+  "hypothesis_disposition": "HELD_REAL_NARROW_GOAL_COMPLETION_WITH_LESS_OBSERVED_RESOURCE_WORK",
+  "inquiry_steps_composed_from_source_receipts": {
+    "any_fresh/exhaustive": [
+      {
+        "actual_http_payload_bytes": 270810,
+        "actual_http_request_wall_ns": 700212342,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "CONTROL_ASK_EXTRA_EVEN_IF_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "blue"
+      },
+      {
+        "actual_http_payload_bytes": 276050,
+        "actual_http_request_wall_ns": 711828491,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "CONTROL_ASK_EXTRA_EVEN_IF_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "sueur"
+      },
+      {
+        "actual_http_payload_bytes": 275917,
+        "actual_http_request_wall_ns": 1057299744,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "FINISH_CONTROL_AFTER_ALL_SOURCES",
+        "original_goal_is_still_reachable": true,
+        "public_source": "mankato"
+      }
+    ],
+    "any_fresh/goal_aware": [
+      {
+        "actual_http_payload_bytes": 270810,
+        "actual_http_request_wall_ns": 737191673,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "STOP_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "blue"
+      }
+    ],
+    "two_named_fresh/exhaustive": [
+      {
+        "actual_http_payload_bytes": 270810,
+        "actual_http_request_wall_ns": 703612747,
+        "goal_was_satisfied": false,
+        "is_another_question_capable_of_completing_original_goal": true,
+        "next_decision": "CONTROL_ASK_EXTRA_EVEN_IF_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "blue"
+      },
+      {
+        "actual_http_payload_bytes": 276050,
+        "actual_http_request_wall_ns": 693549779,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "CONTROL_ASK_EXTRA_EVEN_IF_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "sueur"
+      },
+      {
+        "actual_http_payload_bytes": 275917,
+        "actual_http_request_wall_ns": 691555422,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "FINISH_CONTROL_AFTER_ALL_SOURCES",
+        "original_goal_is_still_reachable": true,
+        "public_source": "mankato"
+      }
+    ],
+    "two_named_fresh/goal_aware": [
+      {
+        "actual_http_payload_bytes": 270810,
+        "actual_http_request_wall_ns": 697760279,
+        "goal_was_satisfied": false,
+        "is_another_question_capable_of_completing_original_goal": true,
+        "next_decision": "ASK_NEXT_POSSIBLY_USEFUL_SOURCE",
+        "original_goal_is_still_reachable": true,
+        "public_source": "blue"
+      },
+      {
+        "actual_http_payload_bytes": 276050,
+        "actual_http_request_wall_ns": 697777769,
+        "goal_was_satisfied": true,
+        "is_another_question_capable_of_completing_original_goal": false,
+        "next_decision": "STOP_GOAL_MET",
+        "original_goal_is_still_reachable": true,
+        "public_source": "sueur"
+      }
+    ]
+  },
+  "limits": [
+    "Two goal contracts intentionally simple; binary source-report satisfaction is not human utility.",
+    "The two strategies were executed at different times, not randomly/independently controlled.",
+    "Comparative measured differences are observed, not causal savings estimates or universal performance guarantees.",
+    "HTTP body bytes exclude transport-layer overhead; process CPU and elapsed time do not measure energy.",
+    "No physical hazards, flood warnings or personal data were evaluated. No autonomous source rewriting."
+  ],
+  "measured_electrical_energy_joules": null,
+  "next_question": "Can an assistant establish the person's actual evidence need and prove which extra question might change its satisfaction before spending energy and attention?",
+  "no_autonomous_code_revision": true,
+  "owner_source": {
+    "commit": "f6a36f5c9d8b567a69ead04ccf7641cba338a7f3",
+    "git_blob": "ee545add1b71f97eb3fae2e5151398f81814a89b",
+    "repository": "the-static-collective/GHoT",
+    "run": "https://github.com/the-static-collective/GHoT/actions/runs/42057823934",
+    "source_response_types": "USGS_REPORTED_PUBLIC_FLOW_NOT_INDEPENDENTLY_CALIBRATED"
+  },
+  "resource_units_are_not_fictional_credit_prices": true,
+  "schema": "motif.cost-of-knowing/v1",
+  "total_actual_http_body_bytes": 2463224,
+  "total_actual_public_gets": 9,
+  "total_actual_request_wall_ns": 6690788246
+}
