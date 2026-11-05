@@ -1,0 +1,30 @@
+name: MOTIF-018 Unknown Unknown
+on:
+  push:
+    branches:
+      - research/motif-018-representation-frontier
+  pull_request:
+    paths:
+      - 'experiments/018/**'
+      - '.github/workflows/motif-018.yml'
+jobs:
+  frozen-synthetic-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reproduce falsification tests
+        working-directory: experiments/018
+        run: python -m unittest -v test_unknown_unknown.py
+      - name: Reproduce full synthetic receipt
+        working-directory: experiments/018
+        run: |
+          python benchmark.py > motif018-receipt.json
+          cat motif018-receipt.json
+      - name: Archive inspectable evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif018-synthetic-receipt
+          path: experiments/018/motif018-receipt.json
