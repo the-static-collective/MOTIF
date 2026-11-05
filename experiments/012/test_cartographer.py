@@ -68,7 +68,7 @@ class CausalCartographerTests(unittest.TestCase):
         spec=self.world
         original=oracle.natural(spec,"train")
         self.assertTrue(all(
-            (spec.candidate_c,e.roles[0]) in e.before ==
+            ((spec.candidate_c,e.roles[0]) in e.before) ==
             ((spec.candidate_p,e.roles[1]) in e.before)
             for e in original))
         query=oracle.intervene(spec,True,False,900)
