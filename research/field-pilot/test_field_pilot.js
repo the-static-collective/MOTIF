@@ -28,6 +28,24 @@ function run() {
  log=make();log.cards[0].origin="third_party_unverified";
  fails(()=>F.validate(log));
 
+ log=make();
+ const proposed=ev("candidate_proposed");proposed.source="operator_generated";
+ log.events=[proposed];
+ assert.equal(F.summary(log,t).prospective_proposals_recorded,1);
+ assert.equal(F.summary(log,t).unresolved_proposals,1);
+ assert.equal(F.summary(log,t).no_benefit_reports,0);
+ const follow=ev("benefit_reported",undefined,"event2");
+ follow.recorded_at="2026-11-04T17:30:00Z";
+ log.events.push(follow);
+ assert.equal(F.summary(log,t).unresolved_proposals,0);
+ assert.equal(F.summary(log,t).benefit_reports,1);
+ log=make();log.events=[ev("benefit_reported"),proposed];
+ fails(()=>F.validate(log));
+ log=make();log.events=[proposed, {...proposed,id:"event2"}];
+ fails(()=>F.validate(log));
+ log=make();log.events=[ev("candidate_proposed")];
+ fails(()=>F.validate(log));
+
  log=make();log.events=[ev("provider_yes_reported")];
  assert.equal(F.eligible(log,t)[0].disposition,"HOLD_CONFIRM_DIRECTLY");
  log.events.push(ev("requester_yes_reported",undefined,"b"));
