@@ -4,7 +4,7 @@ from dataclasses import replace
 
 from bridge import (
     Acceptance, Candidate, Goal, Offer, Scene,
-    first_human_card, food, generate, options, solve, transition, workshop,
+    first_human_card, held_portable_packet, food, generate, options, solve, transition, workshop,
 )
 
 
@@ -221,6 +221,23 @@ class BridgeTests(unittest.TestCase):
                 scene, offers, accepted, Goal("relay", actor="cy")
             ) if x.offer_id == "ari-to-bea")
         ))
+
+    def test_export_is_held_even_when_toy_simulation_is_admitted(self):
+        result = solve(self.scene, self.offers, self.acceptances, self.goal)
+        p = held_portable_packet(result)
+        self.assertEqual(p["status"], "HOLD_REALITY")
+        self.assertEqual(p["admission"], "none")
+        self.assertTrue(p["no_execution_permission"])
+        self.assertTrue(p["no_automatic_delivery"])
+        self.assertFalse(p["claims_real_result"])
+        self.assertEqual(len(p["content_sha256"]), 64)
+        self.assertEqual(p, held_portable_packet(result))
+
+    def test_export_remembers_unresolved_agreements(self):
+        scene, offers, accepted, goal = workshop(with_offers=False)
+        p = held_portable_packet(solve(scene, offers, accepted, goal))
+        self.assertEqual(len(p["unresolved_agreements"]), 2)
+        self.assertEqual(p["source_scope"], "FICTIONAL_GRAPH_ONLY")
 
     def test_no_false_delivery_evidence_in_first_card(self):
         result = solve(self.scene, self.offers, self.acceptances, self.goal)
