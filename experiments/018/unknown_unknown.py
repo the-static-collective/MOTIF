@@ -144,8 +144,11 @@ def assess(model: PredictionModel, cases: tuple[Episode, ...]) -> dict:
     correct = sum(case.outcome == p for case, p in covered)
     true_permitted = sum(p == 1 and case.outcome == 1 and case.authorized
                          for case, p in covered)
+    # Predictions are not action proposals without explicit toy permission.
+    # Preserve the number withheld by the permission fence separately.
+    withheld = sum(p == 1 and not case.authorized for case, p in covered)
     wrong_or_unpermitted = sum(
-        p == 1 and (case.outcome != 1 or not case.authorized)
+        p == 1 and case.authorized and case.outcome != 1
         for case, p in covered)
     return {
         "total": len(cases),
@@ -155,6 +158,7 @@ def assess(model: PredictionModel, cases: tuple[Episode, ...]) -> dict:
         "coverage": round(len(covered) / len(cases), 6) if cases else None,
         "correct_permitted_positive_plans": true_permitted,
         "wrong_or_unpermitted_positive_proposals": wrong_or_unpermitted,
+        "positive_predictions_withheld_by_permission": withheld,
     }
 
 
