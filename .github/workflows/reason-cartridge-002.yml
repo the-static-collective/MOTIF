@@ -1,0 +1,47 @@
+name: REASON-CARTRIDGE-002 method distillery
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-002-method-distillery
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-002/**'
+      - '.github/workflows/reason-cartridge-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  method-distillery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source-owned lessons, guarded transfer, hostile tests
+        run: python -m unittest discover -s experiments/reason-cartridge-002 -p 'test_*.py' -v
+      - name: Independent holdout, full classical and rote controls
+        run: |
+          python experiments/reason-cartridge-002/demo.py > method-distillery-receipt.json
+          python - <<'PY'
+          import json
+          with open('method-distillery-receipt.json', encoding='utf-8') as stream:
+              r = json.load(stream)
+          assert r['review'] == {'correct': 9, 'total': 9, 'unresolved_order_disagreements': 0}
+          assert r['controls']['learned']['correct'] == 9
+          assert r['controls']['single_teacher_router']['correct'] == 8
+          assert r['controls']['full_classical_bfs']['correct'] == 9
+          assert r['controls']['learned']['joint_positive']
+          assert not r['controls']['single_teacher_router']['joint_positive']
+          assert r['controls']['full_classical_bfs']['joint_positive']
+          assert r['read_only_admission'] is True
+          assert r['real_world_authority'] is False
+          print(r['review'], r['controls'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: method-distillery-synthetic-receipt
+          path: method-distillery-receipt.json
