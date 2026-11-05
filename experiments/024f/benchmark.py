@@ -13,6 +13,7 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import asdict
 import json
+import os
 import random
 import time
 
@@ -26,7 +27,7 @@ def evaluate():
     from chorus import LocalFlanT5Small
     torch.set_num_threads(2)
     start=time.monotonic()
-    model=LocalFlanT5Small()
+    model=LocalFlanT5Small(os.environ.get("MOTIF_FLAN_MODEL_DIR", "google/flan-t5-small"))
     load_start=time.monotonic()
     model._prepare()
     model_load=round(time.monotonic()-load_start,4)
@@ -102,6 +103,7 @@ def evaluate():
         "schema":"motif024f.native-vs-small-model-shadow-ranking/v0",
         "actual_model_weights_loaded":model._model is not None,
         "model_id":"google/flan-t5-small",
+        "checkpoint_ref":os.environ.get("MOTIF_FLAN_REVISION", "UNPINNED_LOCAL_CACHE"),
         "actual_model_token_logits_used":True,
         "model_never_granted_field_authority":True,
         "model_was_only_offered_native_eligible_instruments":True,
