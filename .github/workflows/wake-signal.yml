@@ -1,0 +1,36 @@
+name: WAKE SIGNAL 001 local research
+on:
+  push:
+    branches:
+      - "experiment/wake-signal-*"
+    paths:
+      - "experiments/wake-signal/**"
+      - ".github/workflows/wake-signal.yml"
+  pull_request:
+    paths:
+      - "experiments/wake-signal/**"
+      - ".github/workflows/wake-signal.yml"
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Falsification tests
+        run: python -m unittest discover -s experiments/wake-signal -p 'test_*.py' -v
+      - name: Dry 100-slot randomized pilot, zero sends
+        run: |
+          python experiments/wake-signal/wake.py plan \
+            --out /tmp/wake-draft.json --count 100 --seed 2026 \
+            --title "Example only" \
+            --context "No real recipient or opportunity exists." \
+            --small "Move one chair in a fictional space." \
+            --creative "Suggest a fictional improvement." \
+            --autonomous "Propose a hypothetical bounded task." > /tmp/wake-sample.json
+          python experiments/wake-signal/wake.py report \
+            --plan /tmp/wake-draft.json --events /tmp/nonexistent-wake-events.jsonl
