@@ -15,6 +15,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[007 — Inheritance without empire](experiments/007/DESIGN.md):** Export only source-pinned abstract operator closures, hold them for independent local preview and explicit planning-only review, then inherit and improve a composite method across two separate synthetic worlds without sharing either observed graph.
 - **[008 — The unknown world](experiments/008/DESIGN.md):** Infer relational rules from unfamiliar opaque-predicate synthetic worlds, compare with matched classical baselines, preserve validation-based abstention, and measure held-out structural interventions. **The strong depth-2 tree baseline essentially matches MOTIF's covered performance.**
 - **[009 — The Experimenter](experiments/009/DESIGN.md):** Turn two-question decision trees into portable, source-checksummed, local-reviewable **prediction cartridges**. An [actual XOR tree cartridge](experiments/009/example-tree-cartridge.json) is checked in. A committee proposes which synthetic observation to reveal next; compare fixed-budget inquiry with seeded random sampling. v1 showed no benefit at the accuracy ceiling; a separate, post-hoc low-data stress test shows a temporary early advantage.
+- **[010 — The Scientist](experiments/010/DESIGN.md):** Convert competing MOTIF-009 tree cartridges into an information-gain experiment selector. A separate simulator executes two controlled graph interventions **on demand**; in 60 tiny synthetic worlds, the selector identifies the correct two-port truth table in 60/60 worlds, compared with 12/60 random, **and ties a strong fixed classical diagnostic control**.
 
 ### Run (Python 3.10+, standard library only)
 
@@ -56,6 +57,10 @@ python -m unittest -v test_experimenter.py
 python benchmark.py   # v1 ceiling benchmark
 python stress.py      # v2 low-data stress, post hoc
 python cartridge_demo.py # print portable XOR tree, HOLD/review and next question
+
+cd ../010
+python benchmark.py
+python -m unittest -v test_scientist.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
@@ -69,13 +74,13 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 - **Portable method ≠ shared sovereignty.** Source checksums do not authenticate authors, and admitted simulations never authorize real actions.
 - **Compressed macro ≠ new external ability.** Reusing a sequence as one planning primitive does not bypass or reduce its underlying steps.
 - **Decision tree cartridge ≠ autonomous action.** Cartridges offer auditable inferences, and their local admission only permits read-only predictions in this prototype.
-- **Choosing an observation ≠ intervening on reality.** Active inquiry currently selects from an already-generated synthetic pool.
+- **Synthetic interventions ≠ real-world intervention authority.** MOTIF-009 chooses pre-generated unlabeled observations; MOTIF-010 chooses changes executed only inside a separate synthetic graph simulator.
 - **Opaque predicates ≠ open-world understanding.** MOTIF-008 learns within each controlled synthetic world; zero-shot cross-world transfer remains unproven.
 - **Matching a classical baseline ≠ architectural superiority.** A simple tree with the same graph features approaches the full synthetic benchmark ceiling.
 - **New verb ≠ novel model architecture.** Program induction, graph rewriting, and planning have substantial prior art; originality remains to be proven through controlled benchmarks.
 
 ## Next frontier
 
-Measure whether choosing **actual bounded experiments in an independent simulator**, rather than pre-generated observation tickets, improves knowledge per unit of effort. Then test whether structural knowledge learned in **one world** reduces sample cost in a genuinely different, held-out world family; include incomplete observations, concept drift, more than two roles and nonlocal dependencies. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Test whether deliberately chosen experiments remain useful when **observations are noisy, control has a cost, hidden causes exist, and the correct model is absent from the hypothesis grammar**. Then measure whether structural knowledge learned in **one world** reduces sample cost in genuinely different held-out families; include incomplete observations, concept drift, more than two roles and nonlocal dependencies. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
