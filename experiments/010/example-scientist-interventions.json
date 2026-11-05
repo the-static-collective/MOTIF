@@ -1,0 +1,135 @@
+{
+  "experiment": "MOTIF-010",
+  "final_tree": {
+    "checksum_sha256": "cd71cddbf2314df01f316c8ade01458674c50b5123ba1899fd70e3e2bb943cbe",
+    "counts": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "evidence_count": 4,
+    "first": [
+      [
+        "qc2ede03a48bacf30a77b39f2",
+        "?0"
+      ]
+    ],
+    "fit_balanced": 1,
+    "id": "tree-67dc064c1b256157",
+    "leaves": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "schema": "motif.decision-tree-cartridge.v0",
+    "second": [
+      [
+        "q3781f9f03e99532c594155b9",
+        "?1"
+      ]
+    ],
+    "source_digest": "561803a00c6b51d7feef61b9ccea9efaa79629f85100235ebdd39cb802a9e095",
+    "status": "PROPOSAL_ONLY",
+    "vocab": [
+      "pending",
+      "q3781f9f03e99532c594155b9",
+      "qc2ede03a48bacf30a77b39f2",
+      "role_actor",
+      "role_target"
+    ]
+  },
+  "full_two_input_truth_table": [
+    {
+      "controls": [
+        false,
+        false
+      ],
+      "prediction": false
+    },
+    {
+      "controls": [
+        false,
+        true
+      ],
+      "prediction": true
+    },
+    {
+      "controls": [
+        true,
+        false
+      ],
+      "prediction": true
+    },
+    {
+      "controls": [
+        true,
+        true
+      ],
+      "prediction": false
+    }
+  ],
+  "initial_tree_hypotheses": 4,
+  "interventions": [
+    {
+      "actual_real_world_action": false,
+      "control_values": [
+        false,
+        true
+      ],
+      "expected_information_gain_bits": 1,
+      "experiment": "DO_SYNTHETIC_PORT_SETTINGS",
+      "predicted_votes_before_observation": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "remaining_tree_cartridges": 2,
+      "resulting_observed_change": true,
+      "step": 1,
+      "tree_cartridge_ids_before": [
+        "tree-f9a200e1526b0c0d",
+        "tree-15ba8f205fe86078",
+        "tree-dc3f509883417e85",
+        "tree-1f4a0c9bdb57063a"
+      ]
+    },
+    {
+      "actual_real_world_action": false,
+      "control_values": [
+        true,
+        false
+      ],
+      "expected_information_gain_bits": 1,
+      "experiment": "DO_SYNTHETIC_PORT_SETTINGS",
+      "predicted_votes_before_observation": [
+        false,
+        true
+      ],
+      "remaining_tree_cartridges": 1,
+      "resulting_observed_change": true,
+      "step": 2,
+      "tree_cartridge_ids_before": [
+        "tree-ffd28aeeceb6b590",
+        "tree-2c3a7febcb389084"
+      ]
+    }
+  ],
+  "original_natural_observations_unmodified": true,
+  "real_world_authority": false,
+  "receipt": "SYNTHETIC_INTERVENTION_TRANSCRIPT"
+}
