@@ -23,6 +23,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[015 — Many Roads / Multiplex Inquiry](experiments/015/DESIGN.md):** Select a budgeted **portfolio** of complementary `ANSWER` / `ASK` / `VERIFY` avenues by exact joint expected decision value, offer tentative answers while still investigating, and execute read-only synthetic probes concurrently. A tiny XOR counterexample shows two individually unhelpful questions beating a greedy single-probe choice; this is **not** evidence of general superiority or real-world agent authority.
 
+- **[016 — The Living Forest](experiments/016/DESIGN.md):** A finite contingent planner selects joint `ANSWER/ASK/VERIFY` portfolios while anticipating *which next questions will become possible* after each hypothetical answer. It emits counterfactual branches, replans only after separately returned observations, preserves contradiction HOLD and provenance, and stops when further inquiry is not worth its cost. An eight-world example demonstrates non-myopic questioning; a strong fixed classical diagnostic is intentionally a **tie**, not a claimed algorithmic breakthrough.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -91,6 +93,10 @@ python -m unittest -v test_joint.py
 cd ../015
 python -m unittest -v test_multiplex.py
 python demo.py      # greedy bait versus synergistic parallel inquiry
+cd ../016
+python -m unittest -v test_forest.py
+python benchmark.py
+python demo.py      # read the counterfactual branch forecast and actual evidence
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
