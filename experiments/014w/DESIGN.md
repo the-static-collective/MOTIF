@@ -1,5 +1,7 @@
-# MOTIF-014 — THE WITNESS OF WITNESSES
+# MOTIF-014W — THE WITNESS OF WITNESSES
 ## When the credibility of an adjudicator is itself uncertain
+
+**Parallel branch note:** A separate active MOTIF-014 **Organ Gardener** experiment occupies `experiments/014` in another branch. This independent probabilistic-witness research is therefore isolated under `experiments/014w` to avoid overwriting that work. Its internal synthetic experiment identifier remains `MOTIF-014` from the original experiment protocol; the repository index calls this research **014W**.
 
 **Question:** If an apparent independent auditor can be wrong, and a report that an intervention occurred can also be wrong, can MOTIF propagate uncertainty about *those witnesses of evidence* through the causal-model hypotheses instead of mistaking adjudications for ground truth?
 
@@ -199,7 +201,7 @@ It is deliberately an inspectable scientific receipt rather than a web applicati
 Python 3.10+, standard library, no paid API:
 
 \`\`\`sh
-cd experiments/014
+cd experiments/014w
 python benchmark.py
 python demo.py
 python -m unittest -v test_joint.py
