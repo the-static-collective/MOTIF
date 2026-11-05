@@ -1,0 +1,35 @@
+name: MOTIF-016 Gardener's Gardener
+on:
+  push:
+    branches:
+      - research/016-gardener-gardener-metaquestion
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - 'experiments/016/**'
+      - '.github/workflows/motif016.yml'
+jobs:
+  bounded-meta:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute original National Treasure Question Box and Dogram regression
+        run: node --test experiments/014/test_garden.mjs
+      - name: Generated inquiry method baseline and negative-transfer regression
+        run: node --test experiments/015/test_graft.mjs
+      - name: Generate and independently evaluate a conditional meta-procedure
+        run: node --test experiments/016/test_meta.mjs
+      - name: Retain reproducible detailed synthetic study
+        run: node experiments/016/meta_gardener.mjs > motif016-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif016-meta-gardener-synthetic-receipt
+          path: motif016-research.json
+          retention-days: 14
