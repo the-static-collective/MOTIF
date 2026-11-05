@@ -106,6 +106,17 @@ class PlanZOmissionTests(unittest.TestCase):
         self.assertEqual(parallel.first_batch, ("GARDEN-TABLE-001", "SHELF-001"))
         self.assertAlmostEqual(parallel.cost_of_waiting_one_tick, 14)
 
+    def test_wait_first_is_not_misreported_as_act_now(self):
+        # With a durable option and no decay, the conservative optimum can
+        # wait now, then take the modeled action later without losing value.
+        b = fixture()[1]
+        r = self.plan((b,))
+        self.assertAlmostEqual(r.optimal_modeled_value, 8)
+        self.assertEqual(r.first_batch, ())
+        self.assertEqual(r.cost_of_waiting_one_tick, 0)
+        self.assertEqual([x.plans for x in r.sequence if x.plans],
+                         [("GARDEN-TABLE-001",)])
+
     def test_zero_gain_should_not_force_work(self):
         a = replace(fixture()[0], reward_if_successful=0, effort_cost=3)
         r = self.plan((a,))
