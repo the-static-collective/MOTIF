@@ -1,0 +1,101 @@
+name: MOTIF-025F Let MOTIF Interview T5 For a Job
+on:
+  push:
+    paths:
+      - 'experiments/025f/**'
+      - '.github/workflows/motif025f-job-interview.yml'
+  pull_request:
+    paths:
+      - 'experiments/025f/**'
+      - '.github/workflows/motif025f-job-interview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  model-job-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: PRECOMMITTED evidence menu and native NO_T5 safety tests
+        working-directory: experiments/025f
+        run: |
+          python -m unittest -v test_careers.py
+          python - <<'PY'
+          import json
+          from native_careers import preflight_research_menu
+          print("FROZEN JOB INTERVIEW BEFORE MODEL EXPOSURE")
+          print(json.dumps(preflight_research_menu(),indent=2))
+          PY
+      - name: Install pinned CPU inference dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check transformers==4.57.1 sentencepiece==0.2.1 huggingface_hub==0.36.0 safetensors
+      - name: Fetch pinned public T5 model into ephemeral runner only
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from huggingface_hub import snapshot_download
+          rev="0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+          folder=snapshot_download(
+              repo_id="google/flan-t5-small",
+              revision=rev,
+              allow_patterns=[
+                  "config.json","generation_config.json","model.safetensors",
+                  "tokenizer.json","tokenizer_config.json","spiece.model",
+                  "special_tokens_map.json",
+              ],
+          )
+          assert (Path(folder)/"model.safetensors").is_file()
+          with open(os.environ["GITHUB_ENV"],"a") as f:
+              f.write("MOTIF_FLAN_MODEL_DIR="+folder+"\n")
+              f.write("MOTIF_FLAN_REVISION="+rev+"\n")
+          print("PINNED PUBLIC CHECKPOINT:",rev)
+          PY
+      - name: ACTUAL T5 job interview, 72 offline model decisions
+        working-directory: experiments/025f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python interview.py > job_interview_receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("job_interview_receipt.json"))
+          assert d["actual_t5_weights_executed"] is True
+          assert d["real_model_calls"]==72
+          assert d["all_cases_synthetic"] is True
+          assert d["role_assignment_or_human_permission_automated"] is False
+          a=d["original_order_native_job_verdict"]
+          b=d["reversed_order_native_job_verdict"]
+          print("MOTIF'S TRUTH-CONSTRAINED T5 CAREER INTERVIEW")
+          print("model:",d["model"],d["model_revision"])
+          print("total generation seconds:",d["generation_seconds_total"])
+          print("label-order changed",d["changed_choice_when_labels_reversed"])
+          for trial,verdict in (("normal order",a),("reverse",b)):
+              print(trial,"meta outcome",verdict["system_action"],"T5 role:",verdict["hired_role"])
+              for job in verdict["candidate_jobs"]:
+                  print(json.dumps(job,indent=2))
+          for job,records in d["main_label_decisions"].items():
+              for row in records:
+                  print("CASE",job,row["case_id"],"gold="+row["gold"],
+                        "native="+row["native"],"real_T5="+row["selected"])
+          PY
+      - name: Upload receipts only, not model checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif025f-real-t5-job-interview
+          path: experiments/025f/job_interview_receipt.json
+          if-no-files-found: ignore
+          retention-days: 14
