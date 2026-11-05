@@ -25,6 +25,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[016 — The Living Forest](experiments/016/DESIGN.md):** A finite contingent planner selects joint `ANSWER/ASK/VERIFY` portfolios while anticipating *which next questions will become possible* after each hypothetical answer. It emits counterfactual branches, replans only after separately returned observations, preserves contradiction HOLD and provenance, and stops when further inquiry is not worth its cost. An eight-world example demonstrates non-myopic questioning; a strong fixed classical diagnostic is intentionally a **tie**, not a claimed algorithmic breakthrough.
 
+- **[017F — The Self-Growing Forest / Improvable Diagnostic](experiments/017f/DESIGN.md):** Generate a new compositional question from licensed primitive probes and a declared provider offer, require independent synthetic review, then compare a versioned diagnostic incumbent against a cheaper question procedure and a **classical exact refit given the same new capability**. The grown method improves cost over the historical incumbent but ties the refit. A cheaper fraudulent offer is rejected, forbidden offers stay held, an overpriced offer yields no change, and a post-review reliability shift causes **4/8 wrong predictions** rather than disappearing.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -97,6 +99,9 @@ cd ../016
 python -m unittest -v test_forest.py
 python benchmark.py
 python demo.py      # read the counterfactual branch forecast and actual evidence
+cd ../017f
+python -m unittest -v test_grow.py
+python benchmark.py  # clean win over frozen policy, classical parity, drift failure
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
