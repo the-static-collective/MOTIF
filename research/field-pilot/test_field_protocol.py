@@ -32,6 +32,46 @@ class FieldProtocolTests(unittest.TestCase):
         self.assertFalse(summary["authorship_verified"])
         self.assertEqual(len(summary["log_sha256_unsigned"]), 64)
 
+    def test_prospectively_recorded_candidate_precedes_reports(self):
+        first = event("candidate_proposed")
+        first["source"] = "operator_generated"
+        second = event("benefit_reported", id_="event-2")
+        second["recorded_at"] = "2026-11-04T17:30:00Z"
+        self.log["events"] = [first,second]
+        report=summarize(self.log,AS_OF)
+        self.assertEqual(report["prospective_proposals_recorded"],1)
+        self.assertEqual(report["unresolved_proposals"],0)
+        self.assertEqual(report["reported_outcomes"]["benefit_reports"],1)
+        self.assertFalse(report["causal_effect_identified"])
+
+    def test_prospective_proposal_without_followup_is_not_failure(self):
+        proposed = event("candidate_proposed")
+        proposed["source"] = "operator_generated"
+        self.log["events"] = [proposed]
+        report = summarize(self.log,AS_OF)
+        self.assertEqual(report["prospective_proposals_recorded"],1)
+        self.assertEqual(report["unresolved_proposals"],1)
+        self.assertEqual(report["reported_outcomes"]["no_benefit_reports"],0)
+
+    def test_no_postdicted_or_double_proposal(self):
+        proposed = event("candidate_proposed")
+        proposed["source"] = "operator_generated"
+        self.log["events"] = [event("benefit_reported",id_="early"),proposed]
+        with self.assertRaises(FieldError):
+            validate(self.log)
+        self.log["events"] = [proposed,event("candidate_proposed",id_="second")]
+        self.log["events"][1]["source"]="operator_generated"
+        with self.assertRaises(FieldError):
+            validate(self.log)
+
+    def test_proposal_provenance_is_operator_generated_only(self):
+        proposed=event("candidate_proposed")
+        self.log["events"]=[proposed]
+        with self.assertRaises(FieldError):
+            validate(self.log)
+        proposed["source"]="operator_generated"
+        validate(self.log)
+
     def test_no_permission_or_third_party_sharing(self):
         self.log["cards"][0]["share_ok"] = False
         self.assertEqual(candidate_pairs(self.log, AS_OF), [])
