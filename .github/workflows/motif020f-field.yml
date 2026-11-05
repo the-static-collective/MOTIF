@@ -24,5 +24,8 @@ jobs:
         working-directory: experiments/020f
         run: |
           python -m unittest -v test_fellowship_timeline.py
+          python -m unittest -v test_fellowship_operator_update.py
+          python fellowship_operator_update.py > operator_update.json
+          python -c 'import json; d=json.load(open("operator_update.json")); print(json.dumps({"reported_permission":d["observation"]["venue_use_permission"],"new_operational_questions":d["operational_questions_now"],"scenarios":{k:{"first":v["first_review_step"],"value":v["hypothetical_total_value"],"wait_cost":v["hypothetical_cost_of_waiting_one_bucket"],"sequence":v["proposed_sequence"]} for k,v in d["scenario_model_not_verified_impact"].items()}}, indent=2))'
           python fellowship_timeline.py > result.json
           python -c 'import json; d=json.load(open("result.json")); print(json.dumps({"as_of":d["as_of"],"source_status":d["truth_only_planz_conclusion"]["status"],"scenario_results":{k:{"first_now":v["first_batch_now"],"optimal":v["optimal_modeled_value"],"greedy":v["myopic_modeled_value"],"cost_of_wait":v["cost_if_wait_one_bucket"],"schedule":v["model_plan_nonempty_batches"]} for k,v in d["cases"].items()}},indent=2))'
