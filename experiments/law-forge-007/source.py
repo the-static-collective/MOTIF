@@ -58,7 +58,8 @@ class Source:
             if self.hidden_family == "sparse_exception_six":
                 old = SixLinkOwner("any_three_paths", self.seed)
                 return old.actual(state, "inquiry" if phase == "training" else phase) ^ int(state == (1, 1, 1, 1, 1, 1))
-            return SixLinkOwner(self.hidden_family, self.seed).actual(\n                state, "inquiry" if phase == "training" else phase)
+            return SixLinkOwner(self.hidden_family, self.seed).actual(
+                state, "inquiry" if phase == "training" else phase)
         if self.hidden_family == "seven_parity":
             return sum(state) % 2
         if self.hidden_family == "seven_last_channel":
