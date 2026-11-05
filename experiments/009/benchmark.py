@@ -10,6 +10,9 @@ is the matched-budget control. Performance is evaluated on the same untouched
 80-case test split. Results may favor neither strategy. NO physical actions.
 """
 from __future__ import annotations
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "008"))
 
 from collections import defaultdict
 from dataclasses import dataclass
