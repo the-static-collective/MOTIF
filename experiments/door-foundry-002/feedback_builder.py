@@ -113,7 +113,7 @@ def verify_receipt(packet: dict, selection: dict) -> str:
         "no_auto_merge", "content_sha256",
     }:
         raise HOLD("Unexpected CANNON receipt fields")
-    {**body} = packet
+    body = dict(packet)
     claimed = body.pop("content_sha256")
     if (not isinstance(claimed, str) or len(claimed) != 64 or
             claimed != digest(body)):
