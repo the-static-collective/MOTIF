@@ -11,7 +11,7 @@ from pathlib import Path
 import argparse
 import json
 
-from bridge import first_human_card, food, relay, solve, workshop
+from bridge import first_human_card, food, relay, solve, workshop, held_portable_packet
 
 CASES = (
     ("workshop", "The Workshop", "Find a new repair capability without taking away a neighbor's only tool.",
@@ -36,6 +36,7 @@ def payload() -> list[dict[str, object]]:
         {
             "id": identifier, "title": title, "summary": summary,
             "receipt": receipt, "card": first_human_card(receipt),
+            "packet": held_portable_packet(receipt),
         }
         for identifier, title, summary, specimen in CASES
         for receipt in (solve(*specimen),)
@@ -133,7 +134,7 @@ footer{margin-top:46px;padding-top:15px;border-top:3px double var(--ink);font:12
 <p id="first-step" class="card-text"></p>
 <h2>Possible path</h2>
 <ol id="steps" class="steps"></ol>
-<div class="actions"><button id="copy" type="button">Copy this field card</button></div>
+<div class="actions"><button id="copy" type="button">Copy this field card</button><button id="save" type="button">Save HELD JSON packet</button></div>
 <p id="copy-status" class="small" aria-live="polite"></p>
 </div>
 <div>
@@ -197,6 +198,14 @@ function show(id) {
   metrics.append(dt,dd);
  }
  put('receipt',JSON.stringify(r,null,2));
+ document.getElementById('save').onclick=()=>{
+   const data=JSON.stringify(row.packet,null,2);
+   const blob=new Blob([data],{type:'application/json'});
+   const href=URL.createObjectURL(blob);
+   const a=document.createElement('a');a.href=href;a.download='motif-held-bridge-'+id+'.json';
+   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(href);
+   put('copy-status','Saved unsigned HELD packet. It grants no permissions.');
+ };
  document.getElementById('copy').onclick=async()=>{
    const lines=['MOTIF FIELD CARD / FICTIONAL RESEARCH',row.title,r.status,card.first_step,
      ...r.actions.map(x=>x.source+' -> '+x.recipient+' / '+x.kind+' '+x.subject+' / '+x.status),
