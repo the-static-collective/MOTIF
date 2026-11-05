@@ -7,7 +7,7 @@ import { runNativeBridge } from './runner.mjs';
 const mementoRoot = process.env.MEMENTO_ROOT;
 
 test('the adapter has valid JavaScript and no secret-dependent commands', () => {
-  for (const name of ['native_memento.mjs','understory.mjs','runner.mjs']) {
+  for (const name of ['native_memento.mjs','understory.mjs','runner.mjs','probe_selection.mjs']) {
     const path = fileURLToPath(new URL(name,import.meta.url));
     const proc = spawnSync(process.execPath,['--check',path],{encoding:'utf8'});
     assert.equal(proc.status,0,proc.stderr);
@@ -27,7 +27,11 @@ test('native MEMENTO + UNDERSTORY + MOTIF cross-repository witness', {
   assert.equal(p.actualMemento.derivedGrammarRules,2);
   assert.equal(p.actualMemento.proposedRoles,2);
   assert.equal(p.actualMemento.coarseProbeSeparates,false);
-  assert.equal(p.actualMemento.expandedProbeSeparates,true);
+  assert.equal(p.actualMemento.motifSelectedProbe,'reaches');
+  assert.equal(p.actualMemento.nativeProbeSeparates,true);
+  assert.equal(p.probeProposal.expectedPairReduction,1);
+  assert.equal(p.nativeProbeReceipt.methodRef,
+    'motif019:concept-derived:path2(carries,reaches)');
   assert.equal(p.actualMemento.installedGrammarRules,0);
   assert.equal(p.actualMemento.admittedRoles,0);
   assert.equal(p.understory.recordCount,6);
@@ -43,6 +47,8 @@ test('holdout outcome reversal cannot change selected concept or old memory', {
   const initial = await runNativeBridge({mementoRoot});
   const hostile = await runNativeBridge({mementoRoot,perturbHoldout:true});
   assert.deepEqual(initial.motif.cartridge,hostile.motif.cartridge);
+  assert.equal(initial.probeProposal.selectedProbe,hostile.probeProposal.selectedProbe);
+  assert.equal(hostile.actualMemento.nativeProbeSeparates,true);
   assert.equal(hostile.motif.selected_holdout.accuracy,0);
   assert.equal(initial.understory.recordCount,hostile.understory.recordCount);
   assert.equal(initial.understory.stance,'held');
