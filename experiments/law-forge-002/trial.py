@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "law-forge-001"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "law-forge-001"))
 from forge import Probe, hypotheses as original_hypotheses, choose as original_choose
 from forge import independent_review as original_review
 
