@@ -11,6 +11,7 @@ The falsifier's legitimate target is detecting an out-of-grammar mechanism
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from entropy_cartridge import EntropyCartridge
 from gap import diagnose
 from falsifier import (
@@ -22,6 +23,7 @@ from learner import (
 from stranger_owner import Stranger, FAMILIES
 
 
+@lru_cache(maxsize=256)
 def identification(world: Stranger):
     """Same active Shannon learning for every audit policy.
 
