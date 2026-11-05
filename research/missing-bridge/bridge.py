@@ -10,6 +10,7 @@ from dataclasses import dataclass, replace
 from heapq import heappop, heappush
 from typing import Iterable
 import json
+from hashlib import sha256
 
 
 @dataclass(frozen=True)
@@ -438,6 +439,33 @@ def first_human_card(result: dict[str, object]) -> dict[str, object]:
             "first_step": descriptions[first["kind"]] + " " + suffix[first["status"]],
             "source_status": result["status"], "requires_human_review": True,
             "no_auto_contact": True}
+
+
+def held_portable_packet(result: dict[str, object]) -> dict[str, object]:
+    """Export an unsigned, content-addressed proposal—NEVER an authorization.
+
+    The digest only fixes this received byte representation. It cannot prove
+    authorship, facts, permissions, chronology, absence of private leakage, or
+    that a physical effect occurred. A receiving organ must gate independently.
+    """
+    card = first_human_card(result)
+    core = {
+        "schema": "motif.held-bridge-packet/v0",
+        "source_scope": "FICTIONAL_GRAPH_ONLY",
+        "source_receipt_schema": result["schema"],
+        "goal": result["goal"],
+        "status": "HOLD_REALITY",
+        "first_human_step": card["first_step"],
+        "proposed_steps": result.get("actions", []),
+        "unresolved_agreements": result.get("held_steps", []),
+        "requires_receiver_local_review": True,
+        "no_execution_permission": True,
+        "no_automatic_delivery": True,
+        "claims_real_result": False,
+        "admission": "none",
+    }
+    body = json.dumps(core, sort_keys=True, separators=(",", ":"))
+    return {**core, "content_sha256": sha256(body.encode("utf-8")).hexdigest()}
 
 
 def workshop(with_offers: bool = True
