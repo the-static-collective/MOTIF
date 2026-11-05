@@ -1,0 +1,873 @@
+{
+  "artifact": "UNCERTAIN_WITNESS_AND_PROBABILISTIC_TREE_CARTRIDGES",
+  "bayesian_comparison_can_outperform_motif": true,
+  "calibration_is_synthetic_not_verified_human_evidence": true,
+  "examples": {
+    "known_in_grammar": {
+      "bounded_next_synthetic_question": {
+        "command": [
+          false,
+          true
+        ],
+        "cost": 1,
+        "human_authority_verified": false,
+        "information_bits_if_all_origins_report": 0.000001,
+        "status": "PROPOSE_SYNTHETIC_ONLY",
+        "world_actuated": false
+      },
+      "compliance_beta_posterior_means": {
+        "0": 0.80952,
+        "1": 0.82143
+      },
+      "conditional_model_compliance_interval_90pct": [
+        0.23735,
+        0.33478
+      ],
+      "example_disagreeing_witnesses": {
+        "audited_applied": null,
+        "command": [
+          false,
+          false
+        ],
+        "reported_claims": [
+          {
+            "reported_success": true,
+            "reporter": "source_0",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_0_forwarded",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_1",
+            "upstream_origin": "source_1"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_2",
+            "upstream_origin": "source_2"
+          }
+        ],
+        "separately_verified_true_outcome_supplied_to_learner": false,
+        "ticket": "train-0"
+      },
+      "family_in_evaluator_only": "FIRST",
+      "heldout_trial_scored_only_in_evaluator": {
+        "command": [
+          false,
+          true
+        ],
+        "prediction_frozen_before_truth_reveal": 0.283335,
+        "realized_setting_revealed_only_in_evaluator": [
+          true,
+          true
+        ],
+        "ticket": "test-17",
+        "truth_revealed_after_evaluator_scoring": true,
+        "was_admitted_to_issue_prediction": true
+      },
+      "next_command_probability_and_release_decision": {
+        "admitted_for_real_action": false,
+        "other_weight": 0,
+        "probability": 0.283335,
+        "status": "PREDICT_PROBABILITY_ONLY",
+        "top_named_weight": 0.999997
+      },
+      "original_before_graphs_unchanged": true,
+      "portable_uncertain_tree_cartridge_ensemble": {
+        "checksum_sha256": "0ac03e338e8b23dd56221c633627fad1450e174c99c87034c159254819c37047",
+        "components": [
+          {
+            "model": "FIRST",
+            "posterior_weight": 0.99999689,
+            "tree": {
+              "checksum_sha256": "040833bfb0ac23b64609a1546b84190f5f4f0e762fc01d2275157d060f7fa384",
+              "counts": [
+                [
+                  15,
+                  3
+                ],
+                [
+                  13,
+                  5
+                ],
+                [
+                  4,
+                  16
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "evidence_count": 72,
+              "first": [
+                [
+                  "q0e15bd6b39338581ac39",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.737762,
+              "id": "tree-04079bc6656492f0",
+              "leaves": [
+                false,
+                false,
+                true,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "qb93b5845a6acd34dfc00",
+                  "?1"
+                ]
+              ],
+              "source_digest": "c69244ff08fe3de9545ac2681568738fb9b8fe092e18a35821cf3982a34bf906",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q0e15bd6b39338581ac39",
+                "qb93b5845a6acd34dfc00",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "model": "SECOND",
+            "posterior_weight": 0,
+            "tree": {
+              "checksum_sha256": "0ad68a134f25d32f457173276991233307c9b3331b81d4591506b252a50835da",
+              "counts": [
+                [
+                  15,
+                  3
+                ],
+                [
+                  13,
+                  5
+                ],
+                [
+                  4,
+                  16
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "evidence_count": 72,
+              "first": [
+                [
+                  "q0e15bd6b39338581ac39",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.455711,
+              "id": "tree-0c42e9a7acce487d",
+              "leaves": [
+                false,
+                true,
+                false,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "qb93b5845a6acd34dfc00",
+                  "?1"
+                ]
+              ],
+              "source_digest": "c69244ff08fe3de9545ac2681568738fb9b8fe092e18a35821cf3982a34bf906",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q0e15bd6b39338581ac39",
+                "qb93b5845a6acd34dfc00",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "model": "AND",
+            "posterior_weight": 0,
+            "tree": {
+              "checksum_sha256": "96494085c8133a9e56b3f3f450e5abe61c6a8456cf8c57edca16bb67704d6eb1",
+              "counts": [
+                [
+                  15,
+                  3
+                ],
+                [
+                  13,
+                  5
+                ],
+                [
+                  4,
+                  16
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "evidence_count": 72,
+              "first": [
+                [
+                  "q0e15bd6b39338581ac39",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.54662,
+              "id": "tree-add3e20e6a4829e6",
+              "leaves": [
+                false,
+                false,
+                false,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "qb93b5845a6acd34dfc00",
+                  "?1"
+                ]
+              ],
+              "source_digest": "c69244ff08fe3de9545ac2681568738fb9b8fe092e18a35821cf3982a34bf906",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q0e15bd6b39338581ac39",
+                "qb93b5845a6acd34dfc00",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "model": "OR",
+            "posterior_weight": 0.00000267,
+            "tree": {
+              "checksum_sha256": "e1a27728d253713cc557aad825692bc1af17f544e396aa7aaf6c8ba8f23df402",
+              "counts": [
+                [
+                  15,
+                  3
+                ],
+                [
+                  13,
+                  5
+                ],
+                [
+                  4,
+                  16
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "evidence_count": 72,
+              "first": [
+                [
+                  "q0e15bd6b39338581ac39",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.646853,
+              "id": "tree-c4a9e6d36ef2e32c",
+              "leaves": [
+                false,
+                true,
+                true,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "qb93b5845a6acd34dfc00",
+                  "?1"
+                ]
+              ],
+              "source_digest": "c69244ff08fe3de9545ac2681568738fb9b8fe092e18a35821cf3982a34bf906",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q0e15bd6b39338581ac39",
+                "qb93b5845a6acd34dfc00",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          }
+        ],
+        "real_world_authority": false,
+        "schema": "motif.probabilistic-tree-ensemble.v0",
+        "source_counts_are_unadjudicated_witness_claims": true,
+        "status": "HOLD_PROPOSAL_ONLY",
+        "unmodeled_mass": 4.3e-7
+      },
+      "posterior_hypothesis_weights": {
+        "AND": 0,
+        "FIRST": 0.99999689,
+        "OR": 0.00000267,
+        "OTHER": 4.3e-7,
+        "SECOND": 0
+      },
+      "real_world_authority": false,
+      "seed": 11,
+      "source_beta_posteriors_90pct": {
+        "source_0": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.78125,
+            0.92574
+          ],
+          "posterior_mean": 0.85938,
+          "real_world_source_identity_verified": false
+        },
+        "source_1": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.53923,
+            0.73475
+          ],
+          "posterior_mean": 0.64062,
+          "real_world_source_identity_verified": false
+        },
+        "source_2": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.19952,
+            0.38154
+          ],
+          "posterior_mean": 0.28125,
+          "real_world_source_identity_verified": false
+        }
+      },
+      "test_classical_bayesian_cell_brier": 0.219451,
+      "test_measured_brier": 0.213889,
+      "training_after_provenance_checks": {
+        "forwarded_copies_not_double_counted": 67,
+        "held_without_outcome_witness": 0,
+        "held_without_verified_controls": 8,
+        "independent_claims": 200,
+        "used": 72
+      },
+      "validation_shift_diagnostic": {
+        "log_bayes_factor_against_half": 2.42397,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      }
+    },
+    "shift_not_recognized": {
+      "compliance_beta_posterior_means": {
+        "0": 0.79762,
+        "1": 0.80952
+      },
+      "conditional_model_compliance_interval_90pct": [
+        0.24416,
+        0.34567
+      ],
+      "example_disagreeing_witnesses": {
+        "audited_applied": null,
+        "command": [
+          false,
+          false
+        ],
+        "reported_claims": [
+          {
+            "reported_success": false,
+            "reporter": "source_0",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_0_forwarded",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_1",
+            "upstream_origin": "source_1"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_2",
+            "upstream_origin": "source_2"
+          }
+        ],
+        "separately_verified_true_outcome_supplied_to_learner": false,
+        "ticket": "train-0"
+      },
+      "family_in_evaluator_only": "SHIFT",
+      "heldout_trial_scored_only_in_evaluator": {
+        "command": [
+          false,
+          true
+        ],
+        "prediction_frozen_before_truth_reveal": 0.291474,
+        "realized_setting_revealed_only_in_evaluator": [
+          false,
+          true
+        ],
+        "ticket": "test-17",
+        "truth_revealed_after_evaluator_scoring": false,
+        "was_admitted_to_issue_prediction": true
+      },
+      "next_command_probability_and_release_decision": {
+        "admitted_for_real_action": false,
+        "other_weight": 0.000007,
+        "probability": 0.291474,
+        "status": "PREDICT_PROBABILITY_ONLY",
+        "top_named_weight": 0.992798
+      },
+      "original_before_graphs_unchanged": true,
+      "posterior_hypothesis_weights": {
+        "AND": 0.00719577,
+        "FIRST": 0.99279759,
+        "OR": 0,
+        "OTHER": 0.00000663,
+        "SECOND": 0
+      },
+      "real_world_authority": false,
+      "seed": 11,
+      "source_beta_posteriors_90pct": {
+        "source_0": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.78125,
+            0.92574
+          ],
+          "posterior_mean": 0.85938,
+          "real_world_source_identity_verified": false
+        },
+        "source_1": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.63636,
+            0.81723
+          ],
+          "posterior_mean": 0.73438,
+          "real_world_source_identity_verified": false
+        },
+        "source_2": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.06738,
+            0.19911
+          ],
+          "posterior_mean": 0.125,
+          "real_world_source_identity_verified": false
+        }
+      },
+      "test_classical_bayesian_cell_brier": 0.263359,
+      "test_measured_brier": 0.289222,
+      "training_after_provenance_checks": {
+        "forwarded_copies_not_double_counted": 73,
+        "held_without_outcome_witness": 0,
+        "held_without_verified_controls": 14,
+        "independent_claims": 209,
+        "used": 66
+      },
+      "validation_shift_diagnostic": {
+        "log_bayes_factor_against_half": -4.66431,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      }
+    },
+    "shift_recognized": {
+      "compliance_beta_posterior_means": {
+        "0": 0.85714,
+        "1": 0.82143
+      },
+      "conditional_model_compliance_interval_90pct": [
+        0.21058,
+        0.29529
+      ],
+      "example_disagreeing_witnesses": {
+        "audited_applied": [
+          false,
+          false
+        ],
+        "command": [
+          false,
+          true
+        ],
+        "reported_claims": [
+          {
+            "reported_success": false,
+            "reporter": "source_0",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_0_forwarded",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_1",
+            "upstream_origin": "source_1"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_2",
+            "upstream_origin": "source_2"
+          }
+        ],
+        "separately_verified_true_outcome_supplied_to_learner": false,
+        "ticket": "train-1"
+      },
+      "family_in_evaluator_only": "SHIFT",
+      "heldout_trial_scored_only_in_evaluator": {
+        "command": [
+          false,
+          true
+        ],
+        "prediction_frozen_before_truth_reveal": 0.250032,
+        "realized_setting_revealed_only_in_evaluator": [
+          false,
+          true
+        ],
+        "ticket": "test-17",
+        "truth_revealed_after_evaluator_scoring": true,
+        "was_admitted_to_issue_prediction": false
+      },
+      "next_command_probability_and_release_decision": {
+        "admitted_for_real_action": false,
+        "other_weight": 0,
+        "probability": 0.250032,
+        "status": "HOLD_PREDICTIVE_SHIFT",
+        "top_named_weight": 0.999934
+      },
+      "original_before_graphs_unchanged": true,
+      "posterior_hypothesis_weights": {
+        "AND": 2.7e-7,
+        "FIRST": 0.99993392,
+        "OR": 0.00006578,
+        "OTHER": 3e-8,
+        "SECOND": 0
+      },
+      "real_world_authority": false,
+      "seed": 23,
+      "source_beta_posteriors_90pct": {
+        "source_0": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.74045,
+            0.89675
+          ],
+          "posterior_mean": 0.82812,
+          "real_world_source_identity_verified": false
+        },
+        "source_1": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.60411,
+            0.79103
+          ],
+          "posterior_mean": 0.70312,
+          "real_world_source_identity_verified": false
+        },
+        "source_2": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.07602,
+            0.21429
+          ],
+          "posterior_mean": 0.14062,
+          "real_world_source_identity_verified": false
+        }
+      },
+      "test_classical_bayesian_cell_brier": 0.287597,
+      "test_measured_brier": 0.312493,
+      "training_after_provenance_checks": {
+        "forwarded_copies_not_double_counted": 73,
+        "held_without_outcome_witness": 0,
+        "held_without_verified_controls": 13,
+        "independent_claims": 206,
+        "used": 67
+      },
+      "validation_shift_diagnostic": {
+        "log_bayes_factor_against_half": -6.16351,
+        "shift_warning": true,
+        "validation_independent_records": 28
+      }
+    },
+    "unsupported_rule_not_recognized": {
+      "compliance_beta_posterior_means": {
+        "0": 0.79762,
+        "1": 0.86905
+      },
+      "conditional_model_compliance_interval_90pct": [
+        0.74041,
+        0.80701
+      ],
+      "example_disagreeing_witnesses": {
+        "audited_applied": [
+          false,
+          false
+        ],
+        "command": [
+          false,
+          false
+        ],
+        "reported_claims": [
+          {
+            "reported_success": false,
+            "reporter": "source_0",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_0_forwarded",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_1",
+            "upstream_origin": "source_1"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_2",
+            "upstream_origin": "source_2"
+          }
+        ],
+        "separately_verified_true_outcome_supplied_to_learner": false,
+        "ticket": "train-0"
+      },
+      "family_in_evaluator_only": "XOR",
+      "heldout_trial_scored_only_in_evaluator": {
+        "command": [
+          false,
+          true
+        ],
+        "prediction_frozen_before_truth_reveal": 0.775801,
+        "realized_setting_revealed_only_in_evaluator": [
+          false,
+          true
+        ],
+        "ticket": "test-17",
+        "truth_revealed_after_evaluator_scoring": true,
+        "was_admitted_to_issue_prediction": true
+      },
+      "next_command_probability_and_release_decision": {
+        "admitted_for_real_action": false,
+        "other_weight": 0.003913,
+        "probability": 0.775801,
+        "status": "PREDICT_PROBABILITY_ONLY",
+        "top_named_weight": 0.996087
+      },
+      "original_before_graphs_unchanged": true,
+      "posterior_hypothesis_weights": {
+        "AND": 0,
+        "FIRST": 7e-8,
+        "OR": 0.99608694,
+        "OTHER": 0.00391294,
+        "SECOND": 5e-8
+      },
+      "real_world_authority": false,
+      "seed": 41,
+      "source_beta_posteriors_90pct": {
+        "source_0": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.85957,
+            0.96671
+          ],
+          "posterior_mean": 0.92188,
+          "real_world_source_identity_verified": false
+        },
+        "source_1": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.59421,
+            0.78148
+          ],
+          "posterior_mean": 0.6875,
+          "real_world_source_identity_verified": false
+        },
+        "source_2": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.07722,
+            0.22689
+          ],
+          "posterior_mean": 0.14062,
+          "real_world_source_identity_verified": false
+        }
+      },
+      "test_classical_bayesian_cell_brier": 0.219563,
+      "test_measured_brier": 0.287641,
+      "training_after_provenance_checks": {
+        "forwarded_copies_not_double_counted": 69,
+        "held_without_outcome_witness": 0,
+        "held_without_verified_controls": 16,
+        "independent_claims": 202,
+        "used": 64
+      },
+      "validation_shift_diagnostic": {
+        "log_bayes_factor_against_half": -4.07938,
+        "shift_warning": false,
+        "validation_independent_records": 23
+      }
+    },
+    "unsupported_rule_recognized": {
+      "compliance_beta_posterior_means": {
+        "0": 0.7381,
+        "1": 0.77381
+      },
+      "conditional_model_compliance_interval_90pct": [
+        0.5,
+        0.75885
+      ],
+      "example_disagreeing_witnesses": {
+        "audited_applied": [
+          false,
+          false
+        ],
+        "command": [
+          false,
+          false
+        ],
+        "reported_claims": [
+          {
+            "reported_success": false,
+            "reporter": "source_0",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_0_forwarded",
+            "upstream_origin": "source_0"
+          },
+          {
+            "reported_success": false,
+            "reporter": "source_1",
+            "upstream_origin": "source_1"
+          },
+          {
+            "reported_success": true,
+            "reporter": "source_2",
+            "upstream_origin": "source_2"
+          }
+        ],
+        "separately_verified_true_outcome_supplied_to_learner": false,
+        "ticket": "train-0"
+      },
+      "family_in_evaluator_only": "XOR",
+      "heldout_trial_scored_only_in_evaluator": {
+        "command": [
+          false,
+          true
+        ],
+        "prediction_frozen_before_truth_reveal": 0.582668,
+        "realized_setting_revealed_only_in_evaluator": [
+          false,
+          true
+        ],
+        "ticket": "test-17",
+        "truth_revealed_after_evaluator_scoring": true,
+        "was_admitted_to_issue_prediction": false
+      },
+      "next_command_probability_and_release_decision": {
+        "admitted_for_real_action": false,
+        "other_weight": 0.645398,
+        "probability": 0.582668,
+        "status": "HOLD_OUTSIDE_MODEL_FAMILY",
+        "top_named_weight": 0.354598
+      },
+      "original_before_graphs_unchanged": true,
+      "posterior_hypothesis_weights": {
+        "AND": 0,
+        "FIRST": 0.00000432,
+        "OR": 0.35459757,
+        "OTHER": 0.64539762,
+        "SECOND": 4.9e-7
+      },
+      "real_world_authority": false,
+      "seed": 23,
+      "source_beta_posteriors_90pct": {
+        "source_0": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.77685,
+            0.92335
+          ],
+          "posterior_mean": 0.85938,
+          "real_world_source_identity_verified": false
+        },
+        "source_1": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.65804,
+            0.83266
+          ],
+          "posterior_mean": 0.75,
+          "real_world_source_identity_verified": false
+        },
+        "source_2": {
+          "adjudicated_evidence": 60,
+          "interval_90": [
+            0.21966,
+            0.41106
+          ],
+          "posterior_mean": 0.3125,
+          "real_world_source_identity_verified": false
+        }
+      },
+      "test_classical_bayesian_cell_brier": 0.231055,
+      "test_measured_brier": 0.252422,
+      "training_after_provenance_checks": {
+        "forwarded_copies_not_double_counted": 71,
+        "held_without_outcome_witness": 1,
+        "held_without_verified_controls": 14,
+        "independent_claims": 205,
+        "used": 65
+      },
+      "validation_shift_diagnostic": {
+        "log_bayes_factor_against_half": 2.7783,
+        "shift_warning": false,
+        "validation_independent_records": 30
+      }
+    }
+  },
+  "experiment": "MOTIF-013",
+  "known_failure_modes_present": true,
+  "network_calls_or_real_actions": 0,
+  "synthetic_information_budget_examples": {
+    "available": {
+      "command": [
+        true,
+        false
+      ],
+      "cost": 1,
+      "human_authority_verified": false,
+      "information_bits_if_all_origins_report": 0.080619,
+      "status": "PROPOSE_SYNTHETIC_ONLY",
+      "world_actuated": false
+    },
+    "prohibited": {
+      "command": null,
+      "cost": 0,
+      "human_authority_verified": false,
+      "information_bits_if_all_origins_report": 0,
+      "status": "HOLD_UNSAFE",
+      "world_actuated": false
+    },
+    "unaffordable": {
+      "command": null,
+      "cost": 0,
+      "human_authority_verified": false,
+      "information_bits_if_all_origins_report": 0,
+      "status": "HOLD_BUDGET",
+      "world_actuated": false
+    }
+  }
+}
