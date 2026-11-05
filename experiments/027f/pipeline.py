@@ -29,9 +29,9 @@ def guard_public_synthetic_note(text:str)->None:
     if not isinstance(text,str) or len(text)>300 or not text.strip():
         raise ValueError("HOLD_INVALID_PUBLIC_NOTE")
     patterns=(
-        r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
-        r"(?<!\\d)\\d{3}[-. ]\\d{3}[-. ]\\d{4}(?!\\d)",
-        r"(?i:api[_ -]?key|access[_ -]?token|password)\\s*[=:]",
+        r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+        r"(?<!\d)\d{3}[-. ]\d{3}[-. ]\d{4}(?!\d)",
+        r"(?i:api[_ -]?key|access[_ -]?token|password)\s*[=:]",
     )
     if any(re.search(p,text) for p in patterns):
         raise ValueError("HOLD_PUBLIC_PROJECTION_POSSIBLY_PRIVATE")
