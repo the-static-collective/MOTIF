@@ -276,6 +276,32 @@ class ProbabilisticWitnessTests(unittest.TestCase):
         self.assertGreater(s["sum_held_unverified_controls"],0)
         self.assertTrue(0<=s["overall_prediction_issued_coverage"]<=1)
 
+    def test_example_uncertain_tree_cartridges_reproduce_exactly(self):
+        import importlib.util
+        path=Path(__file__).parent/"demo.py"
+        spec=importlib.util.spec_from_file_location("motif013_demo_under_test",
+                                                   str(path))
+        instance=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(instance)
+        saved=json.loads((Path(__file__).parent/
+                          "example-probabilistic-witness.json").read_text())
+        self.assertEqual(saved,instance.demonstration())
+        cases=saved["examples"]
+        self.assertEqual(cases["unsupported_rule_recognized"][
+            "next_command_probability_and_release_decision"]["status"],
+                         "HOLD_OUTSIDE_MODEL_FAMILY")
+        self.assertEqual(cases["shift_recognized"][
+            "next_command_probability_and_release_decision"]["status"],
+                         "HOLD_PREDICTIVE_SHIFT")
+        self.assertEqual(cases["unsupported_rule_not_recognized"][
+            "next_command_probability_and_release_decision"]["status"],
+                         "PREDICT_PROBABILITY_ONLY")
+        self.assertEqual(len(cases["known_in_grammar"][
+            "portable_uncertain_tree_cartridge_ensemble"]["components"]),4)
+        self.assertFalse(saved["synthetic_information_budget_examples"][
+            "available"]["world_actuated"])
+        self.assertEqual(saved["network_calls_or_real_actions"],0)
+
     def test_complete_ci_receipt_matches_fresh_stochastic_seeded_runs(self):
         archive=json.loads((Path(__file__).parent/
                             "experiment-results.json").read_text())
