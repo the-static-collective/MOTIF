@@ -19,7 +19,8 @@ for p in ("016","021f","022f","025f","026f","027f"):
     if folder not in sys.path:sys.path.append(folder)
 from frozen_cases import CASES,digest
 from chorus import LocalFlanT5Small
-from native_careers import native_rule,NATIVE_JOB
+from native_careers import native_rule
+from semantic_router import NATIVE_JOB
 from semantic_router import CachedT5GateClassifier,ClassicalGateClassifier,operator_projection
 from nodes import ThreeSpecialistEncoder,combine_opinions
 from pipeline import relevance_first_relay,source_only
