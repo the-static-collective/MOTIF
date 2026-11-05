@@ -187,6 +187,7 @@ class ToyOwner:
                                  q.closed_scope, q.source, q.target)
         body = {"schema": "motif.reason.synthetic-owner-revision.v1",
                 "source_id": self.source_id,
+                "fixture_turn": self.calls,
                 "source_before_sha256": owner4.digest(before),
                 "source_after_sha256": owner4.digest(owner4.encode(updated)),
                 "challenge": enc_objection(obj),
@@ -211,7 +212,7 @@ def build_record(q, objection, classification, *,
                    "rebuttal": initial["alternate_proof"],
                    "original_conclusion_survives_hypothetical_objection": True,
                    "source_witness_changed": False}
-    elif classification == "CORRECTION":
+    elif classification in ("CORRECTION", "OWNER_DEFENSE"):
         if (initial["classification"] != "MATERIAL_OBJECTION"
                 or not isinstance(after, owner4.Inquiry)
                 or not isinstance(owner_receipt, dict)
@@ -221,8 +222,9 @@ def build_record(q, objection, classification, *,
                 or owner_receipt.get("source_after_sha256") != owner4.digest(owner4.encode(after))):
             raise HOLD("Correction lacks attributable source-owned fixture revision")
         result = owner4.decide(after)
-        if result["status"] == initial["base"]:
-            raise HOLD("No conclusion changed; correction not warranted")
+        changed = result["status"] != initial["base"]
+        if (classification == "CORRECTION") != changed:
+            raise HOLD("Correction/defense classification disagrees with source")
         # Structural replay: receipt and witnesses must show precisely which
         # premise changed. Does not establish true external identity.
         if owner_receipt.get("checksum_sha256") != hashed({
@@ -240,18 +242,23 @@ def build_record(q, objection, classification, *,
             raise HOLD("Synthetic owner result does not match revised evidence")
         kept = [c for c in q.claims if c[:2] not in objection.edges]
         appended = [c for c in after.claims if c[:2] in objection.edges]
-        if ([c for c in after.claims if c[:2] not in objection.edges] != kept
+        turn = owner_receipt.get("fixture_turn")
+        source_id = owner_receipt.get("source_id")
+        if (type(turn) is not int or not 1 <= turn <= 8
+                or not isinstance(source_id, str) or not ID.fullmatch(source_id)
+                or [c for c in after.claims if c[:2] not in objection.edges] != kept
                 or len(appended) != len(objection.edges)
-                or any(c[3] != f"{owner_receipt['source_id']}-fixture-1" for c in appended)
-                or not all(c[3] == f"{owner_receipt['source_id']}-fixture-1" for c in appended)):
+                or any(c[3] != f"{source_id}-fixture-{turn}" for c in appended)):
             raise HOLD("Unreviewed other changes piggybacked on revision")
         if (not result.get("certificate")
                 or not owner4.check_certificate(after, result)):
             raise HOLD("Corrected source has no independent proof")
-        outcome = {"status": "CORRECTION_WITHIN_SYNTHETIC_REVIEW",
+        outcome = {"status": ("CORRECTION_WITHIN_SYNTHETIC_REVIEW" if changed
+                               else "OWNER_REBUTTAL_WITHIN_SYNTHETIC_REVIEW"),
                    "new_conclusion": result["status"],
                    "new_certificate": result["certificate"],
-                   "source_witness_changed": True}
+                   "source_witness_changed": True,
+                   "actual_world_authenticated": False}
     else:
         raise HOLD("Unsupported cartridge")
     body = {"schema": SCHEMA, "source_revision": SOURCE_REVISION,
