@@ -179,6 +179,54 @@ class SensorModel:
                 "source_digest": self.source_digest, "cost_model": self.cost_model,
                 "status": "PROPOSAL_ONLY", "real_world_authority": False}
 
+    @classmethod
+    def from_packet(cls, data):
+        if (not isinstance(data, dict) or set(data) != {
+            "schema", "id", "sensor", "mapping", "source_digest",
+            "cost_model", "status", "real_world_authority"
+        } or data["schema"] != "motif.law-forge.sensor-model.v1" or
+                data["status"] != "PROPOSAL_ONLY" or
+                data["real_world_authority"] is not False):
+            raise ValueError("Unsupported or privileged sensor model")
+        sensor = Sensor.from_packet(data["sensor"])
+        if (data["cost_model"] not in ("symbolic_capacity", "binary_encoded") or
+                not isinstance(data["mapping"], list) or
+                not isinstance(data["source_digest"], str) or
+                len(data["source_digest"]) != 64 or any(
+                    char not in "0123456789abcdef" for char in data["source_digest"]
+                )):
+            raise ValueError("Malformed sensor-model inputs")
+        mapping = []
+        for row in data["mapping"]:
+            if not isinstance(row, list) or len(row) != 2:
+                raise ValueError("Malformed sensor mapping row")
+            key = normalize_value(row[0])
+            val = row[1]
+            if type(val) is not int or val not in (0, 1):
+                raise ValueError("Untrusted model outcome")
+            if (sensor.operation in ("COUNT2", "PATHCOUNT") and
+                    (type(key) is not int or key not in (0, 1, 2))):
+                raise ValueError("Three-valued key expected")
+            if (sensor.operation in ("BIT", "REACH2") and
+                    (type(key) is not int or key not in (0, 1))):
+                raise ValueError("Binary key expected")
+            if sensor.operation in ("PAIR", "PATHPAIR") and (
+                not isinstance(key, tuple) or len(key) != 2):
+                raise ValueError("Two-bit key expected")
+            if sensor.operation == "RAW4" and (
+                not isinstance(key, tuple) or len(key) != 4):
+                raise ValueError("Four-bit key expected")
+            mapping.append((key, val))
+        if len(set(k for k, _ in mapping)) != len(mapping) or (
+            len(mapping) > sensor.cardinality
+        ):
+            raise ValueError("Duplicated or excessive mapping entries")
+        model = cls(sensor, tuple(sorted(mapping)), data["source_digest"],
+                    data["cost_model"])
+        if model.id != data["id"]:
+            raise ValueError("Tampered sensor model fingerprint")
+        return model
+
 
 def score(sensor, cost_model):
     if cost_model not in ("symbolic_capacity", "binary_encoded"):
@@ -269,7 +317,13 @@ def independent_review(model, rows):
     if len(rows) < 32 or any(not isinstance(r, Readout) for r in rows):
         return {"status": "HOLD_INSUFFICIENT_REVIEW", "failures": None}
     tokens = {r.token for r in rows}
-    if len(tokens) < 32:
+    raw = Sensor("RAW4")
+    controls = [r.value(raw) for r in rows]
+    # Synthetic repeats alone do not prove new-domain independence. At least
+    # require the complete 16-graph factorial and two distinct samples/cell.
+    if (len(tokens) < 32 or len(set(controls)) != 16 or
+            any(controls.count(g) < 2
+                for g in product((0, 1), repeat=4))):
         return {"status": "HOLD_DISTINCT_REVIEW_COVERAGE", "failures": None}
     wrong = sum(model.predict(r) != r.outcome for r in rows)
     return {"status": ("ELIGIBLE_PREDICT_ONLY_PENDING_HUMAN_REVIEW"
