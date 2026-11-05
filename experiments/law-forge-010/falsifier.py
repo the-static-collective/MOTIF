@@ -238,6 +238,41 @@ class AuditLedger:
             raise AssertionError("Unverifiable claimed grammar-gap core")
         return gap
 
+    @classmethod
+    def from_packet(cls, data):
+        if (not isinstance(data, dict) or set(data) != {
+            "schema", "id", "learning_cartridge", "audit_observations",
+            "audit_policy", "learning_cost_units", "audit_cost_units",
+            "audit_budget_units", "source_evidence_digest",
+            "surviving_frozen_hypotheses", "relative_grammar_gap",
+            "status", "owner_must_execute", "real_world_authority"
+        } or data["schema"] != "motif.reason-cartridge.blind-falsifier.v1"
+                or data["audit_budget_units"] != AUDIT_BUDGET
+                or data["owner_must_execute"] is not True
+                or data["real_world_authority"] is not False
+                or not isinstance(data["audit_observations"], list)):
+            raise ValueError("Unrecognized or privileged audit cartridge")
+        learning = EntropyCartridge.from_packet(data["learning_cartridge"])
+        audit = []
+        for item in data["audit_observations"]:
+            if (not isinstance(item, dict) or set(item) != {
+                "x", "y", "contract_id", "provenance"
+            } or not isinstance(item["x"], list)):
+                raise ValueError("Malformed audit source witness")
+            audit.append(Observation(tuple(item["x"]), item["y"],
+                                     item["contract_id"], item["provenance"]))
+        audit_cost = data["audit_cost_units"]
+        if (type(audit_cost) is not int
+                or not len(audit) <= audit_cost <= 2 * len(audit)
+                or len(set(item.x for item in audit)) != len(audit)
+                or set(item.x for item in audit) & set(dict(learning.snapshot))):
+            raise ValueError("Unfunded, duplicate or repeated audit evidence")
+        out = cls(learning, tuple(audit), audit_cost, data["audit_policy"])
+        expected = out.packet()
+        if expected != data or data["learning_cost_units"] != learning.budget_spent:
+            raise ValueError("Tampered or unsupported audit program")
+        return out
+
     def packet(self):
         gap = self.diagnosis()
         return {
