@@ -1,0 +1,30 @@
+name: MOTIF-019 native MEMENTO bridge (public contract only)
+on:
+  push:
+    branches:
+      - experiments/019-memento-native-understory
+  pull_request:
+    paths:
+      - 'experiments/019/**'
+      - 'experiments/018/interop_stdio.py'
+      - 'experiments/018/test_interop_stdio.py'
+      - '.github/workflows/motif-019-bridge.yml'
+jobs:
+  public-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: MOTIF structural packet contract tests
+        working-directory: experiments/018
+        run: python -m unittest -v test_interop_stdio.py
+      - name: JavaScript syntax and public boundary tests (native private tests require owner checkout)
+        run: node --test experiments/019/bridge.test.mjs experiments/019/probe_selection.test.mjs experiments/019/fixture_roundtrip.test.mjs
+      - name: Python native MOTIF 018 regression tests
+        working-directory: experiments/018
+        run: python -m unittest -v test_unknown_unknown.py test_green_grammar.py

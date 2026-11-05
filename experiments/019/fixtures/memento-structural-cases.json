@@ -1,0 +1,337 @@
+{
+  "schema": "motif018.memento-evidence/v0",
+  "train": [
+    {
+      "identity": "memento-train-000",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-train-000"
+        ],
+        [
+          "relay-memento-train-000",
+          "wanders",
+          "nowhere"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    },
+    {
+      "identity": "memento-train-011",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-train-011"
+        ],
+        [
+          "relay-memento-train-011",
+          "reaches",
+          "goal"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-train-100",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-train-100"
+        ],
+        [
+          "relay-memento-train-100",
+          "wanders",
+          "nowhere"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-train-111",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-train-111"
+        ],
+        [
+          "relay-memento-train-111",
+          "reaches",
+          "goal"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": false
+    }
+  ],
+  "validation": [
+    {
+      "identity": "memento-validation-001",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-validation-001"
+        ],
+        [
+          "relay-memento-validation-001",
+          "wanders",
+          "nowhere"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    },
+    {
+      "identity": "memento-validation-010",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-validation-010"
+        ],
+        [
+          "relay-memento-validation-010",
+          "reaches",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-validation-101",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-validation-101"
+        ],
+        [
+          "relay-memento-validation-101",
+          "wanders",
+          "nowhere"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": false
+    },
+    {
+      "identity": "memento-validation-110",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-validation-110"
+        ],
+        [
+          "relay-memento-validation-110",
+          "reaches",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    }
+  ],
+  "holdout": [
+    {
+      "identity": "memento-holdout-000",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-000"
+        ],
+        [
+          "relay-memento-holdout-000",
+          "wanders",
+          "nowhere"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-001",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-001"
+        ],
+        [
+          "relay-memento-holdout-001",
+          "wanders",
+          "nowhere"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-010",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-010"
+        ],
+        [
+          "relay-memento-holdout-010",
+          "reaches",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-011",
+      "x": 0,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-011"
+        ],
+        [
+          "relay-memento-holdout-011",
+          "reaches",
+          "goal"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-100",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-100"
+        ],
+        [
+          "relay-memento-holdout-100",
+          "wanders",
+          "nowhere"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-101",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-101"
+        ],
+        [
+          "relay-memento-holdout-101",
+          "wanders",
+          "nowhere"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 1,
+      "authorized": false
+    },
+    {
+      "identity": "memento-holdout-110",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-110"
+        ],
+        [
+          "relay-memento-holdout-110",
+          "reaches",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": true
+    },
+    {
+      "identity": "memento-holdout-111",
+      "x": 1,
+      "edges": [
+        [
+          "actor",
+          "carries",
+          "relay-memento-holdout-111"
+        ],
+        [
+          "relay-memento-holdout-111",
+          "reaches",
+          "goal"
+        ],
+        [
+          "actor",
+          "marked",
+          "goal"
+        ]
+      ],
+      "outcome": 0,
+      "authorized": false
+    }
+  ]
+}
