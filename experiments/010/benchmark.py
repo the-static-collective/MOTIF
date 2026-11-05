@@ -65,8 +65,8 @@ def evaluate_method(spec, method: str):
                 raise AssertionError("No informative synthetic intervention within budget")
             controls = (proposal.first, proposal.second)
             proposed_gain = proposal.information_gain_bits
-            vote_counts = (proposal.predicted_votes.count(False),
-                           proposal.predicted_votes.count(True))
+            vote_counts = [proposal.predicted_votes.count(False),
+                           proposal.predicted_votes.count(True)]
         else:
             controls = choices[step]
             proposed_gain = None
