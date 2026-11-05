@@ -10,9 +10,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import oracle
 import learner
+import benchmark  # Load local 009 benchmark before helpers adjust the shared 008 path.
 import cartridge
 import experimenter
-import benchmark
 
 
 class TreeCartridgeTests(unittest.TestCase):
