@@ -209,7 +209,7 @@ def controls():
     }
 
 
-def benchmark(modes=("RAW_GENERATION","CONSTRAINED_IDS")):
+def benchmark(modes=("RAW_GENERATION","CONSTRAINED_IDS","CONSTRAINED_ID_ONLY")):
     import torch
     torch.set_num_threads(2)
     started = time.monotonic()
