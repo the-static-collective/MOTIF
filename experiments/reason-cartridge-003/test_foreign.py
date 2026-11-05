@@ -5,7 +5,7 @@ from dataclasses import replace
 from fixtures import DOGRAM_COMMIT, specimens, check_path
 from pupil import HOLD, predict, verify_native, select_method, validate, digest, graph_input
 from review import Receiver, objection_experiment
-from objection import Inquiry, decide, check_certificate, HOLD as ObjectionHOLD
+from objection import Inquiry, decide, check_certificate, minimum_break_set, HOLD as ObjectionHOLD
 
 
 def fake_local_receipt(specimen):
@@ -177,6 +177,25 @@ class ObjectionTest(unittest.TestCase):
                     (("S","A","PRESENT","s1"),), ("S","T"), True)
         self.assertEqual(decide(q, question_cost=100)["omission_analysis"]["status"],
                          "HOLD_NO_POSITIVE_QUERY")
+
+
+    def test_proof_fragility_distinguishes_one_route_from_two(self):
+        q = Inquiry(("S","A","B","T"),
+                    (("S","A"),("A","T"),("S","B"),("B","T"),("S","T")),
+                    (("S","A","PRESENT","1"),("A","T","PRESENT","2"),
+                     ("S","B","PRESENT","3"),("B","T","PRESENT","4")),
+                    ("S","T"), True)
+        r = decide(q)
+        self.assertEqual(r["status"], "PROVED_REACHABLE")
+        self.assertEqual(r["fragility"]["minimum_confirmed_edge_retractions"], 2)
+        self.assertEqual(len(r["fragility"]["counterfactual_break_edges"]), 2)
+        self.assertTrue(check_certificate(q, r))
+        q2 = Inquiry(("S","A","T"), (("S","A"),("A","T"),("S","T")),
+                     (("S","A","PRESENT","1"),("A","T","PRESENT","2")),
+                     ("S","T"), True)
+        r2 = decide(q2)
+        self.assertEqual(r2["fragility"]["minimum_confirmed_edge_retractions"], 1)
+        self.assertTrue(check_certificate(q2, r2))
 
     def test_bad_claims_and_nonfinite_cost_hold(self):
         with self.assertRaises(ObjectionHOLD):
