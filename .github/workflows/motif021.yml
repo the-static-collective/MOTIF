@@ -1,0 +1,46 @@
+name: MOTIF-021 ALEX planZ GRAFT Source Chain
+on:
+  push:
+    branches:
+      - research/021-alex-planz-graft-orchestration
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - 'experiments/016/**'
+      - 'experiments/017/**'
+      - 'experiments/018/**'
+      - 'experiments/019/**'
+      - 'experiments/020/**'
+      - 'experiments/021/**'
+      - '.github/workflows/motif021.yml'
+jobs:
+  source-pinned-four-organ:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original source-owned National Treasure and native Dogram
+        run: node --test experiments/014/test_garden.mjs
+      - name: Prior MOTIF method and evidence regression suites
+        run: |
+          node --test experiments/015/test_graft.mjs
+          node --test experiments/016/test_meta.mjs
+          node --test experiments/017/test_question_machine.mjs
+          node --test experiments/018/test_witness_machine.mjs
+          node --test experiments/019/test_common_ancestor.mjs
+          node --test experiments/020/test_madd_custody.mjs
+      - name: Exact real ALEX search + planZ planner + GRAFT compiled code
+        run: node --test experiments/021/test_cross_organ.mjs
+      - name: Preserve deterministic end-to-end research receipt
+        run: node experiments/021/cross_organ.mjs > motif021-four-organ-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif021-original-alex-planz-graft-execution
+          path: motif021-four-organ-research.json
+          retention-days: 14

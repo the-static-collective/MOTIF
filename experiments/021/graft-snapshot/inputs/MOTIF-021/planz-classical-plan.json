@@ -1,0 +1,177 @@
+{
+  "schema": "planz.motif-classical-plan/v1",
+  "plan_id": "PLANZ-MOTIF-021",
+  "input_packet": {
+    "packet_id": "ALEX-MOTIF-021",
+    "git_blob": "71485bd8327bb1bf320d00e0e6e1cee3449365b6",
+    "source_count": 5,
+    "hit_count": 12
+  },
+  "alex_source_commit": "c697ce69258cf894be8e7323bd64c81093bd199c",
+  "domain": "FINITE_PUBLIC_SOURCE_CUSTODY_REVIEW",
+  "initial_facts": [
+    "ALEX_PUBLIC_PACKET_PRESENT"
+  ],
+  "goals": [
+    "CANDIDATE_TESTABLE",
+    "RECEIPT_READY"
+  ],
+  "actions": [
+    "PIN_SOURCE_OBSERVATIONS",
+    "CLASSIFY_SEARCH_LIMITS",
+    "RESTRICT_PUBLIC_HANDOFF",
+    "PREPARE_INDEPENDENT_PROBES",
+    "DESIGN_GRAFT_COMPOSITION",
+    "TEST_CAPABILITY_SANDBOX",
+    "ARCHIVE_REVIEW_RECEIPT"
+  ],
+  "total_declared_cost": 9,
+  "search_expanded_states": 8,
+  "verified_simulated_trace": [
+    {
+      "action": "PIN_SOURCE_OBSERVATIONS",
+      "requires": [
+        "ALEX_PUBLIC_PACKET_PRESENT"
+      ],
+      "effects": [
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 1,
+      "executed_external_action": false
+    },
+    {
+      "action": "CLASSIFY_SEARCH_LIMITS",
+      "requires": [
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "effects": [
+        "COVERAGE_BOUND_DECLARED"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "COVERAGE_BOUND_DECLARED",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 2,
+      "executed_external_action": false
+    },
+    {
+      "action": "RESTRICT_PUBLIC_HANDOFF",
+      "requires": [
+        "COVERAGE_BOUND_DECLARED"
+      ],
+      "effects": [
+        "PUBLIC_HANDOFF_HELD"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "COVERAGE_BOUND_DECLARED",
+        "PUBLIC_HANDOFF_HELD",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 3,
+      "executed_external_action": false
+    },
+    {
+      "action": "PREPARE_INDEPENDENT_PROBES",
+      "requires": [
+        "COVERAGE_BOUND_DECLARED"
+      ],
+      "effects": [
+        "QUESTIONS_PROPOSED"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "COVERAGE_BOUND_DECLARED",
+        "PUBLIC_HANDOFF_HELD",
+        "QUESTIONS_PROPOSED",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 5,
+      "executed_external_action": false
+    },
+    {
+      "action": "DESIGN_GRAFT_COMPOSITION",
+      "requires": [
+        "QUESTIONS_PROPOSED",
+        "PUBLIC_HANDOFF_HELD"
+      ],
+      "effects": [
+        "RECIPE_PROPOSED"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "COVERAGE_BOUND_DECLARED",
+        "PUBLIC_HANDOFF_HELD",
+        "QUESTIONS_PROPOSED",
+        "RECIPE_PROPOSED",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 7,
+      "executed_external_action": false
+    },
+    {
+      "action": "TEST_CAPABILITY_SANDBOX",
+      "requires": [
+        "RECIPE_PROPOSED"
+      ],
+      "effects": [
+        "CANDIDATE_TESTABLE"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "CANDIDATE_TESTABLE",
+        "COVERAGE_BOUND_DECLARED",
+        "PUBLIC_HANDOFF_HELD",
+        "QUESTIONS_PROPOSED",
+        "RECIPE_PROPOSED",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 8,
+      "executed_external_action": false
+    },
+    {
+      "action": "ARCHIVE_REVIEW_RECEIPT",
+      "requires": [
+        "CANDIDATE_TESTABLE"
+      ],
+      "effects": [
+        "RECEIPT_READY"
+      ],
+      "after": [
+        "ALEX_PUBLIC_PACKET_PRESENT",
+        "CANDIDATE_TESTABLE",
+        "COVERAGE_BOUND_DECLARED",
+        "PUBLIC_HANDOFF_HELD",
+        "QUESTIONS_PROPOSED",
+        "RECEIPT_READY",
+        "RECIPE_PROPOSED",
+        "SOURCE_PINS_REVIEWED"
+      ],
+      "cumulative_cost": 9,
+      "executed_external_action": false
+    }
+  ],
+  "candidate_capability": {
+    "id": "GRAFT-MOTIF-SOURCE-REVIEW-021",
+    "recipe": [
+      "VERIFY_PINNED_SOURCE_PACKET",
+      "BUILD_CITED_CANDIDATE_GRAPH",
+      "RETURN_HUMAN_REVIEW_QUESTIONS"
+    ],
+    "scope": "PUBLIC_PINNED_SOURCE_RESEARCH_ONLY",
+    "implementation_needed": true,
+    "permissions": "NONE"
+  },
+  "status": "HELD_PLAN_NOT_EXECUTED",
+  "externally_executed_steps": 0,
+  "source_owner_approval": false,
+  "future_permission": "REQUIRES_SEPARATE_OWNER_DECISION",
+  "evidence_admission": "NONE",
+  "no_real_custody_proved": true,
+  "cost_of_not_acting": "UNQUANTIFIED_NOT_TREATED_AS_ZERO"
+}

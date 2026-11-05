@@ -1,0 +1,407 @@
+{
+  "schema": "alex.motif-source-research-packet/v1",
+  "packet_id": "ALEX-MOTIF-021",
+  "question": "What evidence distinguishes shared upstream source ancestry from shared difficulty or corrupt reference families, and what source-owned machinery can support review?",
+  "research_mode": "FIND+TRACE+PRESSURE",
+  "search_observation": {
+    "id": "ALEX-MOTIF-021-SEARCH",
+    "corpus_id": "ALEX-MOTIF-021-PINNED-FIVE",
+    "query": "common ancestor OR reference OR original OR custody OR independent",
+    "query_type": "exact_phrase_bounded_OR",
+    "index_id": "LOCAL_PINNED_PUBLIC_MARKDOWN",
+    "index_version": "v0",
+    "fields_searched": [
+      "original_text_lines"
+    ],
+    "record_types_searched": [
+      "public_markdown_snapshot"
+    ],
+    "page_or_reading_scope": [
+      "sources/motif020-design.md",
+      "sources/motif019-design.md",
+      "sources/alex-skill.md",
+      "sources/planz-readme.md",
+      "sources/graft-readme.md"
+    ],
+    "pagination_complete": true,
+    "unreadable_or_missing_ranges": [],
+    "exclusions": [
+      "all unmaterialized sources",
+      "live branches since pinned cuts",
+      "private project material",
+      "unlicensed redistribution decisions"
+    ],
+    "truncation": {
+      "hits_per_source": 3,
+      "matching_line_overflow": true
+    },
+    "filters": [
+      {
+        "origin": "public",
+        "content_verified_by_git_blob": true
+      }
+    ],
+    "result_ids": [
+      "SRC-01-L1",
+      "SRC-01-L3",
+      "SRC-01-L5",
+      "SRC-02-L1",
+      "SRC-02-L3",
+      "SRC-02-L7",
+      "SRC-03-L26",
+      "SRC-03-L51",
+      "SRC-03-L65",
+      "SRC-05-L7",
+      "SRC-05-L13",
+      "SRC-05-L19"
+    ],
+    "result_count": 12,
+    "observed_at": "2026-11-05",
+    "producer": "alex.motif021-local-search/v0",
+    "coverage_status": "PARTIAL"
+  },
+  "source_inventory": [
+    {
+      "id": "SRC-01",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "73dbeec3beb89d444c3fd8b64127310b9db0803b",
+      "source_path": "experiments/020/DESIGN.md",
+      "git_blob": "0fd316f17d0a1e0a2d7dc956b83cece3d08dd494",
+      "archive": "sources/motif020-design.md",
+      "inspected": "FULL_PUBLIC_MARKDOWN_FILE",
+      "rights": "PUBLIC_DOCUMENT_SNAPSHOT_NO_LICENSE_INFERENCE"
+    },
+    {
+      "id": "SRC-02",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "2b07c847cc54605b5b05c02a50bddda188310564",
+      "source_path": "experiments/019/DESIGN.md",
+      "git_blob": "19dc84abca872aee4d111378da75e8942cce5a9a",
+      "archive": "sources/motif019-design.md",
+      "inspected": "FULL_PUBLIC_MARKDOWN_FILE",
+      "rights": "PUBLIC_DOCUMENT_SNAPSHOT_NO_LICENSE_INFERENCE"
+    },
+    {
+      "id": "SRC-03",
+      "repository": "the-static-collective/ALEX.2",
+      "source_commit": "515aea5ac73873300f87dcef2de7492e6e1d58d4",
+      "source_path": "skills/alex/SKILL.md",
+      "git_blob": "835543c250b76150953e89a5e6946a5ba50ae077",
+      "archive": "sources/alex-skill.md",
+      "inspected": "FULL_PUBLIC_MARKDOWN_FILE",
+      "rights": "PUBLIC_DOCUMENT_SNAPSHOT_NO_LICENSE_INFERENCE"
+    },
+    {
+      "id": "SRC-04",
+      "repository": "the-static-collective/planZ",
+      "source_commit": "5b6df7fb2a3a0c57d0fff8381108589ec2765a94",
+      "source_path": "README.md",
+      "git_blob": "519640da0d67d3ad31a75ae7215fe4e8171fc065",
+      "archive": "sources/planz-readme.md",
+      "inspected": "FULL_PUBLIC_MARKDOWN_FILE",
+      "rights": "PUBLIC_DOCUMENT_SNAPSHOT_NO_LICENSE_INFERENCE"
+    },
+    {
+      "id": "SRC-05",
+      "repository": "the-static-collective/GRAFT",
+      "source_commit": "265fd538266a742d033ba2f5b408a78610d0a75c",
+      "source_path": "README.md",
+      "git_blob": "a4a5ee55cf349edba34842a6bfa5313d6fdba4b9",
+      "archive": "sources/graft-readme.md",
+      "inspected": "FULL_PUBLIC_MARKDOWN_FILE",
+      "rights": "PUBLIC_DOCUMENT_SNAPSHOT_NO_LICENSE_INFERENCE"
+    }
+  ],
+  "coverage": [
+    {
+      "source_id": "SRC-01",
+      "lines_scanned": 77,
+      "matching_lines": 25,
+      "hits_retained": 3,
+      "inspected_entire_materialized_source": true,
+      "hits_truncated": true
+    },
+    {
+      "source_id": "SRC-02",
+      "lines_scanned": 60,
+      "matching_lines": 17,
+      "hits_retained": 3,
+      "inspected_entire_materialized_source": true,
+      "hits_truncated": true
+    },
+    {
+      "source_id": "SRC-03",
+      "lines_scanned": 207,
+      "matching_lines": 9,
+      "hits_retained": 3,
+      "inspected_entire_materialized_source": true,
+      "hits_truncated": true
+    },
+    {
+      "source_id": "SRC-04",
+      "lines_scanned": 20,
+      "matching_lines": 0,
+      "hits_retained": 0,
+      "inspected_entire_materialized_source": true,
+      "hits_truncated": false
+    },
+    {
+      "source_id": "SRC-05",
+      "lines_scanned": 124,
+      "matching_lines": 38,
+      "hits_retained": 3,
+      "inspected_entire_materialized_source": true,
+      "hits_truncated": true
+    }
+  ],
+  "hits": [
+    {
+      "hit_id": "SRC-01-L1",
+      "source_id": "SRC-01",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "73dbeec3beb89d444c3fd8b64127310b9db0803b",
+      "source_path": "experiments/020/DESIGN.md",
+      "git_blob": "0fd316f17d0a1e0a2d7dc956b83cece3d08dd494",
+      "archive": "sources/motif020-design.md",
+      "line_start": 1,
+      "line_end": 1,
+      "exact_line_excerpt": "# MOTIF-020 — THE MADD SOURCE-CUSTODY MAXHINAL",
+      "matched_phrases": [
+        "custody"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-01-L3",
+      "source_id": "SRC-01",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "73dbeec3beb89d444c3fd8b64127310b9db0803b",
+      "source_path": "experiments/020/DESIGN.md",
+      "git_blob": "0fd316f17d0a1e0a2d7dc956b83cece3d08dd494",
+      "archive": "sources/motif020-design.md",
+      "line_start": 3,
+      "line_end": 3,
+      "exact_line_excerpt": "**Status:** Executable synthetic research using the **actual, byte-identical original MADD Hugh Jackman Maxhinal** from `the-static-collective/the-daily-slice`. All source conclusions remain **unadmitted**. No real Slice file, outside sourc",
+      "matched_phrases": [
+        "original"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-01-L5",
+      "source_id": "SRC-01",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "73dbeec3beb89d444c3fd8b64127310b9db0803b",
+      "source_path": "experiments/020/DESIGN.md",
+      "git_blob": "0fd316f17d0a1e0a2d7dc956b83cece3d08dd494",
+      "archive": "sources/motif020-design.md",
+      "line_start": 5,
+      "line_end": 5,
+      "exact_line_excerpt": "**Stack:** This work stacks on **MOTIF-019 Hidden Common Ancestor draft PR #26**, itself stacked on the isolated 018 → 017 → 016 → 015 → 014 Organ Gardener draft PRs. Its source-owner boundary is separate from Daily Slice.",
+      "matched_phrases": [
+        "common ancestor"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-02-L1",
+      "source_id": "SRC-02",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "2b07c847cc54605b5b05c02a50bddda188310564",
+      "source_path": "experiments/019/DESIGN.md",
+      "git_blob": "19dc84abca872aee4d111378da75e8942cce5a9a",
+      "archive": "sources/motif019-design.md",
+      "line_start": 1,
+      "line_end": 1,
+      "exact_line_excerpt": "# MOTIF-019 — THE HIDDEN COMMON ANCESTOR",
+      "matched_phrases": [
+        "common ancestor"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-02-L3",
+      "source_id": "SRC-02",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "2b07c847cc54605b5b05c02a50bddda188310564",
+      "source_path": "experiments/019/DESIGN.md",
+      "git_blob": "19dc84abca872aee4d111378da75e8942cce5a9a",
+      "archive": "sources/motif019-design.md",
+      "line_start": 3,
+      "line_end": 3,
+      "exact_line_excerpt": "**Question:** Are many apparently independent observations actually descendants of one common source, or merely subject to one shared failure mechanism?",
+      "matched_phrases": [
+        "independent"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-02-L7",
+      "source_id": "SRC-02",
+      "repository": "the-static-collective/MOTIF",
+      "source_commit": "2b07c847cc54605b5b05c02a50bddda188310564",
+      "source_path": "experiments/019/DESIGN.md",
+      "git_blob": "19dc84abca872aee4d111378da75e8942cce5a9a",
+      "archive": "sources/motif019-design.md",
+      "line_start": 7,
+      "line_end": 7,
+      "exact_line_excerpt": "## Stack / authentic original organs",
+      "matched_phrases": [
+        "original"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-03-L26",
+      "source_id": "SRC-03",
+      "repository": "the-static-collective/ALEX.2",
+      "source_commit": "515aea5ac73873300f87dcef2de7492e6e1d58d4",
+      "source_path": "skills/alex/SKILL.md",
+      "git_blob": "835543c250b76150953e89a5e6946a5ba50ae077",
+      "archive": "sources/alex-skill.md",
+      "line_start": 26,
+      "line_end": 26,
+      "exact_line_excerpt": "agreement != independent corroboration",
+      "matched_phrases": [
+        "independent"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-03-L51",
+      "source_id": "SRC-03",
+      "repository": "the-static-collective/ALEX.2",
+      "source_commit": "515aea5ac73873300f87dcef2de7492e6e1d58d4",
+      "source_path": "skills/alex/SKILL.md",
+      "git_blob": "835543c250b76150953e89a5e6946a5ba50ae077",
+      "archive": "sources/alex-skill.md",
+      "line_start": 51,
+      "line_end": 51,
+      "exact_line_excerpt": "For PRESSURE, read [references/modes/pressure.md](references/modes/pressure.md). For source selection, read [references/source-routing.md](references/source-routing.md). For witness-stack and claim modeling, read [references/evidence-model.",
+      "matched_phrases": [
+        "reference"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-03-L65",
+      "source_id": "SRC-03",
+      "repository": "the-static-collective/ALEX.2",
+      "source_commit": "515aea5ac73873300f87dcef2de7492e6e1d58d4",
+      "source_path": "skills/alex/SKILL.md",
+      "git_blob": "835543c250b76150953e89a5e6946a5ba50ae077",
+      "archive": "sources/alex-skill.md",
+      "line_start": 65,
+      "line_end": 65,
+      "exact_line_excerpt": "For an intentionally strange seed, preserve the original formulation as `H0` before literalizing or correcting it. Later formulations are descendants, not rewrites.",
+      "matched_phrases": [
+        "original"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-05-L7",
+      "source_id": "SRC-05",
+      "repository": "the-static-collective/GRAFT",
+      "source_commit": "265fd538266a742d033ba2f5b408a78610d0a75c",
+      "source_path": "README.md",
+      "git_blob": "a4a5ee55cf349edba34842a6bfa5313d6fdba4b9",
+      "archive": "sources/graft-readme.md",
+      "line_start": 7,
+      "line_end": 7,
+      "exact_line_excerpt": "GRAFT receives **reviewed, clean-history source cuts** from independent projects. Each source gets its **own branch**, where its executable code can remain independent. The `main` branch is only the public directory, rules, and return paths",
+      "matched_phrases": [
+        "independent"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-05-L13",
+      "source_id": "SRC-05",
+      "repository": "the-static-collective/GRAFT",
+      "source_commit": "265fd538266a742d033ba2f5b408a78610d0a75c",
+      "source_path": "README.md",
+      "git_blob": "a4a5ee55cf349edba34842a6bfa5313d6fdba4b9",
+      "archive": "sources/graft-readme.md",
+      "line_start": 13,
+      "line_end": 13,
+      "exact_line_excerpt": "The six pinned original runtimes are joined by an on-demand **GitHub public-source scout** that rereads current branch heads, fetches Markdown at exact source SHAs, records byte hashes and changed refs, and discovers additional topic-releva",
+      "matched_phrases": [
+        "original"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    },
+    {
+      "hit_id": "SRC-05-L19",
+      "source_id": "SRC-05",
+      "repository": "the-static-collective/GRAFT",
+      "source_commit": "265fd538266a742d033ba2f5b408a78610d0a75c",
+      "source_path": "README.md",
+      "git_blob": "a4a5ee55cf349edba34842a6bfa5313d6fdba4b9",
+      "archive": "sources/graft-readme.md",
+      "line_start": 19,
+      "line_end": 19,
+      "exact_line_excerpt": "The [source-attendant integration](https://github.com/the-static-collective/GRAFT/tree/graft/jarvis-cannon-planz-001) now composes **six pinned native code sources**: Black Star, MEMENTO, Free Graph, original JAR;VIS, planZ PhaseLift, and C",
+      "matched_phrases": [
+        "original",
+        "independent"
+      ],
+      "classification": "DISCOVERY_NOT_ADMITTED_EVIDENCE"
+    }
+  ],
+  "claim_status": "SOURCE_DISCOVERY_ONLY_NO_REAL_CUSTODY_AUTHENTICATED",
+  "research_findings": [
+    {
+      "claim": "MOTIF-019 computes conditional source-error associations, not verified literal common ancestry.",
+      "status": "INFERRED_FROM_PINNED_PUBLIC_DESIGN",
+      "source_ids": [
+        "SRC-02"
+      ]
+    },
+    {
+      "claim": "MOTIF-020 runs original Maxhinal hypothesis transformations without promoting their creative output into evidence.",
+      "status": "INFERRED_FROM_PINNED_PUBLIC_DESIGN",
+      "source_ids": [
+        "SRC-01"
+      ]
+    },
+    {
+      "claim": "ALEX distinguishes discovery trace from evidence path and requires source-locus provenance.",
+      "status": "SOURCE_POLICY",
+      "source_ids": [
+        "SRC-03"
+      ]
+    },
+    {
+      "claim": "planZ is an index/review boundary, not a plan-execution authority.",
+      "status": "SOURCE_POLICY",
+      "source_ids": [
+        "SRC-04"
+      ]
+    },
+    {
+      "claim": "GRAFT provides reviewable source cuts; composition does not grant deployment permissions.",
+      "status": "SOURCE_POLICY",
+      "source_ids": [
+        "SRC-05"
+      ]
+    }
+  ],
+  "next_questions": [
+    "Can independently recovered source custody distinguish copied material from shared environment?",
+    "Which independent third reference breaks a possible two-reference common-mode error?",
+    "Which bounded executable analysis can GRAFT compose without promoting inferred ancestry into verified lineage?"
+  ],
+  "restrictions": {
+    "only_public_document_snapshots": true,
+    "actual_external_repository_search_run": false,
+    "actual_local_pinned_search_run": true,
+    "human_or_private_evidence_collected": false,
+    "exact_materialized_source_files": 5,
+    "target_runtime_production": false,
+    "independently_authenticated_custody": false,
+    "permission_to_publish_private_data": false,
+    "evidence_admission": "NONE",
+    "automatic_execution_authority": "NONE"
+  }
+}
