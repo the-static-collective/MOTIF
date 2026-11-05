@@ -31,6 +31,7 @@ jobs:
         run: |
           python -m unittest -v test_careers.py
           python -m unittest -v test_encoder.py
+          python -m unittest -v test_sentinel.py
           python - <<'PY'
           import json
           from native_careers import preflight_research_menu
@@ -116,6 +117,26 @@ jobs:
           for row in d["records"]:
               print(row["case_id"],row["gold"],row["choices"])
           PY
+      - name: Show one REAL T5 encoder semantic hint with hard human-held boundary
+        working-directory: experiments/025f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python semantic_sentinel.py > semantic_sentinel_receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("semantic_sentinel_receipt.json"))
+          assert d["model_used"] is True
+          assert d["possible_gate"]=="AUDIO"
+          assert d["human_execution_approval"] is False
+          assert d["action_dispatched"] is False
+          assert d["field_fact_changed"] is False
+          assert d["event_promise_published"] is False
+          print("READ-ONLY semantic possibility:",d["possible_gate"])
+          print("Question for human review:",d["question_for_human_review"])
+          print("Source evidence status:",d["question_status"])
+          PY
       - name: Upload receipts only, not model checkpoint
         if: always()
         uses: actions/upload-artifact@v4
@@ -124,5 +145,6 @@ jobs:
           path: |
             experiments/025f/job_interview_receipt.json
             experiments/025f/semantic_encoder_receipt.json
+            experiments/025f/semantic_sentinel_receipt.json
           if-no-files-found: ignore
           retention-days: 14
