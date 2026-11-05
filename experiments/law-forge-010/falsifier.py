@@ -13,6 +13,7 @@ only when the witnessed evidence falsifies all 650 frozen source models.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from itertools import combinations
 from pathlib import Path
 from hashlib import sha256
@@ -59,21 +60,29 @@ class Mutant:
         return int(all(x[i] for i in self.atom_indices))
 
 
+@lru_cache(maxsize=1)
 def counterfactual_library():
     return tuple(Mutant(c) for width in (1, 2, 3)
                  for c in combinations(range(12), width))
 
 
+@lru_cache(maxsize=1024)
 def candidate_critics(cartridge):
     if not isinstance(cartridge, EntropyCartridge):
         raise ValueError("Only pinned entropy source evidence")
     if len(cartridge.survivor_indices) != 1:
         return ()
     model = rule_library()[cartridge.survivor_indices[0]]
-    # All critic functions are proposed independently of hidden labels.
+    # An XOR-of-AND mutation equals the champion on an observation iff
+    # that conjunction is false there. Use integer masks rather than
+    # repeatedly evaluating models and revalidating vectors.
+    # 'identified champion' has already passed every recorded witness.
+    witnessed_mask = tuple(sum(bit << i for i, bit in enumerate(x))
+                           for x, _ in cartridge.snapshot)
     critics = tuple(m for m in counterfactual_library()
-                    if all((model.predict(x) ^ m.changes(x)) == y
-                           for x, y in cartridge.snapshot))
+                    if all((mask & sum(1 << i for i in m.atom_indices)) !=
+                           sum(1 << i for i in m.atom_indices)
+                           for mask in witnessed_mask))
     return critics
 
 
@@ -136,19 +145,24 @@ def choose_challenge(cartridge, catalog, policy, budget, previously=()):
     champion = rule_library()[survivors[0]]
     critics = candidate_critics(cartridge) if policy == "mutant_challenge" else ()
     best, best_score = None, -1.0
+    mutant_masks = tuple(sum(1 << i for i in m.atom_indices)
+                         for m in critics)
+    observed_masks = tuple(sum(bit << i for i, bit in enumerate(x))
+                           for x, _ in cartridge.snapshot)
     for index, card in enumerate(available):
+        candidate_mask = sum(bit << i for i, bit in enumerate(card.x))
         if policy == "mutant_challenge" and critics:
-            # A mutant surviving all observed cases is a *hypothetical*
-            # alternative. Queries exposing more alternatives are attractive.
-            score = sum(m.changes(card.x) for m in critics)
-            score = score / (len(critics) * card.unit_cost)
+            # Each surviving mutant disagrees iff its AND mask is present.
+            score = sum((candidate_mask & mask) == mask
+                        for mask in mutant_masks)
+            score = score / (len(mutant_masks) * card.unit_cost)
         elif policy == "classical_diversity" or (
             policy == "mutant_challenge" and not critics
         ):
             # Strong classical space-filling challenger. Maximize minimum
             # Hamming distance to any witnessed graph configuration.
-            score = min(hamming(card.x, x) for x, _ in cartridge.snapshot)
-            score = score / card.unit_cost
+            score = min((candidate_mask ^ old).bit_count()
+                        for old in observed_masks) / card.unit_cost
         elif policy == "classical_random":
             # Reproducible pseudo-random ordering keyed ONLY by the source
             # contract, current evidence and card. Neither hidden truth nor
