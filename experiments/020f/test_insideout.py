@@ -61,7 +61,7 @@ class PlanZOmissionTests(unittest.TestCase):
         r = self.plan()
         self.assertAlmostEqual(r.baseline_myopic_value, 8)
         self.assertAlmostEqual(r.optimal_modeled_value, 14)
-        self.assertEqual([x.plans for x in r.sequence][:2],
+        self.assertEqual([x.plans for x in r.sequence if x.plans],
                          [("SHELF-001",), ("GARDEN-TABLE-001",)])
 
     def test_permanent_omission_is_distinct_from_delay(self):
