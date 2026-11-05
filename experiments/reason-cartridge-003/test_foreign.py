@@ -5,7 +5,7 @@ from dataclasses import replace
 from fixtures import DOGRAM_COMMIT, specimens, check_path
 from pupil import HOLD, predict, verify_native, select_method, validate, digest, graph_input
 from review import Receiver, objection_experiment
-from objection import Inquiry, decide, check_certificate
+from objection import Inquiry, decide, check_certificate, HOLD as ObjectionHOLD
 
 
 def fake_local_receipt(specimen):
@@ -179,10 +179,10 @@ class ObjectionTest(unittest.TestCase):
                          "HOLD_NO_POSITIVE_QUERY")
 
     def test_bad_claims_and_nonfinite_cost_hold(self):
-        with self.assertRaises(HOLD):
+        with self.assertRaises(ObjectionHOLD):
             Inquiry(("S","T"), (("S","T"),), (("X","T","PRESENT","s1"),), ("S","T"))
         q = Inquiry(("S","T"), (("S","T"),), (), ("S","T"), True)
-        with self.assertRaises(HOLD):
+        with self.assertRaises(ObjectionHOLD):
             decide(q, question_cost=float("nan"))
 
 
