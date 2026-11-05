@@ -127,6 +127,37 @@ class BirthOfConceptTests(unittest.TestCase):
         model = discover(self.scars + journal.events, self.verb.id)
         self.assertEqual(model.status, 'ABSTAIN_NO_SEPARATION')
 
+    def test_intervening_on_shared_witness_changes_only_the_concept(self):
+        # Deliberately break the join while preserving relation existence.
+        yes = next(x for x in self.scars if x.outcome == 'effect_confirmed_in_fixture')
+        bike, owner, worker = yes.roles
+        shared = next(f[2] for f in yes.before if f[0] == 'carries'
+                      and f[1] == worker
+                      and F('fits', f[2], bike) in yes.before)
+        broken_join = frozenset((yes.before - {F('fits', shared, bike)}) |
+                               {F('fits', 'incompatible_new_witness', bike)})
+        self.assertEqual({f[0] for f in yes.before},
+                         {f[0] for f in broken_join})
+        self.assertTrue(holds(self.model.definition, yes.before, yes.roles))
+        self.assertFalse(holds(self.model.definition, broken_join, yes.roles))
+        self.assertFalse(guarded_moves(broken_join, self.verb, self.model))
+
+    def test_algorithm_induces_a_new_motif_under_renamed_predicates(self):
+        # Changing the graph vocabulary changes the learned concept signature,
+        # not the algorithm; this remains the same deliberately easy generator.
+        from dataclasses import replace
+        rename = {'carries': 'supplies', 'fits': 'accepts'}
+        def reword(graph):
+            return frozenset((rename.get(f[0], f[0]), *f[1:]) for f in graph)
+        changed = [replace(e, before=reword(e.before),
+                           observed_after=reword(e.observed_after))
+                   for e in self.episodes]
+        renamed = discover(labeled(changed, self.verbs), self.verb.id)
+        self.assertEqual(renamed.status, 'PROPOSED')
+        self.assertNotEqual(renamed.id, self.model.id)
+        self.assertEqual({p[0] for p in renamed.definition},
+                         {'supplies', 'accepts'})
+
     def test_report_documents_scoped_synthetic_success(self):
         r = run_demo()
         self.assertEqual(r['train_episodes'], 18)
