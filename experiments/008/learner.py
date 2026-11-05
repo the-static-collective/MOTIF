@@ -209,7 +209,10 @@ def fit_tree(training_episodes, validation_episodes) -> Tree:
         raise ValueError("Need train and validation")
     if min(sum(y for _, y in train), sum(not y for _, y in train),
            sum(y for _, y in valid), sum(not y for _, y in valid)) < MIN_CLASS:
-        raise ValueError("Sparse classes for benchmark tree")
+        # Predeclared constant fallback: cannot reliably train a two-level
+        # classifier with fewer than three contrasting examples per split.
+        default = sum(y for _, y in train) > len(train) / 2
+        return Tree((), (), (default,) * 4, 0.5, 0)
     atoms, _ = candidate_features(train)
     if not atoms:
         raise ValueError("No discoverable relational atoms")
