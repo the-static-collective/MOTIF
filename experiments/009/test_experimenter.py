@@ -175,6 +175,16 @@ class TreeCartridgeTests(unittest.TestCase):
         self.assertTrue(all(q["question_exposed_outcome_before_query"] is False
                             for q in one["questions"]))
 
+    def test_ci_receipts_match_frozen_reproduction(self):
+        from pathlib import Path
+        base = Path(__file__).parent
+        first = json.loads((base / "experiment-results-v1.json").read_text())
+        stress = json.loads((base / "experiment-results-stress.json").read_text())
+        self.assertEqual(first, benchmark.report())
+        self.assertEqual(stress, benchmark.report(
+            initial=6, requests=12,
+            version="active-tree-cartridges-v2-development-stress"))
+
     def test_full_benchmark_is_complete_and_reports_losses(self):
         result = benchmark.report()
         s = result["summary"]
