@@ -1,0 +1,56 @@
+name: MOTIF Law Forge 007 — Classical Lookup Assimilation
+
+on:
+  push:
+    branches:
+      - research/law-forge-007-lookup-assimilation-20261105
+    paths:
+      - 'experiments/law-forge-006/**'
+      - 'experiments/law-forge-007/**'
+      - '.github/workflows/law-forge-007.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-006/**'
+      - 'experiments/law-forge-007/**'
+      - '.github/workflows/law-forge-007.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lookup-skill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify all inherited Law Forge research
+        run: |
+          python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-006 -p 'test_*.py' -v
+      - name: Test exact lookup skill and adversarial source contracts
+        run: python -m unittest discover -s experiments/law-forge-007 -p 'test_*.py' -v
+      - name: Generate complete benchmark and inspect explicit classical controls
+        run: |
+          mkdir -p law-forge-007-receipts
+          python experiments/law-forge-007/trial.py > law-forge-007-receipts/benchmark.json
+          python -m json.tool law-forge-007-receipts/benchmark.json > /dev/null
+          python -c "import json; d=json.load(open('law-forge-007-receipts/benchmark.json')); print(json.dumps({'development':d['development'],'evaluation':d['evaluation'],'method':d['frozen_method_decision'],'sparse_exception_kind':d['examples']['sparse_exception_six']['model_status']},indent=2))"
+      - name: Emit a self-contained versioned lookup skill cartridge
+        run: |
+          python -c "import sys,json;sys.path.append('experiments/law-forge-007');from source import Source;from lookup import assimilate; s=Source('sparse_exception_six',4); m=assimilate(s.contract(),s.observations());open('law-forge-007-receipts/lookup-cartridge.json','w').write(json.dumps(m.packet(),indent=2,sort_keys=True)+'\n')"
+      - name: Preserve auditable exact snapshot and trial receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-007-lookup-assimilation-receipt
+          path: law-forge-007-receipts/
+          retention-days: 30
