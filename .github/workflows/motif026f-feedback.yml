@@ -28,7 +28,9 @@ jobs:
           python-version: '3.11'
       - name: Native 022F and original 016 integration, no-model tests
         working-directory: experiments/026f
-        run: python -m unittest -v test_relay.py
+        run: |
+          python -m unittest -v test_relay.py
+          python -m unittest -v test_diagnostic.py
       - name: Install fixed CPU-only T5 dependencies
         run: |
           python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
@@ -78,6 +80,7 @@ jobs:
           print("Inference calls",d["t5_query_count"])
           print("Methods",json.dumps(d["methods"],indent=2))
           print("MOTIF asked again",json.dumps(d["native_meta_reassessment"],indent=2))
+          print("Posthoc next falsifier",json.dumps(d["posthoc_next_question"],indent=2))
           for x in d["cases"]:
               print("CASE",x["case"],"synthetic truth",x["synthetic_gold"],
                     "native",x["comparison"]["NATIVE"]["gate"],
