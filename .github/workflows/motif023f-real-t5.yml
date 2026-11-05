@@ -90,25 +90,26 @@ jobs:
                     control["total_accuracy_gain"])
           PY
       - name: Run all THREE actual FLAN-T5 Chorus roles beside native Fellowship planning
-        working-directory: experiments/021f
+        working-directory: experiments/023f
         env:
           HF_HUB_OFFLINE: '1'
           TRANSFORMERS_OFFLINE: '1'
         run: |
-          python demo.py --local-t5 --grace 3 > ../023f/full-chorus-receipt.json
+          python three_roles.py > full-chorus-receipt.json
           python - <<'PY'
           import json
-          d=json.load(open("../023f/full-chorus-receipt.json"))
-          assert d["sidecar"]["adopted_suggestions"] is False
-          assert d["native_motif"]["source_planz_still_index_only"] is True
+          d=json.load(open("full-chorus-receipt.json"))
+          assert d["model_weights_really_loaded"] is True
+          assert d["original_native_decision_unmodified"] is True
+          assert d["planz_still_index_only"] is True
           print(json.dumps({
-              "actual_backend":d["backend"],
-              "all_three_completed":d["actual_llm_inference"],
-              "native_next_question":d["native_motif"]["next_modeled_question"],
+              "model":d["model"],
+              "all_three_available_at_cutoff":d["frozen_result_before_worker_join"]["all_three_available_at_cutoff"],
               "roles":[{
                   "role":n["role"],"status":n["status"],"raw":n["text"]
-              } for n in d["sidecar"]["notes"]],
-              "native_not_overwritten":not d["sidecar"]["adopted_suggestions"],
+              } for n in d["frozen_result_before_worker_join"]["roles"]],
+              "safely_joined_worker":d["worker_finished_safely"],
+              "no_native_overwrite":d["original_native_decision_unmodified"],
           },indent=2))
           PY
       - name: Save small experiment receipts, not weights
