@@ -80,6 +80,19 @@ jobs:
         run: |
           python -m unittest -v test_bridge.py
           python bridge.py > /tmp/motif-bridge.json
+      - name: Generate offline human first-door desk
+        working-directory: research/missing-bridge
+        run: |
+          python -m unittest -v test_field_desk.py
+          python field_desk.py --output field-desk.html
+          test -s field-desk.html
+      - name: Save offline field desk artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-first-door-offline
+          path: research/missing-bridge/field-desk.html
+          if-no-files-found: error
+          retention-days: 30
       - name: Native Dogram inferred-bridge calculation
         working-directory: research/missing-bridge
         run: |
