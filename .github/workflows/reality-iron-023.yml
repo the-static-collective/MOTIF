@@ -1,0 +1,40 @@
+name: MOTIF-023 human-goal handshake offline proof
+
+on:
+  pull_request:
+    paths:
+      - "experiments/023/**"
+      - ".github/workflows/reality-iron-023.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  goal-handshake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Adversarial tests — human choice and invalid safety interpretations
+        run: python3 -m unittest discover -s experiments/023 -p "test_*.py" -v
+      - name: Ambiguous human intent must ask, not perform physical work
+        run: |
+          printf '%s' '{"text":"Could you check the rivers?"}' | python3 experiments/023/human_goal.py > /tmp/ask.json
+          python3 -c "import json; x=json.load(open('/tmp/ask.json')); assert x['status']=='ASK_ONE_DECISIVE_QUESTION' and x['next_question']['id']=='evidence_scope' and x['source_requests_sent']==0"
+      - name: Named river request must require a human contract confirmation
+        run: |
+          printf '%s' '{"text":"Need both Blue Earth and Le Sueur river reports within 12 hours."}' | python3 experiments/023/human_goal.py > /tmp/draft.json
+          python3 -c "import json; x=json.load(open('/tmp/draft.json')); assert x['status']=='CONFIRM_REQUIRED' and x['selected_goal']=='two_named_fresh' and x['human_confirmed'] is False"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-023-bounded-human-intent-demo
+          path: |
+            /tmp/ask.json
+            /tmp/draft.json
+          retention-days: 30
