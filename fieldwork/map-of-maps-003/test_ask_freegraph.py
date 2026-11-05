@@ -43,15 +43,24 @@ class SourceOwnedFreeGraphTests(unittest.TestCase):
     runner.return_value.stdout=m.FG_COMMIT+"\n"
     with self.assertRaisesRegex(m.Hold,"FREEGRAPH_SOURCE_MISSING_OR_SYMLINK"):
      m.verify(folder,m.REPO/m.REPORT_PATH)
- def test_invalid_report_path_is_not_a_generic_file_reader(self):
+ def test_invalid_report_path_is_rejected_after_fake_source_identity_checks(self):
   with tempfile.TemporaryDirectory() as d:
-   p=Path(d)/"unapproved.json"
-   p.write_text('{"note":"do not silently read this"}')
-   with self.assertRaisesRegex(m.Hold,"MOTIF_REPORT_UNAUTHORIZED_OR_RELOCATED"):
-    # Use a checkout that passes native source-file validation only when
-    # explicitly configured; direct report-path contract is checked below.
-    self.assertNotEqual(p.resolve(),(m.REPO/m.REPORT_PATH).resolve())
-    raise m.Hold("HOLD_MOTIF_REPORT_UNAUTHORIZED_OR_RELOCATED")
+   folder=Path(d)/"freegraph";folder.mkdir()
+   config=json.loads(m.LOCK.read_text())
+   fake_pins={}
+   for item in config["freegraph_source_owner"]["files"]:
+    f=folder/item["path"]
+    f.parent.mkdir(parents=True,exist_ok=True)
+    f.write_text("local harmless test fixture")
+    item["blob"]=m.git_blob(f.read_bytes())
+    fake_pins[item["path"]]=item["blob"]
+   lock=Path(d)/"fake-lock.json";lock.write_text(json.dumps(config))
+   unapproved=Path(d)/"unapproved.json"
+   unapproved.write_text('{"note":"not the pinned historical report"}')
+   with patch.object(m,"SOURCE_PINS",fake_pins),patch.object(m,"LOCK",lock),patch.object(m.subprocess,"run") as runner:
+    runner.return_value.stdout=m.FG_COMMIT+"\\n"
+    with self.assertRaisesRegex(m.Hold,"MOTIF_REPORT_UNAUTHORIZED_OR_RELOCATED"):
+     m.verify(folder,unapproved)
 
 if __name__=="__main__":
  unittest.main()
