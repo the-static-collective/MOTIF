@@ -1,0 +1,47 @@
+name: MOTIF 021 — source-question protocol integrity
+
+on:
+  pull_request:
+    paths:
+      - "experiments/021/**"
+      - ".github/workflows/reality-iron-021.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  question-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pin source-owned GHoT live physical HTTP receipts
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 1517d2ac822ed1e6cfa30320a0f1e4574b6b0e55
+          persist-credentials: false
+          path: ghot-source-021
+      - name: Verify exact Git blobs and source-owner evidence copies
+        run: |
+          test "$(git hash-object experiments/021/evidence/002-first-misencoded-2026-11-05.json)" = "e70629bc8540cd237b0e9a9fcb9b7626d5a44238"
+          test "$(git hash-object experiments/021/evidence/002-corrected-2026-11-05.json)" = "c49bf2f99325773673a55249ceafbae5129c2fb7"
+          test "$(git hash-object experiments/021/evidence/003-real-stopping-2026-11-05.json)" = "2289794fdce13e58efa271a205c480b074215ca0"
+          cmp experiments/021/evidence/002-first-misencoded-2026-11-05.json ghot-source-021/evidence/002-initial-window-truncation-2026-11-05.json
+          cmp experiments/021/evidence/002-corrected-2026-11-05.json ghot-source-021/evidence/002-corrected-full-utc-network-witness-2026-11-05.json
+          cmp experiments/021/evidence/003-real-stopping-2026-11-05.json ghot-source-021/evidence/003-first-real-conditional-inquiry-2026-11-05.json
+      - name: Check physical-source totals and reject forged success/energy claims
+        run: python3 -m unittest discover -s experiments/021 -p "test_*.py" -v
+      - name: Derive held next best question from known source-witness failure
+        run: python3 experiments/021/question_integrity.py --out motif-021-question-integrity.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-021-question-protocol-falsification
+          path: motif-021-question-integrity.json
+          retention-days: 30
