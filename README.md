@@ -29,6 +29,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[019F — The Planner Foundry: Native Questions × Classical Search](experiments/019f/DESIGN.md):** The original SHA-pinned National Treasure Question Box and Dogram modules gate new proposed graph-relational questions. A small learner uses independent counterexamples to propose a missing STRIPS action precondition; the planner generates **BFS, optimal uniform-cost and admissible A* hmax method cartridges on demand**, receives separate synthetic action receipts, revises its model and replans. A known-model classical UCS given the same evidence ties; shifting hidden mechanisms can make the learned guard worse. Completely synthetic, source preserving, no outside-world authority.
 
+- **[021F — The Chorus: Observer / Critic / Hypeman](experiments/021f/DESIGN.md):** A truly concurrent **read-only sidecar** with one optional locally cached 77M-parameter FLAN-T5-small text-to-text model (three sequential micro-roles sharing one checkpoint). The deterministic MOTIF planner never reads its notes or waits more than a bounded grace period. The default CI uses clearly labeled **scripted text**, not real LLM inference. Privacy guard, deadline and authority boundaries, slow/error HOLD, input digest and native-plan preservation tested. Optional real T5 requires an independently installed compatible runtime and cached weights; no model download on execution.
 - **[020F — The Inside-Out Box: planZ × Cost of Inaction](experiments/020f/DESIGN.md):** Import planZ's **actual, original, pinned public attention feed and native validator** as an `INDEX_ONLY` source of unresolved plans (never authorization or verified deadlines). Build separately labeled synthetic time-critical opportunities; classical finite-horizon planning chooses `WAIT` or simultaneous available actions, and calculates **welfare lost by one tick of inaction**, permanent omission, and deliberation delay rather than only CPU/query cost. A short-lived 6-value opportunity plus a durable 8-value one makes waiting lose 6 modeled units even though computation costs 0.05. No live scheduling or field action; strong exact classical DP ties by design.
 
 ### Run (Python 3.10+, standard library only)
@@ -112,6 +113,11 @@ python benchmark.py  # original pinned donors, replanning, classical parity and 
 cd ../020f
 python -m unittest -v test_insideout.py
 python demo.py  # source-pinned planZ + explicitly imaginary expiring opportunities
+
+cd ../021f
+python -m unittest -v test_chorus.py
+python demo.py       # scripted NOT a model; calls the real 020F native planner
+# python demo.py --local-t5 --grace 2  # optional cached local FLAN-T5-small
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
