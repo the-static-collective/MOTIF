@@ -1,0 +1,38 @@
+name: MOTIF-017 Question Before Question
+on:
+  push:
+    branches:
+      - research/017-question-before-question
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - 'experiments/016/**'
+      - 'experiments/017/**'
+      - '.github/workflows/motif017.yml'
+jobs:
+  native-active-inquiry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact pinned National Treasure Question Box and Dogram tests
+        run: node --test experiments/014/test_garden.mjs
+      - name: Inherited 015 method generation
+        run: node --test experiments/015/test_graft.mjs
+      - name: Inherited 016 metaprocedure
+        run: node --test experiments/016/test_meta.mjs
+      - name: Source-quality inquiry and independent-source counterexamples
+        run: node --test experiments/017/test_question_machine.mjs
+      - name: Retain inspectable synthetic study
+        run: node experiments/017/question_machine.mjs > motif017-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif017-question-before-question-synthetic
+          path: motif017-research.json
+          retention-days: 14
