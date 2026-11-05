@@ -1,0 +1,57 @@
+name: REASON-004 self-objecting proof and probe lab
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-004-self-objecting-reasoner
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-004/**'
+      - '.github/workflows/reason-cartridge-004.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  self-objecting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression tests for inherited reason cartridges
+        run: |
+          python -m unittest discover -s experiments/reason-cartridge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/reason-cartridge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/reason-cartridge-003 -p 'test_*.py' -v
+      - name: Test source-pinned self-objection and tamper refusal
+        run: python -m unittest discover -s experiments/reason-cartridge-004 -p 'test_*.py' -v
+      - name: Run synthetic independent source-owned question budget trial
+        run: |
+          python experiments/reason-cartridge-004/trial.py > reason-004-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-004-receipt.json').read_text())
+          assert r['review'] == {'cases':4,'errors':0}
+          assert r['mean_consequence_questions'] == 1
+          assert r['mean_fixed_order_questions'] == 2
+          assert r['full_information_classical_upper_bound_correct'] == 4
+          assert len(r['worlds']) == 4
+          assert r['synthetic_local_read_only_admission']
+          assert r['external_questions_sent'] == 0
+          assert not r['real_world_authority']
+          print({'question_budget_means':[r['mean_consequence_questions'],
+                                            r['mean_fixed_order_questions']],
+                 'worlds':len(r['worlds']), 'review':r['review']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-004-source-pinned-self-objection-receipt
+          path: reason-004-receipt.json
+          retention-days: 30
