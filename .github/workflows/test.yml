@@ -28,6 +28,26 @@ jobs:
       - name: Test 006
         working-directory: experiments/006
         run: python -m unittest -v test_question.py
+      - name: Checkout pinned Dogram calculation kernel
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: vendor/Dogram
+      - name: Verify native Dogram probe-cost receipts
+        working-directory: experiments/006
+        run: |
+          python dogram_bridge.py --dogram-root ../../vendor/Dogram > /tmp/motif-dogram.json
+          python - <<'PY'
+          import json
+          with open('/tmp/motif-dogram.json', encoding='utf-8') as f:
+              result = json.load(f)
+          assert result['schema'] == 'motif.dogram-calculate-only/v0'
+          assert len(result['pair_receipts']) == 4
+          assert result['source']['excluded_trials'] == ['e_refused-part']
+          assert all('a_part-surrogate' in entry['dogram_calculation']['separating_probes']
+                     for entry in result['pair_receipts'])
+          PY
       - name: Reproduce 006
         working-directory: experiments/006
         run: python question.py
