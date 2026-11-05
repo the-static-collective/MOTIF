@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
  exampleWorld,reliability,posterior,batchRisk,batchOptimum,
  sequentialOptimum,questionDesk,propose,checkCartridge,
- syntheticTrial,observe,demonstration
+ syntheticTrial,observe,adversarialHoldout,demonstration
 } from './question_machine.mjs';
 
 let cached;
@@ -125,6 +125,18 @@ test('malformed external reports, invalid costs, altered method cartridge are re
  assert.throws(()=>checkCartridge({...c,posterior_expected_method:0.999}),/TAMPERED/);
  assert.throws(()=>checkCartridge({...c,automatically_revised:true}),/BAD_CARTRIDGE/);
 });
+test('frozen source-shift cases quantify regression rather than guessing at robustness',()=>{
+ const b=adversarialHoldout(desk(),240);
+ assert.equal(b.stable.episodes,240);
+ assert.equal(b.unannounced_inversion.episodes,240);
+ assert.ok(b.stable.mean_realized_loss_including_probe_cost<
+    b.stable.always_hold_comparator_loss);
+ assert.ok(b.unannounced_inversion.mean_realized_loss_including_probe_cost>
+    b.unannounced_inversion.always_hold_comparator_loss);
+ assert.ok(b.unannounced_inversion.wrong_hypothetical_candidates>
+    b.stable.wrong_hypothetical_candidates);
+ assert.equal(b.unannounced_inversion.true_world_regime_exposed_to_planner,false);
+});
 test('study retains negative cases, native parent lineage and never acts externally',()=>{
  const r=demonstration();
  assert.equal(r.scenarios.pair.questions.length,2);
@@ -132,6 +144,7 @@ test('study retains negative cases, native parent lineage and never acts externa
  assert.equal(r.national_treasure_gap.aperture,'source-object');
  assert.equal(r.genuine_organs.question_box,'national-treasure.question-receipt/v0');
  assert.equal(r.external_effects,0);
+ assert.ok(r.holdout_source_shift.unannounced_inversion.mean_realized_loss_including_probe_cost>1.5);
  assert.equal(r.autonomous_edits,false);
  assert.equal(r.real_world_witnesses,0);
 });
