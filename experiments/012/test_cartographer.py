@@ -149,7 +149,7 @@ class CausalCartographerTests(unittest.TestCase):
             self.assertEqual(sample["provisional_model_label"],model)
             self.assertTrue(sample["independently_admitted"])
             self.assertEqual(sample["independent_review_status"],
-                             "ADMIT_PREDICT_ONLY_IN_SYNTHETIC_LAB")
+                             "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION")
             self.assertEqual(sample["heldout_prediction_coverage"],1)
             self.assertEqual(sample["wrong_when_covered"],0)
 
@@ -269,6 +269,63 @@ class CausalCartographerTests(unittest.TestCase):
         self.assertFalse(hasattr(cartographer,"execute"))
         self.assertFalse(hasattr(cartographer,"authenticate"))
         self.assertEqual(benchmark.safe_scope_proof()["simulator_operations_dispatched"],0)
+
+    def test_review_success_does_not_automatically_admit_a_cartridge(self):
+        review=cartographer.independent_review(
+            cartographer.TrialState((self.start.models[0],),(),
+                                    "SINGLE_PROVISIONAL"),
+            oracle.independent_suite(self.world,"local_review"),
+            self.world.controls)
+        self.assertEqual(review.status,
+                         "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION")
+        bay=cartographer.LocalCausalBay()
+        ticket=bay.offer(self.start.models[0],review)
+        self.assertNotIn(ticket,bay.admitted)
+        test=oracle.independent_suite(self.world,"test")[0]
+        with self.assertRaises(cartographer.HOLD):
+            bay.predict(ticket,test,self.world.controls)
+        receipt=bay.decide(ticket,"ADMIT_PREDICT_ONLY",
+                           "LOCAL_SYNTHETIC_STEWARD")
+        self.assertEqual(receipt["decision"],"ADMIT_PREDICT_ONLY")
+        self.assertFalse(receipt["real_world_authority"])
+        self.assertEqual(bay.predict(ticket,test,self.world.controls),
+                         cartographer.validated_result(test))
+        bay.revoke(ticket,"LOCAL_SYNTHETIC_STEWARD")
+        with self.assertRaises(cartographer.HOLD):
+            bay.predict(ticket,test,self.world.controls)
+
+    def test_falsified_cartridge_cannot_self_admit(self):
+        latent=oracle.new_world("latent",11)
+        start=cartographer.opening_model_space(
+            oracle.natural(latent,"train"),
+            oracle.natural(latent,"validation"),latent.controls)
+        state=start
+        seen=[]
+        for i in range(2):
+            offer=cartographer.choose(state,used=seen)
+            evidence=oracle.intervene(latent,*offer.settings,sequence=1000+i)
+            state=cartographer.revise(state,evidence,latent.controls)
+            seen.append(offer.settings)
+        review=cartographer.independent_review(
+            state,oracle.independent_suite(latent,"local_review"),latent.controls)
+        bay=cartographer.LocalCausalBay()
+        ticket=bay.offer(state.models[0],review)
+        with self.assertRaisesRegex(cartographer.HOLD,"falsification"):
+            bay.decide(ticket,"ADMIT_PREDICT_ONLY","LOCAL")
+        self.assertNotIn(ticket,bay.admitted)
+
+    def test_unknown_relation_in_local_scene_is_refused(self):
+        row=oracle.independent_suite(self.world,"test")[0]
+        augmented=replace(row,before=row.before|{("unreviewed",row.roles[0])})
+        with self.assertRaisesRegex(cartographer.HOLD,"Unreviewed"):
+            self.start.models[0].predict(augmented,self.world.controls)
+
+    def test_natural_source_is_not_independent_review_evidence(self):
+        state=cartographer.TrialState((self.start.models[0],),(),
+                                     "SINGLE_PROVISIONAL")
+        with self.assertRaisesRegex(cartographer.HOLD,"new intervention"):
+            cartographer.independent_review(
+                state,self.train,self.world.controls)
 
     def test_world_full_record_and_ci_receipt_reproduce_exactly(self):
         saved=json.loads((Path(__file__).parent/
