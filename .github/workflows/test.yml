@@ -16,6 +16,12 @@ jobs:
       - name: Test 002
         working-directory: experiments/002
         run: python -m unittest -v test_motif002.py
+      - name: Test 003
+        working-directory: experiments/003
+        run: python -m unittest -v test_affordance.py
+      - name: Reproduce 003
+        working-directory: experiments/003
+        run: python affordance.py
       - name: Reproduce 001
         working-directory: experiments/001
         run: python motif.py
