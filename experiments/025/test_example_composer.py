@@ -142,6 +142,20 @@ class ComposableExamples(unittest.TestCase):
                    "HUMAN_MUST_REVIEW_AND_DEFINE_ACCEPTANCE_EVIDENCE")
   self.assertFalse(x["human_confirmed"])
 
+ def test_mixed_domain_does_not_confidently_route_to_public_river_instrument(self):
+  x=m.compose("Get coffee donated for our river cleanup event")
+  self.assertEqual(x["domain"],"generic")
+  self.assertEqual(x["selection_basis"],"multiple-domains-ambiguous")
+  self.assertIn("river_reports",x["unresolved_domains"])
+  self.assertIn("coffee_donation",x["unresolved_domains"])
+
+ def test_safety_risk_in_persons_custom_completion_statement_holds(self):
+  x=m.compose("Get coffee donations","custom",
+              "I will be satisfied when this bridge is safe to cross")
+  self.assertEqual(x["status"],"HOLD_HIGH_STAKES")
+  self.assertIsNone(x["draft_contract"])
+  self.assertEqual(x["network_requests_sent"],0)
+
  def test_invalid_inputs_refused(self):
   with self.assertRaises(ValueError):m.compose("a"*321)
   with self.assertRaises(ValueError):m.compose("Coffee donations",choice="HACK")

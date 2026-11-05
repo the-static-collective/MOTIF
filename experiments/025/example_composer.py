@@ -126,8 +126,7 @@ def fingerprint(obj):
                           ensure_ascii=True).encode("utf8")).hexdigest()
 
 def detect_domain(text):
- if river.human.RIVER.search(text):
-  return "river_reports","finite-river-024",["physical agency report"]
+ river_interest=bool(river.human.RIVER.search(text))
  candidates=[]
  if COFFEE.search(text) and DONATE.search(text):candidates.append("coffee_donation")
  if VOL.search(text):candidates.append("volunteer_shift")
@@ -135,6 +134,10 @@ def detect_domain(text):
  if WEB.search(text):candidates.append("website")
  if RESEARCH.search(text):candidates.append("research")
  if EVENT.search(text) and not candidates:candidates.append("community_event")
+ if river_interest and candidates:
+  return "generic","multiple-domains-ambiguous",["river_reports"]+candidates
+ if river_interest:
+  return "river_reports","finite-river-024",["physical agency report"]
  if len(candidates)==1:return candidates[0],"explicit-term-cartridge",[]
  if len(candidates)>1:
   return "generic","multiple-domains-ambiguous",candidates
@@ -249,6 +252,10 @@ def compose(text,choice=None,own_example=None,*,freshness_hours=None,confirmed=F
   # Important: preserve user's wording EXACTLY for their review and do not
   # pretend to have translated arbitrary text into machine success logic.
   completion=own_example.strip()
+  if RISK.search(completion):
+   return base("HOLD_HIGH_STAKES",
+    "The typed completion criterion requests a safety outcome the interpreter cannot certify.",
+    domain,method)
   criterion_origin="HUMAN_TYPED_UNINTERPRETED"
   proof="HUMAN_MUST_REVIEW_AND_DEFINE_ACCEPTANCE_EVIDENCE"
   scope="human_authored"
