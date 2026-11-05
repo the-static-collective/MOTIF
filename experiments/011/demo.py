@@ -11,9 +11,9 @@ from __future__ import annotations
 import json
 
 from oracle import SEEDS, make_world, episodes
+from benchmark import demo as outcomes  # Resolve local benchmark before shared imports.
 from skeptic import (assess, LocalConceptBay, export_extension,
                      decode_extension, validated_result)
-from benchmark import demo as outcomes
 
 
 def demonstrate():
