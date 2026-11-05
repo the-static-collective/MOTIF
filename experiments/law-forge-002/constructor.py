@@ -14,7 +14,7 @@ from json import dumps
 from math import log2
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "law-forge-001"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "law-forge-001"))
 from forge import Probe, Observation, hypotheses as original_hypotheses
 
 COMMUTATIVE = ("AND", "OR", "XOR")
