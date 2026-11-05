@@ -1,0 +1,46 @@
+name: MOTIF Reality Iron 015 — live weather read-only witness
+
+on:
+  pull_request:
+    paths:
+      - "experiments/015/**"
+      - ".github/workflows/reality-iron-015.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit/regression tests with SYNTHETIC fixtures only
+        run: python3 -m unittest discover -s experiments/015 -p "test_weather_verifier.py" -v
+  real-station-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: offline
+    continue-on-error: true # Public servers and sensors may be unavailable.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Live read-only public forecasts × airport station
+        run: python3 experiments/015/weather_verifier.py --live --output weather-witness-015.json
+      - name: Retain the raw-result digest and scoring receipt
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reality-iron-015-mankato-public-weather
+          path: weather-witness-015.json
+          retention-days: 14
