@@ -60,8 +60,6 @@ class FellowshipTimelineTests(unittest.TestCase):
 
     def test_grant_deadlines_dont_confuse_fellowship_internal_checkpoints(self):
         facts = self.data["known_and_reported"]
-        self.assertIn("Nov", facts["fellowship_nov12_and_nov18"] if False else
-                      "Nov internal") if False else None
         self.assertIn("ASSISTANT_INTERNAL_TARGETS", facts["fellowship_nov12_and_nov18"])
         self.assertEqual(facts["voqal"], "USER_CONFIRMED_ALREADY_SUBMITTED")
         self.assertEqual(self.data["source_dates"]["NEXUS_TEAM_QUESTION"][0],
