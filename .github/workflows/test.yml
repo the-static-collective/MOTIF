@@ -44,6 +44,9 @@ jobs:
           echo '__MOTIF012_RESULT_START__'
           cat /tmp/motif012.json
           echo '__MOTIF012_RESULT_END__'
+      - name: Test 012
+        working-directory: experiments/012
+        run: python -m unittest -v test_cartographer.py
       - name: Reproduce 011
         working-directory: experiments/011
         run: |
