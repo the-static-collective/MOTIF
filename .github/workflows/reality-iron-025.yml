@@ -1,0 +1,36 @@
+name: MOTIF-025 — reusable goal examples with human-defined completion
+on:
+  push:
+    branches: [experiment/reality-iron-025-composable-examples]
+  pull_request:
+    paths:
+      - "experiments/025/**"
+      - ".github/workflows/reality-iron-025.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  domain-correction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test source-backed older river chain and multi-domain example safety
+        run: |
+          python3 -m unittest discover -s experiments/024 -p 'test_*.py' -v
+          python3 -m unittest discover -s experiments/025 -p 'test_*.py' -v
+      - name: Coffee donation example from user's requested community use case
+        run: |
+          printf '%s' '{"text":"Can we get free coffee donated for our fellowship event?"}' | python3 experiments/025/example_composer.py > /tmp/coffee-025.json
+          python3 -c "import json; x=json.load(open('/tmp/coffee-025.json')); assert x['domain']=='coffee_donation' and x['status']=='SHOW_TWO_EXAMPLES' and len(x['examples'])==2 and x['network_requests_sent']==0"
+      - name: Preserve source-owned inspectable synthetic demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-025-coffee-donation-goal-examples
+          path: /tmp/coffee-025.json
+          retention-days: 30
