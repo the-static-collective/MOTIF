@@ -1,0 +1,29 @@
+{
+  "schema": "motif022.original-donor-pins/v0",
+  "source_owners": {
+    "alex": {
+      "repository": "the-static-collective/ALEX.2",
+      "commit": "46041203f90d4cc2976f9e2a16d3d55fd68b5748",
+      "branch": "research/022-inquiry-from-question"
+    },
+    "planz": {
+      "repository": "the-static-collective/planZ",
+      "commit": "8fc1c73ee804ddd2c46564b0ad422baca3693a4e",
+      "branch": "research/022-question-to-plan"
+    },
+    "graft": {
+      "repository": "the-static-collective/GRAFT",
+      "commit": "8df897ac161941fe90a68d52a3bc0ed1925b39bc",
+      "branch": "graft/022-question-to-capability"
+    }
+  },
+  "files": {
+    "alex-snapshot/tools/motif022-question.mjs": "c6e1a03d2765a0ab6dc480432db76a276f8f3ae9",
+    "planz-snapshot/scripts/motif022-plan.mjs": "67cfe4574de8ffc9205f3cacb68d1baf5de818a8",
+    "planz-snapshot/scripts/motif-classical.mjs": "22d75c26039e5783b59cf71be02982428603128c",
+    "graft-snapshot/src/motif022-inquiry-compiler.mjs": "ecab7f890873adcfbf5ebc700b43e041806e1fdd",
+    "graft-snapshot/generated/motif022-lineage.mjs": "84603edecb3aff202c3bd99affc3d3a6ca12e007",
+    "graft-snapshot/generated/motif022-composition.mjs": "3d7bb58825c875bf6d2f5ae28925c1668a0cad18",
+    "graft-snapshot/generated/motif022-reliability.mjs": "346b2ee14c048482e142ee6f6765548a3c44f895"
+  }
+}
