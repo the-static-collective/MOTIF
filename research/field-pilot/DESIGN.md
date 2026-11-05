@@ -102,7 +102,15 @@ accounting.
   no consent or causal promotion.
 
 Dogram continues to calculate bounded hypothetical differences through
-BRIDGE-001; FIELD-001 does **not** upload real reports to Dogram, MEMENTO,
+BRIDGE-001. FIELD-001 adds an **optional local, explicit-only Dogram** adapter
+in field_dogram.py. If an operator provides BOTH a local exported field log
+and a trusted checkout of Dogram, it compares rich typed event/origin traces
+with the coarser outcome labels. In the synthetic test, two histories that
+both say "benefit reported" differ in how the reports were obtained; Dogram
+receipts the lost distinction. It does **not** identify credibility, actual
+benefit or causality. It never sends the log to the network.
+
+FIELD-001 does **not** automatically upload real reports to Dogram, MEMENTO,
 3rdi, ALEX, Free Graph, GitHub, Supabase or any other service.
 
 ### Reproduce
