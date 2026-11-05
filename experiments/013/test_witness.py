@@ -12,8 +12,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"008"))
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"009"))
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import oracle
+import benchmark  # Resolve local evaluator before 009 imports add older benchmark paths.
 import witness_model as model
-import benchmark
 from cartridge import validate_cartridge
 
 
