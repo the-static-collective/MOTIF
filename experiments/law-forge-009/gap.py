@@ -60,10 +60,14 @@ def diagnose(cartridge):
         raise AssertionError("Snapshot not allowed empty")
     # Removing any row would leave at least one candidate if a minimal
     # unsatisfiable core is reached. Deterministic order ensures reproducibility.
-    for sample in tuple(core):
-        trial = [row for row in core if row != sample]
-        if trial and not fitted_indices(trial):
-            core = trial
+    changed = True
+    while changed:
+        changed = False
+        for sample in tuple(core):
+            trial = [row for row in core if row != sample]
+            if trial and not fitted_indices(trial):
+                core = trial
+                changed = True
     assert not fitted_indices(core)
     assert all(fitted_indices([row for row in core if row != witness])
                for witness in core)
