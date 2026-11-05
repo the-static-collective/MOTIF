@@ -45,7 +45,7 @@ p {margin:7px 0 14px}
 .note {padding:14px 17px;background:#f0dfd3;border-left:3px solid var(--red);font-size:14px;line-height:1.55}
 .workflow {margin-top:24px;border-block:1px solid var(--line);padding-block:15px;
   font:12px/1.8 ui-monospace,monospace;letter-spacing:.035em;color:var(--muted)}
-.metrics {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:22px 0 24px}
+.metrics {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:22px 0 24px}
 .metric {background:#e9e1ce;border:1px solid #cbc2ae;padding:12px;min-height:96px}
 .metric strong {display:block;font-size:clamp(22px,3.8vw,38px);font-weight:400}
 .metric span {font-size:10px;color:var(--muted);text-transform:uppercase;line-height:1.25;display:block}
@@ -119,7 +119,7 @@ footer p {font:11px/1.7 ui-monospace,monospace;color:var(--muted);
   <div class="stamp">FIELD EXPERIMENT<br>NOT A VERIFIED<br>EXCHANGE</div>
 </div>
 <div id="mode" class="mode">REAL-WORLD OPERATOR INTAKE · REPORTS ARE UNVERIFIED</div>
-<div class="workflow">RECORD → FIND A POSSIBLE BRIDGE → ASK DIRECTLY → OBSERVE → RECORD A RESULT · NEVER AUTO-CONTACT</div>
+<div class="workflow">RECORD → FIND A POSSIBLE BRIDGE → FREEZE PROPOSAL → ASK DIRECTLY → OBSERVE → RECORD A RESULT · NEVER AUTO-CONTACT</div>
 </header>
 <main>
 <div class="note"><strong>Privacy and evidence boundary:</strong> This page has no network connection, accounts, automatic matching service or local autosave. It retains entries only in this tab until you explicitly export a JSON file. Use <strong>aliases and broad areas</strong>, not names, addresses, phone numbers, medical details, or information about children. Reported sharing willingness does not establish verified consent. Check in person before any introduction or handoff.</div>
@@ -127,13 +127,15 @@ footer p {font:11px/1.7 ui-monospace,monospace;color:var(--muted);
   <h2>Field position</h2>
   <div class="metrics" aria-label="Noncausal report counts">
     <div class="metric"><strong id="metric-cards">0</strong><span>Cards recorded</span></div>
+    <div class="metric"><strong id="metric-proposed">0</strong><span>Prospective proposals</span></div>
+    <div class="metric"><strong id="metric-unresolved">0</strong><span>Proposals without follow-up</span></div>
     <div class="metric"><strong id="metric-pairs">0</strong><span>Open suggestions</span></div>
     <div class="metric"><strong id="metric-handoffs">0</strong><span>Handoffs reported</span></div>
     <div class="metric"><strong id="metric-benefit">0</strong><span>Benefit reports</span></div>
     <div class="metric"><strong id="metric-no-benefit">0</strong><span>No-benefit reports</span></div>
     <div class="metric"><strong id="metric-unknown">0</strong><span>Unknown follow-ups</span></div>
   </div>
-  <p class="small">Counts reflect operator-entered reports, not independently verified effects, causal impact, or total community need. No answer is not a failure.</p>
+  <p class="small">Prospective proposals are only counted after the operator explicitly records them before a follow-up. Counts reflect entered reports, not independently verified effects, causal impact, or total community need. No answer is not a failure.</p>
 </section>
 <section class="paper">
  <div class="eyebrow">LOCAL FIELD JOURNAL · EXPORT TO RETAIN</div>
