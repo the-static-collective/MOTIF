@@ -1,0 +1,46 @@
+{
+  "experiment": "MOTIF-004",
+  "scope": "synthetic counterfactual only",
+  "induced_operator": "verb-b2643a06ecc5",
+  "train_attempts": 8,
+  "held_out_attempts": 4,
+  "scar_no_change": 4,
+  "revision": {
+    "status": "CONTEXT_CORRELATION",
+    "features": [
+      [
+        "part",
+        "?0",
+        "brake_kit"
+      ]
+    ],
+    "supports_success": 4,
+    "supports_no_effect": 4
+  },
+  "naive_correct": 2,
+  "revised_correct": 4,
+  "abstentions": 0,
+  "heldout_predictions": [
+    {
+      "id": "holdout:1:0",
+      "prediction": "EFFECT_HYPOTHESIS",
+      "observed": "EFFECT_HYPOTHESIS"
+    },
+    {
+      "id": "holdout:1:1",
+      "prediction": "EFFECT_HYPOTHESIS",
+      "observed": "EFFECT_HYPOTHESIS"
+    },
+    {
+      "id": "holdout:0:0",
+      "prediction": "NO_EFFECT_RISK",
+      "observed": "NO_EFFECT_RISK"
+    },
+    {
+      "id": "holdout:0:1",
+      "prediction": "NO_EFFECT_RISK",
+      "observed": "NO_EFFECT_RISK"
+    }
+  ],
+  "training_journal_unchanged": true
+}
