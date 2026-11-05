@@ -70,6 +70,8 @@ The studies run offline with Python standard library and do not use, modify,
 or authorize a real-world actor, external service, or project admission gate.
 The native Dogram bridge is tested in CI against a pinned Dogram checkout.
 
+- **[BRIDGE-001 — The First Door Foundry](research/missing-bridge/DESIGN.md):** Generate candidate cooperation steps from observed synthetic capabilities, scoped offers and explicit recipient acceptance. Recompute actions after every hypothetical step to discover emergent two-person relays; preserve all others' opportunities. Produce a self-contained offline field desk with held JSON packets. Native Dogram measures bounded compositional surplus and lost distinctions. **Draft research, not a live coordination service.**
+
 ## Research laws
 
 - **Hypothesis ≠ observation.** Simulated futures cannot amend observed history.
