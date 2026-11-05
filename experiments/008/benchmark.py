@@ -13,14 +13,14 @@ import math
 import random
 from statistics import mean
 
-from oracle import FAMILIES, SUPPORTED, COUNTS, trial, paired_intervention
+from oracle import FAMILIES, SUPPORTED, COUNTS, spec_for, trial, paired_intervention
 from learner import (features, observed_outcome, balanced_accuracy,
                      fit_relational, fit_tree, majority)
 
 SEEDS = (11, 23, 37, 41, 59)
 # Frozen benchmark definition. Do not change after looking at test results
 # without creating a new benchmark version and recording the change.
-BENCHMARK_VERSION = "unknown-world-v1"
+BENCHMARK_VERSION = "unknown-world-v2"
 
 
 def score(truth, predictions):
@@ -115,13 +115,18 @@ def summarize(records: list[dict]) -> dict:
                 x["evaluated"] for x in intervened),
         }
     covered = [x for x in records if x["relational_test_balanced"] is not None]
+    all_specs = [spec_for(fam, seed) for fam in FAMILIES for seed in SEEDS]
+    all_vocabulary = [name for spec in all_specs for name in spec.vocabulary]
+    disjoint = len(all_vocabulary) == len(set(all_vocabulary))
+    if not disjoint:
+        raise ValueError("Synthetic world vocabularies unexpectedly overlap")
     support = [x for x in records if x["family"] in SUPPORTED]
     unsupported = [x for x in records if x["family"] not in SUPPORTED]
     return {
         "scope": "SYNTHETIC_GRAPHS_ONLY",
         "version": BENCHMARK_VERSION,
         "worlds": len(records),
-        "vocabulary_disjoint_per_world": True,
+        "vocabulary_disjoint_per_world": disjoint,
         "seeds": list(SEEDS),
         "families": list(FAMILIES),
         "oracle_never_imported_by_learner": True,
