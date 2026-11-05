@@ -38,7 +38,7 @@ export async function runNativeBridge({
   const measuredProbe = await executeNativeProbe(mementoRoot,source.nursery,proposedProbe,{
     authorizeSyntheticProbe:true,
   });
-  const understory = await checkUnderstory(mementoRoot,result);
+  const understory = await checkUnderstory(mementoRoot,result,measuredProbe.receipt);
   return {
     schema:'motif019.memento-understory/v0',
     sourceModules:'DIRECT_RUNTIME_IMPORT_FROM_MEMENTO',
