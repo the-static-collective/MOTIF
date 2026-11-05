@@ -15,7 +15,7 @@ from typing import Callable, Mapping, Sequence
 import sys
 
 # Reuse the reviewed MOTIF-015 synthetic parallel dispatcher and hypothesis type.
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "015"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "015"))  # do not shadow local demo.py
 from multiplex import Avenue, Hypothesis, Plan as BatchPlan, best_answer, execute_synthetic  # noqa: E402
 
 
