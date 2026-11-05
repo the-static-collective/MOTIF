@@ -1,7 +1,7 @@
 # MOTIF — THE OUTERMOST CIRCLE
 ## A research program for native intelligence built from consequential change
 
-Status: **speculative architecture** with six bounded, standard-library, synthetic experiments (001–006). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
+Status: **speculative architecture** with seven bounded, standard-library, synthetic experiments (001–007). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
 
 ### The fundamental wager
 
@@ -113,7 +113,7 @@ MOTIF-003 also counts remaining reachable simulated states (bounded, with trunca
 | 004 — Causal scars | Why did a prediction fail? | retain contradictory/no-op attempts; abstain or revise | fails under intervention |
 | 005 — New ontology | Which missing relational *type* improves predictions? | propose typed predicates, measure held-out compression | no improvement over simpler vocabulary |
 | 006 — Recursive capability | Can the system propose a new testable tool or composite operator? | **Composite macro induction and source-checked deterministic replay implemented**; true new executable tools remain future research | missing primitive guards, source tampering or claimed new external authority |
-| 007 — Federated inheritance | Can one world transfer useful motifs to another *without transferring its private states*? | scoped signed schema exchange, independently admissible | leakage, attribution loss, authority confusion |
+| 007 — Federated inheritance | Can one world transfer useful motifs to another *without transferring its private states*? | **Unsigned, checksummed portable operator closure, local hold/review, and two-way synthetic inheritance implemented**. Authentication, secure private transfer and transitive revocation remain open. | leakage, attribution loss, authority confusion |
 
 Further horizons: continuous quantities, physical uncertainty, multiagent preferences, uncertain event duration, energy budgets, local processors, and transferable multimodal perception. None is implemented merely by documenting it.
 
