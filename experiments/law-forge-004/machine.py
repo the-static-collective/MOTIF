@@ -91,9 +91,8 @@ def fold_candidates(observations):
     source = evidence_id(observations)
     return tuple(
         model for outputs in product((0, 1), repeat=4)
-        if all((model.predict(w) == y for w, y in seen.items()
-                if w))
         for model in (FoldModel(tuple(outputs), source),)
+        if all(model.predict(w) == y for w, y in seen.items() if w)
     )
 
 
