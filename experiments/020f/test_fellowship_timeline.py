@@ -55,7 +55,7 @@ class FellowshipTimelineTests(unittest.TestCase):
     def test_no_defensible_welfare_numbers_forces_hold_not_fabricated_priority(self):
         x = self.cases["no_defensible_quantitative_assumptions"]
         self.assertEqual(x["status"], "HOLD_NO_TEMPORAL_ASSUMPTIONS")
-        self.assertEqual(x["first_batch_now"], [])
+        self.assertEqual(x["first_batch_now"], ())
         self.assertEqual(x["optimal_modeled_value"], 0)
 
     def test_grant_deadlines_dont_confuse_fellowship_internal_checkpoints(self):
