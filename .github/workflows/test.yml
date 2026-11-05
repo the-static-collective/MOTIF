@@ -37,6 +37,9 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 027F source-to-question relevance and 3-node native meta-search
+        working-directory: experiments/027f
+        run: python -m unittest -v test_nodes.py
       - name: Test 026F native-first semantic relay and posthoc relevance diagnostic
         working-directory: experiments/026f
         run: |
