@@ -380,6 +380,12 @@ class Receiver:
         if checksum not in self.admitted:
             raise HOLD("Not locally admitted for simulation")
         portable = self.pending[checksum]
+        # Review admitted the *exact* pinned bytes, not mutable registry names.
+        # Check every imported dependency before every simulation invocation.
+        for name, source in portable.catalog.items():
+            current = self.local_catalog.get(name)
+            if current is None or signature(current) != signature(source):
+                raise HOLD("Admitted source has drifted from reviewed artifact")
         return checked_apply(world, portable.root, roles, self.local_catalog)
 
     def revoke(self, checksum: str, reviewer_claim: str) -> LocalDecision:
