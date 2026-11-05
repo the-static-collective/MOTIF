@@ -243,6 +243,22 @@ def assess(records, validation, controls) -> Assessment:
                       "New observed relation predicts validation, not proven causal")
 
 
+def router_checksum(body: dict) -> str:
+    """Canonicalize nested fit numbers before integrity hashing.
+
+    JSON.stringify in JS emits 1.0 as 1. Derived-router artifacts must
+    roundtrip through independent JSON writers without losing integrity.
+    This is a content checksum, NEVER a signature or author identity proof.
+    """
+    normalized = dict(body)
+    for key in ("absent_tree", "present_tree"):
+        nested = normalized.get(key)
+        if isinstance(nested, dict) and "fit_balanced" in nested:
+            normalized[key] = dict(nested,
+                                   fit_balanced=float(nested["fit_balanced"]))
+    return checksum(normalized)
+
+
 def export_extension(extension: Extension) -> str:
     """Portable *prediction-only* concept router; no underlying graph history.
 
@@ -262,7 +278,7 @@ def export_extension(extension: Extension) -> str:
         "source_count": extension.source_count,
         "validation_count": extension.validation_count,
     }
-    packet = dict(body, checksum_sha256=checksum(body))
+    packet = dict(body, checksum_sha256=router_checksum(body))
     raw = json.dumps(packet, sort_keys=True, indent=2) + "\n"
     if len(raw.encode("utf-8")) > 32000:
         raise HOLD("Derived-router package too large")
@@ -288,7 +304,7 @@ def decode_extension(raw: str) -> Extension:
             or obj["status"] != "PROPOSED_NOT_ADMITTED"):
         raise HOLD("Unknown derived-router schema/status")
     body = {k: v for k, v in obj.items() if k != "checksum_sha256"}
-    if obj["checksum_sha256"] != checksum(body):
+    if obj["checksum_sha256"] != router_checksum(body):
         raise HOLD("Derived-router checksum mismatch")
     relation = obj["relation"]
     names = obj["control_names"]
