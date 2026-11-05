@@ -1,0 +1,136 @@
+name: MOTIF Map 002 — native multi-organ investigation
+
+on:
+  push:
+    branches: [research/map-of-maps-002-native-inquiry-court]
+  pull_request:
+    paths:
+      - 'fieldwork/map-of-maps-002/**'
+      - 'fieldwork/map-of-maps-001/**'
+      - '.github/workflows/map-of-maps-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-pinned-native-court:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run offline native-court adversarial tests
+        run: python3 -m unittest discover -s fieldwork/map-of-maps-002 -p 'test_*.py' -v
+      - name: Git Atlas exact original source cut
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/What-is-the-static-collective-
+          ref: 7de5e95a1dc04ead1790d91dd6326430008d954f
+          path: sources/atlas
+          persist-credentials: false
+      - name: planZ public attention original
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/planZ
+          ref: 5b6df7fb2a3a0c57d0fff8381108589ec2765a94
+          path: sources/planz
+          persist-credentials: false
+      - name: GRAFT donor registry original
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 265fd538266a742d033ba2f5b408a78610d0a75c
+          path: sources/graft
+          persist-credentials: false
+      - name: CANNON multi-repo question field original
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc
+          path: sources/cannon
+          persist-credentials: false
+      - name: ALEX original evidence-path evaluator
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/ALEX.2
+          ref: 515aea5ac73873300f87dcef2de7492e6e1d58d4
+          path: sources/alex
+          persist-credentials: false
+      - name: planZ original classical shortest-path planner
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/planZ
+          ref: b4c954c628991acc9d9f41cd42c2b1951bc5855c
+          path: sources/planz-native
+          persist-credentials: false
+      - name: planZ original recursive proposal type
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/planZ
+          ref: 64ed8a376acd63a5d630e1649b6001fb3b3251de
+          path: sources/planz-proposal
+          persist-credentials: false
+      - name: Dogram independent graph/calculation runtime
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: sources/dogram
+          persist-credentials: false
+      - name: GRAFT original public source-scout runtime
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: aa3984d2dbdf949996639b029ca0d95ab6c290e5
+          path: sources/graft-native
+          persist-credentials: false
+      - name: PlayDeck original performance receipt and native type validator sources
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/playdeck
+          ref: a7cf718421e767fd382a01894063c3eeba3d2930
+          path: sources/playdeck
+          persist-credentials: false
+      - name: Run actual MOTIF 001 → native ALEX, planZ, Dogram and GRAFT
+        run: |
+          python3 fieldwork/map-of-maps-002/investigate.py --source-root sources > /tmp/native-court.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/native-court.json'))
+          assert x['status']=='EXECUTED_NATIVE_READ_ONLY_RESEARCH_HELD'
+          assert len(x['original_source_owner_pins'])>=8
+          assert set(x['native_organs'])=={'ALEX','planZ','Dogram','GRAFT'}
+          assert x['native_organs']['ALEX']['attention_only_reason']=='ATTENTION_NOT_SUPPORT'
+          assert x['native_organs']['Dogram']['forward_reachable_before'] is False
+          assert x['native_organs']['Dogram']['forward_reachable_after_counterfactual_edge'] is True
+          assert x['native_organs']['GRAFT']['actual_network_gets']==0
+          assert x['native_organs']['planZ']['external_actions']==0
+          assert x['original_playdeck_contract_inspection']['actual_playdeck_validator_executed'] is False
+          assert x['actual_adapter_compatibility_proved'] is False
+          assert x['external_actions_performed'] is False
+          print('FIRST ACTUAL CROSS-ORGAN INQUIRY RESULT')
+          print(json.dumps({
+            'status':x['status'],
+            'native_owners':list(x['native_organs']),
+            'native_plan':x['native_organs']['planZ'],
+            'ALEX':x['native_organs']['ALEX'],
+            'Dogram':x['native_organs']['Dogram'],
+            'GRAFT':x['native_organs']['GRAFT'],
+            'original_type_check':x['original_playdeck_contract_inspection'],
+            'next_experiment':x['next_experiment']
+          },indent=2))
+          PY
+      - name: Retain actual source-bound native-court result
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-map-of-maps-002-native-investigation
+          path: /tmp/native-court.json
+          retention-days: 30
