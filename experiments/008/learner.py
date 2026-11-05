@@ -73,8 +73,14 @@ def features(world: frozenset[Fact], roles: tuple[str, str],
 
 def observed_outcome(episode) -> bool:
     """Only use independent before/after graphs, not an oracle label."""
-    if getattr(episode, "provenance", None) != "SYNTHETIC_ORACLE":
-        raise ValueError("MOTIF-008 accepts only declared synthetic observations")
+    # The later controlled-intervention simulator uses two additional
+    # explicit synthetic provenance types. Do not relabel these observations
+    # as historical 008 oracle data or admit arbitrary "REAL" claims.
+    if getattr(episode, "provenance", None) not in (
+        "SYNTHETIC_ORACLE", "SYNTHETIC_NATURAL",
+        "SYNTHETIC_INTERVENTION"
+    ):
+        raise ValueError("MOTIF accepts only declared synthetic observations")
     if not (hasattr(episode, "before") and hasattr(episode, "observed_after")
             and hasattr(episode, "roles")):
         raise ValueError("Missing before/after evidence")
