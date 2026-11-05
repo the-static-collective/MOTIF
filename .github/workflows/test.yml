@@ -19,6 +19,12 @@ jobs:
       - name: Test 003
         working-directory: experiments/003
         run: python -m unittest -v test_affordance.py
+      - name: Test 004
+        working-directory: experiments/004
+        run: python -m unittest -v test_scar.py
+      - name: Reproduce 004
+        working-directory: experiments/004
+        run: python scar.py
       - name: Reproduce 003
         working-directory: experiments/003
         run: python affordance.py
