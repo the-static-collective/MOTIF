@@ -36,7 +36,11 @@ jobs:
         run: python -m unittest -v test_unknown.py
       - name: Reproduce 008
         working-directory: experiments/008
-        run: python benchmark.py > /tmp/motif008.json && python -c "import json; print(json.load(open('/tmp/motif008.json'))['summary'])"
+        run: |
+          python benchmark.py > /tmp/motif008.json
+          echo '__MOTIF008_RESULT_START__'
+          cat /tmp/motif008.json
+          echo '__MOTIF008_RESULT_END__'
       - name: Reproduce 007
         working-directory: experiments/007
         run: python inheritance.py
