@@ -31,8 +31,11 @@ class LawForgeTests(unittest.TestCase):
         self.assertNotEqual(probe.history[-1][0], probe.history[-1][1])
         self.assertEqual(Probe.from_packet(probe.packet()), probe)
         self.assertIsNone(propose(hypotheses(training), training, budget=0))
+        # Exhaust both informative off-diagonal histories: genuine refusal.
+        prohibited = (Probe(((0, 1),), (1, 1)),
+                      Probe(((1, 0),), (1, 1)))
         self.assertIsNone(propose(hypotheses(training), training,
-                                  budget=1, prohibited=(probe,)) if False else None)
+                                  budget=1, prohibited=prohibited))
 
     def test_unauthorized_packets_fail_closed(self):
         p = Probe(((0, 1),), (1, 1)).packet()
