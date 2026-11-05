@@ -1,0 +1,38 @@
+name: MOTIF-023 Open Question Field
+on:
+  push:
+    branches:
+      - research/023-open-question-field
+  pull_request:
+    paths:
+      - 'experiments/023/**'
+      - '.github/workflows/motif023.yml'
+permissions:
+  contents: read
+jobs:
+  live-feedback-source-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original MOTIF-021 and MOTIF-022 source-owned regression suites
+        run: node --test experiments/021/test_cross_organ.mjs experiments/022/test_next_question.mjs
+      - name: New source selection, classical feedback, and executable module tests
+        run: node --test experiments/023/test_open_field.mjs
+      - name: TWO REAL read-only public GitHub research rounds with new compiled capabilities
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node experiments/023/open_field.mjs > motif023-live-open-question.json
+      - name: Require genuine new public source evidence, two plans and two tested executable modules
+        run: |
+          node -e "const r=require('./motif023-live-open-question.json').experiment; if(r.status!=='TWO_LIVE_PUBLIC_INQUIRIES_AND_TWO_LOCAL_CAPABILITIES'||!r.actually_found_new_public_source_collection||!r.first.packet.sources.length||!r.second.packet.sources.length||!r.first.candidate.generated_source_sha256||!r.second.candidate.generated_source_sha256||r.external_actions!==0||r.production_installed!==false)process.exit(1)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif023-live-public-source-feedback-research
+          path: motif023-live-open-question.json
+          retention-days: 14
