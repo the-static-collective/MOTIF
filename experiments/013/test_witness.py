@@ -285,7 +285,8 @@ class ProbabilisticWitnessTests(unittest.TestCase):
         spec.loader.exec_module(instance)
         saved=json.loads((Path(__file__).parent/
                           "example-probabilistic-witness.json").read_text())
-        self.assertEqual(saved,instance.demonstration())
+        # JSON roundtrip normalizes tuple-valued Monte Carlo intervals.
+        self.assertEqual(saved,json.loads(json.dumps(instance.demonstration())))
         cases=saved["examples"]
         self.assertEqual(cases["unsupported_rule_recognized"][
             "next_command_probability_and_release_decision"]["status"],
