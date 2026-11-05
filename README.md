@@ -72,6 +72,8 @@ The native Dogram bridge is tested in CI against a pinned Dogram checkout.
 
 - **[BRIDGE-001 — The First Door Foundry](research/missing-bridge/DESIGN.md):** Generate candidate cooperation steps from observed synthetic capabilities, scoped offers and explicit recipient acceptance. Recompute actions after every hypothetical step to discover emergent two-person relays; preserve all others' opportunities. Produce a self-contained offline field desk with held JSON packets. Native Dogram measures bounded compositional surplus and lost distinctions. **Draft research, not a live coordination service.**
 
+- **[FIELD-001 — The First Real Witness](research/field-pilot/DESIGN.md):** A separate local-first operator intake for *real but unverified* OFFER/NEED reports, consent-gated exact matching, prospective candidate freezes before follow-up, append-only witness reports, and one-file offline Field Witness desk. An optional **local** Dogram calculation measures distinctions lost when typed witness histories are collapsed into outcome labels; it does not judge truth or causality. This remains a draft experimental pilot, not a public exchange.
+
 ## Research laws
 
 - **Hypothesis ≠ observation.** Simulated futures cannot amend observed history.
