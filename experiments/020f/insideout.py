@@ -217,9 +217,13 @@ class InsideOutBox:
         soon_lost = tuple(
             x.plan_id for x in self.opportunities
             if x.last_start_tick == 0 and x.expected_net(0) > 0
+            and x.attention_units <= self.attention_budget
             and not self._actor_held(x)
         )
-        first_batch = next((step.plans for step in optimal.policy if step.plans), ())
+        # "Now" is tick zero. Never label a future scheduled action as the
+        # immediate recommendation when the optimal policy first chooses WAIT.
+        first_batch = (optimal.policy[0].plans if optimal.policy
+                       and optimal.policy[0].tick == 0 else ())
         first_effects: dict[str, float] = {}
         for x in self.opportunities:
             if x.plan_id in first_batch:
