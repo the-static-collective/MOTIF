@@ -1,0 +1,61 @@
+{
+  "authority": false,
+  "automatic_promotion": false,
+  "difference_raw_minus_adjusted_mae_c": -0.0126,
+  "holdout_freezing_c": {
+    "raw_previous_day1": {
+      "events": 0,
+      "false_alarms": 0,
+      "misses": 0
+    },
+    "train_bias_adjusted": {
+      "events": 0,
+      "false_alarms": 0,
+      "misses": 0
+    }
+  },
+  "holdout_mae_c": {
+    "raw_previous_day1": 1.6,
+    "train_bias_adjusted": 1.6126,
+    "train_only_constant": 6.5692
+  },
+  "improvement_disposition": "HOLD_NO_MEASURED_IMPROVEMENT",
+  "limitations": [
+    "Archived forecasts are retrospectively accessed, not independently captured at issue time.",
+    "Open-Meteo Best Match model selection may vary; the research needs fixed-model runs.",
+    "NWS station values may be missing, delayed, revised or differ from the forecast grid.",
+    "24-hour lead definition is provider documented, not independently verified here.",
+    "Short chronological holdout is insufficient to establish robust calibration.",
+    "A fitted bias correction is a held proposal, not an automatic operational change."
+  ],
+  "matched_count": 88,
+  "period_end_utc": "2026-11-05T06:00:00Z",
+  "period_start_utc": "2026-11-01T15:00:00Z",
+  "provenance": {
+    "alignment_max_minutes": 25,
+    "forecast_provider": "Open-Meteo Previous Runs 24h lead (Best Match)",
+    "forecast_url": "https://previous-runs-api.open-meteo.com/v1/forecast",
+    "lead_hours": 24,
+    "observation_url": "https://api.weather.gov/stations/KMKT/observations",
+    "public_research_coordinate": [
+      44.22,
+      -93.92
+    ],
+    "reference_temperature_unit": "Celsius",
+    "source_snapshots_sha256": {
+      "forecast": "ae72ee53a82dbc6348a39ca149cdf3c103ff0c5033cb7aab22fdf3f3e21c0dc5",
+      "observations": "55f7d57aff749ce53f8880d5b4223d73ec3ef24c04df4bc74cdf849aa89971c2"
+    },
+    "station_provider": "NWS reported station observation KMKT"
+  },
+  "real_world_effect": false,
+  "schema": "motif.reality-iron-weather/v1",
+  "source_independence": "FORECAST_PRODUCT_AND_REPORTED_STATION_SENSOR; NOT PROVEN FULLY INDEPENDENT",
+  "station": "KMKT",
+  "status": "RETROSPECTIVE_OBSERVATIONAL_COMPARISON",
+  "temperature_bias_train_c": 0.019,
+  "test_begin_utc": "2026-11-04T01:00:00Z",
+  "test_count": 30,
+  "train_count": 58,
+  "train_end_utc": "2026-11-04T00:00:00Z"
+}
