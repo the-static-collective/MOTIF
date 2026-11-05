@@ -161,6 +161,14 @@ class UnknownWorldTests(unittest.TestCase):
         self.assertIn(result["relational_status"],
                       {"PROPOSED", "ABSTAIN_VALIDATION", "ABSTAIN_CLASS_SPARSE"})
 
+    def test_checked_in_evidence_matches_deterministic_reproduction(self):
+        import json
+        from pathlib import Path
+        saved = json.loads((Path(__file__).parent /
+                            "experiment-results.json").read_text())
+        computed = benchmark.run_benchmark(include_detail=True)
+        self.assertEqual(saved, computed)
+
     def test_no_external_action_is_exposed_by_learner(self):
         self.assertFalse(hasattr(learner, "execute"))
         self.assertFalse(hasattr(learner, "dispatch"))
