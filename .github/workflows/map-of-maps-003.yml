@@ -1,0 +1,80 @@
+name: MOTIF Map 003 — source-pinned native Free Graph reason space
+
+on:
+  push:
+    branches: [research/map-of-maps-003-freegraph-reason-space]
+  pull_request:
+    paths:
+      - 'fieldwork/map-of-maps-003/**'
+      - '.github/workflows/map-of-maps-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-freegraph-join:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Checkout original Free Graph owner-native reasoning program
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: a74d018a4ebc7398733e5d98da8f7d389621fb9a
+          path: sources/free-graph
+          persist-credentials: false
+      - name: Check source-owner SHA and original Free Graph source files
+        run: |
+          test "$(git -C sources/free-graph rev-parse HEAD)" = "a74d018a4ebc7398733e5d98da8f7d389621fb9a"
+          test "$(git hash-object sources/free-graph/scripts/reason_space.py)" = "3c00d1f75e20ab6384fb514f4f30f45ae8650bc2"
+          test "$(git hash-object sources/free-graph/scripts/motif_reason_bridge.py)" = "21e9dbc48edaa1118db15fae6ecf46cc7902e495"
+          test "$(git hash-object fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json)" = "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+      - name: Negative controls — original source pin, scope, permissions and report identity
+        run: python3 -m unittest discover -s fieldwork/map-of-maps-003 -p 'test_*.py' -v
+      - name: MOTIF actually asks native Free Graph for a structural next question
+        run: |
+          python3 fieldwork/map-of-maps-003/ask_freegraph.py \
+            --freegraph-root sources/free-graph \
+            --output /tmp/motif-freegraph-003.json
+          python3 - <<'PY'
+          import json
+          result=json.load(open('/tmp/motif-freegraph-003.json'))
+          assert result['schema']=='motif.map-003-freegraph-reason/v1'
+          assert result['status']=='SOURCE_PINNED_FREEGRAPH_REVIEW_ONLY'
+          assert result['reasoning_graph']['count']=={'sources':3,'nodes':13,'links':17}
+          assert len(set(result['reasoning_graph']['packet_ids'].values()))==3
+          p=result['source_owned_graph_pressure']
+          assert p['status']=='STRUCTURAL_QUESTIONS_NOT_DECISIONS'
+          assert p['source_packet_id']==result['reasoning_graph']['packet_ids']['all']
+          assert len(p['candidates'])==1
+          assert p['candidates'][0]['recorded_refusals']==2
+          assert p['candidates'][0]['recorded_unresolved_bearings']==3
+          assert p['candidates'][0]['recorded_supports']==0
+          assert p['candidates'][0]['gap_code']=='NO_RECORDED_SUPPORTING_SPECIMEN'
+          assert p['candidates'][0]['tool_dispatch_authorized'] is False
+          assert result['actual_external_actions']==0
+          assert result['generic_tool_dispatch_implemented'] is False
+          print('MOTIF ASKING FREE GRAPH, ORIGINAL PROGRAM:')
+          print(json.dumps({
+           'source_commit':result['source_commit'],
+           'source_git_blob_count':len(result['verified_freegraph_blobs']),
+           'original_historical_report_blob':result['historical_motif_receipt_blob'],
+           'packet_ids':result['reasoning_graph']['packet_ids'],
+           'counts':result['reasoning_graph']['count'],
+           'pressure':p,
+           'external_actions':result['actual_external_actions']
+          },indent=2))
+          PY
+      - name: Preserve actual source-verified Free Graph reasoning answer
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-map003-actual-freegraph-reasoning-answer
+          path: /tmp/motif-freegraph-003.json
+          retention-days: 30
