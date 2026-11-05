@@ -165,6 +165,22 @@ class FederatedInheritanceTests(unittest.TestCase):
         with self.assertRaisesRegex(HOLD, "overwrite"):
             self.receiver.offer(self.artifact)
 
+    def test_post_admission_local_source_drift_is_held(self):
+        ticket, _, _ = self.accept()
+        repair = next(v for v in self.primitives.values()
+                      if F("usable", "?0") in v.adds)
+        self.receiver.local_catalog[repair.id] = replace(
+            repair, adds=frozenset({F("fabricated", "?0")}))
+        with self.assertRaisesRegex(HOLD, "drifted"):
+            self.receiver.simulate_admitted(ticket, self.world, self.roles)
+
+    def test_reviewed_macro_body_cannot_be_replaced_after_admission(self):
+        ticket, _, _ = self.accept()
+        self.receiver.local_catalog[self.outer.id] = replace(
+            self.outer, adds=self.outer.adds | {F("fabricated", "?2")})
+        with self.assertRaisesRegex(HOLD, "drifted"):
+            self.receiver.simulate_admitted(ticket, self.world, self.roles)
+
     def test_wrong_local_roles_do_not_grant_ability(self):
         ticket = self.receiver.offer(self.artifact)
         with self.assertRaises(HOLD):
