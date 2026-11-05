@@ -28,6 +28,12 @@ jobs:
       - name: Test 006
         working-directory: experiments/006
         run: python -m unittest -v test_composition.py
+      - name: Test 007
+        working-directory: experiments/007
+        run: python -m unittest -v test_inheritance.py
+      - name: Reproduce 007
+        working-directory: experiments/007
+        run: python inheritance.py
       - name: Reproduce 006
         working-directory: experiments/006
         run: python composition.py
