@@ -15,7 +15,7 @@ import re
 from typing import Any
 
 SCHEMA = "motif.field-log/v0"
-ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,79}$")
+ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$")
 TAG = re.compile(r"^[a-z0-9][a-z0-9 _-]{0,39}$")
 ORIGINS = ("owner_self_report", "operator_heard_owner", "third_party_unverified")
 KINDS = ("offer", "need")
@@ -164,7 +164,10 @@ def candidate_pairs(log: object, now: str) -> list[dict[str, Any]]:
             mid = match_id(offer, need)
             history = [e for e in data["events"]
                        if e["subject"] == mid and _utc(e["occurred_at"]) <= time]
-            types = {e["kind"] for e in history}
+            types = {e["kind"] for e in history
+                     if e["source"] != "third_party_unverified"
+                     or e["kind"] not in ("provider_yes_reported",
+                                         "requester_yes_reported")}
             if "provider_no_reported" in types or "requester_no_reported" in types:
                 disposition = "CLOSED_DECLINED_REPORTED"
             elif "benefit_reported" in types and "no_benefit_reported" in types:
@@ -211,7 +214,8 @@ def summarize(log: object, now: str) -> dict[str, Any]:
         "source": "operator-entered reports; origin and timing unverified",
         "eligible_pairs": len(rows),
         "active_candidate_pairs": sum(
-            p["disposition"] not in ("CLOSED_DECLINED_REPORTED",)
+            p["disposition"] in ("HOLD_CONFIRM_DIRECTLY",
+                                 "DUAL_YES_REPORTED_NOT_VERIFIED")
             for p in rows
         ),
         "dispositions": dict(sorted(Counter(p["disposition"]
