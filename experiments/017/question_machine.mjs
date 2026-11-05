@@ -268,6 +268,50 @@ export function observe(trial,queries,seed=trial.evaluator_only.seed){
       synthetic_only:true};
  });
 }
+// Independent post-freeze toy evaluation, not a source-training loop.
+// Fixed detector, fixed synthetic calibration and frozen source menu.
+// Scores hypothetical recommendations; no method is ever applied.
+export function adversarialHoldout(desk,episodes=240){
+ if(!Number.isSafeInteger(episodes)||episodes<20||episodes>1000)
+  throw Error('HOLD_INVALID_EVALUATION_COUNT');
+ const result={};
+ for(const regime of ['stable','unannounced_inversion']){
+   let losses=[],wrong=0,holds=0,candidate=0;
+   for(let i=0;i<episodes;i++){
+     const theta=i%2===0?'expected':'robust';
+     const trial=syntheticTrial(theta,regime,104729+i*97);
+     const w=trial.public_descriptor;
+     const q=propose(w,desk);
+     const requests=q.proposed_questions.map(x=>x.source_id);
+     const reports=observe(trial,requests,104729+i*97);
+     const after=propose(w,desk,reports);
+     const choice=after.candidate_method;
+     const totalCost=requests.reduce((acc,id)=>
+       acc+w.sources.find(x=>x.id===id).cost,0);
+     const stopped=choice===null||choice==='HOLD';
+     const loss=stopped?w.hold_cost:
+       (choice===('PROPOSE_'+theta.toUpperCase())?0:w.wrong_method_cost);
+     if(stopped)holds++;
+     else{
+       candidate++;
+       if(loss>0)wrong++;
+     }
+     losses.push(loss+totalCost);
+   }
+   result[regime]={
+     episodes,
+     hypothetical_method_candidates:candidate,
+     held_for_uncertainty:holds,
+     wrong_hypothetical_candidates:wrong,
+     mean_realized_loss_including_probe_cost:
+       losses.reduce((a,b)=>a+b,0)/episodes,
+     always_hold_comparator_loss:exampleWorld().hold_cost,
+     true_world_regime_exposed_to_planner:false
+   };
+ }
+ return result;
+}
+
 export function demonstration(){
  const desk=questionDesk(),parents=prepareMethodCartridges();
  const scenarios=Object.fromEntries(['pair','solo','expensive','copies','anti'].map(kind=>{
@@ -295,7 +339,8 @@ export function demonstration(){
     robust:parents.robust.checksum_sha256},
   genuine_organs:{question_box:desk.question_receipt.schema,
     dogram:desk.dogram_receipt.schema},
-  scenarios,first_question:initial,fictional_reports:reports,
+  scenarios,holdout_source_shift:adversarialHoldout(desk),
+  first_question:initial,fictional_reports:reports,
   after_reports:followed,
   unannounced_inversion:{reports:inverted,response:adversarial},
   national_treasure_gap:{status:held.status,
