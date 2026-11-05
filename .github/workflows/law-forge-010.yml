@@ -53,6 +53,7 @@ jobs:
           python - <<'PY'
           import sys,json
           sys.path.insert(0, "experiments/law-forge-010")
+          sys.path.insert(1, "experiments/law-forge-009")
           from stranger_owner import Stranger
           from trial import identification
           from falsifier import AuditLedger
