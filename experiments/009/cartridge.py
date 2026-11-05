@@ -296,8 +296,14 @@ class CartridgeBay:
         if identifier not in self.admitted:
             raise HOLD("Cartridge not locally admitted")
         car = self.admitted[identifier]
-        if tuple(sorted({f[0] for f in before})) != car.vocab:
-            raise HOLD("Current graph uses unreviewed relation vocabulary")
+        present = {f[0] for f in before}
+        # Closed-world Boolean feature semantics: a port relation may be absent
+        # because its value is FALSE. Requiring EVERY vocabulary item to be
+        # present incorrectly refused valid negative examples.
+        expected_structure = {"role_actor", "role_target", "pending"}
+        if (not present.issubset(car.vocab)
+                or not expected_structure.issubset(present)):
+            raise HOLD("Current graph uses unreviewed or incomplete schema")
         return car.explain(features(before, roles))
 
     def revoke(self, identifier, reviewer):
