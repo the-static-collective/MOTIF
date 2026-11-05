@@ -1,0 +1,85 @@
+name: MOTIF Law Forge 009 — Shannon Entropy Cartridge & Stranger
+
+on:
+  push:
+    branches:
+      - research/law-forge-009-stranger-entropy-cartridge-20261105
+    paths:
+      - 'experiments/law-forge-009/**'
+      - '.github/workflows/law-forge-009.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-009/**'
+      - '.github/workflows/law-forge-009.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  entropy-stranger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify inherited Law Forge 001–008 regression tests
+        run: |
+          python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-006 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-007 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-008 -p 'test_*.py' -v
+      - name: Verify genuine Shannon entropy, portable cartridge and stranger source tests
+        run: python -m unittest discover -s experiments/law-forge-009 -p 'test_*.py' -v
+      - name: Generate all frozen classical controls and review receipts
+        run: |
+          mkdir -p law-forge-009-receipts
+          python experiments/law-forge-009/trial.py > law-forge-009-receipts/benchmark.json
+          python -m json.tool law-forge-009-receipts/benchmark.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("law-forge-009-receipts/benchmark.json"))
+          print(json.dumps({
+            "development":r["development"],
+            "evaluation":r["evaluation"],
+            "decision":r["frozen_selection"],
+            "out_of_grammar_example":r["examples"]["four_bit_parity"]["grammar_gap"]
+          }, indent=2))
+          PY
+      - name: Produce independently inspectable executable reason-cartridge and one proposed question
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0,"experiments/law-forge-009")
+          from stranger_owner import Stranger
+          from entropy_cartridge import EntropyCartridge
+          from desk import SCHEMA,dispatch
+          source=Stranger("two_bit_xor",3)
+          model=EntropyCartridge(source.contract,source.initial())
+          open("law-forge-009-receipts/portable-entropy-cartridge.json","w").write(
+            json.dumps(model.packet(),sort_keys=True,indent=2)+"\n")
+          question=dispatch({
+            "schema":SCHEMA, "action":"propose",
+            "cartridge":model.packet(),
+            "catalog":[c.packet() for c in source.catalog()],
+            "remaining_budget":24
+          })
+          assert question["status"]=="PROPOSE_ONLY"
+          assert question["proposal"]["owner_must_execute"] is True
+          open("law-forge-009-receipts/source-owned-question-proposal.json","w").write(
+            json.dumps(question,sort_keys=True,indent=2)+"\n")
+          PY
+      - name: Retain source-owned observations, gaps and complete benchmark
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-009-entropy-stranger-receipts
+          path: law-forge-009-receipts/
+          retention-days: 30
