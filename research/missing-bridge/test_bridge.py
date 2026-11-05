@@ -162,6 +162,66 @@ class BridgeTests(unittest.TestCase):
                   self.acceptances, self.goal)
         self.assertEqual(a, b)
 
+
+    def test_emergent_relay_action_not_available_at_initial_cut(self):
+        # Ari can teach Bea, and Bea promises to teach Cy later. Bea initially
+        # lacks the skill. The second move becomes possible *because* of first.
+        scene = Scene(
+            requirements=frozenset({("relay", "transmitter")}),
+            skills=frozenset({("ari", "relay")}),
+            assets=frozenset({("t1", "transmitter")}),
+            custody=frozenset({("cy", "t1")}),
+            access=frozenset({("cy", "relay")}),
+            known=frozenset({("cy", "relay")}),
+        )
+        offers = (
+            Offer("ari-to-bea", "teach", "ari", "relay",
+                  frozenset({"bea"}), 2, 6),
+            Offer("bea-to-cy", "teach", "bea", "relay",
+                  frozenset({"cy"}), 2, 6),
+        )
+        accepted = frozenset({
+            Acceptance("ari-to-bea", "bea"),
+            Acceptance("bea-to-cy", "cy"),
+        })
+        initial = generate(scene, offers, accepted, Goal("relay", actor="cy"))
+        future_teaching = next(
+            c for c in initial if c.offer_id == "bea-to-cy"
+        )
+        self.assertIsNone(transition(scene, future_teaching))
+        result = solve(scene, offers, accepted, Goal("relay", actor="cy"))
+        self.assertEqual(result["status"], "PROPOSED_SYNTHETIC_ONLY")
+        self.assertEqual([a["offer_id"] for a in result["actions"]],
+                         ["ari-to-bea", "bea-to-cy"])
+        self.assertEqual(result["known_cost"], 4)
+        self.assertEqual(result["delta"]["visible"]["gained"], ["cy:relay"])
+
+    def test_missing_relay_consent_is_not_silently_granted(self):
+        scene = Scene(
+            requirements=frozenset({("relay", "transmitter")}),
+            skills=frozenset({("ari", "relay")}),
+            assets=frozenset({("t1", "transmitter")}),
+            custody=frozenset({("cy", "t1")}),
+            access=frozenset({("cy", "relay")}),
+            known=frozenset({("cy", "relay")}),
+        )
+        offers = (
+            Offer("ari-to-bea", "teach", "ari", "relay",
+                  frozenset({"bea"}), 2, 6),
+            Offer("bea-to-cy", "teach", "bea", "relay",
+                  frozenset({"cy"}), 2, 6),
+        )
+        accepted = frozenset({Acceptance("bea-to-cy", "cy")})
+        result = solve(scene, offers, accepted, Goal("relay", actor="cy"))
+        self.assertEqual(result["status"], "HOLD_UNVERIFIED_BRIDGE")
+        self.assertEqual(result["held_steps"],
+                         ["HOLD_ACCEPTANCE:ari-to-bea:bea"])
+        self.assertIsNone(transition(
+            scene, next(x for x in generate(
+                scene, offers, accepted, Goal("relay", actor="cy")
+            ) if x.offer_id == "ari-to-bea")
+        ))
+
     def test_no_false_delivery_evidence_in_first_card(self):
         result = solve(self.scene, self.offers, self.acceptances, self.goal)
         card = first_human_card(result)
