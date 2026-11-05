@@ -18,8 +18,10 @@ SCHEMA = "motif.field-log/v0"
 ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$")
 TAG = re.compile(r"^[a-z0-9][a-z0-9 _-]{0,39}$")
 ORIGINS = ("owner_self_report", "operator_heard_owner", "third_party_unverified")
+EVENT_SOURCES = ORIGINS + ("operator_generated",)
 KINDS = ("offer", "need")
 EVENTS = (
+    "candidate_proposed",
     "provider_yes_reported", "requester_yes_reported",
     "provider_no_reported", "requester_no_reported",
     "handoff_reported", "benefit_reported", "no_benefit_reported",
@@ -105,6 +107,9 @@ def validate(log: object) -> dict[str, Any]:
         and _pair_compatible(a, b)
     }
     events_seen: set[str] = set()
+    proposals_seen: set[str] = set()
+    observed_subjects: set[str] = set()
+    last_recorded: datetime | None = None
     for event in data["events"]:
         e = _keys(event, {
             "id", "subject", "kind", "reporter", "source",
@@ -116,18 +121,29 @@ def validate(log: object) -> dict[str, Any]:
         events_seen.add(eid)
         if e["kind"] not in EVENTS:
             raise FieldError("invalid event kind")
-        if (e["source"] not in ORIGINS
+        if (e["source"] not in EVENT_SOURCES
+                or (e["kind"] == "candidate_proposed") != (e["source"] == "operator_generated")
                 or not isinstance(e["reporter"], str)
                 or not e["reporter"].strip() or len(e["reporter"]) > 60):
             raise FieldError("event requires a bounded reporting origin and alias")
         _text(e["note"], "event note", 360, empty=True)
-        if _utc(e["occurred_at"]) > _utc(e["recorded_at"]):
+        recorded = _utc(e["recorded_at"])
+        if _utc(e["occurred_at"]) > recorded:
             raise FieldError("reported occurrence cannot follow recording")
+        if last_recorded is not None and recorded < last_recorded:
+            raise FieldError("append-only record timestamps must be ordered")
+        last_recorded = recorded
         if e["kind"] == "card_withdrawn":
             if e["subject"] not in cards:
                 raise FieldError("withdrawal refers to unknown card")
         elif e["subject"] not in match_ids:
             raise FieldError("event refers to unsupported pair")
+        if e["kind"] == "candidate_proposed":
+            if e["subject"] in proposals_seen or e["subject"] in observed_subjects:
+                raise FieldError("a prospective proposal must precede outcome reports")
+            proposals_seen.add(e["subject"])
+        elif e["kind"] != "card_withdrawn":
+            observed_subjects.add(e["subject"])
     return data
 
 
@@ -221,6 +237,12 @@ def summarize(log: object, now: str) -> dict[str, Any]:
         "dispositions": dict(sorted(Counter(p["disposition"]
                                             for p in rows).items())),
         "reported_outcomes": outcomes,
+        "prospective_proposals_recorded": types["candidate_proposed"],
+        "unresolved_proposals": len(
+            {e["subject"] for e in data["events"] if e["kind"] == "candidate_proposed"}
+            - {e["subject"] for e in data["events"] if e["kind"] not in
+               ("candidate_proposed", "card_withdrawn")}
+        ),
         "unmatched_is_not_no_demand": True,
         "causal_effect_identified": False,
         "authorship_verified": False,
