@@ -1,0 +1,127 @@
+{
+  "absent_tree": {
+    "checksum_sha256": "ea5622658ecd5644b473e420c0e7e6d78e64743da1b88420db2a7c8ebe077b38",
+    "counts": [
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "evidence_count": 8,
+    "first": [
+      [
+        "qb49091e0f476f00430188824",
+        "?0"
+      ]
+    ],
+    "fit_balanced": 1,
+    "id": "tree-c1e1a67cae6f117e",
+    "leaves": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "schema": "motif.decision-tree-cartridge.v0",
+    "second": [
+      [
+        "qff939dd506ebb09fefb178ce",
+        "?1"
+      ]
+    ],
+    "source_digest": "7c3f192c26066cef3bc6ad15f2f215315ab5e1284847c7ba6fe06c3beaec647c",
+    "status": "PROPOSAL_ONLY",
+    "vocab": [
+      "pending",
+      "qb49091e0f476f00430188824",
+      "qff939dd506ebb09fefb178ce",
+      "role_actor",
+      "role_target"
+    ]
+  },
+  "allowed_vocabulary": [
+    "pending",
+    "q7377035fe275d006734fcdec",
+    "qb49091e0f476f00430188824",
+    "qefcfdace692c995f2d367df2",
+    "qff939dd506ebb09fefb178ce",
+    "role_actor",
+    "role_target"
+  ],
+  "checksum_sha256": "51d381b5a0206bd7f45ae415939d86def95711a385e8bc2c8781da12cf0a521b",
+  "control_names": [
+    "qb49091e0f476f00430188824",
+    "qff939dd506ebb09fefb178ce"
+  ],
+  "id": "extension-8bd26c32d1f8585c",
+  "present_tree": {
+    "checksum_sha256": "de53a1280b9beb8cb5673431c51333b9100991c0957cdd6002d9fbf30feb5a58",
+    "counts": [
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        2
+      ]
+    ],
+    "evidence_count": 8,
+    "first": [
+      [
+        "qb49091e0f476f00430188824",
+        "?0"
+      ]
+    ],
+    "fit_balanced": 1,
+    "id": "tree-3f4bc7a06b68c7fd",
+    "leaves": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "schema": "motif.decision-tree-cartridge.v0",
+    "second": [
+      [
+        "qff939dd506ebb09fefb178ce",
+        "?1"
+      ]
+    ],
+    "source_digest": "b5d04bcfc5f6286c7b94e290de3b9b1c0fbd4b84ac107ca0ec37c596489cb5f6",
+    "status": "PROPOSAL_ONLY",
+    "vocab": [
+      "pending",
+      "qb49091e0f476f00430188824",
+      "qff939dd506ebb09fefb178ce",
+      "role_actor",
+      "role_target"
+    ]
+  },
+  "relation": "q7377035fe275d006734fcdec",
+  "role_index": 0,
+  "schema": "motif.derived-router.v0",
+  "source_count": 16,
+  "status": "PROPOSED_NOT_ADMITTED",
+  "validation_count": 16
+}
