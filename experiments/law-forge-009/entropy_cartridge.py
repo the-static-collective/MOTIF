@@ -12,6 +12,7 @@ A full snapshot is retained; never replace a measured fact with a hypothesis.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from math import log2
 from pathlib import Path
 import sys
@@ -163,7 +164,7 @@ class EntropyCartridge:
             return {"status": "HOLD_CHANGED_SOURCE_CONTRACT",
                     "value": None}
         # Use the actual 008 exact-first conservative prediction algorithm.
-        frozen = make_desk(self.source, self.observations, "classical_entropy")
+        frozen = _frozen_desk(self)
         result = frozen.predict(controls(x), present_source)
         return {**result, "cartridge_id": self.id,
                 "real_world_authority": False}
@@ -215,3 +216,10 @@ class EntropyCartridge:
         if skill.id != item["id"] or skill.source_digest != item["evidence_digest"]:
             raise ValueError("Evidence, digest or query budget tampered")
         return skill
+
+
+@lru_cache(maxsize=1024)
+def _frozen_desk(cartridge):
+    # A single immutable source snapshot maps to one fixed classical model.
+    return make_desk(cartridge.source, cartridge.observations,
+                     "classical_entropy")
