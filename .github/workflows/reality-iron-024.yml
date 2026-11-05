@@ -1,0 +1,44 @@
+name: MOTIF-024 — examples, custom goals and correction
+
+on:
+  push:
+    branches: [experiment/reality-iron-024-examples-and-correction]
+  pull_request:
+    paths:
+      - "experiments/024/**"
+      - ".github/workflows/reality-iron-024.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  human-examples-offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Actual 022/023 pinned source and 024 adversarial clarification tests
+        run: |
+          python3 -m unittest discover -s experiments/023 -p "test_*.py" -v
+          python3 -m unittest discover -s experiments/024 -p "test_*.py" -v
+      - name: Exactly two examples or write your own, no source request
+        run: |
+          printf '%s' '{"text":"Could you check the rivers?"}' | python3 experiments/024/goal_examples.py > /tmp/motif-024-examples.json
+          python3 -c "import json; x=json.load(open('/tmp/motif-024-examples.json')); assert x['status']=='SHOW_TWO_EXAMPLES' and len(x['examples'])==2 and x['write_your_own_option']['id']=='custom' and x['source_requests_sent']==0"
+      - name: Custom example must require precise confirmation
+        run: |
+          printf '%s' '{"text":"Check the rivers","choice":"custom","own_example":"One report from within the last 6 hours would be enough"}' | python3 experiments/024/goal_examples.py > /tmp/motif-024-custom.json
+          python3 -c "import json; x=json.load(open('/tmp/motif-024-custom.json')); assert x['status']=='CONFIRM_REQUIRED' and x['draft_contract']['freshness_hours']==6 and x['human_confirmed'] is False"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-024-offline-examples-and-custom
+          path: |
+            /tmp/motif-024-examples.json
+            /tmp/motif-024-custom.json
+          retention-days: 30
