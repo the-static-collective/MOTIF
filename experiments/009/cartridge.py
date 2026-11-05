@@ -35,6 +35,12 @@ class HOLD(ValueError):
 
 
 def checksum(body):
+    # Preserve cross-language JSON numeric equivalence for this schema:
+    # JavaScript JSON.stringify(1.0) produces 1, whereas Python emits 1.0.
+    # Canonicalize the sole fractional statistic back to float before hashing.
+    # This remains a CONTENT checksum, never a signature or identity proof.
+    if isinstance(body, dict) and "fit_balanced" in body:
+        body = dict(body, fit_balanced=float(body["fit_balanced"]))
     return sha256(json.dumps(body, sort_keys=True, separators=(",", ":"),
                              ensure_ascii=True).encode("utf-8")).hexdigest()
 
