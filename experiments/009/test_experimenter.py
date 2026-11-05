@@ -154,14 +154,14 @@ class TreeCartridgeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             budget.consume("Q00002")
 
-    def test_oracle_resolution_requires_a_consumed_ticket(self):
-        known = self.train[:16]
-        committee = experimenter.train_committee(known)
-        q = experimenter.public_question(19, self.train[19].before,
-                                         self.train[19].roles)
-        offer = experimenter.propose_question((q,), known, committee)
-        with self.assertRaises(ValueError):
-            experimenter.independent_oracle_answer(offer, {})
+    def test_only_evaluator_can_resolve_oracle_tickets(self):
+        self.assertFalse(hasattr(experimenter, "independent_oracle_answer"))
+        with self.assertRaisesRegex(ValueError, "Unknown ticket"):
+            benchmark.reveal_answer("Q99999", {})
+        observation = self.train[19]
+        question = experimenter.public_question(19, observation.before,
+                                               observation.roles)
+        self.assertFalse(hasattr(question, "observed_after"))
 
     def test_small_world_equal_label_budgets(self):
         one = benchmark.experiment("reverse_join", 11)
