@@ -27,6 +27,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[017F — The Self-Growing Forest / Improvable Diagnostic](experiments/017f/DESIGN.md):** Generate a new compositional question from licensed primitive probes and a declared provider offer, require independent synthetic review, then compare a versioned diagnostic incumbent against a cheaper question procedure and a **classical exact refit given the same new capability**. The grown method improves cost over the historical incumbent but ties the refit. A cheaper fraudulent offer is rejected, forbidden offers stay held, an overpriced offer yields no change, and a post-review reliability shift causes **4/8 wrong predictions** rather than disappearing.
 
+- **[019F — The Planner Foundry: Native Questions × Classical Search](experiments/019f/DESIGN.md):** The original SHA-pinned National Treasure Question Box and Dogram modules gate new proposed graph-relational questions. A small learner uses independent counterexamples to propose a missing STRIPS action precondition; the planner generates **BFS, optimal uniform-cost and admissible A* hmax method cartridges on demand**, receives separate synthetic action receipts, revises its model and replans. A known-model classical UCS given the same evidence ties; shifting hidden mechanisms can make the learned guard worse. Completely synthetic, source preserving, no outside-world authority.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -102,6 +104,9 @@ python demo.py      # read the counterfactual branch forecast and actual evidenc
 cd ../017f
 python -m unittest -v test_grow.py
 python benchmark.py  # clean win over frozen policy, classical parity, drift failure
+cd ../019f
+python -m unittest -v test_planner.py
+python benchmark.py  # original pinned donors, replanning, classical parity and shift
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
