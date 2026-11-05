@@ -129,9 +129,13 @@ class GraftBornOperatorTests(unittest.TestCase):
         fake["original_graft_eval"]["winner"]["source_sha256"] = fake["selected_operator"]["source_sha256"]
         body=dict(fake);body.pop("content_sha256")
         fake["content_sha256"]=m.jsdigest(body)
-        # Structurally well-formed untrusted bytes are not code ownership:
-        self.assertNotEqual(fake["selected_operator"]["source"],
-                            m.regenerate_from_original_graft(self.graft)["source"])
+        # Rehashing a fabricated source is not proof that GRAFT generated it.
+        # The actual builder must independently recompile and REFUSE.
+        with tempfile.TemporaryDirectory() as temp:
+            pkt = Path(temp) / "self-rehashed-fake-receipt.json"
+            pkt.write_text(json.dumps(fake))
+            with self.assertRaisesRegex(m.HOLD, "recompilation"):
+                m.build(pkt, self.graft, self.motif, Path(temp) / "invalid-build")
 
     def test_receipt_fake_real_provider_discovery_holds(self):
         fake=copy.deepcopy(self.packet)
