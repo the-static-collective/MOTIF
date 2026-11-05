@@ -14,6 +14,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[006 — The first question × Dogram](experiments/006/DESIGN.md):** Under synthetic uncertainty, select one permitted, affordable discriminator of target predictions; export finite probe vectors for optional calculation-only Dogram analysis. No general intelligence claim.
 
+- **[007 — The smallest key × Dogram](experiments/007/DESIGN.md):** Find a minimum-cost sequence of synthetic interventions to open a target opportunity without deleting other actors' options; compare knowledge vs capability and Dogram's mixed difference / lost distinctions.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -40,6 +42,11 @@ python -m unittest -v test_concept.py
 cd ../006
 python question.py
 python -m unittest -v test_question.py
+python -m unittest -v test_baselines.py
+
+cd ../007
+python smallest_key.py
+python -m unittest -v test_smallest_key.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
