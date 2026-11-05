@@ -1,0 +1,2385 @@
+{
+  "experiment": "MOTIF-013",
+  "summary": {
+    "calibration_samples_per_actuator": 80,
+    "calibration_samples_per_source": 60,
+    "comparison_classical_bayesian_independent_cells": true,
+    "external_actions": 0,
+    "families": [
+      "FIRST",
+      "SECOND",
+      "AND",
+      "OR",
+      "XOR",
+      "SHIFT"
+    ],
+    "heldout_trial_total": 3600,
+    "heldout_truth_exposed_to_learner": false,
+    "independent_source_groups": 3,
+    "mean_bayesian_four_cell_logloss": 0.641032,
+    "mean_classical_bayesian_four_cell_brier": 0.224069,
+    "mean_internal_brier": 0.228364,
+    "mean_internal_logloss": 0.651315,
+    "mean_oracle_unattainable_brier": 0.19913,
+    "mean_weak_unweighted_brier": 0.242385,
+    "model_is_approximate_plug_in_bayesian": true,
+    "oracle_module_imported_by_learner": false,
+    "other_model_is_constant_half_not_causal_explanation": true,
+    "overall_issued_errors": 943,
+    "overall_prediction_issued_coverage": 0.8333,
+    "per_family": {
+      "AND": {
+        "classical_bayesian_four_cell_brier": 0.199201,
+        "internal_brier": 0.190731,
+        "issued_coverage": 1,
+        "issued_errors": 158,
+        "mean_other_posterior": 0.00094,
+        "validation_shift_flags": 0,
+        "worlds": 5
+      },
+      "FIRST": {
+        "classical_bayesian_four_cell_brier": 0.20951,
+        "internal_brier": 0.202544,
+        "issued_coverage": 1,
+        "issued_errors": 169,
+        "mean_other_posterior": 0.00021,
+        "validation_shift_flags": 0,
+        "worlds": 5
+      },
+      "OR": {
+        "classical_bayesian_four_cell_brier": 0.206997,
+        "internal_brier": 0.20316,
+        "issued_coverage": 1,
+        "issued_errors": 178,
+        "mean_other_posterior": 0.00219,
+        "validation_shift_flags": 0,
+        "worlds": 5
+      },
+      "SECOND": {
+        "classical_bayesian_four_cell_brier": 0.210294,
+        "internal_brier": 0.198106,
+        "issued_coverage": 1,
+        "issued_errors": 163,
+        "mean_other_posterior": 0.00084,
+        "validation_shift_flags": 0,
+        "worlds": 5
+      },
+      "SHIFT": {
+        "classical_bayesian_four_cell_brier": 0.28887,
+        "internal_brier": 0.310739,
+        "issued_coverage": 0.4,
+        "issued_errors": 126,
+        "mean_other_posterior": 0,
+        "validation_shift_flags": 3,
+        "worlds": 5
+      },
+      "XOR": {
+        "classical_bayesian_four_cell_brier": 0.229541,
+        "internal_brier": 0.264903,
+        "issued_coverage": 0.6,
+        "issued_errors": 149,
+        "mean_other_posterior": 0.38029,
+        "validation_shift_flags": 0,
+        "worlds": 5
+      }
+    },
+    "scope": "PSEUDORANDOM_SYNTHETIC_UNCERTAINTY",
+    "seeds": [
+      11,
+      23,
+      37,
+      41,
+      59
+    ],
+    "sum_deduplicated_forwarded_claims": 2039,
+    "sum_held_unverified_controls": 365,
+    "test_each": 120,
+    "training_each": 80,
+    "training_truth_exposed_to_learner": false,
+    "validation_each": 32,
+    "version": "probabilistic-witness-v1",
+    "worlds": 30
+  },
+  "worlds": [
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8095,
+        "1": 0.8214
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.825,
+        0.8319
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.219451,
+      "classical_bayesian_four_cell_logloss": 0.631233,
+      "external_actions": 0,
+      "family": "FIRST",
+      "forwarded_duplicate_reports_not_double_counted": 67,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.26667,
+            "mean_forecast": 0.28333,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.65,
+            "mean_forecast": 0.71667,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.04167
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 200,
+      "internal_forecast_brier": 0.213889,
+      "internal_forecast_logloss": 0.619274,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 37,
+      "oracle_unattainable_brier": 0.214548,
+      "other_posterior": 0,
+      "raw_witness_claims": 267,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.6406,
+        "source_2": 0.2812
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8759,
+        0.6181,
+        0.3015
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 8,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.9999969,
+        "OR": 0.0000027,
+        "OTHER": 4e-7,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 72,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.42397,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.257007
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7381,
+        "1": 0.8452
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7897,
+        0.8052
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.219389,
+      "classical_bayesian_four_cell_logloss": 0.630578,
+      "external_actions": 0,
+      "family": "FIRST",
+      "forwarded_duplicate_reports_not_double_counted": 68,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.33333,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.71667,
+            "mean_forecast": 0.66667,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.04167
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.219444,
+      "internal_forecast_logloss": 0.630738,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 39,
+      "oracle_unattainable_brier": 0.220147,
+      "other_posterior": 0,
+      "raw_witness_claims": 270,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9531,
+        "source_1": 0.5312,
+        "source_2": 0.2031
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9508,
+        0.6144,
+        0.1761
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 12,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.9999962,
+        "OR": 0.0000036,
+        "OTHER": 2e-7,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.47706,
+        "shift_warning": false,
+        "validation_independent_records": 24
+      },
+      "weak_source_blind_brier": 0.236339
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8095,
+        "1": 0.881
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8608,
+        0.7975
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.190686,
+      "classical_bayesian_four_cell_logloss": 0.571396,
+      "external_actions": 0,
+      "family": "FIRST",
+      "forwarded_duplicate_reports_not_double_counted": 63,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.16667,
+            "mean_forecast": 0.28337,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.73333,
+            "mean_forecast": 0.71667,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.06668
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 197,
+      "internal_forecast_brier": 0.174172,
+      "internal_forecast_logloss": 0.534221,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 26,
+      "oracle_unattainable_brier": 0.170669,
+      "other_posterior": 0.00003,
+      "raw_witness_claims": 260,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9531,
+        "source_1": 0.7188,
+        "source_2": 0.1719
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9446,
+        0.6349,
+        0.2025
+      ],
+      "training_held_without_any_witness": 2,
+      "training_held_without_audited_intervention": 19,
+      "training_posterior": {
+        "AND": 1e-7,
+        "FIRST": 0.999858,
+        "OR": 0.0001115,
+        "OTHER": 0.0000304,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 59,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 8.34233,
+        "shift_warning": false,
+        "validation_independent_records": 27
+      },
+      "weak_source_blind_brier": 0.236257
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8214,
+        "1": 0.8333
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8159,
+        0.8369
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.209894,
+      "classical_bayesian_four_cell_logloss": 0.610269,
+      "external_actions": 0,
+      "family": "FIRST",
+      "forwarded_duplicate_reports_not_double_counted": 72,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.27515,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.76667,
+            "mean_forecast": 0.72485,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.06667
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 211,
+      "internal_forecast_brier": 0.210618,
+      "internal_forecast_logloss": 0.612387,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 36,
+      "oracle_unattainable_brier": 0.210446,
+      "other_posterior": 0.000643,
+      "raw_witness_claims": 283,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8906,
+        "source_1": 0.5938,
+        "source_2": 0.2969
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9389,
+        0.7012,
+        0.1916
+      ],
+      "training_held_without_any_witness": 1,
+      "training_held_without_audited_intervention": 11,
+      "training_posterior": {
+        "AND": 0.0000195,
+        "FIRST": 0.9993314,
+        "OR": 0.0000061,
+        "OTHER": 0.000643,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 7.55749,
+        "shift_warning": false,
+        "validation_independent_records": 30
+      },
+      "weak_source_blind_brier": 0.259968
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8214,
+        "1": 0.8095
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.807,
+        0.8679
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.20813,
+      "classical_bayesian_four_cell_logloss": 0.607288,
+      "external_actions": 0,
+      "family": "FIRST",
+      "forwarded_duplicate_reports_not_double_counted": 65,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.26667,
+            "mean_forecast": 0.26297,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.75,
+            "mean_forecast": 0.66918,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.04226
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.194599,
+      "internal_forecast_logloss": 0.578195,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 31,
+      "oracle_unattainable_brier": 0.192314,
+      "other_posterior": 0.000369,
+      "raw_witness_claims": 267,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9375,
+        "source_1": 0.7812,
+        "source_2": 0.1719
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8993,
+        0.7394,
+        0.2342
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0.1938732,
+        "FIRST": 0.8057568,
+        "OR": 7e-7,
+        "OTHER": 0.0003691,
+        "SECOND": 2e-7
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 66,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 3.04019,
+        "shift_warning": false,
+        "validation_independent_records": 27
+      },
+      "weak_source_blind_brier": 0.229458
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7738,
+        "1": 0.8571
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8079,
+        0.9164
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.191282,
+      "classical_bayesian_four_cell_logloss": 0.57243,
+      "external_actions": 0,
+      "family": "SECOND",
+      "forwarded_duplicate_reports_not_double_counted": 69,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.2,
+            "mean_forecast": 0.28879,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.83333,
+            "mean_forecast": 0.75297,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.08457
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 208,
+      "internal_forecast_brier": 0.158961,
+      "internal_forecast_logloss": 0.500877,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 22,
+      "oracle_unattainable_brier": 0.150357,
+      "other_posterior": 0.004127,
+      "raw_witness_claims": 277,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8438,
+        "source_1": 0.4844,
+        "source_2": 0.375
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9235,
+        0.5948,
+        0.306
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 19,
+      "training_posterior": {
+        "AND": 0.0068592,
+        "FIRST": 0.0010042,
+        "OR": 0.1261759,
+        "OTHER": 0.0041265,
+        "SECOND": 0.8618341
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 61,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 4.9441,
+        "shift_warning": false,
+        "validation_independent_records": 30
+      },
+      "weak_source_blind_brier": 0.236905
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8095,
+        "1": 0.881
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8363,
+        0.8597
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.206539,
+      "classical_bayesian_four_cell_logloss": 0.605331,
+      "external_actions": 0,
+      "family": "SECOND",
+      "forwarded_duplicate_reports_not_double_counted": 67,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.28333,
+            "mean_forecast": 0.23409,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.75,
+            "mean_forecast": 0.76675,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.033
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 210,
+      "internal_forecast_brier": 0.19665,
+      "internal_forecast_logloss": 0.58288,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 32,
+      "oracle_unattainable_brier": 0.195896,
+      "other_posterior": 0.000041,
+      "raw_witness_claims": 277,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.7656,
+        "source_1": 0.5781,
+        "source_2": 0.2188
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8891,
+        0.6187,
+        0.1376
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 13,
+      "training_posterior": {
+        "AND": 0.0000188,
+        "FIRST": 0,
+        "OR": 0.002427,
+        "OTHER": 0.0000411,
+        "SECOND": 0.9975131
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 67,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 5.72708,
+        "shift_warning": false,
+        "validation_independent_records": 27
+      },
+      "weak_source_blind_brier": 0.229869
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8214,
+        "1": 0.8095
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8581,
+        0.8266
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.224625,
+      "classical_bayesian_four_cell_logloss": 0.642712,
+      "external_actions": 0,
+      "family": "SECOND",
+      "forwarded_duplicate_reports_not_double_counted": 68,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.28333,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.7,
+            "mean_forecast": 0.71667,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.05001
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 205,
+      "internal_forecast_brier": 0.224722,
+      "internal_forecast_logloss": 0.642473,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 40,
+      "oracle_unattainable_brier": 0.22606,
+      "other_posterior": 0,
+      "raw_witness_claims": 273,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9531,
+        "source_1": 0.7188,
+        "source_2": 0.1719
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9329,
+        0.7103,
+        0.1425
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 9,
+      "training_posterior": {
+        "AND": 0.0000012,
+        "FIRST": 0,
+        "OR": 0,
+        "OTHER": 0,
+        "SECOND": 0.9999988
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 71,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 9.4649,
+        "shift_warning": false,
+        "validation_independent_records": 31
+      },
+      "weak_source_blind_brier": 0.227688
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8929,
+        "1": 0.7857
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8629,
+        0.7839
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.202241,
+      "classical_bayesian_four_cell_logloss": 0.594093,
+      "external_actions": 0,
+      "family": "SECOND",
+      "forwarded_duplicate_reports_not_double_counted": 64,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.4,
+            "mean_forecast": 0.30016,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.86667,
+            "mean_forecast": 0.69989,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.13331
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.196657,
+      "internal_forecast_logloss": 0.582597,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 32,
+      "oracle_unattainable_brier": 0.196753,
+      "other_posterior": 0.000021,
+      "raw_witness_claims": 266,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8906,
+        "source_1": 0.7031,
+        "source_2": 0.2656
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9184,
+        0.665,
+        0.2363
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0.0005896,
+        "FIRST": 4e-7,
+        "OR": 0.0007376,
+        "OTHER": 0.0000209,
+        "SECOND": 0.9986515
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 66,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.27496,
+        "shift_warning": false,
+        "validation_independent_records": 30
+      },
+      "weak_source_blind_brier": 0.226876
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7976,
+        "1": 0.7976
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7923,
+        0.8408
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.226784,
+      "classical_bayesian_four_cell_logloss": 0.647378,
+      "external_actions": 0,
+      "family": "SECOND",
+      "forwarded_duplicate_reports_not_double_counted": 63,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.3,
+            "mean_forecast": 0.29167,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.68333,
+            "mean_forecast": 0.70833,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.01667
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.213542,
+      "internal_forecast_logloss": 0.618425,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 37,
+      "oracle_unattainable_brier": 0.215463,
+      "other_posterior": 0.000013,
+      "raw_witness_claims": 265,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9062,
+        "source_1": 0.5156,
+        "source_2": 0.2188
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9111,
+        0.6253,
+        0.1935
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 10,
+      "training_posterior": {
+        "AND": 1e-7,
+        "FIRST": 0,
+        "OR": 0,
+        "OTHER": 0.0000131,
+        "SECOND": 0.9999869
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 70,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 9.59595,
+        "shift_warning": false,
+        "validation_independent_records": 26
+      },
+      "weak_source_blind_brier": 0.240392
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.869,
+        "1": 0.75
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8364,
+        0.7975
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.204225,
+      "classical_bayesian_four_cell_logloss": 0.599158,
+      "external_actions": 0,
+      "family": "AND",
+      "forwarded_duplicate_reports_not_double_counted": 66,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.16667,
+            "mean_forecast": 0.17427,
+            "n": 30,
+            "range": "0.0-0.2"
+          },
+          {
+            "event_frequency": 0.25,
+            "mean_forecast": 0.26207,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.73333,
+            "mean_forecast": 0.60642,
+            "n": 30,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.03966
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 204,
+      "internal_forecast_brier": 0.185893,
+      "internal_forecast_logloss": 0.559351,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 28,
+      "oracle_unattainable_brier": 0.181999,
+      "other_posterior": 0.003415,
+      "raw_witness_claims": 270,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8281,
+        "source_1": 0.7031,
+        "source_2": 0.2344
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8724,
+        0.6053,
+        0.2481
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 8,
+      "training_posterior": {
+        "AND": 0.9930803,
+        "FIRST": 0.0035004,
+        "OR": 0,
+        "OTHER": 0.0034148,
+        "SECOND": 0.0000045
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 72,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.54666,
+        "shift_warning": false,
+        "validation_independent_records": 24
+      },
+      "weak_source_blind_brier": 0.246121
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7381,
+        "1": 0.7857
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.829,
+        0.8671
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.219537,
+      "classical_bayesian_four_cell_logloss": 0.631577,
+      "external_actions": 0,
+      "family": "AND",
+      "forwarded_duplicate_reports_not_double_counted": 71,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.23333,
+            "mean_forecast": 0.18989,
+            "n": 30,
+            "range": "0.0-0.2"
+          },
+          {
+            "event_frequency": 0.26667,
+            "mean_forecast": 0.27799,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.6,
+            "mean_forecast": 0.55604,
+            "n": 30,
+            "range": "0.4-0.6"
+          }
+        ],
+        "ece": 0.02751
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 217,
+      "internal_forecast_brier": 0.202561,
+      "internal_forecast_logloss": 0.594233,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 35,
+      "oracle_unattainable_brier": 0.203887,
+      "other_posterior": 0.001287,
+      "raw_witness_claims": 288,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.7969,
+        "source_1": 0.6719,
+        "source_2": 0.1875
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8657,
+        0.715,
+        0.1409
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 12,
+      "training_posterior": {
+        "AND": 0.9972659,
+        "FIRST": 0.0014411,
+        "OR": 0,
+        "OTHER": 0.0012868,
+        "SECOND": 0.0000062
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 4.27149,
+        "shift_warning": false,
+        "validation_independent_records": 31
+      },
+      "weak_source_blind_brier": 0.253176
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.9286,
+        "1": 0.7143
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8832,
+        0.7836
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.193377,
+      "classical_bayesian_four_cell_logloss": 0.575401,
+      "external_actions": 0,
+      "family": "AND",
+      "forwarded_duplicate_reports_not_double_counted": 73,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.23333,
+            "mean_forecast": 0.17512,
+            "n": 60,
+            "range": "0.0-0.2"
+          },
+          {
+            "event_frequency": 0.16667,
+            "mean_forecast": 0.33572,
+            "n": 30,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.56667,
+            "mean_forecast": 0.6143,
+            "n": 30,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.08328
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 211,
+      "internal_forecast_brier": 0.194302,
+      "internal_forecast_logloss": 0.577769,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 32,
+      "oracle_unattainable_brier": 0.189758,
+      "other_posterior": 0.000003,
+      "raw_witness_claims": 284,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8438,
+        "source_1": 0.625,
+        "source_2": 0.2188
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8751,
+        0.5923,
+        0.2075
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0.9996423,
+        "FIRST": 0,
+        "OR": 0,
+        "OTHER": 0.0000032,
+        "SECOND": 0.0003545
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 66,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 3.53971,
+        "shift_warning": false,
+        "validation_independent_records": 26
+      },
+      "weak_source_blind_brier": 0.259132
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.75,
+        "1": 0.869
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7906,
+        0.8873
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.213319,
+      "classical_bayesian_four_cell_logloss": 0.615894,
+      "external_actions": 0,
+      "family": "AND",
+      "forwarded_duplicate_reports_not_double_counted": 62,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.16667,
+            "mean_forecast": 0.17292,
+            "n": 30,
+            "range": "0.0-0.2"
+          },
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.26042,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.6,
+            "mean_forecast": 0.60625,
+            "n": 30,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.05625
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 199,
+      "internal_forecast_brier": 0.214588,
+      "internal_forecast_logloss": 0.618767,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 39,
+      "oracle_unattainable_brier": 0.216825,
+      "other_posterior": 0,
+      "raw_witness_claims": 261,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.875,
+        "source_1": 0.7344,
+        "source_2": 0.1094
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9136,
+        0.7305,
+        0.127
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 11,
+      "training_posterior": {
+        "AND": 1,
+        "FIRST": 0,
+        "OR": 0,
+        "OTHER": 0,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 69,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 5.0129,
+        "shift_warning": false,
+        "validation_independent_records": 27
+      },
+      "weak_source_blind_brier": 0.240523
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7976,
+        "1": 0.9286
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8411,
+        0.9217
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.165547,
+      "classical_bayesian_four_cell_logloss": 0.514584,
+      "external_actions": 0,
+      "family": "AND",
+      "forwarded_duplicate_reports_not_double_counted": 62,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.13333,
+            "mean_forecast": 0.175,
+            "n": 60,
+            "range": "0.0-0.2"
+          },
+          {
+            "event_frequency": 0.23333,
+            "mean_forecast": 0.28156,
+            "n": 30,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.7,
+            "mean_forecast": 0.66845,
+            "n": 30,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.04078
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.156313,
+      "internal_forecast_logloss": 0.488748,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 24,
+      "oracle_unattainable_brier": 0.155628,
+      "other_posterior": 0.000001,
+      "raw_witness_claims": 264,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.5469,
+        "source_2": 0.2812
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8905,
+        0.6249,
+        0.2947
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 20,
+      "training_posterior": {
+        "AND": 0.9999792,
+        "FIRST": 0.0000024,
+        "OR": 0,
+        "OTHER": 0.000001,
+        "SECOND": 0.0000173
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 60,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.54839,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.22347
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7738,
+        "1": 0.6905
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8483,
+        0.7817
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.225997,
+      "classical_bayesian_four_cell_logloss": 0.643533,
+      "external_actions": 0,
+      "family": "OR",
+      "forwarded_duplicate_reports_not_double_counted": 70,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.46667,
+            "mean_forecast": 0.47599,
+            "n": 30,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.61667,
+            "mean_forecast": 0.7115,
+            "n": 60,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.76667,
+            "mean_forecast": 0.80098,
+            "n": 30,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.05832
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 206,
+      "internal_forecast_brier": 0.227947,
+      "internal_forecast_logloss": 0.647991,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 44,
+      "oracle_unattainable_brier": 0.234073,
+      "other_posterior": 0.000001,
+      "raw_witness_claims": 276,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.875,
+        "source_1": 0.7812,
+        "source_2": 0.2656
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9507,
+        0.7241,
+        0.205
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 1e-7,
+        "OR": 0.9999423,
+        "OTHER": 8e-7,
+        "SECOND": 0.0000568
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 66,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 1.0565,
+        "shift_warning": false,
+        "validation_independent_records": 29
+      },
+      "weak_source_blind_brier": 0.239953
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7619,
+        "1": 0.9286
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7732,
+        0.9011
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.204449,
+      "classical_bayesian_four_cell_logloss": 0.598444,
+      "external_actions": 0,
+      "family": "OR",
+      "forwarded_duplicate_reports_not_double_counted": 61,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.35476,
+            "n": 30,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.66667,
+            "mean_forecast": 0.69522,
+            "n": 30,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.76667,
+            "mean_forecast": 0.82499,
+            "n": 60,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.03928
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 197,
+      "internal_forecast_brier": 0.205081,
+      "internal_forecast_logloss": 0.601431,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 35,
+      "oracle_unattainable_brier": 0.204831,
+      "other_posterior": 0.000006,
+      "raw_witness_claims": 258,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9531,
+        "source_1": 0.6719,
+        "source_2": 0.3906
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9259,
+        0.6756,
+        0.2777
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 10,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0000194,
+        "OR": 0.9999391,
+        "OTHER": 0.0000059,
+        "SECOND": 0.0000356
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 70,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.89453,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.246586
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7857,
+        "1": 0.75
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8002,
+        0.8447
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.191102,
+      "classical_bayesian_four_cell_logloss": 0.567396,
+      "external_actions": 0,
+      "family": "OR",
+      "forwarded_duplicate_reports_not_double_counted": 65,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.43744,
+            "n": 30,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.71667,
+            "mean_forecast": 0.7249,
+            "n": 60,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.86667,
+            "mean_forecast": 0.81245,
+            "n": 30,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.03536
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 193,
+      "internal_forecast_brier": 0.189943,
+      "internal_forecast_logloss": 0.564412,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 32,
+      "oracle_unattainable_brier": 0.19024,
+      "other_posterior": 0,
+      "raw_witness_claims": 258,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9531,
+        "source_1": 0.7031,
+        "source_2": 0.1875
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9509,
+        0.6799,
+        0.2151
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 9,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0004434,
+        "OR": 0.9995565,
+        "OTHER": 0,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 71,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 3.65538,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.217739
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8095,
+        "1": 0.8571
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7782,
+        0.8969
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.210316,
+      "classical_bayesian_four_cell_logloss": 0.612252,
+      "external_actions": 0,
+      "family": "OR",
+      "forwarded_duplicate_reports_not_double_counted": 66,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.33333,
+            "mean_forecast": 0.36577,
+            "n": 30,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.7,
+            "mean_forecast": 0.74961,
+            "n": 60,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.86667,
+            "mean_forecast": 0.82733,
+            "n": 30,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.04275
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 201,
+      "internal_forecast_brier": 0.190912,
+      "internal_forecast_logloss": 0.566845,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 32,
+      "oracle_unattainable_brier": 0.190754,
+      "other_posterior": 0.010956,
+      "raw_witness_claims": 267,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9219,
+        "source_1": 0.6562,
+        "source_2": 0.2188
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9528,
+        0.7096,
+        0.2825
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 12,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0000026,
+        "OR": 0.9890376,
+        "OTHER": 0.0109564,
+        "SECOND": 0.0000034
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 5.59949,
+        "shift_warning": false,
+        "validation_independent_records": 29
+      },
+      "weak_source_blind_brier": 0.225904
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7024,
+        "1": 0.7381
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.7815,
+        0.8489
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.203123,
+      "classical_bayesian_four_cell_logloss": 0.595657,
+      "external_actions": 0,
+      "family": "OR",
+      "forwarded_duplicate_reports_not_double_counted": 68,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.43333,
+            "mean_forecast": 0.4871,
+            "n": 30,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.75556,
+            "mean_forecast": 0.73763,
+            "n": 90,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.02689
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 201,
+      "internal_forecast_brier": 0.201916,
+      "internal_forecast_logloss": 0.593281,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 35,
+      "oracle_unattainable_brier": 0.200662,
+      "other_posterior": 0,
+      "raw_witness_claims": 269,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.6719,
+        "source_2": 0.1562
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8701,
+        0.6882,
+        0.1508
+      ],
+      "training_held_without_any_witness": 1,
+      "training_held_without_audited_intervention": 7,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0,
+        "OR": 0.9999981,
+        "OTHER": 4e-7,
+        "SECOND": 0.0000015
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 72,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 0.35442,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.2435
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7738,
+        "1": 0.7857
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8048,
+        0.8438
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.233291,
+      "classical_bayesian_four_cell_logloss": 0.659458,
+      "external_actions": 0,
+      "family": "XOR",
+      "forwarded_duplicate_reports_not_double_counted": 68,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.36667,
+            "mean_forecast": 0.44385,
+            "n": 30,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.54444,
+            "mean_forecast": 0.69204,
+            "n": 90,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.12999
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 206,
+      "internal_forecast_brier": 0.26972,
+      "internal_forecast_logloss": 0.739267,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 52,
+      "oracle_unattainable_brier": 0.227511,
+      "other_posterior": 0.257189,
+      "raw_witness_claims": 274,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9062,
+        "source_1": 0.6562,
+        "source_2": 0.1719
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9229,
+        0.7145,
+        0.2279
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 12,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0000015,
+        "OR": 0.7428052,
+        "OTHER": 0.2571887,
+        "SECOND": 0.0000047
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 0.88677,
+        "shift_warning": false,
+        "validation_independent_records": 27
+      },
+      "weak_source_blind_brier": 0.251248
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7381,
+        "1": 0.7738
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8015,
+        0.8313
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.231055,
+      "classical_bayesian_four_cell_logloss": 0.655006,
+      "external_actions": 0,
+      "family": "XOR",
+      "forwarded_duplicate_reports_not_double_counted": 71,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.55556,
+            "mean_forecast": 0.54627,
+            "n": 90,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.3,
+            "mean_forecast": 0.60941,
+            "n": 30,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.08432
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 205,
+      "internal_forecast_brier": 0.252422,
+      "internal_forecast_logloss": 0.69835,
+      "issued_prediction_coverage": 0,
+      "issued_status_counts": {
+        "HOLD_OUTSIDE_MODEL_FAMILY": 120
+      },
+      "issued_thresholded_errors": 0,
+      "oracle_unattainable_brier": 0.220611,
+      "other_posterior": 0.645398,
+      "raw_witness_claims": 276,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.75,
+        "source_2": 0.3125
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8893,
+        0.7333,
+        0.3046
+      ],
+      "training_held_without_any_witness": 1,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0000043,
+        "OR": 0.3545976,
+        "OTHER": 0.6453976,
+        "SECOND": 5e-7
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 65,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 2.7783,
+        "shift_warning": false,
+        "validation_independent_records": 30
+      },
+      "weak_source_blind_brier": 0.232684
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.869,
+        "1": 0.7381
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8746,
+        0.8337
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.227224,
+      "classical_bayesian_four_cell_logloss": 0.646393,
+      "external_actions": 0,
+      "family": "XOR",
+      "forwarded_duplicate_reports_not_double_counted": 69,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.51667,
+            "mean_forecast": 0.50107,
+            "n": 120,
+            "range": "0.4-0.6"
+          }
+        ],
+        "ece": 0.0156
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 215,
+      "internal_forecast_brier": 0.249761,
+      "internal_forecast_logloss": 0.692668,
+      "issued_prediction_coverage": 0,
+      "issued_status_counts": {
+        "HOLD_OUTSIDE_MODEL_FAMILY": 120
+      },
+      "issued_thresholded_errors": 0,
+      "oracle_unattainable_brier": 0.216458,
+      "other_posterior": 0.993883,
+      "raw_witness_claims": 284,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8906,
+        "source_1": 0.5781,
+        "source_2": 0.1719
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9297,
+        0.6151,
+        0.1326
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 10,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0,
+        "OR": 0.0061147,
+        "OTHER": 0.9938834,
+        "SECOND": 0.0000019
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 70,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -0.01679,
+        "shift_warning": false,
+        "validation_independent_records": 26
+      },
+      "weak_source_blind_brier": 0.237305
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7976,
+        "1": 0.869
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8133,
+        0.9293
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.219563,
+      "classical_bayesian_four_cell_logloss": 0.631608,
+      "external_actions": 0,
+      "family": "XOR",
+      "forwarded_duplicate_reports_not_double_counted": 69,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.4,
+            "mean_forecast": 0.36531,
+            "n": 30,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.73333,
+            "mean_forecast": 0.7509,
+            "n": 60,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.26667,
+            "mean_forecast": 0.83015,
+            "n": 30,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.15833
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 202,
+      "internal_forecast_brier": 0.287641,
+      "internal_forecast_logloss": 0.799785,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 50,
+      "oracle_unattainable_brier": 0.210137,
+      "other_posterior": 0.003913,
+      "raw_witness_claims": 271,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9219,
+        "source_1": 0.6875,
+        "source_2": 0.1406
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.916,
+        0.5924,
+        0.1439
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 16,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 1e-7,
+        "OR": 0.9960869,
+        "OTHER": 0.0039129,
+        "SECOND": 1e-7
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 64,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -4.07938,
+        "shift_warning": false,
+        "validation_independent_records": 23
+      },
+      "weak_source_blind_brier": 0.243172
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.75,
+        "1": 0.75
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8185,
+        0.7814
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.236572,
+      "classical_bayesian_four_cell_logloss": 0.666029,
+      "external_actions": 0,
+      "family": "XOR",
+      "forwarded_duplicate_reports_not_double_counted": 75,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.33333,
+            "mean_forecast": 0.4563,
+            "n": 30,
+            "range": "0.4-0.6"
+          },
+          {
+            "event_frequency": 0.63333,
+            "mean_forecast": 0.71851,
+            "n": 60,
+            "range": "0.6-0.8"
+          },
+          {
+            "event_frequency": 0.5,
+            "mean_forecast": 0.80592,
+            "n": 30,
+            "range": "0.8-1.0"
+          }
+        ],
+        "ece": 0.14981
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 217,
+      "internal_forecast_brier": 0.26497,
+      "internal_forecast_logloss": 0.735934,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 47,
+      "oracle_unattainable_brier": 0.238558,
+      "other_posterior": 0.001088,
+      "raw_witness_claims": 292,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9062,
+        "source_1": 0.6094,
+        "source_2": 0.25
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9412,
+        0.6843,
+        0.2143
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 12,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.0000106,
+        "OR": 0.9989018,
+        "OTHER": 0.0010875,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": 1.05505,
+        "shift_warning": false,
+        "validation_independent_records": 25
+      },
+      "weak_source_blind_brier": 0.237806
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7976,
+        "1": 0.8095
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8132,
+        0.8372
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.263359,
+      "classical_bayesian_four_cell_logloss": 0.724066,
+      "external_actions": 0,
+      "family": "SHIFT",
+      "forwarded_duplicate_reports_not_double_counted": 73,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.45,
+            "mean_forecast": 0.29116,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.46667,
+            "mean_forecast": 0.70632,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.19924
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 209,
+      "internal_forecast_brier": 0.289222,
+      "internal_forecast_logloss": 0.779388,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 59,
+      "oracle_unattainable_brier": 0.215233,
+      "other_posterior": 0.000007,
+      "raw_witness_claims": 282,
+      "seed": 11,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.7344,
+        "source_2": 0.125
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8727,
+        0.7008,
+        0.1245
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 14,
+      "training_posterior": {
+        "AND": 0.0071958,
+        "FIRST": 0.9927976,
+        "OR": 0,
+        "OTHER": 0.0000066,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 66,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -4.66431,
+        "shift_warning": false,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.238897
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8571,
+        "1": 0.8214
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8189,
+        0.8637
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.287597,
+      "classical_bayesian_four_cell_logloss": 0.775437,
+      "external_actions": 0,
+      "family": "SHIFT",
+      "forwarded_duplicate_reports_not_double_counted": 73,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.5,
+            "mean_forecast": 0.25002,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.5,
+            "mean_forecast": 0.75,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.24999
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 206,
+      "internal_forecast_brier": 0.312493,
+      "internal_forecast_logloss": 0.836969,
+      "issued_prediction_coverage": 0,
+      "issued_status_counts": {
+        "HOLD_PREDICTIVE_SHIFT": 120
+      },
+      "issued_thresholded_errors": 0,
+      "oracle_unattainable_brier": 0.204494,
+      "other_posterior": 0,
+      "raw_witness_claims": 279,
+      "seed": 23,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8281,
+        "source_1": 0.7031,
+        "source_2": 0.1406
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.8775,
+        0.7513,
+        0.1938
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 13,
+      "training_posterior": {
+        "AND": 3e-7,
+        "FIRST": 0.9999339,
+        "OR": 0.0000658,
+        "OTHER": 0,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 67,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -6.16351,
+        "shift_warning": true,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.270717
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.7976,
+        "1": 0.9048
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8063,
+        0.8686
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.25659,
+      "classical_bayesian_four_cell_logloss": 0.707457,
+      "external_actions": 0,
+      "family": "SHIFT",
+      "forwarded_duplicate_reports_not_double_counted": 67,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.53333,
+            "mean_forecast": 0.29178,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.55,
+            "mean_forecast": 0.70836,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.19995
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 209,
+      "internal_forecast_brier": 0.28987,
+      "internal_forecast_logloss": 0.780951,
+      "issued_prediction_coverage": 0,
+      "issued_status_counts": {
+        "HOLD_PREDICTIVE_SHIFT": 120
+      },
+      "issued_thresholded_errors": 0,
+      "oracle_unattainable_brier": 0.148861,
+      "other_posterior": 0.000004,
+      "raw_witness_claims": 276,
+      "seed": 37,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9375,
+        "source_1": 0.6562,
+        "source_2": 0.2344
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9193,
+        0.6628,
+        0.2675
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 9,
+      "training_posterior": {
+        "AND": 1e-7,
+        "FIRST": 0.9995771,
+        "OR": 0.0004189,
+        "OTHER": 0.0000039,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 71,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -7.52653,
+        "shift_warning": true,
+        "validation_independent_records": 26
+      },
+      "weak_source_blind_brier": 0.240101
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8929,
+        "1": 0.9048
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8205,
+        0.8981
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.330711,
+      "classical_bayesian_four_cell_logloss": 0.879735,
+      "external_actions": 0,
+      "family": "SHIFT",
+      "forwarded_duplicate_reports_not_double_counted": 72,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.61667,
+            "mean_forecast": 0.22507,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.5,
+            "mean_forecast": 0.77501,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.33331
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 213,
+      "internal_forecast_brier": 0.357665,
+      "internal_forecast_logloss": 0.945295,
+      "issued_prediction_coverage": 1,
+      "issued_status_counts": {
+        "PREDICT_PROBABILITY_ONLY": 120
+      },
+      "issued_thresholded_errors": 67,
+      "oracle_unattainable_brier": 0.174388,
+      "other_posterior": 0,
+      "raw_witness_claims": 285,
+      "seed": 41,
+      "source_reliabilities_estimated": {
+        "source_0": 0.9062,
+        "source_1": 0.7344,
+        "source_2": 0.2344
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9002,
+        0.7409,
+        0.1797
+      ],
+      "training_held_without_any_witness": 1,
+      "training_held_without_audited_intervention": 11,
+      "training_posterior": {
+        "AND": 0,
+        "FIRST": 0.9997667,
+        "OR": 0.0002331,
+        "OTHER": 2e-7,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 68,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -4.91518,
+        "shift_warning": false,
+        "validation_independent_records": 23
+      },
+      "weak_source_blind_brier": 0.254526
+    },
+    {
+      "actuation_compliance_estimated": {
+        "0": 0.8333,
+        "1": 0.869
+      },
+      "actuation_compliance_true_evaluator_only": [
+        0.8601,
+        0.8361
+      ],
+      "calibration_actuator_samples": 160,
+      "calibration_source_samples": 180,
+      "classical_bayesian_four_cell_brier": 0.306095,
+      "classical_bayesian_four_cell_logloss": 0.819166,
+      "external_actions": 0,
+      "family": "SHIFT",
+      "forwarded_duplicate_reports_not_double_counted": 72,
+      "heldout_brier_calibration": {
+        "bins": [
+          {
+            "event_frequency": 0.51667,
+            "mean_forecast": 0.26667,
+            "n": 60,
+            "range": "0.2-0.4"
+          },
+          {
+            "event_frequency": 0.51667,
+            "mean_forecast": 0.73333,
+            "n": 60,
+            "range": "0.6-0.8"
+          }
+        ],
+        "ece": 0.23333
+      },
+      "heldout_trials": 120,
+      "independent_witness_origins": 197,
+      "internal_forecast_brier": 0.304444,
+      "internal_forecast_logloss": 0.815954,
+      "issued_prediction_coverage": 0,
+      "issued_status_counts": {
+        "HOLD_PREDICTIVE_SHIFT": 120
+      },
+      "issued_thresholded_errors": 0,
+      "oracle_unattainable_brier": 0.156348,
+      "other_posterior": 0,
+      "raw_witness_claims": 269,
+      "seed": 59,
+      "source_reliabilities_estimated": {
+        "source_0": 0.8594,
+        "source_1": 0.5938,
+        "source_2": 0.2344
+      },
+      "source_reliabilities_true_evaluator_only": [
+        0.9232,
+        0.6054,
+        0.2748
+      ],
+      "training_held_without_any_witness": 0,
+      "training_held_without_audited_intervention": 8,
+      "training_posterior": {
+        "AND": 0.0000043,
+        "FIRST": 0.9999951,
+        "OR": 2e-7,
+        "OTHER": 4e-7,
+        "SECOND": 0
+      },
+      "training_tickets": 80,
+      "training_usable_with_audited_applied_and_witness": 72,
+      "validation_drift_warning": {
+        "log_bayes_factor_against_half": -9.44695,
+        "shift_warning": true,
+        "validation_independent_records": 28
+      },
+      "weak_source_blind_brier": 0.288222
+    }
+  ]
+}
