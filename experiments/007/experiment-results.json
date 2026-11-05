@@ -1,0 +1,19 @@
+{
+  "experiment": "MOTIF-007",
+  "scope": "two independent synthetic simulated worlds ONLY",
+  "donor_world_exported": false,
+  "packet_contains_entity_names": false,
+  "source_closure_operators": 4,
+  "receiver_held_by_default": true,
+  "first_local_preview_before_admission": "SIMULATED_NOT_ADMITTED",
+  "first_local_admission": true,
+  "recipient_after_matches_local_replay": true,
+  "recipient_improved_macro_depth": 4,
+  "recipient_did_not_modify_original_graph": true,
+  "returned_bundle_dependency_count": 5,
+  "reverse_transfer_independently_admitted": true,
+  "return_matches_four_primitives": true,
+  "receiver_claim_is_authenticated": false,
+  "bundle_checksum_proves_authorship": false,
+  "remote_action_performed": false
+}
