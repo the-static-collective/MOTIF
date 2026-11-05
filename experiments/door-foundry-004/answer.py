@@ -82,7 +82,7 @@ def evaluate(query_file,packet_file,graft_source,motif_original,build,report):
       "new_sensor_matches":4,
       "fair_classical_same_evidence_matches":4,
       "recommendations_changed":changes,
-      "next_question":"Can the new measurement generalize to an unfamiliar observation schema?",
+      "next_question":"Can the new measurement generalize to an unknown observation schema?",
       "next_question_submitted":False,
       "real_world_actions":0,
       "automatic_source_changes":0,
