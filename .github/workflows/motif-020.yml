@@ -1,0 +1,37 @@
+name: MOTIF-020 Instrument Garden (synthetic, proposal only)
+on:
+  push:
+    branches:
+      - experiments/020-instrument-garden-minecraft
+  pull_request:
+    paths:
+      - 'experiments/020/**'
+      - '.github/workflows/motif-020.yml'
+jobs:
+  choose-instrument:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test uncertainty and cost-of-inaction choices
+        run: node --test experiments/020/instrument_garden.test.mjs
+      - name: Produce inspectable research candidate
+        run: |
+          node experiments/020/seed.mjs > experiments/020/instrument-decision.json
+          test -s experiments/020/instrument-decision.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('experiments/020/instrument-decision.json'))
+          assert x['status']=='PROPOSE_NEW_INSTRUMENT'
+          assert x['selected']['target']['world']=='B'
+          assert x['selected']['target']['fault_x']==-13
+          assert x['selected']['target']['threshold']==4
+          assert x['real_game_execution'] is False
+          assert x['external_actions']==0
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-020-synthetic-instrument-proposal
+          path: experiments/020/instrument-decision.json
