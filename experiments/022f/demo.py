@@ -10,9 +10,9 @@ from dataclasses import asdict, replace
 import argparse
 import json
 
+from feedback import QuestionAwareBackend, QuestionLedger, submit_critic_question
 from chorus import LocalFlanT5Small, parallel_critique
 from forest import LivingForest
-from feedback import QuestionAwareBackend, QuestionLedger, submit_critic_question
 from sealed_oracle import (
     SealedSyntheticOracle, ScriptedCritic, modeled_problem, public_projection,
 )
