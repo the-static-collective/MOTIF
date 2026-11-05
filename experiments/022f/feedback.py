@@ -19,6 +19,7 @@ import sys
 from typing import Mapping, Sequence
 
 sys.path.append(str(Path(__file__).resolve().parents[1] / "016"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "021f"))
 from forest import LivingForest, Road, ForestPlan
 from multiplex import Hypothesis
 from chorus import PublicProjection, SidecarRun
