@@ -21,8 +21,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Cold tests — entirely synthetic data
-        run: python3 -m unittest discover -s experiments/017 -p "test_event_learner.py" -v
+      - name: Cold tests and fallible meta-diagnostic evidence checks
+        run: |
+          python3 -m unittest discover -s experiments/017 -p "test_*.py" -v
+          python3 experiments/017/meta_diagnostic.py --output /tmp/motif-017-lessons.json
   sealed-event:
     needs: synthetic
     runs-on: ubuntu-latest
