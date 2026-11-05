@@ -180,6 +180,42 @@ class SignedCriticTests(unittest.TestCase):
         self.assertEqual(ledger.audit_spent,0)
         self.assertEqual(trial(world,"no_audit")["audit_cost"],0)
 
+    def test_callable_json_reason_desk_keeps_owner_execution_separate(self):
+        from desk import SCHEMA, dispatch
+        world=UnknownOwner("signed_exception",8)
+        learned,_=learn(world)
+        opened=dispatch({"schema":SCHEMA,"action":"open",
+                         "learning_cartridge":learned.packet(),
+                         "policy":"signed_counterfactual"})
+        self.assertEqual(opened["status"],"PROPOSE_ONLY")
+        audit=opened["audit_cartridge"]
+        catalog=[card.packet() for card in world.catalog()]
+        question=dispatch({"schema":SCHEMA,"action":"propose",
+                           "audit_cartridge":audit,"catalog":catalog})
+        self.assertEqual(question["status"],"PROPOSE_ONLY_SOURCE_QUESTION")
+        selected=Question.from_packet(question["question"]["question"])
+        observed=world.execute(selected)
+        updated=dispatch({"schema":SCHEMA,"action":"ingest",
+                          "audit_cartridge":audit,
+                          "catalog":catalog,
+                          "proposed_question":question["question"],
+                          "source_observation":{
+                              "x":list(observed.x),"y":observed.y,
+                              "contract_id":observed.contract_id,
+                              "provenance":observed.provenance}})
+        self.assertEqual(updated["status"],"PROPOSE_ONLY")
+        self.assertFalse(updated["source_signature_verified"])
+        predicted=dispatch({"schema":SCHEMA,"action":"predict",
+                            "audit_cartridge":updated["audit_cartridge"],
+                            "source":world.contract.packet(),
+                            "x":list(observed.x)})
+        self.assertEqual(predicted["value"],observed.y)
+        self.assertEqual(predicted["status"],"LOOKUP_WITNESSED")
+        refused=dispatch({"schema":SCHEMA,"action":"propose",
+                          "audit_cartridge":audit,"catalog":catalog,
+                          "endpoint":"https://invalid.example"})
+        self.assertEqual(refused["status"],"REFUSE")
+
     def test_compact_sample_compares_fair_classical_controls(self):
         source=UnknownOwner("signed_exception",8)
         for policy in POLICIES:
