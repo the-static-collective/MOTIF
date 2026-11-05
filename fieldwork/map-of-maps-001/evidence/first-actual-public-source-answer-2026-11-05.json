@@ -1,0 +1,127 @@
+{
+  "schema": "motif.map-of-maps/actual-ci-research-receipt-v1",
+  "ci_run": "https://github.com/the-static-collective/MOTIF/actions/runs/42087872341",
+  "ci_head": "3785f83880fb17ae2327e6ebd27883848f2e8970",
+  "origin": "Exact pinned public Git repo checkouts and locally executed deterministic MOTIF source-map rules",
+  "executed": true,
+  "branch_at_observation": "research/map-of-maps-001-first-real-weave",
+  "raw_source_content_embedded": false,
+  "auto_canon": false,
+  "external_effects": false,
+  "result": {
+    "tier_source_counts": [
+      4,
+      5,
+      7
+    ],
+    "tier_bytes": [
+      20477,
+      32420,
+      46069
+    ],
+    "atlas": {
+      "atlas_is_canon": false,
+      "captured_at": "2026-11-05T15:27:31+00:00",
+      "editorial_shelves": 7,
+      "human_curated_source_linked_relations": 4,
+      "relations_prove_runtime_compatibility": false,
+      "reported_branch_refs": 2579,
+      "reported_open_pull_requests": 1350,
+      "reported_public_repositories": 90,
+      "restricted_sources_in_public_packet": false,
+      "unique_names_in_editorial_shelves": 65
+    },
+    "planz": {
+      "authorized_to_execute": 0,
+      "editorial_edition": "ATTENTION-2026-10-28-005",
+      "focus": {
+        "blockers": [
+          "SOURCE_PIN_REVIEW",
+          "DONOR_COMPATIBILITY",
+          "CAPABILITY_OWNER_PERMISSION",
+          "RECEIVER_AUTHORIZATION",
+          "INDEPENDENT_VERIFICATION"
+        ],
+        "disposition": "OWNER_REVIEW_REQUIRED",
+        "id": "ATLAS-BRIDGE-002",
+        "next_human_gate": "Review one exact source cut, host/resource owner's informed permission, recipient authority and one source-backed synthetic cross-project test before presenting an integration as executable.",
+        "source": "https://github.com/the-static-collective/planZ/issues/33"
+      },
+      "index_is_a_complete_live_plan_census": false,
+      "reviewed_on": "2026-10-28",
+      "selected_open_entries": 11,
+      "verified_field_outcomes": 0
+    },
+    "technical": {
+      "cannon_candidate_crossings": 6,
+      "graft_original_source_subsets": 2,
+      "graft_registered_adapters": 4,
+      "held_cross_owner_candidates": 5,
+      "previously_executed_bounded_native_routes": 1,
+      "selected_unproven_edge": {
+        "claim": "A proposed planZ record does not automatically provide PlayDeck rendered full-performance evidence.",
+        "from_type": "static-collective/planz-recursive-reactor/v1/proposal",
+        "id": "PLZ_TO_PLAYDECK",
+        "is_runtime_compatible": false,
+        "source_status": "UNTESTED_CROSS_REPO_EDGE",
+        "to_type": "playdeck.PerformanceReceipt/v0.1"
+      }
+    },
+    "questions": [
+      {
+        "action_authorized": false,
+        "automatic_adapter_invention": false,
+        "canon_selection": false,
+        "disposition": "PROPOSED_RESEARCH_ONLY",
+        "external_contact": false,
+        "id": "ATLAS-QUESTION",
+        "question": "Which exact source-owner contract should be inspected before a map edge is called a working integration?",
+        "smallest_falsifiable_probe": "Choose one declared edge, retrieve its owner's cited source and test what it actually asserts.",
+        "sources": [
+          "https://github.com/the-static-collective/What-is-the-static-collective-/blob/7de5e95a1dc04ead1790d91dd6326430008d954f/atlas/constellations.json",
+          "https://github.com/the-static-collective/What-is-the-static-collective-/blob/7de5e95a1dc04ead1790d91dd6326430008d954f/atlas/relations.json"
+        ],
+        "why": "Public branch inventory is far broader than human-curated source-linked relations."
+      },
+      {
+        "action_authorized": false,
+        "automatic_adapter_invention": false,
+        "canon_selection": false,
+        "disposition": "PROPOSED_RESEARCH_ONLY",
+        "external_contact": false,
+        "id": "PLANZ-QUESTION",
+        "question": "Which owner will choose one exact public source cut for a negative-control integration test?",
+        "smallest_falsifiable_probe": "Pin just one source and define both pass and HOLD outcomes before any cross-repository action.",
+        "sources": [
+          "https://github.com/the-static-collective/planZ/blob/5b6df7fb2a3a0c57d0fff8381108589ec2765a94/public/attention-v1.json",
+          "https://github.com/the-static-collective/planZ/issues/33"
+        ],
+        "why": "The plan owner lists source pinning, donor compatibility, capability permission and independent verification as missing gates."
+      },
+      {
+        "action_authorized": false,
+        "automatic_adapter_invention": false,
+        "canon_selection": false,
+        "disposition": "PROPOSED_RESEARCH_ONLY",
+        "external_contact": false,
+        "id": "CONTRACT-QUESTION",
+        "question": "Can a proposed planZ plan actually satisfy the original PlayDeck performance-receipt contract?",
+        "smallest_falsifiable_probe": "A proposed-only plan must HOLD; only a truly witnessed typed performance receipt could satisfy a separately reviewed positive test.",
+        "sources": [
+          "https://github.com/the-static-collective/CANNON/blob/8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc/registry/multi-repo-question-field-v1.json",
+          "https://github.com/the-static-collective/GRAFT/blob/265fd538266a742d033ba2f5b408a78610d0a75c/candidate-registry.json"
+        ],
+        "why": "CANNON records this exact crossing as unverified; GRAFT can inspect the donor's original source without running it."
+      }
+    ],
+    "selected_next_test": {
+      "approval": "HUMAN_SOURCE_OWNER_REVIEW_REQUIRED",
+      "first_step": "Use owner-original public source files to construct an independently runnable planZ-to-PlayDeck typed negative fixture.",
+      "name": "ONE_SOURCE_PINNED_ADAPTER_NEGATIVE_CONTROL",
+      "possible_positive": "Only independent source-owner-reviewed witnessed receipt may justify a positive adapter test.",
+      "required_refusal": "PROPOSED_UNVERIFIED plan must NOT be interpreted as a completed performance receipt.",
+      "result_status": "PROPOSED_NOT_EXECUTED",
+      "why": "A missing typed receipt is an inspectable claim, unlike asserting thousands of branches automatically compose."
+    }
+  }
+}
