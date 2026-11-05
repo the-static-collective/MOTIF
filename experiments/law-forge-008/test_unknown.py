@@ -151,7 +151,8 @@ class UnknownWorldTests(unittest.TestCase):
         samples = []
         for method in METHODS:
             desk, questions, spent = inquiry(world, method)
-            samples.append(tuple(desk.snapshot[:4]))
+            samples.append(tuple(sorted((row.x, desk.predict(row.x, world.contract)['value'])
+                                        for row in world.initial())))
             self.assertLessEqual(spent, MAX_QUERIES)
         self.assertTrue(all(sample == samples[0] for sample in samples))
 
