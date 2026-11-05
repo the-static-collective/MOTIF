@@ -58,7 +58,7 @@ class SourceOwnedFreeGraphTests(unittest.TestCase):
    unapproved=Path(d)/"unapproved.json"
    unapproved.write_text('{"note":"not the pinned historical report"}')
    with patch.object(m,"SOURCE_PINS",fake_pins),patch.object(m,"LOCK",lock),patch.object(m.subprocess,"run") as runner:
-    runner.return_value.stdout=m.FG_COMMIT+"\\n"
+    runner.return_value.stdout=m.FG_COMMIT+"\n"
     with self.assertRaisesRegex(m.Hold,"MOTIF_REPORT_UNAUTHORIZED_OR_RELOCATED"):
      m.verify(folder,unapproved)
 
