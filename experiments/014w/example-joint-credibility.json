@@ -1,0 +1,769 @@
+{
+  "calibration_adjudicator_not_infallible": true,
+  "cases": {
+    "actuator_drift_missed": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.55,
+            0.76
+          ],
+          "posterior_mean": 0.72594
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.72,
+            0.84
+          ],
+          "posterior_mean": 0.79352
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.9,
+            0.9
+          ],
+          "posterior_mean": 0.89341
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.2
+          ],
+          "posterior_mean": 0.20473
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.7648,
+        "q": 0.7977,
+        "r0": 0.908,
+        "r1": 0.2004
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 48,
+        "missing_meta_actuation_reports_marginalized": 8,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "COMPLIANCE_SHIFT",
+      "heldout_brier_classical_full_boolean": 0.312623,
+      "heldout_brier_motif": 0.330317,
+      "issue_decisions": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.0176578,
+        "FIRST": 0.9090885,
+        "OR": 0.0038774,
+        "OTHER": 0.0692091,
+        "SECOND": 0.0001672
+      },
+      "seed": 41,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": 2.82772,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      }
+    },
+    "auditor_drift_caught": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.76,
+            0.92
+          ],
+          "posterior_mean": 0.89159
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.72,
+            0.95
+          ],
+          "posterior_mean": 0.84818
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.7,
+            0.9
+          ],
+          "posterior_mean": 0.79352
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.45
+          ],
+          "posterior_mean": 0.34847
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.8984,
+        "q": 0.7963,
+        "r0": 0.8597,
+        "r1": 0.2553
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 57,
+        "missing_meta_actuation_reports_marginalized": 10,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "AUDIT_SHIFT",
+      "heldout_brier_classical_full_boolean": 0.130249,
+      "heldout_brier_motif": 0.128433,
+      "issue_decisions": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.2743909,
+        "FIRST": 0.6999458,
+        "OR": 0.0107245,
+        "OTHER": 0.0074755,
+        "SECOND": 0.0074633
+      },
+      "seed": 11,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": -8.06584,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      }
+    },
+    "auditor_drift_missed": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.76,
+            0.92
+          ],
+          "posterior_mean": 0.7718
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.72,
+            0.84
+          ],
+          "posterior_mean": 0.75618
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.9,
+            0.9
+          ],
+          "posterior_mean": 0.89489
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.2
+          ],
+          "posterior_mean": 0.20014
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.8009,
+        "q": 0.8247,
+        "r0": 0.8731,
+        "r1": 0.2245
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 49,
+        "missing_meta_actuation_reports_marginalized": 7,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "AUDIT_SHIFT",
+      "heldout_brier_classical_full_boolean": 0.22254,
+      "heldout_brier_motif": 0.222616,
+      "issue_decisions": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.0005188,
+        "FIRST": 0.912946,
+        "OR": 0.0001114,
+        "OTHER": 0.0864234,
+        "SECOND": 5e-7
+      },
+      "seed": 23,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": -3.5588,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      }
+    },
+    "source_drift_caught": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.76,
+            0.92
+          ],
+          "posterior_mean": 0.76462
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.72,
+            0.95
+          ],
+          "posterior_mean": 0.85128
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.7,
+            0.9
+          ],
+          "posterior_mean": 0.81004
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.2
+          ],
+          "posterior_mean": 0.20314
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.8271,
+        "q": 0.8205,
+        "r0": 0.858,
+        "r1": 0.1725
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 45,
+        "missing_meta_actuation_reports_marginalized": 11,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "SOURCE_SHIFT",
+      "heldout_brier_classical_full_boolean": 0.193503,
+      "heldout_brier_motif": 0.17505,
+      "issue_decisions": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.0048393,
+        "FIRST": 0.9463214,
+        "OR": 0.0003386,
+        "OTHER": 0.0484836,
+        "SECOND": 0.000017
+      },
+      "seed": 11,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": -6.19359,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      }
+    },
+    "source_drift_missed": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.76,
+            0.92
+          ],
+          "posterior_mean": 0.86693
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.84,
+            0.95
+          ],
+          "posterior_mean": 0.87425
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.7,
+            0.7
+          ],
+          "posterior_mean": 0.7055
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.2
+          ],
+          "posterior_mean": 0.20725
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.8767,
+        "q": 0.875,
+        "r0": 0.8644,
+        "r1": 0.3025
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 49,
+        "missing_meta_actuation_reports_marginalized": 14,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "SOURCE_SHIFT",
+      "heldout_brier_classical_full_boolean": 0.263089,
+      "heldout_brier_motif": 0.263882,
+      "issue_decisions": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.9806103,
+        "FIRST": 0.0161119,
+        "OR": 0.0004163,
+        "OTHER": 0.0018291,
+        "SECOND": 0.0010325
+      },
+      "seed": 23,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": 2.2581,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      }
+    },
+    "supported_known_mechanism": {
+      "actual_synthetic_witness_receipt": {
+        "command": [
+          false,
+          false
+        ],
+        "evaluator_only_actually_applied": [
+          true,
+          false
+        ],
+        "evaluator_only_truth": true,
+        "hidden_truth_did_not_enter_inference": true,
+        "reported_audit_of_control": true,
+        "upstream_reports": [
+          {
+            "origin": "s0",
+            "reporter": "s0",
+            "says_success": true
+          },
+          {
+            "origin": "s0",
+            "reporter": "s0_forward",
+            "says_success": true
+          },
+          {
+            "origin": "s1",
+            "reporter": "s1",
+            "says_success": false
+          }
+        ]
+      },
+      "calibration_only_question_policy": {
+        "action": "CALIBRATION",
+        "assumes_all_three_channels_report": true,
+        "cost": 1,
+        "expected_joint_information_bits": 0.005277,
+        "real_world_authority": false,
+        "settings": null,
+        "status": "PROPOSE_SYNTHETIC_ONLY"
+      },
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.76,
+            0.92
+          ],
+          "posterior_mean": 0.89363
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.72,
+            0.84
+          ],
+          "posterior_mean": 0.82951
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.9,
+            0.9
+          ],
+          "posterior_mean": 0.89992
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.2,
+            0.2
+          ],
+          "posterior_mean": 0.20063
+        }
+      },
+      "evaluator_only_heldout_probability_then_truth": {
+        "classical_predicted_before_truth": 0.200848,
+        "evaluator_only_actual_controls": [
+          false,
+          false
+        ],
+        "evaluator_only_truth": true,
+        "motif_predicted_before_truth": 0.200819,
+        "requested": [
+          false,
+          false
+        ]
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.8291,
+        "q": 0.875,
+        "r0": 0.841,
+        "r1": 0.2606
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 53,
+        "missing_meta_actuation_reports_marginalized": 9,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "FIRST",
+      "heldout_brier_classical_full_boolean": 0.158774,
+      "heldout_brier_motif": 0.158774,
+      "issue_decisions": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "next_joint_information_question": {
+        "action": "INTERVENTION",
+        "assumes_all_three_channels_report": true,
+        "cost": 2,
+        "expected_joint_information_bits": 0.016585,
+        "real_world_authority": false,
+        "settings": [
+          true,
+          false
+        ],
+        "status": "PROPOSE_SYNTHETIC_ONLY"
+      },
+      "posterior_model_weights": {
+        "AND": 0.0004467,
+        "FIRST": 0.9995237,
+        "OR": 0.000001,
+        "OTHER": 0.0000285,
+        "SECOND": 0
+      },
+      "proposed_009_tree_cartridge_ensemble": {
+        "checksum_sha256": "64b4b5244e3d9334b94cdf11641ebf8a534da1b56be5c51308bcd91734ed604d",
+        "components": [
+          {
+            "hypothesis": "FIRST",
+            "joint_marginal_weight": 0.9995237,
+            "tree": {
+              "checksum_sha256": "a4083aa721e4e6eb3bb29f3daace6f6a9b02bd617972f3a6ac2404258a6b1897",
+              "counts": [
+                [
+                  8,
+                  3
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  1,
+                  10
+                ]
+              ],
+              "evidence_count": 44,
+              "first": [
+                [
+                  "qaf97a933496be53eb67f",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.795833,
+              "id": "tree-6672cd11919958f4",
+              "leaves": [
+                false,
+                false,
+                true,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "q8c5c4d1e02afe429eeb0",
+                  "?1"
+                ]
+              ],
+              "source_digest": "f05a7e0abde0bae54408c8554c8aa8f84eb6c42441851e5e417ede49f5953c36",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q8c5c4d1e02afe429eeb0",
+                "qaf97a933496be53eb67f",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "hypothesis": "SECOND",
+            "joint_marginal_weight": 0,
+            "tree": {
+              "checksum_sha256": "ff80ed6dd30755c7cdc75fbc744237214fabc17e2151b0070e11549cec654848",
+              "counts": [
+                [
+                  8,
+                  3
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  1,
+                  10
+                ]
+              ],
+              "evidence_count": 44,
+              "first": [
+                [
+                  "qaf97a933496be53eb67f",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.525,
+              "id": "tree-720de1bd8516ceb1",
+              "leaves": [
+                false,
+                true,
+                false,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "q8c5c4d1e02afe429eeb0",
+                  "?1"
+                ]
+              ],
+              "source_digest": "f05a7e0abde0bae54408c8554c8aa8f84eb6c42441851e5e417ede49f5953c36",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q8c5c4d1e02afe429eeb0",
+                "qaf97a933496be53eb67f",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "hypothesis": "AND",
+            "joint_marginal_weight": 0.00044674,
+            "tree": {
+              "checksum_sha256": "82e6a6a7c73298f19671d33f2ed6877a9d1f66fe338243968ce2c292d5806096",
+              "counts": [
+                [
+                  8,
+                  3
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  1,
+                  10
+                ]
+              ],
+              "evidence_count": 44,
+              "first": [
+                [
+                  "qaf97a933496be53eb67f",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.729167,
+              "id": "tree-2dc334ab478ba1e6",
+              "leaves": [
+                false,
+                false,
+                false,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "q8c5c4d1e02afe429eeb0",
+                  "?1"
+                ]
+              ],
+              "source_digest": "f05a7e0abde0bae54408c8554c8aa8f84eb6c42441851e5e417ede49f5953c36",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q8c5c4d1e02afe429eeb0",
+                "qaf97a933496be53eb67f",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          },
+          {
+            "hypothesis": "OR",
+            "joint_marginal_weight": 0.00000102,
+            "tree": {
+              "checksum_sha256": "d5c7dd44e2d074605ee83a3834ba051e1c0c192478b80227e9dcf8d3c8675445",
+              "counts": [
+                [
+                  8,
+                  3
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  1,
+                  10
+                ]
+              ],
+              "evidence_count": 44,
+              "first": [
+                [
+                  "qaf97a933496be53eb67f",
+                  "?0"
+                ]
+              ],
+              "fit_balanced": 0.591667,
+              "id": "tree-b07630c8de945cd1",
+              "leaves": [
+                false,
+                true,
+                true,
+                true
+              ],
+              "schema": "motif.decision-tree-cartridge.v0",
+              "second": [
+                [
+                  "q8c5c4d1e02afe429eeb0",
+                  "?1"
+                ]
+              ],
+              "source_digest": "f05a7e0abde0bae54408c8554c8aa8f84eb6c42441851e5e417ede49f5953c36",
+              "status": "PROPOSAL_ONLY",
+              "vocab": [
+                "pending",
+                "q8c5c4d1e02afe429eeb0",
+                "qaf97a933496be53eb67f",
+                "role_actor",
+                "role_target"
+              ]
+            }
+          }
+        ],
+        "confidence_values_are_prior_and_synthetic_evidence_dependent": true,
+        "counts_are_unadjudicated_upstream_witness_claims": true,
+        "other_mass": 0.00002853,
+        "real_world_authority": false,
+        "schema": "motif.joint-witness-tree-ensemble.v0",
+        "source_and_auditor_identities_are_not_authenticated": true,
+        "status": "HOLD_PROPOSAL_ONLY",
+        "uncertainty_model": "EXACT_DISCRETE_JOINT_PARAMETER_AND_MODEL_POSTERIOR"
+      },
+      "seed": 11,
+      "unfunded_question_refusal": {
+        "action": null,
+        "expected_joint_information_bits": 0,
+        "real_world_authority": false,
+        "settings": null,
+        "status": "HOLD_BUDGET"
+      },
+      "unsafe_question_refusal": {
+        "action": null,
+        "expected_joint_information_bits": 0,
+        "real_world_authority": false,
+        "settings": null,
+        "status": "HOLD_UNSAFE"
+      },
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": 4.85022,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      }
+    },
+    "unknown_rule_abstained": {
+      "credible_truthfulness_parameters": {
+        "c": {
+          "finite_grid_90pct_interval": [
+            0.55,
+            0.92
+          ],
+          "posterior_mean": 0.75663
+        },
+        "q": {
+          "finite_grid_90pct_interval": [
+            0.84,
+            0.95
+          ],
+          "posterior_mean": 0.89405
+        },
+        "r0": {
+          "finite_grid_90pct_interval": [
+            0.7,
+            0.9
+          ],
+          "posterior_mean": 0.88186
+        },
+        "r1": {
+          "finite_grid_90pct_interval": [
+            0.45,
+            0.45
+          ],
+          "posterior_mean": 0.44639
+        }
+      },
+      "evaluator_only_hidden_true_training_parameters": {
+        "c": 0.7544,
+        "q": 0.8793,
+        "r0": 0.9244,
+        "r1": 0.3097
+      },
+      "evidence_provenance": {
+        "duplicate_forwarded_reports": 59,
+        "missing_meta_actuation_reports_marginalized": 9,
+        "training_intervention_events_used": 48
+      },
+      "family_is_evaluator_only": "XOR",
+      "heldout_brier_classical_full_boolean": 0.214836,
+      "heldout_brier_motif": 0.245133,
+      "issue_decisions": {
+        "HOLD_OUTSIDE_GRAMMAR": 96
+      },
+      "posterior_model_weights": {
+        "AND": 0.0000227,
+        "FIRST": 0.0011732,
+        "OR": 0.4305026,
+        "OTHER": 0.5674734,
+        "SECOND": 0.0008281
+      },
+      "seed": 37,
+      "validation_signaled_possible_shift": {
+        "log_evidence_ratio_vs_ignorance": 6.17064,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      }
+    }
+  },
+  "claim": "uncertain witnesses' reliability is itself uncertain, not proven ground truth",
+  "experiment": "MOTIF-014",
+  "external_actions": 0,
+  "joint_model_does_not_guarantee_drift_detection": true,
+  "joint_parameter_model": "EXACT_BAYES_ON_HANDCRAFTED_FINITE_GRID",
+  "scope": "SYNTHETIC_FALLIBLE_META_TESTIMONY",
+  "source_identity_and_custody_not_authenticatable": true,
+  "stronger_classical_full_boolean_comparator_included": true
+}
