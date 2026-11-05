@@ -150,10 +150,32 @@ def generate(scene: Scene, offers: tuple[Offer, ...],
     assets = dict(scene.assets)
     # Never infer a new grant. Only actors already covered by site/world access
     # may be suggested as final target performers.
-    recipients = sorted({
+    final_recipients = {
         actor for actor, task in scene.access if task == goal.task
         and (goal.actor is None or goal.actor == actor)
-    })
+    }
+    # Backward-chain through *explicit offered future relay roles*.
+    # A relay teacher may first need to acquire the skill before teaching
+    # the actual target. This is where one action births a new possible action.
+    relevant = set(final_recipients)
+    changed = True
+    while changed:
+        changed = False
+        for offer in offers:
+            if (not offer.declared or offer.subject != goal.task
+                    or not offer.recipients.intersection(relevant)):
+                continue
+            must_gain = (
+                offer.kind == "teach" and
+                (offer.provider, goal.task) not in scene.skills
+            ) or (
+                offer.kind == "inform" and
+                (offer.provider, goal.task) not in scene.known
+            )
+            if must_gain and offer.provider not in relevant:
+                relevant.add(offer.provider)
+                changed = True
+    recipients = sorted(relevant)
     proposals: list[Candidate] = []
 
     def make(kind: str, source: str, recipient: str, subject: str,
@@ -186,16 +208,30 @@ def generate(scene: Scene, offers: tuple[Offer, ...],
 
     for recipient in recipients:
         if (recipient, goal.task) not in scene.skills:
-            for teacher, task in sorted(scene.skills):
-                if task == goal.task and teacher != recipient:
-                    make("teach", teacher, recipient, task)
+            teachers = {
+                actor for actor, task in scene.skills if task == goal.task
+            } | {
+                offer.provider for offer in offers
+                if offer.kind == "teach" and offer.subject == goal.task
+                and recipient in offer.recipients and offer.declared
+            }
+            for teacher in sorted(teachers):
+                if teacher != recipient:
+                    make("teach", teacher, recipient, goal.task)
 
         if (recipient, goal.task) not in scene.known:
-            for informer, task in sorted(scene.known):
-                if task == goal.task and informer != recipient:
-                    make("inform", informer, recipient, task)
+            informers = {
+                actor for actor, task in scene.known if task == goal.task
+            } | {
+                offer.provider for offer in offers
+                if offer.kind == "inform" and offer.subject == goal.task
+                and recipient in offer.recipients and offer.declared
+            }
+            for informer in sorted(informers):
+                if informer != recipient:
+                    make("inform", informer, recipient, goal.task)
 
-        if tool_kind not in {
+        if recipient in final_recipients and tool_kind not in {
             assets[asset] for actor, asset in scene.custody if actor == recipient
         }:
             for holder, asset_id in sorted(scene.custody):
@@ -338,7 +374,13 @@ def solve(
 
         if steps >= max_steps:
             continue
-        for action in moves:
+        # Recompute bindings from the new state. The source of a proposed
+        # teaching/information transfer can itself be a newly trained actor.
+        # Source facts are not added as evidence; only hypothetical successor
+        # states are searched.
+        live_moves = generate(world, offers, acceptances, goal)
+        for action in live_moves:
+            by_id[action.id] = action
             after = transition(world, action, counterfactual=True)
             if after is None or after == world:
                 continue
