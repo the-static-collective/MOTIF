@@ -48,6 +48,19 @@ class BlindFalsifierTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             hamming((0,)*11, (1,)*12)
 
+    def test_all_ones_initial_anchor_eliminates_positive_only_mutants(self):
+        # A predeclared limitation: every all-positive-AND mutant toggles
+        # the champion on the witnessed all-ones setting, so none survive.
+        source = Stranger("two_bit_xor", 3)
+        learning, _ = identification(source)
+        self.assertEqual(len(learning.survivor_indices), 1)
+        self.assertIn((1,)*12, dict(learning.snapshot))
+        self.assertEqual(candidate_critics(learning), ())
+        ours = AuditLedger(learning, audit_policy="mutant_challenge")
+        classical = AuditLedger(learning, audit_policy="classical_diversity")
+        self.assertEqual(ours.propose(source.catalog()).card,
+                         classical.propose(source.catalog()).card)
+
     def test_learning_equal_for_every_audit_method(self):
         world = Stranger("two_bit_xor", 3)
         original, queries = identification(world)
