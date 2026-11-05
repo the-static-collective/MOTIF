@@ -35,6 +35,9 @@ jobs:
         run: |
           python experiments/law-forge-002/trial.py > law-forge-002-results.json
           python -m json.tool law-forge-002-results.json > /dev/null
+      - name: Report predeclared method comparison
+        run: |
+          python -c "import json; r=json.load(open('law-forge-002-results.json')); print(json.dumps({'development': r['development'], 'evaluation': r['evaluation'], 'decision': r['frozen_method_decision']}, indent=2))"
       - name: Preserve synthetic trial receipt
         uses: actions/upload-artifact@v4
         with:
