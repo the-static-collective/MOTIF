@@ -8,6 +8,7 @@ weight. At most 24 query cost units, on a 4096-setting domain.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from itertools import product
 from random import Random
 
@@ -15,6 +16,24 @@ from learner import (
     SourceContract, Observation, Question, controls,
     consequence_weight, question_cost, WIDTH, DOMAIN
 )
+
+@lru_cache(maxsize=128)
+def _sample_partitions(seed):
+    rng = Random(1447 + seed * 1559)
+    all_controls = list(product((0, 1), repeat=WIDTH))
+    rng.shuffle(all_controls)
+    anchors = [tuple([0]*WIDTH), tuple([1]*WIDTH)]
+    anchors.extend(next(x for x in all_controls if x not in anchors)
+                   for _ in range(2))
+    anchored = set(anchors)
+    remaining = [x for x in all_controls if x not in anchored]
+    return {
+        "initial": tuple(anchors),
+        "catalog": tuple(remaining[:160]),
+        "review": tuple(remaining[160:352]),
+        "test": tuple(remaining[352:672])
+    }
+
 
 FAMILIES = (
     "identity_bit", "pair_and", "pair_or", "pair_xor",
@@ -83,21 +102,7 @@ class World:
                            self.contract.id)
 
     def partitions(self):
-        rng = Random(1447 + self.seed * 1559)
-        controls_all = list(product((0, 1), repeat=WIDTH))
-        rng.shuffle(controls_all)
-        # Anchor cases are a specified source observation protocol, not
-        # privileged hidden mechanism hints.
-        anchors = [tuple([0]*WIDTH), tuple([1]*WIDTH)]
-        anchors.extend(controls_all[:2])
-        used = set(anchors)
-        remaining = [x for x in controls_all if x not in used]
-        return {
-            "initial": tuple(anchors),
-            "catalog": tuple(remaining[:160]),
-            "review": tuple(remaining[160:352]),
-            "test": tuple(remaining[352:672])
-        }
+        return _sample_partitions(self.seed)
 
     def initial(self):
         return tuple(self.observe(x, "train")
