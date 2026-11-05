@@ -10,6 +10,10 @@ The falsifier's legitimate target is detecting an out-of-grammar mechanism
 """
 from __future__ import annotations
 
+from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).resolve().parents[1] / "law-forge-009"))
+
 import json
 from functools import lru_cache
 from entropy_cartridge import EntropyCartridge
