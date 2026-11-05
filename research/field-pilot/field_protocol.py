@@ -224,6 +224,7 @@ def summarize(log: object, now: str) -> dict[str, Any]:
         "unmatched_is_not_no_demand": True,
         "causal_effect_identified": False,
         "authorship_verified": False,
+        "contains_demo_ids": any(c["id"].startswith("demo-") for c in data["cards"]),
         "log_sha256_unsigned": sha256(core.encode("utf-8")).hexdigest(),
         "pairs": rows,
     }
