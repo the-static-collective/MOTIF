@@ -1,0 +1,123 @@
+name: MOTIF-006 — actual PNG image-in and imagined future frames
+
+on:
+  push:
+    branches:
+      - experiment/door-foundry-006-image-in-imagination
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-006/**'
+      - '.github/workflows/door-foundry-006.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-source-closed-grammar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original unmerged GRAFT-030 visual operator synthesizer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Original CANNON-095 independent image review code
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Original MOTIF-006 source-owned PNG reader at first commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: MOTIF reads actual tiny PNG input and defines imagined goal
+        run: |
+          python experiments/door-foundry-006/visual_in.py --demo --out image-inputs
+          python - <<'PY'
+          import sys,json
+          from pathlib import Path
+          sys.path.insert(0,'experiments/door-foundry-006')
+          from visual_in import decode_png
+          q=json.loads(Path('image-inputs/visual-gap.json').read_text())
+          assert decode_png(Path('image-inputs/start.png').read_bytes())==tuple(q['start_rows'])
+          assert q['proof']['old_red_pixels_must_be_cleared']==4
+          assert q['proof']['fixed_graft029_add_only_insufficient'] is True
+          print(json.dumps({'source_png_is_actual_binary':True,
+             'image_size':[len(q['start_rows'][0]),len(q['start_rows'])],
+             'operator_kind_not_representable_by_add_only':True}))
+          PY
+      - name: Original GRAFT-030 genuinely compiles and tests visual operators
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: CANNON-095 independently reviews GRAFT code and original PNG bytes
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start image-inputs/start.png --goal image-inputs/target.png \
+            --gap image-inputs/visual-gap.json \
+            --out evidence/cannon-visual-review.json
+      - name: MOTIF independently recompiles source-owned GRAFT program into a new build
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start image-inputs/start.png \
+            --goal image-inputs/target.png \
+            --gap image-inputs/visual-gap.json \
+            --receipt evidence/cannon-visual-review.json \
+            --graft graft-source --out generated-visual-motif
+      - name: Execute image-in imagined-future planner and render PNG storyboard
+        run: |
+          python generated-visual-motif/run.py --out evidence/imagined-futures \
+            > evidence/imagination-result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('evidence/imagination-result.json').read_text())
+          assert p['imagined_goal_reached'] is True
+          assert p['imagined_future_frames']>3
+          assert p['initial_add_only_grammar_can_reach_target'] is False
+          assert p['classical_equal_information_goal_reached'] is True
+          assert p['superior_to_classical'] is False
+          assert p['actual_object_movements']==0
+          assert p['external_network_calls']==0
+          assert Path('evidence/imagined-futures/imagined-storyboard.png').read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'
+          print(json.dumps({'png_input':True,'visual_frames':p['imagined_future_frames'],
+             'counterfactuals':len(p['counterfactual_first_moves']),
+             'min_actions':p['imagined_actions'],
+             'equal_information_classical_actions':p['classical_minimum_steps'],
+             'external_actions':0},indent=2))
+          PY
+      - name: Additional bounded PNG, provenance and tampering tests
+        env:
+          GRAFT_SOURCE: ${{ github.workspace }}/graft-source
+          CANNON_RECEIPT: ${{ github.workspace }}/evidence/cannon-visual-review.json
+          IMG_START: ${{ github.workspace }}/image-inputs/start.png
+          IMG_TARGET: ${{ github.workspace }}/image-inputs/target.png
+          IMG_GAP: ${{ github.workspace }}/image-inputs/visual-gap.json
+        run: python -m unittest discover -s experiments/door-foundry-006 -p 'test_visual_imagination.py' -v
+      - name: Preserve real PNG input, all imagined PNG outputs and source-owned runnable build
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-006-IMAGE-IN-IMAGINED-FUTURES-HOLD
+          path: |
+            image-inputs/
+            evidence/
+            generated-visual-motif/
+          if-no-files-found: error
+          retention-days: 30
