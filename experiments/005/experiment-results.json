@@ -1,0 +1,33 @@
+{
+  "experiment": "MOTIF-005",
+  "scope": "synthetic only",
+  "train_episodes": 18,
+  "heldout_episodes": 12,
+  "concept": {
+    "id": "concept-ef609a99116f",
+    "status": "PROPOSED",
+    "definition": [
+      [
+        "carries",
+        "?2",
+        "?e0"
+      ],
+      [
+        "fits",
+        "?e0",
+        "?0"
+      ]
+    ],
+    "support_success": 6,
+    "support_failure": 12,
+    "alternatives": 1,
+    "best_single_accuracy": 0.5,
+    "explanation": "an anonymous two-edge existential join; provisional, not causal"
+  },
+  "correct_heldout": 12,
+  "single_edge_baseline_balanced_accuracy": 0.5,
+  "join_mismatch_rejected": true,
+  "joined_case_admitted_to_simulation": true,
+  "unjoined_case_held_from_simulation": true,
+  "observed_world_unchanged": true
+}

@@ -22,6 +22,12 @@ jobs:
       - name: Test 004
         working-directory: experiments/004
         run: python -m unittest -v test_scar.py
+      - name: Test 005
+        working-directory: experiments/005
+        run: python -m unittest -v test_concept.py
+      - name: Reproduce 005
+        working-directory: experiments/005
+        run: python concept.py
       - name: Reproduce 004
         working-directory: experiments/004
         run: python scar.py
