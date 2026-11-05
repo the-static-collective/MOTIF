@@ -93,6 +93,27 @@
         wrap.classList.add("warning");
       wrap.appendChild(meta);
       const buttons=el("div","buttonrow");
+      const alreadyProposed=log.events.some(e=>e.subject===row.id&&e.kind==="candidate_proposed");
+      const hasReports=log.events.some(e=>e.subject===row.id&&e.kind!=="candidate_proposed");
+      const freeze=el("button","outline",alreadyProposed?"Candidate recorded":"Record prospective candidate");
+      freeze.disabled=demo||alreadyProposed||hasReports;
+      freeze.addEventListener("click",()=>{
+        const observer=$("observer").value.trim();
+        if(!observer){
+          status("Enter your reporter alias in section 03 before freezing a prospective candidate.",true);
+          $("observer").focus();return;
+        }
+        try{
+          F.addEvent(log,{
+            subject:row.id,kind:"candidate_proposed",reporter:observer,
+            source:"operator_generated",
+            note:"FIELD-001 exact topic+area proposal; no handoff outcome predicted or observed.",
+          },now());
+          setDirty();render();
+          status("Candidate frozen BEFORE follow-up. Actual result remains unknown.");
+        }catch(e){status(e.message,true);}
+      });
+      buttons.appendChild(freeze);
       const intro=el("button","outline","Prepare introduction");
       intro.addEventListener("click",()=>{
         $("intro-draft").value="Possible introduction (DRAFT — NOT SENT):\n\n"
@@ -141,6 +162,8 @@
     try {s=F.summary(log,now());}
     catch(e){status("Invalid field log: "+e.message,true);return;}
     $("metric-cards").textContent=String(log.cards.length);
+    $("metric-proposed").textContent=String(s.prospective_proposals_recorded);
+    $("metric-unresolved").textContent=String(s.unresolved_proposals);
     $("metric-pairs").textContent=String(s.active_candidate_pairs);
     $("metric-handoffs").textContent=String(s.handoff_reports);
     $("metric-benefit").textContent=String(s.benefit_reports);
