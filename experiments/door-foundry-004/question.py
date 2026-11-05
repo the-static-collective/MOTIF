@@ -37,7 +37,7 @@ def digest(obj):
 
 def git_blob(path):
     data = path.read_bytes()
-    return sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    return sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 
 def native_modules(original):
