@@ -110,6 +110,17 @@
     validate({...log,events:[...log.events,event]});
     log.events.push(event); return event;
   }
+  function allCompatiblePairs(log) {
+    validate(log);
+    const out=[];
+    for (const a of log.cards.filter(c=>c.kind==="offer"))
+      for (const b of log.cards.filter(c=>c.kind==="need"))
+        if (compatible(a,b)) out.push({
+          id:pairId(a,b), offer:a,need:b,
+          expires_at:a.expires_at<b.expires_at?a.expires_at:b.expires_at
+        });
+    return out.sort((a,b)=>a.id.localeCompare(b.id));
+  }
   function eligible(log,now=utcNow()) {
     validate(log);
     const at=stamp(now);
@@ -178,7 +189,7 @@
        origin:"owner_self_report",share_ok:true}
     ],events:[]};
   }
-  const api={SCHEMA,empty,validate,utcNow,addCard,addEvent,eligible,summary,demo,pairId};
+  const api={SCHEMA,empty,validate,utcNow,addCard,addEvent,eligible,allCompatiblePairs,summary,demo,pairId};
   if (typeof module!=="undefined" && module.exports) module.exports=api;
   root.FieldPilot=api;
 })(typeof globalThis==="object"?globalThis:this);
