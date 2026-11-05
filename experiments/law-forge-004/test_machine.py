@@ -132,7 +132,7 @@ class GrammarBreakerTests(unittest.TestCase):
         rows = World("ends_01").partition("review")
         self.assertEqual(independent_review(machine, rows[:40])["status"],
                          "HOLD_INSUFFICIENT_REVIEW")
-        repeated = rows[:80] * 2
+        repeated = [row for row in rows if len(row.word) == 8][:80] * 2
         self.assertEqual(independent_review(machine, repeated)["status"],
                          "HOLD_REVIEW_COVERAGE")
 
