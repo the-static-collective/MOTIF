@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import lru_cache
+from hashlib import sha256
 from itertools import product
 from pathlib import Path
 from random import Random
@@ -55,8 +56,11 @@ class UnknownOwner:
 
     @property
     def contract(self):
+        opaque = sha256(
+            f"signed-owner-v1:{self.family}:{self.seed}".encode()
+        ).hexdigest()[:24]
         return SourceContract("synthetic-independent-signed-source",
-                              self.epoch, f"signed-challenge-{self.seed}")
+                              self.epoch, f"signed-challenge-{opaque}")
 
     @property
     def positions(self):
