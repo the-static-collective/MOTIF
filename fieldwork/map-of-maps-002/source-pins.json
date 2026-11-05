@@ -1,0 +1,113 @@
+{
+  "schema": "motif.native-investigation-source-lock/v1",
+  "permission": "LOCAL_PUBLIC_SNAPSHOT_ANALYSIS_ONLY",
+  "purpose": "Test one type-boundary crossing emitted by source-owned MOTIF map-of-maps-001.",
+  "source_owners": [
+    {
+      "id": "alex",
+      "repo": "the-static-collective/ALEX.2",
+      "commit": "515aea5ac73873300f87dcef2de7492e6e1d58d4",
+      "files": [
+        {
+          "path": "alex_runtime/derivation.py",
+          "blob": "032fed703a2719111992fc1ef247606b57b9b860"
+        }
+      ]
+    },
+    {
+      "id": "planz-native",
+      "repo": "the-static-collective/planZ",
+      "commit": "b4c954c628991acc9d9f41cd42c2b1951bc5855c",
+      "files": [
+        {
+          "path": "scripts/motif-classical.mjs",
+          "blob": "22d75c26039e5783b59cf71be02982428603128c"
+        }
+      ]
+    },
+    {
+      "id": "dogram",
+      "repo": "the-static-collective/Dogram",
+      "commit": "551b5f9df18f17ec69b452ddcdff01718e0ff771",
+      "files": [
+        {
+          "path": "dogram/engine.py",
+          "blob": "619ebdd7ef32b58dde2b6d4aa7a56f7d408b07a7"
+        },
+        {
+          "path": "dogram/reach.py",
+          "blob": "1ddffc4505529da71cbb745b088e3f14458caafb"
+        }
+      ]
+    },
+    {
+      "id": "graft-native",
+      "repo": "the-static-collective/GRAFT",
+      "commit": "aa3984d2dbdf949996639b029ca0d95ab6c290e5",
+      "files": [
+        {
+          "path": "src/live-scout.mjs",
+          "blob": "17a1100974cd3c7b7fd8f5e87b245b7df04d2443"
+        }
+      ]
+    },
+    {
+      "id": "playdeck",
+      "repo": "the-static-collective/playdeck",
+      "commit": "a7cf718421e767fd382a01894063c3eeba3d2930",
+      "files": [
+        {
+          "path": "packages/core/src/PerformanceReceipt.ts",
+          "blob": "9f30461e2af88423c84af7e8ea10d0d146714026"
+        },
+        {
+          "path": "packages/receipts/src/validateReceipt.ts",
+          "blob": "65d142bdca276561969e684aff92f06d83464c0d"
+        },
+        {
+          "path": "packages/receipts/src/sealReceipt.ts",
+          "blob": "642bac9b38190c3d054a6325bdcd9a0a2595eddf"
+        }
+      ]
+    },
+    {
+      "id": "planz-proposal",
+      "repo": "the-static-collective/planZ",
+      "commit": "64ed8a376acd63a5d630e1649b6001fb3b3251de",
+      "files": [
+        {
+          "path": "reactor/recursive.mjs",
+          "blob": "3d7c9fc075e4b1c81786b91645b6312e57b6bfce"
+        }
+      ]
+    }
+  ],
+  "snapshot_documents": [
+    {
+      "id": "cannon-question",
+      "repo": "the-static-collective/CANNON",
+      "checkout": "cannon",
+      "commit": "8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc",
+      "branch": "experiment/inspand-013-multi-repo-question-atlas",
+      "path": "docs/INSPAND-013.md",
+      "blob": "3bbfc066ac13d44368f6b4dcf93f3fb04610cc8b"
+    },
+    {
+      "id": "planz-introduction",
+      "repo": "the-static-collective/planZ",
+      "checkout": "planz",
+      "commit": "5b6df7fb2a3a0c57d0fff8381108589ec2765a94",
+      "branch": "main",
+      "path": "README.md",
+      "blob": "519640da0d67d3ad31a75ae7215fe4e8171fc065"
+    }
+  ],
+  "safety": {
+    "no_private_source": true,
+    "no_live_network_in_experiment": true,
+    "local_mocks_are_not_real_network_observations": true,
+    "tools_do_not_grant_canon": true,
+    "no_external_execution": true,
+    "code_does_not_invent_adapter": true
+  }
+}

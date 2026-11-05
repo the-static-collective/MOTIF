@@ -1,0 +1,263 @@
+{
+  "schema": "motif.map-002-first-source-owned-native-execution/v1",
+  "ci_run": "https://github.com/the-static-collective/MOTIF/actions/runs/42097202775",
+  "ci_head": "33f21b18f0ff3897df7eb12ed370299e570e417d",
+  "source": "Actual GitHub Actions stdout on 2026-11-05; full JSON including original source Git blob receipts retained as workflow artifact",
+  "status": "EXECUTED_NATIVE_READ_ONLY_RESEARCH_HELD",
+  "effect": "none",
+  "native_organs_executed": [
+    "ALEX.2",
+    "planZ",
+    "Dogram",
+    "GRAFT"
+  ],
+  "source_pins": "../source-pins.json",
+  "actual_observations": {
+    "status": "EXECUTED_NATIVE_READ_ONLY_RESEARCH_HELD",
+    "native_owners": [
+      "ALEX",
+      "Dogram",
+      "GRAFT",
+      "planZ"
+    ],
+    "native_plan": {
+      "actions": [
+        "PIN_SOURCES",
+        "CHECK_PLAYDECK_TYPES",
+        "ALEX_REVIEW",
+        "DOGRAM_PROBE",
+        "SCOUT_DOCS",
+        "HOLD_BAD_CAST",
+        "RETURN_REVIEW_PACKET"
+      ],
+      "approval": "HUMAN_REVIEW_REQUIRED",
+      "costs_are_measured_energy": false,
+      "declared_example_cost": 10,
+      "expanded": 18,
+      "external_actions": 0,
+      "mode": "LOCAL_RESEARCH_PROPOSAL",
+      "native_owner": "the-static-collective/planZ",
+      "plan_executed_by_planz": false,
+      "planner": "source-owned uniform-cost search + independent replay",
+      "schema": "motif.map-002-native-planz-plan/v1",
+      "simulated_trace": [
+        {
+          "action": "PIN_SOURCES",
+          "after": [
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP"
+          ],
+          "cumulative_cost": 1,
+          "effects": [
+            "PINS_CHECKED"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "QUESTION_FROM_MAP"
+          ]
+        },
+        {
+          "action": "CHECK_PLAYDECK_TYPES",
+          "after": [
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 2,
+          "effects": [
+            "TYPE_CONTRACT_READ"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "PINS_CHECKED"
+          ]
+        },
+        {
+          "action": "ALEX_REVIEW",
+          "after": [
+            "CLAIM_SCREENED",
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 4,
+          "effects": [
+            "CLAIM_SCREENED"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "PINS_CHECKED"
+          ]
+        },
+        {
+          "action": "DOGRAM_PROBE",
+          "after": [
+            "CLAIM_SCREENED",
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "TOPOLOGY_TESTED",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 6,
+          "effects": [
+            "TOPOLOGY_TESTED"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "PINS_CHECKED"
+          ]
+        },
+        {
+          "action": "SCOUT_DOCS",
+          "after": [
+            "CLAIM_SCREENED",
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "SCOUT_INSPECTED",
+            "TOPOLOGY_TESTED",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 8,
+          "effects": [
+            "SCOUT_INSPECTED"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "PINS_CHECKED"
+          ]
+        },
+        {
+          "action": "HOLD_BAD_CAST",
+          "after": [
+            "CANDIDATE_TESTABLE",
+            "CLAIM_SCREENED",
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "SCOUT_INSPECTED",
+            "TOPOLOGY_TESTED",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 9,
+          "effects": [
+            "CANDIDATE_TESTABLE"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "CLAIM_SCREENED",
+            "TYPE_CONTRACT_READ",
+            "TOPOLOGY_TESTED",
+            "SCOUT_INSPECTED"
+          ]
+        },
+        {
+          "action": "RETURN_REVIEW_PACKET",
+          "after": [
+            "CANDIDATE_TESTABLE",
+            "CLAIM_SCREENED",
+            "PINS_CHECKED",
+            "QUESTION_FROM_MAP",
+            "RECEIPT_READY",
+            "SCOUT_INSPECTED",
+            "TOPOLOGY_TESTED",
+            "TYPE_CONTRACT_READ"
+          ],
+          "cumulative_cost": 10,
+          "effects": [
+            "RECEIPT_READY"
+          ],
+          "executed_external_action": false,
+          "requires": [
+            "CANDIDATE_TESTABLE"
+          ]
+        }
+      ],
+      "source_entrypoint": "scripts/motif-classical.mjs",
+      "source_owner_approval": false
+    },
+    "ALEX": {
+      "actual_witness_support_path_supplied": false,
+      "attention_only_disposition": "REFUSE",
+      "attention_only_reason": "ATTENTION_NOT_SUPPORT",
+      "claim_admitted": false,
+      "missing_path_disposition": "INSUFFICIENT_TO_TEST",
+      "missing_path_reason": "NO_ATTRIBUTABLE_SUPPORT_PATH",
+      "original_org": "the-static-collective/ALEX.2",
+      "source_owner_evaluator_executed": true,
+      "source_search_is_evidence_of_working_adapter": false
+    },
+    "Dogram": {
+      "backward_reachable_after_counterfactual_edge": false,
+      "forward_reachable_after_counterfactual_edge": true,
+      "forward_reachable_before": false,
+      "graph_mutation_was_physical_or_code_action": false,
+      "model_topology_only_not_adapter_compatibility": true,
+      "operator": "reach@1",
+      "original_operator_executed": true,
+      "original_org": "the-static-collective/Dogram",
+      "receipt_input_digest": "sha256:247e3cfbfa65513a1f1de041cc91349f9e6a42588de842900ad3c71551114cc9",
+      "status": "OK_COUNTERFACTUAL_GRAPH_ONLY"
+    },
+    "GRAFT": {
+      "actual_network_gets": 0,
+      "mock_fetch_invocations": 8,
+      "native_owner": "the-static-collective/GRAFT",
+      "native_scout_schema": "graft.live-public-scout/v1",
+      "observed_docs": [
+        {
+          "source_sha256": "sha256:cbbd0614500f0c02e9936084a2f3730ae04b628cc36c8191b950736305835039",
+          "source_state": "PROPOSAL_OR_HELD_AT_SOURCE",
+          "source_url": "https://github.com/the-static-collective/CANNON/blob/8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc/docs/INSPAND-013.md",
+          "topic_score": 5.75
+        },
+        {
+          "source_sha256": "sha256:289eb3ea79d642c49b3426e9f93936b57ecd0e3541880dbe2c868cf0467c7830",
+          "source_state": "NO_OWNER_ADOPTION_INFERRED",
+          "source_url": "https://github.com/the-static-collective/planZ/blob/5b6df7fb2a3a0c57d0fff8381108589ec2765a94/README.md",
+          "topic_score": 5.75
+        }
+      ],
+      "original_scout_limitations": {
+        "all_project_states_known": false,
+        "atomic_snapshot": false,
+        "known_documents_attempted": 2,
+        "known_documents_read": 2,
+        "limited_to_first_100_branches_per_repo": true,
+        "new_branch_docs_read": 0,
+        "new_branch_leads": 0,
+        "scope": "allowlisted_public_github_only",
+        "source_errors": 0
+      },
+      "permission": "NONE",
+      "relevant_docs": [
+        "https://github.com/the-static-collective/CANNON/blob/8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc/docs/INSPAND-013.md",
+        "https://github.com/the-static-collective/planZ/blob/5b6df7fb2a3a0c57d0fff8381108589ec2765a94/README.md"
+      ],
+      "replay_mode": "OFFLINE_PUBLIC_EXACT_GIT_SNAPSHOTS_NOT_LIVE_NETWORK",
+      "schema": "motif.map-002-native-graft-scour/v1",
+      "source_admitted_as_evidence": false
+    },
+    "original_type_check": {
+      "actual_playdeck_validator_executed": false,
+      "conversion_authorized": false,
+      "observation": "INCOMPATIBLE_SOURCE_CONTRACTS_WITHOUT_ADAPTER_EVIDENCE",
+      "owner_review": true,
+      "planz_execution_asserted": false,
+      "planz_source_status": "PROPOSED_UNVERIFIED",
+      "playdeck_receipt_requires_rendered_phase_and_full_performance_evidence": true,
+      "real_rendered_performance_observed": false,
+      "source_owned_runtime_seal_module_inspected": true,
+      "status": "HOLD_NO_EXECUTABLE_CAST"
+    },
+    "next_experiment": {
+      "adapter_invented": false,
+      "human_review_required": true,
+      "owner_permission": false,
+      "question": "Can an original, witnessed PlayDeck performance receipt be generated from an independently authorized source-owned activity, rather than silently casting a proposed plan?",
+      "real_positive_witness_found": false,
+      "smallest_negative_control": "A planZ PROPOSED_UNVERIFIED output is held, not accepted as a rendered PlayDeck receipt.",
+      "smallest_positive_control": "Run original PlayDeck validation on a genuine rendered full-performance receipt with resolved descendants; no such witness is available in this case.",
+      "status": "PROPOSED_FOR_SOURCE_OWNER_REVIEW",
+      "what_next": "Inspect one actual original PlayDeck fixture and its native validation/runner; obtain explicit independent owner review before writing a converter."
+    }
+  }
+}
