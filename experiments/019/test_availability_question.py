@@ -106,7 +106,7 @@ class TestedQuestionKinds(unittest.TestCase):
     def test_rejects_wrong_source_units_and_identity(self):
         bad=deepcopy(self.dev)
         bad["blue"]["features"][0]["properties"]["unit_of_measure"]="degC"
-        with self.assertRaises(m.HOLD):
+        with self.assertRaises(m.water.HOLD):
             m.develop(self.train,bad)
 
     def test_failed_sensor_is_never_imputed_as_no_rain_or_no_flow(self):
