@@ -327,6 +327,30 @@ class CausalCartographerTests(unittest.TestCase):
             cartographer.independent_review(
                 state,self.train,self.world.controls)
 
+    def test_checked_in_intervention_cartridges_match_fresh_demo(self):
+        import importlib.util
+        filename=Path(__file__).parent/"demo.py"
+        module=importlib.util.module_from_spec(
+            importlib.util.spec_from_file_location("motif012_demo_test",filename))
+        module.__spec__.loader.exec_module(module)
+        saved=json.loads((Path(__file__).parent/
+                          "example-causal-map.json").read_text())
+        self.assertEqual(saved,module.demonstrate())
+        healthy=saved["supported_causal_candidate"]
+        self.assertEqual(len(healthy["initial_hypotheses"]),4)
+        self.assertEqual([x["candidate_count_after"]
+                          for x in healthy["interventions"]],[2,1])
+        self.assertEqual(healthy["local_fixture_admission"]["decision"],
+                         "ADMIT_PREDICT_ONLY")
+        self.assertTrue(healthy["held_before_explicit_local_decision"])
+        self.assertEqual(saved["latent_source_refused"]["local_review"]["status"],
+                         "HOLD_INDEPENDENT_FALSIFIER")
+        self.assertEqual(saved["noisy_source_refused"]["local_review"]["status"],
+                         "HOLD_INDEPENDENT_FALSIFIER")
+        for card in healthy["initial_hypotheses"]:
+            self.assertEqual(validate_cartridge(json.dumps(card["tree"])).id,
+                             card["tree"]["id"])
+
     def test_world_full_record_and_ci_receipt_reproduce_exactly(self):
         saved=json.loads((Path(__file__).parent/
                           "experiment-results.json").read_text())
