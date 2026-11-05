@@ -21,7 +21,8 @@ def greedy_world(hidden, hypotheses, roads):
             r for r in roads if r.allowed and r.name not in observed
             and all(observed.get(source) == signal for source, signal in r.requires)
         ]
-        available = [Avenue(r.name, r.kind, r.cost, r.predicted, r.origin,
+        available = [Avenue(r.name, r.kind, r.cost,
+                            {h.name: r.predicted[h.name] for h in survivors}, r.origin,
                             r.prompt, r.human, r.allowed) for r in current]
         decision = choose(survivors, available, budget=1.25-spent,
                           max_parallel=2, cost_penalty=0.01)
