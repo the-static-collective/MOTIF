@@ -52,8 +52,8 @@ def sparse_reference_vectors(refs,queries):
             docfreq[k]+=1
     vect=[]
     for row in raw:
-        v={k:(1+log(value))* (1+log((1+num_ref)/(1+docfreq[k])))
-           for k,value in row.items() if value>0}
+        v={k:(1+log(max(1.,value))) * (1+log((1+num_ref)/(1+docfreq[k])))
+           for k,value in row.items() if value>0 and docfreq[k]>0}
         norm=sqrt(sum(x*x for x in v.values())) or 1.
         vect.append({k:value/norm for k,value in v.items()})
     return vect[:num_ref],vect[num_ref:]
