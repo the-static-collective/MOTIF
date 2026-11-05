@@ -1,0 +1,42 @@
+{
+  "phase": "LOOP_REVISED_AND_FROZEN_WITHOUT_NEW_EVENT",
+  "plan_sha256": "5c1e3842bb064faf5bf9bab90d00c561705615442fe47313cd9587a18afc615a",
+  "selected": "ask_sueur",
+  "iteration_summaries": [
+    {
+      "version": "QUESTION-0",
+      "reason": "Is more information always better?",
+      "selected": "ask_sueur",
+      "changed": false,
+      "relative_to_baseline": "New policy gains against same-objective persistence on development"
+    },
+    {
+      "version": "QUESTION-1",
+      "reason": "Is another measurement worth the observation credit?",
+      "selected": "ask_sueur",
+      "changed": false,
+      "relative_to_baseline": "New policy gains against same-objective persistence on development"
+    },
+    {
+      "version": "QUESTION-2",
+      "reason": "What if the sensor is missing when we ask?",
+      "selected": "ask_sueur",
+      "changed": false,
+      "relative_to_baseline": "New policy gains against same-objective persistence on development"
+    },
+    {
+      "version": "QUESTION-3",
+      "reason": "Does the answer survive time-regime drift within development?",
+      "selected": "ask_sueur",
+      "changed": false,
+      "relative_to_baseline": "New policy gains against same-objective persistence on development"
+    },
+    {
+      "version": "QUESTION-4",
+      "reason": "Should we only ask when local conditions make the question relevant?",
+      "selected": "ask_sueur",
+      "changed": false,
+      "relative_to_baseline": "New policy gains against same-objective persistence on development"
+    }
+  ]
+}
