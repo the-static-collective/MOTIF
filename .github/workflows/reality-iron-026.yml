@@ -1,0 +1,30 @@
+name: MOTIF-026 — consent-bound local work specification
+on:
+  push:
+    branches: [experiment/reality-iron-026-goal-to-local-work]
+  pull_request:
+    paths:
+      - "experiments/026/**"
+      - ".github/workflows/reality-iron-026.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  spec-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Exact-contract local work grants and refusal tests
+        run: |
+          python3 -m unittest discover -s experiments/025 -p "test_*.py" -v
+          python3 -m unittest discover -s experiments/026 -p "test_*.py" -v
+      - name: Demonstrate consent-less refusal
+        run: |
+          printf '%s' '{"text":"Get donated coffee","choice":"a","action":"PREPARE_LOCAL_PACKET_ONLY","consent":false}' | python3 experiments/026/prepare_work.py > /tmp/local-work-held.json
+          python3 -c "import json; a=json.load(open('/tmp/local-work-held.json')); assert a['status']=='HOLD_NO_SEPARATE_LOCAL_WORK_PERMISSION' and a['generated'] is False"
