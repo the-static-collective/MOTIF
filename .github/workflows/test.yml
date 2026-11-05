@@ -25,6 +25,12 @@ jobs:
       - name: Test 005
         working-directory: experiments/005
         run: python -m unittest -v test_concept.py
+      - name: Test 006
+        working-directory: experiments/006
+        run: python -m unittest -v test_composition.py
+      - name: Reproduce 006
+        working-directory: experiments/006
+        run: python composition.py
       - name: Reproduce 005
         working-directory: experiments/005
         run: python concept.py
