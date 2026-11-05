@@ -1,0 +1,98 @@
+name: MOTIF-024F Native Shortlist × Real T5 Shadow Rerank
+on:
+  push:
+    paths:
+      - 'experiments/024f/**'
+      - '.github/workflows/motif024f-rerank.yml'
+  pull_request:
+    paths:
+      - 'experiments/024f/**'
+      - '.github/workflows/motif024f-rerank.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-t5-rerank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test real native 016/022F shortlist and independent synthetic worlds
+        working-directory: experiments/024f
+        run: |
+          python -m unittest -v test_native.py
+      - name: Install pinned public-model CPU inference dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check transformers==4.57.1 sentencepiece==0.2.1 huggingface_hub==0.36.0 safetensors
+      - name: Fetch exact previously observed public FLAN-T5-small revision
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from huggingface_hub import snapshot_download
+          revision="0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+          path=snapshot_download(
+              repo_id="google/flan-t5-small", revision=revision,
+              allow_patterns=[
+                  "config.json", "generation_config.json", "model.safetensors",
+                  "tokenizer.json", "tokenizer_config.json", "spiece.model",
+                  "special_tokens_map.json",
+              ],
+          )
+          assert (Path(path)/"model.safetensors").is_file()
+          with open(os.environ["GITHUB_ENV"],"a") as fd:
+              fd.write("MOTIF_FLAN_MODEL_DIR="+str(path)+"\n")
+              fd.write("MOTIF_FLAN_REVISION="+revision+"\n")
+          print("Pinned model revision", revision)
+          PY
+      - name: Run REAL model reranking only after native source review
+        working-directory: experiments/024f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python benchmark.py > benchmark_receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("benchmark_receipt.json"))
+          assert d["actual_model_weights_loaded"]
+          assert d["actual_model_token_logits_used"]
+          assert d["model_never_granted_field_authority"]
+          assert d["model_was_only_offered_native_eligible_instruments"]
+          assert d["number_of_heldout_cases"]==20
+          assert d["number_of_actual_model_ranking_calls"]==40
+          print("REAL FLAN-T5-small native-filtered reranking, frozen independent synthetic outcomes")
+          print("Model revision:",d["checkpoint_ref"])
+          print("CPU model load s:",d["model_load_seconds"])
+          print("CPU generation seconds (40):",d["real_model_inference_seconds_total_40_calls"])
+          print("Ranking order changed selection:",d["different_question_selected_after_display_order_reversed"])
+          print(json.dumps(d["comparison"],indent=2))
+          for c in d["cases"]:
+              print(c["case"],json.dumps({
+                  "selected_native":c["chosen_by_method"]["NATIVE_ONLY"],
+                  "selected_T5":c["chosen_by_method"]["REAL_T5_SHADOW"],
+                  "selected_lexical":c["chosen_by_method"]["CLASSICAL_LEXICAL_SAME_NOTES"],
+                  "correct_native":c["independent_synthetic_run"]["NATIVE_ONLY"]["correct"],
+                  "correct_T5":c["independent_synthetic_run"]["REAL_T5_SHADOW"]["correct"],
+                  "correct_lexical":c["independent_synthetic_run"]["CLASSICAL_LEXICAL_SAME_NOTES"]["correct"],
+                  "display_order_changed_selection":c["advisory_real_t5"]["selected"]!=c["advisory_real_t5_swapped_order"]["selected"],
+              }))
+          PY
+      - name: Keep JSON receipts only, not model weights
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif024f-native-shortlist-real-t5-receipts
+          path: experiments/024f/benchmark_receipt.json
+          if-no-files-found: ignore
+          retention-days: 14
