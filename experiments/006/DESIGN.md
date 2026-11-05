@@ -38,8 +38,16 @@ separately; an abstaining baseline has no measured answer accuracy.
 
 The optional `dogram_bridge.py` accepts a **trusted local checkout of
 Dogram** and calls its existing `probe_cost_pareto.analyze_probe_costs` kernel.
-It computes exact finite separating-probe and information/cost Pareto receipts
-for every hypothesis pair that disagrees about the declared target.
+It computes finite separating-probe and information/cost Pareto receipts
+for every hypothesis pair that disagrees about the declared target, using
+`probe_cost_pareto`. A second native calculation, `anti_collapse_reachability`,
+counts which distinctions between candidate mechanisms are lost when MOTIF
+retains only its selected probe. This deliberately allows the important
+case: **the target is predictable although the underlying mechanism remains
+ambiguous**. The lost distinctions are preserved, not declared irrelevant.
+
+The pinned Dogram checkout used by this branch's CI is commit
+`551b5f9df18f17ec69b452ddcdff01718e0ff771`.
 
 **Dogram does not choose the next query.** It calculates finite partitions and
 declared costs. MOTIF owns the toy question policy; ALEX would independently
