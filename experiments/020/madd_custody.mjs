@@ -23,7 +23,7 @@ const BLOBS=Object.freeze({
 const SCHEMA='motif020.maxhinal-graft-receipt/v0';
 const HYP=['carrier','difficulty','reference','independent'];
 const IDS=HYP.map(x=>'hyp-'+x);
-const MAX_OPERATIONS=12;
+const MAX_OPERATIONS=20;
 const MAX_BYTES=262144;
 
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -307,7 +307,7 @@ export function experiment(){
   const drifted=pinnedCore().hydrateRide(challenged,drift);
   models[regime]={
    input_019_checksum:result.checksum_sha256,
-   019_suspected_links:result.statistically_suspected_shared_failure_links.length,
+   motif019_suspected_links:result.statistically_suspected_shared_failure_links.length,
    main_ride:challenged,alternate_ride:second.ride,
    continuation:{
     operations:resumed.operations.length,
