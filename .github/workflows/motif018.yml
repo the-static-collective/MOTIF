@@ -1,0 +1,41 @@
+name: MOTIF-018 Witness of the Witness
+on:
+  push:
+    branches:
+      - research/018-witness-of-witness
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - 'experiments/016/**'
+      - 'experiments/017/**'
+      - 'experiments/018/**'
+      - '.github/workflows/motif018.yml'
+jobs:
+  witness-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original Question Box and native Dogram
+        run: node --test experiments/014/test_garden.mjs
+      - name: Generated method cartridges and negative transfers
+        run: node --test experiments/015/test_graft.mjs
+      - name: Failure-induced metaprocedure
+        run: node --test experiments/016/test_meta.mjs
+      - name: Bayesian active inquiry and provenance
+        run: node --test experiments/017/test_question_machine.mjs
+      - name: Witness drift, world shift, reference collusion, and controls
+        run: node --test experiments/018/test_witness_machine.mjs
+      - name: Reproducible source-integrity experiment
+        run: node experiments/018/witness_machine.mjs > motif018-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif018-witness-of-witness-synthetic
+          path: motif018-research.json
+          retention-days: 14
