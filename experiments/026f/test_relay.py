@@ -56,7 +56,7 @@ class BoundaryTests(unittest.TestCase):
                          {"AUDIO_PATH_TEST","FOOD_SERVICE_GATE"})
         self.assertTrue(result["independent_synthetic_run"]["correct"])
         self.assertFalse(result["independent_synthetic_run"]["authenticated_real_world"])
-        self.assertEqual(result["adapter"],"STRUCTURAL_NOT_ACTUAL_CHORUS")
+        self.assertEqual(result["bridge_kind"],"TRUSTED_STRUCTURE_NOT_REAL_CHORUS_WORKER")
         self.assertEqual(result["external_actions"],0)
         self.assertFalse(result["permissions_inferred"])
         self.assertFalse(result["primary_native_plan_overwritten"])
