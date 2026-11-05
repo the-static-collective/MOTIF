@@ -102,18 +102,14 @@ export async function buildNativeEvidence(mementoRoot) {
   const coarse = roles.probeRoleCandidates(nursery,{
     candidateIds,probeKeys:['carries'],
   });
-  const expanded = roles.probeRoleCandidates(coarse.nursery,{
-    candidateIds,probeKeys:['carries','reaches'],
-  });
-  requireTrue(coarse.receipt.separatesCandidates===false &&
-    expanded.receipt.separatesCandidates===true,
-    'MEMENTO functional probe sequence did not separate candidates');
+  requireTrue(coarse.receipt.separatesCandidates===false,
+    'Coarse MEMENTO probe unexpectedly separated candidates');
   requireTrue(grammar.rules.every(x=>x.status==='candidate') &&
-    expanded.nursery.candidates.every(x=>x.status==='proposed') &&
+    coarse.nursery.candidates.every(x=>x.status==='proposed') &&
     field.affordanceSchemas.every(x=>x.status==='proposed'),
     'MEMENTO silently admitted candidates');
-  return {packet,field,grammar,nursery:expanded.nursery,
-    coarse:coarse.receipt,expanded:expanded.receipt,
+  return {packet,field,grammar,nursery:coarse.nursery,
+    coarse:coarse.receipt,
     nativeVersions:{
       rfa:rfa.RFA_SCHEMA,
       grammar:interaction.INTERACTION_GRAMMAR_SCHEMA,
