@@ -26,3 +26,5 @@ python3 -m unittest discover -s experiments/027 -p 'test_*.py' -v
 All paths are no-cost stdlib Python. Future actual delivery could be supported only behind a separately installed mail integration, an authenticated sender identity, explicit per-recipient authorization, delivery receipts and revocation; none are implemented here.
 
 The contribution is **a bounded source-owned gate from a human-specified goal to a real-world application's composer**, without falsely claiming the message was sent.
+
+Recipient parser excludes percent characters to prevent ambiguity around encoded `mailto:` delimiters. A possible valid percent-containing mailbox is deliberately unsupported; HOLD is safer than introducing confusion about which third party receives an outreach draft.

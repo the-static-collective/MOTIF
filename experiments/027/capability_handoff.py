@@ -32,7 +32,7 @@ ALLOWED_FIELDS={
 DIGEST=re.compile(r"^[0-9a-f]{64}$")
 # Single, conventional ASCII mailbox. No lists, encoded separators or Unicode
 # domains. IDN/quoted addresses remain unsupported rather than half-accepted.
-RECIPIENT=re.compile(r"^[A-Za-z0-9][A-Za-z0-9._%+\-]{0,63}@[A-Za-z0-9][A-Za-z0-9\-]{0,61}(?:\.[A-Za-z0-9][A-Za-z0-9\-]{0,61})+$")
+RECIPIENT=re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+\-]{0,63}@[A-Za-z0-9][A-Za-z0-9\-]{0,61}(?:\.[A-Za-z0-9][A-Za-z0-9\-]{0,61})+$")
 BAD=re.compile(r"[\x00-\x08\x0b-\x1f\x7f]")
 MAIL_DOMAINS={"coffee_donation","volunteer_shift","community_event",
               "grocery_network"}

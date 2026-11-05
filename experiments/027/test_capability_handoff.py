@@ -64,6 +64,11 @@ class LastInch(unittest.TestCase):
               "javascript:evil@x.com", "Donor Unknown","noname@localhost"]:
    with self.assertRaises(ValueError):h.route(mail(recipient=bad))
   with self.assertRaises(ValueError):h.route(mail(subject="hi\r\nBcc: bad@evil.org"))
+  # Percent-encoded @, newline or query delimiters must not become
+  # ambiguous destination/scope characters in mailto app handlers.
+  for attack in ("user%40other@example.org","foo%0Abcc@example.org",
+                 "contact%3Fsubject=bad@example.org"):
+   with self.assertRaises(ValueError):h.route(mail(recipient=attack))
  def test_route_scopes_are_domain_specific(self):
   site="Build a working website page"
   x=h.route({**goal(site),"stage":h.DISCOVER})
