@@ -39,7 +39,7 @@ The previous 026F false relevance example, 'We are just revising the invitation 
 
 However, the literal subject+problem matching still gets **negation scope wrong** in cases like 'We are not planning to serve a meal.' The word NOT plus the topic meal can misleadingly look like a missing meal authorization. Source spans are independent of encoder output, **not independent proofs of actual unmet needs**.
 
-The three-node majority generated misleading source-grounded offers on synthetic NONE situations N07, N08 and N10. This is why quorum alone cannot grant authority.
+The full three-node PIPELINE produced misleading source-grounded offers on synthetic NONE situations N07, N08 and N10. **N07 and N08 were native-first short-circuit decisions; T5 was not consulted for those examples. Only N10 was an actual three-head inference error.** This matters because errors must be attributed to the component that made the proposal, not automatically blamed on T5. The same reason makes quorum incapable of granting source authority.
 
 ## MOTIF's second-order answer
 
@@ -52,6 +52,10 @@ The proposed next question is more specific than 'more T5':
 **Could three nodes performing different steps — semantic synonym scout, literal quotation locator and contradiction/negation challenger — improve reliable human-held questions, compared against the same three functions implemented by native symbolic code on a fresh independently prepared domain?**
 
 This is an untested new hypothesis, *not* a result proved by the present experiment. Any new trial must preserve source authority, count extra computation and rejected/missed questions, and explicitly quantify consequence of delay before claiming a good real-world 'thinking' improvement.
+
+## Posthoc specialist diversity audit
+
+A separately labeled, posthoc diagnostic (NOT a new prospective success claim) examined which head contributed complementary labels: among cases where the actual three-node encoder ran, the CARTRIDGE_FINDER got the label right on **six** instances where SCOUT was wrong, while SKEPTIC did so on **two**. The heads disagreed on **29** of those cases and all three agreed in only **eight**. The hindsight oracle could select an accurate node for **25** called cases, but there is no executable selection rule with access to that oracle. These disagreements suggest useful *latent diversity*, not that majority voting improved decisions. The more grounded follow-up hypothesis is a sequence of genuinely different jobs (synonym scout → quote locator → negation challenger), with a native-only implementation of the same three jobs as the essential strong comparator.
 
 ## Honest constraints
 
