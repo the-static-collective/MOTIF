@@ -217,5 +217,48 @@ class UnknownWorldTests(unittest.TestCase):
                         MAX_QUERIES*len(FAMILIES)*5+1)
 
 
+    def test_local_question_machine_desk_is_callable_but_not_authorized(self):
+        from desk import SCHEMA, dispatch
+        world = World("pair_and", 3)
+        rows = [{"x": list(r.x), "y": r.y,
+                 "contract_id": r.contract_id, "provenance": r.provenance}
+                for r in world.initial()]
+        payload = {
+            "schema": SCHEMA, "action": "propose",
+            "contract": world.contract.packet(),
+            "observations": rows,
+            "catalog": [q.packet() for q in world.query_catalog()],
+            "remaining_budget": 24,
+            "method": "motif_consequence"
+        }
+        proposed = dispatch(payload)
+        self.assertEqual(proposed["status"], "PROPOSE_ONLY_SYNTHETIC_QUESTION")
+        self.assertTrue(proposed["owner_must_execute"])
+        self.assertEqual(Question.from_packet(proposed["query"]).provenance,
+                         "SYNTHETIC_OWNER_QUESTION_CATALOG")
+        self.assertFalse(proposed["real_world_authority"])
+        refused = dispatch({**payload, "endpoint": "https://invalid.example"})
+        self.assertEqual(refused["status"], "REFUSE")
+        refused = dispatch({**payload, "remaining_budget": -1})
+        self.assertEqual(refused["status"], "REFUSE")
+
+    def test_question_desk_prediction_holds_unknown_inputs(self):
+        from desk import SCHEMA, dispatch
+        world = World("pair_and", 1)
+        rows = [{"x": list(r.x), "y": r.y,
+                 "contract_id": r.contract_id, "provenance": r.provenance}
+                for r in world.initial()]
+        unseen = world.independent("test")[0].x
+        result = dispatch({
+            "schema": SCHEMA, "action": "predict",
+            "contract": world.contract.packet(),
+            "observations": rows,
+            "controls": list(unseen),
+            "method": "lookup_only"
+        })
+        self.assertEqual(result["status"], "HOLD_UNOBSERVED")
+        self.assertIsNone(result["value"])
+
+
 if __name__ == "__main__":
     unittest.main()
