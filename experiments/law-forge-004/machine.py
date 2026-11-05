@@ -316,8 +316,9 @@ def independent_review(model, examples):
         return {"status": "HOLD_INSUFFICIENT_REVIEW", "failures": None}
     if any(not isinstance(row, Observation) for row in rows):
         raise ValueError("Independent review requires typed synthetic evidence")
-    lengths = {len(row.word) for row in rows}
-    if not {8, 9, 10, 11} <= lengths:
+    distinct = {row.word for row in rows}
+    by_length = {n: sum(len(w) == n for w in distinct) for n in (8, 9, 10, 11)}
+    if len(distinct) < 64 or any(count < 12 for count in by_length.values()):
         return {"status": "HOLD_REVIEW_COVERAGE", "failures": None}
     failures = sum(model.predict(row.word) != row.result for row in rows)
     return {"status": ("ELIGIBLE_PREDICT_ONLY_PENDING_HUMAN_REVIEW"
