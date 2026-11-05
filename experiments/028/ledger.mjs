@@ -12,10 +12,33 @@ import {
  verifyExperience,recallSimilar,replayExperience,captureExperience
 } from './graft/src/experience-memory-028.mjs';
 import {solve} from '../023/planz-snapshot/scripts/motif-classical.mjs';
+import {verifyGardenOwners as verify027} from '../027/gardener.mjs';
 
 const sha=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const MAX={entries:128,bytes:10000000,line:200000,plans:3};
 const NAME='experiences.jsonl';
+
+const PINNED=Object.freeze({
+ 'graft/src/experience-memory-028.mjs':'b1cf697e5049a931fc4133d152e372d4b1e81ec1',
+ 'graft/src/capability-gardener-027.mjs':'a8d74c3b236f1a53018a458b767ed0ac0120d243',
+ 'graft/src/discovered-adapter-026.mjs':'3227361a543fbfaa19cc445edfa64757f2b52c71',
+ 'graft/vendor/alex/api-discovery-026.mjs':'67b851c9ea58d4aa92ca159000e982c312cd2335',
+ 'graft/vendor/alex/eagle-eye-providers-025.mjs':'5c095be409d2ace0d39765c4316471702d88acb5'
+});
+export function verifyMemorySourceOwners(){
+ verify027();
+ const mismatches=[];
+ for(const [relative,expected] of Object.entries(PINNED)){
+  const bytes=readFileSync(new URL(relative,import.meta.url));
+  const blob=createHash('sha1').update(Buffer.from('blob '+bytes.length+'\\0'))
+   .update(bytes).digest('hex');
+  if(blob!==expected)mismatches.push(relative);
+ }
+ if(mismatches.length)throw Error('HOLD_028_CHANGED_SOURCE_OWNER_CODE_'+mismatches.join('_'));
+ return {original_graft_git_blobs:PINNED,
+  inherited_source_checks:true,source_owner_approval_not_inferred:true};
+}
+
 function directory(dir,{create=false}={}){
  if(typeof dir!=='string'||!path.isAbsolute(dir)||dir.length>350)
   throw Error('HOLD_028_ABSOLUTE_EXPLICIT_STORE_REQUIRED');
@@ -34,6 +57,7 @@ function checkedFile(file){
  return true;
 }
 export function readLedger(dir){
+ verifyMemorySourceOwners();
  const file=directory(dir);
  if(!checkedFile(file))return {schema:'motif028.ledger-snapshot/v0',entries:[],
   root_sha256:null,filename:NAME};
@@ -63,6 +87,7 @@ export function readLedger(dir){
  return {schema:'motif028.ledger-snapshot/v0',entries,root_sha256:previous,filename:NAME};
 }
 export function appendLedger(dir,record,{approvedPersistentSave=false}={}){
+ verifyMemorySourceOwners();
  if(approvedPersistentSave!==true)throw Error('HOLD_028_PERSISTENCE_REQUIRES_APPROVAL');
  verifyExperience(record);
  const file=directory(dir,{create:true});
@@ -122,6 +147,7 @@ export function planFromMemory(recall){
   original_planz_optimizer:true,external_actions:0};
 }
 export async function recallAndReplay(dir,cases,{limit=3}={}){
+ verifyMemorySourceOwners();
  const history=readLedger(dir);
  const recall=recallSimilar(history.entries.map(x=>x.experience),cases,{limit});
  const replayed=[];
