@@ -165,5 +165,54 @@ class GrowingDiagnosticTests(unittest.TestCase):
         self.assertFalse(result["explicit_boundaries"]["adopted_live"])
 
 
+    def test_an_accurate_diagnostic_does_not_call_itself_optimal(self):
+        from frontier import inspect_diagnostic
+        report = inspect_diagnostic(self.hypotheses, self.roads, ())
+        self.assertEqual(report.status, "OPEN_METHOD_FRONTIER_NOT_A_PROVEN_CEILING")
+        self.assertFalse(report.global_optimality_established)
+        self.assertFalse(report.known_worlds_exhaustive_of_reality)
+        self.assertIn("negative_transfer_resistance", report.improvement_axes)
+        self.assertEqual(report.review_priority, ())
+
+    def test_self_audit_generates_improvement_research_priorities(self):
+        from frontier import inspect_diagnostic
+        report = inspect_diagnostic(self.hypotheses, self.roads,
+                                    tuple(self.proposals.values()))
+        self.assertEqual(report.review_priority[0], "FALSE_SHORTCUT")
+        self.assertIn("FUSED_PORTS", report.review_priority)
+        self.assertEqual(
+            next(t for t in report.tickets if t.candidate_name == "FORBIDDEN_PORTS").status,
+            "HOLD_PERMISSION",
+        )
+        # The best hypothetical offer has not been given permission to execute.
+        self.assertFalse(self.proposals["FALSE_SHORTCUT"].candidate.allowed)
+        self.assertGreater(
+            next(t.potential_saving_if_true for t in report.tickets
+                 if t.candidate_name == "FUSED_PORTS"), 0,
+        )
+
+    def test_research_priority_is_revised_after_refutation(self):
+        from frontier import inspect_diagnostic
+        reviewed = {
+            "FALSE_SHORTCUT": review_question(
+                self.proposals["FALSE_SHORTCUT"],
+                reviewed_receipts(self.proposals["FALSE_SHORTCUT"].offer)),
+            "FUSED_PORTS": review_question(
+                self.proposals["FUSED_PORTS"],
+                reviewed_receipts(self.proposals["FUSED_PORTS"].offer)),
+        }
+        report = inspect_diagnostic(self.hypotheses, self.roads,
+                                    tuple(self.proposals.values()), reviewed)
+        self.assertNotIn("FALSE_SHORTCUT", report.review_priority)
+        self.assertEqual(
+            next(t for t in report.tickets if t.candidate_name == "FALSE_SHORTCUT").status,
+            "REFUSE_INDEPENDENT_FALSIFICATION",
+        )
+        self.assertEqual(
+            next(t for t in report.tickets if t.candidate_name == "FUSED_PORTS").status,
+            "REVIEWED_POSSIBLE_REVISION",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
