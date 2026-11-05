@@ -1,0 +1,2187 @@
+{
+  "experiment": "MOTIF-011",
+  "safety_audit": {
+    "admissible_proposal": [
+      false,
+      true
+    ],
+    "admissible_proposal_cost": 1,
+    "admissible_proposal_status": "PROPOSE_SYNTHETIC_ONLY",
+    "competing_hypotheses": 4,
+    "forbidden_information_gain_does_not_override_policy": "HOLD_UNSAFE",
+    "insufficient_budget": "HOLD",
+    "insufficient_budget_status": "HOLD_BUDGET",
+    "real_action_dispatched": false,
+    "simulator_changes_performed": 0,
+    "unsafe_informative_setting": "HOLD"
+  },
+  "summary": {
+    "candidate_grammar_complete": false,
+    "families": [
+      "clean_two",
+      "visible_third",
+      "hidden_third",
+      "noisy_flip",
+      "ambiguous_proxy",
+      "restricted_clean"
+    ],
+    "forced_baseline_accuracy": 0.6667,
+    "forced_baseline_heldout_coverage": 1,
+    "forced_baseline_wrong_total": 160,
+    "heldout_test_each": 16,
+    "local_review_each": 16,
+    "per_family": {
+      "ambiguous_proxy": {
+        "forced_baseline_accuracy": 0.5,
+        "mean_coverage": 0,
+        "statuses": {
+          "ABSTAIN_AMBIGUOUS": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      },
+      "clean_two": {
+        "forced_baseline_accuracy": 1,
+        "mean_coverage": 1,
+        "statuses": {
+          "TWO_PORT_CONSISTENT": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      },
+      "hidden_third": {
+        "forced_baseline_accuracy": 0.5,
+        "mean_coverage": 0,
+        "statuses": {
+          "ABSTAIN_INADEQUATE": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      },
+      "noisy_flip": {
+        "forced_baseline_accuracy": 0.5,
+        "mean_coverage": 0,
+        "statuses": {
+          "ABSTAIN_INADEQUATE": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      },
+      "restricted_clean": {
+        "forced_baseline_accuracy": 1,
+        "mean_coverage": 1,
+        "statuses": {
+          "TWO_PORT_CONSISTENT": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      },
+      "visible_third": {
+        "forced_baseline_accuracy": 0.5,
+        "mean_coverage": 1,
+        "statuses": {
+          "PROPOSE_EXTENSION": 5
+        },
+        "worlds": 5,
+        "wrong_when_covered": 0
+      }
+    },
+    "provisional_new_concept_requires_explicit_local_review": true,
+    "real_world_actions": 0,
+    "scope": "SYNTHETIC_GRAPH_EVIDENCE_ONLY",
+    "seeds": [
+      11,
+      23,
+      37,
+      41,
+      59
+    ],
+    "skeptic_heldout_coverage": 0.5,
+    "skeptic_wrong_where_covered": 0,
+    "source_train_val_test_separated": true,
+    "status_counts": {
+      "ABSTAIN_AMBIGUOUS": 5,
+      "ABSTAIN_INADEQUATE": 10,
+      "PROPOSE_EXTENSION": 5,
+      "TWO_PORT_CONSISTENT": 10
+    },
+    "total_heldout_predictions_possible": 480,
+    "train_each": 16,
+    "unobserved_cause_can_be_identified": false,
+    "validation_each": 16,
+    "version": "skeptical-scientist-v1",
+    "worlds": 30
+  },
+  "worlds": [
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "clean_two",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 11,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "clean_two",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 23,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "clean_two",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 37,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "clean_two",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 41,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "clean_two",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 59,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": true,
+      "extension_receipt": {
+        "id": "extension-8bd26c32d1f8585c",
+        "local_decision": "ADMIT_PREDICT_ONLY",
+        "local_training_examples": 16,
+        "portable_router_roundtrip": true,
+        "source_tree_ids": [
+          "tree-c1e1a67cae6f117e",
+          "tree-3f4bc7a06b68c7fd"
+        ],
+        "third_relation_predicate": "q7377035fe275d006734fcdec",
+        "third_role": 0
+      },
+      "family": "visible_third",
+      "held_before_local_review": true,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 1,
+      "proposed_extension": {
+        "absent_tree": "tree-c1e1a67cae6f117e",
+        "allowed_vocabulary": [
+          "pending",
+          "q7377035fe275d006734fcdec",
+          "qb49091e0f476f00430188824",
+          "qefcfdace692c995f2d367df2",
+          "qff939dd506ebb09fefb178ce",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "qb49091e0f476f00430188824",
+          "qff939dd506ebb09fefb178ce"
+        ],
+        "id": "extension-8bd26c32d1f8585c",
+        "present_tree": "tree-3f4bc7a06b68c7fd",
+        "real_world_authority": false,
+        "relation": "q7377035fe275d006734fcdec",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 11,
+      "status": "PROPOSE_EXTENSION",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": true,
+      "extension_receipt": {
+        "id": "extension-1dcdbdcdf549d33d",
+        "local_decision": "ADMIT_PREDICT_ONLY",
+        "local_training_examples": 16,
+        "portable_router_roundtrip": true,
+        "source_tree_ids": [
+          "tree-9f5602f96150e43f",
+          "tree-ffe7badef4d18d22"
+        ],
+        "third_relation_predicate": "qfac0488ddcd6afba9477787c",
+        "third_role": 0
+      },
+      "family": "visible_third",
+      "held_before_local_review": true,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 1,
+      "proposed_extension": {
+        "absent_tree": "tree-9f5602f96150e43f",
+        "allowed_vocabulary": [
+          "pending",
+          "q13bcad38d1dc44dcea932625",
+          "q49d6e9f1b37c67a5addf4902",
+          "qfac0488ddcd6afba9477787c",
+          "qfe2f461760da138c6bacdf61",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "q13bcad38d1dc44dcea932625",
+          "q49d6e9f1b37c67a5addf4902"
+        ],
+        "id": "extension-1dcdbdcdf549d33d",
+        "present_tree": "tree-ffe7badef4d18d22",
+        "real_world_authority": false,
+        "relation": "qfac0488ddcd6afba9477787c",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 23,
+      "status": "PROPOSE_EXTENSION",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": true,
+      "extension_receipt": {
+        "id": "extension-ac8581558fdf73b1",
+        "local_decision": "ADMIT_PREDICT_ONLY",
+        "local_training_examples": 16,
+        "portable_router_roundtrip": true,
+        "source_tree_ids": [
+          "tree-1737977d1f626725",
+          "tree-7247b84b9b07d0e6"
+        ],
+        "third_relation_predicate": "q60eaa5c7fe8386aff9e891a5",
+        "third_role": 0
+      },
+      "family": "visible_third",
+      "held_before_local_review": true,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 1,
+      "proposed_extension": {
+        "absent_tree": "tree-1737977d1f626725",
+        "allowed_vocabulary": [
+          "pending",
+          "q135753dc97c58f30e9996cc4",
+          "q3dd622adb4a2f98cf5d255fc",
+          "q558b67eb0ca78cbd7440b8b6",
+          "q60eaa5c7fe8386aff9e891a5",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "q558b67eb0ca78cbd7440b8b6",
+          "q3dd622adb4a2f98cf5d255fc"
+        ],
+        "id": "extension-ac8581558fdf73b1",
+        "present_tree": "tree-7247b84b9b07d0e6",
+        "real_world_authority": false,
+        "relation": "q60eaa5c7fe8386aff9e891a5",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 37,
+      "status": "PROPOSE_EXTENSION",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": true,
+      "extension_receipt": {
+        "id": "extension-b0f32f868db4b935",
+        "local_decision": "ADMIT_PREDICT_ONLY",
+        "local_training_examples": 16,
+        "portable_router_roundtrip": true,
+        "source_tree_ids": [
+          "tree-6b5fa06edf2388a3",
+          "tree-d3c7fc8adc79330c"
+        ],
+        "third_relation_predicate": "q0b6395123a866bdd2abbfe50",
+        "third_role": 0
+      },
+      "family": "visible_third",
+      "held_before_local_review": true,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 1,
+      "proposed_extension": {
+        "absent_tree": "tree-6b5fa06edf2388a3",
+        "allowed_vocabulary": [
+          "pending",
+          "q0b6395123a866bdd2abbfe50",
+          "q0df99397966ced4f46d28254",
+          "q7338c6984cee624ba258b9b4",
+          "qefd6f292ce231cb1898239fc",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "q7338c6984cee624ba258b9b4",
+          "qefd6f292ce231cb1898239fc"
+        ],
+        "id": "extension-b0f32f868db4b935",
+        "present_tree": "tree-d3c7fc8adc79330c",
+        "real_world_authority": false,
+        "relation": "q0b6395123a866bdd2abbfe50",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 41,
+      "status": "PROPOSE_EXTENSION",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": true,
+      "extension_receipt": {
+        "id": "extension-4b46b99ee61abfa3",
+        "local_decision": "ADMIT_PREDICT_ONLY",
+        "local_training_examples": 16,
+        "portable_router_roundtrip": true,
+        "source_tree_ids": [
+          "tree-649cf9dc2b83f655",
+          "tree-90dd087af49081f4"
+        ],
+        "third_relation_predicate": "qa49380f8e818a6facffec054",
+        "third_role": 0
+      },
+      "family": "visible_third",
+      "held_before_local_review": true,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 1,
+      "proposed_extension": {
+        "absent_tree": "tree-649cf9dc2b83f655",
+        "allowed_vocabulary": [
+          "pending",
+          "q21018e12978f64a6860195b1",
+          "q9cb61a08c147910f3cd9339c",
+          "qa49380f8e818a6facffec054",
+          "qdac5214d5359aab279ff5cea",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "qdac5214d5359aab279ff5cea",
+          "q21018e12978f64a6860195b1"
+        ],
+        "id": "extension-4b46b99ee61abfa3",
+        "present_tree": "tree-90dd087af49081f4",
+        "real_world_authority": false,
+        "relation": "qa49380f8e818a6facffec054",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 59,
+      "status": "PROPOSE_EXTENSION",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "hidden_third",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 11,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "hidden_third",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 23,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "hidden_third",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 37,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "hidden_third",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 41,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "hidden_third",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 59,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "noisy_flip",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 11,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "noisy_flip",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 23,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "noisy_flip",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 37,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "noisy_flip",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 41,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "noisy_flip",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 59,
+      "status": "ABSTAIN_INADEQUATE",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "ambiguous_proxy",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 2,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 11,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "ambiguous_proxy",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 2,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 23,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "ambiguous_proxy",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 2,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 37,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "ambiguous_proxy",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 2,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 41,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 4,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "ambiguous_proxy",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": null,
+      "heldout_correct_when_covered": 0,
+      "heldout_coverage": 0,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 0.5,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 8
+      },
+      "new_concept_candidates": 2,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [
+        {
+          "controls": [
+            false,
+            false
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            false,
+            true
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            false
+          ],
+          "observed_outcomes": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        },
+        {
+          "controls": [
+            true,
+            true
+          ],
+          "observed_outcomes": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "synthetic_provenance": "SYNTHETIC_CONTRADICTION"
+        }
+      ],
+      "seed": 59,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "restricted_clean",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 11,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "restricted_clean",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 23,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "restricted_clean",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 37,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "restricted_clean",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 41,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    },
+    {
+      "contradictory_control_settings": 0,
+      "explicit_local_admission": false,
+      "extension_receipt": null,
+      "family": "restricted_clean",
+      "held_before_local_review": null,
+      "heldout_accuracy_when_covered": 1,
+      "heldout_correct_when_covered": 16,
+      "heldout_coverage": 1,
+      "heldout_original_graphs_unchanged": true,
+      "heldout_test": 16,
+      "heldout_wrong_when_covered": 0,
+      "local_review": 16,
+      "naive_forced_baseline": {
+        "accuracy": 1,
+        "coverage": 1,
+        "never_abstains": true,
+        "wrong": 0
+      },
+      "new_concept_candidates": 0,
+      "proposed_extension": null,
+      "real_world_authority": false,
+      "scars": [],
+      "seed": 59,
+      "status": "TWO_PORT_CONSISTENT",
+      "train": 16,
+      "validation": 16
+    }
+  ]
+}
