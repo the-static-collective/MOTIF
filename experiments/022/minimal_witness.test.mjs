@@ -68,8 +68,7 @@ test('Without verified game source context, refuse compression',()=>{
 });
 
 test('No invented reward if even the cheaper witness exceeds budget',()=>{
-  const s=seed();s.budget=.1;
-  const m=forgeMinimalWitness(s,receipt(),trace());
+  const m=forge({currentBudget:.1});
   assert.equal(m.status,'HOLD_NO_VALID_BUDGETED_MICRO_INSTRUMENT');
   assert.equal(m.selected,null);
 });
@@ -92,8 +91,7 @@ test('Action cost and measurement reliability remain assumptions and affect sele
 });
 
 test('Never allow exactly same past 009 observation to masquerade as novel',()=>{
-  const s=seed();s.targets=[{world:'B',fault_x:-13,cost:0,latency:0,reliability:1}];
-  const m=forgeMinimalWitness(s,receipt(),trace());
+  const m=forge({permittedTargets:['B:-13']});
   assert.equal(m.status,'HOLD_NO_VALID_BUDGETED_MICRO_INSTRUMENT');
 });
 
