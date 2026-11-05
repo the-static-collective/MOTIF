@@ -57,6 +57,7 @@ class CausalModel:
     tree: Cartridge
     first: Relation
     second: Relation
+    known_vocabulary: tuple[str,...]
 
     def residual(self, c: bool, p: bool) -> bool:
         if type(c) is not bool or type(p) is not bool:
@@ -70,7 +71,8 @@ class CausalModel:
         return self.tree.predict(row)
 
     def predict(self, episode, original_controls) -> bool:
-        if not source_compatible(episode,self.first,self.second,original_controls):
+        if not source_compatible(episode,self.first,self.second,original_controls,
+                                 self.known_vocabulary):
             raise HOLD("Unreviewed original or candidate predicate vocabulary")
         a,b=controls_present(episode,original_controls)
         c=feature_present(episode,self.first.name,self.first.role_index)
@@ -117,13 +119,14 @@ class Review:
     real_world_authority: bool = False
 
 
-def source_compatible(episode,first,second,original_controls):
+def source_compatible(episode,first,second,original_controls,known_vocabulary):
     relations={original_controls.first_port,original_controls.second_port,
                first.name,second.name,"role_actor","role_target","pending"}
     actual={fact[0] for fact in episode.before}
     # Nuisance predicates unrelated to the two candidates may be present in
     # original observations. The candidate learner never depends on those.
     return ({"role_actor","role_target","pending"}.issubset(actual)
+            and actual.issubset(known_vocabulary)
             and original_controls.first_port!=original_controls.second_port
             and first!=second
             and first.name != second.name)
@@ -223,8 +226,9 @@ def _candidate_tree(program, observed, controls, candidates):
 def opening_model_space(train,validation,controls) -> TrialState:
     inputs=tuple(train)
     candidates=discover_candidate_relations(inputs,validation,controls)
+    vocab=tuple(sorted({fact[0] for row in inputs for fact in row.before}))
     models=tuple(CausalModel(name,_candidate_tree(bits,inputs,controls,
-                                                 candidates),*candidates)
+                                                 candidates),*candidates,vocab)
                  for name,bits in PROGRAMS.items())
     return TrialState(models,(),"COMPETING_EXPLANATIONS")
 
@@ -283,6 +287,10 @@ def revise(state: TrialState, evidence, controls) -> TrialState:
     """Preserve a prediction-evidence scar; never turn a simulation into fact."""
     if not state.models:
         return state
+    if not source_compatible(evidence,state.models[0].first,
+                             state.models[0].second,controls,
+                             state.models[0].known_vocabulary):
+        raise HOLD("Unreviewed intervention source vocabulary")
     a,b=controls_present(evidence,controls)
     residual=_residual(evidence,controls)
     c=feature_present(evidence,state.models[0].first.name,
@@ -309,6 +317,11 @@ def independent_review(state: TrialState, local_evidence, controls) -> Review:
     conflicts=[]
     seen={}
     for row in source:
+        if row.provenance!="SYNTHETIC_INTERVENTION":
+            raise HOLD("Independent review requires new intervention evidence")
+        if not source_compatible(row,proposed.first,proposed.second,controls,
+                                 proposed.known_vocabulary):
+            raise HOLD("Unreviewed local schema")
         a,b=controls_present(row,controls)
         c=feature_present(row,proposed.first.name,proposed.first.role_index)
         p=feature_present(row,proposed.second.name,proposed.second.role_index)
