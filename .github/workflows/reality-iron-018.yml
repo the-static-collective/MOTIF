@@ -1,0 +1,56 @@
+name: MOTIF 018 — five-step question loop against real river records
+
+on:
+  pull_request:
+    paths:
+      - "experiments/018/**"
+      - ".github/workflows/reality-iron-018.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m unittest discover -s experiments/018 -p "test_*.py" -v
+
+  real-question-loop:
+    runs-on: ubuntu-latest
+    needs: tests
+    timeout-minutes: 12
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Five bounded self-revisions, older public sources only
+        run: python3 experiments/018/question_loop.py develop --out-dir /tmp/motif018
+      - name: Preserve evidence separation before heldout target read
+        run: |
+          test -f /tmp/motif018/frozen.json
+          test -f /tmp/motif018/training-raw.json
+          test -f /tmp/motif018/development-raw.json
+          test ! -f /tmp/motif018/new-event-raw.json
+          test ! -f /tmp/motif018/test.json
+      - name: Test final frozen policy on later 2025 public river observations
+        run: python3 experiments/018/question_loop.py challenge --out-dir /tmp/motif018
+      - name: Archive frozen policy, all three raw source windows and outcomes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-018-real-question-loop-raw-replay
+          path: /tmp/motif018/
+          retention-days: 30
+          if-no-files-found: warn
