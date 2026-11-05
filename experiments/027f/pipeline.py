@@ -10,6 +10,7 @@ a held ambiguity; do not silently choose one.
 from __future__ import annotations
 from dataclasses import asdict
 from pathlib import Path
+import re
 import sys
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -22,6 +23,18 @@ from relevance import relevance_witness,anchored_native_guess,GATE_SUBJECTS
 from native_careers import native_rule
 from semantic_router import NATIVE_JOB
 from nodes import ThreeSpecialistEncoder,combine_opinions
+
+def guard_public_synthetic_note(text:str)->None:
+    """Deliberately narrow privacy tripwire; no claim of full PII filtering."""
+    if not isinstance(text,str) or len(text)>300 or not text.strip():
+        raise ValueError("HOLD_INVALID_PUBLIC_NOTE")
+    patterns=(
+        r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+        r"(?<!\\d)\\d{3}[-. ]\\d{3}[-. ]\\d{4}(?!\\d)",
+        r"(?i:api[_ -]?key|access[_ -]?token|password)\\s*[=:]",
+    )
+    if any(re.search(p,text) for p in patterns):
+        raise ValueError("HOLD_PUBLIC_PROJECTION_POSSIBLY_PRIVATE")
 
 class Forced:
     """A category nomination from a read-only encoder node, not model text."""
@@ -41,6 +54,7 @@ def relevance_first_relay(
     The result is an audit receipt; 022F still has its own independent
     *synthetic* source reviews and 016 question-value check.
     """
+    guard_public_synthetic_note(note)
     projection=operator_projection(note)
     digest=projection.digest()
     receipts={
@@ -82,6 +96,9 @@ def relevance_first_relay(
         base["status"]="HOLD_NATIVE_AND_SEMANTIC_GATE_CONFLICT"
         return base
     base["source_quote"]=witness["source_quote"]
+    if candidate not in ("FOOD","AUDIO"):
+        base["status"]="HOLD_NO_REGISTERED_TEST_FOR_GATE"
+        return base
     actual=review_semantic_question(
         note,Forced(candidate,mode),
         hidden_world=hidden_world,
@@ -93,6 +110,7 @@ def relevance_first_relay(
 
 def source_only(note:str)->str|None:
     """Strong classical comparator with the same independent anchor grammar."""
+    guard_public_synthetic_note(note)
     operator_projection(note)
     hits=anchored_native_guess(note)
     return hits[0] if len(hits)==1 else None
@@ -100,6 +118,7 @@ def source_only(note:str)->str|None:
 
 def candidate_from_single(note:str,single)->str|None:
     """Model only if native has not found a category."""
+    guard_public_synthetic_note(note)
     native=native_rule(NATIVE_JOB,note)
     if native!="NONE":
         return native
