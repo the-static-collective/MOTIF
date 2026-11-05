@@ -1,6 +1,8 @@
 name: MOTIF-023 human-goal handshake offline proof
 
 on:
+  push:
+    branches: [experiment/reality-iron-023-human-goal-handshake]
   pull_request:
     paths:
       - "experiments/023/**"
