@@ -288,6 +288,31 @@ class WitnessOfWitnessesTests(unittest.TestCase):
                              c["tree"]["id"])
         self.assertEqual(expected["external_actions"],0)
 
+    def test_nominal_90pct_source_intervals_fail_coverage_on_off_grid_truth(self):
+        # This negative test guards against reporting finite-grid model
+        # intervals as empirically calibrated human-source reliability.
+        saved=json.loads((Path(__file__).parent/
+                          "experiment-results.json").read_text())
+        worlds=saved["worlds"]
+        coverage={}
+        collapsed={}
+        for name in ("r0","r1","q","c"):
+            covered=0
+            single_point=0
+            for row in worlds:
+                lo,hi=row["motif_credible_intervals_90"][name]
+                truth=row["hidden_training_parameters_for_evaluator_only"][name]
+                covered+=lo<=truth<=hi
+                single_point+=lo==hi
+            coverage[name]=covered
+            collapsed[name]=single_point
+        self.assertEqual(coverage,{"r0":10,"r1":7,"q":27,"c":24})
+        self.assertEqual(collapsed,{"r0":14,"r1":21,"q":0,"c":0})
+        # This model is exactly Bayesian ON ITS GRID, not an external
+        # 90%-coverage guarantee for continuous true source qualities.
+        self.assertLess(coverage["r0"]/len(worlds),.9)
+        self.assertLess(coverage["r1"]/len(worlds),.9)
+
     def test_full_receipt_is_identical_to_new_seeded_stochastic_rerun(self):
         location=Path(__file__).parent/"experiment-results.json"
         self.assertEqual(json.loads(location.read_text()),benchmark.benchmark())
