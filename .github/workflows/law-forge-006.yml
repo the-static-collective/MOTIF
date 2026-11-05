@@ -1,0 +1,65 @@
+name: MOTIF Law Forge 006 — Source-Owned Instrument Inventor
+
+on:
+  push:
+    branches:
+      - research/law-forge-006-instrument-inventor-20261105
+    paths:
+      - 'experiments/law-forge-006/**'
+      - '.github/workflows/law-forge-006.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-006/**'
+      - '.github/workflows/law-forge-006.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  instrument-inventor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify native inherited Law Forge contracts
+        run: |
+          python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/law-forge-005 -p 'test_*.py' -v
+      - name: Test derived-instrument synthesis and guarded source contracts
+        run: python -m unittest discover -s experiments/law-forge-006 -p 'test_*.py' -v
+      - name: Emit full bounded science receipt
+        run: |
+          mkdir -p law-forge-006-receipts
+          python experiments/law-forge-006/trial.py > law-forge-006-receipts/benchmark.json
+          python -m json.tool law-forge-006-receipts/benchmark.json > /dev/null
+          python -c "import json; r=json.load(open('law-forge-006-receipts/benchmark.json')); print(json.dumps({'development':r['development'],'evaluation':r['final_evaluation'],'decision':r['frozen_method_decision'],'discovered_instrument':r['demonstrations']['any_three_paths']['derived_sensor_clauses']},indent=2))"
+      - name: Produce layered ALEX/GRAFT handoff proposals and Dogram native specimens
+        run: python experiments/law-forge-006/bridge.py emit law-forge-006-receipts
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: _external/dogram
+          persist-credentials: false
+      - name: Run actual Dogram CLI at frozen original source revision
+        run: |
+          set -eu
+          for n in 0 1 2; do
+            PYTHONPATH=_external/dogram python -m dogram.cli "law-forge-006-receipts/dogram-${n}.json" > "law-forge-006-receipts/dogram-${n}.receipt.json"
+          done
+          python experiments/law-forge-006/bridge.py verify law-forge-006-receipts
+      - name: Preserve native and synthetic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-006-source-owned-receipts
+          path: law-forge-006-receipts/
+          retention-days: 30
