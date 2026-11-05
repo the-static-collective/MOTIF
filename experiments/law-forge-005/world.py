@@ -6,6 +6,7 @@ Three-valued readings are *constructed from topology*, not privileged truth.
 """
 from __future__ import annotations
 from dataclasses import dataclass
+from hashlib import sha256
 from itertools import product
 
 from instrument import (Readout, Sensor, Query, bits4,
@@ -95,7 +96,11 @@ class World:
             type(copy_index) is not int or copy_index < 0
         ):
             raise ValueError("Only local simulator query partitions")
-        token = f"{phase}:{copy_index}:{''.join(map(str, graph))}:{self.seed}"
+        # An opaque sample reference, not a raw graph field or verified
+        # source signature. Four-bit inputs could still be brute-forced.
+        token = sha256(
+            f"synthetic|{phase}|{copy_index}|{self.seed}|{graph}".encode()
+        ).hexdigest()[:24]
         readings = tuple(
             (sensor, self.reading(sensor, graph))
             for sensor in generate_sensor_language()
