@@ -1,0 +1,94 @@
+{
+  "automatic_promotion": false,
+  "card_id": "lessons-bd00d5052a4c57dc977806aa",
+  "caution_outperformed_legacy_on_017": false,
+  "diagnostic_is_fallible": true,
+  "diagnostic_self_challenge": {
+    "counterhypotheses": [
+      "The river-flow regime changed, so persistence cannot be globally preferred.",
+      "The cautious fallback hurt because it replaced useful extrapolation during rapid rises.",
+      "The apparent policy differences depend on which 2024 event hours had complete upstream gauge data.",
+      "Later revisions to station ratings or missing station telemetry would alter the reported scores."
+    ],
+    "proposed_experiments": [
+      {
+        "kind": "EVENT_BLOCKED_REPLICATION",
+        "status": "HELD",
+        "test": "Freeze both policies, choose a different not-yet-scored river event, and evaluate each in complete source-availability blocks."
+      },
+      {
+        "kind": "SENSOR_DROPOUT_ABLATION",
+        "status": "HELD",
+        "test": "Before examining target labels, model input dropout and compare single-gauge persistence against cross-gauge methods."
+      },
+      {
+        "kind": "COST_OF_INACTION",
+        "status": "HELD",
+        "test": "Track abstention fraction and separately predeclared costs of false confidence, wrong action, and missing a useful decision."
+      }
+    ],
+    "question": "Is the current test measuring model skill or simply selecting the hours when broken sensors happened to report?"
+  },
+  "external_effect": false,
+  "human_action": "REVIEW_CONTESTED_LESSONS_AND_FREEZE_NEXT_TEST",
+  "learning_type": "EXPLICIT_RESEARCH_METHOD_REVISION_NOT_WEIGHT_TRAINING",
+  "lessons": [
+    {
+      "claim_scope": "TWO_DIFFERENT_RETROSPECTIVE_WINDOWS_ONLY",
+      "evidence": {
+        "016_winner": "persistence",
+        "017_winner": "cross_gauges"
+      },
+      "id": "L-001",
+      "kind": "NO_UNIVERSAL_COMPLEXITY_ORDER",
+      "observation": "Persistence won the later low-flow test in 016, but the cross-gauge fit beat persistence in the June 2024 event subset.",
+      "suggestion": "Do not rank strategies by parameter count; compare per independent hydrologic regime."
+    },
+    {
+      "claim_scope": "OBSERVED_EVENT_SUBSET_NOT_PROOF_OF_CAUSAL_GAIN",
+      "evidence": {
+        "cautious_mae_cfs": 1966.8894,
+        "fallback_hours": 74,
+        "observed_regret_old_minus_cautious_cfs": -673.8674,
+        "old_mae_cfs": 1293.022
+      },
+      "id": "L-002",
+      "kind": "CAUTION_HAS_COST",
+      "observation": "The added origin-outlier fallback INCREASED total error on measured event hours.",
+      "suggestion": "Compare the cost of abstaining or reverting to persistence against the risk of model extrapolation. Predeclare that cost before the next event."
+    },
+    {
+      "claim_scope": "COMPLETE_CASES_ONLY",
+      "evidence": {
+        "calendar_hours": 264,
+        "complete_hours": 117,
+        "coverage_fraction": 0.4432
+      },
+      "id": "L-003",
+      "kind": "OBSERVABILITY_LIMIT",
+      "observation": "The event comparison used only hours with complete cross-site sensor coverage, creating possible missing-not-at-random selection.",
+      "suggestion": "Assess outage patterns and report-time provenance; separate missing sensors from genuine low-flow conditions."
+    }
+  ],
+  "limits": [
+    "The event was deliberately chosen after its occurrence; this is a retrospective case, not a prospective prediction.",
+    "Both compared methods can be wrong. The meta-diagnostic can also be wrong about which lesson generalizes.",
+    "The low-flow and flood models were trained differently and observed in different windows; direct MAE magnitude comparisons across those windows are invalid.",
+    "USGS provisional or historically revised discharge is reported sensor evidence, not independent ground-truth authentication.",
+    "Historical time-to-availability is not reconstructed, and only complete multi-gauge hours were scored.",
+    "No causal effect of gauge readings or decision policy is established from these associations."
+  ],
+  "next_model_admission": "HOLD_UNTIL_INDEPENDENT_EVENT_REPLICATION",
+  "real_source_evidence_count": 2,
+  "schema": "motif.meta-diagnostic-lessons/v1",
+  "source_authentication": false,
+  "source_cards_sha256": {
+    "event017": "f5f71a8bcbe9111e6c6aa3acf9f80c4c338b6199a4721a078f47b5b27bcc5f37",
+    "river016": "3b129956af393c5d2e0a1aff2532fc207abb4229eed89f8ea898e07ea444675a"
+  },
+  "status": "EVIDENCE_TETHERED_HYPOTHESES_NO_IMPROVED_POLICY_VALIDATED",
+  "wins_on_test": {
+    "016_low_flow": "persistence",
+    "017_historical_event": "cross_gauges"
+  }
+}

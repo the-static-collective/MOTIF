@@ -1,0 +1,76 @@
+{
+  "all_method_event_mae_cfs": {
+    "cross_gauges": 1293.022,
+    "local_trend": 860.2783,
+    "persistence": 2027.3504
+  },
+  "authority": false,
+  "automatic_admission": false,
+  "candidate_event_mae_cfs": {
+    "cautious_selection": 1966.8894,
+    "old_selection": 1293.022,
+    "persistence": 2027.3504
+  },
+  "cautious_vs_old_error_reduction_cfs": -673.8674,
+  "cautious_vs_persistence_error_reduction_cfs": 60.461,
+  "complete_hour_coverage": {
+    "available_complete_hours": 117,
+    "complete_hour_coverage": 0.4432,
+    "total_calendar_hours": 264
+  },
+  "disposition": "HOLD_INSUFFICIENT_EVENT_COVERAGE",
+  "event_source_snapshot_sha256": "4a1cc1610cc129717677466817b8680829e7ef728f65c9cd0c28551c4c3a4b24",
+  "event_window": [
+    "2024-06-18",
+    "2024-06-28"
+  ],
+  "experiment": "MOTIF-017_LIVING_WATERSHED_EVENT_LEARNING",
+  "external_action": false,
+  "fixed_event_source": "https://www.weather.gov/mpx/RecordFloodingJune2024",
+  "frozen_plan_sha256": "196fa6be6703c5470b017d3db0ab4da6e5ffb3a4dd74abbe4a098e53c610750a",
+  "matched_test_hours": 117,
+  "model_was_trained_on_event": false,
+  "origin_ood_fallback_count": 74,
+  "peer_research_diagnostics": {
+    "JARVIS_to_MOTIF": "More sensors, routes or code are not proof of better field outcomes. Preserve the transparent persistence control and an ability to abstain.",
+    "MOTIF_to_JARVIS": "A method that wins on one validation block can fail under different physical conditions. Respect sealed event error and sensor availability.",
+    "next_experiment": "Choose an entirely different future or independently archived flood event and freeze this policy unchanged before access to target labels.",
+    "self_critique": "This preselected 2024 flood is a single historical event. Missing upstream sensors, report-time hindsight, later ratings and a conservative rule invented after 016 failure undermine generalization."
+  },
+  "period": "2024_JUNE_FLOOD_HISTORICAL",
+  "plan_frozen_before_event_fetch": "VERIFIED_BY_WORKFLOW_ORDER_NOT_CRYPTOGRAPHIC_TIME_AUTHORITY",
+  "policies_frozen": {
+    "cautious_reasons": [],
+    "cautious_regime_aware": "cross_gauges",
+    "legacy_validation_winner": "cross_gauges"
+  },
+  "raw_responses_in_ci_artifact": true,
+  "rising_flow_test": {
+    "cautious_mae_cfs": 4282.8125,
+    "count": 32,
+    "definition": {
+      "minimum_absolute_cfs": 20,
+      "relative_increase": 0.05
+    },
+    "legacy_mae_cfs": 2363.3401,
+    "persistence_mae_cfs": 4282.8125
+  },
+  "schema": "motif.reality-iron-event-learning/v1",
+  "source_limitations": [
+    "2024 flood was selected retrospectively from documented historical events; not sampled randomly.",
+    "The 2024 Rapidan dam event temporarily disrupted gauge power; missingness is informative and can bias results.",
+    "Raw USGS API source captures in run artifact can change if re-fetched after later station revisions.",
+    "No original time-of-issue telemetry snapshots, rating curves or independent verification of physical outcomes.",
+    "Models calibrated on 2023/early-2024 history, not modern official flood forecast tools.",
+    "No stage thresholds, warnings, contacts, evacuation, safety advice or real-world decisions.",
+    "A win over a weak historical policy is not proof of generally improved intelligence."
+  ],
+  "source_measurements_are_estimates_not_infallible": true,
+  "stations": {
+    "blue": "USGS-05320000",
+    "mankato": "USGS-05325000",
+    "sueur": "USGS-05320500"
+  },
+  "status": "RETROSPECTIVE_SOURCE_BACKED_REPLAY_NOT_ACTUAL_ISSUED_FORECAST",
+  "test_labels_selected_policy": false
+}

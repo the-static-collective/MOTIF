@@ -1,0 +1,56 @@
+name: MOTIF 017 — sealed historical flood event learning
+
+on:
+  pull_request:
+    paths:
+      - "experiments/017/**"
+      - ".github/workflows/reality-iron-017.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cold tests and fallible meta-diagnostic evidence checks
+        run: |
+          python3 -m unittest discover -s experiments/017 -p "test_*.py" -v
+          python3 experiments/017/meta_diagnostic.py --output /tmp/motif-017-lessons.json
+  sealed-event:
+    needs: synthetic
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    continue-on-error: true # Public station outages / API limits may force an honest HOLD.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Phase 1 — PREPARE training + validation only; freeze policy before event fetch
+        run: python3 experiments/017/event_learner.py prepare --out-dir /tmp/motif017
+      - name: Verify pre-event seal exists
+        run: |
+          test -f /tmp/motif017/frozen-plan.json
+          test ! -f /tmp/motif017/event-raw.json
+          test ! -f /tmp/motif017/result.json
+      - name: Phase 2 — fetch locked June 2024 flood event + score both frozen policies
+        run: python3 experiments/017/event_learner.py evaluate --out-dir /tmp/motif017
+      - name: Preserve source replies, frozen plan, and scored reality receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-017-historical-flood-sealed-witness
+          path: /tmp/motif017/
+          if-no-files-found: warn
+          retention-days: 30
