@@ -1,0 +1,95 @@
+name: MOTIF-003 GRAFT-generated NEW organ via CANNON source review
+on:
+  push:
+    branches:
+      - experiment/door-foundry-003-graft-born-operator
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-003/**'
+      - '.github/workflows/door-foundry-003.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-generated-operator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original unmerged GRAFT-027 source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 6ff59aead0296081e1547d8107e4b6f06ea2381e
+          path: graft-source
+          persist-credentials: false
+      - name: CANNON-093 original independent reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 0fd326c1bb6f222dc572a4877818d63881828801
+          path: cannon-source
+          persist-credentials: false
+      - name: Original MOTIF-001 source at CANNON prior selection
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 5ee9207f04af2826750863526af7f92b31ef8578
+          path: motif-original
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: GRAFT owner suite — genuine original compiled numeric projection
+        run: node --test graft-source/test/capability-gardener-027.test.mjs
+      - name: CANNON original reviewer produces HELD generated operator
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-graft-motif-001/review.mjs \
+            --graft graft-source --output evidence/cannon-graft-sensor.json
+      - name: MOTIF independently regenerates original GRAFT code and constructs new runnable build
+        run: |
+          python experiments/door-foundry-003/graft_backloop.py \
+            --cannon-receipt evidence/cannon-graft-sensor.json \
+            --graft-source graft-source \
+            --motif-original motif-original \
+            --output generated-motif-new-sensor
+      - name: Test new executable, original MOTIF reasoning change and multiple adversarial gates
+        env:
+          CANNON_GRAFT_RECEIPT: ${{ github.workspace }}/evidence/cannon-graft-sensor.json
+          GRAFT_SOURCE: ${{ github.workspace }}/graft-source
+          MOTIF_ORIGINAL: ${{ github.workspace }}/motif-original
+        run: python -m unittest discover -s experiments/door-foundry-003 -p 'test_graft_backloop.py' -v
+      - name: Execute freshly generated source-owned MOTIF build in a separate Python process
+        run: |
+          python generated-motif-new-sensor/run.py > evidence/motif-new-operator-result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('evidence/motif-new-operator-result.json').read_text())
+          assert p['final_blind_correct']==4
+          assert p['original_motif_003_policy_determined_by_sensor'] is True
+          assert all(x['naive_priority_differs'] for x in p['observations'])
+          assert p['fair_classical_selector_would_tie'] is True
+          assert p['new_general_reasoning_algorithm_proven'] is False
+          assert p['operator_admitted'] is False
+          assert p['network_requests']==0
+          assert p['external_actions']==0
+          print(json.dumps({'new_executable_generated':True,
+           'final_holdout_correct':p['final_blind_correct'],
+           'policy_changes':sum(x['naive_priority_differs'] for x in p['observations']),
+           'beats_fair_classical':False,'real_actions':0},indent=2))
+          PY
+      - name: Preserve GRAFT generated source, CANNON review and MOTIF new runnable organ
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-003-GRAFT-BORN-NEW-ORGAN-HELD
+          path: |
+            evidence/
+            generated-motif-new-sensor/
+          if-no-files-found: error
+          retention-days: 30
