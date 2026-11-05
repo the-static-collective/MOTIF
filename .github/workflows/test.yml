@@ -37,22 +37,22 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
-      - name: Reproduce 014 exact joint uncertain-witness inference
-        working-directory: experiments/014
+      - name: Reproduce 014W exact joint uncertain-witness inference
+        working-directory: experiments/014w
         run: |
           python benchmark.py > /tmp/motif014.json
           echo '__MOTIF014_RESULT_START__'
           cat /tmp/motif014.json
           echo '__MOTIF014_RESULT_END__'
-      - name: Reproduce 014 meta-witness cartridge and observed failures
-        working-directory: experiments/014
+      - name: Reproduce 014W meta-witness cartridge and observed failures
+        working-directory: experiments/014w
         run: |
           python demo.py > /tmp/motif014demo.json
           echo '__MOTIF014_DEMO_START__'
           cat /tmp/motif014demo.json
           echo '__MOTIF014_DEMO_END__'
-      - name: Test 014 joint uncertainty
-        working-directory: experiments/014
+      - name: Test 014W joint uncertainty
+        working-directory: experiments/014w
         run: python -m unittest -v test_joint.py
       - name: Reproduce 013
         working-directory: experiments/013
