@@ -1,0 +1,122 @@
+name: MOTIF-023F Real FLAN-T5 CPU Trial
+on:
+  push:
+    paths:
+      - 'experiments/023f/**'
+      - '.github/workflows/motif023f-real-t5.yml'
+  pull_request:
+    paths:
+      - 'experiments/023f/**'
+      - '.github/workflows/motif023f-real-t5.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-cpu-inference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test frozen case universe and deterministic policy gates BEFORE downloading weights
+        working-directory: experiments/023f
+        run: python -m unittest -v test_trial.py
+      - name: Install pinned CPU inference dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check transformers==4.57.1 sentencepiece==0.2.1 huggingface_hub==0.36.0 safetensors
+      - name: Deliberately fetch PUBLIC flan-t5-small model checkpoint to local cache
+        run: |
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          from pathlib import Path
+          path = snapshot_download(
+              repo_id="google/flan-t5-small",
+              allow_patterns=[
+                  "config.json", "generation_config.json", "model.safetensors",
+                  "tokenizer.json", "tokenizer_config.json", "spiece.model",
+                  "special_tokens_map.json",
+              ],
+          )
+          print("PUBLIC checkpoint downloaded. Snapshot revision:", Path(path).name)
+          assert (Path(path)/"model.safetensors").is_file()
+          PY
+      - name: Run ACTUAL FLAN-T5-small inference offline, no accounts
+        working-directory: experiments/023f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python real_probe.py | tee real-probe-receipt.json
+      - name: Run REAL model Critic on 16 frozen cases with unrestricted and constrained decoding
+        working-directory: experiments/023f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python trial.py > trial-receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("trial-receipt.json"))
+          assert d["real_model_weights_loaded"] is True
+          assert d["real_model_generation_or_token_logit_choice"] is True
+          assert d["limits"]["outside_execution_or_person_contact"] is False
+          print("REAL FLAN-T5-small CPU trial, with independent synthetic scoring")
+          print("Model load seconds:",d["model_load_seconds"])
+          print("End-to-end seconds:",d["end_to_end_seconds"])
+          for method, group in d["outputs"].items():
+              print(method, json.dumps(group["summary"],indent=2))
+              print("Individual raw critic decisions:")
+              for case in group["cases"]:
+                  print(case["id"],json.dumps({
+                      "text":case["critic_raw_text"],
+                      "source_review":case["question_status"],
+                      "prior_accuracy":case["baseline_accuracy"],
+                      "gain":case["accuracy_gain_from_admitted_question"],
+                      "heldout_run":case["synthetic_execution"]["correct"]
+                          if case["synthetic_execution"] is not None else None,
+                  }))
+          for name, control in d["fixed_baselines"].items():
+              print("COMPARATOR",name,
+                    control["admitted_improvement_cases"],
+                    control["total_accuracy_gain"])
+          PY
+      - name: Run all THREE actual FLAN-T5 Chorus roles beside native Fellowship planning
+        working-directory: experiments/023f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python three_roles.py > full-chorus-receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("full-chorus-receipt.json"))
+          assert d["model_weights_really_loaded"] is True
+          assert d["original_native_decision_unmodified"] is True
+          assert d["planz_still_index_only"] is True
+          print(json.dumps({
+              "model":d["model"],
+              "all_three_available_at_cutoff":d["frozen_result_before_worker_join"]["all_three_available_at_cutoff"],
+              "roles":[{
+                  "role":n["role"],"status":n["status"],"raw":n["text"]
+              } for n in d["frozen_result_before_worker_join"]["roles"]],
+              "safely_joined_worker":d["worker_finished_safely"],
+              "no_native_overwrite":d["original_native_decision_unmodified"],
+          },indent=2))
+          PY
+      - name: Save small experiment receipts, not weights
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif023f-real-model-receipts
+          path: experiments/023f/*receipt.json
+          if-no-files-found: ignore
+          retention-days: 10

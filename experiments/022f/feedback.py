@@ -217,6 +217,10 @@ def submit_critic_question(
     if not match:
         return result("HOLD_UNSTRUCTURED_OR_INJECTED_CRITIQUE", note_hash=hashed)
     name = match.group(1)
+    # Reserved zero-authority option for constrained tiny-model decoders.
+    # Explicitly not a registered sensing program; no work or replan occurs.
+    if name == "NO_TEST":
+        return result("HOLD_MODEL_ABSTAINED", name, note_hash=hashed)
     held = ledger.claim(name)
     if held:
         return result(held, name, note_hash=hashed)
