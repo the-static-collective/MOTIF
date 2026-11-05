@@ -69,6 +69,17 @@
           "blob": "642bac9b38190c3d054a6325bdcd9a0a2595eddf"
         }
       ]
+    },
+    {
+      "id": "planz-proposal",
+      "repo": "the-static-collective/planZ",
+      "commit": "64ed8a376acd63a5d630e1649b6001fb3b3251de",
+      "files": [
+        {
+          "path": "reactor/recursive.mjs",
+          "blob": "3d7c9fc075e4b1c81786b91645b6312e57b6bfce"
+        }
+      ]
     }
   ],
   "snapshot_documents": [
