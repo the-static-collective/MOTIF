@@ -7,7 +7,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 ## Working experiments
 
 - **[001 — Named transformation induction](experiments/001/VISION.md):** Learn role-relative graph rewrites from labeled synthetic `before/action/after` episodes. Discover a synthetic repair → teach → repair chain.
-- **[002 — Birth of an unnamed verb](experiments/002/DESIGN.md):** Infer action *schemas* from unlabeled `before/after` graphs. Identify recurring local changes, discover anonymous graph-rewrite operators, and compose them to reach new hypothetical states.
+- **[002 — Birth of an unnamed verb](experiments/002/DESIGN.md):** Infer anonymous graph-rewrite operators from unlabeled `before/after` graphs and compose them in unfamiliar synthetic worlds.
+- **[003 — The affordance frontier](experiments/003/affordance.py):** Compare the immediate utility of hypothetical transitions with the new actions they enable; see [the outermost circle](docs/THE-OUTERMOST-CIRCLE.md).
 
 ### Run (Python 3.10+, standard library only)
 
@@ -19,6 +20,10 @@ python -m unittest -v test_motif.py
 cd ../002
 python motif002.py
 python -m unittest -v test_motif002.py
+
+cd ../003
+python affordance.py
+python -m unittest -v test_affordance.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
