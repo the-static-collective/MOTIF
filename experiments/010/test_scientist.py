@@ -210,6 +210,20 @@ class ScientistTests(unittest.TestCase):
         self.assertFalse(set(vars(first).values()) & set(vars(second).values()))
         self.assertFalse(set(vars(first).values()) & set(vars(third).values()))
 
+    def test_concrete_scientist_transcript_is_reproducible(self):
+        import demo
+        materialized = json.loads((Path(__file__).parent /
+             "example-scientist-interventions.json").read_text())
+        self.assertEqual(materialized, demo.demonstrate())
+        self.assertEqual([event["remaining_tree_cartridges"]
+                          for event in materialized["interventions"]], [2, 1])
+        self.assertEqual([event["expected_information_gain_bits"]
+                          for event in materialized["interventions"]], [1.0, 1.0])
+        self.assertEqual(materialized["final_tree"]["leaves"],
+                         [False, True, True, False])
+        self.assertTrue(materialized["original_natural_observations_unmodified"])
+        self.assertFalse(materialized["real_world_authority"])
+
     def test_full_report_and_checked_in_receipt_match(self):
         r = benchmark.benchmark()
         self.assertEqual(r["summary"]["worlds"],
