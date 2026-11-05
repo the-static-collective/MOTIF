@@ -106,6 +106,13 @@ def natural_observations(spec: SyntheticWorld) -> tuple[Observation, Observation
             _construct(spec, True, True, 1001, "SYNTHETIC_NATURAL"))
 
 
+def natural_case(spec: SyntheticWorld, setting: bool, serial: int) -> Observation:
+    """Fresh unmanipulated observation from the confounded natural regime."""
+    if type(setting) is not bool:
+        raise ValueError("Natural setting must be Boolean")
+    return _construct(spec, setting, setting, serial, "SYNTHETIC_NATURAL")
+
+
 def intervene(spec: SyntheticWorld, first: bool, second: bool,
               serial: int) -> Observation:
     """An *on-demand* simulator operation, not a cached example lookup.
