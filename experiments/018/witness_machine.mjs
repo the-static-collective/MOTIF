@@ -256,12 +256,14 @@ export function auditPlan(options,budget=1.2,question=questionForWitness()){
  const ordered=[...options].sort((a,b)=>
    b.impact/b.audit_cost-a.impact/a.audit_cost||
    a.origin.localeCompare(b.origin));
- const chosen=[],origins=new Set(),spent={value:0};
+ const chosen=[],origins=new Set(),auditors=new Set(),spent={value:0};
  for(const item of ordered){
   if(chosen.length>=2)break;
-  if(!origins.has(item.origin)&&spent.value+item.audit_cost<=budget){
+  if(!origins.has(item.origin)&&!auditors.has(item.auditor_origin)&&
+     spent.value+item.audit_cost<=budget){
    chosen.push(item);spent.value+=item.audit_cost;
    origins.add(item.origin);
+   auditors.add(item.auditor_origin);
   }
  }
  return {
