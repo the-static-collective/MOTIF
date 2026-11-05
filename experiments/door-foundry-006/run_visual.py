@@ -94,8 +94,9 @@ def native_predict_batch(calls):
         if p.returncode or len(p.stdout)>90000:
             raise HOLD('Generated program rejected bounded imagery')
         obj=json.loads(p.stdout)
-        if obj.get('status')!='LOCAL_SYNTHETIC_ONLY' or
-           not isinstance(obj.get('answers'),list) or len(obj['answers'])!=len(chunk):
+        if (obj.get('status')!='LOCAL_SYNTHETIC_ONLY' or
+            not isinstance(obj.get('answers'),list) or
+            len(obj['answers'])!=len(chunk)):
             raise HOLD('Unexpected generated program output')
         for (rows,delta),result in zip(chunk,obj['answers']):
             expected,expect_rows=reference_move(rows,delta)
@@ -151,7 +152,7 @@ def run(output):
         observed_counterfactuals.append({
           'imagined_delta':list(delta),
           'prediction_status':status,
-          'predicted_frame_png_sha256':v.digest(list(nxt)) if nxt else None,
+          'predicted_frame_png_sha256':sha256(v.encode_png(nxt)).hexdigest() if nxt else None,
           'real_action_executed':False})
     frames,steps,seen=imagine(first,goal,True)
     classic_frames,classic_steps,classic_seen=imagine(first,goal,False)
