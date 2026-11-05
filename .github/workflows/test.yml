@@ -37,6 +37,12 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 022F untrusted critic question feedback, independent synthetic review
+        working-directory: experiments/022f
+        run: |
+          python -m unittest -v test_feedback.py
+          python demo.py > /tmp/motif022f.json
+          python -c 'import json; d=json.load(open("/tmp/motif022f.json")); assert d["question_decision"]["status"] == "ELIGIBLE_SYNTHETIC_REPLAN_ONLY"; assert not d["actual_T5_executed"]; assert not d["real_world_deployment_or_app_submission"]; print(json.dumps({"status":d["question_decision"]["status"],"before":d["question_decision"]["original_expected_accuracy"],"after":d["question_decision"]["challenged_expected_accuracy"]},indent=2))'
       - name: Test 021F parallel observer critic hypeman isolation and mock demonstration
         working-directory: experiments/021f
         run: |

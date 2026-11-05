@@ -1,0 +1,29 @@
+name: MOTIF-022F Chorus Critic Feedback
+on:
+  push:
+    paths:
+      - 'experiments/022f/**'
+      - '.github/workflows/motif022f-feedback.yml'
+  pull_request:
+    paths:
+      - 'experiments/022f/**'
+      - '.github/workflows/motif022f-feedback.yml'
+  workflow_dispatch:
+jobs:
+  typed-feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run bounded critic-to-question admission and negative controls
+        working-directory: experiments/022f
+        run: python -m unittest -v test_feedback.py
+      - name: Replay source-independent synthetic evidence with real 016 Forest
+        working-directory: experiments/022f
+        run: |
+          python demo.py > /tmp/motif022f-clean.json
+          python demo.py --test-id BAD_FOOD_TEST > /tmp/motif022f-falsified.json
+          python demo.py --test-id DRIFT_FOOD_TEST --hidden-world 11 > /tmp/motif022f-drift.json
+          python -c 'import json; a=json.load(open("/tmp/motif022f-clean.json")); b=json.load(open("/tmp/motif022f-falsified.json")); c=json.load(open("/tmp/motif022f-drift.json")); assert not a["actual_T5_executed"]; assert a["question_decision"]["status"]=="ELIGIBLE_SYNTHETIC_REPLAN_ONLY"; assert a["independent_synthetic_run"]["model_correct"]; assert b["question_decision"]["status"]=="REFUSE_CALIBRATION_FALSIFIED"; assert not c["independent_synthetic_run"]["model_correct"]; print(json.dumps({"clean":a["question_decision"]["status"],"initial_accuracy":a["question_decision"]["original_expected_accuracy"],"modeled_accuracy_with_reviewed_probe":a["question_decision"]["challenged_expected_accuracy"],"actual_simulated_decision":a["independent_synthetic_run"]["final_answer"],"bad_source":b["question_decision"]["status"],"drift_correct":c["independent_synthetic_run"]["model_correct"],"real_t5_executed":a["actual_T5_executed"],"real_actions":a["real_world_deployment_or_app_submission"]},indent=2))'
