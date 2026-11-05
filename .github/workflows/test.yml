@@ -31,6 +31,50 @@ jobs:
       - name: Test 007
         working-directory: experiments/007
         run: python -m unittest -v test_inheritance.py
+      - name: Test inquiry (MOTIF-Q-001)
+        working-directory: research/first-question
+        run: |
+          python -m unittest -v test_question.py
+          python -m unittest -v test_baselines.py
+          python question.py > /tmp/motif-first-question.json
+      - name: Test minimum key (MOTIF-SK-001)
+        working-directory: research/smallest-key
+        run: |
+          python -m unittest -v test_smallest_key.py
+          python smallest_key.py > /tmp/motif-smallest-key.json
+      - name: Checkout pinned Dogram calculation floor
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: vendor/Dogram
+      - name: Native Dogram probe and anti-collapse study
+        working-directory: research/first-question
+        run: |
+          python dogram_bridge.py --dogram-root ../../vendor/Dogram > /tmp/motif-dogram-query.json
+          python - <<'PY'
+          import json
+          with open('/tmp/motif-dogram-query.json', encoding='utf-8') as f:
+              result = json.load(f)
+          assert result['schema'] == 'motif.dogram-calculate-only/v0'
+          assert len(result['pair_receipts']) == 4
+          assert result['source']['excluded_trials'] == ['e_refused-part']
+          assert result['collapse_analysis']['target_relative_sufficiency'] is True
+          assert len(result['collapse_analysis']['dogram_calculation']['lost_distinctions']) == 2
+          PY
+      - name: Native Dogram rectangle and anti-collapse study
+        working-directory: research/smallest-key
+        run: |
+          python dogram_bridge.py --dogram-root ../../vendor/Dogram > /tmp/motif-dogram-key.json
+          python - <<'PY'
+          import json
+          with open('/tmp/motif-dogram-key.json', encoding='utf-8') as f:
+              result = json.load(f)
+          assert result['schema'] == 'motif.dogram-two-key/v0'
+          assert result['rectangle']['mixed_delta'] == {'kind': 'integer', 'value': 1}
+          assert result['anti_collapse']['lawful_quotient'] is True
+          assert len(result['anti_collapse']['lost_distinctions']) == 3
+          PY
       - name: Reproduce 007
         working-directory: experiments/007
         run: python inheritance.py
