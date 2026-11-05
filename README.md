@@ -29,6 +29,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[019F — The Planner Foundry: Native Questions × Classical Search](experiments/019f/DESIGN.md):** The original SHA-pinned National Treasure Question Box and Dogram modules gate new proposed graph-relational questions. A small learner uses independent counterexamples to propose a missing STRIPS action precondition; the planner generates **BFS, optimal uniform-cost and admissible A* hmax method cartridges on demand**, receives separate synthetic action receipts, revises its model and replans. A known-model classical UCS given the same evidence ties; shifting hidden mechanisms can make the learned guard worse. Completely synthetic, source preserving, no outside-world authority.
 
+- **[020F — The Inside-Out Box: planZ × Cost of Inaction](experiments/020f/DESIGN.md):** Import planZ's **actual, original, pinned public attention feed and native validator** as an `INDEX_ONLY` source of unresolved plans (never authorization or verified deadlines). Build separately labeled synthetic time-critical opportunities; classical finite-horizon planning chooses `WAIT` or simultaneous available actions, and calculates **welfare lost by one tick of inaction**, permanent omission, and deliberation delay rather than only CPU/query cost. A short-lived 6-value opportunity plus a durable 8-value one makes waiting lose 6 modeled units even though computation costs 0.05. No live scheduling or field action; strong exact classical DP ties by design.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -107,6 +109,9 @@ python benchmark.py  # clean win over frozen policy, classical parity, drift fai
 cd ../019f
 python -m unittest -v test_planner.py
 python benchmark.py  # original pinned donors, replanning, classical parity and shift
+cd ../020f
+python -m unittest -v test_insideout.py
+python demo.py  # source-pinned planZ + explicitly imaginary expiring opportunities
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
