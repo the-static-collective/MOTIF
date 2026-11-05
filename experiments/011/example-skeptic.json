@@ -1,0 +1,248 @@
+{
+  "all_raw_observations_remained_immutable": true,
+  "cost_and_safety": {
+    "admissible_proposal": [
+      false,
+      true
+    ],
+    "admissible_proposal_cost": 1,
+    "admissible_proposal_status": "PROPOSE_SYNTHETIC_ONLY",
+    "competing_hypotheses": 4,
+    "forbidden_information_gain_does_not_override_policy": "HOLD_UNSAFE",
+    "insufficient_budget": "HOLD",
+    "insufficient_budget_status": "HOLD_BUDGET",
+    "real_action_dispatched": false,
+    "simulator_changes_performed": 0,
+    "unsafe_informative_setting": "HOLD"
+  },
+  "experiment": "MOTIF-011",
+  "heldout_router_correct": 16,
+  "heldout_router_total": 16,
+  "local_review": {
+    "decision": "ADMIT_PREDICT_ONLY",
+    "examples": 16,
+    "real_world_authority": false,
+    "used_heldout_test_labels": false
+  },
+  "mode": "SYNTHETIC_SKEPTICAL_SCIENTIST",
+  "portable_new_concept_router": {
+    "absent_tree": {
+      "checksum_sha256": "ea5622658ecd5644b473e420c0e7e6d78e64743da1b88420db2a7c8ebe077b38",
+      "counts": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "evidence_count": 8,
+      "first": [
+        [
+          "qb49091e0f476f00430188824",
+          "?0"
+        ]
+      ],
+      "fit_balanced": 1,
+      "id": "tree-c1e1a67cae6f117e",
+      "leaves": [
+        false,
+        true,
+        true,
+        false
+      ],
+      "schema": "motif.decision-tree-cartridge.v0",
+      "second": [
+        [
+          "qff939dd506ebb09fefb178ce",
+          "?1"
+        ]
+      ],
+      "source_digest": "7c3f192c26066cef3bc6ad15f2f215315ab5e1284847c7ba6fe06c3beaec647c",
+      "status": "PROPOSAL_ONLY",
+      "vocab": [
+        "pending",
+        "qb49091e0f476f00430188824",
+        "qff939dd506ebb09fefb178ce",
+        "role_actor",
+        "role_target"
+      ]
+    },
+    "allowed_vocabulary": [
+      "pending",
+      "q7377035fe275d006734fcdec",
+      "qb49091e0f476f00430188824",
+      "qefcfdace692c995f2d367df2",
+      "qff939dd506ebb09fefb178ce",
+      "role_actor",
+      "role_target"
+    ],
+    "checksum_sha256": "51d381b5a0206bd7f45ae415939d86def95711a385e8bc2c8781da12cf0a521b",
+    "control_names": [
+      "qb49091e0f476f00430188824",
+      "qff939dd506ebb09fefb178ce"
+    ],
+    "id": "extension-8bd26c32d1f8585c",
+    "present_tree": {
+      "checksum_sha256": "de53a1280b9beb8cb5673431c51333b9100991c0957cdd6002d9fbf30feb5a58",
+      "counts": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "evidence_count": 8,
+      "first": [
+        [
+          "qb49091e0f476f00430188824",
+          "?0"
+        ]
+      ],
+      "fit_balanced": 1,
+      "id": "tree-3f4bc7a06b68c7fd",
+      "leaves": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "schema": "motif.decision-tree-cartridge.v0",
+      "second": [
+        [
+          "qff939dd506ebb09fefb178ce",
+          "?1"
+        ]
+      ],
+      "source_digest": "b5d04bcfc5f6286c7b94e290de3b9b1c0fbd4b84ac107ca0ec37c596489cb5f6",
+      "status": "PROPOSAL_ONLY",
+      "vocab": [
+        "pending",
+        "qb49091e0f476f00430188824",
+        "qff939dd506ebb09fefb178ce",
+        "role_actor",
+        "role_target"
+      ]
+    },
+    "relation": "q7377035fe275d006734fcdec",
+    "role_index": 0,
+    "schema": "motif.derived-router.v0",
+    "source_count": 16,
+    "status": "PROPOSED_NOT_ADMITTED",
+    "validation_count": 16
+  },
+  "real_external_actions": 0,
+  "research_cases": [
+    {
+      "concept_candidate_count": 0,
+      "contradiction_count": 0,
+      "coverage": 1,
+      "family": "clean_two",
+      "local_admission": false,
+      "naive_forced_baseline_accuracy": 1,
+      "source_only_concept": null,
+      "status": "TWO_PORT_CONSISTENT",
+      "wrong": 0
+    },
+    {
+      "concept_candidate_count": 1,
+      "contradiction_count": 4,
+      "coverage": 1,
+      "family": "visible_third",
+      "local_admission": true,
+      "naive_forced_baseline_accuracy": 0.5,
+      "source_only_concept": {
+        "absent_tree": "tree-c1e1a67cae6f117e",
+        "allowed_vocabulary": [
+          "pending",
+          "q7377035fe275d006734fcdec",
+          "qb49091e0f476f00430188824",
+          "qefcfdace692c995f2d367df2",
+          "qff939dd506ebb09fefb178ce",
+          "role_actor",
+          "role_target"
+        ],
+        "control_names": [
+          "qb49091e0f476f00430188824",
+          "qff939dd506ebb09fefb178ce"
+        ],
+        "id": "extension-8bd26c32d1f8585c",
+        "present_tree": "tree-3f4bc7a06b68c7fd",
+        "real_world_authority": false,
+        "relation": "q7377035fe275d006734fcdec",
+        "role_index": 0,
+        "status": "PROPOSED_NOT_ADMITTED",
+        "training_count": 16,
+        "validation_count": 16
+      },
+      "status": "PROPOSE_EXTENSION",
+      "wrong": 0
+    },
+    {
+      "concept_candidate_count": 0,
+      "contradiction_count": 4,
+      "coverage": 0,
+      "family": "hidden_third",
+      "local_admission": false,
+      "naive_forced_baseline_accuracy": 0.5,
+      "source_only_concept": null,
+      "status": "ABSTAIN_INADEQUATE",
+      "wrong": 0
+    },
+    {
+      "concept_candidate_count": 0,
+      "contradiction_count": 4,
+      "coverage": 0,
+      "family": "noisy_flip",
+      "local_admission": false,
+      "naive_forced_baseline_accuracy": 0.5,
+      "source_only_concept": null,
+      "status": "ABSTAIN_INADEQUATE",
+      "wrong": 0
+    },
+    {
+      "concept_candidate_count": 2,
+      "contradiction_count": 4,
+      "coverage": 0,
+      "family": "ambiguous_proxy",
+      "local_admission": false,
+      "naive_forced_baseline_accuracy": 0.5,
+      "source_only_concept": null,
+      "status": "ABSTAIN_AMBIGUOUS",
+      "wrong": 0
+    },
+    {
+      "concept_candidate_count": 0,
+      "contradiction_count": 0,
+      "coverage": 1,
+      "family": "restricted_clean",
+      "local_admission": false,
+      "naive_forced_baseline_accuracy": 1,
+      "source_only_concept": null,
+      "status": "TWO_PORT_CONSISTENT",
+      "wrong": 0
+    }
+  ],
+  "router_was_held_until_local_review": true
+}
