@@ -321,20 +321,22 @@ def solve(
                 "known_cost": 0, "known_minutes": 0,
                 "delta": _delta(initial, initial), "explored_states": 1}
 
-    # Priority: fewer held commitments -> lower known financial cost -> fewer
-    # steps -> stable action IDs. Holds cannot be called "cheap" because costs
-    # are missing. Search never uses the held branch for executable claims.
-    queue: list[tuple[int, int, int, tuple[str, ...], int, Scene]] = [
-        (0, 0, 0, (), 0, initial)
+    # Priority: fewer held commitments -> fewer *completely unoffered*
+    # commitments -> lower known cost -> fewer steps -> stable IDs.
+    # A recipient's pending acceptance of a real (toy) offer is grounded
+    # better than an entirely unoffered direct proposal.
+    # Unknown costs are never equated to actual zero costs.
+    queue: list[tuple[int, int, int, int, tuple[str, ...], int, Scene]] = [
+        (0, 0, 0, 0, (), 0, initial)
     ]
-    seen: dict[tuple[Scene, int], tuple[int, int, int, tuple[str, ...]]] = {
-        (initial, 0): (0, 0, 0, ())
+    seen: dict[tuple[Scene, int], tuple[int, int, int, int, tuple[str, ...]]] = {
+        (initial, 0): (0, 0, 0, 0, ())
     }
     by_id = {m.id: m for m in moves}
     explored = 0
     while queue:
-        held_count, cost, steps, path, minutes, world = heappop(queue)
-        if (held_count, cost, steps, path) != seen.get((world, minutes)):
+        held_count, unoffered, cost, steps, path, minutes, world = heappop(queue)
+        if (held_count, unoffered, cost, steps, path) != seen.get((world, minutes)):
             continue
         explored += 1
         if explored > max_states:
@@ -398,8 +400,9 @@ def solve(
                     continue
             new_cost = cost + (action.cost or 0)
             new_held = held_count + int(action.held)
+            new_unoffered = unoffered + int(action.status == "HOLD_OFFER")
             new_path = path + (action.id,)
-            score = (new_held, new_cost, steps + 1, new_path)
+            score = (new_held, new_unoffered, new_cost, steps + 1, new_path)
             state_key = (after, new_minutes)
             if state_key not in seen or score < seen[state_key]:
                 seen[state_key] = score
