@@ -1,0 +1,74 @@
+name: MOTIF-027F Three Semantic Specialists
+on:
+  push:
+    paths: ['experiments/027f/**','.github/workflows/motif027f-three-nodes.yml']
+  pull_request:
+    paths: ['experiments/027f/**','.github/workflows/motif027f-three-nodes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-three:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Frozen tests and native relevance review
+        working-directory: experiments/027f
+        run: python -m unittest -v test_nodes.py
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install transformers==4.57.1 sentencepiece==0.2.1 huggingface_hub==0.36.0 safetensors
+      - name: Fetch pinned public checkpoint
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from huggingface_hub import snapshot_download
+          sha='0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab'
+          p=snapshot_download(repo_id='google/flan-t5-small',revision=sha,allow_patterns=[
+            'config.json','generation_config.json','model.safetensors',
+            'tokenizer.json','tokenizer_config.json','spiece.model','special_tokens_map.json'])
+          assert (Path(p)/'model.safetensors').is_file()
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+            f.write('MOTIF_FLAN_MODEL_DIR='+p+'\n')
+            f.write('MOTIF_FLAN_REVISION='+sha+'\n')
+          PY
+      - name: Real T5 triple-node benchmark and native meta-verdict
+        working-directory: experiments/027f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python benchmark.py > triple_receipt.json
+          python - <<'PY'
+          import json
+          r=json.load(open('triple_receipt.json'))
+          assert r['actual_model_weights_loaded']
+          assert r['sample_size']==50
+          assert r['one_loaded_model_three_different_roles']
+          assert not r['three_roles_are_independent_models']
+          assert r['external_actions']==0
+          print('Method scores',json.dumps(r['scores'],indent=2))
+          print('MOTIF asks again',json.dumps(r['motif_asks_again_about_three_t5_nodes'],indent=2))
+          print('Actual encoder calls',r['actual_encoder_model_calls'])
+          print('CPU seconds 1 node',r['single_encoder_seconds'])
+          print('CPU seconds 3 nodes',r['triple_encoder_seconds'])
+          for row in r['cases']:
+            print(row['id'],row['gold'],{k:v['chosen_gate'] for k,v in row['methods'].items()})
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: motif027f-real-three-encoder-receipt
+          path: experiments/027f/triple_receipt.json
+          if-no-files-found: ignore
+          retention-days: 14
