@@ -1,0 +1,44 @@
+name: MOTIF 016 — living watershed read-only witness
+
+on:
+  pull_request:
+    paths:
+      - "experiments/016/**"
+      - ".github/workflows/reality-iron-016.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m unittest discover -s experiments/016 -p "test_watershed.py" -v
+  hydrology:
+    runs-on: ubuntu-latest
+    needs: unit
+    timeout-minutes: 7
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read fixed USGS river gauges and optional gridded rain; HOLD on failure
+        run: python3 experiments/016/watershed.py --live --out watershed-result.json
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: motif-016-living-watershed-readonly
+          path: watershed-result.json
+          retention-days: 14
