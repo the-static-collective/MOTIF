@@ -35,6 +35,7 @@ test('native MEMENTO + UNDERSTORY + MOTIF cross-repository witness', {
   assert.equal(p.actualMemento.installedGrammarRules,0);
   assert.equal(p.actualMemento.admittedRoles,0);
   assert.equal(p.understory.recordCount,6);
+  assert.equal(p.understory.probeWitness,p.nativeProbeReceipt.id);
   assert.equal(p.understory.stance,'held');
   assert.equal(p.understory.association,'unresolved');
   assert.equal(p.understory.ledgerWrites,0);
@@ -54,4 +55,5 @@ test('holdout outcome reversal cannot change selected concept or old memory', {
   assert.equal(initial.understory.stance,'held');
   assert.equal(hostile.understory.stance,'held');
   assert.equal(hostile.understory.canonAdmissions,0);
+  assert.equal(hostile.understory.probeWitness,hostile.nativeProbeReceipt.id);
 });
