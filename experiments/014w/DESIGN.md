@@ -163,6 +163,21 @@ Privileged simulator-oracle Brier: **0.175628**.
 
 The failure is instructive: the system can estimate q for the *old* auditor regime but often cannot tell that q or compliance has changed. This means **well-calculated posterior probability can still become miscalibrated under distribution shift**. It can detect some out-of-regime evidence but does not recover a changed auditor's new reliability from thin air.
 
+### A second negative result: credibility intervals do not cover true reliability
+
+We also evaluated whether the reported **nominal 90% finite-grid parameter intervals** actually contain the simulator's hidden, continuous reliability parameters. These results were calculated directly from all 28 archived world receipts, **without refitting or looking at test truths during training**:
+
+| Source parameter | Worlds where interval contains hidden training parameter | Empirical coverage | Intervals collapsed to one grid point |
+|---|---:|---:|---:|
+| Upstream source 0 reliability `r0` | **10/28** | **35.71%** | **14/28** |
+| Upstream source 1 reliability `r1` | **7/28** | **25.00%** | **21/28** |
+| Fallible auditor reliability `q` | **27/28** | **96.43%** | 0/28 |
+| Actuator compliance `c` | **24/28** | **85.71%** | 0/28 |
+
+**This is a serious failure of the source-reliability uncertainty representation.** For example, the model only permits source 0 rates of `.20, .45, .70, .90` even though the simulator can generate values *above* `.90`. A concentrated discrete posterior can therefore exclude the true continuous parameter **by construction**. In the example cartridge, source 0's interval is `[.90,.90]` while its hidden training reliability is `.841`; source 1's interval is `[.20,.20]` while its hidden reliability is `.2606`.
+
+These numbers **must not** be advertised as externally calibrated 90% intervals. This is a falsifier for the next generation: use denser/continuous priors and measure coverage under *independently generated, out-of-grid truths*, not just whether a posterior interval is narrow. The q and c figures also come from only 28 related synthetic worlds, not a validation of real-world coverage.
+
 The experiment's heuristic prediction gate issues probabilities on **57.14%** of held-out cases and holds the rest. It still makes **362 wrong thresholded decisions** among those issued because actual outcomes are stochastic. We do not hide the internal probability scores for abstained cases: all contribute to Brier and log loss.
 
 The code deduplicated **1,359 forwarded copies** and *integrated rather than discarded* **279 missing auditor control-attestation reports**. These are measured toy counters, not operational business telemetry.
