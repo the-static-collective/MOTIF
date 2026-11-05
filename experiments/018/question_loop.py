@@ -74,10 +74,45 @@ def collect(name):
   data[key]=water.request_json(water.USGS+"?"+query)
  return data
 
+def optional_upstream_gauge(raw,site):
+ """Retain real sparse sensors without inventing the missing observations.
+
+ Source-owned 016 parser requires 50 sensor hours for a full multi-gauge model,
+ which is inappropriate for OPTIONAL sources in an information-value study.
+ Apply the same strict identity, units, timestamp and duplicate checks here,
+ but allow the validated output to be empty.
+ """
+ from collections import defaultdict
+ require(type(raw) is dict and raw.get("type")=="FeatureCollection"
+         and type(raw.get("features")) is list and
+         len(raw["features"])<=MAX_FEATURES, "INVALID_OPTIONAL_GAUGE")
+ require(not any(link.get("rel")=="next" for link in raw.get("links",[])
+                 if type(link) is dict),"SILENT_OPTIONAL_SOURCE_PAGING")
+ entries={}
+ for item in raw["features"]:
+  require(type(item) is dict and type(item.get("properties")) is dict,
+          "INVALID_OPTIONAL_SENSOR_FEATURE")
+  p=item["properties"]
+  require(p.get("monitoring_location_id")==FIXED_SITES[site] and
+          p.get("parameter_code")=="00060" and
+          p.get("unit_of_measure") in ("ft3/s","ft^3/s","ft³/s","ft3 s-1"),
+          "UNEXPECTED_OPTIONAL_SENSOR_ID_OR_UNIT")
+  when=water.utc(p.get("time"))
+  value=water.number(p.get("value"))
+  require(when not in entries or entries[when]==value,
+          "CONFLICTING_OPTIONAL_SENSOR_SAME_TIMESTAMP")
+  entries[when]=value
+ byhour=defaultdict(list)
+ for when,value in entries.items():
+  byhour[when.replace(minute=0,second=0,microsecond=0)].append(value)
+ return {when:mean(values) for when,values in byhour.items()}
+
 def rows(raw,name):
  require(name in WINDOWS and type(raw) is dict and set(raw)==set(FIXED_SITES),
          "INVALID_SOURCE_ENVELOPE")
- d={key:water.gauges(raw[key],key) for key in FIXED_SITES}
+ d={"mankato":water.gauges(raw["mankato"],"mankato")}
+ for upstream in ("blue","sueur"):
+  d[upstream]=optional_upstream_gauge(raw[upstream],upstream)
  lo=datetime.fromisoformat(WINDOWS[name][0]).replace(tzinfo=timezone.utc)
  hi=(datetime.fromisoformat(WINDOWS[name][1]).replace(tzinfo=timezone.utc)
        +timedelta(days=1))
