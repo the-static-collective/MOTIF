@@ -1,0 +1,100 @@
+{
+  "schema": "motif.instrument-garden/v0",
+  "domain": "minecraft-vanilla-game-only",
+  "source": {
+    "classification": "native-relatte-p256-verified-game-history",
+    "disposition": "HOLD",
+    "owner_admitted": false,
+    "source_ids": [
+      "relatte-crossing-v0:0b61b9476c0ab3e2b57a5090781d2591e8c1145ac84c2eea2f67efb301d54fa3",
+      "relatte-crossing-v0:bceaf6c25b074b0e1eed56c157368dae7aa97c99d33c382d5d00c96ddb91dda1"
+    ]
+  },
+  "hypotheses": [
+    {
+      "id": "position-invariant-prefix",
+      "prior": 0.5,
+      "predictions": {
+        "A:-13": 3,
+        "A:2": 5,
+        "B:17": 6,
+        "B:-28": 2,
+        "B:-13": 3,
+        "A:17": 6,
+        "A:-28": 2,
+        "B:2": 5
+      }
+    },
+    {
+      "id": "world-local-hidden-relay",
+      "prior": 0.5,
+      "predictions": {
+        "A:-13": 3,
+        "A:2": 5,
+        "B:17": 6,
+        "B:-28": 2,
+        "B:-13": 4,
+        "A:17": 6,
+        "A:-28": 3,
+        "B:2": 5
+      }
+    }
+  ],
+  "observed": [
+    {
+      "world": "A",
+      "fault_x": -13,
+      "lit_count": 3
+    },
+    {
+      "world": "A",
+      "fault_x": 2,
+      "lit_count": 5
+    },
+    {
+      "world": "B",
+      "fault_x": 17,
+      "lit_count": 6
+    },
+    {
+      "world": "B",
+      "fault_x": -28,
+      "lit_count": 2
+    }
+  ],
+  "targets": [
+    {
+      "world": "B",
+      "fault_x": -13,
+      "cost": 1.2,
+      "latency": 1,
+      "reliability": 0.95
+    },
+    {
+      "world": "A",
+      "fault_x": 17,
+      "cost": 1,
+      "latency": 1,
+      "reliability": 0.95
+    },
+    {
+      "world": "A",
+      "fault_x": -28,
+      "cost": 5.5,
+      "latency": 4,
+      "reliability": 0.6
+    },
+    {
+      "world": "B",
+      "fault_x": 2,
+      "cost": 0.5,
+      "latency": 1,
+      "reliability": 0.95
+    }
+  ],
+  "budget": 4,
+  "cost_of_inaction": 1.5,
+  "value_per_bit": 10,
+  "latency_penalty": 0.4,
+  "operator_permission": "PROPOSE_ONLY"
+}
