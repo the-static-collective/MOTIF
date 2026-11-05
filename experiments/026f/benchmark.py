@@ -17,6 +17,7 @@ from semantic_router import CachedT5GateClassifier,ClassicalGateClassifier
 from question_relay import review_semantic_question
 from frozen_cases import CASES,digest
 from ask_again import assess_careers
+from diagnostic import inspect_semantic_link
 
 METHODS=("NATIVE","CLASSICAL_TFIDF","REAL_T5")
 
@@ -108,6 +109,7 @@ def benchmark():
         "all_field_and_source_events_synthetic":True,
     }
     report["native_meta_reassessment"]=assess_careers(report)
+    report["posthoc_next_question"]=inspect_semantic_link(report)
     return report
 
 if __name__=="__main__":
