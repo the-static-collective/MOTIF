@@ -24,6 +24,13 @@ jobs:
         run: node --test experiments/026/test_discovery_machine.mjs
       - name: New adaptive paths, held-out failure counterexample, independent live read boundaries
         run: node --test experiments/027/test_gardener.mjs
+      - name: Reproduce three bounded capability experiments
+        run: node experiments/027/boundary_challenge.mjs > motif027-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif027-three-frontier-report
+          path: motif027-report.json
+          retention-days: 14
       - name: Run independent fixed public Open-Meteo live read (no user data)
         run: |
           node --input-type=module -e "import {probePublicExample} from './experiments/027/graft/src/live-pilot-027.mjs';import {writeFileSync} from 'node:fs';const r=await probePublicExample({approvedPublicPilot:true});if(r.status!=='READ_ONLY_THIRD_PARTY_RESPONSE_OBSERVED'||r.requests!==1||r.code_installed)process.exit(1);writeFileSync('motif027-real-live-read.json',JSON.stringify(r,null,2));console.log(JSON.stringify({host:r.endpoint_host,example:r.example_location,read:true,originalWorldFactVerified:false}));"
