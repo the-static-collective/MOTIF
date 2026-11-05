@@ -42,6 +42,7 @@ jobs:
         run: |
           python -m unittest -v test_careers.py
           python -m unittest -v test_encoder.py
+          python -m unittest -v test_sentinel.py
       - name: Test 022F untrusted critic question feedback, independent synthetic review
         working-directory: experiments/022f
         run: |
