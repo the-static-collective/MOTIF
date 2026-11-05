@@ -1,0 +1,132 @@
+name: MOTIF-005 — impossible fixed goal to GRAFT-born new graph operator
+on:
+  push:
+    branches:
+      - experiment/door-foundry-005-impossibility-graft
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-005/**'
+      - '.github/workflows/door-foundry-005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  missing-operator-crossing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original fixed MOTIF-002/003 repertoire
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 5ee9207f04af2826750863526af7f92b31ef8578
+          path: motif-original
+          persist-credentials: false
+      - name: Original unmerged GRAFT-029 source owner
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 5023b594b0daa4f0328d01643a7f258b71f60bb9
+          path: graft-source
+          persist-credentials: false
+      - name: Independent CANNON-094 source-review code
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 03f8c012b3d6eb48ed821a2be25aa5fd6a48970c
+          path: cannon-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: MOTIF proves impossibility IN ORIGINAL CLOSED GRAMMAR before synthesis
+        run: |
+          mkdir -p evidence
+          python experiments/door-foundry-005/impossibility.py \
+            --original motif-original --out evidence/motif-impossibility.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('evidence/motif-impossibility.json').read_text())
+          assert x['proof']['all_original_effects_exclude_predicate'] is True
+          assert x['proof']['original_fixed_replay_reaches_goal'] is False
+          assert x['permission_to_deploy'] is False
+          print(json.dumps({'gap':x['requested_goal'],
+             'invariant':x['proof']['invariant'],'candidate_unseen':True}))
+          PY
+      - name: Denied simulated permission yields no synthesis request
+        run: |
+          if python experiments/door-foundry-005/impossibility.py \
+            --original motif-original --deny --out evidence/false-gap.json; then
+            echo "A denied world must not cause a source synthesis request"; exit 1
+          fi
+          if test -e evidence/false-gap.json; then exit 1; fi
+      - name: GRAFT original source-owning new-operator synthesizer
+        run: |
+          node --test graft-source/test/missing-operator-forge-029.test.mjs
+          node graft-source/scripts/run-forge-029.mjs \
+            --gap evidence/motif-impossibility.json \
+            --output evidence/graft-native-generated.json
+      - name: CANNON independently checks originals, unseen final cases and classical
+        run: |
+          node cannon-source/experiments/cannon-094/verify.mjs \
+            --graft graft-source --original motif-original \
+            --gap evidence/motif-impossibility.json \
+            --output evidence/cannon-reviewed-operator.json
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const c=JSON.parse(fs.readFileSync('evidence/cannon-reviewed-operator.json','utf8'));
+          const g=JSON.parse(fs.readFileSync('evidence/graft-native-generated.json','utf8'));
+          if(c.generated.source_sha256!==g.selected.source_sha256 ||
+             c.independent_final.correct!==6 || c.operator_admitted!==false ||
+             c.classical_reference.fair_classical_synthetic_goal_reached!==true)
+            throw Error('CANNON failed to replay original GRAFT and fair classical evidence');
+          JS
+      - name: MOTIF compiles genuinely new local build from exact GRAFT-generated program
+        run: |
+          python experiments/door-foundry-005/build.py \
+            --original motif-original --graft graft-source \
+            --question evidence/motif-impossibility.json \
+            --review evidence/cannon-reviewed-operator.json \
+            --out generated-motif-new-grammar
+      - name: Original classically learned control and forged-evidence tests
+        env:
+          MOTIF_ORIGINAL: ${{ github.workspace }}/motif-original
+          GRAFT_SOURCE: ${{ github.workspace }}/graft-source
+          MOTIF_GAP: ${{ github.workspace }}/evidence/motif-impossibility.json
+          CANNON_REVIEW: ${{ github.workspace }}/evidence/cannon-reviewed-operator.json
+        run: python -m unittest discover -s experiments/door-foundry-005 -p 'test_missing_operator.py' -v
+      - name: Run NEW MOTIF executable from generated package
+        run: |
+          python generated-motif-new-grammar/run.py > evidence/new-motif-reachability.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('evidence/new-motif-reachability.json').read_text())
+          assert p['original_fixed_goal_reached'] is False
+          assert p['new_generated_operator_goal_reached'] is True
+          assert p['without_permission_goal_reached'] is False
+          assert p['fair_original_motif_002_newly_trained_goal_reached'] is True
+          assert p['fair_original_motif_002_newly_trained_denied_leak'] is False
+          assert p['claimed_better_than_classical'] is False
+          assert p['actual_bicycle_inspections']==0
+          print(json.dumps({'fixed_reachable':False,
+           'new_generated_executable_reachable':True,
+           'same_evidence_classical_reachable':True,
+           'permission_denied_reachable':False,
+           'real_actions':0},indent=2))
+          PY
+      - name: Keep new executable build and independent review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-005-NEW-GRAFT-OPERATOR-CANNON-HOLD
+          path: |
+            evidence/
+            generated-motif-new-grammar/
+          retention-days: 30
+          if-no-files-found: error
