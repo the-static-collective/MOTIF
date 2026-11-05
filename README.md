@@ -18,6 +18,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[010 — The Scientist](experiments/010/DESIGN.md):** Convert competing MOTIF-009 tree cartridges into an information-gain experiment selector. A separate simulator executes two controlled graph interventions **on demand**; see the [actual two-step scientist transcript and final tree cartridge](experiments/010/example-scientist-interventions.json). In 60 tiny synthetic worlds the selector identifies the correct two-port truth table in 60/60 worlds, compared with 12/60 random, **and ties a strong fixed classical diagnostic control**.
 - **[011 — The Skeptical Scientist](experiments/011/DESIGN.md):** Preserve contradictions that disprove the current two-input grammar; refuse to guess about hidden causes or noise; propose a new **role-relative relation routing to two real MOTIF-009 tree cartridges** only with independent validation and local prediction-only review. [The actual composite router and six-case transcript](experiments/011/example-skeptic.json) are committed. In 30 controlled worlds, MOTIF predicts only half the holdouts but makes no wrong covered predictions; a forced baseline predicts all and gets 160/480 wrong.
 - **[012 — The Causal Cartographer](experiments/012/DESIGN.md):** Start with MOTIF-011's perfectly confounded candidate concepts, package four competing **real MOTIF-009 decision-tree cartridges**, choose synthetic interventions to break their correlation, and record independent local falsification and explicit prediction-only review. The [concrete causal-map and refusal cartridge](experiments/012/example-causal-map.json) is stored. Across 36 synthetic worlds, 24/36 model candidates pass separate local review and an explicit synthetic admission fixture, 12/36 are held for hidden-context/noisy counterexamples; this **ties an ordinary fixed diagnostic strategy**, not evidence of new causal mathematics.
+- **[013 — The Probabilistic Witness](experiments/013/DESIGN.md):** Replace exact outcomes with **sampled Bernoulli success/failure, unreliable and anti-reliable witnesses, forwarded hearsay, missing reports, and real synthetic actuator noncompliance**. Learn Beta-calibrated source/actuator uncertainty, weight four real 009 decision-tree cartridges plus unresolved OTHER mass, and issue probabilities or abstentions. In 3,600 held-out synthetic outcomes, **a flexible classical Bayesian four-cell baseline beats MOTIF on Brier score (0.224069 vs 0.228364)**. See the [verified probabilistic witness cartridge and admitted/missed failures](experiments/013/example-probabilistic-witness.json).
 
 ### Run (Python 3.10+, standard library only)
 
@@ -74,12 +75,21 @@ cd ../012
 python benchmark.py
 python demo.py    # show candidate causal maps, interventions, and refusals
 python -m unittest -v test_cartographer.py
+
+cd ../013
+python benchmark.py  # 30 worlds, noisy reporters and classical Bayesian control
+python demo.py       # uncertainty, anti-witness, and missed shift examples
+python -m unittest -v test_witness.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Research laws
 
+- **A report ≠ an observed outcome.** Sources can misreport, disagree, be absent or be malicious; witness identity metadata and checksum are not verified real-world truth.
+- **A forwarded witness ≠ another independent witness.** Repeated claims sharing one upstream origin are counted once, not multiplied into false certainty.
+- **An intended intervention ≠ an applied intervention.** Without a separate synthetic receipt of applied controls, MOTIF-013 holds causal attribution from that training attempt.
+- **A high posterior ≠ calibration or immunity to distribution shift.** The 013 ensemble loses to a flexible Bayesian baseline overall and misses some out-of-family and drift worlds.
 - **A broken hypothesis family ≠ a discovered cause.** Repeated same-input contradictions require abstention until an independently validated explanation exists.
 - **A new feature ≠ a causal relation.** A predictive relation can be a proxy; competing indistinguishable proxies are explicitly held.
 - **A simulated causal intervention ≠ identification in the physical world.** A predictive causal map must survive independent controls and validation; even then, it is only supported in its programmed sandbox.
@@ -99,6 +109,6 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Next frontier
 
-Test noisy interventions with **calibrated probabilistic likelihoods**, unknown causal factors and partial intervention compliance, under identical observation and cost budgets. Compare active causal maps to strong Bayesian and classical experimental-design algorithms in independently frozen held-out graph domains, and measure *harm from negative cross-world cartridge transfer*. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Test a **joint Bayesian witness world-model** that integrates uncertain sources, unverified intervention controls and structural hypotheses instead of plugging in their posterior means. Freeze out-of-family/noisy-regime holdouts, measure online calibration and abstention, and compare against strong classical Bayesian baselines on matched evidence and compute. Compare active causal maps to strong Bayesian and classical experimental-design algorithms in independently frozen held-out graph domains, and measure *harm from negative cross-world cartridge transfer*. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
