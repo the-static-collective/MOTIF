@@ -263,6 +263,31 @@ class WitnessOfWitnessesTests(unittest.TestCase):
         self.assertGreater(benchmark.logloss(True,.01),
                            benchmark.logloss(True,.9))
 
+    def test_concrete_meta_witness_and_cartridges_reproduce_exactly(self):
+        import importlib.util
+        source=Path(__file__).parent/"demo.py"
+        spec=importlib.util.spec_from_file_location("motif014w_demo_test",
+                                                    str(source))
+        module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        expected=json.loads((Path(__file__).parent/
+                             "example-joint-credibility.json").read_text())
+        self.assertEqual(expected,json.loads(json.dumps(module.demonstrate())))
+        cases=expected["cases"]
+        self.assertFalse(cases["source_drift_missed"][
+            "validation_signaled_possible_shift"]["warning"])
+        self.assertTrue(cases["source_drift_caught"][
+            "validation_signaled_possible_shift"]["warning"])
+        self.assertFalse(cases["auditor_drift_missed"][
+            "validation_signaled_possible_shift"]["warning"])
+        ensemble=cases["supported_known_mechanism"][
+            "proposed_009_tree_cartridge_ensemble"]
+        self.assertEqual(len(ensemble["components"]),4)
+        for c in ensemble["components"]:
+            self.assertEqual(validate_cartridge(json.dumps(c["tree"])).id,
+                             c["tree"]["id"])
+        self.assertEqual(expected["external_actions"],0)
+
     def test_full_receipt_is_identical_to_new_seeded_stochastic_rerun(self):
         location=Path(__file__).parent/"experiment-results.json"
         self.assertEqual(json.loads(location.read_text()),benchmark.benchmark())
