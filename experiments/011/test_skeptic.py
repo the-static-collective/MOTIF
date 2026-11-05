@@ -294,8 +294,12 @@ class SkepticalScientistTests(unittest.TestCase):
         self.assertTrue(result["safety_audit"]["real_action_dispatched"] is False)
 
     def test_committed_receipts_match_fresh_synthetic_reproduction(self):
-        import demo
+        import importlib.util
         location=Path(__file__).parent
+        spec=importlib.util.spec_from_file_location(
+            "motif011_demo_under_test",str(location/"demo.py"))
+        demo=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(demo)
         measured=json.loads((location/"experiment-results.json").read_text())
         transcript=json.loads((location/"example-skeptic.json").read_text())
         router=json.loads((location/"example-derived-router.json").read_text())
