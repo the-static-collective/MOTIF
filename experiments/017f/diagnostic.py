@@ -10,8 +10,8 @@ from dataclasses import dataclass
 from statistics import mean
 from typing import Sequence
 
+from grower import QuestionProposal, Review  # installs the relative 016 import path
 from forest import LivingForest, Road
-from grower import QuestionProposal, Review
 from multiplex import Hypothesis, best_answer
 from oracle import TestWorld, measure
 
