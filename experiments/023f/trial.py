@@ -149,13 +149,26 @@ def summarize(rows):
     theoretical = sum(x["reference_max_accuracy_gain"] for x in rows)
     failures = [(x["id"], x["question_status"], x["critic_raw_text"])
                 for x in rows if not x["correct_eligibility_choice"]]
+    # This is a STRICT MODEL-SELECTION metric, distinct from a safe outcome
+    # enforced by the independent native gate. A HOLD on a useless test does
+    # NOT establish that the LLM knew no test should have been asked.
+    exact_choices = sum(
+        (x["question_status"] == "ELIGIBLE_SYNTHETIC_REPLAN_ONLY"
+         and x["proposed_id"] in x["reference_eligible_ids"])
+        if x["reference_eligible_ids"]
+        else (x["critic_raw_text"] == "TEST_ID=NO_TEST")
+        for x in rows
+    )
     return {
         "case_count": len(rows),
         "cases_with_reference_improving_test": gold_cases,
         "actually_model_generated_critic_cases": selected,
         "strict_test_id_packet_count": valid,
         "eligible_synthetic_test_nominations": useful,
-        "correct_useful_or_safe_hold_rate": round(correct/len(rows),4),
+        "pipeline_safe_hold_or_useful_rate": round(correct/len(rows),4),
+        "llm_exact_useful_or_explicit_abstention_count": exact_choices,
+        "llm_exact_useful_or_explicit_abstention_rate": round(exact_choices/len(rows),4),
+        "native_gate_refused_or_model_abstained_count": len(rows) - useful,
         "total_synthetic_accuracy_gain": round(learned,4),
         "reference_max_total_gain_same_catalog": round(theoretical,4),
         "independent_RUN_correct_on_accepted_cases": sum(
