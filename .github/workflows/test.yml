@@ -50,6 +50,29 @@ jobs:
           assert all('a_part-surrogate' in entry['dogram_calculation']['separating_probes']
                      for entry in result['pair_receipts'])
           PY
+      - name: Conventional baseline 006
+        working-directory: experiments/006
+        run: python -m unittest -v test_baselines.py
+      - name: Test 007
+        working-directory: experiments/007
+        run: python -m unittest -v test_smallest_key.py
+      - name: Reproduce 007
+        working-directory: experiments/007
+        run: python smallest_key.py
+      - name: Native Dogram rectangle and anti-collapse 007
+        working-directory: experiments/007
+        run: |
+          python dogram_bridge.py --dogram-root ../../vendor/Dogram > /tmp/motif-dogram-007.json
+          python - <<'PY'
+          import json
+          with open('/tmp/motif-dogram-007.json', encoding='utf-8') as f:
+              result = json.load(f)
+          assert result['schema'] == 'motif.dogram-two-key/v0'
+          assert result['rectangle']['mode'] == 'numeric'
+          assert result['rectangle']['mixed_delta'] == {'kind':'integer','value':1}
+          assert result['anti_collapse']['lawful_quotient'] is True
+          assert len(result['anti_collapse']['lost_distinctions']) == 3
+          PY
       - name: Reproduce 006
         working-directory: experiments/006
         run: python question.py
