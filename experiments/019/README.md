@@ -37,6 +37,12 @@ copy any MEMENTO source code to MOTIF, or export private UNDERSTORY content.
   passed at `e9754bd5f16993b5eddd8071219756fbfd4780ed`.
 - MOTIF's separate Python `test_interop_stdio.py` checks isolation,
   type limits, schema rejection, holdout blindness and negative transfer.
+- The public end-to-end **snapshot roundtrip** (see \`fixtures/PROVENANCE.md\`)
+  processes structurally synthetic data actually derived from the pinned
+  MEMENTO code bodies through the native MEMENTO functions in a V8 adapter.
+  Real Python MOTIF selects \`path2(carries,reaches)\`; the real 019 policy
+  then chooses \`reaches\`, not a pre-authored probe. Sealed holdout reversal
+  retains the selection but drops accuracy to zero.
 - The public pure-policy tests confirm the new probe is selected **because of
   MOTIF's chosen program**: \`path2(carries,reaches)\` selects \`reaches\`,
   while a distinct reviewable \`direct(marked)\` would select \`marked\`.
@@ -130,3 +136,9 @@ MEMENTO's roles, the policy returns HOLD. Inverting sealed holdout outcomes
 must not alter which probe was selected, but must collapse predictive
 accuracy. The native integration test covers that once a private checkout is
 available. No private source is published here.
+
+Latest public CI on the source-derived snapshot: **7 Python interop,
+37 MOTIF/Green Grammar, and 14 JavaScript tests passed; 2 private native
+runtime tests skipped**. The standalone source-derived V8 inspection exercised
+actual MEMENTO function bodies with an adapted import and digest shim; it is
+not a substitute for an actual pinned private Node.js checkout.
