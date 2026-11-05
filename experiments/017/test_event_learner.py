@@ -54,7 +54,7 @@ class Reality017Tests(unittest.TestCase):
 
     def test_truth_cannot_change_prepared_plan_or_models(self):
         first=m.canonical(self.plan)
-        mutated=fake_window("event",scale=30.0,trend=40)
+        mutated=fake_window("event",scale=5.0,trend=1.5)
         self.assertNotEqual(m.evaluate_frozen(self.plan,self.event)["event_source_snapshot_sha256"],
                             m.evaluate_frozen(self.plan,mutated)["event_source_snapshot_sha256"])
         self.assertEqual(m.canonical(self.plan),first)
