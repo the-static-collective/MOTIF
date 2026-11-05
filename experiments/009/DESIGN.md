@@ -112,6 +112,22 @@ The original generator is too easy for a competent two-question tree: **active s
 
 Do not describe these results as a discovery of autonomous curiosity or improved sample efficiency.
 
+### v2 post-observation stress results: a detectable early effect
+
+After seeing the v1 ceiling, the development stress protocol reduced the initial revealed observations from **16 to 6** while preserving the same 12-question budget and all six generator families, 5 seeds and 80 held-out test episodes per world.
+
+| Labeled examples per world | Active mean balanced accuracy | Random mean balanced accuracy |
+|---|---:|---:|
+| 6 (before further questions) | 0.6169 | 0.6169 |
+| 12 (6 new observations) | **0.9876** | **0.9025** |
+| 18 (12 new observations) | **1.0000** | **0.9943** |
+
+Final results across 30 worlds: **active won 1, tied 29, lost 0**. The early (6-additional-observation) advantage was **0.0851 mean balanced-accuracy points**. By the final budget, most of that difference vanished.
+
+This is **a small, post-hoc synthetic stress result**, not independently preregistered evidence of a generally superior active-learning method. The toy generator remains easy for a shallow tree, and the early gap could reflect the particular frozen seeds, query-selection heuristic and finite observation pool. A stronger benchmark must repeat the result on genuinely different, harder worlds with more seeds, an information-gain baseline, and a locked design.
+
+The full per-seed and per-question outputs for both protocols are retained; neither the original null result nor the stress result replaces the other.
+
 ### A strong falsifier is better than a flattering story
 
 The real research frontier is to evaluate whether tree-guided inquiry becomes useful **when evidence is actually scarce, observation is costly and plausible hypotheses disagree**.
