@@ -134,7 +134,7 @@ def minimum_break_set(nodes, edges, source, target):
                                    if capacity > 0), source)
     left = set(reached)
     cut = tuple(sorted(e for e in edges if e[0] in left and e[1] not in left))
-    if len(cut) != flow or path(nodes, (e for e in edges if e not in cut),
+    if len(cut) != flow or path(nodes, tuple(e for e in edges if e not in cut),
                                source, target) is not None:
         raise HOLD("Max-flow/min-cut crosscheck failed")
     return {"minimum_confirmed_edge_retractions": flow,
