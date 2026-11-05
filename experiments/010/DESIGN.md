@@ -33,6 +33,19 @@ The scientist chooses the available setting with maximum gain and refuses to inv
 
 A cartridge is a bounded and inspectable two-question tree: structural role-relative predicates, four possible leaves, observation counts, and an unverified content digest. It can be exported as the portable MOTIF-009 JSON format. A tree is a hypothesis, not an independently observed fact or an executable external tool.
 
+## An actual scientist cartridge and inquiry transcript
+
+[Open the generated two-step intervention transcript](example-scientist-interventions.json). This artifact was produced by the GitHub Actions simulator, not assembled by hand, and the test suite checks its exact reproducibility.
+
+In the synthetic XOR world, the learner starts with **four** indistinguishable tree-cartridge hypotheses. It proposes:
+
+1. \`do(A=false,B=true)\` — expected gain **1 bit**; the independently computed simulator outcome is **success**; two hypothetical trees survive.
+2. \`do(A=true,B=false)\` — expected gain **1 bit**; the simulator again reports **success**; one tree survives.
+
+Its final exported decision-tree cartridge has four leaves \`[false,true,true,false]\`, so it predicts success exactly when one of the two synthetically controlled inputs is present.
+
+The transcript stores the input settings, rival tree IDs and votes **before** each result, observed graph outcome, remaining hypothesis count, final cartridge and an explicit \`real_world_authority=false\` declaration. None of the simulated world states or observations are modified by recording it.
+
 ## Controlled comparisons: actual measured results
 
 [The reproducible CI receipt](experiment-results.json) includes all 60 synthetic worlds and every individual question. The protocol covers six hidden rule families × ten seeds. All four methods receive the same two initial natural observations and **exactly two further observations**.
@@ -64,6 +77,7 @@ Python 3.10+, standard library, no paid API:
 cd experiments/010
 python benchmark.py
 python -m unittest -v test_scientist.py
+python demo.py     # concrete two-step inquiry and exported tree cartridge
 \`\`\`
 
 GitHub Actions runs all previous MOTIF experiments and logs the full independently generated benchmark. The 010 test suite checks that the archived JSON matches the regenerated JSON **exactly**.
