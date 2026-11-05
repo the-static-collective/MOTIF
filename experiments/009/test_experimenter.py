@@ -185,6 +185,18 @@ class TreeCartridgeTests(unittest.TestCase):
             initial=6, requests=12,
             version="active-tree-cartridges-v2-development-stress"))
 
+    def test_checked_in_xor_cartridge_is_real_and_reproducible(self):
+        import cartridge_demo
+        raw = json.loads((Path(__file__).parent /
+                          "example-tree-cartridge.json").read_text())
+        sample = cartridge_demo.demonstration()
+        self.assertEqual(raw, sample["artifact"])
+        self.assertEqual(raw["leaves"], [False, True, True, False])
+        self.assertEqual(sample["review"]["decision"], "ADMIT_PREDICT_ONLY")
+        self.assertTrue(sample["held_before_review"])
+        restored = cartridge.validate_cartridge(json.dumps(raw))
+        self.assertEqual(restored.id, raw["id"])
+
     def test_full_benchmark_is_complete_and_reports_losses(self):
         result = benchmark.report()
         s = result["summary"]
