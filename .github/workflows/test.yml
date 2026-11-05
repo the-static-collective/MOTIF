@@ -1,0 +1,24 @@
+name: MOTIF experiments
+on:
+  push:
+  pull_request:
+jobs:
+  standard-library-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test 001
+        working-directory: experiments/001
+        run: python -m unittest -v test_motif.py
+      - name: Test 002
+        working-directory: experiments/002
+        run: python -m unittest -v test_motif002.py
+      - name: Reproduce 001
+        working-directory: experiments/001
+        run: python motif.py
+      - name: Reproduce 002
+        working-directory: experiments/002
+        run: python motif002.py
