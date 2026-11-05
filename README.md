@@ -48,6 +48,28 @@ python -m unittest -v test_inheritance.py
 
 The suites also run on GitHub Actions with no paid services or API credentials.
 
+## Parallel research: Inquiry × The Smallest Key × Dogram
+
+These two **separately scoped** synthetic studies do not replace official
+MOTIF-006 (composite verb) or MOTIF-007 (two-world method inheritance).
+
+- **[Q-001 — The First Question](research/first-question/DESIGN.md):**
+  Compare target-relevant active question selection with an equal-budget,
+  conventional finite hypothesis-elimination policy. They **tie** on the
+  constructed four-case benchmark. An optional native Dogram calculation
+  examines separating probes, declared costs, and distinctions erased by
+  the selected question.
+- **[SK-001 — The Smallest Key](research/smallest-key/DESIGN.md):**
+  Find a bounded, minimum-cost hypothetical intervention that opens a
+  declared opportunity while preserving other actors' existing options.
+  The synthetic workshop requires teaching **and** informing Ben rather
+  than borrowing his only kit. Dogram's rectangle measures the 2×2
+  composition and anti-collapse records erased world distinctions.
+
+The studies run offline with Python standard library and do not use, modify,
+or authorize a real-world actor, external service, or project admission gate.
+The native Dogram bridge is tested in CI against a pinned Dogram checkout.
+
 ## Research laws
 
 - **Hypothesis ≠ observation.** Simulated futures cannot amend observed history.
