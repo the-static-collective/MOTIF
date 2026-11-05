@@ -1,0 +1,39 @@
+name: DOOR-FOUNDRY-001 provenance and composition
+on:
+  push:
+    branches:
+      - experiment/door-foundry-001-capability-composition
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-001/**'
+      - '.github/workflows/door-foundry.yml'
+      - 'experiments/002/motif002.py'
+      - 'experiments/003/affordance.py'
+      - 'experiments/006/composition.py'
+  workflow_dispatch:
+jobs:
+  door-foundry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run original source-pinned cross-organ tests
+        working-directory: experiments/door-foundry-001
+        run: python -m unittest -v test_door_foundry.py
+      - name: Reproduce door and preserve synthetic permission HOLD
+        run: |
+          python experiments/door-foundry-001/door_foundry.py > /tmp/door.json
+          python experiments/door-foundry-001/door_foundry.py --deny-synthetic-permission > /tmp/hold.json
+          python - <<'PY'
+          import json
+          door = json.load(open('/tmp/door.json'))
+          hold = json.load(open('/tmp/hold.json'))
+          assert door['stage'] == 'PROPOSED'
+          assert hold['stage'] == 'HOLD'
+          assert door['external_action_executed'] is False
+          print(json.dumps({'door': door, 'permission_ablation': hold}, indent=2))
+          PY
