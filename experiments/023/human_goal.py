@@ -24,7 +24,7 @@ STATIONS={"blue":"USGS-05320000","sueur":"USGS-05320500",
 HAZARD=re.compile(r"\b(evacuat\w*|flood\s+risk|flood\s+warning|"
  r"safe\s+to\s+(cross|drive|drink|swim|travel)|safe\s+(bridge|route|road|water)|"
  r"bridge\s+(safe|closed)|should\s+i\s+(cross|drive|evacuate))\b",re.I)
-RIVER=re.compile(r"\b(river|streamflow|discharge|gauge|gage|usgs|"
+RIVER=re.compile(r"\b(rivers?|streamflow|discharge|gauge|gage|usgs|"
  r"water\s+reading|water\s+level)\b",re.I)
 COMMUNITY=re.compile(r"\b(coffee|donat\w*|fellowship|event|volunteer|"
  r"grocery|church|soup\s+kitchen)\b",re.I)
