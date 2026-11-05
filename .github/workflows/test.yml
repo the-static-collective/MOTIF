@@ -44,6 +44,8 @@ jobs:
               result = json.load(f)
           assert result['schema'] == 'motif.dogram-calculate-only/v0'
           assert len(result['pair_receipts']) == 4
+          assert result['collapse_analysis']['target_relative_sufficiency'] is True
+          assert len(result['collapse_analysis']['dogram_calculation']['lost_distinctions']) == 2
           assert result['source']['excluded_trials'] == ['e_refused-part']
           assert all('a_part-surrogate' in entry['dogram_calculation']['separating_probes']
                      for entry in result['pair_receipts'])
