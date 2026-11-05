@@ -169,7 +169,7 @@ def examples(domain):
    "is_illustrative_not_an_achieved_outcome":True}
   for id in ("a","b")]
 
-def inspect_input(text,choice,own_example,confirmed,expected_contract_id,correction_of_id):
+def inspect_input(text,choice,own_example,confirmed,expected_contract_id,correction_of_id,freshness_hours):
  require(type(text) is str and 0<len(text.strip())<=MAX_GOAL and
          not BAD.search(text),"INVALID_PERSON_GOAL")
  require(choice is None or (type(choice) is str and
@@ -180,16 +180,18 @@ def inspect_input(text,choice,own_example,confirmed,expected_contract_id,correct
  require(own_example is None or (type(own_example) is str and
          len(own_example)<=CUSTOM_MAX and not BAD.search(own_example)),
          "INVALID_OWN_EXAMPLE")
+ require(freshness_hours is None or (type(freshness_hours) is int and
+         freshness_hours in (1,6,12,24)),"INVALID_FRESHNESS")
  require(choice=="custom" or own_example is None,
          "CUSTOM_EXAMPLE_WITHOUT_CUSTOM_SELECTION")
  require(not confirmed or (choice is not None and expected_contract_id is not None),
          "NO_CONFIRMATION_WITHOUT_SEEN_CONTRACT")
 
-def compose(text,choice=None,own_example=None,*,confirmed=False,
+def compose(text,choice=None,own_example=None,*,freshness_hours=None,confirmed=False,
             expected_contract_id=None,correction_of_id=None,
             river_prior=None):
  inspect_input(text,choice,own_example,confirmed,
-               expected_contract_id,correction_of_id)
+               expected_contract_id,correction_of_id,freshness_hours)
  domain,method,unresolved=detect_domain(text)
  if RISK.search(text):
   return base("HOLD_HIGH_STAKES",
@@ -199,7 +201,7 @@ def compose(text,choice=None,own_example=None,*,confirmed=False,
   # No rewriting of validated 024 river semantics: all physics retained.
   selection={"a":"one","b":"both","custom":"custom",None:None}[choice]
   r=river.evaluate(text,selection,own_example,
-      confirmed=confirmed,expected_contract_id=expected_contract_id,
+      freshness_hours=freshness_hours,confirmed=confirmed,expected_contract_id=expected_contract_id,
       correction_of_id=correction_of_id,prior=river_prior)
   opts=None
   if r["status"]=="SHOW_TWO_EXAMPLES":
@@ -224,6 +226,10 @@ def compose(text,choice=None,own_example=None,*,confirmed=False,
     prior_physical_example=r.get("prior_physical_example"),
     human_text_persisted=False)
 
+ if freshness_hours is not None:
+  return base("HOLD_UNSUPPORTED_FRESHNESS",
+    "Hourly source recency does not apply to this non-river outcome contract.",
+    domain,method)
  c=CARTRIDGES[domain]
  if choice is None:
   return base("SHOW_TWO_EXAMPLES",
@@ -312,9 +318,10 @@ def main():
   require(len(raw)<4096,"BOUNDARY_INPUT_TOO_LARGE")
   d=json.loads(raw)
   require(type(d) is dict and set(d)<={
-   "text","choice","own_example","confirmed",
+   "text","choice","own_example","freshness_hours","confirmed",
    "expected_contract_id","correction_of_id"},"UNLISTED_API_INPUT")
   response=compose(d.get("text"),d.get("choice"),d.get("own_example"),
+      freshness_hours=d.get("freshness_hours"),
       confirmed=d.get("confirmed",False),
       expected_contract_id=d.get("expected_contract_id"),
       correction_of_id=d.get("correction_of_id"))

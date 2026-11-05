@@ -107,6 +107,17 @@ class ComposableExamples(unittest.TestCase):
   self.assertEqual(a["draft_contract"]["goal"],"any_fresh")
   self.assertEqual(b["draft_contract"]["goal"],"two_named_fresh")
 
+ def test_river_custom_missing_age_can_request_clarification_and_confirm(self):
+  x=m.compose("Could you check the rivers?","custom",
+    "Both Blue Earth and Le Sueur reports are enough")
+  self.assertEqual(x["status"],"ASK_ONE_DECISIVE_QUESTION")
+  self.assertEqual(x["next_question"]["id"],"freshness_hours")
+  y=m.compose("Could you check the rivers?","custom",
+    "Both Blue Earth and Le Sueur reports are enough",freshness_hours=24)
+  self.assertEqual(y["status"],"CONFIRM_REQUIRED")
+  self.assertEqual(y["draft_contract"]["freshness_hours"],24)
+  self.assertEqual(y["draft_contract"]["goal"],"two_named_fresh")
+
  def test_river_custom_6hour_still_needs_human_confirmation(self):
   x=m.compose("Could you check the rivers?","custom",
      "One report from within the last 6 hours would be enough")
