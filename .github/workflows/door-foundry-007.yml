@@ -1,0 +1,141 @@
+name: MOTIF-007 — text makes pictures, pictures constrain text
+
+on:
+  push:
+    branches:
+      - experiment/door-foundry-007-text-visual-cotranslation
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-007/**'
+      - '.github/workflows/door-foundry-007.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  classical-cotranslation-and-native-imagination:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original GRAFT-030 source-owned visual rule
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Original CANNON-095 independent visual evidence reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Exact original MOTIF-006 PNG decoder for independent CANNON review
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Text FIRST, parse relations without T5 and produce actual synthetic PNGs
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall." \
+            --out text-scenes
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('text-scenes/text-to-picture.json').read_text())
+          assert x['status']=='UNAMBIGUOUS_GRAMMAR'
+          assert x['candidate_count']==1
+          assert x['automatic_t5_invocations']==0
+          assert x['candidate_scenes'][0]['scene']['interpretation']['observed_physical_scene'] is False
+          assert Path('text-scenes/H01/start.png').read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'
+          assert Path('text-scenes/H01/target.png').read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'
+          print(json.dumps({'text_compiled_to_binary_png':True,
+            'unverified_geometry_kept_as_assumption':True,'T5_required':False},indent=2))
+          PY
+      - name: Ambiguity before action yields multiple *unselected* picture hypotheses
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate is beside a blue wall. Move it to the other side." \
+            --out ambiguous-scenes
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('ambiguous-scenes/text-to-picture.json').read_text())
+          assert x['status']=='UNRESOLVED_MULTIPLE_VISUAL_HYPOTHESES'
+          assert x['candidate_count']==2
+          assert x['authority']['human_question_answered'] is False
+          print(json.dumps({'uncertain_spatial_text':True,
+            'alternative_unmerged_visual_models':2,'silently_chosen':False}))
+          PY
+      - name: Existing original GRAFT visual grammar native tests
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: CANNON independently checks this text-produced PNG pair, not an old receipt
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start text-scenes/H01/start.png --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --out evidence/cannon-text-produced-image-review.json
+      - name: Original MOTIF-006 rebuilds its held executable from verified GRAFT source
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start text-scenes/H01/start.png \
+            --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --receipt evidence/cannon-text-produced-image-review.json \
+            --graft graft-source --out generated-visual-motif
+      - name: Imagine multiple frames using the genuinely generated operator
+        run: |
+          python generated-visual-motif/run.py --out imagined-futures \
+            > evidence/imagination-result.json
+      - name: Translate actual generated image frames BACK into grounded text
+        run: |
+          python experiments/door-foundry-007/narrate.py \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --out evidence/picture-reasoning.md \
+            > evidence/picture-grounding-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('evidence/picture-grounding-receipt.json').read_text())
+          assert r['status']=='VERIFIED_TEXT_TO_IMAGES_TO_TEXT'
+          assert r['visual_frames_independently_checked']==12
+          assert r['motions_independently_reconstructed']==11
+          assert r['same_information_classical_minimum']==11
+          assert r['external_actions']==0
+          print(json.dumps({'text_to_image_to_image_reasoning_to_text':True,
+            'visual_frames':r['visual_frames_independently_checked'],
+            'imaginary_movements':r['motions_independently_reconstructed'],
+            'classical_ties':True},indent=2))
+          PY
+      - name: Falsify unsupported language, ambiguous scenes, altered evidence and false authority
+        env:
+          TEXT_SCENES: ${{ github.workspace }}/text-scenes
+          IMAGINED_FRAMES: ${{ github.workspace }}/imagined-futures
+        run: python -m unittest discover -s experiments/door-foundry-007 -p 'test_cotranslation.py' -v
+      - name: Preserve the complete inspectable multimodal reasoning packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-007-TEXT-PICTURE-THOUGHT-HELD
+          path: |
+            text-scenes/
+            ambiguous-scenes/
+            imagined-futures/
+            evidence/
+            generated-visual-motif/
+          if-no-files-found: error
+          retention-days: 30
