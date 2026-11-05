@@ -1,0 +1,91 @@
+name: MOTIF map-of-maps 001 — progressive public Git questions
+
+on:
+  push:
+    branches: [research/map-of-maps-001-first-real-weave]
+  pull_request:
+    paths:
+      - 'fieldwork/map-of-maps-001/**'
+      - '.github/workflows/map-of-maps-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-owning-public-cuts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Adversarial tests for tier separation, source mutation, visibility and HOLD
+        run: python3 -m unittest discover -s fieldwork/map-of-maps-001 -p 'test_*.py' -v
+      - name: Exact public Atlas repository cut
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/What-is-the-static-collective-
+          ref: 7de5e95a1dc04ead1790d91dd6326430008d954f
+          persist-credentials: false
+          path: sources/atlas
+      - name: Exact public planZ repository cut
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/planZ
+          ref: 5b6df7fb2a3a0c57d0fff8381108589ec2765a94
+          persist-credentials: false
+          path: sources/planz
+      - name: Exact public GRAFT source registry
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 265fd538266a742d033ba2f5b408a78610d0a75c
+          persist-credentials: false
+          path: sources/graft
+      - name: Exact CANNON experimental interface research
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc
+          persist-credentials: false
+          path: sources/cannon
+      - name: Tier 1 — real public map and four admitted relations
+        run: python3 fieldwork/map-of-maps-001/engine.py --tier 1 --source-root sources > /tmp/motif-tier1.json
+      - name: Tier 2 — add selected held plan attention
+        run: python3 fieldwork/map-of-maps-001/engine.py --tier 2 --source-root sources > /tmp/motif-tier2.json
+      - name: Tier 3 — add GRAFT/CANNON original donor and contract-crossing research
+        run: |
+          python3 fieldwork/map-of-maps-001/engine.py --tier 3 --source-root sources > /tmp/motif-tier3.json
+          python3 - <<'PY'
+          import json
+          reports=[json.load(open(f'/tmp/motif-tier{x}.json')) for x in (1,2,3)]
+          assert [x['source_count'] for x in reports]==[4,5,7]
+          assert [len(x['questions']) for x in reports]==[1,2,3]
+          assert reports[-1]['plan_attention']['authorized_to_execute']==0
+          assert reports[-1]['technical_evidence']['held_cross_owner_candidates']>=1
+          assert all(x['network_requests_from_reasoner']==0 for x in reports)
+          assert reports[-1]['external_actions'] is False
+          print('MOTIF MAP-OF-MAPS FIRST ACTUAL SOURCE-PINNED QUESTION')
+          print(json.dumps({
+            'tier_source_counts':[x['source_count'] for x in reports],
+            'tier_bytes':[x['source_bytes'] for x in reports],
+            'atlas':reports[-1]['atlas'],
+            'planz':reports[-1]['plan_attention'],
+            'technical':reports[-1]['technical_evidence'],
+            'questions':reports[-1]['questions'],
+            'selected_next_test':reports[-1]['motif_first_next_experiment']
+          },indent=2))
+          PY
+      - name: Retain source-pinned evidence and research questions
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-map-of-maps-001-actual-three-tier-question-receipts
+          path: |
+            /tmp/motif-tier1.json
+            /tmp/motif-tier2.json
+            /tmp/motif-tier3.json
+          retention-days: 30
