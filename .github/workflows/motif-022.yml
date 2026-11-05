@@ -1,0 +1,21 @@
+name: MOTIF-022 minimal causal witness (bounded research)
+on:
+  push:
+    branches:
+      - experiments/022-minimal-causal-witness
+  pull_request:
+    paths:
+      - "experiments/022/**"
+      - ".github/workflows/motif-022.yml"
+jobs:
+  micro-instrument:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Verify predecessor model's answer conditions
+        run: node --test experiments/020/instrument_garden.test.mjs experiments/021/learn_from_game.test.mjs
+      - name: Test bounded causal probe compressor and epistemic guards
+        run: node --test experiments/022/minimal_witness.test.mjs
