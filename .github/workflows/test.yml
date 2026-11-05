@@ -37,6 +37,13 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Reproduce 014 exact joint uncertain-witness inference
+        working-directory: experiments/014
+        run: |
+          python benchmark.py > /tmp/motif014.json
+          echo '__MOTIF014_RESULT_START__'
+          cat /tmp/motif014.json
+          echo '__MOTIF014_RESULT_END__'
       - name: Reproduce 013
         working-directory: experiments/013
         run: |
