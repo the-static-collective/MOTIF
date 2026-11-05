@@ -1,0 +1,31 @@
+{
+  "schema": "memento.role-nursery/v0",
+  "candidates": [
+    {
+      "id": "role-candidate-0001",
+      "status": "proposed",
+      "proposal": {
+        "probeProfile": {
+          "carries": true,
+          "marked": false,
+          "reaches": false
+        }
+      }
+    },
+    {
+      "id": "role-candidate-0002",
+      "status": "proposed",
+      "proposal": {
+        "probeProfile": {
+          "carries": true,
+          "marked": true,
+          "reaches": true
+        }
+      }
+    }
+  ],
+  "coarseProbeKeys": [
+    "carries"
+  ],
+  "coarseCollisionCount": 1
+}
