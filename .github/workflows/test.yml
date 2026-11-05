@@ -37,6 +37,13 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 019F native question box, Dogram and adaptive classical planning
+        working-directory: experiments/019f
+        run: |
+          node --version
+          python -m unittest -v test_planner.py
+          python benchmark.py > /tmp/motif019f.json
+          cat /tmp/motif019f.json
       - name: Test 017F self-growing diagnostic, classical parity and honest drift failures
         working-directory: experiments/017f
         run: |
