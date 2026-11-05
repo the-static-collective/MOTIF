@@ -1,0 +1,98 @@
+name: MOTIF-026F Semantic Hint to Native Question
+on:
+  push:
+    paths:
+      - 'experiments/026f/**'
+      - '.github/workflows/motif026f-feedback.yml'
+  pull_request:
+    paths:
+      - 'experiments/026f/**'
+      - '.github/workflows/motif026f-feedback.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-encoder-native-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Native 022F and original 016 integration, no-model tests
+        working-directory: experiments/026f
+        run: |
+          python -m unittest -v test_relay.py
+          python -m unittest -v test_diagnostic.py
+      - name: Install fixed CPU-only T5 dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check transformers==4.57.1 sentencepiece==0.2.1 huggingface_hub==0.36.0 safetensors
+      - name: Intentionally fetch pinned public T5 weights to temporary cache
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from huggingface_hub import snapshot_download
+          sha="0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+          directory=snapshot_download(
+              repo_id="google/flan-t5-small",revision=sha,
+              allow_patterns=[
+                  "config.json","generation_config.json","model.safetensors",
+                  "tokenizer.json","tokenizer_config.json","spiece.model",
+                  "special_tokens_map.json",
+              ],
+          )
+          assert (Path(directory)/"model.safetensors").is_file()
+          with open(os.environ["GITHUB_ENV"],"a") as f:
+              f.write("MOTIF_FLAN_MODEL_DIR="+directory+"\n")
+              f.write("MOTIF_FLAN_REVISION="+sha+"\n")
+          print("Pinned public model revision:",sha)
+          PY
+      - name: Execute actual T5 encoder and native question loop on 25 frozen examples
+        working-directory: experiments/026f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python benchmark.py > real_receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("real_receipt.json"))
+          assert d["actual_t5_encoder_loaded"]
+          assert d["real_t5_decoder_calls"]==0
+          assert d["sample_size"]==25
+          assert d["human_action_or_permission_autonomous"] is False
+          assert d["all_field_and_source_events_synthetic"] is True
+          for case in d["cases"]:
+              for attempt in case["comparison"].values():
+                  assert attempt["typed_test"] in (None,"FOOD_SERVICE_GATE","REPEAT_AUDIO_TEST")
+          print("MOTIF-026F REAL T5 ENCODER -> NATIVE 022F/016")
+          print("Frozen cases digest",d["frozen_corpus_digest"])
+          print("T5 encoder time seconds",d["t5_encoder_seconds"])
+          print("Inference calls",d["t5_query_count"])
+          print("Methods",json.dumps(d["methods"],indent=2))
+          print("MOTIF asked again",json.dumps(d["native_meta_reassessment"],indent=2))
+          print("Posthoc next falsifier",json.dumps(d["posthoc_next_question"],indent=2))
+          for x in d["cases"]:
+              print("CASE",x["case"],"synthetic truth",x["synthetic_gold"],
+                    "native",x["comparison"]["NATIVE"]["gate"],
+                    "classical",x["comparison"]["CLASSICAL_TFIDF"]["gate"],
+                    "real T5",x["comparison"]["REAL_T5"]["gate"],
+                    "native review",x["comparison"]["REAL_T5"]["native_review"])
+          PY
+      - name: Archive only small receipt, not model weights
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif026f-semantic-question-native-meta-receipt
+          path: experiments/026f/real_receipt.json
+          if-no-files-found: ignore
+          retention-days: 14
