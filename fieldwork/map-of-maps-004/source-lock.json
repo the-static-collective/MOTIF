@@ -1,0 +1,30 @@
+{
+  "schema": "motif.freegraph-inquiry-source-lock/v1",
+  "purpose": "MOTIF discovers the next owner-scoped investigation from source-pinned Free Graph; LSD profile is not executable",
+  "freegraph_repo": "the-static-collective/free-graph",
+  "freegraph_commit": "76ddfbcde03bc6f464f5d27812a707fa5a0f5c9f",
+  "files": {
+    "scripts/fg_core.py": "bd4e75b55b91bb199de65d26bbd888662a65495d",
+    "scripts/fg_ops.py": "cb80e283bb114e97e1769d149a2c52b8f79ae3a3",
+    "scripts/reason_space.py": "9808088816f90f8c3761e66355d7229255b5cbb4",
+    "scripts/motif_reason_bridge.py": "cb68b22ebfdea77e46d12fe3416be9180d56fbc2",
+    "scripts/inquiry_selector.py": "f4b764c74eeffcd40f3f5d89afc0e14d45c2f053",
+    "scripts/select_motif_next.py": "f0934e1d59f475f96f88ed3f62e45ffb7547ead4",
+    "research/reason-space-002/instruments.json": "c98513ce6913d05c0a33fe87138106a3831c8d3c"
+  },
+  "native_receipt": {
+    "repo": "the-static-collective/MOTIF",
+    "commit": "070aba60319cbab3d1c1838ec7481c350e7d86e5",
+    "path": "fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json",
+    "blob": "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+  },
+  "rights": {
+    "auto_execute": false,
+    "source_writes": false,
+    "network": false,
+    "private": false,
+    "owner_gate": false,
+    "model_training": false
+  },
+  "external_lsd_code_executed": false
+}

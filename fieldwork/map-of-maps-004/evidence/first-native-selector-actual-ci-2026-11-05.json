@@ -1,0 +1,49 @@
+{
+  "schema": "motif.map-004-actual-selection-ci-receipt/v1",
+  "source_ci": "https://github.com/the-static-collective/MOTIF/actions/runs/42128478730",
+  "original_branch_commit": "bd8f772675daa1277c8cbf2b51080e384018a66b",
+  "freegraph_source_owner_commit": "76ddfbcde03bc6f464f5d27812a707fa5a0f5c9f",
+  "historical_motif_git_blob": "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9",
+  "native_original_instruments_already_observed": [
+    "alex-evidence",
+    "dogram-graph",
+    "graft-source",
+    "planz-plan"
+  ],
+  "unresolved_gap": "NO_RECORDED_SUPPORTING_SPECIMEN",
+  "controls": {
+    "same_old_data_no_new_source": {
+      "selected": null,
+      "prohibits_repeat": true
+    },
+    "fresh_source_scope_human_declaration": {
+      "selected_proposal": "graft-source",
+      "disposition": "PROPOSE_NOT_EXECUTE"
+    },
+    "original_positive_receipt_human_declaration": {
+      "selected_proposal": "playdeck-validator",
+      "disposition": "PROPOSE_NOT_EXECUTE"
+    },
+    "operator_decline": {
+      "disposition": "TASK_CUT_NOT_REQUIRED",
+      "selected": null
+    }
+  },
+  "lsd": {
+    "status": "HUMAN_ONLY_IDEATION_NOT_EXECUTABLE",
+    "original_description": "https://github.com/the-static-collective/the-daily-slice/blob/23c3d4bf7e4febb89919a3d54b6e8aaf3a764120/slices/2026/08/2026-08-24/reality-bakers.md",
+    "github_executable_verified": false
+  },
+  "tests": {
+    "owner_specific_native_source_guard_tests": 6,
+    "passed": true
+  },
+  "source_owner_code_executes_from_verified_git": true,
+  "external_effects": false,
+  "real_tool_dispatch": false,
+  "real_network_calls_from_selector": false,
+  "source_code_written_elsewhere": false,
+  "real_positive_specimen_found": false,
+  "measurement_joules": null,
+  "scientific_caveat": "Explicit scenario controls, not a held-out generalization or measured user benefit."
+}
