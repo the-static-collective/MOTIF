@@ -121,6 +121,36 @@ def select_question(
     return choices[0][-1]
 
 
+def select_information_gain(
+    hypotheses: tuple[str, ...], probes: tuple[Trial, ...],
+    budget: int, asked: frozenset[str] = frozenset()
+) -> Trial | None:
+    """Strong ordinary baseline: finite hypothesis pair elimination per cost.
+
+    This target-blind baseline uses the SAME declared hypotheses and trials.
+    It does not see the oracle. No advantage is claimed if MOTIF ties it.
+    """
+    candidates = []
+    for probe in probes:
+        if (not probe.admitted or probe.id in asked or probe.cost <= 0
+                or probe.cost > budget):
+            continue
+        eliminated_pairs = sum(
+            predict(h1, probe) != predict(h2, probe)
+            for index, h1 in enumerate(hypotheses)
+            for h2 in hypotheses[index + 1:]
+        )
+        if eliminated_pairs:
+            candidates.append((
+                Fraction(eliminated_pairs, probe.cost),
+                eliminated_pairs, -probe.cost, probe.id, probe
+            ))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda row: (-row[0], -row[1], -row[2], row[3]))
+    return candidates[0][-1]
+
+
 def decide_with_oracle(
     hidden_mechanism: str, probes: tuple[Trial, ...] | None = None,
     target: Trial | None = None, budget: int = 1,
@@ -133,7 +163,7 @@ def decide_with_oracle(
     """
     if hidden_mechanism not in HYPOTHESES:
         raise ValueError("unknown oracle mechanism")
-    if policy not in ("active", "fixed_nuisance"):
+    if policy not in ("active", "info_gain", "fixed_nuisance"):
         raise ValueError("unknown declared policy")
     if budget < 0:
         raise ValueError("negative budget")
@@ -152,6 +182,9 @@ def decide_with_oracle(
         if policy == "active":
             chosen = select_question(current, probes, target, remaining,
                                      frozenset(asked))
+        elif policy == "info_gain":
+            chosen = select_information_gain(current, probes, remaining,
+                                             frozenset(asked))
         else:
             chosen = next(
                 (p for p in probes if p.id == "c_nuisance-repeat"
@@ -228,7 +261,7 @@ def dogram_probe_family(
 
 def run_demo() -> dict[str, object]:
     rows = [decide_with_oracle(h, policy=policy) for policy in
-            ("active", "fixed_nuisance") for h in HYPOTHESES]
+            ("active", "info_gain", "fixed_nuisance") for h in HYPOTHESES]
     stats = {
         policy: {
             "answered": sum(row["answered"] for row in rows
@@ -240,7 +273,7 @@ def run_demo() -> dict[str, object]:
                 event["cost"] for row in rows if row["policy"] == policy
                 for event in row["query_receipts"]),
         }
-        for policy in ("active", "fixed_nuisance")
+        for policy in ("active", "info_gain", "fixed_nuisance")
     }
     return {"experiment": "MOTIF-006", "domain": "synthetic finite toy",
             "statistics": stats, "cases": rows,
