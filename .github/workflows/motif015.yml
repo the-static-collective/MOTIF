@@ -1,0 +1,32 @@
+name: MOTIF-015 Generated Graft & Meta-Question
+on:
+  push:
+    branches:
+      - research/015-invented-graft-metaprocedure
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - 'experiments/015/**'
+      - '.github/workflows/motif015.yml'
+jobs:
+  candidate-programs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact pinned original organ test (014)
+        run: node --test experiments/014/test_garden.mjs
+      - name: Generated procedure, classical baseline, negative-transfer tests
+        run: node --test experiments/015/test_graft.mjs
+      - name: Synthetic receipt for researcher inspection
+        run: node experiments/015/invented_graft.mjs > motif015-research.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif015-invented-graft-synthetic-only
+          path: motif015-research.json
+          retention-days: 14
