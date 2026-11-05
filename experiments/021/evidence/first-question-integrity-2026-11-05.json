@@ -1,0 +1,68 @@
+{
+  "authority": false,
+  "automatic_promotion": false,
+  "disposition": "HELD_QUESTION_PROTOCOL_VALIDATOR_AND_FRESH_REPLICATION",
+  "electrical_energy_measured": false,
+  "environmental_warning": false,
+  "learning": {
+    "autonomous_model_weight_update": false,
+    "diagnostic_that_blames_sensor_on_buggy_query_is_refuted": true,
+    "improved_operator_outcome_beyond_this_question_NOT_PROVED": true,
+    "new_physical_world_interaction_kind": "MEASURED_QUESTION_FETCH_AND_STOP",
+    "newly_proved_minimal_task": "ONE_PUBLIC_SOURCE_REPORTED_TIMELY_READING",
+    "next_best_question": "Can MOTIF check the fidelity of its question's URL, timestamps and freshness window BEFORE spending network resources or blaming a sensor?",
+    "next_falsification": "Freeze the URL/request-window validator and compare actual conditional source inquiry on another independently scheduled period, with captured exact request URLs and response-status timing.",
+    "next_hypothesis": "A source-request contract validator can prevent a false environmental diagnosis without executing any network request.",
+    "protocol_error_detected": true,
+    "source_code_was_changed_BY_HUMAN_APPROVED_COMMIT": true
+  },
+  "measured_resource_units": {
+    "GHOT002_corrected_actual_request_count": 3,
+    "GHOT003_actual_request_count": 1,
+    "arbitrary_credits": false,
+    "body_payload_bytes_not_total_network_wire_bytes": true,
+    "causal_network_cost_savings_PROVED": false,
+    "electrical_energy_joules": null,
+    "resource_comparison_is_NONCONTEMPORANEOUS": true
+  },
+  "observations": {
+    "actual_stop_when_first_fresh": {
+      "fresh_reported_observation_obtained": true,
+      "other_fixed_queries_actually_executed": false,
+      "public_body_bytes": 270808,
+      "reported_discharge_cfs": 2580,
+      "requests_actually_sent": 1,
+      "source_observation_utc": "2026-11-05T14:00:00Z",
+      "wall_ns_sum": 745783791
+    },
+    "corrected_full_UTC_interval": {
+      "public_body_bytes": 822771,
+      "qualified_fresh_source_count": 3,
+      "reported_latest_utc": "2026-11-05T13:45:00Z",
+      "requests_actually_sent": 3,
+      "source_code_repair": "FULL_UTC_TIMESTAMP_INTERVAL_AND_NEGATIVE_TEST",
+      "wall_ns_sum": 1839210023
+    },
+    "first_date_only_interval": {
+      "diagnosed_protocol_error": "END_OF_DATE_ONLY_INTERVAL_IS_MIDNIGHT",
+      "invalid_inference": "THE_AGENCY_SENSORS_ARE_STALE",
+      "public_body_bytes": 824285,
+      "qualified_fresh_source_count": 0,
+      "reported_latest_utc": "2026-11-05T00:00:00Z",
+      "request_url_not_embedded_in_receipt": true,
+      "requests_actually_sent": 3,
+      "wall_ns_sum": 1567309986
+    }
+  },
+  "question": "How can an intelligence detect that its physical evidence was distorted by how it encoded the question?",
+  "schema": "motif.question-integrity-and-physical-work/v1",
+  "source_commit_GHOT": "1517d2ac822ed1e6cfa30320a0f1e4574b6b0e55",
+  "source_limits": [
+    "The original date-only bug is known from the source code and regression tests, not reconstructible from the old receipts alone; raw requested URL is not archived.",
+    "Source reports were read in separate executions, so the before/after difference is not a controlled experiment.",
+    "The conditional strategy meets an intentionally narrow information goal, not a flood forecasting or human-benefit benchmark.",
+    "No original physical gauge calibration or USGS issue-time provenance independently authenticated.",
+    "The GHOT power field reported willingness, not attributable Joules or watts.",
+    "Actual request count and HTTP response bytes are measured, but claimed saved bytes are not causally identified."
+  ]
+}
