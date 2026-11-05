@@ -19,7 +19,8 @@ for part in ("016","021f","022f","025f","026f","027f"):
 from semantic_router import route_semantic_hint,operator_projection
 from question_relay import review_semantic_question
 from relevance import relevance_witness,anchored_native_guess,GATE_SUBJECTS
-from native_careers import NATIVE_JOB,native_rule
+from native_careers import native_rule
+from semantic_router import NATIVE_JOB
 from nodes import ThreeSpecialistEncoder,combine_opinions
 
 class Forced:
