@@ -490,10 +490,35 @@ def food() -> tuple[Scene, tuple[Offer, ...], frozenset[Acceptance], Goal]:
                                           preserve=True, deadline_minutes=20)
 
 
+def relay(*, recipient_accepts: bool = True
+          ) -> tuple[Scene, tuple[Offer, ...], frozenset[Acceptance], Goal]:
+    """A taught intermediary unlocks a later action absent at the first cut."""
+    scene = Scene(
+        requirements=frozenset({("relay", "transmitter")}),
+        skills=frozenset({("ari", "relay")}),
+        assets=frozenset({("t1", "transmitter")}),
+        custody=frozenset({("cy", "t1")}),
+        access=frozenset({("cy", "relay")}),
+        known=frozenset({("cy", "relay")}),
+    )
+    offers = (
+        Offer("ari-to-bea", "teach", "ari", "relay",
+              frozenset({"bea"}), 2, 6),
+        Offer("bea-to-cy", "teach", "bea", "relay",
+              frozenset({"cy"}), 2, 6),
+    )
+    accepted = {Acceptance("bea-to-cy", "cy")}
+    if recipient_accepts:
+        accepted.add(Acceptance("ari-to-bea", "bea"))
+    return scene, offers, frozenset(accepted), Goal("relay", actor="cy")
+
+
 def run_demo() -> dict[str, object]:
     a = workshop()
     b = workshop(with_offers=False)
     c = food()
+    d = relay()
+    e = relay(recipient_accepts=False)
     return {"experiment": "MOTIF-BRIDGE-001",
             "full_offers": {"result": solve(*a),
                             "card": first_human_card(solve(*a))},
@@ -501,6 +526,10 @@ def run_demo() -> dict[str, object]:
                                "card": first_human_card(solve(*b))},
             "other_domain": {"result": solve(*c),
                              "card": first_human_card(solve(*c))},
+            "emergent_relay": {"result": solve(*d),
+                              "card": first_human_card(solve(*d))},
+            "held_relay": {"result": solve(*e),
+                           "card": first_human_card(solve(*e))},
             "limits": ("synthetic named-world grammar only; no real "
                        "consent, food safety, verified source, or external execution")}
 
