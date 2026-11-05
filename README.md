@@ -12,6 +12,8 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[004 — The first scar](experiments/004/DESIGN.md):** Record an attempted edit that did not occur, compare predicted and observed graphs, learn one provisional missing-context discriminator from contrasts, and explicitly abstain when evidence conflicts.
 - **[005 — The birth of a concept](experiments/005/DESIGN.md):** Propose an anonymous two-edge derived relation from successful and failed synthetic attempts; distinguish a shared intervening part from disconnected parts, and filter hypothetical actions without altering observed history.
 
+- **[006 — The first question × Dogram](experiments/006/DESIGN.md):** Under synthetic uncertainty, select one permitted, affordable discriminator of target predictions; export finite probe vectors for optional calculation-only Dogram analysis. No general intelligence claim.
+
 ### Run (Python 3.10+, standard library only)
 
 ```sh
@@ -34,6 +36,10 @@ python -m unittest -v test_scar.py
 cd ../005
 python concept.py
 python -m unittest -v test_concept.py
+
+cd ../006
+python question.py
+python -m unittest -v test_question.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
