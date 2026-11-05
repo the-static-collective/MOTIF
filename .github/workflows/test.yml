@@ -44,6 +44,9 @@ jobs:
           echo '__MOTIF013_RESULT_START__'
           cat /tmp/motif013.json
           echo '__MOTIF013_RESULT_END__'
+      - name: Test 013
+        working-directory: experiments/013
+        run: python -m unittest -v test_witness.py
       - name: Reproduce 012
         working-directory: experiments/012
         run: |
