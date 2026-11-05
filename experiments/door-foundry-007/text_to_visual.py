@@ -37,7 +37,7 @@ CLAUSE = re.compile(
 )
 SHORT = re.compile(
     r"(?i)^\s*move\s+(?:a|the)\s+red\s+(?P<noun>block|crate|square)\s+"
-    r"from\s+(?P<start>left|right|above|below)\s+of\s+"
+    r"from\s+(?P<start>left|right|above|below)\s+(?:of\s+)?"
     r"(?:a|the)\s+blue\s+(?P<obstacle>wall|barrier)\s+"
     r"to\s+(?:the\s+)?(?P<goal>left|right|above|below)\s+"
     r"of\s+(?:the\s+)?(?:blue\s+)?(?:wall|barrier)\s*\.?\s*$"
