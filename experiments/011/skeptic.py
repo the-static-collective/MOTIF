@@ -54,6 +54,8 @@ class Extension:
     id: str
     relation: str
     role_index: int
+    control_names: tuple[str,str]
+    allowed_vocabulary: tuple[str,...]
     when_absent: Cartridge
     when_present: Cartridge
     source_count: int
@@ -61,6 +63,12 @@ class Extension:
     status: str = "PROPOSED_NOT_ADMITTED"
 
     def predict(self, episode, controls) -> bool:
+        if (controls.first_port, controls.second_port) != self.control_names:
+            raise HOLD("Unreviewed control vocabulary; no implicit domain transfer")
+        present = {fact[0] for fact in episode.before}
+        if (not {"role_actor","role_target","pending"}.issubset(present)
+                or not present.issubset(self.allowed_vocabulary)):
+            raise HOLD("Unreviewed predicate in local concept prediction")
         value = feature_present(episode, self.relation, self.role_index)
         tree = self.when_present if value else self.when_absent
         a, b = controls_present(episode, controls)
@@ -69,6 +77,8 @@ class Extension:
     def metadata(self) -> dict:
         return {"id": self.id, "relation": self.relation,
                 "role_index": self.role_index,
+                "control_names": list(self.control_names),
+                "allowed_vocabulary": list(self.allowed_vocabulary),
                 "absent_tree": self.when_absent.id,
                 "present_tree": self.when_present.id,
                 "training_count": self.source_count,
@@ -168,8 +178,11 @@ def _extension_from_table(records, validation, controls,
     content = {"relation": relation, "role_index": role_index,
                "absent": first.id, "present": second.id}
     ident = "extension-" + checksum(content)[:16]
-    return Extension(ident, relation, role_index, first, second,
-                     len(records), len(validation))
+    vocab = tuple(sorted({f[0] for row in (tuple(records)+tuple(validation))
+                          for f in row.before}))
+    return Extension(ident, relation, role_index,
+                     (controls.first_port,controls.second_port), vocab,
+                     first, second, len(records), len(validation))
 
 
 def assess(records, validation, controls) -> Assessment:
