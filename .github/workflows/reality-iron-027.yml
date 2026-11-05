@@ -1,0 +1,26 @@
+name: MOTIF-027 last-inch capability handoff
+on:
+  push:
+    branches: [experiment/reality-iron-027-capability-handoff]
+  pull_request:
+    paths:
+      - "experiments/027/**"
+      - ".github/workflows/reality-iron-027.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  standalone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Source-owned last-inch router and negative authority tests
+        run: |
+          python3 -m unittest discover -s experiments/026 -p 'test_*.py' -v
+          python3 -m unittest discover -s experiments/027 -p 'test_*.py' -v
