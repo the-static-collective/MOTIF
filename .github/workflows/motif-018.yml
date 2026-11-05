@@ -21,6 +21,9 @@ jobs:
       - name: Test Green Grammar adversarial crucible
         working-directory: experiments/018
         run: python -m unittest -v test_green_grammar.py
+      - name: Test bounded MEMENTO interop API
+        working-directory: experiments/018
+        run: python -m unittest -v test_interop_stdio.py
       - name: Reproduce full synthetic receipt
         working-directory: experiments/018
         run: |
