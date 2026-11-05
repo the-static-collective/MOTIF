@@ -44,6 +44,7 @@ jobs:
           python -m unittest -v test_insideout.py
           python demo.py > /tmp/motif020f.json
           cat /tmp/motif020f.json
+          python -m unittest -v test_fellowship_timeline.py
           python fellowship_timeline.py > /tmp/fellowship_timeline_motif020f.json
           cat /tmp/fellowship_timeline_motif020f.json
       - name: Test 019F native question box, Dogram and adaptive classical planning
