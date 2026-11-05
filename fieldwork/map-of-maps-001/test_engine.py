@@ -74,8 +74,7 @@ class FieldMapTests(unittest.TestCase):
   self.assertEqual([len(x["questions"]) for x in (a,b,c)],[1,2,3])
   self.assertEqual(c["atlas"]["reported_public_repositories"],90)
   self.assertEqual(c["atlas"]["reported_branch_refs"],2579)
-  self.assertEqual(c["planz"]["plan_attention"] if "plan_attention" in c["planz"] else
-                   c["plan_attention"]["authorized_to_execute"],0)
+  self.assertEqual(c["plan_attention"]["authorized_to_execute"],0)
   self.assertEqual(c["technical_evidence"]["held_cross_owner_candidates"],1)
   self.assertFalse(c["technical_evidence"]["selected_unproven_edge"]["is_runtime_compatible"])
   self.assertEqual(c["motif_first_next_experiment"]["result_status"],"PROPOSED_NOT_EXECUTED")
