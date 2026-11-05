@@ -34,6 +34,10 @@ class FeedbackTrialTests(unittest.TestCase):
         self.assertEqual(len(tokens),3)
         self.assertIn("TEST_ID=NO_TEST",tokens.values())
         self.assertNotIn("TEST_ID=AUTHORIZE_MEAL",tokens.values())
+        forced = permitted_sequences(TinyFakeTokenizer(),("FOOD_SERVICE_GATE",),allow_abstain=False)
+        self.assertEqual(tuple(forced.values()),("TEST_ID=FOOD_SERVICE_GATE",))
+        with self.assertRaises(ValueError):
+            permitted_sequences(TinyFakeTokenizer(),(),allow_abstain=False)
         common = "TEST_ID="
         prefix = tuple(TinyFakeTokenizer().encode(common))
         allowed = allowed_next(prefix,tokens,3)
