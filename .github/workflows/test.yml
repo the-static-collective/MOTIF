@@ -37,6 +37,12 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 021F parallel observer critic hypeman isolation and mock demonstration
+        working-directory: experiments/021f
+        run: |
+          python -m unittest -v test_chorus.py
+          python demo.py > /tmp/motif021f.json
+          python -c 'import json; d=json.load(open("/tmp/motif021f.json")); assert not d["actual_llm_inference"]; assert not d["sidecar"]["adopted_suggestions"]; print(json.dumps(d,indent=2))'
       - name: Test 020F native planZ snapshot and counterfactual inaction losses
         working-directory: experiments/020f
         run: |
