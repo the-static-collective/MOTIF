@@ -25,6 +25,7 @@ from semantic_router import CachedT5GateClassifier,ClassicalGateClassifier,opera
 from nodes import ThreeSpecialistEncoder,combine_opinions
 from pipeline import relevance_first_relay,source_only
 from relevance import anchored_native_guess
+from postmortem import ask_about_specialization_again
 
 METHODS=(
     "NO_MODEL_NATIVE",
@@ -238,6 +239,7 @@ def evaluate():
         "classical_relevance_lexicon_was_frozen_before_model_run":True,
     }
     result["motif_asks_again_about_three_t5_nodes"]=choose_deployment_and_new_question(result)
+    result["posthoc_specialist_diversity"]=ask_about_specialization_again(result)
     return result
 
 if __name__=="__main__":
