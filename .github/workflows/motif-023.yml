@@ -1,0 +1,15 @@
+name: MOTIF-023 — method falsification and revised measurement
+on:
+  push:
+    branches: [experiments/023-adversarial-method-falsifier]
+  pull_request:
+    paths: ["experiments/023/**", ".github/workflows/motif-023.yml"]
+jobs:
+  adversarial-method:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: node --test experiments/023/method_falsifier.test.mjs experiments/022/minimal_witness.test.mjs
