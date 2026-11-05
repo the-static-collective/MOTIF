@@ -23,8 +23,8 @@ import json
 from oracle import (FAMILIES,SEEDS,PAIRS,new_world,natural,
                     intervene,independent_suite,declared_policy)
 from cartographer import (HOLD,opening_model_space,choose,revise,
-                          independent_review,retained_contradictions,
-                          _residual,feature_present)
+                          independent_review,LocalCausalBay,
+                          retained_contradictions,_residual,feature_present)
 
 VERSION="cartographer-interventions-v1"
 METHODS=("cartographer","fixed_diagnostic","random")
@@ -92,14 +92,25 @@ def evaluate(family:str,seed:int,method:str) -> dict:
     # generated group with the candidate and proxy decoupled from context.
     local=independent_suite(spec,"local_review")
     review=independent_review(state,local,spec.controls)
-    admitted=review.status=="ADMIT_PREDICT_ONLY_IN_SYNTHETIC_LAB"
+    bay=LocalCausalBay()
+    receipt=None
+    ticket=None
+    held_before_review=None
+    if len(state.models)==1:
+        ticket=bay.offer(state.models[0],review)
+        held_before_review=ticket not in bay.admitted
+        if review.status=="ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION":
+            # This is an EXPLICIT evaluator-fixture decision. It represents
+            # no verified person or real-world authorization.
+            receipt=bay.decide(ticket,"ADMIT_PREDICT_ONLY",
+                               "LOCAL_SYNTHETIC_STEWARD")
+    admitted=ticket in bay.admitted if ticket is not None else False
 
     # A distinct independently generated held-out evaluator-only suite is
     # NEVER inspected during model selection or local review.
     tests=independent_suite(spec,"test")
     if admitted:
-        model=state.models[0]
-        predicts=[model.predict(x,spec.controls) for x in tests]
+        predicts=[bay.predict(ticket,x,spec.controls) for x in tests]
     else:
         predicts=[None for _ in tests]
     actual=[_residual(x,spec.controls) for x in tests]
@@ -132,6 +143,8 @@ def evaluate(family:str,seed:int,method:str) -> dict:
             {"settings":list(x.setting),"predicted":list(x.predicted),
              "observed":x.observed,"source":x.source}
             for x in review.contradictions],
+        "held_before_explicit_fixture_decision":held_before_review,
+        "explicit_local_fixture_decision":receipt,
         "independently_admitted":admitted,
         "heldout_prediction_coverage":round(covered/len(tests),4),
         "wrong_when_covered":wrong,
