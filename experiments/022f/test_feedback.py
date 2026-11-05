@@ -2,11 +2,11 @@
 from dataclasses import replace
 import unittest
 
-from chorus import SidecarNote, parallel_critique
 from feedback import (
     QuestionAwareBackend, QuestionLedger, ReviewReceipt,
     submit_critic_question, validate_review,
 )
+from chorus import SidecarNote, parallel_critique
 from forest import LivingForest
 from demo import scenario
 from sealed_oracle import (
