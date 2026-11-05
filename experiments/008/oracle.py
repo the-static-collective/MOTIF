@@ -54,12 +54,15 @@ class Trial:
 def spec_for(family: str, seed: int) -> WorldSpec:
     if family not in FAMILIES or not isinstance(seed, int) or seed < 0:
         raise ValueError("Unknown or invalid synthetic world")
-    randomizer = Random(int.from_bytes(sha256(
-        f"spec:v1:{family}:{seed}".encode()).digest()[:8], "big"))
-    vocab = list(f"p{i:05d}" for i in range(2000))
-    randomizer.shuffle(vocab)
-    # Names are gibberish and unique per world, not human-readable semantics.
-    return WorldSpec(family, seed, tuple(vocab[:len(KEYS)]))
+    # A digest namespace per (family, seed) prevents accidental repeated
+    # source predicate names among distinct worlds in this finite benchmark.
+    # Earlier v1 sampling seven names from a shared 2000-name list did NOT
+    # guarantee disjoint vocabulary, so this is an explicit method correction.
+    namespace = sha256(f"spec:v2:{family}:{seed}".encode()).hexdigest()
+    vocabulary = tuple("q" + sha256(
+        f"{namespace}:{index}".encode()).hexdigest()[:24]
+        for index in range(len(KEYS)))
+    return WorldSpec(family, seed, vocabulary)
 
 
 def hidden_rule(spec: WorldSpec, hidden_flags: dict[str, bool]) -> bool:
