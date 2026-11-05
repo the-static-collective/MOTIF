@@ -1,0 +1,2823 @@
+{
+  "experiment": "MOTIF-014",
+  "summary": {
+    "actuator_receipts_are_fallible_not_ground_truth": true,
+    "auditor_quality_jointly_inferred_not_fixed": true,
+    "calibration_truth_exposed_to_learner": false,
+    "classical_baseline_has_broader_grammar": true,
+    "external_actions": 0,
+    "families": [
+      "FIRST",
+      "SECOND",
+      "AND",
+      "XOR",
+      "SOURCE_SHIFT",
+      "AUDIT_SHIFT",
+      "COMPLIANCE_SHIFT"
+    ],
+    "heldout_each": 96,
+    "issued_thresholded_errors": 362,
+    "joint_grid_components_classical": 3264,
+    "joint_grid_components_motif": 960,
+    "mean_classical_full_grammar_brier": 0.19764,
+    "mean_classical_full_grammar_logloss": 0.58108,
+    "mean_issued_coverage": 0.57143,
+    "mean_motif_brier": 0.202442,
+    "mean_motif_logloss": 0.592631,
+    "mean_privileged_oracle_brier": 0.175628,
+    "model_is_classical_exact_finite_grid_joint_bayes": true,
+    "motif_minus_classical_brier": 0.004802,
+    "per_family": {
+      "AND": {
+        "mean_classical_brier": 0.177203,
+        "mean_issued_coverage": 1,
+        "mean_motif_brier": 0.160785,
+        "mean_q_posterior": 0.79681,
+        "validation_drift_flags": 0,
+        "worlds": 4
+      },
+      "AUDIT_SHIFT": {
+        "mean_classical_brier": 0.190022,
+        "mean_issued_coverage": 0.25,
+        "mean_motif_brier": 0.189581,
+        "mean_q_posterior": 0.83161,
+        "validation_drift_flags": 3,
+        "worlds": 4
+      },
+      "COMPLIANCE_SHIFT": {
+        "mean_classical_brier": 0.289648,
+        "mean_issued_coverage": 0.25,
+        "mean_motif_brier": 0.309248,
+        "mean_q_posterior": 0.79094,
+        "validation_drift_flags": 1,
+        "worlds": 4
+      },
+      "FIRST": {
+        "mean_classical_brier": 0.194728,
+        "mean_issued_coverage": 1,
+        "mean_motif_brier": 0.180801,
+        "mean_q_posterior": 0.79586,
+        "validation_drift_flags": 0,
+        "worlds": 4
+      },
+      "SECOND": {
+        "mean_classical_brier": 0.111549,
+        "mean_issued_coverage": 1,
+        "mean_motif_brier": 0.111395,
+        "mean_q_posterior": 0.85449,
+        "validation_drift_flags": 0,
+        "worlds": 4
+      },
+      "SOURCE_SHIFT": {
+        "mean_classical_brier": 0.203818,
+        "mean_issued_coverage": 0.5,
+        "mean_motif_brier": 0.198439,
+        "mean_q_posterior": 0.82886,
+        "validation_drift_flags": 2,
+        "worlds": 4
+      },
+      "XOR": {
+        "mean_classical_brier": 0.216514,
+        "mean_issued_coverage": 0,
+        "mean_motif_brier": 0.266846,
+        "mean_q_posterior": 0.82372,
+        "validation_drift_flags": 0,
+        "worlds": 4
+      }
+    },
+    "scope": "STOCHASTIC_SIMULATION_WITH_FALLIBLE_META_WITNESSES",
+    "seeds": [
+      11,
+      23,
+      37,
+      41
+    ],
+    "source_calibration_each": 40,
+    "test_outcome_truth_exposed_to_learner": false,
+    "total_forwarded_claims_deduplicated": 1359,
+    "total_heldout": 2688,
+    "total_missing_fallible_control_receipts_integrated": 279,
+    "train_each": 48,
+    "validation_each": 24,
+    "version": "motif-014-joint-credibility-v1",
+    "world_count": 28
+  },
+  "worlds": [
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.85022,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "FIRST",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8291,
+        "q": 0.875,
+        "r0": 0.841,
+        "r1": 0.2606
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 19,
+      "missing_fallible_control_receipts_integrated_not_discarded": 9,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.89363,
+        "q": 0.82951,
+        "r0": 0.89992,
+        "r1": 0.20063
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0004467,
+        "FIRST": 0.9995237,
+        "OR": 0.000001,
+        "OTHER": 0.0000285,
+        "SECOND": 0
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.158774,
+      "score_classical_full_grammar_logloss": 0.497589,
+      "score_motif_brier": 0.158774,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.20083,
+            "n": 48,
+            "observed_frequency": 0.27083,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.799,
+            "n": 48,
+            "observed_frequency": 0.875,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.073
+      },
+      "score_motif_logloss": 0.497588,
+      "score_privileged_true_world_oracle_brier": 0.161446,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.85022,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 53
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 7.03879,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "FIRST",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8971,
+        "q": 0.8804,
+        "r0": 0.8616,
+        "r1": 0.2528
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 18,
+      "missing_fallible_control_receipts_integrated_not_discarded": 12,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.78185,
+        "q": 0.84602,
+        "r0": 0.73455,
+        "r1": 0.20253
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0007339,
+        "FIRST": 0.8726925,
+        "OR": 0.0408181,
+        "OTHER": 0.0856953,
+        "SECOND": 0.0000602
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.176864,
+      "score_classical_full_grammar_logloss": 0.542637,
+      "score_motif_brier": 0.166898,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.31556,
+            "n": 48,
+            "observed_frequency": 0.27083,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.69967,
+            "n": 48,
+            "observed_frequency": 0.89583,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.12044
+      },
+      "score_motif_logloss": 0.519936,
+      "score_privileged_true_world_oracle_brier": 0.152458,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 7.43916,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 52
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.72477,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "FIRST",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7984,
+        "q": 0.7715,
+        "r0": 0.8775,
+        "r1": 0.2485
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 19,
+      "missing_fallible_control_receipts_integrated_not_discarded": 10,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.58,
+          0.84
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.85422,
+        "q": 0.72491,
+        "r0": 0.88392,
+        "r1": 0.38557
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0023605,
+        "FIRST": 0.9838888,
+        "OR": 0.0015812,
+        "OTHER": 0.0120533,
+        "SECOND": 0.0001162
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.205953,
+      "score_classical_full_grammar_logloss": 0.599902,
+      "score_motif_brier": 0.160055,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.23344,
+            "n": 48,
+            "observed_frequency": 0.27083,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.76627,
+            "n": 48,
+            "observed_frequency": 0.875,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.07306
+      },
+      "score_motif_logloss": 0.501296,
+      "score_privileged_true_world_oracle_brier": 0.164416,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.15504,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 45
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.10325,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "FIRST",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7541,
+        "q": 0.7817,
+        "r0": 0.8884,
+        "r1": 0.2008
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 34,
+      "missing_fallible_control_receipts_integrated_not_discarded": 9,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.81565,
+        "q": 0.78299,
+        "r0": 0.88966,
+        "r1": 0.20328
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0021726,
+        "FIRST": 0.9973745,
+        "OR": 0.0000059,
+        "OTHER": 0.0004464,
+        "SECOND": 6e-7
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.23732,
+      "score_classical_full_grammar_logloss": 0.670825,
+      "score_motif_brier": 0.237476,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.26006,
+            "n": 48,
+            "observed_frequency": 0.22917,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.73912,
+            "n": 48,
+            "observed_frequency": 0.52083,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.12459
+      },
+      "score_motif_logloss": 0.671231,
+      "score_privileged_true_world_oracle_brier": 0.230968,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.10188,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 44
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 7.04415,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SECOND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8473,
+        "q": 0.7855,
+        "r0": 0.9116,
+        "r1": 0.3263
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 12,
+      "missing_fallible_control_receipts_integrated_not_discarded": 10,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.45,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.76192,
+        "q": 0.88297,
+        "r0": 0.89326,
+        "r1": 0.44134
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0206171,
+        "FIRST": 0.0002085,
+        "OR": 0.0052393,
+        "OTHER": 0.0162033,
+        "SECOND": 0.9577319
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.110076,
+      "score_classical_full_grammar_logloss": 0.379638,
+      "score_motif_brier": 0.109464,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12823,
+            "n": 48,
+            "observed_frequency": 0.10417,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.8,
+            "mean_predicted": 0.86593,
+            "n": 48,
+            "observed_frequency": 0.85417,
+            "upper": 1
+          }
+        ],
+        "empirical_calibration_error": 0.01791
+      },
+      "score_motif_logloss": 0.377161,
+      "score_privileged_true_world_oracle_brier": 0.1094,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 7.1686,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 41
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.95522,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SECOND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7665,
+        "q": 0.7981,
+        "r0": 0.8545,
+        "r1": 0.2829
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 11,
+      "missing_fallible_control_receipts_integrated_not_discarded": 14,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.76174,
+        "q": 0.86473,
+        "r0": 0.897,
+        "r1": 0.20107
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.000001,
+        "FIRST": 0,
+        "OR": 9e-7,
+        "OTHER": 0,
+        "SECOND": 0.9999981
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.101489,
+      "score_classical_full_grammar_logloss": 0.356161,
+      "score_motif_brier": 0.101483,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12,
+            "n": 48,
+            "observed_frequency": 0.08333,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.8,
+            "mean_predicted": 0.88,
+            "n": 48,
+            "observed_frequency": 0.85417,
+            "upper": 1
+          }
+        ],
+        "empirical_calibration_error": 0.03125
+      },
+      "score_motif_logloss": 0.356133,
+      "score_privileged_true_world_oracle_brier": 0.101483,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.95546,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 52
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.61645,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SECOND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8335,
+        "q": 0.7657,
+        "r0": 0.9371,
+        "r1": 0.266
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 12,
+      "missing_fallible_control_receipts_integrated_not_discarded": 7,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.76
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.6697,
+        "q": 0.80047,
+        "r0": 0.89371,
+        "r1": 0.21282
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0003163,
+        "FIRST": 5e-7,
+        "OR": 0.0018054,
+        "OTHER": 0.000018,
+        "SECOND": 0.9978598
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.109408,
+      "score_classical_full_grammar_logloss": 0.376925,
+      "score_motif_brier": 0.109403,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12069,
+            "n": 48,
+            "observed_frequency": 0.125,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.8,
+            "mean_predicted": 0.87987,
+            "n": 48,
+            "observed_frequency": 0.875,
+            "upper": 1
+          }
+        ],
+        "empirical_calibration_error": 0.00459
+      },
+      "score_motif_logloss": 0.376901,
+      "score_privileged_true_world_oracle_brier": 0.1094,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.59262,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 44
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 15.9418,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SECOND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7661,
+        "q": 0.8788,
+        "r0": 0.8561,
+        "r1": 0.2138
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 14,
+      "missing_fallible_control_receipts_integrated_not_discarded": 13,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.82622,
+        "q": 0.8698,
+        "r0": 0.88888,
+        "r1": 0.20534
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0002026,
+        "FIRST": 0,
+        "OR": 0.0000203,
+        "OTHER": 0.0000011,
+        "SECOND": 0.999776
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.125224,
+      "score_classical_full_grammar_logloss": 0.41835,
+      "score_motif_brier": 0.12523,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12001,
+            "n": 48,
+            "observed_frequency": 0.14583,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.8,
+            "mean_predicted": 0.87992,
+            "n": 48,
+            "observed_frequency": 0.85417,
+            "upper": 1
+          }
+        ],
+        "empirical_calibration_error": 0.02579
+      },
+      "score_motif_logloss": 0.418381,
+      "score_privileged_true_world_oracle_brier": 0.125233,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 3,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 15.94141,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 53
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -1.61195,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "AND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7956,
+        "q": 0.7532,
+        "r0": 0.8794,
+        "r1": 0.257
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 17,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.58,
+          0.84
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.69383,
+        "q": 0.74214,
+        "r0": 0.78211,
+        "r1": 0.20506
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.8401922,
+        "FIRST": 0.023043,
+        "OR": 0.0023487,
+        "OTHER": 0.0260796,
+        "SECOND": 0.1083365
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.167116,
+      "score_classical_full_grammar_logloss": 0.510381,
+      "score_motif_brier": 0.152794,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.13956,
+            "n": 48,
+            "observed_frequency": 0.125,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.41197,
+            "n": 24,
+            "observed_frequency": 0.25,
+            "upper": 0.6
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.67215,
+            "n": 24,
+            "observed_frequency": 0.79167,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.07765
+      },
+      "score_motif_logloss": 0.479548,
+      "score_privileged_true_world_oracle_brier": 0.144091,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -1.84991,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 41
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.66799,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "AND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8757,
+        "q": 0.798,
+        "r0": 0.935,
+        "r1": 0.3152
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 19,
+      "missing_fallible_control_receipts_integrated_not_discarded": 7,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.45,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.75459,
+        "q": 0.77538,
+        "r0": 0.85358,
+        "r1": 0.43876
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.878963,
+        "FIRST": 0.0102273,
+        "OR": 0.002819,
+        "OTHER": 0.0135621,
+        "SECOND": 0.0944286
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.176914,
+      "score_classical_full_grammar_logloss": 0.541996,
+      "score_motif_brier": 0.176017,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.13011,
+            "n": 48,
+            "observed_frequency": 0.22917,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.36301,
+            "n": 24,
+            "observed_frequency": 0.16667,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.7109,
+            "n": 24,
+            "observed_frequency": 0.83333,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.12922
+      },
+      "score_motif_logloss": 0.546194,
+      "score_privileged_true_world_oracle_brier": 0.16487,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.88144,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 45
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 12.99571,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "AND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.764,
+        "q": 0.7716,
+        "r0": 0.9146,
+        "r1": 0.3074
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 21,
+      "missing_fallible_control_receipts_integrated_not_discarded": 9,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.84513,
+        "q": 0.81085,
+        "r0": 0.89166,
+        "r1": 0.2102
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.9932623,
+        "FIRST": 0.0039785,
+        "OR": 0.0000043,
+        "OTHER": 0.0024735,
+        "SECOND": 0.0002814
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.162336,
+      "score_classical_full_grammar_logloss": 0.497505,
+      "score_motif_brier": 0.16243,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12245,
+            "n": 48,
+            "observed_frequency": 0.10417,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.23845,
+            "n": 24,
+            "observed_frequency": 0.33333,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.76177,
+            "n": 24,
+            "observed_frequency": 0.66667,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.05663
+      },
+      "score_motif_logloss": 0.497563,
+      "score_privileged_true_world_oracle_brier": 0.158472,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 13.04743,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 49
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.71265,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "AND",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7901,
+        "q": 0.8631,
+        "r0": 0.8553,
+        "r1": 0.2953
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 17,
+      "missing_fallible_control_receipts_integrated_not_discarded": 12,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.75971,
+        "q": 0.85886,
+        "r0": 0.83096,
+        "r1": 0.40128
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.8315558,
+        "FIRST": 0.0944793,
+        "OR": 0.0014667,
+        "OTHER": 0.0629229,
+        "SECOND": 0.0095753
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.202447,
+      "score_classical_full_grammar_logloss": 0.587005,
+      "score_motif_brier": 0.1519,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.18037,
+            "n": 48,
+            "observed_frequency": 0.14583,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.32359,
+            "n": 24,
+            "observed_frequency": 0.25,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.6848,
+            "n": 24,
+            "observed_frequency": 0.83333,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.0728
+      },
+      "score_motif_logloss": 0.482438,
+      "score_privileged_true_world_oracle_brier": 0.147616,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 7.05546,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 54
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.7937,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "XOR",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8113,
+        "q": 0.7647,
+        "r0": 0.8821,
+        "r1": 0.1826
+      },
+      "issue_statuses": {
+        "HOLD_MODEL_UNCERTAIN": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.80582,
+        "q": 0.74045,
+        "r0": 0.89905,
+        "r1": 0.20003
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0023932,
+        "FIRST": 0.0068208,
+        "OR": 0.5172158,
+        "OTHER": 0.0760727,
+        "SECOND": 0.3974975
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.247231,
+      "score_classical_full_grammar_logloss": 0.688296,
+      "score_motif_brier": 0.291858,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.23986,
+            "n": 24,
+            "observed_frequency": 0.25,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.45623,
+            "n": 24,
+            "observed_frequency": 0.66667,
+            "upper": 0.6
+          },
+          {
+            "lower": 0.8,
+            "mean_predicted": 0.84759,
+            "n": 48,
+            "observed_frequency": 0.52083,
+            "upper": 1
+          }
+        ],
+        "empirical_calibration_error": 0.21852
+      },
+      "score_motif_logloss": 0.816611,
+      "score_privileged_true_world_oracle_brier": 0.222182,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.36238,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 46
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 3.58433,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "XOR",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8187,
+        "q": 0.7744,
+        "r0": 0.9349,
+        "r1": 0.2854
+      },
+      "issue_statuses": {
+        "HOLD_MODEL_UNCERTAIN": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 5,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.79176,
+        "q": 0.83296,
+        "r0": 0.79214,
+        "r1": 0.33462
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0056801,
+        "FIRST": 0.5952767,
+        "OR": 0.1324777,
+        "OTHER": 0.2653487,
+        "SECOND": 0.0012168
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.188017,
+      "score_classical_full_grammar_logloss": 0.563884,
+      "score_motif_brier": 0.28057,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.33432,
+            "n": 24,
+            "observed_frequency": 0.125,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.4213,
+            "n": 24,
+            "observed_frequency": 0.70833,
+            "upper": 0.6
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.67037,
+            "n": 48,
+            "observed_frequency": 0.33333,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.29261
+      },
+      "score_motif_logloss": 0.757649,
+      "score_privileged_true_world_oracle_brier": 0.187561,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -1.73305,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 51
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 12.15595,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "XOR",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7544,
+        "q": 0.8793,
+        "r0": 0.9244,
+        "r1": 0.3097
+      },
+      "issue_statuses": {
+        "HOLD_OUTSIDE_GRAMMAR": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 9,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.45,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.75663,
+        "q": 0.89405,
+        "r0": 0.88186,
+        "r1": 0.44639
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0000227,
+        "FIRST": 0.0011732,
+        "OR": 0.4305026,
+        "OTHER": 0.5674734,
+        "SECOND": 0.0008281
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.214836,
+      "score_classical_full_grammar_logloss": 0.621068,
+      "score_motif_brier": 0.245133,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.49968,
+            "n": 48,
+            "observed_frequency": 0.60417,
+            "upper": 0.6
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.66391,
+            "n": 48,
+            "observed_frequency": 0.52083,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.12378
+      },
+      "score_motif_logloss": 0.684492,
+      "score_privileged_true_world_oracle_brier": 0.214878,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 6.17064,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 59
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 5.89232,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "XOR",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8117,
+        "q": 0.8681,
+        "r0": 0.9323,
+        "r1": 0.2319
+      },
+      "issue_statuses": {
+        "HOLD_OUTSIDE_GRAMMAR": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 6,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.77692,
+        "q": 0.82741,
+        "r0": 0.75019,
+        "r1": 0.20071
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0000785,
+        "FIRST": 0.4794356,
+        "OR": 0.0081749,
+        "OTHER": 0.5122847,
+        "SECOND": 0.0000262
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.215973,
+      "score_classical_full_grammar_logloss": 0.622426,
+      "score_motif_brier": 0.249824,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.39481,
+            "n": 48,
+            "observed_frequency": 0.45833,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.60826,
+            "n": 48,
+            "observed_frequency": 0.5625,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.05464
+      },
+      "score_motif_logloss": 0.692944,
+      "score_privileged_true_world_oracle_brier": 0.182737,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 4.29955,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 47
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -5.0554,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "SOURCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8271,
+        "q": 0.8205,
+        "r0": 0.858,
+        "r1": 0.1725
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.76462,
+        "q": 0.85128,
+        "r0": 0.81004,
+        "r1": 0.20314
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0048393,
+        "FIRST": 0.9463214,
+        "OR": 0.0003386,
+        "OTHER": 0.0484836,
+        "SECOND": 0.000017
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.193503,
+      "score_classical_full_grammar_logloss": 0.577148,
+      "score_motif_brier": 0.17505,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.30918,
+            "n": 48,
+            "observed_frequency": 0.20833,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.68911,
+            "n": 48,
+            "observed_frequency": 0.79167,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.10171
+      },
+      "score_motif_logloss": 0.537249,
+      "score_privileged_true_world_oracle_brier": 0.166786,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -6.19359,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 45
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.27125,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SOURCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8767,
+        "q": 0.875,
+        "r0": 0.8644,
+        "r1": 0.3025
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 33,
+      "missing_fallible_control_receipts_integrated_not_discarded": 14,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.7
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.86693,
+        "q": 0.87425,
+        "r0": 0.7055,
+        "r1": 0.20725
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.9806103,
+        "FIRST": 0.0161119,
+        "OR": 0.0004163,
+        "OTHER": 0.0018291,
+        "SECOND": 0.0010325
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.263089,
+      "score_classical_full_grammar_logloss": 0.761811,
+      "score_motif_brier": 0.263882,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.12698,
+            "n": 48,
+            "observed_frequency": 0.4375,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.22258,
+            "n": 24,
+            "observed_frequency": 0.25,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.77852,
+            "n": 24,
+            "observed_frequency": 0.75,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.16925
+      },
+      "score_motif_logloss": 0.76514,
+      "score_privileged_true_world_oracle_brier": 0.158995,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.2581,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 49
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -7.02483,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "SOURCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.82,
+        "q": 0.7573,
+        "r0": 0.8654,
+        "r1": 0.2761
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.58,
+          0.84
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.87057,
+        "q": 0.71129,
+        "r0": 0.87887,
+        "r1": 0.22962
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0001515,
+        "FIRST": 0.9978243,
+        "OR": 0.0000922,
+        "OTHER": 0.0019266,
+        "SECOND": 0.0000054
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.197209,
+      "score_classical_full_grammar_logloss": 0.585831,
+      "score_motif_brier": 0.194332,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.21877,
+            "n": 48,
+            "observed_frequency": 0.29167,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.78121,
+            "n": 48,
+            "observed_frequency": 0.77083,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.04164
+      },
+      "score_motif_logloss": 0.578351,
+      "score_privileged_true_world_oracle_brier": 0.192613,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -7.47622,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 54
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 1.24757,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "SOURCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.898,
+        "q": 0.8724,
+        "r0": 0.8733,
+        "r1": 0.2512
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 19,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.84571,
+        "q": 0.8786,
+        "r0": 0.81591,
+        "r1": 0.21794
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0010773,
+        "FIRST": 0.988148,
+        "OR": 0.0008962,
+        "OTHER": 0.0098636,
+        "SECOND": 0.0000149
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.161469,
+      "score_classical_full_grammar_logloss": 0.505141,
+      "score_motif_brier": 0.160492,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.23994,
+            "n": 48,
+            "observed_frequency": 0.22917,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.75999,
+            "n": 48,
+            "observed_frequency": 0.83333,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.04205
+      },
+      "score_motif_logloss": 0.502505,
+      "score_privileged_true_world_oracle_brier": 0.158746,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 0.97476,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 39
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -8.07225,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "AUDIT_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8984,
+        "q": 0.7963,
+        "r0": 0.8597,
+        "r1": 0.2553
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 10,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.7,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.45
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.89159,
+        "q": 0.84818,
+        "r0": 0.79352,
+        "r1": 0.34847
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.2743909,
+        "FIRST": 0.6999458,
+        "OR": 0.0107245,
+        "OTHER": 0.0074755,
+        "SECOND": 0.0074633
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.130249,
+      "score_classical_full_grammar_logloss": 0.433198,
+      "score_motif_brier": 0.128433,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "mean_predicted": 0.18182,
+            "n": 24,
+            "observed_frequency": 0.125,
+            "upper": 0.2
+          },
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.21675,
+            "n": 24,
+            "observed_frequency": 0.08333,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.70052,
+            "n": 48,
+            "observed_frequency": 0.85417,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.12438
+      },
+      "score_motif_logloss": 0.428107,
+      "score_privileged_true_world_oracle_brier": 0.11459,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 3,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -8.06584,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 57
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -3.43333,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "AUDIT_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8009,
+        "q": 0.8247,
+        "r0": 0.8731,
+        "r1": 0.2245
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 32,
+      "missing_fallible_control_receipts_integrated_not_discarded": 7,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.7718,
+        "q": 0.75618,
+        "r0": 0.89489,
+        "r1": 0.20014
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0005188,
+        "FIRST": 0.912946,
+        "OR": 0.0001114,
+        "OTHER": 0.0864234,
+        "SECOND": 5e-7
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.22254,
+      "score_classical_full_grammar_logloss": 0.637217,
+      "score_motif_brier": 0.222616,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.31378,
+            "n": 48,
+            "observed_frequency": 0.33333,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.68607,
+            "n": 48,
+            "observed_frequency": 0.66667,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.01947
+      },
+      "score_motif_logloss": 0.637419,
+      "score_privileged_true_world_oracle_brier": 0.226068,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -3.5588,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 49
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -4.5972,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "AUDIT_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8096,
+        "q": 0.8821,
+        "r0": 0.8479,
+        "r1": 0.2456
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 11,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.77089,
+        "q": 0.84638,
+        "r0": 0.89958,
+        "r1": 0.2041
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0000052,
+        "FIRST": 0.9999404,
+        "OR": 0.0000112,
+        "OTHER": 0.0000432,
+        "SECOND": 0
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.210902,
+      "score_classical_full_grammar_logloss": 0.612794,
+      "score_motif_brier": 0.210892,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.29413,
+            "n": 48,
+            "observed_frequency": 0.22917,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.70587,
+            "n": 48,
+            "observed_frequency": 0.625,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.07291
+      },
+      "score_motif_logloss": 0.612771,
+      "score_privileged_true_world_oracle_brier": 0.212226,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -4.60267,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 45
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -6.02509,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "AUDIT_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7737,
+        "q": 0.8485,
+        "r0": 0.8907,
+        "r1": 0.2527
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 8,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.76
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.73438,
+        "q": 0.87572,
+        "r0": 0.89981,
+        "r1": 0.20068
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0000042,
+        "FIRST": 0.9997561,
+        "OR": 0.0000245,
+        "OTHER": 0.0002152,
+        "SECOND": 0
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.196395,
+      "score_classical_full_grammar_logloss": 0.582519,
+      "score_motif_brier": 0.196382,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.32191,
+            "n": 48,
+            "observed_frequency": 0.20833,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.6781,
+            "n": 48,
+            "observed_frequency": 0.6875,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.06149
+      },
+      "score_motif_logloss": 0.582489,
+      "score_privileged_true_world_oracle_brier": 0.193597,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 1,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -6.03035,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 47
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -2.57348,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "COMPLIANCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.8448,
+        "q": 0.8599,
+        "r0": 0.8774,
+        "r1": 0.2542
+      },
+      "issue_statuses": {
+        "HOLD_MODEL_UNCERTAIN": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 10,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.76,
+          0.92
+        ],
+        "q": [
+          0.84,
+          0.95
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.7852,
+        "q": 0.87224,
+        "r0": 0.89621,
+        "r1": 0.20077
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.3045508,
+        "FIRST": 0.5906793,
+        "OR": 0.0037334,
+        "OTHER": 0.0965708,
+        "SECOND": 0.0044656
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.304863,
+      "score_classical_full_grammar_logloss": 0.808113,
+      "score_motif_brier": 0.328331,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.28374,
+            "n": 48,
+            "observed_frequency": 0.64583,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.50868,
+            "n": 24,
+            "observed_frequency": 0.33333,
+            "upper": 0.6
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.69521,
+            "n": 24,
+            "observed_frequency": 0.375,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.30494
+      },
+      "score_motif_logloss": 0.863396,
+      "score_privileged_true_world_oracle_brier": 0.229189,
+      "seed": 11,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -3.1347,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 46
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 3.09293,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "COMPLIANCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7389,
+        "q": 0.7863,
+        "r0": 0.935,
+        "r1": 0.1892
+      },
+      "issue_statuses": {
+        "HOLD_MODEL_UNCERTAIN": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 10,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.76
+        ],
+        "q": [
+          0.58,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.67527,
+        "q": 0.72781,
+        "r0": 0.89844,
+        "r1": 0.20012
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0026828,
+        "FIRST": 0.3679292,
+        "OR": 0.4908791,
+        "OTHER": 0.1352158,
+        "SECOND": 0.003293
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.284365,
+      "score_classical_full_grammar_logloss": 0.763518,
+      "score_motif_brier": 0.307087,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.38363,
+            "n": 24,
+            "observed_frequency": 0.66667,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.66247,
+            "n": 72,
+            "observed_frequency": 0.40278,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.26553
+      },
+      "score_motif_logloss": 0.813911,
+      "score_privileged_true_world_oracle_brier": 0.232673,
+      "seed": 23,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.18156,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 49
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -8.83321,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "family_evaluator_only": "COMPLIANCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7639,
+        "q": 0.7845,
+        "r0": 0.9236,
+        "r1": 0.1994
+      },
+      "issue_statuses": {
+        "HOLD_RELIABILITY_OR_MECHANISM_SHIFT": 96
+      },
+      "issued_prediction_count": 0,
+      "issued_prediction_coverage": 0,
+      "issued_thresholded_errors": 0,
+      "missing_fallible_control_receipts_integrated_not_discarded": 14,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.92
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.7551,
+        "q": 0.7702,
+        "r0": 0.89828,
+        "r1": 0.20005
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0028152,
+        "FIRST": 0.4314154,
+        "OR": 0.0001248,
+        "OTHER": 0.5656425,
+        "SECOND": 0.0000021
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.256741,
+      "score_classical_full_grammar_logloss": 0.706641,
+      "score_motif_brier": 0.271256,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.4,
+            "mean_predicted": 0.49949,
+            "n": 96,
+            "observed_frequency": 0.4375,
+            "upper": 0.6
+          }
+        ],
+        "empirical_calibration_error": 0.06199
+      },
+      "score_motif_logloss": 0.735944,
+      "score_privileged_true_world_oracle_brier": 0.236156,
+      "seed": 37,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": -8.01099,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": true
+      },
+      "witness_forwarded_copies_counted_once": 55
+    },
+    {
+      "classical_16_boolean_models_plus_other": 17,
+      "classical_validation_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.83036,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "family_evaluator_only": "COMPLIANCE_SHIFT",
+      "heldout": 96,
+      "hidden_training_parameters_for_evaluator_only": {
+        "c": 0.7648,
+        "q": 0.7977,
+        "r0": 0.908,
+        "r1": 0.2004
+      },
+      "issue_statuses": {
+        "PREDICT_PROBABILITY_ONLY": 96
+      },
+      "issued_prediction_count": 96,
+      "issued_prediction_coverage": 1,
+      "issued_thresholded_errors": 65,
+      "missing_fallible_control_receipts_integrated_not_discarded": 8,
+      "motif_credible_intervals_90": {
+        "c": [
+          0.55,
+          0.76
+        ],
+        "q": [
+          0.72,
+          0.84
+        ],
+        "r0": [
+          0.9,
+          0.9
+        ],
+        "r1": [
+          0.2,
+          0.2
+        ]
+      },
+      "motif_joint_parameter_posterior_means": {
+        "c": 0.72594,
+        "q": 0.79352,
+        "r0": 0.89341,
+        "r1": 0.20473
+      },
+      "motif_tree_models_plus_other": 5,
+      "posteriors_over_causal_models": {
+        "AND": 0.0176578,
+        "FIRST": 0.9090885,
+        "OR": 0.0038774,
+        "OTHER": 0.0692091,
+        "SECOND": 0.0001672
+      },
+      "real_world_operations": 0,
+      "score_classical_full_grammar_brier": 0.312623,
+      "score_classical_full_grammar_logloss": 0.821718,
+      "score_motif_brier": 0.330317,
+      "score_motif_calibration": {
+        "bins": [
+          {
+            "lower": 0.2,
+            "mean_predicted": 0.33876,
+            "n": 48,
+            "observed_frequency": 0.72917,
+            "upper": 0.4
+          },
+          {
+            "lower": 0.6,
+            "mean_predicted": 0.65601,
+            "n": 48,
+            "observed_frequency": 0.375,
+            "upper": 0.8
+          }
+        ],
+        "empirical_calibration_error": 0.33571
+      },
+      "score_motif_logloss": 0.860311,
+      "score_privileged_true_world_oracle_brier": 0.218739,
+      "seed": 41,
+      "source_samples": 40,
+      "stochastic_outcomes_belong_to_evaluator_only": true,
+      "training": 48,
+      "training_events_used_in_joint_update": 48,
+      "training_trials_without_both_source_reports": 0,
+      "validation": 24,
+      "validation_heldout_report_diagnostic": {
+        "log_evidence_ratio_vs_ignorance": 2.82772,
+        "records": 24,
+        "threshold_is_heuristic_not_calibrated": true,
+        "warning": false
+      },
+      "witness_forwarded_copies_counted_once": 48
+    }
+  ]
+}

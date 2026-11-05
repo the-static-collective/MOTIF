@@ -1,7 +1,7 @@
 # MOTIF — THE OUTERMOST CIRCLE
 ## A research program for native intelligence built from consequential change
 
-Status: **speculative architecture** with thirteen bounded, standard-library, synthetic experiments (001–013). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
+Status: **speculative architecture** with fourteen bounded, standard-library, synthetic research organs (001–013, plus parallel 014W). No claim of artificial general intelligence, causal discovery, learned ethics, or verified real-world agency.
 
 ### The fundamental wager
 
@@ -103,7 +103,7 @@ A myopic first-step policy favors the first. A declared *new-choices-first* poli
 
 MOTIF-003 also counts remaining reachable simulated states (bounded, with truncation reported) and separates predicted from independently supplied observations. It does not change either world or grant consent.
 
-## Thirteen experimental shells and counting
+## Fourteen experimental shells and counting
 
 | Shell | Native question | Minimal proof | Critical falsifier |
 |---|---|---|---|
@@ -120,6 +120,7 @@ MOTIF-003 also counts remaining reachable simulated states (bounded, with trunca
 | 011 — The Skeptical Scientist | When is the current hypothesis grammar inadequate, and when must the system abstain? | **Contradiction scars, independent candidate-relational validation, composite 009-tree routing, prediction-only local review, and cost/safety holds across 30 synthetic worlds.** | hidden factors indistinguishable from noise; perfect proxies mistaken for causes; no advantage over noise-aware Bayesian baselines established |
 | 012 — The Causal Cartographer | Can intervention on correlated relations separate causal hypotheses without promoting noise and hidden-context errors? | **Four rival 009-tree models, two synthetic off-diagonal interventions, independent review and separate explicit fixture admission; 24/36 reviewed, latent/noisy 12/36 held; ties optimal classical diagnostic.** | fragile under stochastic noise, intervention compliance gaps, unknown mechanisms or actual field causation |
 | 013 — The Probabilistic Witness | What if outcomes vary, witnesses misreport or repeat hearsay, interventions fail, and causal grammar shifts? | **Seeded Bernoulli graph outcomes, three calibrated upstream channels, correlated forwarders, Beta reliability/compliance, four weighted 009 trees + OTHER, 3,600 held-out outcomes and a stronger four-cell Bayesian baseline. Classical Bayes wins overall (Brier .224069 vs .228364).** | Model can be confident but wrong on unsupported rules and changing regimes; noisy sources are synthetic and independent-origin metadata is unverified in reality |
+| 014W — The Witness of Witnesses | What if the *adjudicator* of source credibility is also wrong, and reported intervention compliance is uncertain? | **Exact finite-grid joint Bayes over four 009-tree hypotheses plus unknown mass, two upstream source reliabilities, fallible auditor q, actuator compliance c, with held-out 2,688 stochastic outcomes. A stronger classical 16-Boolean joint model wins Brier .197640 vs .202442.** | finite grids and truth-orientation priors are brittle; source collusion, forged origin, temporal shift, and real authenticated claims remain untested |
 
 Further horizons: continuous quantities, physical uncertainty, multiagent preferences, uncertain event duration, energy budgets, local processors, and transferable multimodal perception. None is implemented merely by documenting it.
 

@@ -19,6 +19,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[011 — The Skeptical Scientist](experiments/011/DESIGN.md):** Preserve contradictions that disprove the current two-input grammar; refuse to guess about hidden causes or noise; propose a new **role-relative relation routing to two real MOTIF-009 tree cartridges** only with independent validation and local prediction-only review. [The actual composite router and six-case transcript](experiments/011/example-skeptic.json) are committed. In 30 controlled worlds, MOTIF predicts only half the holdouts but makes no wrong covered predictions; a forced baseline predicts all and gets 160/480 wrong.
 - **[012 — The Causal Cartographer](experiments/012/DESIGN.md):** Start with MOTIF-011's perfectly confounded candidate concepts, package four competing **real MOTIF-009 decision-tree cartridges**, choose synthetic interventions to break their correlation, and record independent local falsification and explicit prediction-only review. The [concrete causal-map and refusal cartridge](experiments/012/example-causal-map.json) is stored. Across 36 synthetic worlds, 24/36 model candidates pass separate local review and an explicit synthetic admission fixture, 12/36 are held for hidden-context/noisy counterexamples; this **ties an ordinary fixed diagnostic strategy**, not evidence of new causal mathematics.
 - **[013 — The Probabilistic Witness](experiments/013/DESIGN.md):** Replace exact outcomes with **sampled Bernoulli success/failure, unreliable and anti-reliable witnesses, forwarded hearsay, missing reports, and real synthetic actuator noncompliance**. Learn Beta-calibrated source/actuator uncertainty, weight four real 009 decision-tree cartridges plus unresolved OTHER mass, and issue probabilities or abstentions. In 3,600 held-out synthetic outcomes, **a flexible classical Bayesian four-cell baseline beats MOTIF on Brier score (0.224069 vs 0.228364)**. See the [verified probabilistic witness cartridge and admitted/missed failures](experiments/013/example-probabilistic-witness.json).
+- **[014W — The Witness of Witnesses](experiments/014w/DESIGN.md):** Treat the **auditor itself as another unreliable witness**, instead of assuming its adjudications are gold truth. Jointly enumerate source truthfulness, fallible audit reports, intervention compliance and causal-tree hypotheses in an exact **960-state finite Bayesian grid**, while integrating missing action receipts rather than treating requested actions as completed. The [actual probabilistic 009-tree ensemble, meta-witness credibility intervals and both caught/missed source drifts](experiments/014w/example-joint-credibility.json) are committed. Across **2,688 stochastic holdouts**, a broader **classical 16-Boolean-model joint Bayes wins** (Brier 0.197640 versus MOTIF 0.202442). This parallel research organ is isolated from the concurrent **014 Organ Gardener** branch.
 
 ### Run (Python 3.10+, standard library only)
 
@@ -80,12 +81,19 @@ cd ../013
 python benchmark.py  # 30 worlds, noisy reporters and classical Bayesian control
 python demo.py       # uncertainty, anti-witness, and missed shift examples
 python -m unittest -v test_witness.py
+
+cd ../014w
+python benchmark.py  # exact finite-grid joint Bayes, stronger full-Boolean competitor
+python demo.py       # meta-auditor, model uncertainty, and missed reliability shifts
+python -m unittest -v test_joint.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Research laws
 
+- **An adjudicator's report ≠ ground truth.** MOTIF-014W models fallible calibration judges and actuator attestations as latent-variable Bayesian evidence, not privileged observations.
+- **A posterior interval ≠ proof of independent identification.** Inferring who is right from agreement relies on orientation priors and observed-source assumptions; those can be wrong.
 - **A report ≠ an observed outcome.** Sources can misreport, disagree, be absent or be malicious; witness identity metadata and checksum are not verified real-world truth.
 - **A forwarded witness ≠ another independent witness.** Repeated claims sharing one upstream origin are counted once, not multiplied into false certainty.
 - **An intended intervention ≠ an applied intervention.** Without a separate synthetic receipt of applied controls, MOTIF-013 holds causal attribution from that training attempt.
@@ -109,6 +117,6 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Next frontier
 
-Test a **joint Bayesian witness world-model** that integrates uncertain sources, unverified intervention controls and structural hypotheses instead of plugging in their posterior means. Freeze out-of-family/noisy-regime holdouts, measure online calibration and abstention, and compare against strong classical Bayesian baselines on matched evidence and compute. Compare active causal maps to strong Bayesian and classical experimental-design algorithms in independently frozen held-out graph domains, and measure *harm from negative cross-world cartridge transfer*. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Break the **identifiability assumptions** of the finite-grid witness-of-witnesses model: introduce correlated reports, false origin metadata, doubly fallible adjudicators, and time-changing evidence quality. Measure online calibration, safe abstention and conditional source dependence under independently frozen uncertainty regimes. Freeze out-of-family/noisy-regime holdouts, measure online calibration and abstention, and compare against strong classical Bayesian baselines on matched evidence and compute. Compare active causal maps to strong Bayesian and classical experimental-design algorithms in independently frozen held-out graph domains, and measure *harm from negative cross-world cartridge transfer*. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
