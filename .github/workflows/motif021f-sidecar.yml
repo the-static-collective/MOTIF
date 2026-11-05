@@ -1,0 +1,28 @@
+name: MOTIF-021F Optional T5 sidecar
+on:
+  push:
+    paths:
+      - 'experiments/021f/**'
+      - '.github/workflows/motif021f-sidecar.yml'
+  pull_request:
+    paths:
+      - 'experiments/021f/**'
+      - '.github/workflows/motif021f-sidecar.yml'
+  workflow_dispatch:
+jobs:
+  observer-critic-hypeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Standard-library concurrency and isolation tests
+        working-directory: experiments/021f
+        run: |
+          python -m unittest -v test_chorus.py
+      - name: Real native Fellowship decision with SCRIPTED sidecar; no LLM claims
+        working-directory: experiments/021f
+        run: |
+          python demo.py > sidecar-receipt.json
+          python -c 'import json; d=json.load(open("sidecar-receipt.json")); assert d["actual_llm_inference"] is False; assert d["backend"] == "SCRIPTED_FIXTURE_NOT_AN_LLM"; assert d["sidecar"]["adopted_suggestions"] is False; assert d["native_motif"]["source_planz_still_index_only"] is True; print(json.dumps(d,indent=2))'
