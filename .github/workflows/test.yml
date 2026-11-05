@@ -37,6 +37,11 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 025F native job meta-planner and semantic retrieval controls
+        working-directory: experiments/025f
+        run: |
+          python -m unittest -v test_careers.py
+          python -m unittest -v test_encoder.py
       - name: Test 022F untrusted critic question feedback, independent synthetic review
         working-directory: experiments/022f
         run: |
