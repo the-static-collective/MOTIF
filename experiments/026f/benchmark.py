@@ -60,7 +60,7 @@ def benchmark():
                 h["origin"] not in ("NATIVE_LEXICAL_RULE","NO_MODEL")
             )
             assert receipt["external_actions"]==0
-            assert not receipt["permissions_inferred"]
+            assert not receipt["human_permissions_inferred"]
             assert not receipt["field_facts_changed"]
             assert not receipt["primary_native_plan_overwritten"]
             assert receipt["test_id"] in (None,"FOOD_SERVICE_GATE","REPEAT_AUDIO_TEST")
