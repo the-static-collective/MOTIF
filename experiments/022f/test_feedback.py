@@ -114,7 +114,7 @@ class CriticQuestionTests(unittest.TestCase):
         x = challenge("SLOW_FOOD_TEST", cost_of_wait_if_delayed=0.)
         self.assertEqual(x.status, "ELIGIBLE_SYNTHETIC_REPLAN_ONLY")
 
-    def test_repeating_a_question_cannot_gain_new authority(self):
+    def test_repeating_a_question_cannot_gain_new_authority(self):
         hyp, roads, catalog, projection, chorus, reviews = fixture()
         ledger = QuestionLedger()
         a = submit_critic_question(chorus, projection, hyp, roads,
