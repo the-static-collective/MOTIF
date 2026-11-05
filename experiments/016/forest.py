@@ -159,7 +159,13 @@ class LivingForest:
             if r.allowed and r.name not in observed
             and all(observed.get(name) == value for name, value in r.requires)
         ]
-        seen = set()
+        # A previously witnessed source/signature must not be offered again
+        # under a new road name after the first road leaves the available set.
+        seen = {
+            (self.roads[name].origin,
+             tuple((h, self.roads[name].predicted[h]) for h in sorted(self.names)))
+            for name in observed if name in self.roads
+        }
         result = []
         for r in sorted(eligible, key=lambda item: (item.cost, item.name)):
             claim = (r.origin, tuple((name, r.predicted[name]) for name in sorted(self.names)))
