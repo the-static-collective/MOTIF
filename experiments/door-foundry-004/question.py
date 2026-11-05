@@ -10,6 +10,7 @@ import argparse
 from hashlib import sha1, sha256
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
@@ -42,6 +43,14 @@ def git_blob(path):
 
 def native_modules(original):
     original = Path(original).resolve()
+    try:
+        actual_commit = subprocess.check_output(
+            ["git", "-C", str(original), "rev-parse", "HEAD"],
+            text=True, timeout=6, stderr=subprocess.DEVNULL).strip()
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise HOLD("Original owner commit unavailable") from exc
+    if actual_commit != SOURCE_SHA:
+        raise HOLD("Wrong original source revision: question needs exact owner commit")
     for rel, sha in PINS.items():
         full = (original / rel).resolve()
         if not full.is_relative_to(original) or not full.is_file():
