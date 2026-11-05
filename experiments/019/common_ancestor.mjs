@@ -56,7 +56,7 @@ export function simulate(kind='independent',seed=501){
     const proxy=colluded?other(truth):truth;
     for(const reporter of REPORTERS){
       let claim;
-      if(kind==='declared_copy'&&reporter==='elm'){
+      if((kind==='declared_copy'||kind==='contradictory_copy')&&reporter==='elm'){
         claim=sharedCarrier;
       }else if((kind==='hidden_ancestor'||kind==='weak_ancestor')&&
                (reporter==='cedar'||reporter==='elm')){
@@ -73,13 +73,13 @@ export function simulate(kind='independent',seed=501){
         refs.pop();
       if(kind==='conflicting_reference'&&i===0&&reporter==='cedar')
         refs[1]={...refs[1],label:other(proxy)};
-      const parent=kind==='declared_copy'&&reporter==='elm'
+      const parent=(kind==='declared_copy'||kind==='contradictory_copy')&&reporter==='elm'
         ?'cedar':null;
       const row={schema:ROW,source_scope:SOURCE_SCOPE,
         sample_id,reporter,carrier_claim:claim,declared_parent:parent,
         references:refs};
       records.push(row);
-      if(kind==='declared_copy'&&reporter==='elm'){
+      if((kind==='declared_copy'||kind==='contradictory_copy')&&reporter==='elm'){
         records.push({...row,forwarded_copy_id:'extra-report-'+i});
         if(kind==='contradictory_copy'&&i===0){
           records.push({...row,carrier_claim:other(claim),
@@ -344,8 +344,21 @@ export function proposedDiscriminators(receipt,budget=1.5){
     throw Error('HOLD_INVALID_DISCRIMINATOR_BUDGET');
   const links=receipt.statistically_suspected_shared_failure_links;
   const actions=[],used=new Set();let left=budget;
-  // Two different tests are suggested, neither performed: recover independent
-  // original carriers, then test a separately audited control or a third source.
+  // Challenge the declared reference family FIRST. Without that check,
+  // an observationally strong common-error correlation may be a false
+  // genealogy caused by two jointly corrupted reference streams.
+  if(left>=0.5){
+    actions.push({
+      kind:'PROPOSE_THIRD_INDEPENDENT_REFERENCE_FAMILY',
+      cost:0.5,
+      question:'What independently adjudicated reference could reveal common-mode failure in both current references?',
+      suggested_without_access_to_original_sources:true,
+      purpose:'CHALLENGE_REFERENCE_COLLUSION'
+    });
+    left-=0.5;
+  }
+  // Next ask for original carrier custody. Never infer literal ancestry
+  // from a conditional dependence edge or content hash.
   for(const link of links){
     if(actions.length>=2)break;
     const key=[link.a,link.b].sort().join('|');
@@ -359,16 +372,6 @@ export function proposedDiscriminators(receipt,budget=1.5){
       purpose:'DISCRIMINATE_LITERAL_ANCESTRY_FROM_SHARED_ENVIRONMENT_OR_REFERENCE_ERROR'
     });
     left-=0.6;
-  }
-  if(left>=0.5){
-    actions.push({
-      kind:'PROPOSE_THIRD_INDEPENDENT_REFERENCE_FAMILY',
-      cost:0.5,
-      question:'What independently adjudicated reference could reveal common-mode failure in both current references?',
-      suggested_without_access_to_original_sources:true,
-      purpose:'CHALLENGE_REFERENCE_COLLUSION'
-    });
-    left-=0.5;
   }
   return {
     schema:'motif019.inquiry-plan/v0',
