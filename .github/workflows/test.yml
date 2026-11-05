@@ -107,6 +107,23 @@ jobs:
           assert len(result['information_collapse']['lost_distinctions']) == 3
           assert len(result['binding_ids']) == 2
           PY
+      - name: Test FIELD-001 real-world reporting contract and browser engine
+        working-directory: research/field-pilot
+        run: |
+          python -m unittest -v test_field_protocol.py test_build_field_desk.py
+          node --check field_pilot.js
+          node --check field_app.js
+          node test_field_pilot.js
+          python field_protocol.py --as-of 2026-11-04T18:00:00Z > /tmp/motif-field-summary.json
+          python build_field_desk.py --output field-witness.html
+          test -s field-witness.html
+      - name: Save offline real-world field witness page
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-field-witness-offline
+          path: research/field-pilot/field-witness.html
+          if-no-files-found: error
+          retention-days: 30
       - name: Reproduce 007
         working-directory: experiments/007
         run: python inheritance.py
