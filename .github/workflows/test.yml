@@ -44,6 +44,13 @@ jobs:
           echo '__MOTIF010_RESULT_START__'
           cat /tmp/motif010.json
           echo '__MOTIF010_RESULT_END__'
+      - name: Reproduce 010 scientist transcript
+        working-directory: experiments/010
+        run: |
+          python demo.py > /tmp/motif010demo.json
+          echo '__MOTIF010_DEMO_START__'
+          cat /tmp/motif010demo.json
+          echo '__MOTIF010_DEMO_END__'
       - name: Test 010
         working-directory: experiments/010
         run: python -m unittest -v test_scientist.py
