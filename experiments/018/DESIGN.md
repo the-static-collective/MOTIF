@@ -60,3 +60,11 @@ If a selected question improves heldout utility **and** absolute forecast error 
 The loop can therefore return either a held policy candidate or a new discriminating question. It must not certify itself superior simply because it generated more ideas.
 
 USGS modern OGC continuous API: https://api.waterdata.usgs.gov/docs/ogcapi/ .
+
+## After test: learning to ask about answer availability (post-hoc only)
+
+The initial real execution selected `ask_sueur` in all five development stages and observed a 2025 holdout improvement against downstream persistence. On the same 2025 holdout, the never-selected `ask_both` policy had a *lower* retrospective error, despite 81 missing Blue Earth answers. This is **not** evidence that we may change the selected policy after opening its heldout target labels. Instead, 018 now explicitly distinguishes **a hypothesis about the next question** from an admitted improved choice.
+
+The new machine-readable field `posthoc_question_generation_only` can therefore identify a concrete follow-up: *is learning whether a sensor is available (before paying for its value) itself worth asking?* This availability-probe question must be developed on a new training/development block and evaluated against another event not already opened. The existing final frozen policy remains unchanged.
+
+A "best model" computed after seeing test labels is **optimistic selection bias**, even if other candidates were originally predeclared. These values inform investigation only, never retroactive model ranking.

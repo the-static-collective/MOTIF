@@ -353,12 +353,45 @@ def challenge(frozen,test_raw):
   verdict="HOLD_TOO_MANY_MISSING_SENSOR_ANSWERS"
  else:
   verdict="HELD_CANDIDATE_NEEDS_MORE_EVENTS"
- # Ask something *falsifiable* in response to the observed failure.
- next_question=(
-  "Which unavailable sensor hours bias the value estimate, and could a one-sensor baseline retain more cases?"
-  if selected_score["unanswered_questions"]>0 else
-  "Can this question policy beat persistence again in a different, independently selected year?"
- )
+ # The observed holdout may suggest a better *question*, not justify
+ # selecting a new policy after opening its outcome labels.
+ posthoc_best=min(outcomes,key=lambda name:(
+  outcomes[name]["declared_development_objective_cfs_equivalent"],
+  question_count(name),QUESTIONS.index(name)))
+ posthoc=outcomes[posthoc_best]
+ question_about_answer_availability=(
+  posthoc_best!=selected and
+  question_count(posthoc_best)>question_count(selected) and
+  posthoc["unanswered_questions"]>0)
+ if question_about_answer_availability:
+  next_question=(
+   "Could a cheap origin-time question about Blue Earth gauge AVAILABILITY "
+   "make asking both rivers worthwhile only when the Blue Earth answer "
+   "can actually arrive, without inspecting future river discharge?")
+ elif selected_score["unanswered_questions"]>0:
+  next_question=(
+   "Which absent source hours destroy the value of our selected question, "
+   "and is a second information source worth its cost?")
+ else:
+  next_question=(
+   "Can this frozen question policy beat persistence again in another "
+   "independently selected year with pre-archived origin-time telemetry?")
+ # There is NO new automatic acceptance; this is after-the-fact question
+ # formulation, labeled as such. Posthoc best is *not* the frozen choice.
+ posthoc_research_probe={
+  "best_only_after_opening_holdout":posthoc_best,
+  "not_a_permitted_policy_change":True,
+  "needs_fresh_untouched_data":True,
+  "posthoc_best_utility_cfs_equivalent":
+   posthoc["declared_development_objective_cfs_equivalent"],
+  "posthoc_best_unanswered_fraction":
+   posthoc["asked_and_missing_fraction"],
+  "availability_question_worth_testing":question_about_answer_availability,
+  "challenge_to_our_diagnostic":(
+   "The frozen development winner may be suboptimal even when it beats "
+   "persistence on heldout; source availability and question prices "
+   "may dominate which evidence matters.")
+ }
  return {
   "schema":RUN_SCHEMA,
   "status":"RETROSPECTIVE_REAL_SENSOR_QUESTION_TEST_NOT_ACTUAL_ISSUED_FORECAST",
@@ -374,6 +407,7 @@ def challenge(frozen,test_raw):
   "source_type":"USGS_REPORTED_HISTORICAL_DISCHARGE_ESTIMATES",
   "run_disposition":verdict,
   "next_best_question":next_question,
+  "posthoc_question_generation_only":posthoc_research_probe,
   "metric_diagnostic":{
    "source_missingness_can_select_population":True,
    "cost_weights_are_assumed_not_empirically_valued":True,

@@ -87,6 +87,16 @@ class QuestionLoopTests(unittest.TestCase):
   self.assertEqual(original["frozen_plan_sha256"],self.frozen["plan_sha256"])
   self.assertFalse(original["automatic_promotion"])
 
+ def test_new_question_can_follow_holdout_but_cannot_reselect_policy(self):
+  out=m.challenge(self.frozen,self.test)
+  question=out["posthoc_question_generation_only"]
+  self.assertTrue(question["not_a_permitted_policy_change"])
+  self.assertTrue(question["needs_fresh_untouched_data"])
+  self.assertIn(question["best_only_after_opening_holdout"],m.QUESTIONS)
+  self.assertEqual(out["selected_policy"],self.frozen["frozen_final_question_policy"])
+  self.assertFalse(out["model_retrained_on_holdout"])
+  self.assertIn("?",out["next_best_question"])
+
  def test_validation_prices_are_fixed_from_training_only(self):
   x=self.frozen["training_only_question_cost_unit_cfs_equivalent"]
   different=m.freeze(self.train,fixture("development",shock=2.0))
