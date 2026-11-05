@@ -1,0 +1,32 @@
+name: MOTIF-022 New Question to Executable
+on:
+  push:
+    branches:
+      - research/022-question-to-capability
+  pull_request:
+    paths:
+      - 'experiments/022/**'
+      - 'experiments/021/**'
+      - '.github/workflows/motif022.yml'
+jobs:
+  source-owned-question-loop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original MOTIF-021 ALEX planZ GRAFT crossing
+        run: node --test experiments/021/test_cross_organ.mjs
+      - name: New changing-question research plan and capability tests
+        run: node --test experiments/022/test_next_question.mjs
+      - name: Source-referenced new-question run with no-evidence counterexample
+        run: node experiments/022/next_question.mjs > motif022-question-to-capability.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif022-new-question-bounded-capabilities
+          path: motif022-question-to-capability.json
+          retention-days: 14
