@@ -1,0 +1,122 @@
+name: MOTIF-004 — self-posed question precedes GRAFT capability search
+on:
+  push:
+    branches:
+      - experiment/door-foundry-004-self-posed-question-gate
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-004/**'
+      - '.github/workflows/door-foundry-004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-source-inquiry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original MOTIF source before generated sensor
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 5ee9207f04af2826750863526af7f92b31ef8578
+          path: motif-original
+          persist-credentials: false
+      - name: Original GRAFT-027 candidate generator
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 6ff59aead0296081e1547d8107e4b6f06ea2381e
+          path: graft-source
+          persist-credentials: false
+      - name: Original CANNON-093 independent reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 0fd326c1bb6f222dc572a4877818d63881828801
+          path: cannon-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: MOTIF diagnoses its own policy disagreement FIRST
+        run: |
+          mkdir -p evidence
+          python experiments/door-foundry-004/question.py \
+            --source motif-original --out evidence/motif-self-question.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          q=json.loads(Path('evidence/motif-self-question.json').read_text())
+          assert q['evidence']['policy_disagreement'] is True
+          assert q['candidate_executable_examined'] is False
+          assert q['missing_capability_contract']['target_path'] is None
+          print(json.dumps({'question_digest':q['content_sha256'],
+            'decision_critical_gap':True,'target_field_preset':False}))
+          PY
+      - name: Verify no gap gives HOLD before generation
+        run: |
+          if python experiments/door-foundry-004/question.py \
+            --source motif-original --mode no-permissions \
+            --out evidence/unapproved-query.json; then
+            echo "Query was incorrectly generated without synthetic permission!"
+            exit 1
+          fi
+          if test -e evidence/unapproved-query.json; then
+            echo "A false question file was created"
+            exit 1
+          fi
+      - name: CANNON runs original GRAFT generated-candidate review
+        run: |
+          node cannon-source/experiments/cannon-graft-motif-001/review.mjs \
+            --graft graft-source --output evidence/cannon-generated-operator.json
+      - name: MOTIF independently checks answer and builds GRAFT-born local organ
+        run: |
+          python experiments/door-foundry-004/answer.py \
+            --question evidence/motif-self-question.json \
+            --cannon-receipt evidence/cannon-generated-operator.json \
+            --graft-source graft-source \
+            --motif-original motif-original \
+            --build generated-motif-self-answer \
+            --report evidence/motif-self-answer.json
+      - name: Source, falsification, answer and independent test suite
+        env:
+          MOTIF_ORIGINAL: ${{ github.workspace }}/motif-original
+          GRAFT_SOURCE: ${{ github.workspace }}/graft-source
+          CANNON_GRAFT_RECEIPT: ${{ github.workspace }}/evidence/cannon-generated-operator.json
+        run: python -m unittest discover -s experiments/door-foundry-004 -p 'test_self_question.py' -v
+      - name: Check reproducible held answer without claiming better general reasoning
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          q=json.loads(Path('evidence/motif-self-question.json').read_text())
+          x=json.loads(Path('evidence/motif-self-answer.json').read_text())
+          assert x['original_question_sha256']==q['content_sha256']
+          assert x['status']=='SYNTHETIC_GAP_ADDRESSED_IN_HELD_BUILD'
+          assert x['fixed_immediate_no_sensor_matches']==2
+          assert x['new_sensor_matches']==4
+          assert x['fair_classical_same_evidence_matches']==4
+          assert x['next_question_submitted'] is False
+          assert x['real_world_actions']==0
+          assert x['automatic_source_changes']==0
+          assert x['admitted'] is False
+          print(json.dumps({'self_question_before_candidate':True,
+            'withheld_synthetic_cases':4,'fixed_baseline_correct':2,
+            'graft_sensor_correct':4,'fair_classical_correct':4,
+            'no_external_actions':True},indent=2))
+          PY
+      - name: Save both question and answer, and complete runnable build
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-004-SELF-QUESTION-GRAFT-CANNON-HELD
+          path: |
+            evidence/
+            generated-motif-self-answer/
+          retention-days: 30
+          if-no-files-found: error
