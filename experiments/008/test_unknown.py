@@ -40,6 +40,12 @@ class UnknownWorldTests(unittest.TestCase):
         self.assertFalse(set(a.vocabulary) & set(b.vocabulary))
         self.assertFalse(set(a.vocabulary) & set(c.vocabulary))
 
+    def test_all_world_vocabulary_names_are_unique_in_frozen_benchmark(self):
+        tokens = [name for family in oracle.FAMILIES
+                  for seed in benchmark.SEEDS
+                  for name in oracle.spec_for(family, seed).vocabulary]
+        self.assertEqual(len(tokens), len(set(tokens)))
+
     def test_learner_never_imports_hidden_oracle(self):
         text = inspect.getsource(learner)
         self.assertNotIn("from oracle import", text)
@@ -142,6 +148,8 @@ class UnknownWorldTests(unittest.TestCase):
         self.assertEqual(summary["supported_worlds"], 25)
         self.assertEqual(summary["unsupported_worlds"], 5)
         self.assertFalse(summary["zero_shot_cross_world_transfer_demonstrated"])
+        self.assertTrue(summary["vocabulary_disjoint_per_world"])
+        self.assertEqual(summary["version"], "unknown-world-v2")
         self.assertFalse(summary["test_used_for_model_selection"])
         self.assertEqual(set(summary["per_family"]), set(oracle.FAMILIES))
 
