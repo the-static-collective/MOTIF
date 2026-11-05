@@ -34,11 +34,11 @@ class ChoiceReport:
     model_inference: bool = True
 
 
-def permitted_sequences(tokenizer, ids: tuple[str, ...]):
+def permitted_sequences(tokenizer, ids: tuple[str, ...], *, allow_abstain: bool = True):
     """Build strictly finite acceptable output space at token granularity."""
     if len(ids) != len(set(ids)) or len(ids) > 8:
         raise ValueError("HOLD_DUPLICATE_OR_TOO_MANY_CHOICES")
-    names = tuple(ids) + (NO_TEST,)
+    names = tuple(ids) + ((NO_TEST,) if allow_abstain else ())
     if any(not re.fullmatch(r"[A-Z][A-Z0-9_]{0,39}", s) for s in names):
         raise ValueError("HOLD_UNSAFE_TEST_ID")
     eos = tokenizer.eos_token_id
@@ -71,7 +71,7 @@ class RealT5Critic:
                  test_labels: tuple[tuple[str, str], ...],
                  *,
                  method: str = "CONSTRAINED_IDS"):
-        if method not in {"CONSTRAINED_IDS", "RAW_GENERATION"}:
+        if method not in {"CONSTRAINED_IDS", "CONSTRAINED_ID_ONLY", "RAW_GENERATION"}:
             raise ValueError("HOLD_BAD_MODEL_METHOD")
         self.inner = model
         self.projection = projection
@@ -87,17 +87,19 @@ class RealT5Critic:
 
     def _prompt(self) -> str:
         catalog = "\n".join(s + " : " + label for s, label in self.test_labels)
+        abstain = self.method != "CONSTRAINED_ID_ONLY"
         return (
             "Choose the most useful NEW missing question for this imaginary "
-            "planning task. If the question is already known, unsafe, "
-            "unavailable, or would not change the decision, choose NO_TEST. "
-            "Return one ID only. Do not answer the question or authorize action.\n"
+            "planning task. Return one registered ID only. "
+            "Do not answer the question or authorize action. "
+            + ("If none is useful, choose NO_TEST. " if abstain else
+               "The native verifier will reject any incorrect or redundant choice. ") + "\n"
             "KNOWN: " + "; ".join(self.projection.facts) + "\n"
             "UNKNOWN: " + "; ".join(self.projection.uncertainties) + "\n"
             "CURRENT NEXT: " + self.projection.proposed_next + "\n"
             "TESTS:\n" + catalog +
-            "\nABSTAIN: NO_TEST\n"
-            "Reply strictly as TEST_ID=<name>.\n"
+            ("\nABSTAIN: NO_TEST\n" if abstain else "\n")
+            + "Reply strictly as TEST_ID=<name>.\n"
         )
 
     def generate(self, prompt: str) -> str:
@@ -126,7 +128,10 @@ class RealT5Critic:
                 self.inner._prepare()
                 tokenizer = self.inner._tokenizer
                 model = self.inner._model
-                seqs = permitted_sequences(tokenizer, self.ids)
+                seqs = permitted_sequences(
+                    tokenizer, self.ids,
+                    allow_abstain=self.method != "CONSTRAINED_ID_ONLY",
+                )
                 p = self._prompt()
                 input_tensor = tokenizer(
                     p, return_tensors="pt", max_length=384, truncation=True,
