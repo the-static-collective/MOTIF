@@ -1,0 +1,65 @@
+name: REASON-005 objections to objections / reasoning economy
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-005-meta-objection-economy
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-005/**'
+      - '.github/workflows/reason-cartridge-005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  meta-objection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: All inherited reason-cartridge regression tests
+        run: |
+          for n in 001 002 003 004; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reasoning economy, source revision, adversarial tests
+        run: python -m unittest discover -s experiments/reason-cartridge-005 -p 'test_*.py' -v
+      - name: Reproducible source-owned synthetic bench and receipt
+        run: |
+          python experiments/reason-cartridge-005/trial.py > reason-005-receipt.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path("reason-005-receipt.json").read_text())
+          assert r["redundant_objection_defenses"] == 2
+          assert r["redundant_owner_reviews"] == 0
+          assert r["real_premise_error_corrections_in_synthetic_fixture"] == 2
+          assert r["source_rebuttals_after_fixture_review"] == 1
+          assert r["meta_critic_source_reviews"] == 3
+          assert r["naive_always_review_count"] == 6
+          assert r["costly_probe_avoided"]
+          assert r["independent_review"] == {"cases":4,"errors":0}
+          assert r["fixture_only_admitted"]
+          assert r["repaired_positive_claim"] == "PROVED_UNREACHABLE"
+          assert r["repaired_negative_claim"] == "PROVED_REACHABLE"
+          assert r["exact_context_memory_status"] == "EXACT_CONTEXT_ONLY"
+          assert r["changed_context_memory_status"] == "HOLD_NO_REUSABLE_CONTEXT"
+          assert r["external_observations_performed"] == 0
+          assert r["external_authority"] is False
+          print({"reviewed":r["meta_critic_source_reviews"],
+                 "always_review":r["naive_always_review_count"],
+                 "corrections":r["real_premise_error_corrections_in_synthetic_fixture"],
+                 "defenses":r["redundant_objection_defenses"]})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-005-self-critic-receipt
+          path: reason-005-receipt.json
+          retention-days: 30
