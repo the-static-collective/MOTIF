@@ -1,0 +1,61 @@
+{
+  "GHOT_actual_execution": false,
+  "GHOT_observed_power_willingness": "normal",
+  "GHOT_scheduler_hypothetical_action": "run_here",
+  "authority": false,
+  "automatic_promotion": false,
+  "disposition": "HELD_REUSE_CANDIDATE_FOR_MORE_BODIES",
+  "future_real_energy_adapter": {
+    "available_now": false,
+    "measurement_units": "joules, watts, bytes, nanoseconds",
+    "missing_source_behavior": "UNKNOWN_NOT_ZERO",
+    "promotion_gate": "INDIVIDUAL_BODY_ENERGY_CALIBRATION_AND_INDEPENDENT_TASK_REPLICATION",
+    "target": "ghot.power_field / hardware-specific energy meter"
+  },
+  "identical_evidence_derived_answer": true,
+  "independent_Joules_verified": false,
+  "limits": [
+    "Five matched local GitHub Actions trials are not a cross-hardware, cross-load energy study.",
+    "CPU time excludes direct calibrated electrical power; the runner exposed no usable Joules meter.",
+    "The experimental GHoT scheduler decision used an explicitly hypothetical single local offer, never real dispatch.",
+    "Original public river measurements were retrieved retrospectively; this resource measurement is about computation, not river prediction improvement.",
+    "A cryptographic source hash supports cache invalidation; it does not independently authenticate underlying river measurements.",
+    "A faster cached answer may still be wrong, outdated or inappropriate for a different task; operator constraints come first."
+  ],
+  "measured_work": {
+    "actual_source_bytes_read_per_batch": 2426750,
+    "bytes_read_saved": 0,
+    "electrical_energy_joules": null,
+    "json_validations_reparse": 250,
+    "json_validations_reuse": 1,
+    "measured_power_draw_watts": null,
+    "median_cpu_ns_reduction_per_batch": 72048073,
+    "median_wall_ns_reduction_per_batch": 72047775,
+    "process_cpu_time_is_not_joules": true,
+    "reparse_median_cpu_ns": 100424701,
+    "reuse_median_cpu_ns": 28376628,
+    "total_CO2_kg": null
+  },
+  "model_retrained": false,
+  "next_question": "Can verified evidence reuse reduce compute on the operator's actual device while preserving freshness and usefulness, especially when GHoT reports scarce battery or thermal pressure?",
+  "operator_defined_constraints_required": [
+    "answer_freshness_requirement",
+    "actual_device_capabilities",
+    "urgency_and_deferrability",
+    "acceptable_response_latency",
+    "battery_or_thermal_budget_if_physically_measured",
+    "correctness_and_data_provenance_requirements"
+  ],
+  "remote_execution": false,
+  "repeated_questions_per_trial": 250,
+  "schema": "motif.embodied-question/v1",
+  "source": {
+    "GHOT_commit": "0cbd111a1f7d58a3e4d1dacaeb6be067cbffe9ad",
+    "GHOT_git_blob": "4c46c92b0529920f4b990d45b64a855abdb7d385",
+    "GHOT_resource_run": "https://github.com/the-static-collective/GHoT/actions/runs/42043913470",
+    "local_receipt_sha256": "ccae2044a00b2f8abe397cb7af91c265c82f8a202e54cecbbc593c90309a35c6",
+    "source_evidence": "ACTUAL_RUNNER_BENCHMARK_OF_ARCHIVED_PUBLIC_RESEARCH_REPORT"
+  },
+  "state": "OBSERVED_PHYSICAL_COMPUTE_PROXY_NOT_MEASURED_JOULES",
+  "trial_count_each": 5
+}
