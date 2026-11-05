@@ -38,6 +38,8 @@ def permitted_sequences(tokenizer, ids: tuple[str, ...], *, allow_abstain: bool 
     """Build strictly finite acceptable output space at token granularity."""
     if len(ids) != len(set(ids)) or len(ids) > 8:
         raise ValueError("HOLD_DUPLICATE_OR_TOO_MANY_CHOICES")
+    if not ids and not allow_abstain:
+        raise ValueError("HOLD_NO_AVAILABLE_TESTS")
     names = tuple(ids) + ((NO_TEST,) if allow_abstain else ())
     if any(not re.fullmatch(r"[A-Z][A-Z0-9_]{0,39}", s) for s in names):
         raise ValueError("HOLD_UNSAFE_TEST_ID")
