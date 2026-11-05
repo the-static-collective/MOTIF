@@ -1,6 +1,11 @@
 """023F: deterministic tests are NOT FLAN-T5 quality results."""
 from dataclasses import replace
 import unittest
+from pathlib import Path
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+for folder in ("021f", "022f", "016"):
+    sys.path.append(str(ROOT / folder))
 
 from chorus import LocalFlanT5Small, SidecarNote, SidecarRun
 from forest import LivingForest
