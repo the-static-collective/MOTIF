@@ -46,7 +46,7 @@ export function classicalProviderPlan(packet){
  const optimum=solve(choices,['CANDIDATE_OBSERVED'],['REVIEW_RECEIPT_READY']);
  if(optimum.status!=='PLAN_FOUND')throw Error('HOLD_CLASSICAL_DISCOVERY_PLAN_FAILED');
  const trace=replaySteps(choices,optimum.steps,['CANDIDATE_OBSERVED']);
- if(trace.cost!==optimum.cost||!trace.reached_goal)
+ if(trace.cost!==optimum.cost||!trace.final_facts.includes('REVIEW_RECEIPT_READY'))
   throw Error('HOLD_UNREPLAYABLE_SOURCE_DISCOVERY_PLAN');
  return {schema:'motif026.classical-review-plan/v0',status:'PLAN_READY_BUT_NOT_AUTHORIZED',
   steps:optimum.steps,cost:optimum.cost,trace:trace.trace,
