@@ -30,6 +30,7 @@ jobs:
         working-directory: experiments/025f
         run: |
           python -m unittest -v test_careers.py
+          python -m unittest -v test_encoder.py
           python - <<'PY'
           import json
           from native_careers import preflight_research_menu
@@ -91,11 +92,37 @@ jobs:
                   print("CASE",job,row["case_id"],"gold="+row["gold"],
                         "native="+row["native"],"real_T5="+row["selected"])
           PY
+      - name: Test T5 as a silent ENCODER against same-reference classical retrieval
+        working-directory: experiments/025f
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+        run: |
+          python encoder_interview.py > semantic_encoder_receipt.json
+          python - <<'PY'
+          import json
+          d=json.load(open("semantic_encoder_receipt.json"))
+          assert d["real_model_encoder_executed"]
+          assert d["model_decoder_calls"]==0
+          assert d["frozen_semantic_holdout_examples"]==24
+          assert d["external_inference_or_action"] is False
+          assert d["role_can_override_native_decision"] is False
+          print("SILENT ENCODER JOB INTERVIEW: REAL T5 MODEL")
+          print("Encoder seconds:",d["t5_encoder_cpu_seconds"])
+          print("TFIDF seconds:",d["classical_tfidf_build_and_search_seconds"])
+          print(json.dumps(d["metrics"],indent=2))
+          print("Encoder exceeds best classical same-reference comparator:",
+                d["best_t5_encoder_outperformed_best_classical"])
+          for row in d["records"]:
+              print(row["case_id"],row["gold"],row["choices"])
+          PY
       - name: Upload receipts only, not model checkpoint
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: motif025f-real-t5-job-interview
-          path: experiments/025f/job_interview_receipt.json
+          path: |
+            experiments/025f/job_interview_receipt.json
+            experiments/025f/semantic_encoder_receipt.json
           if-no-files-found: ignore
           retention-days: 14
