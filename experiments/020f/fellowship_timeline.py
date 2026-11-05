@@ -100,9 +100,12 @@ def study():
     base = inputs()
     cases: dict[str, tuple[CounterfactualOpportunity, ...]] = {
         "base_five_to_four_attention": base,
-        "no_confirmed_nexus_team": tuple(x for x in base
+        "confirmed_no_viable_nexus_team": tuple(x for x in base
                                           if x.plan_id != "NEXUS_TEAM_QUESTION"),
         "host_window_closes_immediately": tuple(
+            replace(x, last_start_tick=0, reward_if_successful=9.)
+            if x.plan_id == "RIVERSIDE_HOST_QUESTION" else x for x in base),
+        "host_and_nexus_urgent_parallel": tuple(
             replace(x, last_start_tick=0, reward_if_successful=9.)
             if x.plan_id == "RIVERSIDE_HOST_QUESTION" else x for x in base),
         "nexus_question_low_expected_value": tuple(
@@ -114,14 +117,16 @@ def study():
     answers = {}
     for name, opportunities in cases.items():
         capacity = 5 if name == "all_opportunities_still_reachable" else 4
+        parallel = 2 if name == "host_and_nexus_urgent_parallel" else 1
         planner = InsideOutBox(
-            overlay, opportunities, horizon=8, max_parallel=1,
+            overlay, opportunities, horizon=8, max_parallel=parallel,
             attention_budget=capacity, cognition_cost_per_tick=.05,
         )
         r = planner.analyze()
         answers[name] = {
             "status": r.status,
             "hypothetical_attention_budget": capacity,
+            "hypothetical_simultaneous_capacity": parallel,
             "first_batch_now": r.first_batch,
             "optimal_modeled_value": r.optimal_modeled_value,
             "myopic_modeled_value": r.baseline_myopic_value,
