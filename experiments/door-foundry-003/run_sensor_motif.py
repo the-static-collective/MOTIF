@@ -162,7 +162,7 @@ def run():
         "operator_admitted": False,
     }
     result["content_sha256"] = jsdigest(result)
-    print(json.dumps(result, indent=2, sort_keys=True))
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
