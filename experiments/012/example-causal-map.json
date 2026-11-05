@@ -1,0 +1,1131 @@
+{
+  "artifact": "CAUSAL_CARTOGRAPHER_SYNTHETIC_CARTRIDGE_TRANSCRIPT",
+  "causal_validity_outside_programmed_simulator": false,
+  "experiment": "MOTIF-012",
+  "independently_authenticated_source": false,
+  "latent_source_refused": {
+    "graph_source_modified": false,
+    "held_before_explicit_local_decision": true,
+    "initial_hypotheses": [
+      {
+        "abstract_hypothesis": "FIRST",
+        "tree": {
+          "checksum_sha256": "d3887b87a34c6a12e3ee3d934f1e70c5f58c8b4a60e38ec6acde7a3208dc90e1",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q1b630254b9ccfb542b4cf5e0",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-c691ca0f0981b461",
+          "leaves": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q120c86da6513308545681b95",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q120c86da6513308545681b95",
+            "q1b630254b9ccfb542b4cf5e0",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "SECOND",
+        "tree": {
+          "checksum_sha256": "1956dab01d5266aa0267b09933b232b9ae92a3aad4d7f7b7a7578626ad08323e",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q1b630254b9ccfb542b4cf5e0",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-316f3f856cf35875",
+          "leaves": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q120c86da6513308545681b95",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q120c86da6513308545681b95",
+            "q1b630254b9ccfb542b4cf5e0",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "JOINT",
+        "tree": {
+          "checksum_sha256": "da689178f0b32bc4f9f6434b3c992f86665fece0b04ad1cdf9354d03b7010a79",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q1b630254b9ccfb542b4cf5e0",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-7d964733dbe03af5",
+          "leaves": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q120c86da6513308545681b95",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q120c86da6513308545681b95",
+            "q1b630254b9ccfb542b4cf5e0",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "EITHER",
+        "tree": {
+          "checksum_sha256": "a499a4e1c53276389a28c8ebc67b81e786e2314aff81a8543bb12da5924c4345",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q1b630254b9ccfb542b4cf5e0",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-bab732213d994f00",
+          "leaves": [
+            false,
+            true,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q120c86da6513308545681b95",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q120c86da6513308545681b95",
+            "q1b630254b9ccfb542b4cf5e0",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      }
+    ],
+    "interventions": [
+      {
+        "candidate_count_after": 2,
+        "candidate_count_before": 4,
+        "controlled_candidate_values": [
+          false,
+          true
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": false,
+        "real_world_authority": false,
+        "step": 1,
+        "votes_before_observation": [
+          false,
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "candidate_count_after": 1,
+        "candidate_count_before": 2,
+        "controlled_candidate_values": [
+          true,
+          false
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": false,
+        "real_world_authority": false,
+        "step": 2,
+        "votes_before_observation": [
+          true,
+          false
+        ]
+      }
+    ],
+    "local_fixture_admission": null,
+    "local_review": {
+      "contradiction_count": 8,
+      "no_real_world_authority": true,
+      "scars": [
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            false
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            false
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            true,
+            false
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            true,
+            false
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            true
+          ],
+          "observed": false,
+          "setting": [
+            true,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            true
+          ],
+          "observed": false,
+          "setting": [
+            true,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        }
+      ],
+      "separate_intervention_evidence": 16,
+      "status": "HOLD_INDEPENDENT_FALSIFIER"
+    },
+    "provisional_cartridge": {
+      "checksum_sha256": "da689178f0b32bc4f9f6434b3c992f86665fece0b04ad1cdf9354d03b7010a79",
+      "counts": [
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "evidence_count": 16,
+      "first": [
+        [
+          "q1b630254b9ccfb542b4cf5e0",
+          "?0"
+        ]
+      ],
+      "fit_balanced": 1,
+      "id": "tree-7d964733dbe03af5",
+      "leaves": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "schema": "motif.decision-tree-cartridge.v0",
+      "second": [
+        [
+          "q120c86da6513308545681b95",
+          "?1"
+        ]
+      ],
+      "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+      "status": "PROPOSAL_ONLY",
+      "vocab": [
+        "pending",
+        "q120c86da6513308545681b95",
+        "q1b630254b9ccfb542b4cf5e0",
+        "role_actor",
+        "role_target"
+      ]
+    },
+    "source_description": "OPAQUE_TWO_CANDIDATE_OBSERVATIONAL_PROXIES",
+    "source_training_observations": 16
+  },
+  "noisy_source_refused": {
+    "graph_source_modified": false,
+    "held_before_explicit_local_decision": true,
+    "initial_hypotheses": [
+      {
+        "abstract_hypothesis": "FIRST",
+        "tree": {
+          "checksum_sha256": "05158cbf5d3b6fef05938edbadf14499bac920524c606c67a73b34b12b8d11ab",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q2e42151c0daac7b11bce270f",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-e7def5eb8aa063d1",
+          "leaves": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q5b789b2c179f08a1c3c85a31",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q2e42151c0daac7b11bce270f",
+            "q5b789b2c179f08a1c3c85a31",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "SECOND",
+        "tree": {
+          "checksum_sha256": "6823ceb88865c4334c5143c1b16dbb23fb98733a207ff83c6917124dc283b0ec",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q2e42151c0daac7b11bce270f",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-f8e9a8a4d351beba",
+          "leaves": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q5b789b2c179f08a1c3c85a31",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q2e42151c0daac7b11bce270f",
+            "q5b789b2c179f08a1c3c85a31",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "JOINT",
+        "tree": {
+          "checksum_sha256": "49d3197d71cd0489f7186b91b04fb1c2a13149a03bf0be85a7eef9e90936e2fa",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q2e42151c0daac7b11bce270f",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-8d1245d373c0d6ff",
+          "leaves": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q5b789b2c179f08a1c3c85a31",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q2e42151c0daac7b11bce270f",
+            "q5b789b2c179f08a1c3c85a31",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "EITHER",
+        "tree": {
+          "checksum_sha256": "9894ac28d15ea774bab33cfa87e770312dc676a97cd32960ea0a51942307826e",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q2e42151c0daac7b11bce270f",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-8a39cbd3733194fa",
+          "leaves": [
+            false,
+            true,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "q5b789b2c179f08a1c3c85a31",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q2e42151c0daac7b11bce270f",
+            "q5b789b2c179f08a1c3c85a31",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      }
+    ],
+    "interventions": [
+      {
+        "candidate_count_after": 2,
+        "candidate_count_before": 4,
+        "controlled_candidate_values": [
+          false,
+          true
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": false,
+        "real_world_authority": false,
+        "step": 1,
+        "votes_before_observation": [
+          false,
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "candidate_count_after": 1,
+        "candidate_count_before": 2,
+        "controlled_candidate_values": [
+          true,
+          false
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": true,
+        "real_world_authority": false,
+        "step": 2,
+        "votes_before_observation": [
+          true,
+          false
+        ]
+      }
+    ],
+    "local_fixture_admission": null,
+    "local_review": {
+      "contradiction_count": 4,
+      "no_real_world_authority": true,
+      "scars": [
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            false
+          ],
+          "observed": true,
+          "setting": [
+            false,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        },
+        {
+          "expected": [
+            true
+          ],
+          "observed": false,
+          "setting": [
+            true,
+            true
+          ],
+          "source": "SYNTHETIC_INTERVENTION"
+        }
+      ],
+      "separate_intervention_evidence": 16,
+      "status": "HOLD_INDEPENDENT_FALSIFIER"
+    },
+    "provisional_cartridge": {
+      "checksum_sha256": "05158cbf5d3b6fef05938edbadf14499bac920524c606c67a73b34b12b8d11ab",
+      "counts": [
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "evidence_count": 16,
+      "first": [
+        [
+          "q2e42151c0daac7b11bce270f",
+          "?0"
+        ]
+      ],
+      "fit_balanced": 1,
+      "id": "tree-e7def5eb8aa063d1",
+      "leaves": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "schema": "motif.decision-tree-cartridge.v0",
+      "second": [
+        [
+          "q5b789b2c179f08a1c3c85a31",
+          "?1"
+        ]
+      ],
+      "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+      "status": "PROPOSAL_ONLY",
+      "vocab": [
+        "pending",
+        "q2e42151c0daac7b11bce270f",
+        "q5b789b2c179f08a1c3c85a31",
+        "role_actor",
+        "role_target"
+      ]
+    },
+    "source_description": "OPAQUE_TWO_CANDIDATE_OBSERVATIONAL_PROXIES",
+    "source_training_observations": 16
+  },
+  "real_world_actions": 0,
+  "safety_and_cost": {
+    "permitted_cost": 1,
+    "permitted_request": "PROPOSE_SYNTHETIC_ONLY",
+    "permitted_settings": [
+      false,
+      true
+    ],
+    "real_world_authority": false,
+    "simulator_operations_dispatched": 0,
+    "unaffordable_request": "HOLD_BUDGET",
+    "unsafe_request": "HOLD_UNSAFE"
+  },
+  "supported_causal_candidate": {
+    "graph_source_modified": false,
+    "held_before_explicit_local_decision": true,
+    "initial_hypotheses": [
+      {
+        "abstract_hypothesis": "FIRST",
+        "tree": {
+          "checksum_sha256": "b715164fa7efee13ae9528a027d2cfe6983fedc5894dc18983e4581056a7118e",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q5168dafecd59276471dc6833",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-4f3347b141db09ac",
+          "leaves": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "qab568e94c85f41a4966876a9",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q5168dafecd59276471dc6833",
+            "qab568e94c85f41a4966876a9",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "SECOND",
+        "tree": {
+          "checksum_sha256": "4b9ae503fdaf97d2e9da88ceebc732e3fffb1bb078817117393cf08baaa7e1f9",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q5168dafecd59276471dc6833",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-efb36b717278b9c9",
+          "leaves": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "qab568e94c85f41a4966876a9",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q5168dafecd59276471dc6833",
+            "qab568e94c85f41a4966876a9",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "JOINT",
+        "tree": {
+          "checksum_sha256": "ba8744b076d86a8912bc987c31648e6fc47a540e5220144b39a4a9280074e7d9",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q5168dafecd59276471dc6833",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-fe930c27076fc0fa",
+          "leaves": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "qab568e94c85f41a4966876a9",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q5168dafecd59276471dc6833",
+            "qab568e94c85f41a4966876a9",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      },
+      {
+        "abstract_hypothesis": "EITHER",
+        "tree": {
+          "checksum_sha256": "d23409119ffaa218821f4d95ffb623045840ae49e2e9f82d88facbb99ffda99f",
+          "counts": [
+            [
+              8,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              8
+            ]
+          ],
+          "evidence_count": 16,
+          "first": [
+            [
+              "q5168dafecd59276471dc6833",
+              "?0"
+            ]
+          ],
+          "fit_balanced": 1,
+          "id": "tree-8b6a6e4afb4d2d48",
+          "leaves": [
+            false,
+            true,
+            true,
+            true
+          ],
+          "schema": "motif.decision-tree-cartridge.v0",
+          "second": [
+            [
+              "qab568e94c85f41a4966876a9",
+              "?1"
+            ]
+          ],
+          "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+          "status": "PROPOSAL_ONLY",
+          "vocab": [
+            "pending",
+            "q5168dafecd59276471dc6833",
+            "qab568e94c85f41a4966876a9",
+            "role_actor",
+            "role_target"
+          ]
+        }
+      }
+    ],
+    "interventions": [
+      {
+        "candidate_count_after": 2,
+        "candidate_count_before": 4,
+        "controlled_candidate_values": [
+          false,
+          true
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": true,
+        "real_world_authority": false,
+        "step": 1,
+        "votes_before_observation": [
+          false,
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "candidate_count_after": 1,
+        "candidate_count_before": 2,
+        "controlled_candidate_values": [
+          true,
+          false
+        ],
+        "expected_information_gain_bits": 1,
+        "independent_synthetic_result": false,
+        "real_world_authority": false,
+        "step": 2,
+        "votes_before_observation": [
+          false,
+          true
+        ]
+      }
+    ],
+    "local_fixture_admission": {
+      "cartridge_id": "tree-efb36b717278b9c9",
+      "decision": "ADMIT_PREDICT_ONLY",
+      "independent_review_status": "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION",
+      "real_world_authority": false,
+      "reviewer_claim_unverified": "LOCAL_SYNTHETIC_REVIEWER"
+    },
+    "local_review": {
+      "contradiction_count": 0,
+      "no_real_world_authority": true,
+      "scars": [],
+      "separate_intervention_evidence": 16,
+      "status": "ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION"
+    },
+    "provisional_cartridge": {
+      "checksum_sha256": "4b9ae503fdaf97d2e9da88ceebc732e3fffb1bb078817117393cf08baaa7e1f9",
+      "counts": [
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "evidence_count": 16,
+      "first": [
+        [
+          "q5168dafecd59276471dc6833",
+          "?0"
+        ]
+      ],
+      "fit_balanced": 1,
+      "id": "tree-efb36b717278b9c9",
+      "leaves": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "schema": "motif.decision-tree-cartridge.v0",
+      "second": [
+        [
+          "qab568e94c85f41a4966876a9",
+          "?1"
+        ]
+      ],
+      "source_digest": "46952a8d93fd13e02026a012427b9921a5b057ba7374f8a8ed9d49263867c295",
+      "status": "PROPOSAL_ONLY",
+      "vocab": [
+        "pending",
+        "q5168dafecd59276471dc6833",
+        "qab568e94c85f41a4966876a9",
+        "role_actor",
+        "role_target"
+      ]
+    },
+    "source_description": "OPAQUE_TWO_CANDIDATE_OBSERVATIONAL_PROXIES",
+    "source_training_observations": 16
+  }
+}

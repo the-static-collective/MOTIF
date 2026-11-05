@@ -37,6 +37,23 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Reproduce 012
+        working-directory: experiments/012
+        run: |
+          python benchmark.py > /tmp/motif012.json
+          echo '__MOTIF012_RESULT_START__'
+          cat /tmp/motif012.json
+          echo '__MOTIF012_RESULT_END__'
+      - name: Reproduce 012 causal map cartridge
+        working-directory: experiments/012
+        run: |
+          python demo.py > /tmp/motif012demo.json
+          echo '__MOTIF012_DEMO_START__'
+          cat /tmp/motif012demo.json
+          echo '__MOTIF012_DEMO_END__'
+      - name: Test 012
+        working-directory: experiments/012
+        run: python -m unittest -v test_cartographer.py
       - name: Reproduce 011
         working-directory: experiments/011
         run: |
