@@ -92,12 +92,21 @@ def satisfied(goal,seen):
  if g["kind"]=="any_of":return bool(fresh&set(g["required"]))
  return set(g["required"])<=fresh
 
-def future_useful(goal,seen,remaining):
- if satisfied(goal,seen):return False
+def reachable(goal,seen,remaining):
+ """Can the goal be completed by observed facts OR by remaining sources?
+
+ This *includes* a goal already met, matching the GHoT owner contract.
+ It is NOT the same as whether another request is necessary.
+ """
  g=GOALS[goal]
  fresh={r["site"] for r in seen if available(r)}
- if g["kind"]=="any_of":return bool(set(remaining)&set(g["required"]))
+ if g["kind"]=="any_of":
+  return bool(fresh&set(g["required"])) or bool(set(remaining)&set(g["required"]))
  return set(g["required"])<=(fresh|set(remaining))
+
+def future_useful(goal,seen,remaining):
+ """Should an additional source be asked, assuming no other side goals?"""
+ return not satisfied(goal,seen) and reachable(goal,seen,remaining)
 
 def check_trial(t,goal,policy):
  g=GOALS[goal]
@@ -159,7 +168,8 @@ def check_trial(t,goal,policy):
   prefix=received[:i+1]
   ok=satisfied(goal,prefix)
   rest=plan[i+1:]
-  can= future_useful(goal,prefix,rest)
+  can=reachable(goal,prefix,rest)
+  next_needed=future_useful(goal,prefix,rest)
   if policy=="goal_aware":
    intended=("STOP_GOAL_MET" if ok else
       "HOLD_GOAL_UNREACHABLE_WITH_ALLOWED_SOURCES" if not can else
@@ -175,7 +185,8 @@ def check_trial(t,goal,policy):
           "RESEARCH_STEP_DECISION_NOT_EXPLAINED")
   trace.append({
    "public_source":site,"goal_was_satisfied":ok,
-   "is_another_question_capable_of_completing_original_goal":can,
+   "original_goal_is_still_reachable":can,
+   "is_another_question_capable_of_completing_original_goal":next_needed,
    "next_decision":intended,
    "actual_http_payload_bytes":r["body_bytes_received"],
    "actual_http_request_wall_ns":r["latency_wall_ns"],
