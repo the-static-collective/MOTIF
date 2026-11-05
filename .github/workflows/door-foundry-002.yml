@@ -1,0 +1,96 @@
+name: MOTIF 002 - CANNON source evidence to runnable local builds
+
+on:
+  push:
+    branches:
+      - experiment/door-foundry-002-cannon-build-backloop
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-002/**'
+      - '.github/workflows/door-foundry-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cannon-return-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout independent original MOTIF source at CANNON selected SHA
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 5ee9207f04af2826750863526af7f92b31ef8578
+          path: motif-source
+          persist-credentials: false
+      - name: Checkout exact CANNON reviewer implementation
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: ce54c67f5e830b32a6e754c22da4a1acd51418c0
+          path: cannon-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run original CANNON independent receiver on exact original MOTIF
+        run: |
+          mkdir -p cannon-return
+          node cannon-source/experiments/motif-door-selection-001/cannon-door.mjs \
+            --source motif-source \
+            --output cannon-return/cannon-reviewed-door.json
+      - name: Generate three new runnable MOTIF candidate builds from held CANNON evidence
+        run: |
+          python experiments/door-foundry-002/feedback_builder.py \
+            --cannon-receipt cannon-return/cannon-reviewed-door.json \
+            --cannon-selection cannon-source/experiments/motif-door-selection-001/selection.json \
+            --source-root motif-source \
+            --output generated-builds
+      - name: Test original owner, all three generated profiles, and evidence tampering
+        env:
+          CANNON_RECEIPT: ${{ github.workspace }}/cannon-return/cannon-reviewed-door.json
+          CANNON_SELECTION: ${{ github.workspace }}/cannon-source/experiments/motif-door-selection-001/selection.json
+          MOTIF_SOURCE: ${{ github.workspace }}/motif-source
+        run: |
+          python -m unittest discover -s experiments/door-foundry-002 \
+            -p 'test_feedback_builder.py' -v
+      - name: Independently demonstrate three build targets execute
+        run: |
+          mkdir -p executed-builds
+          (cd generated-builds/motif-build-frontier && python run.py) \
+            > executed-builds/frontier.json
+          (cd generated-builds/motif-build-macro-replay && python run.py) \
+            > executed-builds/macro-replay.json
+          (cd generated-builds/motif-build-door && python run.py) \
+            > executed-builds/door.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          actual = []
+          for f in sorted(Path('executed-builds').glob('*.json')):
+              d = json.loads(f.read_text())
+              assert d['local_synthetic_only'] is True
+              assert d['no_external_actions'] is True
+              assert d['status'] == 'EXECUTED_LOCAL_SYNTHETIC_CANDIDATE'
+              actual.append((d['target'],len(d['selected_capabilities'])))
+          assert set(actual) == {('frontier',2),('macro_replay',3),('door',5)}
+          print(json.dumps({'executed_distinct_builds':actual,
+                            'external_actions':0,'auto_promotions':0},indent=2))
+          PY
+      - name: Preserve exact CANNON evidence, runnable build bundles and results
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-002-CANNON-BUILD-BACKLOOP-HOLD
+          path: |
+            cannon-return/
+            generated-builds/
+            executed-builds/
+          retention-days: 30
+          if-no-files-found: error
