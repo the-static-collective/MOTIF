@@ -1,0 +1,44 @@
+{
+  "schema": "motif.freegraph-join/v1",
+  "purpose": "Source-pinned read-only graph interpretation of one actual MOTIF native investigation.",
+  "freegraph_source_owner": {
+    "repo": "the-static-collective/free-graph",
+    "commit": "a74d018a4ebc7398733e5d98da8f7d389621fb9a",
+    "files": [
+      {
+        "path": "scripts/fg_core.py",
+        "blob": "bd4e75b55b91bb199de65d26bbd888662a65495d"
+      },
+      {
+        "path": "scripts/fg_ops.py",
+        "blob": "cb80e283bb114e97e1769d149a2c52b8f79ae3a3"
+      },
+      {
+        "path": "scripts/reason_space.py",
+        "blob": "3c00d1f75e20ab6384fb514f4f30f45ae8650bc2"
+      },
+      {
+        "path": "scripts/motif_reason_bridge.py",
+        "blob": "21e9dbc48edaa1118db15fae6ecf46cc7902e495"
+      }
+    ]
+  },
+  "historical_motif_report": {
+    "repo": "the-static-collective/MOTIF",
+    "commit": "070aba60319cbab3d1c1838ec7481c350e7d86e5",
+    "path": "fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json",
+    "blob": "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+  },
+  "permission": "LOCAL_HISTORICAL_SOURCE_READ_ONLY",
+  "rights": {
+    "private_content": false,
+    "network": false,
+    "external_execution": false,
+    "branch_discovery": false,
+    "owner_gate": false,
+    "auto_canon": false
+  },
+  "measurements": {
+    "claim_actual_joules": false
+  }
+}

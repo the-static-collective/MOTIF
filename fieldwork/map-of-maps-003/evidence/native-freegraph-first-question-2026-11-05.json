@@ -1,0 +1,58 @@
+{
+  "schema": "motif.map-003-actual-freegraph-ci-receipt/v1",
+  "source_ci": "https://github.com/the-static-collective/MOTIF/actions/runs/42117466225",
+  "source_commit": "485c110e14701ffadeb29649353d0d1b94e4a116",
+  "method": "Source-pin actual Free Graph owner code; call original graph compiler and pressure on original MOTIF MAP-002 historical research",
+  "scope": "PUBLIC_FROZEN_HISTORICAL_NO_AUTHORITY",
+  "actual_observation": {
+    "source_commit": "a74d018a4ebc7398733e5d98da8f7d389621fb9a",
+    "source_git_blob_count": 4,
+    "original_historical_report_blob": "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9",
+    "packet_ids": {
+      "all": "fgp:sha256:efd1f896b153eda9f88a80147cd6d7acbd8557ce12a9e52826c8d11eb545041e",
+      "evidence": "fgp:sha256:72e4f46a54706a80e91a6bc85bf20c13c17b5f1259f9e26350fca2f5c8e8c674",
+      "next": "fgp:sha256:040ddb8952092deee949dc9c3dbb21e59f40b762a4a89f1caa421e776269320b"
+    },
+    "counts": {
+      "links": 17,
+      "nodes": 13,
+      "sources": 3
+    },
+    "pressure": {
+      "automatic_authority": "NONE",
+      "candidates": [
+        {
+          "claim_became_true": false,
+          "gap_code": "NO_RECORDED_SUPPORTING_SPECIMEN",
+          "historical_label": "Hypothesis under pressure: an unexecuted planZ proposal can count as a rendered PlayDeck performance receipt",
+          "hypothesis_node_id": "fgn:sha256:8633e2b3dd425ba40f8a0cfa880fa4ad3fc4edc8d45a2075af5220e7f6ebfb86",
+          "owner_gate_satisfied": false,
+          "proposed_next_question": "What source-owned, reproducible positive specimen would actually support this claim, rather than merely connect to it?",
+          "recorded_probe_edges": 5,
+          "recorded_refusals": 2,
+          "recorded_supports": 0,
+          "recorded_unresolved_bearings": 3,
+          "source_receipt_ids_not_independent_witness_count": [
+            "fgs:sha256:88fa64b3a6775a506e805b1e2e3ea74c53f2e39fb6ee6eafa89fb81de0234c39"
+          ],
+          "tool_dispatch_authorized": false
+        }
+      ],
+      "external_actions": false,
+      "human_review_required": true,
+      "lens": "all",
+      "method": "bounded explicit graph-edge pattern; no semantic model or inference of source independence",
+      "schema": "free-graph.reason-pressure/v0",
+      "source_packet_id": "fgp:sha256:efd1f896b153eda9f88a80147cd6d7acbd8557ce12a9e52826c8d11eb545041e",
+      "status": "STRUCTURAL_QUESTIONS_NOT_DECISIONS"
+    },
+    "external_actions": 0
+  },
+  "claims_not_made": [
+    "no live GitHub search",
+    "no actual owner admission",
+    "no automatic tool selector",
+    "no confirmed PlayDeck performance",
+    "no independently confirmed software interoperability"
+  ]
+}
