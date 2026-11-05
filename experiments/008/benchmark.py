@@ -44,9 +44,9 @@ def evaluate_world(family: str, seed: int) -> dict:
     edge_records = [features(e.before, e.roles, use_joins=False)
                     for e in task.test]
     baseline = [typical for _ in truth]
-    edge_preds = [single.predict(x) for x in edge_records]
-    if any(x is None for x in edge_preds):
-        raise ValueError("One-edge baseline unexpectedly abstained")
+    edge_fallback = single.status != "PROPOSED"
+    edge_preds = ([typical for _ in truth] if edge_fallback else
+                  [single.predict(x) for x in edge_records])
     tree_preds = [tree.predict(x) for x in records]
     motif_preds = [motif.predict(x) for x in records]
     covered = motif.status == "PROPOSED"
@@ -78,6 +78,8 @@ def evaluate_world(family: str, seed: int) -> dict:
         "relational_test_balanced": score(truth, motif_preds) if covered else None,
         "majority_test_balanced": score(truth, baseline),
         "single_edge_test_balanced": score(truth, edge_preds),
+        "single_edge_used_majority_fallback": edge_fallback,
+        "classical_tree_used_majority_fallback": tree.considered == 0,
         "classical_tree_test_balanced": score(truth, tree_preds),
         "paired_intervention": intervention
     }
@@ -102,6 +104,10 @@ def summarize(records: list[dict]) -> dict:
                 x["single_edge_test_balanced"] for x in rows), 4),
             "classical_tree_test_balanced": round(mean(
                 x["classical_tree_test_balanced"] for x in rows), 4),
+            "tree_fallback_worlds": sum(x["classical_tree_used_majority_fallback"]
+                                         for x in rows),
+            "edge_fallback_worlds": sum(x["single_edge_used_majority_fallback"]
+                                         for x in rows),
             "oracle_intervention_flips_observed_by_model": sum(
                 x["counterfactual_flipped_as_oracle"] is True
                 for x in intervened),
