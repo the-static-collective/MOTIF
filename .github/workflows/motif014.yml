@@ -1,0 +1,29 @@
+name: MOTIF-014 Native Question-Organ Proof
+on:
+  push:
+    branches:
+      - research/014-organ-gardener-question-box
+  pull_request:
+    paths:
+      - 'experiments/014/**'
+      - '.github/workflows/motif014.yml'
+jobs:
+  native-organs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exercise pinned original National Treasure + Dogram organs
+        run: node --test experiments/014/test_garden.mjs
+      - name: Reproduce synthetic method-improvement and counterexample receipt
+        run: node experiments/014/organ_garden.mjs > motif014-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif014-organ-gardener-synthetic
+          path: motif014-results.json
+          retention-days: 14
