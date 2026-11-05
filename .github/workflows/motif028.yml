@@ -1,0 +1,40 @@
+name: MOTIF-028 Memory of Failure
+on:
+  push:
+    branches: [research/028-memory-of-failure]
+  pull_request:
+    paths:
+      - 'experiments/028/**'
+      - '.github/workflows/motif028.yml'
+permissions:
+  contents: read
+jobs:
+  durable-experience-memory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original MOTIF-027 source and garden regression
+        run: node --test experiments/027/test_gardener.mjs
+      - name: Memory integrity, permission refusal, exact replay and structural recall
+        run: node --test experiments/028/test_ledger.mjs
+      - name: Persist success and failure, then replay in a NEW node process
+        run: |
+          mkdir -p .local-synthetic-memory
+          chmod 700 .local-synthetic-memory
+          node experiments/028/cli.mjs seed "$PWD/.local-synthetic-memory"
+          node experiments/028/cli.mjs replay "$PWD/.local-synthetic-memory" > motif028-restart-evidence.json
+          node -e "const r=require('./motif028-restart-evidence.json'); if(r.status!=='EXPERIENCES_REPLAYED_IN_NEW_NODE_PROCESS'||r.prior_count!==2||r.matched<1||r.remote_requests!==0)process.exit(1)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif028-synthetic-experience-ledger-and-replay
+          path: |
+            .local-synthetic-memory/experiences.jsonl
+            motif028-restart-evidence.json
+          retention-days: 14
