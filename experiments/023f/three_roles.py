@@ -17,7 +17,7 @@ import threading
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-for folder in ("020f","021f"):
+for folder in ("021f","020f"):
     sys.path.append(str(ROOT / folder))
 
 from chorus import LocalFlanT5Small, parallel_critique
