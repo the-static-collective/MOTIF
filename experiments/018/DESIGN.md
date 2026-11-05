@@ -45,7 +45,7 @@ Every synthetic record contains **two distinct declared reference families** tha
 
 ## Source-audit question portfolio
 
-A bounded research planner proposes zero, one or two **synthetic** independent-origin audits using declared impact/cost. These are inert question proposals; neither audit is performed in reality. The ranking is a **declared impact-per-cost heuristic**, not an optimal Bayesian value-of-information algorithm. MOTIF-017 already contains the stronger exact conventional Bayesian information-acquisition benchmark; MOTIF-018 does not claim to beat it.
+A bounded research planner proposes zero, one or two **synthetic** independent-origin audits using declared impact/cost. It cannot select two tasks from the same declared reporter origin or the same declared auditor family as though they were independent. These are inert question proposals; neither audit is performed in reality. The ranking is a **declared impact-per-cost heuristic**, not an optimal Bayesian value-of-information algorithm. MOTIF-017 already contains the stronger exact conventional Bayesian information-acquisition benchmark; MOTIF-018 does not claim to beat it.
 
 ## Adversarial / disambiguation cases
 
