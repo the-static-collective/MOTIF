@@ -1,0 +1,79 @@
+{
+  "project": "MOTIF-001",
+  "status": "toy research proof; entirely synthetic",
+  "learned": [
+    {
+      "action": "repair",
+      "requires": [
+        "(bike, ?2)",
+        "(broken, ?2)",
+        "(owns, ?0, ?2)",
+        "(permits, ?0, ?1, ?2)",
+        "(person, ?0)",
+        "(person, ?1)",
+        "(skill, ?1, repair)",
+        "(tool, ?1, wrench)"
+      ],
+      "adds": [
+        "(usable, ?2)"
+      ],
+      "removes": [
+        "(broken, ?2)"
+      ],
+      "demonstrations": 3
+    },
+    {
+      "action": "teach",
+      "requires": [
+        "(permits, ?1, ?0, teaching)",
+        "(person, ?0)",
+        "(person, ?1)",
+        "(skill, ?0, repair)"
+      ],
+      "adds": [
+        "(skill, ?1, repair)"
+      ],
+      "removes": [],
+      "demonstrations": 3
+    }
+  ],
+  "new_names_tested": [
+    "Jo",
+    "Mira",
+    "bike1",
+    "bike2"
+  ],
+  "counterfactual_plan": [
+    {
+      "event": "repair",
+      "roles": [
+        "Jo",
+        "Mira",
+        "bike1"
+      ]
+    },
+    {
+      "event": "teach",
+      "roles": [
+        "Mira",
+        "Jo"
+      ]
+    },
+    {
+      "event": "repair",
+      "roles": [
+        "Jo",
+        "Jo",
+        "bike2"
+      ]
+    }
+  ],
+  "objective_score": 24,
+  "states_explored": 6,
+  "distinct_worlds_reached": 6,
+  "without_permission": {
+    "plan": [],
+    "score": 0,
+    "distinct_worlds_reached": 1
+  }
+}
