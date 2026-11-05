@@ -10,6 +10,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[002 — Birth of an unnamed verb](experiments/002/DESIGN.md):** Infer anonymous graph-rewrite operators from unlabeled `before/after` graphs and compose them in unfamiliar synthetic worlds.
 - **[003 — The affordance frontier](experiments/003/affordance.py):** Compare the immediate utility of hypothetical transitions with the new actions they enable; see [the outermost circle](docs/THE-OUTERMOST-CIRCLE.md).
 - **[004 — The first scar](experiments/004/DESIGN.md):** Record an attempted edit that did not occur, compare predicted and observed graphs, learn one provisional missing-context discriminator from contrasts, and explicitly abstain when evidence conflicts.
+- **[005 — The birth of a concept](experiments/005/DESIGN.md):** Propose an anonymous two-edge derived relation from successful and failed synthetic attempts; distinguish a shared intervening part from disconnected parts, and filter hypothetical actions without altering observed history.
 
 ### Run (Python 3.10+, standard library only)
 
@@ -29,6 +30,10 @@ python -m unittest -v test_affordance.py
 cd ../004
 python scar.py
 python -m unittest -v test_scar.py
+
+cd ../005
+python concept.py
+python -m unittest -v test_concept.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
@@ -43,6 +48,6 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Next frontier
 
-Train on varied, noisy, partially observed transitions with unlabeled agent roles, ambiguous preconditions, multiple confounders and held-out relation types; compare against a deterministic rule learner and a graph-network baseline under identical budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Test whether the proposed composite concepts survive true structural holdouts, graph rewirings, and interventions that break confounders. Compare with simple relational and neural baselines under identical budgets. Then train on varied, noisy, partially observed transitions with unlabeled agent roles, ambiguous preconditions, multiple confounders and held-out relation types; compare against a deterministic rule learner and a graph-network baseline under identical budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
