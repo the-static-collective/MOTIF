@@ -64,7 +64,7 @@ The derived concept is an **ephemeral inferential overlay**, never inserted into
 ## Files
 
 - [concept.py](concept.py): candidate generation, existential-join matching, contrast learning, inferred concept projection, bounded hypothetical action filter.
-- [test_concept.py](test_concept.py): tests covering generalization to fresh IDs, joins with wrong parts, preservation of original observations, synthetic permission boundaries, contradictory and confounded evidence, and abstention.
+- [test_concept.py](test_concept.py): tests covering fresh identities, mismatched part joins, a synthetic intervention that rewires the shared witness, new source-predicate names, preservation of observations, permission fixture boundaries, contradictory and confounded evidence, and abstention.
 
 Run:
 
@@ -75,6 +75,10 @@ python -m unittest -v test_concept.py
 \`\`\`
 
 Pure Python 3.10+ and standard library. GitHub Actions runs both the experiment and tests without paid API dependencies.
+
+## An additional stress test
+
+The suite deliberately changes the identity of a part connecting the two source relations while leaving the relation names and all other fields present. The induced concept disappears. A separate test renames the source predicates throughout the synthetic corpus and induces a *different* composite concept without changing the learner's algorithm. These demonstrate structural matching within the generator; neither is a real causal intervention.
 
 ## What this demonstrates, and what it does not
 
