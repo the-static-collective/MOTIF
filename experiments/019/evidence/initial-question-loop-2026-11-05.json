@@ -1,0 +1,50 @@
+{
+  "phase": "EVOLVED_RESEARCH_QUESTIONS_BEFORE_HELDOUT",
+  "plan_sha256": "0967e752305be3e67c8bb6f8eaa64e94374d6b1ebbd72ac159aec324a9e2df64",
+  "selected": "downstream",
+  "stages": [
+    {
+      "stage": "Q0",
+      "new_kind": null,
+      "selected": "both_graceful",
+      "policy_changed": false,
+      "difference_vs_same_baseline": 55.0149
+    },
+    {
+      "stage": "Q1",
+      "new_kind": null,
+      "selected": "downstream",
+      "policy_changed": true,
+      "difference_vs_same_baseline": 0
+    },
+    {
+      "stage": "Q2",
+      "new_kind": null,
+      "selected": "downstream",
+      "policy_changed": false,
+      "difference_vs_same_baseline": 0
+    },
+    {
+      "stage": "Q3",
+      "new_kind": "conditional_measurement",
+      "selected": "downstream",
+      "policy_changed": false,
+      "difference_vs_same_baseline": 0
+    },
+    {
+      "stage": "Q4",
+      "new_kind": "source_health",
+      "selected": "downstream",
+      "policy_changed": false,
+      "difference_vs_same_baseline": 0
+    },
+    {
+      "stage": "Q5",
+      "new_kind": "false_health_cost",
+      "selected": "downstream",
+      "policy_changed": false,
+      "difference_vs_same_baseline": 0
+    }
+  ],
+  "holdout_seen": false
+}

@@ -1,0 +1,56 @@
+name: MOTIF 019 — self-questioning availability loop against USGS sources
+
+on:
+  pull_request:
+    paths:
+      - "experiments/019/**"
+      - ".github/workflows/reality-iron-019.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m unittest discover -s experiments/019 -p "test_*.py" -v
+
+  sealed-physical-question:
+    runs-on: ubuntu-latest
+    needs: offline-adversarial
+    timeout-minutes: 12
+    continue-on-error: true # public USGS sensor errors can HOLD without weakening unit checks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Learn question TYPES from older physical river records, freeze signed plan
+        run: python3 experiments/019/availability_question.py evolve --out-dir /tmp/motif019
+      - name: Assert March 2026 sources have not entered policy revision
+        run: |
+          test -f /tmp/motif019/train-raw.json
+          test -f /tmp/motif019/develop-raw.json
+          test -f /tmp/motif019/frozen-plan.json
+          test ! -f /tmp/motif019/holdout-raw.json
+          test ! -f /tmp/motif019/result.json
+      - name: Only now fetch previously sealed March 2026 physical outcomes
+        run: python3 experiments/019/availability_question.py confront --out-dir /tmp/motif019
+      - name: Keep actual raw USGS source responses and sealed results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-019-question-about-question-source-replay
+          path: /tmp/motif019/
+          retention-days: 30
+          if-no-files-found: warn
