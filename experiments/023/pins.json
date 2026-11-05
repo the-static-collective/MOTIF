@@ -1,0 +1,30 @@
+{
+  "schema": "motif023.pinned-source-organs/v0",
+  "source_owners": {
+    "ALEX": {
+      "repository": "the-static-collective/ALEX.2",
+      "branch": "research/023-public-source-observations",
+      "commit": "e678b0a0596a6391f92e18b6b8135477ad49658d"
+    },
+    "planZ": {
+      "repository": "the-static-collective/planZ",
+      "branch": "research/023-observation-replanning",
+      "commit": "a36ab06e2ac151a03b769bad9162a61946430270"
+    },
+    "GRAFT": {
+      "repository": "the-static-collective/GRAFT",
+      "branch": "graft/023-observation-composed-capability",
+      "commit": "9d02b83bc259ee0eaa68d4e6da7b526d9afc8ee4"
+    }
+  },
+  "source_blobs": {
+    "alex-snapshot/tools/motif023-live.mjs": "00690d5b8f540f5a59719f97349710eba17254f5",
+    "planz-snapshot/scripts/motif023-replan.mjs": "5e4073cd245714eaca63036d60190780feb22171",
+    "planz-snapshot/scripts/motif-classical.mjs": "22d75c26039e5783b59cf71be02982428603128c",
+    "graft-snapshot/src/motif023-compiler.mjs": "751bb4955265e32ba5fe55d242321d56ac9597ee",
+    "graft-snapshot/vendor/planZ/motif023-replan.mjs": "5e4073cd245714eaca63036d60190780feb22171",
+    "graft-snapshot/vendor/planZ/motif-classical.mjs": "22d75c26039e5783b59cf71be02982428603128c"
+  },
+  "source_scope": "VERIFIED_PUBLIC_GITHUB_READ_ONLY",
+  "rights": "NO_PRIVATE_OR_UNLICENSED_MATERIAL_IMPORTED"
+}
