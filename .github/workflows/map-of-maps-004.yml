@@ -1,0 +1,84 @@
+name: MOTIF Map 004 — native Free Graph investigation selector and LSD profile
+
+on:
+  push:
+    branches: [research/map-of-maps-004-freegraph-investigation-selection]
+  pull_request:
+    paths:
+      - 'fieldwork/map-of-maps-004/**'
+      - '.github/workflows/map-of-maps-004.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-inquiry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Original Free Graph exact source-owned implementation
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: 76ddfbcde03bc6f464f5d27812a707fa5a0f5c9f
+          path: sources/native-freegraph
+          persist-credentials: false
+      - name: Independently verify selected original source hashes
+        run: |
+          test "$(git -C sources/native-freegraph rev-parse HEAD)" = "76ddfbcde03bc6f464f5d27812a707fa5a0f5c9f"
+          test "$(git hash-object sources/native-freegraph/scripts/inquiry_selector.py)" = "f4b764c74eeffcd40f3f5d89afc0e14d45c2f053"
+          test "$(git hash-object sources/native-freegraph/scripts/reason_space.py)" = "9808088816f90f8c3761e66355d7229255b5cbb4"
+          test "$(git hash-object sources/native-freegraph/scripts/motif_reason_bridge.py)" = "cb68b22ebfdea77e46d12fe3416be9180d56fbc2"
+          test "$(git hash-object fieldwork/map-of-maps-002/evidence/first-actual-native-court-2026-11-05.json)" = "457eaf895cc96cfa9f853b31ab665f38f2f3f0c9"
+      - name: Source and permission adversarial tests
+        run: python3 -m unittest discover -s fieldwork/map-of-maps-004 -p 'test_*.py' -v
+      - name: Native graph selector, historical reuse, LSD conditional divergence
+        run: |
+          mkdir -p /tmp/motif-004
+          ROOT=sources/native-freegraph
+          python3 fieldwork/map-of-maps-004/ask_selector.py --freegraph-root "$ROOT" --lsd-ideation --output /tmp/motif-004/no-new-evidence.json
+          python3 fieldwork/map-of-maps-004/ask_selector.py --freegraph-root "$ROOT" --lsd-ideation --new-source --output /tmp/motif-004/new-source-scope.json
+          python3 fieldwork/map-of-maps-004/ask_selector.py --freegraph-root "$ROOT" --positive-specimen --output /tmp/motif-004/positive-specimen.json
+          python3 fieldwork/map-of-maps-004/ask_selector.py --freegraph-root "$ROOT" --decline --output /tmp/motif-004/declined.json
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          paths={p.stem:json.loads(p.read_text()) for p in Path('/tmp/motif-004').glob('*.json')}
+          r=paths['no-new-evidence']
+          assert r['status']=='REAL_NATIVE_FREEGRAPH_SELECTOR_COMPLETED_NO_ACTIONS'
+          assert len(r['verified_source_blobs'])==7
+          assert r['external_effects'] is False
+          assert r['lsd_github_executable_connected'] is False
+          prior=r['selection']['known_prior_instrument_profiles']
+          assert prior==['alex-evidence','dogram-graph','graft-source','planz-plan']
+          assert r['selection']['claim_candidates'][0]['selected_proposal'] is None
+          assert paths['new-source-scope']['selection']['claim_candidates'][0]['selected_proposal']=='graft-source'
+          assert paths['positive-specimen']['selection']['claim_candidates'][0]['selected_proposal']=='playdeck-validator'
+          assert paths['declined']['selection']['claim_candidates']==[]
+          assert all(x['selection']['no_automatic_tool_invocations'] is True for x in paths.values())
+          print('MOTIF MAP 004 ACTUAL FREE GRAPH NATIVE INQUIRY SELECTION')
+          print(json.dumps({
+            'native_owner_commit':r['verified_commit'],
+            'known_previous_organs':prior,
+            'same_unresolved_historical_question':r['selection']['claim_candidates'][0]['decisive_question'],
+            'no_new_receipt':r['selection']['claim_candidates'][0]['selected_proposal'],
+            'new_source_proposal':paths['new-source-scope']['selection']['claim_candidates'][0]['selected_proposal'],
+            'original_positive_witness_proposal':paths['positive-specimen']['selection']['claim_candidates'][0]['selected_proposal'],
+            'lsd':next(x['proposal_status'] for x in r['selection']['claim_candidates'][0]['options'] if x['instrument']=='lsd-divergence'),
+            'operator_decline':paths['declined']['selection']['status'],
+            'physical_execution':False
+          },indent=2))
+          PY
+      - name: Preserve all four audited selection outcomes
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-map004-native-freegraph-source-owned-selection
+          path: /tmp/motif-004/*.json
+          retention-days: 30
