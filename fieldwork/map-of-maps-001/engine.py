@@ -48,6 +48,7 @@ def lock_read(path=HERE/"sources.lock.json"):
        bool(SHA40.fullmatch(s["blob"])) and
        bool(SHA40.fullmatch(s["commit"])) and
        bool(SAFE_PATH.fullmatch(s["path"])) and
+       all(part not in (".","..") for part in s["path"].split("/")) and
        s["max_bytes"]<=25000 and s["max_bytes"]>0 and
        s["kind"] in ("json","markdown"),"BAD_SOURCE_PIN")
  return manifest
