@@ -7,8 +7,8 @@ m=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
 ROOT=Path(__file__).resolve().parents[2]
 def cards():
-    return (json.loads((ROOT/"016/evidence/actual-watershed-2026-11-05.json").read_text()),
-            json.loads((ROOT/"017/evidence/first-real-event-2026-11-05.json").read_text()))
+    return (json.loads((ROOT/"experiments/016/evidence/actual-watershed-2026-11-05.json").read_text()),
+            json.loads((ROOT/"experiments/017/evidence/first-real-event-2026-11-05.json").read_text()))
 
 class MetaLessons(unittest.TestCase):
     def test_real_research_cards_explicitly_capture_both_losses(self):
