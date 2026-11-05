@@ -385,7 +385,60 @@ def test_frozen(plan,unseen_raw):
         verdict="HOLD_HIGH_UNANSWERED_QUERY_RATE"
     else:
         verdict="HELD_REPLICATE_BEFORE_ADMISSION"
-    if by_objective!=selected:
+    # The research cost of asking was chosen by us, not measured in nature.
+    # Expose exactly how that *assumption* affects policy selection. All
+    # sensitivity findings below are POSTHOC: do not alter the frozen choice.
+    cost_sensitivity={}
+    for policy,score in results.items():
+        if policy=="downstream":continue
+        query_units_per_case=(
+            weights[0]*(score["request_count"]+score["probe_credits_total"])+
+            weights[1]*score["unanswered_queries"]+
+            weights[3]*score["false_positive_health_probes"]
+        )/len(cases)
+        # What is the maximum hypothetical credit price at which this
+        # alternative would have beaten the same downstream baseline,
+        # retaining the fixed temporal-stability penalty?
+        drift_adjusted_margin=(
+            base["absolute_error_mae_cfs"]+
+            weights[2]*base["temporal_instability_cfs"]-
+            score["absolute_error_mae_cfs"]-
+            weights[2]*score["temporal_instability_cfs"]
+        )
+        limit=(round(drift_adjusted_margin/query_units_per_case,4)
+               if query_units_per_case>0 and drift_adjusted_margin>0 else None)
+        cost_sensitivity[policy]={
+            "raw_error_improvement_cfs":round(
+                base["absolute_error_mae_cfs"]-score["absolute_error_mae_cfs"],4),
+            "weighted_question_units_per_case":round(query_units_per_case,5),
+            "max_credit_unit_for_positive_weighted_value_cfs_equivalent":limit,
+            "assumed_frozen_credit_unit_cfs_equivalent":unit,
+            "posthoc_only_not_new_model_selection":True,
+        }
+    accuracy_best=min(POSSIBLE_POLICIES,key=lambda name:(
+        results[name]["absolute_error_mae_cfs"],POSSIBLE_POLICIES.index(name)))
+    question_cost_dominated=(
+        selected=="downstream" and
+        accuracy_best!="downstream" and
+        results[accuracy_best]["absolute_error_mae_cfs"]<
+          base["absolute_error_mae_cfs"]
+    )
+    cost_diagnostic={
+        "status":"AFTER_TEST_VALUE_FUNCTION_DIAGNOSTIC_NOT_POLICY_ADMISSION",
+        "frozen_question_credit_price_cfs_equivalent":unit,
+        "pure_accuracy_best_only_known_after_test":accuracy_best,
+        "all_candidate_break_even_credit_prices":cost_sensitivity,
+        "assumed_query_cost_dominated_final_choice":question_cost_dominated,
+        "falsifiable_next_problem":"Measure true query delay and answer availability before assigning costs; compare a time-of-issue logged policy on an untouched period.",
+        "posthoc_only_not_admitted":True,
+    }
+    if question_cost_dominated:
+        next_question=(
+            "Are our research credit prices the WRONG question? A different "
+            "policy reduced raw error on the 2026 test, but our assumed cost "
+            "function made us choose not to ask at all. What actual latency, "
+            "missing-answer and opportunity costs would justify that tradeoff?")
+    elif by_objective!=selected:
         next_question=(
             "What changed between 2025 and 2026 that made "+
             by_objective+" more valuable than the frozen "+selected+
@@ -413,6 +466,7 @@ def test_frozen(plan,unseen_raw):
         "frozen_policy_utility_improvement_cfs_equivalent":savings,
         "all_declared_policy_results_POSTHOC_DO_NOT_SELECT":results,
         "posthoc_best_from_opened_holdout_NOT_ADMITTED":by_objective,
+        "self_diagnostic_on_assumed_cost_of_questions":cost_diagnostic,
         "whether_historical_health_probe_selected":saw_probes,
         "proposed_next_question":next_question,
         "hypothesis_state":verdict,

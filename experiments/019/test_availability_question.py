@@ -114,6 +114,18 @@ class TestedQuestionKinds(unittest.TestCase):
         cases,_=m.make_rows(data,"holdout")
         self.assertTrue(all(row["blue_delta"] is None for row in cases))
 
+    def test_meta_diagnostic_can_question_its_own_assumed_question_price(self):
+        report=m.test_frozen(self.plan,self.test)
+        diagnostic=report["self_diagnostic_on_assumed_cost_of_questions"]
+        self.assertTrue(diagnostic["posthoc_only_not_admitted"])
+        self.assertIn(diagnostic["pure_accuracy_best_only_known_after_test"],m.POSSIBLE_POLICIES)
+        self.assertEqual(len(diagnostic["all_candidate_break_even_credit_prices"]),6)
+        for alternate in diagnostic["all_candidate_break_even_credit_prices"].values():
+            self.assertTrue(alternate["posthoc_only_not_new_model_selection"])
+            self.assertGreater(alternate["weighted_question_units_per_case"],0)
+        self.assertEqual(report["frozen_selection"],self.plan["selected_policy"])
+        self.assertFalse(report["observed_future_labels_used_to_modify_policy"])
+
     def test_all_candidates_share_denominator_and_query_costs(self):
         report=m.test_frozen(self.plan,self.test)
         self.assertEqual(len(report["all_declared_policy_results_POSTHOC_DO_NOT_SELECT"]),7)

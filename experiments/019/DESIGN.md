@@ -69,3 +69,11 @@ If a question wins on already-opened test labels but wasn't the frozen selected 
 **No autonomous code editing, trained language model, flood prediction service, real sensors queried in 2026 March at issue time, model promotion, or external effects.**
 
 Main source: https://api.waterdata.usgs.gov/docs/ogcapi/migration/ .
+
+## The meta-question: maybe the cost function, not the sensor, was wrong
+
+On the first USGS March 2026 replay, the evolved question policy selected **no extra source query**, after Q1 introduced our invented research credit price. Among 300 downstream targets, Blue Earth was usable in only 35 origin-time histories, Le Sueur in 116. The zero-query method had MAE **185.3333 cfs**, whereas querying Le Sueur produced **155.8044 cfs** raw error and the historical health-probe policy **150.4962 cfs** raw error on exactly the same 300 hours. Despite this, the assumed, uncalibrated query/missing-answer prices made the zero-query policy win the **declared weighted objective**.
+
+**This is not evidence that asking is genuinely too expensive in the real world.** The system can now inspect *its own arbitrary value function*. The post-test diagnostic explicitly calculates, for each policy, the maximum **hypothetical research credit price** at which it would beat downstream persistence under the same time-stability weighting, while keeping the original sealed decision and raw metrics unchanged. The output is `self_diagnostic_on_assumed_cost_of_questions`, strictly **posthoc; not admitted**.
+
+The resulting new question is about **measuring actual question cost**, not another pretense of smarter source selection. A legitimate future experiment would log true source request timestamps, delays, availability at issue time, model error and the measurable cost of indecision across real user tasks. This cannot be reconstructed fully from retrospective water-data snapshots.
