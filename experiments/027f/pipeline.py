@@ -76,6 +76,10 @@ def relevance_first_relay(
         base["status"]="HOLD_AMBIGUOUS_MULTIPLE_SUPPORTED_GATES"
         return base
     witness=receipts[candidate]
+    baseline_gate=native_rule(NATIVE_JOB,note)
+    if baseline_gate not in ("NONE",candidate):
+        base["status"]="HOLD_NATIVE_AND_SEMANTIC_GATE_CONFLICT"
+        return base
     base["source_quote"]=witness["source_quote"]
     actual=review_semantic_question(
         note,Forced(candidate,mode),
