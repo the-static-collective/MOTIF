@@ -1,0 +1,136 @@
+{
+  "experiment": "MOTIF-002",
+  "status": "synthetic, label-free symbolic induction",
+  "training_pairs": 6,
+  "learned_verbs": [
+    {
+      "id": "verb-b2643a06ecc5",
+      "role_types": [
+        "bike",
+        "person",
+        "person"
+      ],
+      "requires": [
+        [
+          "bike",
+          "?0"
+        ],
+        [
+          "broken",
+          "?0"
+        ],
+        [
+          "owns",
+          "?1",
+          "?0"
+        ],
+        [
+          "permits",
+          "?1",
+          "?2",
+          "?0"
+        ],
+        [
+          "person",
+          "?1"
+        ],
+        [
+          "person",
+          "?2"
+        ],
+        [
+          "skill",
+          "?2",
+          "repair"
+        ],
+        [
+          "tool",
+          "?2",
+          "wrench"
+        ]
+      ],
+      "adds": [
+        [
+          "usable",
+          "?0"
+        ]
+      ],
+      "removes": [
+        [
+          "broken",
+          "?0"
+        ]
+      ],
+      "demonstrations": 3
+    },
+    {
+      "id": "verb-520ff486e77a",
+      "role_types": [
+        "person",
+        "person"
+      ],
+      "requires": [
+        [
+          "permits",
+          "?0",
+          "?1",
+          "teaching"
+        ],
+        [
+          "person",
+          "?0"
+        ],
+        [
+          "person",
+          "?1"
+        ],
+        [
+          "skill",
+          "?1",
+          "repair"
+        ]
+      ],
+      "adds": [
+        [
+          "skill",
+          "?0",
+          "repair"
+        ]
+      ],
+      "removes": [],
+      "demonstrations": 3
+    }
+  ],
+  "counterfactual_plan": [
+    {
+      "anonymous_verb": "verb-520ff486e77a",
+      "roles": [
+        "Jo",
+        "Mira"
+      ]
+    },
+    {
+      "anonymous_verb": "verb-b2643a06ecc5",
+      "roles": [
+        "bike1",
+        "Jo",
+        "Mira"
+      ]
+    },
+    {
+      "anonymous_verb": "verb-b2643a06ecc5",
+      "roles": [
+        "bike2",
+        "Jo",
+        "Jo"
+      ]
+    }
+  ],
+  "score": 24,
+  "states_explored": 6,
+  "reachable_worlds": 6,
+  "permission_ablation": {
+    "plan": [],
+    "reachable_worlds": 1
+  }
+}
