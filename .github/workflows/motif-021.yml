@@ -1,0 +1,21 @@
+name: MOTIF-021 real game return interpretation (not source authentication)
+on:
+  push:
+    branches:
+      - experiments/021-live-minecraft-epistemic-update
+  pull_request:
+    paths:
+      - 'experiments/021/**'
+      - '.github/workflows/motif-021.yml'
+jobs:
+  interpreter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Baseline source instrument logic
+        run: node --test experiments/020/instrument_garden.test.mjs
+      - name: Game observation changes posterior and future question, not original history
+        run: node --test experiments/021/learn_from_game.test.mjs
