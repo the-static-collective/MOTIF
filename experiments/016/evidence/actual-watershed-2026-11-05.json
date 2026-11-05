@@ -1,0 +1,95 @@
+{
+  "authority": false,
+  "automatic_promotion": false,
+  "disposition": "HOLD_NO_IMPROVEMENT",
+  "heldout_start_utc": "2026-10-26T15:00:00Z",
+  "holdout_improvement_vs_persistence_cfs": -7.8173,
+  "holdout_improvement_vs_persistence_percent": -59.491,
+  "holdout_mae_cfs": {
+    "cross_gauges": 20.9575,
+    "local_trend": 23.0281,
+    "persistence": 13.1402,
+    "rain_context": 176.4602
+  },
+  "hypothesis_test": "Do measured tributary-flow changes (and retrospective gridded rain, if available) help predict Mankato streamflow relative to persistence?",
+  "independent_outcome_verified": false,
+  "limitations": [
+    "USGS stage/discharge estimates can be provisional or revised; sensors are not independent draws.",
+    "Mankato flow includes upstream Minnesota basin, not just the two measured tributaries.",
+    "Hourly averages are computed retrospectively; gauge telemetry latency is not modeled.",
+    "Open-Meteo historical precipitation is gridded model/reanalysis context, not rain-gauge truth or guaranteed available at issue time.",
+    "Past-6h context is calculated using hours fully prior to target; report availability may lag.",
+    "Single watershed and short retrospective window; no flood thresholds or safety alert calibration.",
+    "Choosing a method on validation does not prove generalization across events, seasons or basins."
+  ],
+  "matched_complete_hours": 324,
+  "next_discriminating_question": "Can we observe at least three independent rising-flow test hours before claiming flood/rise skill?",
+  "partitions": {
+    "test": 82,
+    "train": 178,
+    "validation": 64
+  },
+  "peer_diagnostic": {
+    "JARVIS_to_MOTIF": "Three gauges belong to coupled rivers. Shared weather, delayed reporting, and retrospective rainfall may create spurious causal-looking gains.",
+    "MOTIF_to_JARVIS": "Treat model selection on earlier validation as a held experiment; compare later physical test error before claiming a useful next action.",
+    "self_diagnostic": "This test may fail under a seasonal regime shift. The scorer can improve: use block-holdout by hydrologic event and fit a rainfall-free control."
+  },
+  "period_end_utc": "2026-10-30T00:00:00Z",
+  "period_start_utc": "2026-10-16T13:00:00Z",
+  "prior_weather_015": null,
+  "provenance": {
+    "USGS_public_site_ids": {
+      "blue": "USGS-05320000",
+      "mankato": "USGS-05325000",
+      "sueur": "USGS-05320500"
+    },
+    "flow_parameter": "00060",
+    "forecast_horizon_minimum_hours": 6,
+    "known_hour_offset": 7,
+    "observation_units": "cubic_feet_per_second",
+    "public_context_coordinate": [
+      44.17,
+      -94
+    ],
+    "rain_type": "OPEN_METEO_GRIDDED_HISTORICAL_ESTIMATE_NOT_RAIN_GAUGE",
+    "source_json_sha256": {
+      "blue": "0f0f0a7073f39b166cec480619fb1288edf7aa1b7622a9bff18bb0982d0c88a8",
+      "mankato": "2fdff70a85b4e70d36849903971acb9ab3c1cfb2f87ca816c4d16fad051b83a1",
+      "rain": "d01380c262430df457a7bfc691fd842e4d78bb2957426a7516657f9ae0cdeab0",
+      "sueur": "5a01ab97cdc15e9871f9e490a0531a88298b00f836f96b0f9f09c04a427c27d1"
+    },
+    "source_urls": {
+      "USGS_modern_continuous": "https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items",
+      "precipitation_context": "https://archive-api.open-meteo.com/v1/archive"
+    },
+    "time_split": "chronological_55_20_25"
+  },
+  "real_world_effect": false,
+  "rising_event_test_scores": {
+    "cross_gauges": {
+      "mae_cfs": null,
+      "rising_count": 0
+    },
+    "local_trend": {
+      "mae_cfs": null,
+      "rising_count": 0
+    },
+    "persistence": {
+      "mae_cfs": null,
+      "rising_count": 0
+    },
+    "rain_context": {
+      "mae_cfs": null,
+      "rising_count": 0
+    }
+  },
+  "schema": "motif.reality-iron-watershed/v1",
+  "scope": "RETROSPECTIVE_REAL_SENSOR_TEST_NOT_DEPLOYED_FORECAST",
+  "selected_on_validation": "cross_gauges",
+  "validation_mae_cfs": {
+    "cross_gauges": 15.0201,
+    "local_trend": 21.2352,
+    "persistence": 37.6562,
+    "rain_context": 22.7317
+  }
+}
