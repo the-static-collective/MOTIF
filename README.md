@@ -16,6 +16,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[008 — The unknown world](experiments/008/DESIGN.md):** Infer relational rules from unfamiliar opaque-predicate synthetic worlds, compare with matched classical baselines, preserve validation-based abstention, and measure held-out structural interventions. **The strong depth-2 tree baseline essentially matches MOTIF's covered performance.**
 - **[009 — The Experimenter](experiments/009/DESIGN.md):** Turn two-question decision trees into portable, source-checksummed, local-reviewable **prediction cartridges**. An [actual XOR tree cartridge](experiments/009/example-tree-cartridge.json) is checked in. A committee proposes which synthetic observation to reveal next; compare fixed-budget inquiry with seeded random sampling. v1 showed no benefit at the accuracy ceiling; a separate, post-hoc low-data stress test shows a temporary early advantage.
 - **[010 — The Scientist](experiments/010/DESIGN.md):** Convert competing MOTIF-009 tree cartridges into an information-gain experiment selector. A separate simulator executes two controlled graph interventions **on demand**; see the [actual two-step scientist transcript and final tree cartridge](experiments/010/example-scientist-interventions.json). In 60 tiny synthetic worlds the selector identifies the correct two-port truth table in 60/60 worlds, compared with 12/60 random, **and ties a strong fixed classical diagnostic control**.
+- **[011 — The Skeptical Scientist](experiments/011/DESIGN.md):** Preserve contradictions that disprove the current two-input grammar; refuse to guess about hidden causes or noise; propose a new **role-relative relation routing to two real MOTIF-009 tree cartridges** only with independent validation and local prediction-only review. [The actual composite router and six-case transcript](experiments/011/example-skeptic.json) are committed. In 30 controlled worlds, MOTIF predicts only half the holdouts but makes no wrong covered predictions; a forced baseline predicts all and gets 160/480 wrong.
 
 ### Run (Python 3.10+, standard library only)
 
@@ -62,12 +63,20 @@ cd ../010
 python benchmark.py
 python -m unittest -v test_scientist.py
 python demo.py  # reproduce the two-step scientist cartridge
+
+cd ../011
+python benchmark.py
+python demo.py    # inspect proposed missing relation and safe refusals
+python -m unittest -v test_skeptic.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Research laws
 
+- **A broken hypothesis family ≠ a discovered cause.** Repeated same-input contradictions require abstention until an independently validated explanation exists.
+- **A new feature ≠ a causal relation.** A predictive relation can be a proxy; competing indistinguishable proxies are explicitly held.
+- **Information gain ≠ permission.** A prohibited or unaffordable synthetic experiment stays held even when informative.
 - **Hypothesis ≠ observation.** Simulated futures cannot amend observed history.
 - **Structure ≠ causality.** Correlated transitions do not establish why events occur.
 - **Graph permission fact ≠ real-world consent.** The hard gate is a synthetic demonstration only.
@@ -82,6 +91,6 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 
 ## Next frontier
 
-Test whether deliberately chosen experiments remain useful when **observations are noisy, control has a cost, hidden causes exist, and the correct model is absent from the hypothesis grammar**. Then measure whether structural knowledge learned in **one world** reduces sample cost in genuinely different held-out families; include incomplete observations, concept drift, more than two roles and nonlocal dependencies. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Test whether a proposed newly observed relation survives **randomized interventions breaking its correlations**. Build proper probabilistic noise models and missing-data hypotheses, then measure safe information gain per cost on *separately frozen causal domains* and compare to strong Bayesian/causal-design baselines. Transfer a locally reviewed predicted concept between genuinely different ontologies only when independent evidence supports it. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
