@@ -18,13 +18,23 @@ jobs:
       - name: Reproduce falsification tests
         working-directory: experiments/018
         run: python -m unittest -v test_unknown_unknown.py
+      - name: Test Green Grammar adversarial crucible
+        working-directory: experiments/018
+        run: python -m unittest -v test_green_grammar.py
       - name: Reproduce full synthetic receipt
         working-directory: experiments/018
         run: |
           python benchmark.py > motif018-receipt.json
           cat motif018-receipt.json
+      - name: Preserve Green Grammar hostile counterexamples
+        working-directory: experiments/018
+        run: |
+          python green_grammar_crucible.py > green-grammar-crucible.json
+          cat green-grammar-crucible.json
       - name: Archive inspectable evidence
         uses: actions/upload-artifact@v4
         with:
           name: motif018-synthetic-receipt
-          path: experiments/018/motif018-receipt.json
+          path: |
+            experiments/018/motif018-receipt.json
+            experiments/018/green-grammar-crucible.json
