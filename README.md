@@ -13,6 +13,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 - **[005 — The birth of a concept](experiments/005/DESIGN.md):** Propose an anonymous two-edge derived relation from successful and failed synthetic attempts; distinguish a shared intervening part from disconnected parts, and filter hypothetical actions without altering observed history.
 - **[006 — The composite verb](experiments/006/DESIGN.md):** Induce anonymous reusable operator programs from repeated synthetic traces, nest macros within macros, pin every dependency's source semantics, and recheck every primitive guard during hypothetical replay.
 - **[007 — Inheritance without empire](experiments/007/DESIGN.md):** Export only source-pinned abstract operator closures, hold them for independent local preview and explicit planning-only review, then inherit and improve a composite method across two separate synthetic worlds without sharing either observed graph.
+- **[008 — The unknown world](experiments/008/DESIGN.md):** Infer relational rules from unfamiliar opaque-predicate synthetic worlds, compare with matched classical baselines, preserve validation-based abstention, and measure held-out structural interventions. **The strong depth-2 tree baseline essentially matches MOTIF's covered performance.**
 
 ### Run (Python 3.10+, standard library only)
 
@@ -44,6 +45,10 @@ python -m unittest -v test_composition.py
 cd ../007
 python inheritance.py
 python -m unittest -v test_inheritance.py
+
+cd ../008
+python -m unittest -v test_unknown.py
+python benchmark.py
 ```
 
 The suites also run on GitHub Actions with no paid services or API credentials.
@@ -53,13 +58,15 @@ The suites also run on GitHub Actions with no paid services or API credentials.
 - **Hypothesis ≠ observation.** Simulated futures cannot amend observed history.
 - **Structure ≠ causality.** Correlated transitions do not establish why events occur.
 - **Graph permission fact ≠ real-world consent.** The hard gate is a synthetic demonstration only.
-- **Learned rule ≠ capability to act.** Neither experiment can affect external systems.
+- **Learned rule ≠ capability to act.** None of these experiments can affect external systems.
 - **Portable method ≠ shared sovereignty.** Source checksums do not authenticate authors, and admitted simulations never authorize real actions.
 - **Compressed macro ≠ new external ability.** Reusing a sequence as one planning primitive does not bypass or reduce its underlying steps.
+- **Opaque predicates ≠ open-world understanding.** MOTIF-008 learns within each controlled synthetic world; zero-shot cross-world transfer remains unproven.
+- **Matching a classical baseline ≠ architectural superiority.** A simple tree with the same graph features approaches the full synthetic benchmark ceiling.
 - **New verb ≠ novel model architecture.** Program induction, graph rewriting, and planning have substantial prior art; originality remains to be proven through controlled benchmarks.
 
 ## Next frontier
 
-Test whether the proposed composite concepts survive true structural holdouts, graph rewirings, and interventions that break confounders. Compare with simple relational and neural baselines under identical budgets. Then train on varied, noisy, partially observed transitions with unlabeled agent roles, ambiguous preconditions, multiple confounders and held-out relation types; compare against a deterministic rule learner and a graph-network baseline under identical budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
+Measure whether structural knowledge learned in **one world** reduces sample cost in a genuinely different, held-out world family; include incomplete observations, concept drift, more than two roles, nonlocal dependencies and active inquiry. Compare with stronger statistical, program-induction, graph network and classical planning baselines under identical evidence and compute budgets. The goal is falsifiable prediction of changes in *reachable future capabilities*, not flattering descriptions of emergence.
 
 This repository is a standalone science lab. A future JAR;VIS integration must use explicit, reviewed contracts rather than treating generated scenarios as reality.
