@@ -18,7 +18,7 @@ Can repeated before/after observations yield **reusable operators without being 
 
 ## Demonstration
 
-Three synthetic repair examples and three synthetic teaching examples, with unrelated people and assets, produce two anonymous operators. An unfamiliar world permits a three-step simulation: helper repairs bike 1; helper teaches owner; owner repairs bike 2. Remove permission facts and the planner has no valid action. Remove the wrenches and it has no repair action.
+Three synthetic repair examples and three synthetic teaching examples, with unrelated people and assets, produce two anonymous operators. An unfamiliar world permits a three-step simulation: helper teaches owner; helper repairs bike 1; owner repairs bike 2. Remove permission facts and the planner has no valid action. Remove the wrenches and it has no repair action.
 
 ```sh
 python motif002.py
