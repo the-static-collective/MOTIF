@@ -243,6 +243,89 @@ def assess(records, validation, controls) -> Assessment:
                       "New observed relation predicts validation, not proven causal")
 
 
+def export_extension(extension: Extension) -> str:
+    """Portable *prediction-only* concept router; no underlying graph history.
+
+    A SHA-256 content checksum detects changes; it does NOT establish source
+    identity, authentic witness, safe data sharing or actual permission.
+    """
+    body = {
+        "schema": "motif.derived-router.v0",
+        "status": "PROPOSED_NOT_ADMITTED",
+        "id": extension.id,
+        "relation": extension.relation,
+        "role_index": extension.role_index,
+        "control_names": list(extension.control_names),
+        "allowed_vocabulary": list(extension.allowed_vocabulary),
+        "absent_tree": json.loads(export_cartridge(extension.when_absent)),
+        "present_tree": json.loads(export_cartridge(extension.when_present)),
+        "source_count": extension.source_count,
+        "validation_count": extension.validation_count,
+    }
+    packet = dict(body, checksum_sha256=checksum(body))
+    raw = json.dumps(packet, sort_keys=True, indent=2) + "\n"
+    if len(raw.encode("utf-8")) > 32000:
+        raise HOLD("Derived-router package too large")
+    decode_extension(raw)
+    return raw
+
+
+def decode_extension(raw: str) -> Extension:
+    """Strict schema and nested tree checks; content integrity only."""
+    if not isinstance(raw, str) or len(raw.encode("utf-8")) > 32000:
+        raise HOLD("Invalid or oversized derived-router package")
+    try:
+        obj = json.loads(raw)
+    except (ValueError, TypeError) as exc:
+        raise HOLD("Invalid JSON") from exc
+    fields = {"schema", "status", "id", "relation", "role_index",
+              "control_names", "allowed_vocabulary", "absent_tree",
+              "present_tree", "source_count", "validation_count",
+              "checksum_sha256"}
+    if not isinstance(obj, dict) or set(obj) != fields:
+        raise HOLD("Unrecognized derived-router fields")
+    if (obj["schema"] != "motif.derived-router.v0"
+            or obj["status"] != "PROPOSED_NOT_ADMITTED"):
+        raise HOLD("Unknown derived-router schema/status")
+    body = {k: v for k, v in obj.items() if k != "checksum_sha256"}
+    if obj["checksum_sha256"] != checksum(body):
+        raise HOLD("Derived-router checksum mismatch")
+    relation = obj["relation"]
+    names = obj["control_names"]
+    vocab = obj["allowed_vocabulary"]
+    index = obj["role_index"]
+    if not isinstance(relation, str) or not SAFE_LABEL.fullmatch(relation):
+        raise HOLD("Invalid newly proposed relation")
+    if (not isinstance(names, list) or len(names) != 2 or
+            any(not isinstance(x,str) or not SAFE_LABEL.fullmatch(x) for x in names)
+            or names[0] == names[1]):
+        raise HOLD("Invalid control schema")
+    if (not isinstance(vocab,list) or len(vocab)>100 or vocab != sorted(set(vocab))
+            or any(not isinstance(x,str) or not SAFE_LABEL.fullmatch(x) for x in vocab)
+            or not {relation,*names,"role_actor","role_target","pending"}.issubset(vocab)):
+        raise HOLD("Unrecognized router source vocabulary")
+    if type(index) is not int or index not in (0,1):
+        raise HOLD("Unsupported role-relative router")
+    if any(type(obj[k]) is not int or not 1 <= obj[k] <= 100000
+           for k in ("source_count","validation_count")):
+        raise HOLD("Invalid evidence count")
+    try:
+        absent = validate_cartridge(json.dumps(obj["absent_tree"]))
+        present = validate_cartridge(json.dumps(obj["present_tree"]))
+    except (CARTRIDGE_HOLD, ValueError, TypeError) as exc:
+        raise HOLD("Invalid nested prediction cartridge") from exc
+    required = tuple(sorted({"role_actor","role_target","pending",*names}))
+    if absent.vocab != required or present.vocab != required:
+        raise HOLD("Nested trees do not describe the declared controls")
+    identity = "extension-" + checksum({
+        "relation": relation, "role_index": index,
+        "absent": absent.id, "present": present.id})[:16]
+    if obj["id"] != identity:
+        raise HOLD("Router identity inconsistent with its nested trees")
+    return Extension(identity,relation,index,tuple(names),tuple(vocab),
+                     absent,present,obj["source_count"],obj["validation_count"])
+
+
 @dataclass(frozen=True)
 class Review:
     decision: str
@@ -264,6 +347,11 @@ class LocalConceptBay:
         if assessment.status != "PROPOSE_EXTENSION" or not assessment.extension:
             raise HOLD("No unique testable concept to review")
         candidate = assessment.extension
+        self.pending[candidate.id] = candidate
+        return candidate.id
+
+    def offer_packet(self, raw: str) -> str:
+        candidate = decode_extension(raw)
         self.pending[candidate.id] = candidate
         return candidate.id
 
