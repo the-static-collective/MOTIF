@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {proposeFalsification,diagnoseMethod} from './method_falsifier.mjs';
+const crossing=n=>'relatte-crossing-v0:'+n.repeat(64);
+const prior=()=>({schema:'relatte.minecraft-010-independent-game-return/v0',source_signatures_verified:true,source_004_005_008_009_chain_verification:true,actual_lamps_lit:2,micro_sensor_inferred_count:2,result_status:'GAME_MICRO_INSTRUMENT_CONFIRMED_BY_NINE_LAMP_AUDIT',source_009_crossing:crossing('a'),signed_game_crossing:crossing('b'),disposition:'R3_HOLD',owner_admission:false});
+const t10=()=>({states:{fault:{server:[true,true,false,false,false,false,false,false,false].map(lit=>({lit}))}}});
+const v11=()=>({schema:'relatte.minecraft-011-independent-return/v0',all_source_signatures_verified:true,game_world:'A',fault_x:-28,nonoperator_nine_lamp_agreement:true,disposition:'R3_HOLD',game_011_crossing:crossing('c')});
+const t11=(island=6)=>({states:{fault:{server:Array.from({length:9},(_,i)=>({lit:i<2||i===island}))}},micro_readout:{stages:[{index:2,lit:false},{index:3,lit:false}]}});
+test('new bounded side-power falsifier from prior signed game',()=>{const x=proposeFalsification(prior(),t10());assert.equal(x.status,'PROPOSE_HOSTILE_GAME_FOR_METHOD');assert.equal(x.selected.stage_index,6);assert.equal(x.selected.source_block.x,20);assert.equal(x.automatic_execution,false)});
+test('bad source or previous nonprefix or insufficient budget cannot propose',()=>{const bad=prior();bad.source_signatures_verified=false;assert.throws(()=>proposeFalsification(bad,t10()));const t=t10();t.states.fault.server[7].lit=true;assert.throws(()=>proposeFalsification(prior(),t));assert.equal(proposeFalsification(prior(),t10(),{experimental_cost_budget:0}).status,'HOLD_NO_BUDGETED_COUNTEREXAMPLE')});
+test('actual island evidence determines next probe',()=>{const d=diagnoseMethod(v11(),t11());assert.equal(d.status,'PROPOSE_REVISED_THREE_STAGE_GAME_PROBE');assert.deepEqual(d.new_probe_indexes,[2,3,6]);assert.equal(d.observed_total,3);assert.equal(d.compressed_original_result,2);assert.equal(d.external_actions,0)});
+test('different real island causes a different revision, not a hardcoded solution',()=>{assert.deepEqual(diagnoseMethod(v11(),t11(7)).new_probe_indexes,[2,3,7])});
+test('falsifier did not break method => HOLD',()=>{assert.equal(diagnoseMethod(v11(),t11(-1)).status,'HOLD_FALSIFIER_DID_NOT_BREAK_METHOD')});
+test('forged independent witness and altered micro read refused',()=>{const r=v11();r.nonoperator_nine_lamp_agreement=false;assert.throws(()=>diagnoseMethod(r,t11()));const tr=t11();tr.micro_readout.stages[0].lit=true;assert.throws(()=>diagnoseMethod(v11(),tr))});
