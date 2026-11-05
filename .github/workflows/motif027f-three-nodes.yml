@@ -22,7 +22,9 @@ jobs:
           python-version: '3.11'
       - name: Frozen tests and native relevance review
         working-directory: experiments/027f
-        run: python -m unittest -v test_nodes.py
+        run: |
+          python -m unittest -v test_nodes.py
+          python -m unittest -v test_postmortem.py
       - name: Install CPU dependencies
         run: |
           python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
@@ -59,6 +61,7 @@ jobs:
           assert r['external_actions']==0
           print('Method scores',json.dumps(r['scores'],indent=2))
           print('MOTIF asks again',json.dumps(r['motif_asks_again_about_three_t5_nodes'],indent=2))
+          print('POSTHOC ROLE REDESIGN',json.dumps(r['posthoc_specialist_diversity'],indent=2))
           print('Actual encoder calls',r['actual_encoder_model_calls'])
           print('CPU seconds 1 node',r['single_encoder_seconds'])
           print('CPU seconds 3 nodes',r['triple_encoder_seconds'])
