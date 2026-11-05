@@ -87,6 +87,27 @@ GitHub Actions repeats all seven earlier MOTIF experiment suites, runs the eight
 
 **The tests do not certify neural intelligence**; they verify synthetic protocols, isolation, deterministic generation, feature matching, intervention semantics, abstention and result transparency.
 
+## Observed v2 controlled results
+
+The [CI-captured seed-level receipt](experiment-results.json) contains all 30 world results. The aggregate outcomes are:
+
+| Evaluation | Test result |
+|---|---:|
+| Synthetic worlds | 30 (6 families × 5 seeds) |
+| Test episodes | 2,400 (80/world) |
+| MOTIF relational learner prediction coverage | **24/30 worlds** |
+| MOTIF balanced accuracy, *covered worlds only* | **1.0000** |
+| Majority baseline, all worlds | **0.5000** |
+| One-edge baseline, all worlds | **0.6847** |
+| Two-level decision tree, all worlds | **0.9833** |
+| Forward/reverse paired graph rewiring, MOTIF | **10/10 correctly flipped** |
+| Unsupported XOR worlds | **0/5 admitted** |
+| Other abstentions | **1 sparse conjunction world** |
+
+**The strongest finding is a limitation:** a conventional depth-2 decision tree given the same relational features essentially matches the controlled learner on the domains where MOTIF predicts, and additionally handles the XOR family. MOTIF's 100% number is **coverage-conditional**. It is not a defensible superiority claim over a 98.33% *all-world* baseline. In the one sparse conjunction world, the tree falls back to majority with balanced score 0.5 and MOTIF abstains.
+
+The learner also abstained on every XOR world because its conjunction grammar cannot express that hidden condition with the required validation accuracy. Abstention here reflects explicit bounds of the symbolic model, not calibrated epistemic uncertainty in an unfamiliar physical environment.
+
 ## What a positive result would mean
 
 If the relational learner reliably predicts changes in **unseen synthetic graphs with unseen entity IDs and opaque predicate names**, while withholding its predictions on outcomes outside its grammar, that is evidence for *invariant symbolic pattern recognition* under these generator conditions.
