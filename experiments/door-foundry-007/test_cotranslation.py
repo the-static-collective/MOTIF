@@ -166,9 +166,8 @@ class CoTranslationTests(unittest.TestCase):
             b=dict(x);b.pop("content_sha256")
             x["content_sha256"]=img.digest(b)
             p.write_text(json.dumps(x))
-            # Current narrate requires source PNG matches and an authorized receipt.
-            # Any future change must not treat rehashed text authority as permission.
-            self.assertNotEqual(x["authority"]["real_world_actions"],0)
+            with self.assertRaises(narrate.HOLD):
+                narrate.explain(altered,self.simulated,Path(temp)/"forged.md")
 
     def test_unknown_deployment_or_physical_scene_is_never_claimed(self):
         self.assertTrue(self.prose["evidence_is_hypothetical"])

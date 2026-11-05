@@ -65,6 +65,15 @@ def explain(text_dir,imagined_dir,output_file):
     if report["status"] not in ("UNAMBIGUOUS_GRAMMAR",
          "EXPLICIT_CHOICE_OF_AMBIGUOUS_TEXT") or report["candidate_count"]!=1:
         raise HOLD("HOLD_MULTIPLE_UNRESOLVED_VISUAL_HYPOTHESES")
+    if (report.get("grammar")!=text_bridge.GRAMMAR or
+        report.get("compiler")!="DETERMINISTIC_CLASSICAL_RELATIONAL_PARSE" or
+        report.get("automatic_t5_invocations")!=0 or
+        report.get("candidate_model_source")!="NONE" or
+        report.get("privacy")!="LOCAL_ONLY_TEXT_AND_SYNTHETIC_IMAGES" or
+        report.get("authority")!={"human_question_answered":True,
+          "external_calls":0,"real_world_actions":0,
+          "deploy":False,"promote_canon":False}):
+        raise HOLD("HOLD_TEXT_EVIDENCE_CANNOT_GRANT_AUTHORITY")
     scene=report["candidate_scenes"][0]["scene"]
     folder=text_dir/"H01"
     start=vision.read_png(folder/"start.png")
