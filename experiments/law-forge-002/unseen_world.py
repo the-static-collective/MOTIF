@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 from pathlib import Path
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "law-forge-001"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "law-forge-001"))
 from forge import Probe, Observation
 
 FAMILIES = ("xor_memory", "or_memory", "instant",
