@@ -1,0 +1,83 @@
+name: REASON-CARTRIDGE-003 native foreign teacher + objection
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-003-foreign-dogram-and-objection
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-003/**'
+      - '.github/workflows/reason-cartridge-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-foreign-teacher:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Local adversarial tests and mathematical integrity checks
+        run: |
+          python -m unittest discover -s experiments/reason-cartridge-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/reason-cartridge-002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/reason-cartridge-003 -p 'test_*.py' -v
+      - name: Freeze source-separated test cases without labels
+        run: |
+          python experiments/reason-cartridge-003/fixtures.py reason-003-evidence
+          python -m json.tool reason-003-evidence/manifest.json > /dev/null
+      - name: Checkout unmodified ORIGINAL Dogram at exact inspected SHA
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: _external/dogram
+          persist-credentials: false
+      - name: Run actual original native Dogram on independent teaching/review cases
+        run: |
+          set -eu
+          test "$(git -C _external/dogram rev-parse HEAD)" = "551b5f9df18f17ec69b452ddcdff01718e0ff771"
+          for split in train withheld; do
+            for specimen in reason-003-evidence/$split/*.json; do
+              PYTHONPATH=_external/dogram python -m dogram.cli "$specimen" > "${specimen%.json}.receipt.json"
+            done
+          done
+          echo 'Original Dogram produced native receipts; no substitute teacher called.'
+      - name: Remove the foreign teacher source before assimilation and review
+        run: |
+          rm -rf _external/dogram
+          test ! -e _external/dogram
+      - name: Train only on training receipts, review on disjoint heldout native receipts
+        run: |
+          python experiments/reason-cartridge-003/review.py reason-003-evidence
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("reason-003-evidence/evaluation.json").read_text())
+          c = json.loads(Path("reason-003-evidence/learned-cartridge.json").read_text())
+          assert r['cases'] == 18
+          assert r['learner_correct'] == 18
+          assert r['full_classical_correct'] == 18
+          assert r['always_breaks_correct'] == 12
+          assert r['status_quo_correct'] == 12
+          assert r['teacher_absent_at_evaluation'] is True
+          assert r['synthetic_fixture_admission_only'] is True
+          assert r['human_admission'] is False
+          assert c['learned_method'] == 'RECHECK_GRAPH_REACHABILITY'
+          assert c['external_execution'] is False
+          assert r['objection_engine']['query']['status'] == 'UNKNOWN'
+          print({k:r[k] for k in ('cases','learner_correct','full_classical_correct','teacher_absent_at_evaluation')})
+          PY
+      - name: Preserve actual teacher and withheld receipts, retained method, proof/objection result
+        uses: actions/upload-artifact@v4
+        with:
+          name: reason-003-native-teacher-removed-evidence
+          path: reason-003-evidence/
+          retention-days: 30
