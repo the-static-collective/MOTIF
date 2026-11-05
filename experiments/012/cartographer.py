@@ -337,8 +337,58 @@ def independent_review(state: TrialState, local_evidence, controls) -> Review:
     if conflicts:
         return Review("HOLD_INDEPENDENT_FALSIFIER",proposed.tree.id,
                       len(source),tuple(conflicts))
-    return Review("ADMIT_PREDICT_ONLY_IN_SYNTHETIC_LAB",proposed.tree.id,
-                  len(source),())
+    return Review("ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION",
+                  proposed.tree.id,len(source),())
+
+
+class LocalCausalBay:
+    """Only a separate explicit fixture decision can admit prediction.
+
+    The reviewer string is NOT authenticated. The bay cannot execute
+    interventions, transmit data, change source observations or act outside
+    the toy environment.
+    """
+    def __init__(self):
+        self.pending: dict[str, tuple[CausalModel,Review]] = {}
+        self.admitted: dict[str,CausalModel] = {}
+        self.receipts: list[dict] = []
+
+    def offer(self,model: CausalModel,review: Review) -> str:
+        if review.proposed_model!=model.tree.id:
+            raise HOLD("Independent review must refer to exact candidate")
+        self.pending[model.tree.id]=(model,review)
+        return model.tree.id
+
+    def decide(self,identifier:str,decision:str,reviewer_claim:str):
+        if identifier not in self.pending:
+            raise HOLD("No pending local causal cartridge")
+        if decision not in ("ADMIT_PREDICT_ONLY","REFUSE"):
+            raise HOLD("Only explicit prediction-only crossing is possible")
+        if (not isinstance(reviewer_claim,str) or len(reviewer_claim)>96 or
+                not reviewer_claim or any(not(c.isalnum() or c in "_-.:")
+                                          for c in reviewer_claim)):
+            raise HOLD("Invalid unverified reviewer label")
+        model,review=self.pending[identifier]
+        if decision=="ADMIT_PREDICT_ONLY":
+            if review.status!="ELIGIBLE_PREDICT_ONLY_PENDING_LOCAL_DECISION":
+                raise HOLD("Independent falsification prevents local admission")
+            self.admitted[identifier]=model
+        else:
+            self.admitted.pop(identifier,None)
+        receipt={"cartridge_id":identifier,"decision":decision,
+                 "reviewer_claim_unverified":reviewer_claim,
+                 "independent_review_status":review.status,
+                 "real_world_authority":False}
+        self.receipts.append(receipt)
+        return receipt
+
+    def predict(self,identifier,episode,controls):
+        if identifier not in self.admitted:
+            raise HOLD("Not locally admitted for read-only predictions")
+        return self.admitted[identifier].predict(episode,controls)
+
+    def revoke(self,identifier,reviewer_claim):
+        return self.decide(identifier,"REFUSE",reviewer_claim)
 
 
 def retained_contradictions(state,review):
