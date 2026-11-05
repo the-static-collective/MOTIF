@@ -35,7 +35,7 @@ def pinned_owner():
 
 
 pinned_owner()
-sys.path.insert(0, str(OWNER_PATH.parent))
+sys.path.append(str(OWNER_PATH.parent))
 import reason004 as owner4  # noqa: E402
 
 
