@@ -1,0 +1,43 @@
+name: THOUGHT-010 Local Thought Door
+on:
+  push:
+    branches: [experiment/thought-010-local-interoperability]
+  pull_request:
+    paths:
+      - 'experiments/thought-010/**'
+      - '.github/workflows/thought-010.yml'
+  workflow_dispatch:
+jobs:
+  thought-door:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Free-Graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: _external/free-graph-owner
+          persist-credentials: false
+      - name: Test local MOTIF and actual pinned Free Graph contract
+        env:
+          FREE_GRAPH_CORE: ${{ github.workspace }}/_external/free-graph-owner/scripts/fg_core.py
+        run: cd experiments/thought-010 && python -m unittest -v test_door.py
+      - name: Preserve THOUGHT-007/008/009 regressions
+        run: |
+          cd experiments/thought-009 && python -m unittest -v test_router.py
+          cd ../thought-008 && python -m unittest -v test_multiview.py
+          cd ../thought-007 && python -m unittest -v test_field.py
+      - name: Reproduce end-to-end local crossing
+        run: |
+          cd experiments/thought-010
+          python door.py example-ideas.json > example-reply.json
+          python demo.py > demo-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thought-010-door-evidence
+          path: |
+            experiments/thought-010/example-reply.json
+            experiments/thought-010/demo-results.json
