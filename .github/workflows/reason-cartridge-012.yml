@@ -1,0 +1,71 @@
+name: REASON-012 Real Court Opinion Excerpts and Contradiction Scopes
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-012-actual-opinion-excerpts
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-012/**'
+      - '.github/workflows/reason-cartridge-012.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  anchored-opinion-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inherited source-owned REASON-001 through REASON-011 tests
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Newly sourced short real-opinion tests, source review and hostile assertions
+        run: |
+          python -m unittest discover -s experiments/reason-cartridge-012 -p 'test_*.py' -v
+      - name: Reproduce new heldout historical opinions and prior four-valued link
+        run: |
+          python experiments/reason-cartridge-012/trial.py reason-012-evidence > reason-012-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-012-evidence/benchmark.json').read_text())
+          assert r['strictly_new_heldout_opinions']==['ULYSSES','COCA']
+          assert r['training_fragments']==8
+          assert r['heldout_fragments']==4
+          assert r['heldout_correct_accepted']==3
+          assert r['heldout_correct_abstained']==1
+          assert r['heldout_errors']==0
+          assert r['naive_always_legal_holdout_correct']==2
+          assert not r['live_source_quote_verification_in_CI']
+          assert r['quoted_text_not_full_opinion']
+          assert r['curated_issue_polarity_not_inferred_from_unstructured_text']
+          b=r['typed_bridge']
+          p=b['four_value_propositions']
+          assert p['NARUTO/ARTICLE_III_STANDING']['four_value']=='SUPPORTED'
+          assert p['NARUTO/COPYRIGHT_STATUTORY_STANDING']['four_value']=='REFUTED'
+          assert p['STAMBOVSKY/PHYSICAL_GHOST_EXISTS']['four_value']=='UNDETERMINED'
+          assert p['COCA/CAFFEINE_ADDED_INGREDIENT']['four_value']=='SUPPORTED'
+          assert p['COCA/CAFFEINE_HARM_PROVEN']['four_value']=='UNDETERMINED'
+          assert not b['current_law_inferred']
+          assert not r['external_actions']
+          assert not r['real_world_authority']
+          print({'new_opinions':2,'source_grounded':3,'abstained':1,
+                 'false_contradictions_avoided':3})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-012-real-opinion-source-evidence
+          path: |
+            reason-012-evidence/
+            reason-012-stdout.json
+          retention-days: 30
