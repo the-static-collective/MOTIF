@@ -1,0 +1,166 @@
+{
+  "schema": "motif.meaning-teachers.v1",
+  "authorship": "assistant-authored explicit teacher corrections; not independently reviewed",
+  "examples": [
+    {
+      "id": "T01",
+      "question": "Does missing sonar echo rule out underwater habitat?",
+      "frame": "does",
+      "left": "missing sonar echo",
+      "right": "rule out underwater habitat",
+      "proxy": "sonar echo",
+      "target": "underwater habitat",
+      "meaning": "U_NEG"
+    },
+    {
+      "id": "T02",
+      "question": "Does missing neural command response rule out subjective experience?",
+      "frame": "does",
+      "left": "missing neural command response",
+      "right": "rule out subjective experience",
+      "proxy": "neural command response",
+      "target": "subjective experience",
+      "meaning": "U_NEG"
+    },
+    {
+      "id": "T03",
+      "question": "Does no infrared glow establish that wildfire activity is absent?",
+      "frame": "does",
+      "left": "no infrared glow",
+      "right": "establish that wildfire activity is absent",
+      "proxy": "infrared glow",
+      "target": "wildfire activity",
+      "meaning": "U_NEG"
+    },
+    {
+      "id": "T04",
+      "question": "Does no seismic rumble establish that underground movement is absent?",
+      "frame": "does",
+      "left": "no seismic rumble",
+      "right": "establish that underground movement is absent",
+      "proxy": "seismic rumble",
+      "target": "underground movement",
+      "meaning": "U_NEG"
+    },
+    {
+      "id": "T05",
+      "question": "Can underwater habitat exist without sonar echo?",
+      "frame": "can",
+      "left": "underwater habitat exist",
+      "right": "without sonar echo",
+      "proxy": "sonar echo",
+      "target": "underwater habitat",
+      "meaning": "CAN_NEG"
+    },
+    {
+      "id": "T06",
+      "question": "Can subjective experience exist without neural command response?",
+      "frame": "can",
+      "left": "subjective experience exist",
+      "right": "without neural command response",
+      "proxy": "neural command response",
+      "target": "subjective experience",
+      "meaning": "CAN_NEG"
+    },
+    {
+      "id": "T07",
+      "question": "Can wildfire activity be present despite missing infrared glow?",
+      "frame": "can",
+      "left": "wildfire activity be present",
+      "right": "despite missing infrared glow",
+      "proxy": "infrared glow",
+      "target": "wildfire activity",
+      "meaning": "CAN_NEG"
+    },
+    {
+      "id": "T08",
+      "question": "Can underground movement be present despite missing seismic rumble?",
+      "frame": "can",
+      "left": "underground movement be present",
+      "right": "despite missing seismic rumble",
+      "proxy": "seismic rumble",
+      "target": "underground movement",
+      "meaning": "CAN_NEG"
+    },
+    {
+      "id": "T09",
+      "question": "Does detecting sonar echo guarantee underwater habitat?",
+      "frame": "does",
+      "left": "detecting sonar echo",
+      "right": "guarantee underwater habitat",
+      "proxy": "sonar echo",
+      "target": "underwater habitat",
+      "meaning": "U_POS"
+    },
+    {
+      "id": "T10",
+      "question": "Does detecting neural command response guarantee subjective experience?",
+      "frame": "does",
+      "left": "detecting neural command response",
+      "right": "guarantee subjective experience",
+      "proxy": "neural command response",
+      "target": "subjective experience",
+      "meaning": "U_POS"
+    },
+    {
+      "id": "T11",
+      "question": "Does a positive infrared glow establish that wildfire activity is present?",
+      "frame": "does",
+      "left": "a positive infrared glow",
+      "right": "establish that wildfire activity is present",
+      "proxy": "infrared glow",
+      "target": "wildfire activity",
+      "meaning": "U_POS"
+    },
+    {
+      "id": "T12",
+      "question": "Does a positive seismic rumble establish that underground movement is present?",
+      "frame": "does",
+      "left": "a positive seismic rumble",
+      "right": "establish that underground movement is present",
+      "proxy": "seismic rumble",
+      "target": "underground movement",
+      "meaning": "U_POS"
+    },
+    {
+      "id": "T13",
+      "question": "Can sonar echo appear without underwater habitat?",
+      "frame": "can",
+      "left": "sonar echo appear",
+      "right": "without underwater habitat",
+      "proxy": "sonar echo",
+      "target": "underwater habitat",
+      "meaning": "CAN_POS"
+    },
+    {
+      "id": "T14",
+      "question": "Can neural command response appear without subjective experience?",
+      "frame": "can",
+      "left": "neural command response appear",
+      "right": "without subjective experience",
+      "proxy": "neural command response",
+      "target": "subjective experience",
+      "meaning": "CAN_POS"
+    },
+    {
+      "id": "T15",
+      "question": "Can infrared glow be detected when wildfire activity is absent?",
+      "frame": "can",
+      "left": "infrared glow be detected",
+      "right": "when wildfire activity is absent",
+      "proxy": "infrared glow",
+      "target": "wildfire activity",
+      "meaning": "CAN_POS"
+    },
+    {
+      "id": "T16",
+      "question": "Can seismic rumble be detected when underground movement is absent?",
+      "frame": "can",
+      "left": "seismic rumble be detected",
+      "right": "when underground movement is absent",
+      "proxy": "seismic rumble",
+      "target": "underground movement",
+      "meaning": "CAN_POS"
+    }
+  ]
+}

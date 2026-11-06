@@ -1,0 +1,486 @@
+{
+  "schema": "motif.meaning-evaluation.v1",
+  "author": "assistant-authored, source-separated NOT investigator-blind",
+  "cases": [
+    {
+      "id": "Q01",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does missing microwave reflection rule out buried satellite?",
+      "indicator": "microwave reflection",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "microwave reflection",
+        "target": "buried satellite"
+      }
+    },
+    {
+      "id": "Q02",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does missing electrical pulse rule out living microorganism?",
+      "indicator": "electrical pulse",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "electrical pulse",
+        "target": "living microorganism"
+      }
+    },
+    {
+      "id": "Q03",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does no mineral fluorescence establish that crystal structure is absent?",
+      "indicator": "mineral fluorescence",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "mineral fluorescence",
+        "target": "crystal structure"
+      }
+    },
+    {
+      "id": "Q04",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does no ocean sonar ping establish that deep sea animal is absent?",
+      "indicator": "ocean sonar ping",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "ocean sonar ping",
+        "target": "deep sea animal"
+      }
+    },
+    {
+      "id": "Q05",
+      "group": "unseen_recomposition",
+      "question": "Does missing chemical signature establish that stored propellant is absent?",
+      "indicator": "chemical signature",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "chemical signature",
+        "target": "stored propellant"
+      }
+    },
+    {
+      "id": "Q06",
+      "group": "unseen_recomposition",
+      "question": "Does missing optical flash establish that distant spacecraft is absent?",
+      "indicator": "optical flash",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "optical flash",
+        "target": "distant spacecraft"
+      }
+    },
+    {
+      "id": "Q07",
+      "group": "unseen_recomposition",
+      "question": "Does no dust plume rule out active volcano?",
+      "indicator": "dust plume",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "dust plume",
+        "target": "active volcano"
+      }
+    },
+    {
+      "id": "Q08",
+      "group": "unseen_recomposition",
+      "question": "Does no metallic resonance rule out underground chamber?",
+      "indicator": "metallic resonance",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "metallic resonance",
+        "target": "underground chamber"
+      }
+    },
+    {
+      "id": "Q09",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can stellar remnant exist without radiation trace?",
+      "indicator": "radiation trace",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "radiation trace",
+        "target": "stellar remnant"
+      }
+    },
+    {
+      "id": "Q10",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can microbial colony exist without carbon dioxide plume?",
+      "indicator": "carbon dioxide plume",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "carbon dioxide plume",
+        "target": "microbial colony"
+      }
+    },
+    {
+      "id": "Q11",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can submerged wreck be present despite missing magnetic anomaly?",
+      "indicator": "magnetic anomaly",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "magnetic anomaly",
+        "target": "submerged wreck"
+      }
+    },
+    {
+      "id": "Q12",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can concealed aquifer be present despite missing humidity spike?",
+      "indicator": "humidity spike",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "humidity spike",
+        "target": "concealed aquifer"
+      }
+    },
+    {
+      "id": "Q13",
+      "group": "unseen_recomposition",
+      "question": "Can nearby aircraft exist despite missing radar reflection?",
+      "indicator": "radar reflection",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "radar reflection",
+        "target": "nearby aircraft"
+      }
+    },
+    {
+      "id": "Q14",
+      "group": "unseen_recomposition",
+      "question": "Can forest combustion exist despite missing thermal signature?",
+      "indicator": "thermal signature",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "thermal signature",
+        "target": "forest combustion"
+      }
+    },
+    {
+      "id": "Q15",
+      "group": "unseen_recomposition",
+      "question": "Can cellular growth be present without enzyme reaction?",
+      "indicator": "enzyme reaction",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "enzyme reaction",
+        "target": "cellular growth"
+      }
+    },
+    {
+      "id": "Q16",
+      "group": "unseen_recomposition",
+      "question": "Can artificial transmitter be present without radio modulation?",
+      "indicator": "radio modulation",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "radio modulation",
+        "target": "artificial transmitter"
+      }
+    },
+    {
+      "id": "Q17",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does detecting luminous arc guarantee electrical fault?",
+      "indicator": "luminous arc",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "luminous arc",
+        "target": "electrical fault"
+      }
+    },
+    {
+      "id": "Q18",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does detecting microbial swab guarantee surface contamination?",
+      "indicator": "microbial swab",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "microbial swab",
+        "target": "surface contamination"
+      }
+    },
+    {
+      "id": "Q19",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does a positive seismic pulse establish that subterranean collapse is present?",
+      "indicator": "seismic pulse",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "seismic pulse",
+        "target": "subterranean collapse"
+      }
+    },
+    {
+      "id": "Q20",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Does a positive infrared gradient establish that buried heat source is present?",
+      "indicator": "infrared gradient",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "infrared gradient",
+        "target": "buried heat source"
+      }
+    },
+    {
+      "id": "Q21",
+      "group": "unseen_recomposition",
+      "question": "Does detecting acoustic emission establish that pipe fracture is present?",
+      "indicator": "acoustic emission",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "acoustic emission",
+        "target": "pipe fracture"
+      }
+    },
+    {
+      "id": "Q22",
+      "group": "unseen_recomposition",
+      "question": "Does detecting light scattering establish that dust cloud is present?",
+      "indicator": "light scattering",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "light scattering",
+        "target": "dust cloud"
+      }
+    },
+    {
+      "id": "Q23",
+      "group": "unseen_recomposition",
+      "question": "Does a positive gravitational wobble guarantee orbiting exoplanet?",
+      "indicator": "gravitational wobble",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "gravitational wobble",
+        "target": "orbiting exoplanet"
+      }
+    },
+    {
+      "id": "Q24",
+      "group": "unseen_recomposition",
+      "question": "Does a positive voltage variation guarantee motor malfunction?",
+      "indicator": "voltage variation",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "voltage variation",
+        "target": "motor malfunction"
+      }
+    },
+    {
+      "id": "Q25",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can ground vibration appear without moving vehicle?",
+      "indicator": "ground vibration",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "ground vibration",
+        "target": "moving vehicle"
+      }
+    },
+    {
+      "id": "Q26",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can spectral line appear without distant atmosphere?",
+      "indicator": "spectral line",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "spectral line",
+        "target": "distant atmosphere"
+      }
+    },
+    {
+      "id": "Q27",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can geochemical tracer be detected when groundwater channel is absent?",
+      "indicator": "geochemical tracer",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "geochemical tracer",
+        "target": "groundwater channel"
+      }
+    },
+    {
+      "id": "Q28",
+      "group": "seen_phrase_pair_new_domain",
+      "question": "Can gamma spike be detected when radioactive mineral is absent?",
+      "indicator": "gamma spike",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "gamma spike",
+        "target": "radioactive mineral"
+      }
+    },
+    {
+      "id": "Q29",
+      "group": "unseen_recomposition",
+      "question": "Can laser reflection appear when hidden mirror is absent?",
+      "indicator": "laser reflection",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "laser reflection",
+        "target": "hidden mirror"
+      }
+    },
+    {
+      "id": "Q30",
+      "group": "unseen_recomposition",
+      "question": "Can plasma emission appear when charged particle is absent?",
+      "indicator": "plasma emission",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "plasma emission",
+        "target": "charged particle"
+      }
+    },
+    {
+      "id": "Q31",
+      "group": "unseen_recomposition",
+      "question": "Can ultrasound reflection be detected without internal tissue damage?",
+      "indicator": "ultrasound reflection",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "ultrasound reflection",
+        "target": "internal tissue damage"
+      }
+    },
+    {
+      "id": "Q32",
+      "group": "unseen_recomposition",
+      "question": "Can ion signature be detected without chemical reaction?",
+      "indicator": "ion signature",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "ion signature",
+        "target": "chemical reaction"
+      }
+    },
+    {
+      "id": "Q33",
+      "group": "new_lexical_paraphrase",
+      "question": "Does an undetected infrared spike establish that hidden wildfire is absent?",
+      "indicator": "infrared spike",
+      "gold": {
+        "kind": "U_NEG",
+        "proxy": "infrared spike",
+        "target": "hidden wildfire"
+      }
+    },
+    {
+      "id": "Q34",
+      "group": "new_lexical_paraphrase",
+      "question": "Could buried groundwater still be present with no mineral tracer?",
+      "indicator": "mineral tracer",
+      "gold": {
+        "kind": "CAN_NEG",
+        "proxy": "mineral tracer",
+        "target": "buried groundwater"
+      }
+    },
+    {
+      "id": "Q35",
+      "group": "new_lexical_paraphrase",
+      "question": "Does spotting a cosmic flash mean supernova remnant is present?",
+      "indicator": "cosmic flash",
+      "gold": {
+        "kind": "U_POS",
+        "proxy": "cosmic flash",
+        "target": "supernova remnant"
+      }
+    },
+    {
+      "id": "Q36",
+      "group": "new_lexical_paraphrase",
+      "question": "Could radio noise show up even if satellite transmitter is absent?",
+      "indicator": "radio noise",
+      "gold": {
+        "kind": "CAN_POS",
+        "proxy": "radio noise",
+        "target": "satellite transmitter"
+      }
+    },
+    {
+      "id": "Q37",
+      "group": "hostile_or_unsupported",
+      "question": "Does missing photon pulse not rule out extinct reactor?",
+      "indicator": "photon pulse",
+      "gold": null
+    },
+    {
+      "id": "Q38",
+      "group": "hostile_or_unsupported",
+      "question": "Does missing gamma wave rule out not a detector?",
+      "indicator": "gamma wave",
+      "gold": null
+    },
+    {
+      "id": "Q39",
+      "group": "hostile_or_unsupported",
+      "question": "Does detecting ion spike guarantee that alien life is absent?",
+      "indicator": "ion spike",
+      "gold": null
+    },
+    {
+      "id": "Q40",
+      "group": "hostile_or_unsupported",
+      "question": "Can exoplanet exist without no transit signature?",
+      "indicator": "transit signature",
+      "gold": null
+    },
+    {
+      "id": "Q41",
+      "group": "hostile_or_unsupported",
+      "question": "Can particle beam be detected when invisible particle is not absent?",
+      "indicator": "particle beam",
+      "gold": null
+    },
+    {
+      "id": "Q42",
+      "group": "hostile_or_unsupported",
+      "question": "Does no light flash guarantee solar flare?",
+      "indicator": "light flash",
+      "gold": null
+    },
+    {
+      "id": "Q43",
+      "group": "hostile_or_unsupported",
+      "question": "Would no infrared spectrum establish heat absence?",
+      "indicator": "infrared spectrum",
+      "gold": null
+    },
+    {
+      "id": "Q44",
+      "group": "hostile_or_unsupported",
+      "question": "Can chemical trace appear without chemical trace?",
+      "indicator": "chemical trace",
+      "gold": null
+    },
+    {
+      "id": "Q45",
+      "group": "source_indicator_mismatch",
+      "question": "Does missing tidal echo rule out underwater cave?",
+      "indicator": "satellite camera",
+      "gold": null
+    },
+    {
+      "id": "Q46",
+      "group": "source_indicator_mismatch",
+      "question": "Can unknown star be present without red spectrum?",
+      "indicator": "infrared thermometer",
+      "gold": null
+    },
+    {
+      "id": "Q47",
+      "group": "source_indicator_mismatch",
+      "question": "Does detecting radiation pulse guarantee nuclear reaction?",
+      "indicator": "laser beam",
+      "gold": null
+    },
+    {
+      "id": "Q48",
+      "group": "source_indicator_mismatch",
+      "question": "Can optical flash be detected when nearby spacecraft is absent?",
+      "indicator": "radar reflection",
+      "gold": null
+    }
+  ]
+}
