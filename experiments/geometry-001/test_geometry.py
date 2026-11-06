@@ -1,6 +1,6 @@
 """Deterministic geometry controls: correctness, abstentions and fair baselines."""
 import unittest
-from math import hypot, sqrt
+from math import hypot
 
 from geometry import (
     circle_intersections, edges, flower, from_xy, hex_distance, pathfind,
@@ -47,8 +47,7 @@ class FlowerTests(unittest.TestCase):
             xy = to_xy(c, 17)
             self.assertEqual(from_xy(*xy, radius=17), c)
         self.assertIsNone(from_xy(0.21, 0.37))
-        self.assertIsNone(from_xy(*to_xy((1, 0), 2.0), radius=1.0)
-                          if False else from_xy(1.15, 0.0, radius=1.0))
+        self.assertIsNone(from_xy(1.15, 0.0, radius=1.0))
         with self.assertRaises(ValueError):
             from_xy(0, 0, radius=0)
 
