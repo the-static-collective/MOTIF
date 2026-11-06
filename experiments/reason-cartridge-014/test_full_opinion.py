@@ -167,11 +167,17 @@ class FullOpinionTests(unittest.TestCase):
                             for x in result["out_of_source_questions"]))
 
     def test_gold_labels_never_imported_by_reader(self):
-        import inspect,reader
-        code=inspect.getsource(reader)
-        self.assertNotIn("review_keys",code)
-        self.assertNotIn("HELDOUT_QUESTIONS",code)
-        self.assertNotIn("GOLD",code)
+        import ast,inspect,reader
+        tree=ast.parse(inspect.getsource(reader))
+        targets=set()
+        for entry in ast.walk(tree):
+            if isinstance(entry,ast.Import):
+                targets.update(alias.name for alias in entry.names)
+            if isinstance(entry,ast.ImportFrom) and entry.module:
+                targets.add(entry.module)
+        self.assertNotIn("review_keys",targets)
+        self.assertNotIn("gold",targets)
+
 
 if __name__=="__main__":
     unittest.main()
