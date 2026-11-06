@@ -1,0 +1,38 @@
+name: THOUGHT-016 typed algorithm composition dev lab
+on:
+  push:
+    paths:
+      - 'experiments/thought-016/**'
+      - '.github/workflows/thought-016.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-016/**'
+      - '.github/workflows/thought-016.yml'
+  workflow_dispatch:
+jobs:
+  typed-composition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run typed compiler, oracle and development-model adversarial tests
+        working-directory: experiments/thought-016
+        run: python -m unittest -v test_thought016.py
+      - name: Reproduce code patch, independent audit and stress receipts
+        working-directory: experiments/thought-016
+        run: python benchmark.py
+      - name: THOUGHT-015 previous developer regression
+        working-directory: experiments/thought-015
+        run: python -m unittest -v test_lab.py
+      - name: Retain human-review-only patch packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-016-typed-inventor-review
+          path: |
+            experiments/thought-016/reference_solver.py
+            experiments/thought-016/candidate_solver.py
+            experiments/thought-016/candidate.diff
+            experiments/thought-016/experiment-results.json
