@@ -64,7 +64,7 @@ jobs:
           assert r["full_information_classical_reference_could_tie"]
           assert r["not_an_independently_authored_human_ethics_experiment"]
           assert r["not_a_mind_or_love_measurement"]
-          assert not r["no_external_actions"]
+          assert r["no_external_actions"]
           assert not r["real_world_authority"]
           print({
             "source_owners":r["synthetic_source_owners"],
