@@ -1,0 +1,98 @@
+name: REASON-022 Unimagined Distinction / independent typed source challenges
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-022-unimagined-distinction
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-022/**'
+      - '.github/workflows/reason-cartridge-022.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typed-unimagined-distinction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress core MOTIF-003 affordance evaluation
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regress source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire source-verified complete opinions for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress REASON-014 through REASON-021
+        run: |
+          for n in 014 015 016 017 018 019 020 021; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Fetch independent bAbI source data at exact published Git blobs
+        run: |
+          python experiments/reason-cartridge-022/acquire.py reason-022-sources
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,"experiments/reason-cartridge-022")
+          from acquire import get_sources
+          r=get_sources("reason-022-sources")
+          assert len(r["sources"])==6
+          assert all(x["external_authorship"] for x in r["sources"])
+          print({"source_artifacts":len(r["sources"]),
+                 "independent_original_authors":True,
+                 "pinned_exact_git_blob":True})
+          PY
+      - name: Test all three new typed interpreters and actual Golden Mirror perspective processes
+        run: python -m unittest discover -s experiments/reason-cartridge-022 -p 'test_*.py' -v
+      - name: Run independent 750-question source evaluation and typed obligations
+        run: |
+          python experiments/reason-cartridge-022/trial.py reason-022-sources reason-022-evidence > reason-022-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("reason-022-evidence/benchmark.json").read_text())
+          assert r["training_questions"]==180
+          assert r["test_questions"]==750
+          assert len(r["external_test"])==3
+          assert {x["model_type_from_source_training"] for x in r["external_test"].values()}=={
+              "QUANTITY","ORDERED_TIME","TRIADIC_TRANSFER"}
+          assert len(r["original_external_source"]["sources"])==6
+          for family,s in r["external_test"].items():
+              assert s["independently_authored_test_questions"]==250
+              assert s["exact_source_answers"]+s["incorrect_confident_answers"]+s["explicit_abstentions"]==250
+          assert r["fictional_obligation_cases"]==7
+          assert r["actual_original_worker_subprocesses_primary_pass"]==28
+          assert r["no_real_world_permission_or_personal_assistance"]
+          assert r["independent_external_QA_is_not_independent_human_ethics_evaluation"]
+          assert r["classical_typed_baselines_can_match_or_exceed"]
+          assert not r["permission_to_execute"]
+          assert not r["external_actions"]
+          print({"independent_source_test_questions":r["test_questions"],
+                 "independent_results":{
+                     k:{"exact":v["exact_source_answers"],
+                        "incorrect":v["incorrect_confident_answers"],
+                        "abstained":v["explicit_abstentions"],
+                        "weak_flat_baseline":v["weak_fixed_answer_baseline_exact"]}
+                     for k,v in r["external_test"].items()},
+                 "duty_cases":r["fictional_obligation_cases"],
+                 "original_subprocess_perspectives":r["actual_original_worker_subprocesses_primary_pass"]})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-022-third-party-babi-typed-reasoning-and-duty-evidence
+          path: |
+            reason-022-evidence/
+            reason-022-stdout.json
+            reason-022-sources/provenance.json
+          retention-days: 30
