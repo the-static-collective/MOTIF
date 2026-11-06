@@ -39,7 +39,7 @@ class CompoundingEconomyTests(unittest.TestCase):
         cls.cases=scenario_cases()
 
     def test_each_assumption_scenario_is_well_typed(self):
-        self.assertEqual(len(self.cases),7)
+        self.assertEqual(len(self.cases),8)
         for scenario in self.cases.values():
             self.assertEqual(validate(scenario),scenario)
 
@@ -128,6 +128,33 @@ class CompoundingEconomyTests(unittest.TestCase):
         first=transition(sc,initial(sc),"BUILD_VERIFIER")[0][1]
         self.assertEqual(first.power,4)
         self.assertIn("COMPOSE_NEW_SOLVER",_legal(sc,first))
+
+    def test_second_order_improvement_improves_future_improvement_capability(self):
+        model=self.cases["SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS"]
+        beginning=initial(model)
+        self.assertNotIn("PROGRAM_SCHOOL",_legal(model,beginning))
+        gain=transition(model,beginning,"RESEARCH_ABOUT_RESEARCH")[0][1]
+        self.assertEqual(gain.power,3)  # no immediate WORK improvement
+        self.assertEqual(gain.research_rate,4)
+        self.assertEqual(gain.capital,4)
+        self.assertIn("PROGRAM_SCHOOL",_legal(model,gain))
+        after=transition(model,gain,"PROGRAM_SCHOOL")[0][1]
+        self.assertEqual(after.capital,1)  # ceil(12/4) = 3
+        self.assertEqual(after.power,6)
+        self.assertEqual(after.research_rate,4)
+
+    def test_second_order_option_value_survives_full_classical_reference(self):
+        model=self.cases["SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS"]
+        result=evaluate(model)
+        without=independent_only(model,["PROGRAM_SCHOOL","REASONER_COMPOSER"])
+        comparison=evaluate(without)
+        self.assertEqual(result["first_action"],"RESEARCH_ABOUT_RESEARCH")
+        self.assertGreater(result["best_expected_useful_work"],
+                           comparison["best_expected_useful_work"])
+        self.assertEqual(result["best_expected_useful_work"],
+                         classical_optimal(model))
+        self.assertEqual(comparison["best_expected_useful_work"],
+                         classical_optimal(without))
 
     def test_probability_change_can_reverse_the_recommendation(self):
         sc=self.cases["UNCERTAIN_SUCCESS"]
@@ -237,6 +264,8 @@ class CompoundingEconomyTests(unittest.TestCase):
         self.assertEqual(out["automated_external_actions"],0)
         self.assertEqual(out["examples"]["TOO_LATE_TO_PAY_OFF"]["first_action"],"WORK")
         self.assertEqual(out["demonstrations"]["non_additive_synergy"]["net_synergy"],"16")
+        self.assertTrue(out["demonstrations"]["second_order_research_compound"]
+                        ["not_a_measured_future_software_gain"])
 
 if __name__=="__main__":
     unittest.main()
