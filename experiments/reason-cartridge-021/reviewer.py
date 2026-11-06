@@ -118,6 +118,7 @@ class Receiver:
     def __init__(self):
         self.review_hash=None
         self.admitted=False
+        self.passed=False
 
     def preview(self,worlds):
         if (not isinstance(worlds,tuple) or
@@ -155,11 +156,17 @@ class Receiver:
             "no_moral_or_general_language_comprehension_claim":True,
             "cases":rows,
         }
+        self.passed=(
+            summary["matches_author_reference"]==len(worlds)
+            and summary["independent_scope_failures"]==0
+            and summary["correct_heldout_contexts"]==
+                summary["independently_validated_contexts"]
+        )
         self.review_hash=digest(summary)
         return dict(summary,review_digest=self.review_hash)
 
     def admit(self,choice,review_hash):
-        if (choice!="ADMIT_READ_ONLY"
+        if (choice!="ADMIT_READ_ONLY" or not self.passed
                 or self.review_hash is None or self.review_hash!=review_hash):
             raise HOLD("No source-reviewed, consent-limited read-only admission")
         self.admitted=True
