@@ -1,0 +1,38 @@
+name: THOUGHT-015 experimental software developer
+on:
+  push:
+    paths:
+      - 'experiments/thought-015/**'
+      - '.github/workflows/thought-015.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-015/**'
+      - '.github/workflows/thought-015.yml'
+  workflow_dispatch:
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify generated candidate and independent oracle tests
+        working-directory: experiments/thought-015
+        run: python -m unittest -v test_lab.py
+      - name: Reproduce synthetic benchmark and write held patch
+        working-directory: experiments/thought-015
+        run: python benchmark.py
+      - name: Previously existing THOUGHT-014 model-dev regression
+        working-directory: experiments/thought-014
+        run: python -m unittest -v test_thought014.py
+      - name: Retain review-only generated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-015-review-only
+          path: |
+            experiments/thought-015/experiment-results.json
+            experiments/thought-015/candidate.diff
+            experiments/thought-015/candidate_solver.py
+            experiments/thought-015/reference_solver.py

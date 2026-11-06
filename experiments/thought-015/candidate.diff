@@ -1,0 +1,17 @@
+--- experiments/thought-015/reference_solver.py
++++ experiments/thought-015/candidate_solver.py
+@@ -3,10 +3,10 @@
+ import json
+ import sys
+ 
+-WEIGHTED_PRIORITY = False
+-ENFORCE_BUDGET = False
+-RESOURCE_STATE = False
+-RELAX_IMPROVED = False
++WEIGHTED_PRIORITY = True
++ENFORCE_BUDGET = True
++RESOURCE_STATE = True
++RELAX_IMPROVED = True
+ 
+ def solve(problem):
+     n = problem["n"]
