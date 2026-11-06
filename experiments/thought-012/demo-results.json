@@ -1,0 +1,24 @@
+{
+  "authority": "NONE",
+  "carried_open_questions": 5,
+  "deterministic_replay": true,
+  "experiment": "THOUGHT-012",
+  "limitation": "same authored source, not independent lenses of empirical corroboration",
+  "new_question_kinds": [
+    "association_bridge",
+    "resolve_tension",
+    "test_conditional_enablement",
+    "verify_prerequisite"
+  ],
+  "original_questions": 1,
+  "pen_unchanged": true,
+  "same_semantics_after_views": true,
+  "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+  "source_fixture": "fictional community meal",
+  "source_only_full_control_parity": true,
+  "visited_lenses": [
+    "dependency",
+    "tension",
+    "affordance"
+  ]
+}

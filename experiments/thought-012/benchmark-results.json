@@ -1,0 +1,70 @@
+{
+  "case_count": 6,
+  "experiment": "THOUGHT-012",
+  "interpretation": "Cross-lens may expose more questions than association-only, but exhaustive no-map source inspection provides the same results. No measured reasoning accuracy gain.",
+  "passed": 6,
+  "results": [
+    {
+      "cross_lens_question_count": 5,
+      "fixture": "complete",
+      "full_inspections": 3,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 1,
+      "source_only_control_count": 5,
+      "source_only_question_parity": true
+    },
+    {
+      "cross_lens_question_count": 4,
+      "fixture": "no_tension",
+      "full_inspections": 3,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 1,
+      "source_only_control_count": 4,
+      "source_only_question_parity": true
+    },
+    {
+      "cross_lens_question_count": 2,
+      "fixture": "no_requirements",
+      "full_inspections": 3,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 1,
+      "source_only_control_count": 2,
+      "source_only_question_parity": true
+    },
+    {
+      "cross_lens_question_count": 4,
+      "fixture": "no_affordances",
+      "full_inspections": 3,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 1,
+      "source_only_control_count": 4,
+      "source_only_question_parity": true
+    },
+    {
+      "cross_lens_question_count": 0,
+      "fixture": "no_bridge",
+      "full_inspections": 0,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 0,
+      "source_only_control_count": 0,
+      "source_only_question_parity": true
+    },
+    {
+      "cross_lens_question_count": 0,
+      "fixture": "hypothesis_only",
+      "full_inspections": 0,
+      "no_pen_or_action": true,
+      "passed": true,
+      "single_question_count": 0,
+      "source_only_control_count": 0,
+      "source_only_question_parity": true
+    }
+  ],
+  "status": "PASS",
+  "suite": "synthetic development (not blind)"
+}
