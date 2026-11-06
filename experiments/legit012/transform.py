@@ -24,7 +24,7 @@ from pathlib import Path
 from itertools import product
 import json
 
-from independent_oracle import (
+from graph_reference import (
     check_graph,make_graph,all_states,scan,classical_dp,cases
 )
 
