@@ -14,7 +14,7 @@ import unittest
 
 from acquire import SOURCES,get_sources,git_blob,COMMIT
 from corpus import read,query_input
-from engines import solve
+from engines import solve,count_before_source_repair
 from router import discover,infer,boolean_projection_witness,question_family
 from obligations import CASES,all_proofs,source_proof,contradiction,old_binary_projection
 from mirror_bridge import four_elves,run_all,pin
@@ -56,6 +56,16 @@ class TypedConceptTests(unittest.TestCase):
         self.assertEqual(solve("QUANTITY",q)["answer"],"two")
         q["facts"].append({"line":3,"text":"Mary left the apple."})
         q["facts"].append({"line":4,"text":"Mary left the milk."})
+        self.assertEqual(solve("QUANTITY",q)["answer"],"none")
+
+    def test_source_discovered_discard_variants_repair_old_count_failure(self):
+        q=request(["John grabbed the apple there.",
+                   "John discarded the apple."],
+                  "How many objects is John carrying?")
+        self.assertEqual(count_before_source_repair(q)["answer"],"one")
+        self.assertEqual(solve("QUANTITY",q)["answer"],"none")
+        q["facts"][-1]["text"]="John dropped the apple there."
+        self.assertEqual(count_before_source_repair(q)["answer"],"one")
         self.assertEqual(solve("QUANTITY",q)["answer"],"none")
 
     def test_temporal_ordering_ignores_narration_line_order(self):
@@ -163,6 +173,10 @@ class TypedConceptTests(unittest.TestCase):
         result=run(source_dir=ROOT,train_limit=60,test_limit=250)
         self.assertEqual(result["training_questions"],180)
         self.assertEqual(result["test_questions"],750)
+        self.assertEqual(result["inspected_development_questions"],750)
+        self.assertEqual(result["first_run_counting_development_exact_before_repair"],226)
+        self.assertEqual(result["same_inspected_counting_development_exact_after_repair"],250)
+        self.assertTrue(result["prospective_external_test_starts_after_first_250_per_family"])
         self.assertEqual(len(result["external_test"]),3)
         self.assertEqual(set(result["trained_question_type_router"][
                             "question_grammar_to_typed_engine"].values()),
