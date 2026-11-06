@@ -73,7 +73,7 @@ class AlgorithmExaminerTests(unittest.TestCase):
 
     def test_SMT_actually_refutes_unsound_shortcut(self):
         for proposal in (("P_ZERO","COLUMN"),("ALWAYS","ZERO"),
-                         ("P_FULL","PARENT"),("C_ZERO","COLUMN")):
+                         ("P_FULL","PARENT"),("C_ZERO","PARENT")):
             counterexample=prove_rule(*proposal,152)
             self.assertEqual(counterexample["result"],"SAT")
             x=counterexample["counterexample"]
