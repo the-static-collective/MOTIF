@@ -27,6 +27,7 @@ MAX_HORIZON=10
 MAX_CAPITAL=64
 MAX_POWER=64
 MAX_INVESTMENTS=5
+MAX_RESEARCH_RATE=16
 
 @dataclass(frozen=True)
 class Improvement:
@@ -36,6 +37,7 @@ class Improvement:
     numerator: int=1
     denominator: int=1
     requires: tuple[str,...]=()
+    research_factor: int=1  # success improves the ability to attempt later improvements
 
 @dataclass(frozen=True)
 class Economy:
@@ -52,6 +54,7 @@ class State(NamedTuple):
     power: int
     tried: int
     succeeded: int
+    research_rate: int=1
 
 class HOLD(ValueError):
     pass
@@ -67,7 +70,7 @@ def validate(e: Economy)->Economy:
     if type(e.investments) is not tuple or len(e.investments)>MAX_INVESTMENTS:
         raise HOLD("Too many available interventions")
     names=[a.name for a in e.investments]
-    if len(set(names))!=len(names):
+    if len(set(names))!=len(names) or "WORK" in names:
         raise HOLD("Conflicting action names")
     for a in e.investments:
         if (type(a) is not Improvement or
@@ -75,6 +78,7 @@ def validate(e: Economy)->Economy:
             or a.name.startswith("_") or a.name.upper()!=a.name
             or type(a.cost) is not int or not 1<=a.cost<=MAX_CAPITAL
             or type(a.factor) is not int or not 1<=a.factor<=4
+            or type(a.research_factor) is not int or not 1<=a.research_factor<=4
             or type(a.numerator) is not int or type(a.denominator) is not int
             or not 0<=a.numerator<=a.denominator<=100 or
             a.denominator<1 or type(a.requires) is not tuple or
@@ -102,7 +106,7 @@ def _legal(e,state):
     available=["WORK"]
     for i,a in enumerate(e.investments):
         if (state.tried>>i)&1:continue
-        if a.cost>state.capital:continue
+        if max(1,(a.cost+state.research_rate-1)//state.research_rate)>state.capital:continue
         if any(not((state.succeeded>>ids[p])&1) for p in a.requires):
             continue
         available.append(a.name)
@@ -117,16 +121,18 @@ def transition(e,state,action):
     if action=="WORK":
         nxt=State(state.period+1,
                   min(e.capital_cap,state.capital+state.power),
-                  state.power,state.tried,state.succeeded)
+                  state.power,state.tried,state.succeeded,state.research_rate)
         return ((Fraction(1),nxt,Fraction(state.power)),)
     i=next(i for i,a in enumerate(e.investments) if a.name==action)
     a=e.investments[i]
-    base=State(state.period+1,state.capital-a.cost,state.power,
-               state.tried|(1<<i),state.succeeded)
+    effective_cost=max(1,(a.cost+state.research_rate-1)//state.research_rate)
+    base=State(state.period+1,state.capital-effective_cost,state.power,
+               state.tried|(1<<i),state.succeeded,state.research_rate)
     p=Fraction(a.numerator,a.denominator)
     success=State(base.period,base.capital,
                   min(e.power_cap,base.power*a.factor),
-                  base.tried,base.succeeded|(1<<i))
+                  base.tried,base.succeeded|(1<<i),
+                  min(MAX_RESEARCH_RATE,base.research_rate*a.research_factor))
     if p==0:return ((Fraction(1),base,Fraction(0)),)
     if p==1:return ((Fraction(1),success,Fraction(0)),)
     return ((p,success,Fraction(0)),
@@ -182,6 +188,10 @@ def evaluate(e):
         prob,next_state,reward=branches[0]
         trace.append({
             "period":state.period,"action":choice,
+            "research_rate_before":state.research_rate,
+            "research_rate_after":next_state.research_rate,
+            "improvement_cash_cost_at_current_research_rate":(
+                0 if choice=="WORK" else state.capital-next_state.capital),
             "capital_before":state.capital,
             "power_before":state.power,
             "success_branch_probability":str(prob),
@@ -211,8 +221,16 @@ def independent_only(e,keep):
     validate(e)
     keep=set(keep)
     universe={a.name:a for a in e.investments}
-    filtered=tuple(a for a in e.investments
-                   if a.name in keep and all(p in keep for p in a.requires))
+    # Remove actions whose dependencies have themselves been removed.
+    feasible=set(keep)
+    changed=True
+    while changed:
+        changed=False
+        for a in e.investments:
+            if a.name in feasible and not all(p in feasible for p in a.requires):
+                feasible.remove(a.name)
+                changed=True
+    filtered=tuple(a for a in e.investments if a.name in feasible)
     return replace(e,investments=filtered)
 
 def interaction(e,a,b):
