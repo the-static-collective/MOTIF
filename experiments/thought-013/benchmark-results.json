@@ -1,0 +1,815 @@
+{
+  "cases": [
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:00"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:01"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:02"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "YES",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "YES",
+      "world": "hypothesis:03"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:04"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:05"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:06"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "YES",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "YES",
+      "world": "hypothesis:07"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:08"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:09"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:10"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "YES",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "YES",
+      "world": "hypothesis:11"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:12"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:13"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 1
+        },
+        "decision_no_map": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": "NO",
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "NO",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "NO",
+      "world": "hypothesis:14"
+    },
+    {
+      "no_geometry_parity": true,
+      "strategies": {
+        "decision_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 2
+        },
+        "decision_no_map": {
+          "decision": "YES",
+          "queries": 2,
+          "question_ids": [
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        },
+        "dependency_only": {
+          "decision": null,
+          "queries": 1,
+          "question_ids": [
+            "ask:r:meal-needs-venue"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "HOLD_NO_DISCRIMINATING_QUESTION",
+          "views": 0
+        },
+        "strong_world_entropy": {
+          "decision": "YES",
+          "queries": 3,
+          "question_ids": [
+            "ask:r:meal-needs-van",
+            "ask:r:meal-needs-venue",
+            "ask:r:volunteers-enable-meal"
+          ],
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+          "status": "MODEL_CONSENSUS_NOT_TRUTH",
+          "views": 0
+        }
+      },
+      "truth_within_fixture": "YES",
+      "world": "hypothesis:15"
+    }
+  ],
+  "decision_correct_under_model": {
+    "decision_map": 16,
+    "decision_no_map": 16,
+    "dependency_only": 8,
+    "strong_world_entropy": 16
+  },
+  "external_authority": "NONE",
+  "kind": "16 entirely synthetic, developed-with-policy world fixtures",
+  "limitations": "Finely specified hypothetical outcomes: not real independent witnesses, not blind data, and not a demonstrated language model.",
+  "no_geometry_parity_all": true,
+  "question_budget_each": 3,
+  "questions_issued": {
+    "decision_map": 24,
+    "decision_no_map": 24,
+    "dependency_only": 16,
+    "strong_world_entropy": 40
+  },
+  "strict_source_unchanged": true,
+  "trials": 16
+}

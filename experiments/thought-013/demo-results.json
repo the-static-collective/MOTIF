@@ -1,0 +1,200 @@
+{
+  "dialogue": {
+    "authority": "NONE",
+    "input": {
+      "can_commit_pen": false,
+      "can_execute": false,
+      "clarification": null,
+      "inferred_relations": [],
+      "interpreter_origin": "BOUNDED_LOCAL_GRAMMAR",
+      "limits": "Bounded aliases and phrase rules, not general natural language understanding.",
+      "normalized_input": "what if food and a community meal could connect",
+      "routing_preference": "world",
+      "schema": "motif.human-talk.v1.interpretation",
+      "selected_manifestations": [
+        "m:food",
+        "m:meal"
+      ],
+      "speech_act": "EXPLORE_POSSIBILITY",
+      "status": "TYPED_ONLY"
+    },
+    "inquiry": {
+      "allowed_lenses": [
+        "dependency",
+        "tension",
+        "affordance",
+        "association"
+      ],
+      "candidate_question_count": 8,
+      "conclusion_status": "HOLD_BUDGET_EXHAUSTED",
+      "decision_distribution_under_assumptions": {
+        "NO": 0,
+        "YES": 2
+      },
+      "effective_external_authority": "NONE",
+      "geometry_used_for_evidence": false,
+      "identity_digest": "03b70258b14590c1c55f526718cb4d40047cd0a38ec37bab6417243296915fe2",
+      "model_worlds_remaining": 2,
+      "pen_status": "UNCHANGED",
+      "proposed_decision": "YES",
+      "question_steps": [
+        {
+          "answer": "NO",
+          "atom": "r:meal-needs-van",
+          "claimed_origin": "fixture:root0",
+          "coordinates_used_for_evidence": false,
+          "expected_information_gain_bits": 1.0,
+          "external_authority": "NONE",
+          "index": 1,
+          "lens": "dependency",
+          "model_mismatch": false,
+          "pen_status": "UNCHANGED",
+          "posterior_model_world_count": 8,
+          "previous_receipt": "0000000000000000000000000000000000000000000000000000000000000000",
+          "prior_model_world_count": 16,
+          "projection_placement_count": 9,
+          "question_id": "ask:r:meal-needs-van",
+          "receipt": "37ce6c52ce87d36199229e07ccd4279534e2b902b4d5f09dc34bdc5f3bf1b4d1",
+          "relation_id": "r:meal-needs-van",
+          "response_is_fixture_oracle_not_world_witness": true,
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+        },
+        {
+          "answer": "YES",
+          "atom": "r:meal-needs-venue",
+          "claimed_origin": "fixture:root0",
+          "coordinates_used_for_evidence": false,
+          "expected_information_gain_bits": 1.0,
+          "external_authority": "NONE",
+          "index": 2,
+          "lens": "dependency",
+          "model_mismatch": false,
+          "pen_status": "UNCHANGED",
+          "posterior_model_world_count": 4,
+          "previous_receipt": "37ce6c52ce87d36199229e07ccd4279534e2b902b4d5f09dc34bdc5f3bf1b4d1",
+          "prior_model_world_count": 8,
+          "projection_placement_count": 9,
+          "question_id": "ask:r:meal-needs-venue",
+          "receipt": "78c39959bcb0b8b56451f91eebba1573d88da1c08a4a4718239eddb84d12e825",
+          "relation_id": "r:meal-needs-venue",
+          "response_is_fixture_oracle_not_world_witness": true,
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+        },
+        {
+          "answer": "YES",
+          "atom": "r:volunteers-enable-meal",
+          "claimed_origin": "fixture:root0",
+          "coordinates_used_for_evidence": false,
+          "expected_information_gain_bits": 1.0,
+          "external_authority": "NONE",
+          "index": 3,
+          "lens": "affordance",
+          "model_mismatch": false,
+          "pen_status": "UNCHANGED",
+          "posterior_model_world_count": 2,
+          "previous_receipt": "78c39959bcb0b8b56451f91eebba1573d88da1c08a4a4718239eddb84d12e825",
+          "prior_model_world_count": 4,
+          "projection_placement_count": 9,
+          "question_id": "ask:r:volunteers-enable-meal",
+          "receipt": "78e87036666b0492cc6d81d810359d48af29d00c83e5eabb2ca8f4b98606261f",
+          "relation_id": "r:volunteers-enable-meal",
+          "response_is_fixture_oracle_not_world_witness": true,
+          "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+        }
+      ],
+      "receipt_digest": "5ae25ca26286bd5ea9c47307d57a571ca92067d12adc69eed5e36e11aa1bb2a1",
+      "schema": "motif.thought-adaptive-inquiry.v1",
+      "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+      "starting_manifestations": [
+        "m:food",
+        "m:meal"
+      ],
+      "strategy": "world",
+      "view_count": 3,
+      "warning": "Finite hypothetical models and caller-provided test answers; consensus is NOT verified world truth.",
+      "world_model_digest": "a6cb9e1b97b1e1a4b59eeafbe27787575665e3623c22733c160c689df75cc68b"
+    },
+    "pen": "UNCHANGED",
+    "receipt_digest": "e4d0356569350db82372fabf190c97cb91f0f967663fbab19ee924f3ab5e57d1",
+    "schema": "motif.human-talk.v1.dialogue",
+    "status": "HOLD_FOR_REVIEW",
+    "utterances": [
+      {
+        "speaker": "HUMAN",
+        "speech_act": "EXPLORE_POSSIBILITY",
+        "status": "OPERATOR_SUPPLIED",
+        "text": "What if food and a community meal could connect?"
+      },
+      {
+        "claimed_origin": "fixture:root0",
+        "instrument": "PENCIL",
+        "question_id": "ask:r:meal-needs-van",
+        "relation_id": "r:meal-needs-van",
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+        "speaker": "MOTIF",
+        "speech_act": "ASK",
+        "status": "QUESTION_ONLY",
+        "text": "Could we check whether Meal requires Van?"
+      },
+      {
+        "instrument": "PENCIL",
+        "question_id": "ask:r:meal-needs-van",
+        "speaker": "MOTIF",
+        "speech_act": "RECORD_TEST_RESULT",
+        "status": "UNVERIFIED_FIXTURE_OBSERVATION",
+        "text": "The synthetic test says no for this modeled possibility. The original authored link remains a historical claim."
+      },
+      {
+        "claimed_origin": "fixture:root0",
+        "instrument": "PENCIL",
+        "question_id": "ask:r:meal-needs-venue",
+        "relation_id": "r:meal-needs-venue",
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+        "speaker": "MOTIF",
+        "speech_act": "ASK",
+        "status": "QUESTION_ONLY",
+        "text": "Could we check whether Meal requires Venue Open?"
+      },
+      {
+        "instrument": "PENCIL",
+        "question_id": "ask:r:meal-needs-venue",
+        "speaker": "MOTIF",
+        "speech_act": "RECORD_TEST_RESULT",
+        "status": "UNVERIFIED_FIXTURE_OBSERVATION",
+        "text": "The synthetic test says yes for this modeled possibility. That does not verify the real world."
+      },
+      {
+        "claimed_origin": "fixture:root0",
+        "instrument": "PENCIL",
+        "question_id": "ask:r:volunteers-enable-meal",
+        "relation_id": "r:volunteers-enable-meal",
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+        "speaker": "MOTIF",
+        "speech_act": "ASK",
+        "status": "QUESTION_ONLY",
+        "text": "Could we check whether Volunteers enables Meal?"
+      },
+      {
+        "instrument": "PENCIL",
+        "question_id": "ask:r:volunteers-enable-meal",
+        "speaker": "MOTIF",
+        "speech_act": "RECORD_TEST_RESULT",
+        "status": "UNVERIFIED_FIXTURE_OBSERVATION",
+        "text": "The synthetic test says yes for this modeled possibility. That does not verify the real world."
+      },
+      {
+        "instrument": "PENCIL",
+        "speaker": "MOTIF",
+        "speech_act": "PROVISIONAL_SUMMARY",
+        "status": "MODEL_CONDITIONAL_ONLY",
+        "text": "Under the supplied hypothetical worlds, the remaining models all say YES. This is not independent evidence or a PEN conclusion."
+      }
+    ]
+  },
+  "experiment": "MOTIF-THOUGHT-013",
+  "external_authority": "NONE",
+  "human_terminal_inspiration": "Full Measure Human Terminal v0.1",
+  "oracle_is_synthetic": true,
+  "original_phrase": "What if food and a community meal could connect?",
+  "source_unchanged": true
+}
