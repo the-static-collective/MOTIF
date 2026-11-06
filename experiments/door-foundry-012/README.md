@@ -85,3 +85,11 @@ The artifact contains genuine (synthetic) original PNGs, GRAFT/CANNON owner evid
 ### Next falsifiable boundary
 
 Test on *novel* undisclosed source-partition shapes, correlated/misleading forensic cues, out-of-support origins, and real user-consented provenance metadata **without identifying people from stylometry**. Benchmark false positives and uncertainty calibration against classical dependency and Bayesian source-discovery baselines. The principled next job is an evidence acquisition interface that keeps source consent and original-identity authority separate from AI inference.
+
+## Independent CANNON-097 reviewer added
+
+[CANNON-097 draft PR #97](https://github.com/the-static-collective/CANNON/pull/97) now independently verifies this exact original source and the five newly generated MOTIF-012 packets. Its source code is pinned at immutable CANNON commit `788739025352b89d57928bf145953befe3db6a37`.
+
+The reviewer **does not import MOTIF's Bayesian or question-selection code**: it recomputes the latent 3×4 source/world posterior with exact BigInt rational arithmetic in JavaScript, independently replays the optimal 0/1/2-question policies and checks all original synthetic reports, their content hashes, the four original PNG hashes, and the explicit no-witness-authentication boundaries. Original canonical Python JSON SHA-256 records are checked using a separate standard-library script rather than MOTIF application code.
+
+The standalone CANNON-097 experiment has **14 independent tests**, including forged-human-attestation and false-independence controls. Its own read-only workflow passed at its final documentation head. The MOTIF-012 native workflow checks the actual emitted MOTIF-012 evidence against this independent CANNON reviewer as a required test, recording a separate unsigned `HOLD_LATENT_ORIGIN_MATH_REPLAYED_WITNESSES_UNAUTHENTICATED` receipt. **No source identities have been authenticated.**
