@@ -1,0 +1,753 @@
+{
+  "schema": "motif.branch-ring-inventory.v1",
+  "snapshot_utc": "2026-11-06",
+  "source": "GitHub REST branches snapshot; refs can move",
+  "scope": "DISCOVERY_ONLY_NO_IMPORTS_NO_AUTHORITY",
+  "branches": [
+    {
+      "ref": "experiment/door-foundry-001-capability-composition",
+      "commit": "5ee9207f04af2826750863526af7f92b31ef8578",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-002-cannon-build-backloop",
+      "commit": "e4ca5449052562030f6a124e1fa664cf19e803e5",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-003-graft-born-operator",
+      "commit": "1bcbdcc6e39228d4f23870337d459e1e0304cd17",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-004-self-posed-question-gate",
+      "commit": "f34dc7f28be9f9f74a39dd7a882c40e94fe53c71",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-005-impossibility-graft",
+      "commit": "30564cdf60ffb34769c496c91e79aade356a41ec",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-006-image-in-imagination",
+      "commit": "67f05d7b235bfdafa9b11fddcb9bfe53e674eb54",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-006-image-in-imagination-test",
+      "commit": "30564cdf60ffb34769c496c91e79aade356a41ec",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-007-text-visual-cotranslation",
+      "commit": "4dc51dd3837d369bcba020d2b35e0095d93adabd",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-008-three-way-crossexamination",
+      "commit": "eb8bb92779f5ea16147127155aa37af2a8ceb2b8",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-009-active-visual-question",
+      "commit": "fa414df38ad674ac292d6505e66f0dd05077cc2c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-010-belief-ledger",
+      "commit": "8007f037733557ecdeb9e2017cda4a95e99ff84c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-011-evidence-dependency-frontier",
+      "commit": "03f16903838a6141b0088ebd5edb70d7ad52f380",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-012-hidden-source",
+      "commit": "c340b463695adebab111372100a8c4b11e77284f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/door-foundry-013-missing-world",
+      "commit": "a4f3b6645a5bbf50e3304bd8df74215ecf99766b",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-001-flower-of-life",
+      "commit": "db3840d951f1196410d611bf93ef2f16eb470904",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-002-self-discovered-rules",
+      "commit": "de9d8ef8330446fda4d4007ae46bf19610e7f1cb",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-003-inventable-constructions",
+      "commit": "1b7a55152979639a9177e14a3e86de70f6dcb27d",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-004-missing-macro",
+      "commit": "792149503ef29da01676c48ca9c09f6f4141b4d0",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-005-optional-thought-space",
+      "commit": "2a07e68ff7047d5607924f3b95a7611903ad24f0",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-006-temporal-staircase",
+      "commit": "16204d6f14c7afffd7e875f14a1c0928803ce11f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-007-contextual-imagination",
+      "commit": "754dad57642e1e0c42b78dc0258f5cf9b4cba8a9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-008-free-graph-frontier",
+      "commit": "79296285c263df7bd05c5f8565e89a40197117db",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-009-self-questioning-grammar",
+      "commit": "a96d8ee9b00c37d84cd979339d5cbacd7d00f5a2",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-010-self-revising-reason-lab",
+      "commit": "fd9b81ab8f282b74457cc34a5288be9eb8ea8743",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-011-missing-dimension",
+      "commit": "3420435b08779458bc84e23b5076761be64f355a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-012-procedural-instrument-synthesis",
+      "commit": "07e19151c7ff3fd8bfd42057f970f4d7338dafca",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/geometry-013-self-redesigning-instrument",
+      "commit": "a3dc551ababa40c29975c9b54c4eaa515d9dc18c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-001-reason-routing-stranger-gate",
+      "commit": "cd8edf6d229a2663b535eba58389389a9257b12c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-002-covert-consciousness-stranger",
+      "commit": "5188dfa4ff2707df0dd5c877da651d3480f42c32",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-003-grammar-of-the-unknown",
+      "commit": "34835a8c29aad30fad490252fc135ab51e3d8831",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-004-question-grammar-induction",
+      "commit": "95237960f7f5e15d78b8c074056a563594da36a5",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-005-meaning-consequence-frontier",
+      "commit": "17f5e14bcb62334e43416c458d0eb155bd377ae2",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-006-semantic-adversary",
+      "commit": "0967752731cdbeb6645bc453613db0e39a4f0b98",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-007-adversarial-witness-provenance",
+      "commit": "882aa53805d3bf648361ff6f4b2a6d56c52fc5b1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-008-proof-carrying-meta-reasoner",
+      "commit": "779de5844dfb2749680907699498019fdbc7ba25",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-009-counterexample-cartridge-invention",
+      "commit": "2f3a876dae21a7e25b177540756ee9ff516e9544",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-010-self-hosted-reason-composer",
+      "commit": "bc8e2ad2564be693daac607d031d7a8efd6ce3c0",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-011-self-rewriting-search-kernel",
+      "commit": "660f9a3f405689e62c7d912a3245235b696f0074",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-012-certified-search-dag-transformer",
+      "commit": "8c13997dd52fe1f5f95582ef44fbbec907f82f7d",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/legit-013-examiner-z3-proven-transform",
+      "commit": "aa1feb8b0d47e97b9913d6248fa63c5ee24279b3",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/motif-006-first-question-dogram-probes",
+      "commit": "404c0c6701737f35fd0998112d81a4ca850ff5f1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/motif-007-smallest-key",
+      "commit": "10514da5cc61968cdd0ed3d2f9a75401c59a5fa1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/observation-015-posthog-outcome-witness",
+      "commit": "87a5dc4749683a998784dedca5089a46d24325a9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-015-weather-witness",
+      "commit": "60f27b6da7eea332627ab4cc8186193d48810fb9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-016-living-watershed",
+      "commit": "685f55f7bd02a36880620df1fadd4439282c8234",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-017-event-learning",
+      "commit": "d0cf7ec78923a9f536857e2efa8038f5a333f708",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-018-question-engine",
+      "commit": "88ccef6085e545cdda386cca9e2eb16ad2ab31eb",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-019-availability-question",
+      "commit": "1bb4028141eb20a8798bed338dcb3d851284de22",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-020-embodied-inquiry",
+      "commit": "aa838a2c419edf5cb19afc15f76b5793e2fe8855",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-021-question-integrity",
+      "commit": "cdcec6013492bb6ccd0982ee9af9f5bf1d3200f7",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-022-cost-of-knowing",
+      "commit": "dd264e277a3ca66d55daed59ff52c38a0f81b307",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-023-human-goal-handshake",
+      "commit": "5835a44a5eb52386c070121e94f4771a402687ce",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-024-examples-and-correction",
+      "commit": "66dbc1a1b566609a4fc7cf0764bc374e31842d15",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-025-composable-examples",
+      "commit": "1c3c6d3474c096ce2403902a1bc5a19f1633c344",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-026-goal-to-local-work",
+      "commit": "a4af07cb48c201d22e34b5569496a4ac1d3deb58",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reality-iron-027-capability-handoff",
+      "commit": "90cbe6427d52286d17b74cdff48c4a81a48db3d0",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-001-teacher-corrections",
+      "commit": "ca48c017975c754e415b70d159bb6333ea91fbaa",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-002-method-distillery",
+      "commit": "5729d0dc4f452332ea433ed17f3e4b494b0fc447",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-003-foreign-dogram-and-objection",
+      "commit": "f6c5eefcc0e562823230e63da85da66a5f7cddd2",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-004-self-objecting-reasoner",
+      "commit": "f36be2fa1dcfe69d6daf480f6af8eecbacfa683a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-005-ci-import-fix",
+      "commit": "4f44b0562dd611631cc5317a50bf0b6f4b9199ef",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-005-meta-objection-economy",
+      "commit": "386853599bcdb608d8024f155a8ade9869b10457",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-006-reasoning-commonwealth",
+      "commit": "d0808c6a829fc6ef15d736c325790ddb4d169ab1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-007-discovery-market",
+      "commit": "49def94c74e3107a64c73f0744cce8ee185f5847",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-008-missing-primitive",
+      "commit": "b0210bf2c709b2533867340804e2bde33c4d7519",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-009-grammar-inventor",
+      "commit": "09d6d5cbbe883c6f90df8cbff7ca99d4477161d9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-010-strange-law",
+      "commit": "ec8131c38d779288f8688f1b410fd50c5de15912",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-011-impossible-court",
+      "commit": "c83fa98d989d10cd61b4b42e51ac5ac35e1f81e4",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-012-actual-opinion-excerpts",
+      "commit": "3f73ea13c1bc9073dd9c9b1a31c71b08bc896968",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-013-adversarial-reader",
+      "commit": "1903df3227a4ec8d0286040774faa72fc96b0c88",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-014-complete-opinion-retrieval",
+      "commit": "1fc06f9e9683e2a651c7c184e9db8912c7c96d66",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-015-unowned-good",
+      "commit": "96aaeab6752b14eed1471b8494b23f033a41a33f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-016-good-of-the-other",
+      "commit": "9733a3bcfbcacfcbce668dd5d21117660d19b70a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-017-unexpected-other",
+      "commit": "d94b93698f31acab83274af2d0e1dcaf5963caeb",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-018-living-concept",
+      "commit": "ce6b22951f3cabe9e5f26111919889ffaaf776b4",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-019-golden-mirror",
+      "commit": "bb1cc8bd8a6ea7ee9b18012911c0e08c373d3c00",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-020-golden-mirror-learns",
+      "commit": "c0db988ac1443f63d602f5e5a89c5a9d9bf93769",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/reason-cartridge-021-other-teaches-self",
+      "commit": "d1dfacdc34949085a24713e1ad540cb234434a60",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-006-pencil-pen-ledger",
+      "commit": "ffeefcedd32faa8f7670bad05db6b06496278e6e",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-007-nonfungible-manifestations",
+      "commit": "9cfc817fd12f4d9d10d8659617f33d69aa08f25a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-008-parallel-geometries",
+      "commit": "fbce0bc1b0f27db08a9d14da5a33a621235e472a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-009-representation-router",
+      "commit": "34222c31ab7bd16821c89c83637cbb34930697b4",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-010-local-interoperability",
+      "commit": "e698ef70fd93d9318a372b37501d9f088ffa61a3",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-012-cross-lens-inquiry",
+      "commit": "b025aa46a0a85cc8186df86992f401bad5f0e98f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-013-self-directed-human-talk",
+      "commit": "61f8571a642c4a1440007ae9cf5bf936c22bbc9b",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/thought-014-native-language-selfdev",
+      "commit": "a38c617641adffe52cd4df283996a58f0fe7b973",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiment/wake-signal-001-human-agency",
+      "commit": "efe133f0db12b439b9c483eace13601cf8c03285",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/015-multiplex-inquiry-20261105",
+      "commit": "f88c93e9c8385fa7ea588efd1b113042cc6126e5",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/016-living-forest-20261105",
+      "commit": "645bcafe3e398499db43ab062387d5129eaa7f57",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/017f-growing-diagnostic-20261105",
+      "commit": "d6d7861d171e62dd49f5f46e79f2828b08f1a541",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/019-memento-native-understory",
+      "commit": "9b785aea6ef2f61345d1b93fdc44b3d69073bf28",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/019f-native-question-planner-20261105",
+      "commit": "e0fe6b44e6d3f374cea71b75d9eb208c464d3dd6",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/020-instrument-garden-minecraft",
+      "commit": "8379f6018106ad68aa8d22ac884ede57f34508f9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/020f-planz-omission-20261105",
+      "commit": "53b3740b8b30888b560c4f390fe61750e99da590",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/021-live-minecraft-epistemic-update",
+      "commit": "c9c5030667beb98da3863c2ec3e9ad828737b8a6",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/021f-t5-sidecar-chorus-20261105",
+      "commit": "89433236aeffcc32862bb721436ede299c155054",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/022-minimal-causal-witness",
+      "commit": "3b0c5767e77a98321e142e03328c876067e29d64",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/022f-critic-question-loop-20261105",
+      "commit": "d9ab2edb6385dc3e5c9a50ef04bc6658d76714ee",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/023-adversarial-method-falsifier",
+      "commit": "2fab3f845e1afb247a78d8129ace229f702a56ed",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/023f-real-t5-critic-trial-20261105",
+      "commit": "c453dc41c1e8a31b814a95de76d0a1b2ba80eaad",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/024f-native-shortlist-t5-rerank-20261105",
+      "commit": "e58484efda51b33bbd6e34ed60cfc7bdd6410466",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/025f-t5-job-search-20261105",
+      "commit": "0a7560270d3574f51910d01db93028baed591b6c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/026f-semantic-question-loop-20261105",
+      "commit": "ce5b3407b4da43beb1d0d5f4a066804b70db0fda",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "experiments/027f-three-specialist-semantic-20261105",
+      "commit": "3175fdb1a5ada605773741e1bfb293ee623bc8f1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "plan/thought-fields-full-stack-20261106",
+      "commit": "c08117b28dda5518e9c2aad34b8ab4a28eba2d13",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/003-affordance-frontier",
+      "commit": "1577ed30213c0c4b20d1c99ed5b5d079621ba907",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/004-causal-scars",
+      "commit": "643cad8ada3719303c22901a04b006a49ceab0bd",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/005-birth-of-a-concept",
+      "commit": "69e5a1e8c8d1b3d325eb07b174e71cc1c85543d8",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/006-recursive-capability",
+      "commit": "14fae4fd43d2d4bb3ee6544f3d0c2bab69dff05b",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/007-federated-inheritance",
+      "commit": "180c2dc404a0e9d7a05b1850e2aa96ca36731747",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/008-unknown-world",
+      "commit": "c3944e1499aeb377ba7c3ad2ce22cd03a6023ad9",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/009-tree-cartridge-experimenter",
+      "commit": "26b587389364d8c92edea839f2693081222752be",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/010-scientist-interventions",
+      "commit": "30f6126f056cee978513bb6429d7fe4cfd86916f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/011-skeptical-scientist",
+      "commit": "c2cd06c70152f384dd61f33dfafcad9700a0a607",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/012-causal-cartographer",
+      "commit": "5e49d5b3081f180d3f46c9ba7685a057045cb201",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/013-probabilistic-witness",
+      "commit": "5d34bf8a667e567000f960b66f2e5bbdf78a228a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/014-organ-gardener-question-box",
+      "commit": "8b8d962ad46bf0ff8979c39dc2e0998d775cd4af",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/014-witness-of-witnesses",
+      "commit": "420b3d1b434c5fab5d5adc5033fd3c7d7258ef9e",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/015-invented-graft-metaprocedure",
+      "commit": "31b06790a3fa1a50ccf4087746b7f7b657342f59",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/016-gardener-gardener-metaquestion",
+      "commit": "31874858ffff94a6f1c8fe8da4279a6c4c6a4169",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/017-question-before-question",
+      "commit": "d13b1ab649ce3025df2fb4d4dcfdb26a6e7b2a82",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/018-witness-of-witness",
+      "commit": "17a2d488cf623c4120d1c04540f4356bef06e830",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/019-hidden-common-ancestor",
+      "commit": "2b07c847cc54605b5b05c02a50bddda188310564",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/020-madd-source-custody-maxhinal",
+      "commit": "73dbeec3beb89d444c3fd8b64127310b9db0803b",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/021-alex-planz-graft-orchestration",
+      "commit": "a46c4f7b82d4561f7a05c43232ca942c75d67956",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/022-question-to-capability",
+      "commit": "c32b0db670fe7587e25140e49c47aa761e4b6b7d",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/023-open-question-field",
+      "commit": "63225336a0aa72d040f5af4091b376284e508b4f",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/026-discovery-of-discovery",
+      "commit": "7d14d59e12347dc7df3f8d5ceb2d5515bc41d266",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/027-capability-gardener-evaluation",
+      "commit": "d1b0890a767239ab9799fe2e17937d7e9f0fa642",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/028-memory-of-failure",
+      "commit": "526eb75823070c2d96c0e2a9e3f84460b07df81e",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/field-001-real-world-witness-desk",
+      "commit": "a6bd72c498f308a8dbf21f65af2d126ca41f0e17",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/first-real-door-bridge-synthesis",
+      "commit": "bc25f4ec1c6628845e3b5ff23f225f1c3c78b1b4",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/inquiry-smallest-key-dogram",
+      "commit": "3daa17affcb629e8647f522de7a33e8e000de83e",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-001-20261105",
+      "commit": "fab484a9ba0fab5a0d4dc9234019e8eaeb45f58a",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-002-constructor-20261105",
+      "commit": "0576b038d432c2719e03268d1a63b45a6382d35e",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-003-operator-foundry-20261105",
+      "commit": "7a8845c31dbd58496d7004ada9374124cb30f91c",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-004-grammar-breaker-20261105",
+      "commit": "d77d74776e1c7f8edee2c029adc6782b4de80310",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-005-world-breaker-trinary-20261105",
+      "commit": "091b01df9bb2378259ae560135b768769e6e1748",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-006-instrument-inventor-20261105",
+      "commit": "54e7546727c665729b966a8f113e2a39d244cf66",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-007-lookup-assimilation-20261105",
+      "commit": "3cdad4206f54f1d0896e940e35fd5b4719df0fc7",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-008-unknown-world-20261105",
+      "commit": "3c933b18d3ba2295d3466c292c8242e6d6bd5bfe",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-009-stranger-entropy-cartridge-20261105",
+      "commit": "0d771ff937997a33a07b792f63f439903ecde360",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-010-blind-falsifier-20261105",
+      "commit": "9cf607cc3879c81f0b780ecd42613281f1ff9dc1",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/law-forge-011-signed-counterfactual-20261105",
+      "commit": "b1c5ec2d4b3fe117746c50e207542abe40918b57",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/map-of-maps-001-first-real-weave",
+      "commit": "4ea03de4e250d220fff14503edb89f065ca7fbd6",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/map-of-maps-002-native-inquiry-court",
+      "commit": "070aba60319cbab3d1c1838ec7481c350e7d86e5",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/map-of-maps-003-freegraph-reason-space",
+      "commit": "8c4ce04e3ec73b4dcad98097dffec6d44c7c17d3",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/map-of-maps-004-freegraph-investigation-selection",
+      "commit": "ee4cd6a21c6cafb3a230e7127fc342ea921a8f2b",
+      "status": "DISCOVERED_ONLY"
+    },
+    {
+      "ref": "research/motif-018-representation-frontier",
+      "commit": "6a1e6f0becbe79d21c349ef87c10ca92cfeef70a",
+      "status": "DISCOVERED_ONLY"
+    }
+  ]
+}
