@@ -1,0 +1,109 @@
+{
+  "committed_to_main": false,
+  "external_network_access_granted": false,
+  "finite_proof_summary": {
+    "existing_legit010_search_behavior_preserved": true,
+    "independently_authored_examiner": false,
+    "partial_truth_tables_checked": 6561,
+    "real_world_authority": false,
+    "source_sha256": "09f0e39892526f3ecf0cb5cfa7e3d210b74e5e72c2648b2648f887ce5e7c899a",
+    "status": "VERIFIED_FULL_FINITE_SEARCH_REWRITE"
+  },
+  "real_world_authority": false,
+  "rewrite_manifest": {
+    "finite_verification_states": 6561,
+    "generated_recipe": {
+      "combine": "AND",
+      "empty": "HOLD",
+      "invert": false,
+      "pick": "FIRST"
+    },
+    "meta_counterexamples": 1,
+    "meta_transcript": [
+      {
+        "candidate_recipe": {
+          "combine": "OR",
+          "empty": "HOLD",
+          "invert": false,
+          "pick": "FIRST"
+        },
+        "counterexample": {
+          "candidate_index": 0,
+          "expected_index": 3,
+          "partial": [
+            [
+              6,
+              false
+            ],
+            [
+              7,
+              false
+            ]
+          ]
+        },
+        "iteration": 1,
+        "known_cases_before": 1
+      },
+      {
+        "candidate_recipe": {
+          "combine": "AND",
+          "empty": "HOLD",
+          "invert": false,
+          "pick": "FIRST"
+        },
+        "counterexample": null,
+        "iteration": 2,
+        "known_cases_before": 2
+      }
+    ],
+    "parent_legit009_update_sha256": "bc6b2356064afeb63edae714790383825f4ff315d8d308ba5358d5238efefc05",
+    "parent_legit010_search_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+    "real_world_authority": false,
+    "schema": "motif.self-rewrite-search-source.v1",
+    "sha256": "5c0ee40e15be2501897b1092b5e654fcfa89ae0848173fd9c8dc5218d7026310",
+    "source_changes_production": false,
+    "source_sha256": "09f0e39892526f3ecf0cb5cfa7e3d210b74e5e72c2648b2648f887ce5e7c899a",
+    "status": "DRAFT_SOURCE_TRANSFORMATION_ONLY",
+    "unrestricted_python_self_edit": false
+  },
+  "schema": "motif.generated-research-search-rewrite-bundle.v1",
+  "self_generated_operator": {
+    "counterexample_count": 2,
+    "emitted_python_primitive": "BITWISE_AND",
+    "independent_four_case_verifier": {
+      "complete": true,
+      "inductive_claim": "The intersection of all observed requirements equals the surviving candidate set.",
+      "property": "membership_next = membership_previous AND new_evidence",
+      "tested": 4
+    },
+    "operator": "AND_TWO_BOOLEAN_MEMBERSHIP_BITS",
+    "previous_generation_synthesizer_used": true,
+    "source_cartridge": {
+      "cegis_rounds": 3,
+      "counterexample_count": 2,
+      "gate_count": 2,
+      "gates": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "instruction_set": "NAND_DAG_WITH_INPUTS_A_B",
+      "output": 3,
+      "real_world_authority": false,
+      "schema": "motif.nand-reason-cartridge.v1",
+      "sha256": "bc6b2356064afeb63edae714790383825f4ff315d8d308ba5358d5238efefc05",
+      "source_of_semantic_labels": "INDEPENDENT_FINITE_VERIFIER",
+      "status": "PROVED_FINITE_DOMAIN_PROPOSAL_ONLY",
+      "task_id": "SearchIndexIntersection",
+      "truth_mask": 8,
+      "verifier_exhausted_two_bit_domain": true
+    }
+  },
+  "source_code_sha256": "09f0e39892526f3ecf0cb5cfa7e3d210b74e5e72c2648b2648f887ce5e7c899a",
+  "status": "DRAFT_SOURCE_CHANGE_REQUIRES_HUMAN_REVIEW"
+}
