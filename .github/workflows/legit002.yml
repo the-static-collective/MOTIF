@@ -1,0 +1,35 @@
+name: MOTIF LEGIT-002 silent witness
+on:
+  push:
+    paths:
+      - "experiments/legit002/**"
+      - ".github/workflows/legit002.yml"
+  pull_request:
+    paths:
+      - "experiments/legit002/**"
+      - ".github/workflows/legit002.yml"
+jobs:
+  consciousness-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test data provenance and native schema refusal
+        run: python -m unittest discover -s experiments/legit002 -p 'test_*.py' -v
+      - name: Reproduce native HOLD and author-curated evidence route
+        run: |
+          python experiments/legit002/bridge.py > /tmp/motif-legit002-conscience.json
+          cat /tmp/motif-legit002-conscience.json
+          python -m json.tool /tmp/motif-legit002-conscience.json > /dev/null
+      - name: Archive source-bound research receipt (no clinical advice)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT002-SILENT-WITNESS-HOLD
+          path: /tmp/motif-legit002-conscience.json
+          retention-days: 30
+          if-no-files-found: error

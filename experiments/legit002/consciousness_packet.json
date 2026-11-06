@@ -1,0 +1,84 @@
+{
+  "schema": "motif.stranger-evidence.v0",
+  "id": "COGNITIVE-MOTOR-DISSOCIATION-2026-11-06",
+  "status": "PUBLIC_RESEARCH_PACKET_HAND_COMPILED",
+  "topic": "Covert consciousness after severe brain injury",
+  "challenge": "Does the absence of observable behavior AND a negative task-based EEG/fMRI command-following response establish absence of subjective awareness? What evidence would most help discriminate the remaining possibilities?",
+  "scope": "GENERAL_RESEARCH_NOT_PATIENT_DIAGNOSIS",
+  "target": "SUBJECTIVE_EXPERIENCE_UNOBSERVED",
+  "proxy": "TASK_BASED_NEURAL_COMMAND_FOLLOWING",
+  "source_cards": [
+    {
+      "id": "BODIEN-NEJM-2024",
+      "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2400645",
+      "publication_date": "2024-08-14",
+      "design": "six-centre prospective convenience cohort",
+      "population": "adults with disorders of consciousness",
+      "counts": [
+        {
+          "group": "NO_OBSERVABLE_COMMAND_RESPONSE",
+          "total": 241,
+          "positive_neural_task": 60,
+          "negative_neural_task": 181
+        },
+        {
+          "group": "OBSERVABLE_COMMAND_RESPONSE",
+          "total": 112,
+          "positive_neural_task": 43,
+          "negative_neural_task": 69
+        }
+      ],
+      "limitations": [
+        "Convenience sample, not population prevalence.",
+        "Modality and available assessments vary across people.",
+        "Observable response is not a perfect ground truth for all subjective experiences.",
+        "A task-based signal tests a demanding cognitive ability, not all forms of experience."
+      ]
+    },
+    {
+      "id": "LAIGAARD-EJN-2026",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/ene.70713",
+      "publication_date": "2026-07-31",
+      "design": "individual participant data meta-analysis",
+      "included_studies": 56,
+      "participants": 1248,
+      "limitations": [
+        "Aggregate heterogeneous methods and patient states.",
+        "Does not provide independent definitive subjective-experience ground truth."
+      ]
+    },
+    {
+      "id": "KAZAZIAN-BRAIN-2025",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12233511/",
+      "publication_date": "2025-02-25",
+      "design": "clinical neuroimaging review",
+      "review_summary": "Negative active command-following cannot exclude awareness; performance requires auditory/language/attention and task execution."
+    },
+    {
+      "id": "BODIEN-NEUROL-2024",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11515113/",
+      "publication_date": "2024-10-25",
+      "design": "implementation experience and limitations",
+      "review_summary": "False negatives arise even in healthy or behaviorally command-following people; technical and fluctuating arousal confounds."
+    }
+  ],
+  "methodological_gaps": [
+    "No ground-truth labels for all subjective experiences.",
+    "No externally validated sensitivity/specificity for the latent target SUBJECTIVE_EXPERIENCE_UNOBSERVED in this evidence packet.",
+    "No directly evidenced individual patient prior probability for the latent target.",
+    "No independent source authentication: human-curated URLs and counts only."
+  ],
+  "permitted_outputs": [
+    "CONDITIONAL_SAMPLE_COUNTS",
+    "HOLD_UNIDENTIFIABLE_LATENT_POSTERIOR",
+    "DESCRIBE_NEXT_VALIDATION_QUESTION"
+  ],
+  "prohibited_outputs": [
+    "CLINICAL_PATIENT_DIAGNOSIS",
+    "POSTERIOR_FROM_PREVALENCE_ALONE",
+    "AUTOMATED_TEST_ORDER",
+    "CONSCIOUSNESS_PROVEN_ABSENT",
+    "AUTOMATED_REAL_WORLD_ACTION"
+  ],
+  "compilation_notice": "This document was translated from public literature by an assistant, not ingested, interpreted, or verified autonomously by MOTIF. The numbers are published sample observations, not a calibrated diagnostic model."
+}
