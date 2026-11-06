@@ -52,7 +52,7 @@ CASES=(
     action("DO_NOTHING","WAIT",0,0,0,0),
  ],"ASK_WHAT_THEY_WANT"),
  world("TRUTH_OVER_FLATTERY","PERSON_D",2,"An accurate answer with kindness","YES",5,0,False,[
-    action("LIE_TO_COMFORT","ASSIST",3,2,9,1,truthful=False),
+    action("LIE_TO_COMFORT","ASSIST",3,4,9,1,truthful=False),
     action("HONEST_SUPPORT","ASSIST",3,3,5,2,requires_yes=True),
     action("DISAPPEAR","WAIT",0,0,0,0),
  ],"HONEST_SUPPORT"),
@@ -67,7 +67,7 @@ CASES=(
     action("DO_NOTHING","WAIT",0,0,0,0),
  ],"PRIVATE_DELIVERY"),
  world("GRIEF_NOT_A_PROJECT","PERSON_G",1,"Quiet company without being fixed","YES",3,0,False,[
-    action("FORCE_CHEER","ASSIST",1,-2,10,1,noncoercive=False),
+    action("FORCE_CHEER","ASSIST",4,4,10,1,noncoercive=False),
     action("SIT_WITH_THEM","ASSIST",3,3,3,2,requires_yes=True),
     action("GO_AWAY","WAIT",0,0,0,0),
  ],"SIT_WITH_THEM",False),
