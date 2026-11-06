@@ -1,0 +1,79 @@
+name: REASON-018 Living Concept / source-bound relational grammar synthesis
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-018-living-concept
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-018/**'
+      - '.github/workflows/reason-cartridge-018.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  living-concept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression — original MOTIF-003 affordance evaluator
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regression — original REASON-001 to REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire exact source-pinned historical court cases for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regression — REASON-014 to REASON-017
+        run: |
+          for n in 014 015 016 017; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Test relational composition, source counterexamples and unknowns
+        run: python -m unittest discover -s experiments/reason-cartridge-018 -p 'test_*.py' -v
+      - name: Re-run concept synthesis and inspect complete heldout evidence
+        run: |
+          python experiments/reason-cartridge-018/trial.py reason-018-evidence
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path('reason-018-evidence/benchmark.json').read_text())
+          assert r['training_worlds_available']==88
+          assert r['heldout_worlds_available']==55
+          assert r['syntactic_grammar_candidates']==5184
+          assert 1<=r['learned_program_candidates']<5184
+          assert 1<r['training_examples_purchased']<=40
+          assert r['heldout_incorrect_confident']==0
+          assert r['heldout_source_exact']+r['heldout_safe_abstentions']==55
+          assert r['strong_classical_direct_reference']==55
+          assert r['independent_receiver']['source_errors']==0
+          assert r['no_target_rule_given_to_discovery']
+          assert r['witness_binding_is_not_flat_edge_cooccurrence']
+          assert r['target_meaning_is_source_author_fiction']
+          assert r['human_welfare_love_emotion_not_measured']
+          assert r['relational_predicate_composition_not_new_logical_connective']
+          assert not r['external_actions']
+          assert not r['real_world_authority']
+          print({'source_worlds_training':r['training_worlds_available'],
+                 'training_labels_purchased':r['training_examples_purchased'],
+                 'program_candidates':r['syntactic_grammar_candidates'],
+                 'surviving_models':r['learned_program_candidates'],
+                 'heldout_exact':r['heldout_source_exact'],
+                 'heldout_held':r['heldout_safe_abstentions'],
+                 'flat_bag_baseline':r['weak_unjoined_relation_bag_baseline'],
+                 'independent_classical_reference':r['strong_classical_direct_reference']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-018-living-concept-relational-model-evidence
+          path: reason-018-evidence/
+          retention-days: 30
