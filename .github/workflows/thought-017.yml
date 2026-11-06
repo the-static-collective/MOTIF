@@ -1,0 +1,37 @@
+name: THOUGHT-017 held model-proposed primitive laboratory
+on:
+  push:
+    paths:
+      - 'experiments/thought-017/**'
+      - '.github/workflows/thought-017.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-017/**'
+      - '.github/workflows/thought-017.yml'
+  workflow_dispatch:
+jobs:
+  primitive-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate model boundary and independent oracle
+        working-directory: experiments/thought-017
+        run: python -m unittest -v test_lab.py
+      - name: Reproduce held candidate and frozen audit
+        working-directory: experiments/thought-017
+        run: python benchmark.py
+      - name: Earlier grammar and lab regressions
+        working-directory: experiments/thought-016
+        run: python -m unittest -v test_thought016.py
+      - name: Preserve review-only results
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-017-human-review
+          path: |
+            experiments/thought-017/experiment-results.json
+            experiments/thought-017/candidate.diff
+            experiments/thought-017/candidate_solver.py

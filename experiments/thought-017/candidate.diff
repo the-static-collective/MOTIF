@@ -1,0 +1,11 @@
+--- experiments/thought-017/monotone_reference.py
++++ experiments/thought-017/candidate_solver.py
+@@ -1,7 +1,7 @@
+ # REVIEW ONLY / MODEL PROPOSAL NEVER DIRECTLY EXECUTED
+ """THOUGHT-017 fixed source-owned interpreter. REVIEW-ONLY."""
+ import heapq,json,sys
+-MACRO=json.loads('{"args":[{"ref":"state.on"},{"ref":"arrival.toggles"}],"op":"union"}')
++MACRO=json.loads('{"args":[{"args":[{"ref":"state.on"},{"ref":"arrival.toggles"}],"op":"difference"},{"args":[{"ref":"arrival.toggles"},{"ref":"state.on"}],"op":"difference"}],"op":"union"}')
+ def apply(on,toggle):
+     fields={'state.on':on,'arrival.toggles':toggle}
+     def calc(x):
