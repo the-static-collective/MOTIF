@@ -28,7 +28,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parent
 sys.path.insert(0,str(ROOT/"legit017"))
-from toolsmith import compile_tool,emit
+from toolsmith import compile_tool,emit as emit_017
 from challenge import reference,FAMILIES
 
 BUNDLE=ROOT/"legit017"/"generated"/"executable_research_tools.json"
@@ -52,7 +52,7 @@ def ancestry():
         source=packet["selected_tools"][family]
         expected=sha256(source.encode()).hexdigest()
         if (packet["selected_sources_verified"].get(family)!=expected or
-            source!=emit(family,strategy)):
+            source!=emit_017(family,strategy)):
             raise HOLD("Ancestral source differs from verified old generator")
         tools[family]=compile_tool(family,strategy,source)
     return {
