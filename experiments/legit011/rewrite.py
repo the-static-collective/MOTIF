@@ -21,8 +21,8 @@ from pathlib import Path
 import sys
 
 HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE.parent/"legit010"))
 sys.path.insert(0,str(HERE.parent/"legit009"))
+sys.path.insert(0,str(HERE.parent/"legit010"))
 
 from bootstrap import (
     library, invent_successor_search, _compressed_candidates,
