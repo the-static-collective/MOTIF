@@ -1,0 +1,35 @@
+name: MOTIF LEGIT-009 CEGIS reason cartridge invention
+on:
+  push:
+    paths:
+      - "experiments/legit009/**"
+      - ".github/workflows/legit009.yml"
+  pull_request:
+    paths:
+      - "experiments/legit009/**"
+      - ".github/workflows/legit009.yml"
+jobs:
+  cegis-invention-and-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial counterexample synthesis, independent minimum proof, actual provenance crosswire
+        run: python -m unittest discover -s experiments/legit009 -p 'test_*.py' -v
+      - name: Synthesize novel typed circuits and capture exact proof certificates
+        run: |
+          python experiments/legit009/benchmark.py > /tmp/motif-legit009-benchmark.json
+          python -m json.tool /tmp/motif-legit009-benchmark.json > /dev/null
+          cat /tmp/motif-legit009-benchmark.json
+      - name: Archive typed generated programs and counterexamples
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT009-CEGIS-INVENTION-RESEARCH-HOLD
+          path: /tmp/motif-legit009-benchmark.json
+          retention-days: 30
+          if-no-files-found: error
