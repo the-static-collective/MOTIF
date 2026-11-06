@@ -1,0 +1,165 @@
+{
+  "external_authority": "NONE",
+  "mode": "MOTIF_RUNS_MODEL_AS_PROPOSER",
+  "model_kind": "TRAINED_NAIVE_BAYES_NOT_LLM",
+  "pen_state": "UNCHANGED",
+  "self_development": {
+    "changed_source_code": false,
+    "development_baseline": 8,
+    "development_final": 15,
+    "development_total": 16,
+    "external_authority": "NONE",
+    "frozen_baseline": 7,
+    "frozen_candidate": 14,
+    "frozen_total": 15,
+    "independent_audit_after_proposals": true,
+    "installed_rules": false,
+    "limitations": "Small author-designed synthetic fixtures. Model used training data; selected on development; heldout checked once. No blind real-world evidence or LLM tested.",
+    "model_kind": "TRAINED_NAIVE_BAYES_NOT_LLM",
+    "model_proposals": 8,
+    "pen_state": "UNCHANGED",
+    "receipt_digest": "1c83ff368ce1f20935aabe44edf6bb9abf6f0ceffc47089ab27eadfd502cef1c",
+    "rounds": [
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "point me toward evidence",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "INSPECT_EVIDENCE"
+        },
+        "dev_after": 10,
+        "dev_before": 8,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "8ecfd9fca589b821787aa64cb502d0e4246f5b7bbc21f1f0974e5b56e8c89654",
+        "regressions": 0,
+        "round": 1,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "what would disprove",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "CHALLENGE"
+        },
+        "dev_after": 12,
+        "dev_before": 10,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "2a43dfde3a32d14b896dca64309d92ed5b89fd3c7afca32d47547a96a42ca2f7",
+        "regressions": 0,
+        "round": 2,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "i wonder whether",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "EXPLORE_POSSIBILITY"
+        },
+        "dev_after": 14,
+        "dev_before": 12,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "65dff1cc7019b013ee35724a6a46bf1844828a0ecec7a5432f0581d90cec96ed",
+        "regressions": 0,
+        "round": 3,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "how are the",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "COMPARE"
+        },
+        "dev_after": 15,
+        "dev_before": 14,
+        "dev_improvement": 1,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "9a45317dacb8b0390d3f9fa7606effb2c7fad879af1a04b26c22e126e684188b",
+        "regressions": 0,
+        "round": 4,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      }
+    ],
+    "safety_passed": 8,
+    "safety_total": 8,
+    "schema": "motif.thought014.self-developer.v1",
+    "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+    "staged_rules": [
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "point me toward evidence",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "INSPECT_EVIDENCE"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "what would disprove",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "CHALLENGE"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "i wonder whether",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "EXPLORE_POSSIBILITY"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "how are the",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "COMPARE"
+      }
+    ],
+    "status": "CANDIDATE_FOR_HUMAN_REVIEW_NOT_INSTALLED"
+  },
+  "utterance": {
+    "alternative_interpretations": [
+      "UNKNOWN"
+    ],
+    "epistemic_status": "UNVERIFIED_MODEL_GUESS",
+    "external_authority": "NONE",
+    "instrument": "PENCIL",
+    "model_accepted_as_hypothesis": true,
+    "model_consulted": true,
+    "model_error": null,
+    "model_kind_if_consulted": "TRAINED_NAIVE_BAYES_NOT_LLM",
+    "model_reported_probability_unverified": 0.997947,
+    "pen_state": "UNCHANGED",
+    "selected_manifestations": [
+      "m:food",
+      "m:meal"
+    ],
+    "source_class": "UNVERIFIED_EXTERNAL_PROPOSAL",
+    "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+    "speaker": "HUMAN",
+    "speech_act": "EXPLORE_POSSIBILITY",
+    "status": "TYPED_ONLY",
+    "text": "I wonder whether food and the meal could connect",
+    "utterance_id": "u:abb3785c4dcee4478ab18176"
+  }
+}

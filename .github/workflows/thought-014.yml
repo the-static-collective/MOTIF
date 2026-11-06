@@ -1,0 +1,36 @@
+name: MOTIF Thought-014 Model Dev Tester
+on:
+  push:
+    paths:
+      - 'experiments/thought-014/**'
+      - '.github/workflows/thought-014.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-014/**'
+      - '.github/workflows/thought-014.yml'
+jobs:
+  model-dev-tester:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: THOUGHT-014 model and self-development tests
+        working-directory: experiments/thought-014
+        run: python -m unittest -v test_thought014.py
+      - name: Trial benchmark and demo
+        working-directory: experiments/thought-014
+        run: |
+          python benchmark.py > /tmp/thought014-benchmark.json
+          python demo.py > /tmp/thought014-demo.json
+      - name: Regression from THOUGHT-013
+        working-directory: experiments/thought-013
+        run: python -m unittest -q test_inquiry.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: thought014-local-model-evidence
+          path: |
+            /tmp/thought014-benchmark.json
+            /tmp/thought014-demo.json
