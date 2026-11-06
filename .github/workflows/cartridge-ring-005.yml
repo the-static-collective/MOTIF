@@ -1,0 +1,81 @@
+name: MOTIF Ring 005 / evidence-adaptive native routing
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-005-evidence-adaptive-routing
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-005/**'
+      - '.github/workflows/cartridge-ring-005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: All inherited cartridge-ring contracts remain intact
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-004 -p 'test_*.py' -v
+      - name: RING-005 learned-policy and adversarial execution gates
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-005 -p 'test_*.py' -v
+
+  evidence-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Native source runtime must be Docker isolated
+        run: docker pull python:3.11-slim
+      - name: Freeze after 64 training cases, route 64 distinct unseen-to-native cases before execution
+        run: |
+          python experiments/cartridge-ring-005/adaptive.py \
+            --count 32 --out /tmp/ring005-living-feedback.json
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/ring005-living-feedback.json'))
+          assert j['schema']=='motif.ring005.adaptive-routing-trial.v1'
+          assert j['training_cases']==64 and j['heldout_cases']==64
+          assert j['training_seeds']==[2026110615,2026110616]
+          assert j['heldout_seeds']==[2026110617,2026110618]
+          assert j['measured_total_native_calls_on_heldouts'] < 192
+          assert j['measured_total_native_calls_on_heldouts'] > 0
+          assert len(j['evals'])==2
+          for e in j['evals']:
+              assert e['count']==32
+              assert e['totals']['correct']==32
+              assert e['totals']['wrong_decisive']==0
+              assert e['strong_classical_control_correct']==32
+              assert e['full_native_control_correct']==32
+              assert e['source_method_invocations_were_selected_before_inference']
+              assert e['separate_heldout_labels_not_mounted_into_execution']
+              assert e['authority']=='NONE'
+          assert j['initial_policy']['evaluation_labels_visible_during_policy_creation'] is False
+          assert j['after_first_feedback_policy']['revision_status'] in (
+              'NO_CHANGE_NO_MEASURED_ERROR','DEMOTED_AFTER_MEASURED_ERROR')
+          assert j['external_action_executed'] is False
+          assert j['authority']=='NONE'
+          print('RING-005: source-native on-demand routing verified on unseen-to-native synthetic heldouts.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring005-adaptive-native-results
+          path: /tmp/ring005-living-feedback.json
+          retention-days: 30
