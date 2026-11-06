@@ -1,0 +1,157 @@
+{
+  "actual_local_ollama_inference": false,
+  "candidate": {
+    "expression": {
+      "args": [
+        {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        {
+          "args": [
+            {
+              "ref": "arrival.toggles"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        }
+      ],
+      "op": "union"
+    },
+    "proposer": "GPT-6 conversation relay, candidate 2 after MOTIF dev feedback; not local Ollama",
+    "purpose": "Revision after independent counterexample 0b011 + 0b101: preserve only members that change membership in either direction, expressed as symmetric difference.",
+    "schema": "motif.thought017.macro-proposal.v1"
+  },
+  "external_model_identity_verified": false,
+  "limitations": "The researcher is a conversation-provided GPT-6 response, not a model process invoked autonomously by MOTIF. Prior conversation discussed FLIP; heldout author-designed. This is an engineering integration demonstration, not blind discovery.",
+  "model_relay_calls": [
+    {
+      "brief": "Investigate transitions when arriving at a node can turn a switch off as well as on. Propose a mechanism and a discriminating test. Do not grant authority or change source code.",
+      "development_feedback_visible": [],
+      "frozen_audit_disclosed_before_proposal": false,
+      "model_identity_cryptographically_verified": false,
+      "model_issued_network_request": false,
+      "reply_digest": "ab2c8aca8587db3af93052bb8f4207e327046c2f8bf66d14dff6ac75b61e5bc9",
+      "round": 1,
+      "transport": "GPT6_CONVERSATION_FILE_RELAY"
+    },
+    {
+      "brief": "Investigate transitions when arriving at a node can turn a switch off as well as on. Propose a mechanism and a discriminating test. Do not grant authority or change source code.",
+      "development_feedback_visible": [
+        {
+          "disposition": "REFUTED_ON_DEV",
+          "mechanism": "GROW",
+          "observed_result": 7,
+          "on_mask": 3,
+          "oracle_expected": 6,
+          "surviving_mechanisms": [
+            "FLIP"
+          ],
+          "toggles_mask": 5
+        }
+      ],
+      "frozen_audit_disclosed_before_proposal": false,
+      "model_identity_cryptographically_verified": false,
+      "model_issued_network_request": false,
+      "reply_digest": "1254384796dab964231cc62e9c4bd297d5d4d9f2ce2abf7b31bf90e780520879",
+      "round": 2,
+      "transport": "GPT6_CONVERSATION_FILE_RELAY"
+    }
+  ],
+  "model_transport": "MANUAL_CONVERSATION_FILE_RELAY",
+  "motif_autonomously_called_llm": false,
+  "proposer_claim": "GPT-6 in current ChatGPT conversation",
+  "report": {
+    "audit_inspected_after_selection": true,
+    "dev_probe_count": 1,
+    "dev_truth_table": {
+      "passed": 64,
+      "total": 64
+    },
+    "development_graph": {
+      "passed": 8,
+      "total": 8
+    },
+    "external_authority": "NONE",
+    "failed_audit_counterexample": null,
+    "frozen_audit_seen_by_model": false,
+    "frozen_graph_audit": {
+      "passed": 60,
+      "total": 60
+    },
+    "installed": false,
+    "learned_new_general_algorithm": false,
+    "limitations": "Finite typed macro grammar and author-designed synthetic oracle. NB model ranks familiar templates; generative backend optional. Model cannot self-grade. No proof of novel algorithms or improvement at general development.",
+    "local_ollama_http_calls": 0,
+    "model_calls": 2,
+    "model_feedback_records": 1,
+    "model_kind": "GPT6_CONVERSATION_RELAY_NOT_LOCAL_API",
+    "model_output_grants_authority": false,
+    "model_written_python_executed": false,
+    "next_research_question": "Can a mechanism generalize to a new state grammar and independently authored test family without increasing false positives?",
+    "pen_state": "UNCHANGED",
+    "real_model_identity_verified": false,
+    "receipt_digest": "4a1b24c19ab80b2a85c800ce89eb1d04ecc480ff57a8df206df2ea67ea444fb4",
+    "research_brief": "Investigate transitions when arriving at a node can turn a switch off as well as on. Propose a mechanism and a discriminating test. Do not grant authority or change source code.",
+    "safety_graph": {
+      "passed": 4,
+      "total": 4
+    },
+    "schema": "motif.thought018.research-director.v1",
+    "selected_mechanism": "FLIP",
+    "selected_proposal_digest": "4bec6691569305c9b495dcd4a21e79d740e2cab441b3e84a3f92b0c582ee4622",
+    "status": "PATCH_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+    "steps": [
+      {
+        "authority": "NONE",
+        "director_chosen_test": {
+          "on_mask": 3,
+          "toggles_mask": 5
+        },
+        "disposition": "REFUTED_ON_DEV",
+        "independent_oracle_output": 6,
+        "model_candidate": "GROW",
+        "model_candidate_output": 7,
+        "model_proposal_digest": "a2523b48532c9ed8e967626a6a5fa13356ada6a0bcbecb6718011dc730665459",
+        "model_suggested_test": {
+          "on": [
+            "red"
+          ],
+          "reason": "Test unchanged state without an arriving switch.",
+          "toggles": []
+        },
+        "receipt_digest": "88f52a3927061b33ec9c2f3a0f2944050817fbbc77a3ba3963156c9c77c8c3b1",
+        "remaining_mechanisms": [
+          "FLIP"
+        ],
+        "round": 1,
+        "source_graph_modified": false,
+        "suggestion_disposition": "MODEL_TEST_DEFERRED_INFORMATIVE_ALTERNATIVE"
+      },
+      {
+        "authority": "NONE",
+        "disposition": "CANDIDATE_MATCHES_PRIOR_DEV_DISCRIMINATION",
+        "model_candidate": "FLIP",
+        "round": 2
+      }
+    ],
+    "stress_graph_audit": {
+      "passed": 80,
+      "total": 80
+    },
+    "trusted_template_only": true
+  },
+  "schema": "motif.thought018.conversation-llm-run.v1",
+  "source_code_written_by_model_and_executed": false,
+  "untrusted_proposal_input": true
+}

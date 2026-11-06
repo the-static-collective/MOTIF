@@ -1,0 +1,78 @@
+[
+  {
+    "schema": "motif.thought018.model-research-proposal.v1",
+    "mechanism": {
+      "schema": "motif.thought017.macro-proposal.v1",
+      "expression": {
+        "op": "union",
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ]
+      },
+      "purpose": "First hypothesis: incoming signals accumulate persistently; test whether it survives off/on behavior.",
+      "proposer": "GPT-6 conversation relay, candidate 1; no local Ollama model"
+    },
+    "suggested_test": {
+      "on": [
+        "red"
+      ],
+      "toggles": [],
+      "reason": "Test unchanged state without an arriving switch."
+    },
+    "model_kind": "GPT6_CONVERSATION_RELAY_GENERATIVE_NOT_LOCAL_API",
+    "declared_name": "GROW"
+  },
+  {
+    "schema": "motif.thought018.model-research-proposal.v1",
+    "mechanism": {
+      "schema": "motif.thought017.macro-proposal.v1",
+      "expression": {
+        "op": "union",
+        "args": [
+          {
+            "op": "difference",
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ]
+          },
+          {
+            "op": "difference",
+            "args": [
+              {
+                "ref": "arrival.toggles"
+              },
+              {
+                "ref": "state.on"
+              }
+            ]
+          }
+        ]
+      },
+      "purpose": "Revision after independent counterexample 0b011 + 0b101: preserve only members that change membership in either direction, expressed as symmetric difference.",
+      "proposer": "GPT-6 conversation relay, candidate 2 after MOTIF dev feedback; not local Ollama"
+    },
+    "suggested_test": {
+      "on": [
+        "red",
+        "blue"
+      ],
+      "toggles": [
+        "red",
+        "green"
+      ],
+      "reason": "Distinguish reversible off/on changes from permanent accumulation."
+    },
+    "model_kind": "GPT6_CONVERSATION_RELAY_GENERATIVE_NOT_LOCAL_API",
+    "declared_name": null
+  }
+]
