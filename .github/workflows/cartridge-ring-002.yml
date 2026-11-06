@@ -1,0 +1,82 @@
+name: MOTIF Ring 002 / living branch garden and pinned triad
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-002-live-branch-garden
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-001/**'
+      - '.github/workflows/cartridge-ring-002.yml'
+  schedule:
+    # GitHub only runs scheduled workflows from the default branch, after merge.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run future-branch expansion and refusal tests
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+      - name: Discover current branches from all API pages (including new branches)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python experiments/cartridge-ring-001/discovery.py --output /tmp/motif-branch-garden-live.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/motif-branch-garden-live.json'))
+          assert d['schema']=='motif.branch-garden.v2'
+          assert d['branches_total']>=d['cartridges_indexed_non_executable']
+          assert all(not p['executable'] for p in d['passports'])
+          print('Indexed',d['cartridges_indexed_non_executable'],'non-executable branch source pointers.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: live-branch-garden
+          path: /tmp/motif-branch-garden-live.json
+          retention-days: 30
+
+  triad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The three non-ancestor pinned commits must be accessible locally.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate synthetic router contracts
+        run: python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+      - name: Pull controlled Python image, then run no-network isolated original experiments
+        run: |
+          docker pull python:3.11-slim
+          python experiments/cartridge-ring-001/triad.py --output /tmp/motif-triad.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/motif-triad.json'))
+          assert d['status']=='SOURCE_NATIVE_SYNTHETIC_TRIAL'
+          assert len(d['results'])==3
+          assert all(r['isolated_no_network_read_only'] for r in d['results'])
+          assert d['cross_method_compatibility']=='UNPROVEN'
+          assert d['authority']=='NONE'
+          print('Three actual native, isolated synthetic source runs verified.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pinned-source-native-triad
+          path: /tmp/motif-triad.json
+          retention-days: 30
