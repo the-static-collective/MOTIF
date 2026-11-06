@@ -1,0 +1,47 @@
+name: MOTIF LEGIT-017 measurable research-productivity engine
+on:
+  push:
+    paths:
+      - "experiments/legit017/**"
+      - ".github/workflows/legit017.yml"
+  pull_request:
+    paths:
+      - "experiments/legit017/**"
+      - ".github/workflows/legit017.yml"
+jobs:
+  generate-verify-transfer-and-ablate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Actually generate executable tools, freeze selected portfolio and evaluate new engineering instances
+        run: |
+          python experiments/legit017/benchmark.py --emit > /tmp/motif-legit017-console.json
+          python -m json.tool /tmp/motif-legit017-research-trial.json > /dev/null
+          python -m json.tool /tmp/motif-legit017-generated-tools.json > /dev/null
+          cat /tmp/motif-legit017-console.json
+          echo "---- SOURCE AND TRIAL PROVENANCE ----"
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-legit017-research-trial.json'))
+          print(json.dumps({'experiment':r['experiment'],'heldout':r['heldout_verified_query_answers'],'frozen':r['frozen_plan'],'source_sha':r['frozen_plan_sha256'],'meta':r['second_order_generated_verifier']['source_sha256'],'state':r['status']},indent=2))
+          PY
+      - name: Falsify code generation, domain transfer, oracle caching and false promotion
+        run: |
+          python -m unittest discover -s experiments/legit017 -p 'test_*.py' -v
+      - name: Preserve unpromoted generated source, CPU measurement and ablation receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT017-RESEARCH-PRODUCTIVITY-HOLD
+          path: |
+            /tmp/motif-legit017-research-trial.json
+            /tmp/motif-legit017-generated-tools.json
+            /tmp/motif-legit017-console.json
+          if-no-files-found: warn
+          retention-days: 30
