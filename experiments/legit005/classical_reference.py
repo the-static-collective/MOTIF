@@ -25,7 +25,7 @@ EXTRAS={
     "CAN_NEG":["could {target} still be present with no {proxy}"],
 }
 SLOT=re.compile(r"(\{proxy\}|\{target\})")
-UNSAFE=re.compile(r"\b(not|never|except|unless|despite|without|neither|nor|isnt|arent|cannot|can't|won't)\b")
+UNSAFE=re.compile(r"\\b(not|never|except|unless|despite|without|neither|nor|isnt|arent|cannot|can't|won't|no|that|is|are|was|were|present|absent|exists|exist|and|or)\\b")
 
 
 def _render(template):
