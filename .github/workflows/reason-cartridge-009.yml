@@ -1,0 +1,66 @@
+name: REASON-009 Grammar Inventor
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-009-grammar-inventor
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-009/**'
+      - '.github/workflows/reason-cartridge-009.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  grammar-inventor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress all previous REASON-001 through REASON-008 tests
+        run: |
+          for n in 001 002 003 004 005 006 007 008; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Test new uncommitted grammar shapes, source boundaries and falsifiers
+        run: python -m unittest discover -s experiments/reason-cartridge-009 -p 'test_*.py' -v
+      - name: Reproduce two-family independent source-owned grammar inventions
+        run: |
+          python experiments/reason-cartridge-009/trial.py reason-009-evidence > reason-009-stdout.json
+          python - <<'PY'
+          import json
+          r=json.load(open('reason-009-evidence/benchmark.json'))
+          assert r['two_nonisomorphic_source_graphs']
+          assert r['both_use_same_source_blind_grammar_algorithm']
+          assert not r['invented_mathematically_new_boolean_operator']
+          assert not r['real_world_authority']
+          for name,budget in [('LONG_SHORT',9),('BRIDGE',11)]:
+              x=r['families'][name]
+              assert x['found_expression_node_count']==budget
+              assert x['sealed_holdout_cases']==8
+              assert x['sealed_holdout_errors']==0
+              assert x['renamed_future_correct']==64
+              assert x['renamed_future_cases']==64
+              assert x['cost_one_task']['winner']=='DIRECT_BFS'
+              assert x['cost_sixty_four_tasks']['winner']=='COMPILED_GRAMMAR'
+          assert r['families']['BRIDGE']['legacy_baselines']['fixed_008_best_correct']<32
+          print({'long_short':r['families']['LONG_SHORT']['found_expression_node_count'],
+                 'bridge':r['families']['BRIDGE']['found_expression_node_count'],
+                 'sealed_holdouts':16,
+                 'renamed_future_exact':128,
+                 'invention_method':'GENERAL_BINARY_AST_CEGIS'})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-009-source-owned-grammar-receipts
+          path: |
+            reason-009-evidence/
+            reason-009-stdout.json
+          retention-days: 30
