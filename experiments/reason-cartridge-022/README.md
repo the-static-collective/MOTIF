@@ -61,6 +61,18 @@ The source-pinned GitHub Actions evaluation, using **750 further third-party-aut
 | Three-party transfer | **249/250** | **1** | 0 | 48/250 |
 | **Total** | **749/750** | **1** | **0** | **233/750** |
 
+### The one mismatch exposed a deeper source ambiguity
+
+After freezing the independent prospective score, we inspected the sole disagreement in the three-party transfer test.
+
+In the dataset's question **313**, the question asks what **Bill gave Mary**. The official source answer is **football**, supported by original story **line 22**. Yet **line 25** explicitly states that Bill also gave Mary an **apple**. The interpreter's deterministic "most recent matching transfer" rule therefore returned **apple**.
+
+The scorer is entitled to mark the output wrong relative to its **one designated annotation**, but **both objects have explicit supporting source lines**. This is more subtle than a false statement about the story. The model's actual mistake is presenting a unique answer **without recognizing that the question is underdetermined by its wording**.
+
+`ambiguity.py` performs an independent, **posthoc** scan of original external source lines. It verifies each alternative from source text, notes the official supporting-line IDs and records `MULTIPLE_EXPLICITLY_SUPPORTED_ANSWERS` without modifying the original prospective score. The evidence/HTML viewer now preserves this discrepancy. It does **not** claim that the bAbI authors intended multiple valid responses or that the official key should be changed.
+
+This is precisely where a future MOTIF reasoner should emit **the competing source-linked answers, a request for disambiguation, or HOLD**, rather than overconfidently committing to whichever transfer happened most recently.
+
 **The wrong transfer prediction remains a genuine recorded failure.** Its source question ID, original gold label, emitted answer and original story receipts are available in the evidence artifact; it was not "corrected" after the reserved prospective evaluation. The three engines are still developer-supplied classical finite-state programs. Now that these results have been examined, **this slice must be considered inspected for any later changes**; a new prospective test would require a genuinely further untouched slice or a different benchmark.
 
 The complete exact-head regression run also passes **425 automated tests** (407 inherited; 18 new REASON-022 tests), plus the published external source-provenance and two-circle viewer assertions.
