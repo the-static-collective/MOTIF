@@ -1,0 +1,40 @@
+name: MOTIF LEGIT-010 self-bootstrapping reason composer
+on:
+  push:
+    paths:
+      - "experiments/legit010/**"
+      - ".github/workflows/legit010.yml"
+  pull_request:
+    paths:
+      - "experiments/legit010/**"
+      - ".github/workflows/legit010.yml"
+jobs:
+  self-compose-and-falsify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test recursive self-use, meta-counterexamples, classical optimality, and spoofed code
+        run: python -m unittest discover -s experiments/legit010 -p 'test_*.py' -v
+      - name: Actually run previous synthesizer to create and write its next algorithms
+        run: |
+          python experiments/legit010/benchmark.py --emit > /tmp/motif-legit010-research-results.json
+          python -m json.tool /tmp/motif-legit010-research-results.json > /dev/null
+          python -m json.tool /tmp/motif-legit010-self-generated-algorithms.json > /dev/null
+          cat /tmp/motif-legit010-research-results.json
+          echo "----SYNTHESIZED PROGRAM ARTIFACT BELOW----"
+          cat /tmp/motif-legit010-self-generated-algorithms.json
+      - name: Archive generated typed programs, actual failed candidates, and exact proof receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT010-SELF-GENERATED-ALGORITHMS-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit010-research-results.json
+            /tmp/motif-legit010-self-generated-algorithms.json
+          if-no-files-found: error
+          retention-days: 30
