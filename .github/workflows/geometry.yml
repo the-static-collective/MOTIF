@@ -23,7 +23,7 @@ jobs:
         working-directory: experiments/geometry-001
         run: |
           python demo.py > experiment-results.json
-          python -c "import json; d=json.load(open('experiment-results.json')); assert d['completion_ties_topological_control'] and d['navigation']['same_optimal_distance']"
+          python -c "import json; d=json.load(open('experiment-results.json')); assert d['completion_ties_topological_control'] and d['navigation']['same_optimal_distance'] and d['cartridge_revalidated']"
       - name: Save inspectable diagram and result
         uses: actions/upload-artifact@v4
         with:
@@ -31,3 +31,4 @@ jobs:
           path: |
             experiments/geometry-001/flower-of-life.svg
             experiments/geometry-001/experiment-results.json
+            experiments/geometry-001/example-geometry-cartridge.json
