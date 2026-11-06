@@ -216,6 +216,50 @@ class ProductivityTests(unittest.TestCase):
                              source["selected_sources_verified"][family])
         self.assertEqual(source["research_meta_tool"],VERIFIER_SOURCE)
 
+    def test_ci_archived_generated_python_is_exactly_one_approved_template(self):
+        archive=json.loads((HERE/"generated"/"executable_research_tools.json")
+                           .read_text(encoding="utf-8"))
+        receipt=json.loads((HERE/"generated"/"research_productivity_report.json")
+                           .read_text(encoding="utf-8"))
+        self.assertEqual(archive["frozen_plan_sha256"],
+                         receipt["frozen_plan_sha256"])
+        self.assertEqual(archive["research_meta_tool"],VERIFIER_SOURCE)
+        self.assertEqual(archive["selected_research_verifier_mode"],
+                         receipt["frozen_plan"]["research_verifier_mode"])
+        self.assertFalse(archive["production_write_approved"])
+        for family,source in archive["selected_tools"].items():
+            plan=receipt["selected_source_manifest"][family]
+            self.assertEqual(source,emit(family,plan["strategy"]))
+            self.assertEqual(sha256(source.encode()).hexdigest(),plan["sha256"])
+            code=compile_tool(family,plan["strategy"],source)
+            proof=bounded_falsification(code)
+            self.assertGreater(proof["exact_cases_checked"],0)
+            self.assertEqual(verify(code,self.holdout)["tests"],864)
+
+    def test_archived_trial_raw_samples_and_frozen_meta_decision_are_consistent(self):
+        archived=json.loads((HERE/"generated"/"research_productivity_report.json")
+                            .read_text(encoding="utf-8"))
+        self.assertEqual(archived["experiment"],"MOTIF-LEGIT-017")
+        self.assertEqual(archived["status"],
+            "HOLD_RESEARCH_ONLY_INDEPENDENT_COMPOUNDING_NOT_DEMONSTRATED")
+        self.assertEqual(archived["heldout_verified_query_answers"],2592)
+        self.assertEqual(archived["frozen_plan"]["selected"],["GRAPH","SUBSET"])
+        self.assertEqual(archived["frozen_plan"]["research_verifier_mode"],
+                         "IMPROVED_CACHE")
+        self.assertEqual(set(archived["second_order_generated_verifier"]
+                             ["test_ms"]),{"CACHE","IMPROVED_CACHE","RECHECK","STRONG"})
+        for arm in archived["heldout_portfolio_ms"].values():
+            self.assertEqual(len(arm["samples_ms"]),11)
+            self.assertAlmostEqual(median(arm["samples_ms"]),
+                                   arm["median_wall_ms"],places=5)
+        for arm in archived["second_order_generated_verifier"]["test_ms"].values():
+            self.assertEqual(len(arm["samples_ms"]),7)
+            self.assertAlmostEqual(median(arm["samples_ms"]),
+                                   arm["median_wall_ms"],places=5)
+        self.assertFalse(archived["gates"]["at_least_10pct_gain_over_strong_classical"])
+        self.assertFalse(archived["gates"]["causal_successive_discoveries_demonstrated"])
+        self.assertFalse(archived["second_order_research_discovery_compounding_confirmed"])
+
     def test_new_research_cannot_claim_general_proof_or_independent_author(self):
         r=self.report
         self.assertFalse(r["external_mathematical_prover_invoked_for_general_tools"])
