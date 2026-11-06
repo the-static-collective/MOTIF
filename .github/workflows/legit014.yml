@@ -1,0 +1,49 @@
+name: MOTIF LEGIT-014 formally proved performance-gated self-improvement trial
+on:
+  push:
+    paths:
+      - "experiments/legit014/**"
+      - ".github/workflows/legit014.yml"
+  pull_request:
+    paths:
+      - "experiments/legit014/**"
+      - ".github/workflows/legit014.yml"
+jobs:
+  measured-self-improvement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install required third-party SMT proof checker
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Execute two feedback rounds and freeze a generated algorithm before unseen trials
+        run: |
+          python experiments/legit014/benchmark.py --emit > /tmp/motif-legit014-results.json
+          python -m json.tool /tmp/motif-legit014-results.json >/dev/null
+          python -m json.tool /tmp/motif-legit014-trial-manifest.json >/dev/null
+          python -m py_compile /tmp/motif-legit014-candidate-rewrite.py
+          cat /tmp/motif-legit014-results.json
+          echo "---- GENERATED CANDIDATE SOURCE ----"
+          cat /tmp/motif-legit014-candidate-rewrite.py
+          echo "---- GENERATED TRIAL PROOF MANIFEST ----"
+          cat /tmp/motif-legit014-trial-manifest.json
+      - name: Adversarial tests against unsound proofs, data leakage and false performance promotion
+        run: |
+          python -m unittest discover -s experiments/legit014 -p 'test_*.py' -v
+      - name: Archive generated candidate source and independent test receipts even if tests fail
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT014-PROOF-AND-PERFORMANCE-HOLD
+          path: |
+            /tmp/motif-legit014-results.json
+            /tmp/motif-legit014-trial-manifest.json
+            /tmp/motif-legit014-candidate-rewrite.py
+          if-no-files-found: warn
+          retention-days: 30
