@@ -1,0 +1,112 @@
+name: REASON-023 Many-Truth Mirror — source alternatives, four-valued witness, active inquiry
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-023-many-truth-mirror
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-023/**'
+      - '.github/workflows/reason-cartridge-023.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  many-truth-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress original MOTIF-003 affordance work
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regress all source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Acquire source-pinned complete opinions for original REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress REASON-014 through REASON-021
+        run: |
+          for n in 014 015 016 017 018 019 020 021; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Acquire third-party original bAbI sources for REASON-022 and 023
+        run: |
+          python experiments/reason-cartridge-022/acquire.py reason-022-sources
+          python experiments/reason-cartridge-022/acquire.py reason-023-sources
+      - name: Regress REASON-022 real external benchmark, source ambiguity and typed duties
+        run: python -m unittest discover -s experiments/reason-cartridge-022 -p 'test_*.py' -v
+      - name: Run REASON-023 original-source graph, paraconsistent and Golden Mirror tests
+        run: python -m unittest discover -s experiments/reason-cartridge-023 -p 'test_*.py' -v
+      - name: Evaluate independently authored source questions 501–750 with all hypotheses preserved
+        run: |
+          python experiments/reason-cartridge-023/trial.py reason-023-sources reason-023-evidence > reason-023-stdout.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path("reason-023-evidence/benchmark.json").read_text())
+          c=r["external_test_counts"]
+          assert c["total"]==250
+          assert r["independent_test_first_ordinal"]==501
+          assert r["independent_test_last_ordinal"]==750
+          assert c["source_single_answer"]+c["source_non_unique"]+c["source_no_answer"]==250
+          assert c["single_answer_correct"]+c["single_answer_wrong"]==c["source_single_answer"]
+          assert c["non_unique_gold_supported"]+c["non_unique_gold_not_supported"]==c["source_non_unique"]
+          assert c["strong_classical_equivalence"]==250
+          assert r["strong_classical_multi_answer_reference_ties"]
+          assert len(r["scripted_ambiguous_case"]["source_graph"]["candidates"])==2
+          assert r["scripted_ambiguous_case"]["owner_declined"]["stage"]=="HOLD_SOURCE_REFUSED"
+          assert r["scripted_ambiguous_case"]["no_contact"]["questions"]==[]
+          assert r["scripted_ambiguous_case"]["no_source_owner"]["questions"]==[]
+          assert r["scripted_ambiguous_case"]["balanced_question_four_alternatives"]["binary_question_information_gain_bits"]==1.0
+          assert r["four_value_stage_counts"]=={
+            "SUPPORTED":2,"REFUTED":2,"BOTH":1,"UNDETERMINED":1}
+          assert r["original_019_subprocesses_primary_pass"]==16
+          assert r["historical_source_ambiguity_not_fictional_consent"]
+          assert r["distinct_candidates_do_not_automatically_mean_a_paraconsistent_BOTH"]
+          assert not r["external_actions"]
+          assert not r["permission_to_execute"]
+          print({
+            "external_test_source_questions":c["total"],
+            "unique_exact":c["single_answer_correct"],
+            "unique_wrong":c["single_answer_wrong"],
+            "source_nonunique_HOLD":c["source_non_unique"],
+            "source_multi_source_gold_supported":c["non_unique_gold_supported"],
+            "no_source_HOLD":c["source_no_answer"],
+            "prior_overconfidence_errors":c["original_022_wrong"],
+            "prior_errors_now_HOLD":c["original_wrong_now_ambiguous"],
+            "strong_classical_source_reference_tie":c["strong_classical_equivalence"],
+            "signed_four_values":r["four_value_stage_counts"],
+            "original_golden_mirror_processes":r["original_019_subprocesses_primary_pass"],
+          })
+          PY
+      - name: Render offline source-provenance and Golden Mirror circles
+        run: |
+          python experiments/reason-cartridge-023/viewer.py reason-023-evidence/benchmark.json reason-023-evidence/many-truth-mirror.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("reason-023-evidence/many-truth-mirror.html")
+          html=p.read_text(encoding="utf8")
+          assert 'class="self"' in html and 'class="other"' in html
+          assert 'id="polar"' in html and 'id="example"' in html
+          assert "MULTI-TRUTH" in html
+          assert "<script src=" not in html
+          assert p.stat().st_size>7000
+          print({"offline_many_truth_viewer":str(p),"bytes":p.stat().st_size})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-023-many-truth-source-graph-and-active-inquiry
+          path: |
+            reason-023-evidence/
+            reason-023-stdout.json
+            reason-023-sources/provenance.json
+          retention-days: 30
