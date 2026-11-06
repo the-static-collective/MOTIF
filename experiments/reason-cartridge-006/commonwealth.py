@@ -189,7 +189,10 @@ def _challenge(q, proof, model, owner, ledger):
     flag = proof["refutation_program"]
     status = proof["conclusion"]
     if status == "PROVED_REACHABLE":
-        choices = tuple(tuple(s["edge"]) for s in flag["counterexample_program"])
+        witness = proof["proof_certificate"]["nodes"]
+        choices = tuple(reversed(tuple(zip(witness, witness[1:]))))
+        # Last-to-first witness challenge, independent of hidden owner truth.
+        # The min-cut remains the source-owned fragility bound.
         if not choices:
             raise HOLD("Missing native fragility witness")
         kind = "RETRACT_PRESENT"
