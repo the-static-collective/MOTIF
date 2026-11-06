@@ -28,3 +28,10 @@ jobs:
           cat /tmp/motif-legit001.json
           echo "__MOTIF_LEGIT001_END__"
           python -m json.tool /tmp/motif-legit001.json >/dev/null
+      - name: Archive exact authored benchmark HOLD receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT001-AUTHORED-SYNTHETIC-HOLD
+          path: /tmp/motif-legit001.json
+          if-no-files-found: error
+          retention-days: 30
