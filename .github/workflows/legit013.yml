@@ -20,7 +20,8 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install external formal SMT verifier (pinned full provenance release)
-        run: python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
       - name: Prove discovered source rewrites and test source/logic falsifiers
         run: python -m unittest discover -s experiments/legit013 -p 'test_*.py' -v
       - name: Generate new proven optimizer, evaluate sealed-source heldout graphs and classical controls
