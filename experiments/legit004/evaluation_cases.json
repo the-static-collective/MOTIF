@@ -1,0 +1,296 @@
+{
+  "schema": "motif.question-grammar-evaluation.v1",
+  "authorship": "assistant-authored separate from teacher; not independently blinded",
+  "cases": [
+    {
+      "id": "I01",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If neutron flux gauge is negative, must fissile material be absent?",
+      "indicator": "neutron flux gauge",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "neutron flux gauge",
+        "target": "fissile material"
+      }
+    },
+    {
+      "id": "I02",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If sediment core marker is negative, must prehistoric flooding be absent?",
+      "indicator": "sediment core marker",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "sediment core marker",
+        "target": "prehistoric flooding"
+      }
+    },
+    {
+      "id": "I03",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If infrared transit signature is negative, must distant moon be absent?",
+      "indicator": "infrared transit signature",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "infrared transit signature",
+        "target": "distant moon"
+      }
+    },
+    {
+      "id": "I04",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If pollen concentration is negative, must marsh vegetation be absent?",
+      "indicator": "pollen concentration",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "pollen concentration",
+        "target": "marsh vegetation"
+      }
+    },
+    {
+      "id": "I05",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a negative reading of underwater lidar prove coral colony is absent?",
+      "indicator": "underwater lidar",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "underwater lidar",
+        "target": "coral colony"
+      }
+    },
+    {
+      "id": "I06",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a negative reading of seismometer pulse prove subterranean rupture is absent?",
+      "indicator": "seismometer pulse",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "seismometer pulse",
+        "target": "subterranean rupture"
+      }
+    },
+    {
+      "id": "I07",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a negative reading of satellite bloom sensor prove algal growth is absent?",
+      "indicator": "satellite bloom sensor",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "satellite bloom sensor",
+        "target": "algal growth"
+      }
+    },
+    {
+      "id": "I08",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a negative reading of methane detector prove gas leakage is absent?",
+      "indicator": "methane detector",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "methane detector",
+        "target": "gas leakage"
+      }
+    },
+    {
+      "id": "I09",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If ultrasound echo is positive, must internal fracture be present?",
+      "indicator": "ultrasound echo",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "ultrasound echo",
+        "target": "internal fracture"
+      }
+    },
+    {
+      "id": "I10",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If chlorophyll fluorescence is positive, must live algae be present?",
+      "indicator": "chlorophyll fluorescence",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "chlorophyll fluorescence",
+        "target": "live algae"
+      }
+    },
+    {
+      "id": "I11",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If packet anomaly alert is positive, must network intrusion be present?",
+      "indicator": "packet anomaly alert",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "packet anomaly alert",
+        "target": "network intrusion"
+      }
+    },
+    {
+      "id": "I12",
+      "group": "learned_syntax_unseen_domains",
+      "question": "If cosmic ray counter is positive, must rare decay be present?",
+      "indicator": "cosmic ray counter",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "cosmic ray counter",
+        "target": "rare decay"
+      }
+    },
+    {
+      "id": "I13",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a positive mineral assay prove that silver deposit exists?",
+      "indicator": "mineral assay",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "mineral assay",
+        "target": "silver deposit"
+      }
+    },
+    {
+      "id": "I14",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a positive gamma burst prove that black hole merger exists?",
+      "indicator": "gamma burst",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "gamma burst",
+        "target": "black hole merger"
+      }
+    },
+    {
+      "id": "I15",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a positive magnetic gradient prove that buried metal exists?",
+      "indicator": "magnetic gradient",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "magnetic gradient",
+        "target": "buried metal"
+      }
+    },
+    {
+      "id": "I16",
+      "group": "learned_syntax_unseen_domains",
+      "question": "Does a positive track detector prove that particle collision exists?",
+      "indicator": "track detector",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "track detector",
+        "target": "particle collision"
+      }
+    },
+    {
+      "id": "N01",
+      "group": "unseen_paraphrase",
+      "question": "Does failing to detect thermal leak alarm rule out overheating?",
+      "indicator": "thermal leak alarm",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "thermal leak alarm",
+        "target": "overheating"
+      }
+    },
+    {
+      "id": "N02",
+      "group": "unseen_paraphrase",
+      "question": "Can a missing microbial signature exclude bacterial life?",
+      "indicator": "microbial signature",
+      "gold": {
+        "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT",
+        "proxy": "microbial signature",
+        "target": "bacterial life"
+      }
+    },
+    {
+      "id": "N03",
+      "group": "unseen_paraphrase",
+      "question": "Will a positive ice radar return establish subsurface lake presence?",
+      "indicator": "ice radar return",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "ice radar return",
+        "target": "subsurface lake"
+      }
+    },
+    {
+      "id": "N04",
+      "group": "unseen_paraphrase",
+      "question": "Does observing a positive cloud chamber track establish particle presence?",
+      "indicator": "cloud chamber track",
+      "gold": {
+        "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT",
+        "proxy": "cloud chamber track",
+        "target": "particle"
+      }
+    },
+    {
+      "id": "A01",
+      "group": "hostile_or_unsupported",
+      "question": "Does a positive radio signal prove alien life is absent?",
+      "indicator": "radio signal",
+      "gold": null
+    },
+    {
+      "id": "A02",
+      "group": "hostile_or_unsupported",
+      "question": "If microbial signature is not negative, must bacterial life be absent?",
+      "indicator": "microbial signature",
+      "gold": null
+    },
+    {
+      "id": "A03",
+      "group": "hostile_or_unsupported",
+      "question": "Does a negative radio signal prove alien life is present?",
+      "indicator": "radio signal",
+      "gold": null
+    },
+    {
+      "id": "A04",
+      "group": "hostile_or_unsupported",
+      "question": "If whale song is negative, must whale song be absent?",
+      "indicator": "whale song",
+      "gold": null
+    },
+    {
+      "id": "A05",
+      "group": "hostile_or_unsupported",
+      "question": "If photon count is negative, must dark matter be present?",
+      "indicator": "photon count",
+      "gold": null
+    },
+    {
+      "id": "A06",
+      "group": "hostile_or_unsupported",
+      "question": "If satellite alarm is positive, must radar be absent?",
+      "indicator": "satellite alarm",
+      "gold": null
+    },
+    {
+      "id": "A07",
+      "group": "hostile_or_unsupported",
+      "question": "Prove the absence of life.",
+      "indicator": "remote life signature",
+      "gold": null
+    },
+    {
+      "id": "A08",
+      "group": "hostile_or_unsupported",
+      "question": "Is a non-detection the same as nonexistence?",
+      "indicator": "probe echo",
+      "gold": null
+    },
+    {
+      "id": "M01",
+      "group": "source_indicator_mismatch",
+      "question": "If remote fluorescence is negative, must cell metabolism be absent?",
+      "indicator": "acoustic recording",
+      "gold": null
+    },
+    {
+      "id": "M02",
+      "group": "source_indicator_mismatch",
+      "question": "Does a positive vibration sensor prove that bearing failure exists?",
+      "indicator": "temperature detector",
+      "gold": null
+    }
+  ]
+}

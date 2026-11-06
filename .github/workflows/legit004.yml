@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-004 discover question grammar
+on:
+  push:
+    paths:
+      - "experiments/legit004/**"
+      - ".github/workflows/legit004.yml"
+  pull_request:
+    paths:
+      - "experiments/legit004/**"
+      - ".github/workflows/legit004.yml"
+jobs:
+  bounded-grammar-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Falsify source grammar induction and withheld forms
+        run: python -m unittest discover -s experiments/legit004 -p 'test_*.py' -v
+      - name: Replay originally unannotated neuroscience question
+        run: |
+          python experiments/legit004/bridge.py > /tmp/motif-legit004-neuroscience.json
+          python -m json.tool /tmp/motif-legit004-neuroscience.json >/dev/null
+          cat /tmp/motif-legit004-neuroscience.json
+      - name: Reproduce 30-question strong baseline comparison
+        run: |
+          python experiments/legit004/benchmark.py > /tmp/motif-legit004-benchmark.json
+          python -m json.tool /tmp/motif-legit004-benchmark.json >/dev/null
+          cat /tmp/motif-legit004-benchmark.json
+      - name: Archive exact method failure and source receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT004-GRAMMAR-HOLD
+          path: |
+            /tmp/motif-legit004-neuroscience.json
+            /tmp/motif-legit004-benchmark.json
+          if-no-files-found: error
+          retention-days: 30

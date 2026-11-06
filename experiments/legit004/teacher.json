@@ -1,0 +1,62 @@
+{
+  "schema": "motif.teacher-questions.v1",
+  "authored_by": "assistant source-labeled corrections",
+  "examples": [
+    {
+      "id": "T01",
+      "question": "If neural command following is negative, must subjective experience be absent?",
+      "proxy": "neural command following",
+      "target": "subjective experience",
+      "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT"
+    },
+    {
+      "id": "T02",
+      "question": "If sonar echo is negative, must underwater habitat be absent?",
+      "proxy": "sonar echo",
+      "target": "underwater habitat",
+      "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT"
+    },
+    {
+      "id": "T03",
+      "question": "Does a negative reading of viral antigen test prove active infection is absent?",
+      "proxy": "viral antigen test",
+      "target": "active infection",
+      "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT"
+    },
+    {
+      "id": "T04",
+      "question": "Does a negative reading of radar return prove aircraft presence is absent?",
+      "proxy": "radar return",
+      "target": "aircraft presence",
+      "kind": "PROXY_NEGATIVE_IMPLIES_TARGET_ABSENT"
+    },
+    {
+      "id": "T05",
+      "question": "If seismic tremor signal is positive, must tectonic activity be present?",
+      "proxy": "seismic tremor signal",
+      "target": "tectonic activity",
+      "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT"
+    },
+    {
+      "id": "T06",
+      "question": "If enzyme assay is positive, must bacterial growth be present?",
+      "proxy": "enzyme assay",
+      "target": "bacterial growth",
+      "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT"
+    },
+    {
+      "id": "T07",
+      "question": "Does a positive radio emission prove that alien civilization exists?",
+      "proxy": "radio emission",
+      "target": "alien civilization",
+      "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT"
+    },
+    {
+      "id": "T08",
+      "question": "Does a positive infrared signature prove that forest fire exists?",
+      "proxy": "infrared signature",
+      "target": "forest fire",
+      "kind": "PROXY_POSITIVE_IMPLIES_TARGET_PRESENT"
+    }
+  ]
+}
