@@ -21,7 +21,7 @@ import sys
 SCENE_FILE=Path(__file__).with_name("scenes.py")
 SCENE_BLOB="9f30e97e6b1070d4a7cd79e64f28acf6ea2f8aca"
 ELF=Path(__file__).with_name("elf.py")
-ELF_BLOB="REPLACE_ELF_BLOB"
+ELF_BLOB="60f2bbb432d19a279b00ae7a0d7e81bd62e65903"
 SCHEMA="motif.reason.golden-mirror.scene.v1"
 PACKET="motif.reason.golden-mirror.proposal.v1"
 MAX_OUTPUT=120000
