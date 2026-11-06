@@ -94,7 +94,7 @@ def run(out=None):
         (dest/"benchmark.json").write_text(
             json.dumps(answer,indent=2,sort_keys=True)+"\n",encoding="utf8")
         (dest/"unrepresented-new-relation.json").write_text(
-            json.dumps(correction,indent=2,sort_keys=True)+"\\n",encoding="utf8")
+            json.dumps(correction,indent=2,sort_keys=True)+"\n",encoding="utf8")
         (dest/"heldout-four-valued-source-audit.json").write_text(
             json.dumps(examples,indent=2,sort_keys=True)+"\n",encoding="utf8")
     return answer
