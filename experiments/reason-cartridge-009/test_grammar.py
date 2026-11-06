@@ -157,6 +157,37 @@ class GrammarTests(unittest.TestCase):
             with self.subTest(variant=variant),self.assertRaises(HOLD):
                 validate(json.dumps(changed))
 
+
+    def test_rehashed_false_counterexample_trace_is_not_a_proof(self):
+        original=json.loads(self.bridge[0])
+        for mode in ("query_order","missing_counterexample","invented_pass"):
+            document=json.loads(json.dumps(original))
+            if mode=="query_order":
+                event=next(e for e in document["source_challenge_trace"]
+                           if e["kind"] in ("QUERY","COUNTEREXAMPLE"))
+                event["asked"]=9 if event["asked"]!=9 else 10
+            elif mode=="missing_counterexample":
+                document["source_challenge_trace"].pop(0)
+                document["source_oracle_calls"]-=1
+            else:
+                document["source_challenge_trace"][-1]["signature"]="ffffffff"
+            document["checksum_sha256"]=digest({
+                k:v for k,v in document.items() if k!="checksum_sha256"})
+            with self.subTest(mode=mode),self.assertRaises(HOLD):
+                validate(json.dumps(document))
+
+    def test_local_observer_never_leaks_heldout_even_on_refutation(self):
+        observer=SourceOwner("LONG_SHORT",max_queries=24)
+        with self.assertRaises(ValueError):
+            observer.query(HOLDOUT[-1])
+        self.assertFalse(any(m in HOLDOUT for m in observer.issued))
+        # An obviously false constant-true candidate may be refuted, but only
+        # using the source-owner acquisition set and with an attributed receipt.
+        response=observer.refute_or_pass((1<<32)-1)
+        self.assertEqual(response["status"],"COUNTEREXAMPLE")
+        self.assertNotIn(response["observation"]["mask"],HOLDOUT)
+        self.assertFalse(response["observation"]["real_world_authority"])
+
     def test_fixed_008_grammar_fails_different_bridge_topology(self):
         a=fixed_family_accuracy("LONG_SHORT")
         b=fixed_family_accuracy("BRIDGE")
