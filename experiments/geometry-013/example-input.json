@@ -1,0 +1,5318 @@
+{
+  "parent": {
+    "operator": "XOR",
+    "atoms": [
+      {
+        "channel": "a",
+        "start": 0,
+        "end": 8,
+        "transform": "ODD"
+      },
+      {
+        "channel": "b",
+        "start": 0,
+        "end": 8,
+        "transform": "ODD"
+      }
+    ],
+    "scope": "synthetic:observer-a@cut-12:decoder-A",
+    "state": "PENCIL",
+    "authority": "NONE"
+  },
+  "capabilities": [
+    {
+      "channel": "a",
+      "cost": 1.0,
+      "permitted": true,
+      "available": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "channel": "b",
+      "cost": 1.0,
+      "permitted": true,
+      "available": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "channel": "noise",
+      "cost": 0.1,
+      "permitted": true,
+      "available": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "channel": "answer-leak",
+      "cost": 0.001,
+      "permitted": false,
+      "available": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "channel": "unavailable-leak",
+      "cost": 0.001,
+      "permitted": true,
+      "available": false,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    }
+  ],
+  "windows": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      4,
+      8
+    ]
+  ],
+  "identifier_access": {
+    "scope": "synthetic:observer-a@cut-12:decoder-A",
+    "permitted": true,
+    "available": true,
+    "unit_cost": 0.25
+  },
+  "development": [
+    {
+      "id": "round1-0",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:0:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:0:b:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:0:b:1"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:0:noise:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:0:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:0:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:0:a:3"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:0:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:0:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:0:a:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-1",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:1:noise:3"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:1:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:1:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:1:answer-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:1:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:1:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:1:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:1:noise:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:1:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:1:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:1:a:3"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:1:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:1:noise:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-2",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:2:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:2:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:2:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:2:answer-leak"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:2:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:2:unavailable-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:2:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:2:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-3",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:3:noise:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:3:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:3:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:3:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:3:b:2"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:3:noise:2"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:3:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:3:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:3:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:3:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:3:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:3:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-4",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:4:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:4:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:4:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:4:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:4:noise:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:4:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:4:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:4:b:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-5",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:5:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:5:unavailable-leak"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:5:a:6"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:5:answer-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:5:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:5:a:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:5:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:5:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:5:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:5:a:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:5:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:5:b:4"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:5:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:5:b:5"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:5:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-6",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:6:answer-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:6:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:6:unavailable-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:6:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:6:noise:2"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:6:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:6:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:6:a:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:6:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:6:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:6:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:6:b:4"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:6:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:6:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:6:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-7",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:7:noise:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:7:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:7:b:4"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:7:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:7:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:7:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:7:b:6"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:7:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:7:noise:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:7:a:4"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:7:b:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:7:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:7:noise:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:7:b:5"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:7:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:7:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-8",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:8:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:8:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:8:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:8:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:8:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:8:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:8:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:8:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:8:a:5"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:8:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:8:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-9",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:9:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:9:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:9:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:9:answer-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:9:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:9:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:9:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-10",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:10:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:10:answer-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:10:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:10:b:4"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:10:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:10:a:2"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:10:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:10:unavailable-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:10:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:10:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:10:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:10:a:3"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:10:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:10:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-11",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:11:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:11:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:11:b:6"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:11:a:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:11:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:11:a:6"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:11:a:5"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:11:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:11:b:4"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:11:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:11:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:11:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:11:b:5"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:11:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:11:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-12",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:12:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:12:b:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:12:b:5"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:12:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:12:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:12:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:12:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:12:a:5"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:12:b:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:12:a:4"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:12:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:12:noise:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:12:b:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:12:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:12:a:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-13",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:13:unavailable-leak"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:13:noise:2"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:13:noise:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:13:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:13:answer-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:13:a:4"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:13:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:13:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:13:a:5"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:13:noise:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:13:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:13:b:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:13:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:13:a:6"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:13:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:13:a:3"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-14",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:14:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:14:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:14:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:14:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:14:unavailable-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:14:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:14:noise:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:14:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:14:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:14:answer-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:14:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:14:b:4"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:14:b:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:14:a:3"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-15",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:15:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:15:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:15:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:15:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:15:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:15:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:15:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:15:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-16",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:16:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:16:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:16:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:16:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:16:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:16:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:16:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:16:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-17",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:17:a:6"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:17:a:5"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:17:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:17:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:17:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:17:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:17:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:17:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:17:unavailable-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:17:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:17:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:17:answer-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-18",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:18:a:5"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:18:b:6"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:18:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:18:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:18:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:18:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:18:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:18:answer-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:18:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:18:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:18:noise:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:18:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:18:noise:2"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:18:b:5"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:18:noise:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:18:b:3"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:18:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:18:a:3"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:18:b:4"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:18:a:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-19",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:19:b:6"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:19:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:19:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:19:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:19:b:3"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:19:a:1"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:19:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:19:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:19:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:19:b:4"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:19:b:5"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:19:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:19:b:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-20",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:20:b:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:20:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:20:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:20:b:0"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:20:noise:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:20:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:20:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:20:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-21",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:21:b:5"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:21:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:21:b:3"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:21:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:21:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:21:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:21:unavailable-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:21:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:21:b:4"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:21:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:21:answer-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-22",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:22:b:3"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:22:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:22:b:4"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:22:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:22:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:22:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:22:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:22:unavailable-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:22:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:22:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:22:answer-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:22:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-23",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:23:b:3"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:23:b:5"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:23:b:0"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:23:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:23:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:23:a:2"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:23:noise:3"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:23:noise:2"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:23:b:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:23:a:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:23:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:23:b:4"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:23:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:23:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:23:b:6"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:23:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-24",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:24:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:24:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:24:noise:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:24:b:0"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:24:a:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:24:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:24:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:24:noise:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:24:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:24:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:24:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:24:noise:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-25",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:25:b:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:25:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:25:answer-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:25:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:25:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:25:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:25:unavailable-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:25:a:1"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:25:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:25:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:25:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:25:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-26",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:26:a:1"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:26:a:2"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:26:b:5"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:26:noise:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:26:noise:2"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:26:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:26:a:5"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:26:b:3"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:26:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:26:answer-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:26:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:26:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:26:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:26:b:4"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:26:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:26:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:26:unavailable-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:26:b:6"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:26:b:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-27",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:27:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:27:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:27:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:27:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:27:b:4"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:27:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:27:noise:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:27:b:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:27:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:27:b:5"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:27:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:27:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:27:b:6"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:27:a:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-28",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:28:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:28:noise:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:28:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:28:b:5"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:28:b:2"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:28:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:28:b:3"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:28:b:4"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:28:noise:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:28:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:28:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-29",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:29:noise:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:29:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:29:answer-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:29:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:29:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:29:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:29:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:29:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:29:a:6"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:29:noise:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:29:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:29:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:29:b:2"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:29:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:29:noise:2"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:29:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:29:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-30",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:30:noise:3"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:30:noise:0"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:30:a:5"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:30:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:30:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:30:b:6"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:30:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:30:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:30:unavailable-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:30:b:5"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:30:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:30:b:3"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:30:noise:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:30:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:30:noise:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:30:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:30:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:30:b:4"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:30:answer-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:30:b:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-31",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:31:noise:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:31:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:31:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:31:b:5"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:31:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:31:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:31:noise:3"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:31:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:31:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:31:b:6"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:31:noise:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:31:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:31:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:31:b:4"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-32",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:32:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:32:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:32:a:5"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:32:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:32:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:32:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:32:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:32:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:32:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-33",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:33:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:33:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:33:answer-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:33:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:33:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:33:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:33:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:33:unavailable-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:33:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:33:b:5"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:33:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:33:b:4"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-34",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:34:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:34:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:34:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:34:noise:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:34:answer-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:34:b:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:34:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:34:noise:2"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:34:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:34:noise:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:34:unavailable-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-35",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:35:b:6"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:35:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:35:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:35:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:35:b:4"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:35:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:35:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:35:b:5"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:35:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:35:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:35:a:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-36",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:36:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:36:b:5"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:36:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:36:b:4"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:36:a:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:36:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:36:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:36:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:36:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:36:b:2"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:36:b:3"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:36:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:36:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-37",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:37:b:5"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:37:answer-leak"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:37:a:5"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:37:a:4"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:37:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:37:b:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:37:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:37:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:37:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:37:a:6"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:37:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:37:b:3"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:37:a:3"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:37:b:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:37:unavailable-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-38",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:38:noise:0"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:38:a:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:38:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:38:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:38:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:38:answer-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:38:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:38:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:38:noise:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:38:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:38:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:38:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:38:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-39",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:39:a:2"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:39:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:39:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:39:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:39:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:39:b:6"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:39:b:5"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:39:b:3"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:39:b:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:39:b:4"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-40",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:40:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:40:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:40:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:40:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:40:a:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-41",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:41:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:41:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:41:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:41:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:41:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:41:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:41:b:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:41:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:41:a:2"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:41:noise:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:41:answer-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-42",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:42:noise:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:42:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:42:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:42:unavailable-leak"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:42:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:42:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:42:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:42:answer-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:42:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:42:noise:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:42:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:42:noise:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:42:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-43",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:43:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:43:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:43:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:43:b:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:43:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:43:noise:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:43:a:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:43:a:6"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:43:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:43:a:5"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:43:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:43:noise:1"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:43:b:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:43:b:4"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:43:a:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-44",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:44:b:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:44:a:3"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:44:noise:2"
+        },
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:44:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:44:noise:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:44:b:3"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:44:a:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:44:a:1"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:44:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:44:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:44:a:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:44:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:44:b:0"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:44:noise:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:44:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-45",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:45:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:45:b:0"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:45:a:3"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:45:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:45:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:45:answer-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:45:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:45:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:45:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:45:unavailable-leak"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:45:noise:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:45:b:3"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-46",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:46:b:4"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:46:answer-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:46:b:6"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:46:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:46:unavailable-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:46:b:3"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:46:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:46:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:46:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:46:b:5"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:46:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:46:b:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-47",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:47:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:47:noise:0"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:47:b:4"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:47:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:47:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:47:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:47:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:47:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:47:b:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-48",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:48:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:48:b:3"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:48:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:48:b:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:48:noise:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:48:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:48:b:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:48:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:48:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:48:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-49",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:49:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:49:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:49:noise:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:49:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:49:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:49:a:3"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:49:a:5"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:49:unavailable-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:49:answer-leak"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:49:a:6"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:49:a:4"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:49:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:49:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:49:b:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:49:b:5"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:49:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:49:b:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-50",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:50:b:2"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:50:b:4"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:50:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:50:a:0"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:50:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:50:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:50:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:50:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:50:unavailable-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:50:b:6"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:50:b:5"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:50:answer-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-51",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:51:b:4"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:51:b:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:51:a:6"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:51:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:51:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:51:noise:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:51:a:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:51:a:4"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:51:a:3"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:51:noise:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:51:a:5"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:51:b:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:51:b:5"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:51:b:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:51:b:2"
+        },
+        {
+          "tick": 0,
+          "channel": "b",
+          "event_id": "round1:51:b:6"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-52",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:52:b:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:52:a:5"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:52:b:5"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:52:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "noise",
+          "event_id": "round1:52:noise:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:52:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:52:b:4"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:52:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:52:b:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:52:a:1"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:52:a:4"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:52:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:52:b:3"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:52:a:3"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-53",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:53:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:53:b:2"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:53:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:53:a:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:53:b:3"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:53:unavailable-leak"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:53:a:0"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:53:answer-leak"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:53:b:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-54",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "noise",
+          "event_id": "round1:54:noise:0"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:54:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:54:a:0"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:54:a:4"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:54:unavailable-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:54:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:54:noise:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:54:a:4"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:54:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:54:answer-leak"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:54:a:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:54:a:5"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:54:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:54:b:2"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-55",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:55:b:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:55:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:55:a:3"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:55:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:55:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:55:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:55:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:55:a:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-56",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:56:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:56:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:56:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:56:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:56:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:56:noise:1"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:56:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-57",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:57:unavailable-leak"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:57:a:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:57:answer-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:57:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:57:noise:0"
+        },
+        {
+          "tick": 4,
+          "channel": "noise",
+          "event_id": "round1:57:noise:1"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:57:b:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:57:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:57:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-1",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-58",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:58:b:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:58:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:58:answer-leak"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:58:a:3"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:58:b:4"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:58:b:6"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:58:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:58:noise:2"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:58:a:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:58:b:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:58:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "b",
+          "event_id": "round1:58:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:58:unavailable-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:58:b:5"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:58:a:0"
+        },
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:58:noise:0"
+        },
+        {
+          "tick": 1,
+          "channel": "noise",
+          "event_id": "round1:58:noise:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-2",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-59",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:59:noise:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:59:b:1"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:59:b:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:59:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:59:a:1"
+        },
+        {
+          "tick": 1,
+          "channel": "b",
+          "event_id": "round1:59:b:2"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:59:a:0"
+        }
+      ],
+      "source_root": "claimed:round1:source-3",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-60",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 7,
+          "channel": "noise",
+          "event_id": "round1:60:noise:0"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:60:a:1"
+        },
+        {
+          "tick": 5,
+          "channel": "noise",
+          "event_id": "round1:60:noise:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:60:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:60:b:1"
+        },
+        {
+          "tick": 2,
+          "channel": "b",
+          "event_id": "round1:60:b:0"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:60:a:0"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:60:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:60:a:3"
+        }
+      ],
+      "source_root": "claimed:round1:source-4",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-61",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:61:b:5"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:61:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:61:answer-leak"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:61:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:61:b:4"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:61:a:1"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:61:a:0"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:61:b:3"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:61:noise:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:61:b:2"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:61:b:0"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:61:a:2"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:61:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:61:unavailable-leak"
+        }
+      ],
+      "source_root": "claimed:round1:source-5",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-62",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": true,
+      "records": [
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:62:b:2"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:62:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:62:a:3"
+        },
+        {
+          "tick": 0,
+          "channel": "answer-leak",
+          "event_id": "round1:62:answer-leak"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:62:b:0"
+        },
+        {
+          "tick": 0,
+          "channel": "unavailable-leak",
+          "event_id": "round1:62:unavailable-leak"
+        },
+        {
+          "tick": 5,
+          "channel": "a",
+          "event_id": "round1:62:a:1"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:62:a:2"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:62:a:2"
+        },
+        {
+          "tick": 2,
+          "channel": "noise",
+          "event_id": "round1:62:noise:0"
+        },
+        {
+          "tick": 6,
+          "channel": "b",
+          "event_id": "round1:62:b:1"
+        },
+        {
+          "tick": 0,
+          "channel": "a",
+          "event_id": "round1:62:a:4"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:62:a:5"
+        }
+      ],
+      "source_root": "claimed:round1:source-6",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "id": "round1-63",
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      },
+      "expected": false,
+      "records": [
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:63:b:0"
+        },
+        {
+          "tick": 3,
+          "channel": "a",
+          "event_id": "round1:63:a:3"
+        },
+        {
+          "tick": 1,
+          "channel": "a",
+          "event_id": "round1:63:a:5"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:63:a:0"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:63:b:1"
+        },
+        {
+          "tick": 4,
+          "channel": "b",
+          "event_id": "round1:63:b:4"
+        },
+        {
+          "tick": 6,
+          "channel": "a",
+          "event_id": "round1:63:a:2"
+        },
+        {
+          "tick": 4,
+          "channel": "a",
+          "event_id": "round1:63:a:4"
+        },
+        {
+          "tick": 5,
+          "channel": "b",
+          "event_id": "round1:63:b:3"
+        },
+        {
+          "tick": 2,
+          "channel": "a",
+          "event_id": "round1:63:a:6"
+        },
+        {
+          "tick": 3,
+          "channel": "b",
+          "event_id": "round1:63:b:2"
+        },
+        {
+          "tick": 3,
+          "channel": "noise",
+          "event_id": "round1:63:noise:0"
+        },
+        {
+          "tick": 7,
+          "channel": "a",
+          "event_id": "round1:63:a:1"
+        }
+      ],
+      "source_root": "claimed:round1:source-0",
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    }
+  ],
+  "budget": 3.6,
+  "work_budget": 10
+}

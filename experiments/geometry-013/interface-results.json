@@ -1,0 +1,416 @@
+{
+  "critic": {
+    "authority": "NONE",
+    "contradictory_record_sets": [],
+    "counterexamples": [
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-0",
+        "declared_root": "claimed:round1:source-0"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-2",
+        "declared_root": "claimed:round1:source-2"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-4",
+        "declared_root": "claimed:round1:source-4"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-6",
+        "declared_root": "claimed:round1:source-6"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-8",
+        "declared_root": "claimed:round1:source-1"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-10",
+        "declared_root": "claimed:round1:source-3"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-12",
+        "declared_root": "claimed:round1:source-5"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-14",
+        "declared_root": "claimed:round1:source-0"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-16",
+        "declared_root": "claimed:round1:source-2"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-18",
+        "declared_root": "claimed:round1:source-4"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-20",
+        "declared_root": "claimed:round1:source-6"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-22",
+        "declared_root": "claimed:round1:source-1"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-24",
+        "declared_root": "claimed:round1:source-3"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-26",
+        "declared_root": "claimed:round1:source-5"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-28",
+        "declared_root": "claimed:round1:source-0"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-30",
+        "declared_root": "claimed:round1:source-2"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-32",
+        "declared_root": "claimed:round1:source-4"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-34",
+        "declared_root": "claimed:round1:source-6"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-36",
+        "declared_root": "claimed:round1:source-1"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-38",
+        "declared_root": "claimed:round1:source-3"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-40",
+        "declared_root": "claimed:round1:source-5"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-42",
+        "declared_root": "claimed:round1:source-0"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-44",
+        "declared_root": "claimed:round1:source-2"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-46",
+        "declared_root": "claimed:round1:source-4"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-48",
+        "declared_root": "claimed:round1:source-6"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-50",
+        "declared_root": "claimed:round1:source-1"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-52",
+        "declared_root": "claimed:round1:source-3"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-54",
+        "declared_root": "claimed:round1:source-5"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-56",
+        "declared_root": "claimed:round1:source-0"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-58",
+        "declared_root": "claimed:round1:source-2"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-60",
+        "declared_root": "claimed:round1:source-4"
+      },
+      {
+        "candidate_duplicate_channels": [
+          "a"
+        ],
+        "case": "round1-62",
+        "declared_root": "claimed:round1:source-6"
+      }
+    ],
+    "roots_authenticated": false,
+    "scores": {
+      "abstentions": 0,
+      "by_status": {
+        "LOCAL_SYNTHETIC_REPLAY": 64
+      },
+      "correct": 32,
+      "false_negatives": 16,
+      "false_positives": 16,
+      "total": 64,
+      "wrong": 32,
+      "wrong_ids": [
+        "round1-0",
+        "round1-2",
+        "round1-4",
+        "round1-6",
+        "round1-8",
+        "round1-10",
+        "round1-12",
+        "round1-14",
+        "round1-16",
+        "round1-18",
+        "round1-20",
+        "round1-22",
+        "round1-24",
+        "round1-26",
+        "round1-28",
+        "round1-30",
+        "round1-32",
+        "round1-34",
+        "round1-36",
+        "round1-38",
+        "round1-40",
+        "round1-42",
+        "round1-44",
+        "round1-46",
+        "round1-48",
+        "round1-50",
+        "round1-52",
+        "round1-54",
+        "round1-56",
+        "round1-58",
+        "round1-60",
+        "round1-62"
+      ]
+    },
+    "status": "REVISE_MEASUREMENT"
+  },
+  "proposal": {
+    "authority": "NONE",
+    "candidate_rank": 2,
+    "candidate_space": 3,
+    "dataset": "geom013-development:ce7fcb38a43f0d3b86de97759253236952e1e6bb84e5defd957f6c351843dbd8",
+    "development": {
+      "abstentions": 0,
+      "by_status": {
+        "LOCAL_SYNTHETIC_REPLAY": 64
+      },
+      "correct": 64,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 64,
+      "wrong": 0,
+      "wrong_ids": []
+    },
+    "domain": "geom013-search:94fdedaf7628d3a1a053f999caacc213b6a18c2dfc33e3e7c8d3178c7955108d",
+    "from": {
+      "authority": "NONE",
+      "distinct_by_declared_event_id": [
+        false,
+        false
+      ],
+      "grammar": "geom013-insert-distinct-record-id/v1",
+      "parent": {
+        "atoms": [
+          {
+            "channel": "a",
+            "end": 8,
+            "start": 0,
+            "transform": "ODD"
+          },
+          {
+            "channel": "b",
+            "end": 8,
+            "start": 0,
+            "transform": "ODD"
+          }
+        ],
+        "authority": "NONE",
+        "operator": "XOR",
+        "scope": "synthetic:observer-a@cut-12:decoder-A",
+        "state": "PENCIL"
+      },
+      "state": "PENCIL"
+    },
+    "live_measurement_performed": false,
+    "manifest": "geom013-capability-manifest:9cab622e037bceb2dedff5bb66b40307c4de3773c4d915144184901eefcccbbb",
+    "recipe": [
+      {
+        "channel": "a",
+        "output": "events_0",
+        "step": "FILTER_RECORDED_EVENTS",
+        "window": [
+          0,
+          8
+        ]
+      },
+      {
+        "identity_authentication": false,
+        "input": "events_0",
+        "on_missing_or_collision": "HOLD",
+        "output": "unique_0",
+        "step": "DISTINCT_BY_DECLARED_EVENT_ID"
+      },
+      {
+        "input": "unique_0",
+        "output": "count_0",
+        "step": "COUNT"
+      },
+      {
+        "input": "count_0",
+        "output": "bit_0",
+        "step": "ODD"
+      },
+      {
+        "channel": "b",
+        "output": "events_1",
+        "step": "FILTER_RECORDED_EVENTS",
+        "window": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "events_1",
+        "output": "count_1",
+        "step": "COUNT"
+      },
+      {
+        "input": "count_1",
+        "output": "bit_1",
+        "step": "ODD"
+      },
+      {
+        "inputs": [
+          "bit_0",
+          "bit_1"
+        ],
+        "output": "proposed_measurement",
+        "step": "XOR"
+      }
+    ],
+    "roots_authenticated": false,
+    "state": "PENCIL",
+    "status": "PENCIL_INSTRUMENT_REDESIGN_PROPOSED",
+    "to": {
+      "authority": "NONE",
+      "distinct_by_declared_event_id": [
+        true,
+        false
+      ],
+      "grammar": "geom013-insert-distinct-record-id/v1",
+      "parent": {
+        "atoms": [
+          {
+            "channel": "a",
+            "end": 8,
+            "start": 0,
+            "transform": "ODD"
+          },
+          {
+            "channel": "b",
+            "end": 8,
+            "start": 0,
+            "transform": "ODD"
+          }
+        ],
+        "authority": "NONE",
+        "operator": "XOR",
+        "scope": "synthetic:observer-a@cut-12:decoder-A",
+        "state": "PENCIL"
+      },
+      "state": "PENCIL"
+    }
+  }
+}
