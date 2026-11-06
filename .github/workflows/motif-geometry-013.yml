@@ -1,0 +1,39 @@
+name: MOTIF GEOM-013 Self-Redesigning Instrument
+on:
+  push:
+    paths:
+      - 'experiments/geometry-013/**'
+      - '.github/workflows/motif-geometry-013.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-013/**'
+      - '.github/workflows/motif-geometry-013.yml'
+jobs:
+  iterative-procedural-redesign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Local synthetic unit/adversarial controls
+        run: |
+          cd experiments/geometry-013
+          python -m unittest -v test_redesign.py
+      - name: Reproducible two-stage feedback and classical oracle
+        run: |
+          cd experiments/geometry-013
+          python demo.py > /tmp/geom013-demo.json
+          python benchmark.py > /tmp/geom013-benchmark.json
+          python interface.py example-input.json > /tmp/geom013-interface.json
+          python -m json.tool /tmp/geom013-demo.json > /dev/null
+          python -m json.tool /tmp/geom013-benchmark.json > /dev/null
+          python -m json.tool /tmp/geom013-interface.json > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom013-synthetic-evidence
+          path: |
+            /tmp/geom013-demo.json
+            /tmp/geom013-benchmark.json
+            /tmp/geom013-interface.json
