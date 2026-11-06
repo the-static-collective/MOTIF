@@ -194,11 +194,28 @@ class AlgorithmExaminerTests(unittest.TestCase):
     def test_committed_formal_certificate_matches_new_Z3_replay(self):
         committed=json.loads((HERE/"generated"/"formal_certificate.json").read_text(
             encoding="utf-8"))
-        self.assertEqual(committed["source_manifest"],self.artifact["manifest"])
-        verified=reverify(self.artifact)
+        # SMT SAT models are valid counterexamples, not unique canonical
+        # assignments. A future Z3 replay can choose a different model.
+        # Recheck stored counterexamples and match the PROVED semantics.
+        archive=committed["source_manifest"]
+        latest=self.artifact["manifest"]
+        self.assertEqual(archive["rules"],latest["rules"])
+        self.assertEqual(archive["source_sha256"],latest["source_sha256"])
+        self.assertEqual(archive["genuine_smt_counterexamples"],
+                         latest["genuine_smt_counterexamples"])
+        for event in archive["examiner_transcript"]:
+            if event["external_smt_result"]!="SAT":
+                continue
+            cex=event["counterexample"]
+            rule=event["hypothesis"]
+            self.assertTrue(guard_eval(rule["guard"],cex["parent"],
+                                       cex["column"],(1<<152)-1))
+            self.assertEqual(cex["reference"],cex["parent"]&cex["column"])
+            self.assertNotEqual(cex["incorrect"],cex["reference"])
+        verified=reverify({"source":self.artifact["source"],
+                           "manifest":archive})
         self.assertEqual(committed["formal_verification"],verified)
-        self.assertEqual(committed["source_sha256"],
-                         self.artifact["manifest"]["source_sha256"])
+        self.assertEqual(committed["source_sha256"],latest["source_sha256"])
         self.assertFalse(committed["production_write_permitted"])
         self.assertFalse(committed["automatic_algorithm_promotion"])
 
