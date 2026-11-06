@@ -56,7 +56,7 @@ def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
         receipt["source_inspection"]=source_reader.inspect(
             catalog,source_ref,source_query,repo_root=roots)
     if read_outputs:
-        receipt["ring_work"]=ring.run(tuple(read_outputs))
+        receipt["ring_work"]=ring.run(tuple(read_outputs), census_count=catalog["cartridges_indexed_non_executable"])
     if specialist_ids:
         if not native:
             receipt["native_specialist_work"]={
