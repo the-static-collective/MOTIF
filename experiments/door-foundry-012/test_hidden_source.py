@@ -200,7 +200,7 @@ class HiddenSourceTests(unittest.TestCase):
             shutil.copytree(self.source,copied)
             file=copied/"worlds"/"LEFT_FULL"/"start.png"
             file.write_bytes(file.read_bytes()+b"changed")
-            with self.assertRaises(images.HOLD):
+            with self.assertRaises(source009.HOLD):
                 engine.read_origin_pins(copied)
 
     def test_unknown_origin_option_is_not_silently_added_to_posterior(self):
