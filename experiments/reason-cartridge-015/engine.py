@@ -15,7 +15,7 @@ from pathlib import Path
 import json
 
 SOURCE=Path(__file__).with_name("casebook.py")
-SOURCE_BLOB="13f1240d8040269ace437d10fcb0c32797a5b134"
+SOURCE_BLOB="88903189b40fe527f962f810c6bd2c05f16c57d5"
 REVISION="motif.reason.care-without-capture.synthetic.v1"
 SCHEMA="motif.reason.care.scenario.v1"
 PACKET="motif.reason.the-unowned-good.v1"
