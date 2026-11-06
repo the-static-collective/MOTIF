@@ -29,8 +29,11 @@ def bind_source_roots():
     import demo as geometry_demo
     from redesign import RecordedCase,RecordedEvent,IdentifierAccess
     from language_space import LanguageSpace
+    from model_gateway import TinyTextModel
+    from fixtures import TRAIN as original_language_training
     from commonwealth import run_council,owner4
-    return geometry_demo,RecordedCase,RecordedEvent,IdentifierAccess,LanguageSpace,run_council,owner4
+    return (geometry_demo,RecordedCase,RecordedEvent,IdentifierAccess,
+            LanguageSpace,TinyTextModel,original_language_training,run_council,owner4)
 
 
 def native_run(packet):
@@ -40,7 +43,11 @@ def native_run(packet):
             or len(packet["cases"])>48):
         raise ValueError("Unsupported shared-evidence packet")
     (geom,RecordedCase,RecordedEvent,IdentifierAccess,
-     LanguageSpace,run_council,owner4)=bind_source_roots()
+     LanguageSpace,TinyTextModel,original_language_training,
+     run_council,owner4)=bind_source_roots()
+    # Train ORIGINAL source-owned tiny supervised classifier only on THOUGHT-014
+    # training examples, never on heldout labels or this packet outcomes.
+    tiny_model=TinyTextModel(original_language_training)
 
     # The original GEOM-013 source builds its revision using development
     # cases from its own earlier experiment, NOT the heldout packet here.
@@ -67,8 +74,13 @@ def native_run(packet):
         engine.input_digest=hashlib.sha256(json.dumps(item,sort_keys=True).encode()).hexdigest()
         # Native THOUGHT-014 LanguageSpace, which calls the original 013
         # conservative interpreter. No generative model and no network.
-        speech=LanguageSpace(engine).explore(item["utterance"],
-                                             selected_pair=item["selected_pair"])
+        baseline_speech=LanguageSpace(engine).explore(
+            item["utterance"],selected_pair=item["selected_pair"],model=None)
+        speech=LanguageSpace(engine).explore(
+            item["utterance"],selected_pair=item["selected_pair"],model=tiny_model)
+        baseline_safe=(baseline_speech["status"]=="TYPED_ONLY" and
+                       baseline_speech["speech_act"] in (
+                            "EXPLORE_POSSIBILITY","CHALLENGE","COMPARE","INSPECT_EVIDENCE"))
         safe=speech["status"]=="TYPED_ONLY" and speech["speech_act"] in (
             "EXPLORE_POSSIBILITY","CHALLENGE","COMPARE","INSPECT_EVIDENCE")
         if speech["status"]=="HOLD" and speech["speech_act"]=="HOLD_EFFECT_REQUEST":
@@ -116,6 +128,10 @@ def native_run(packet):
             "id":cid,
             "language":{"speech_act":speech["speech_act"],
                         "status":speech["status"],"safe":safe,
+                        "baseline_safe":baseline_safe,
+                        "baseline_act":baseline_speech["speech_act"],
+                        "model_consulted":speech["model_consulted"],
+                        "model_accepted_as_hypothesis":speech["model_accepted_as_hypothesis"],
                         "source_class":speech["source_class"],
                         "pen_state":speech["pen_state"]},
             "geometry":{"raw":raw,"repaired":repaired,
@@ -132,7 +148,8 @@ def native_run(packet):
             "source_owner_geom_parent_sha256":parent_digest,
             "source_native_geometry_procedure_learned_from_other_cases":True,
             "all_three_native_algorithms_receive_same_case_ids":True,
-            "language_model_calls":0,
+            "language_model_kind":"TRAINED_NAIVE_BAYES_NOT_LLM",
+            "language_model_calls":"ONLY_WHEN_BOUNDARY_INTERPRETER_UNKNOWN",
             "external_action_executed":False,"authority":"NONE",
             "results":rows}
     return output
