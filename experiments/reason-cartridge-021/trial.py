@@ -49,6 +49,14 @@ def run(directory=None):
             "observation_pairs_indistinguishable_in_old_features":
                 report["learner"]["contradiction"] is not None,
             "new_feature":report["learner"]["learned_additional_feature"],
+            "old_feature_contradiction_witness":report["learner"]["contradiction"],
+            "synthetic_source_observations":report["learner"]["author_observations"],
+            "self_role_reversal_wish":case["self_role_reversal_preference"],
+            "source_feature_veto_or_disclosure":(
+                report["learner"]["source_disclosed_feature_receipt"]["response"]["status"]
+                if report["learner"]["source_disclosed_feature_receipt"]
+                else "NOT_REQUESTED"),
+            "critic_rejection_reasons":report["critic_source_blockers"],
             "DNF_program":report["learner"]["program"],
             "remaining_syntactic_programs":report["learner"].get(
                 "candidate_programs_after_training"),
