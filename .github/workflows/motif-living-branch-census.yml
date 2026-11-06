@@ -1,0 +1,106 @@
+name: MOTIF living branch census (read-only)
+
+# Default-branch watcher. It only indexes branches; it NEVER checks out or
+# executes their code and NEVER admits them as live reasoning cartridges.
+on:
+  create:
+  schedule:
+    - cron: '13 */6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/motif-living-branch-census.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motif-living-branch-census
+  cancel-in-progress: true
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Collect all currently visible branches as inert source pointers
+        env:
+          GH_READER_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import datetime
+          import hashlib
+          import json
+          import os
+          import re
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          repo = 'the-static-collective/MOTIF'
+          api = 'https://api.github.com/repos/' + repo + '/branches'
+          cards, seen = [], set()
+          ref_rx = re.compile(r'^[A-Za-z0-9._/-]{1,250}$')
+          sha_rx = re.compile(r'^[0-9a-f]{40}$')
+          for page in range(1, 21):
+              req = Request(api + f'?per_page=100&page={page}', headers={
+                  'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28',
+                  'User-Agent': 'motif-readonly-branch-watcher-v1',
+                  'Authorization': 'Bearer ' + os.environ['GH_READER_TOKEN'],
+              })
+              with urlopen(req, timeout=20) as response:
+                  raw = response.read(2_000_001)
+              if len(raw) > 2_000_000:
+                  raise RuntimeError('HOLD: oversized GitHub branch API page')
+              rows = json.loads(raw.decode('utf-8'))
+              if not isinstance(rows, list):
+                  raise RuntimeError('HOLD: non-list API result')
+              for row in rows:
+                  name = row.get('name')
+                  sha = (row.get('commit') or {}).get('sha')
+                  if (not isinstance(name, str) or not ref_rx.fullmatch(name)
+                      or name.startswith(('/', '-')) or name.endswith('/')
+                      or '..' in name or '//' in name or name in seen
+                      or not isinstance(sha, str) or not sha_rx.fullmatch(sha)):
+                      raise RuntimeError('HOLD: invalid or duplicate GitHub ref')
+                  seen.add(name)
+                  if name == 'main':
+                      continue
+                  cards.append({
+                      'ref': name, 'commit': sha,
+                      'id': hashlib.sha256((name+'@'+sha).encode()).hexdigest()[:20],
+                      'status': 'INDEXED_NON_EXECUTABLE',
+                      'executable': False,
+                      'authority': 'NONE',
+                  })
+              if len(rows) < 100:
+                  break
+          else:
+              raise RuntimeError('HOLD: branch pagination incomplete')
+          cards.sort(key=lambda x:x['ref'])
+          result = {
+              'schema': 'motif.public-branch-census.v1',
+              'observed_at_utc': datetime.datetime.now(
+                  datetime.timezone.utc).isoformat(timespec='seconds'),
+              'repository': repo,
+              'branches_total': len(seen),
+              'source_only_cartridges': len(cards),
+              'all_pages_checked': True,
+              'code_executed_from_other_branches': False,
+              'automatic_new_branch_admission': False,
+              'passports': cards,
+          }
+          Path('motif-public-branch-census.json').write_text(
+              json.dumps(result, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(
+              '# MOTIF branch census\n\n'
+              + f"Observed {len(seen)} branches, {len(cards)} non-executable source passports.\n\n"
+              + 'Source pointers only; no branch code imported, executed, or admitted.\n')
+          print('INDEXED', len(seen), 'GitHub branches; execution authority NONE')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-living-branch-census
+          path: motif-public-branch-census.json
+          retention-days: 30
