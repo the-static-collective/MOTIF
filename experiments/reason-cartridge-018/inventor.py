@@ -50,7 +50,7 @@ def pin():
 
 
 def programs():
-    """Finite joined-graph compositions; deduplicate commutative AB conjuncts."""
+    """All four shape families x six allowed relations in four ordered slots."""
     return tuple((shape,one,two,three,gate)
                  for shape in range(len(SHAPES))
                  for one,two,three,gate in product(RELATIONS,repeat=4)\n                 if one<=gate)
@@ -124,7 +124,7 @@ def _check_label(world,source_record):
 
 def _filter(programs_left,world,label):
     return [p for p in programs_left
-            if (prove(p,world) is not None)==label["positive_support"]]
+            if status(p,world)==label["status"]]
 
 
 def _ask(owner,w,seen,labels,remaining):
