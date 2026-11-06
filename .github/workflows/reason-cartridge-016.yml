@@ -1,0 +1,79 @@
+name: REASON-016 The Good of the Other / source-owned active listening
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-016-good-of-the-other
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-016/**'
+      - '.github/workflows/reason-cartridge-016.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  good-of-the-other:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress foundational MOTIF-003 affordance frontier
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regress source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Fetch exact SHA-pinned original Supreme Court opinion reproductions
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress complete opinion REASON-014
+        run: python -m unittest discover -s experiments/reason-cartridge-014 -p 'test_*.py' -v
+      - name: Regress consent and unowned-care REASON-015
+        run: python -m unittest discover -s experiments/reason-cartridge-015 -p 'test_*.py' -v
+      - name: New recipient corrections, query provenance, refusals and revision tests
+        run: python -m unittest discover -s experiments/reason-cartridge-016 -p 'test_*.py' -v
+      - name: Independent source-owner evaluation and truthful benchmark report
+        run: |
+          python experiments/reason-cartridge-016/trial.py reason-016-evidence > reason-016-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-016-evidence/benchmark.json').read_text())
+          assert r['cases']==16
+          assert r['development_cases']==5 and r['heldout_cases']==11
+          assert r['reference_matches']==16
+          assert r['independent_mechanical_review_passed']==16
+          assert r['information_questions_sent_to_synthetic_owner']==6
+          assert r['revoked_prior_permission_not_reusable']
+          assert r['unsupported_third_party_demand_held']
+          assert r['multi_turn_learning_case']['questions']==['Q_SOUP','Q_COMPANY']
+          assert r['naive_gain_reference_matches']<16
+          assert r['safe_but_no_listening_reference_matches']<16
+          assert r['independent_receiver']['errors']==0
+          assert r['source_owner_expectations_are_predefined_not_human_expert_gold']
+          assert r['no_mind_reading_or_subjective_love_demonstrated']
+          assert r['no_real_humans_consulted']
+          assert not r['external_actions']
+          assert not r['real_world_authority']
+          print({'source_scenarios':r['cases'],
+                 'heldout':r['heldout_cases'],
+                 'author_choice_match':r['reference_matches'],
+                 'no_listening_baseline':r['safe_but_no_listening_reference_matches'],
+                 'naive_gain_baseline':r['naive_gain_reference_matches'],
+                 'simulated_questions':r['information_questions_sent_to_synthetic_owner'],
+                 'consent_revocation_isolated':r['revoked_prior_permission_not_reusable']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-016-good-of-the-other-source-receipts
+          path: |
+            reason-016-evidence/
+            reason-016-stdout.json
+          retention-days: 30
