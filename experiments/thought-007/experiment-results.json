@@ -1,0 +1,159 @@
+{
+  "ambiguous_word_referent_candidates": 2,
+  "distinct_concepts_with_same_label": 2,
+  "effective_external_authority": "NONE",
+  "equivalence_status": "HYPOTHESIS_ONLY",
+  "events": 21,
+  "exact_replay": true,
+  "placement_snapshot": [
+    {
+      "active": true,
+      "coordinate_authority": "NONE",
+      "id": "p:assoc-a",
+      "manifestation_id": "m:shelter-logistics",
+      "purpose": "appearance A",
+      "revision": 2,
+      "view_id": "v:association",
+      "x": 1000.0,
+      "y": -500.0
+    },
+    {
+      "active": true,
+      "coordinate_authority": "NONE",
+      "id": "p:assoc-b",
+      "manifestation_id": "m:shelter-logistics",
+      "purpose": "same manifestation second appearance",
+      "revision": 1,
+      "view_id": "v:association",
+      "x": 2.0,
+      "y": -0.5
+    },
+    {
+      "active": true,
+      "coordinate_authority": "NONE",
+      "id": "p:dep",
+      "manifestation_id": "m:shelter-logistics",
+      "purpose": "dependency viewpoint",
+      "revision": 1,
+      "view_id": "v:dependency",
+      "x": 0.0,
+      "y": 2.0
+    },
+    {
+      "active": false,
+      "coordinate_authority": "NONE",
+      "id": "p:hex",
+      "manifestation_id": "m:shelter-values",
+      "purpose": "flower lattice sketch",
+      "revision": 1,
+      "view_id": "v:hex",
+      "x": 0.5,
+      "y": 0.866
+    },
+    {
+      "active": true,
+      "coordinate_authority": "NONE",
+      "id": "p:none",
+      "manifestation_id": "m:belonging-values",
+      "purpose": "no geometry needed",
+      "revision": 1,
+      "view_id": "v:nolayout",
+      "x": null,
+      "y": null
+    }
+  ],
+  "semantic_invariant_under_layout_change": true,
+  "semantic_snapshot": {
+    "concepts": [
+      {
+        "description": "Home as belonging or shared care",
+        "id": "concept:belonging",
+        "label": "Home",
+        "origin": "example:concept-author",
+        "revision": 1
+      },
+      {
+        "description": "Home as physical shelter",
+        "id": "concept:shelter",
+        "label": "Home",
+        "origin": "example:concept-author",
+        "revision": 1
+      }
+    ],
+    "equivalence_proposals": [
+      {
+        "id": "eq:home-meanings",
+        "left": "concept:shelter",
+        "origin": "example:analogy",
+        "reason": "The two senses might overlap; they remain distinct",
+        "right": "concept:belonging",
+        "status": "HYPOTHESIS_ONLY"
+      }
+    ],
+    "expressions": [
+      {
+        "context": "Ambiguous word in discussion",
+        "id": "expr:home",
+        "origin": "example:human-utterance",
+        "text": "home"
+      }
+    ],
+    "external_authority": "NONE",
+    "manifestations": [
+      {
+        "concept_id": "concept:belonging",
+        "context": "community values",
+        "id": "m:belonging-values",
+        "parent_id": null,
+        "phase": "ABSTRACT_PENCIL",
+        "role": "goal"
+      },
+      {
+        "concept_id": "concept:shelter",
+        "context": "housing logistics",
+        "id": "m:shelter-logistics",
+        "parent_id": null,
+        "phase": "ABSTRACT_PENCIL",
+        "role": "resource"
+      },
+      {
+        "concept_id": "concept:shelter",
+        "context": "future concrete planning",
+        "id": "m:shelter-next",
+        "parent_id": "m:shelter-logistics",
+        "phase": "CONCRETE_PENCIL",
+        "role": "requirement"
+      },
+      {
+        "concept_id": "concept:shelter",
+        "context": "community values",
+        "id": "m:shelter-values",
+        "parent_id": null,
+        "phase": "ABSTRACT_PENCIL",
+        "role": "condition"
+      }
+    ],
+    "referent_proposals": [
+      {
+        "concept_id": "concept:belonging",
+        "expression_id": "expr:home",
+        "id": "ref:belonging",
+        "origin": "example:hypothesis",
+        "reason": "Word could mean emotional belonging",
+        "status": "HYPOTHESIS_ONLY"
+      },
+      {
+        "concept_id": "concept:shelter",
+        "expression_id": "expr:home",
+        "id": "ref:shelter",
+        "origin": "example:hypothesis",
+        "reason": "Word could mean physical shelter",
+        "status": "HYPOTHESIS_ONLY"
+      }
+    ],
+    "schema": "motif.thought-field.semantics.v1"
+  },
+  "shelter_active_placements": 3,
+  "shelter_manifestations": 3,
+  "status": "PROPOSAL_ONLY"
+}

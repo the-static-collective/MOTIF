@@ -1,0 +1,39 @@
+name: THOUGHT-007 non-fungible manifestations
+on:
+  push:
+    branches:
+      - 'experiment/thought-007-nonfungible-manifestations'
+  pull_request:
+    paths:
+      - 'experiments/thought-007/**'
+      - '.github/workflows/thought-007.yml'
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Typed identities and adversarial replay
+        working-directory: experiments/thought-007
+        run: python -m unittest -v test_field.py
+      - name: Reproducible non-fungible thought fixture
+        working-directory: experiments/thought-007
+        run: |
+          python demo.py > experiment-results.json
+          python - <<'PY'
+          import json
+          r=json.load(open('experiment-results.json'))
+          assert r['exact_replay'] and r['semantic_invariant_under_layout_change']
+          assert r['distinct_concepts_with_same_label']==2
+          assert r['ambiguous_word_referent_candidates']==2
+          assert r['equivalence_status']=='HYPOTHESIS_ONLY'
+          assert r['effective_external_authority']=='NONE'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thought-007-synthetic-results
+          path: experiments/thought-007/experiment-results.json
