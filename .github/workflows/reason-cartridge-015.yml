@@ -1,0 +1,72 @@
+name: REASON-015 The Unowned Good / bounded care without capture
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-015-unowned-good
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-015/**'
+      - '.github/workflows/reason-cartridge-015.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-care:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress historical MOTIF-003 affordance frontier
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Complete inherited REASON-001 through REASON-013 tests
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire source-owned full judicial texts for inherited REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: REASON-014 tests against exact original archived full-opinion pins
+        run: python -m unittest discover -s experiments/reason-cartridge-014 -p 'test_*.py' -v
+      - name: REASON-015 independent synthetic care and source-gate tests
+        run: python -m unittest discover -s experiments/reason-cartridge-015 -p 'test_*.py' -v
+      - name: Compare source-owned care decisions with two naive proxy policies
+        run: |
+          python experiments/reason-cartridge-015/trial.py reason-015-evidence
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-015-evidence/benchmark.json').read_text())
+          assert r['scenario_count']==15
+          assert r['development']==6 and r['evaluations']==9
+          assert r['source_defined_reference_matches']==15
+          assert r['independent_gate_audits_passed']==15
+          assert r['gating_ablation_changes']==6
+          assert r['naive_proxy_correct']<15
+          assert r['unguarded_MOTIF_003_new_choice_correct']<15
+          assert r['different_consent_revision_never_inherits_admission']
+          assert r['careful_behavior_is_not_proof_of_experienced_love']
+          assert r['strong_rules_based_reference_can_match']
+          assert r['self_authored_scenarios_not_independent_ethics_raters']
+          assert r['can_test_behavioral_constraints_not_interior_love']
+          assert r['no_real_people_tested']
+          assert not r['external_actions']
+          print({'toy_scenarios':r['scenario_count'],
+                 'source_matches':r['source_defined_reference_matches'],
+                 'naive_proxy':r['naive_proxy_correct'],
+                 'affordance_proxy':r['unguarded_MOTIF_003_new_choice_correct'],
+                 'gates_with_counterexamples':r['gating_ablation_changes']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-015-unowned-good-care-receipts
+          path: |
+            reason-015-evidence/
+          retention-days: 30
