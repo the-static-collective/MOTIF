@@ -19,12 +19,17 @@ import discovery
 import ring
 import source_reader
 import triad
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cartridge-ring-003"))
+import hypergraph
+import receipt_bridge
 
 SCHEMA = "motif.living-cartridge-ring.v1"
 
 
 def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
-            source_query=None, source_prefix=None, repo_root=None, observed_at=None, native=False):
+            source_query=None, source_prefix=None, repo_root=None, observed_at=None, native=False,
+            hyper_goals=(), hyper_budget=6, execute_hyper_selected=False):
     """Observe current branch heads on demand and recruit only needed organs."""
     roots = Path(repo_root) if repo_root is not None else Path(__file__).resolve().parents[2]
     rows = discovery.get_branches(fetch_page)
@@ -48,6 +53,8 @@ def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
         "source_inspection":None,
         "ring_work":None,
         "native_specialist_work":None,
+        "hypergraph_plan":None,
+        "hypergraph_native_evidence":None,
         "this_census_does_not_admit_new_code":True,
         "external_action_executed":False,
         "authority":"NONE",
@@ -67,6 +74,22 @@ def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
         else:
             receipt["native_specialist_work"]=triad.run(tuple(specialist_ids),
                                                          repo_root=roots)
+    if execute_hyper_selected and (not native or not hyper_goals):
+        raise hypergraph.HOLD("Native hypergraph execution requires explicit goals and native approval")
+    if hyper_goals:
+        task=hypergraph.Task("explicit-typed-hypergraph-request",tuple(hyper_goals),hyper_budget)
+        graph=hypergraph.current_graph()
+        plan=graph.solve(task)
+        plan["live_source_only_branch_count"]=catalog["cartridges_indexed_non_executable"]
+        receipt["hypergraph_plan"]=plan
+        if execute_hyper_selected:
+            chosen=tuple(plan["selected"]["selected"])
+            if chosen:
+                native_receipt=triad.run(chosen,repo_root=roots)
+                receipt["hypergraph_native_evidence"]=receipt_bridge.validate_native(native_receipt)
+            else:
+                receipt["hypergraph_native_evidence"]={"status":"NO_METHODS_SELECTED",
+                    "no_execution":True}
     body=json.dumps(receipt,sort_keys=True,separators=(",",":"))
     receipt["receipt_sha256"]=hashlib.sha256(body.encode()).hexdigest()
     return receipt
@@ -83,6 +106,11 @@ def main():
     p.add_argument("--inspect-branch")
     p.add_argument("--query")
     p.add_argument("--source-prefix")
+    p.add_argument("--hyper-goal",action="append",default=[],metavar="AFFORDANCE:VALUE",
+                   help="Explicitly requested hypothetical affordance and integer value")
+    p.add_argument("--hyper-budget",type=int,default=6)
+    p.add_argument("--execute-hyper-selected",action="store_true",
+                   help="Requires --native; only pinned, reviewed triad adapters in Docker")
     p.add_argument("--output",type=Path)
     args=p.parse_args()
     if args.offline_frozen:
@@ -96,11 +124,23 @@ def main():
             return discovery.github_page(page,size,os.getenv("GITHUB_TOKEN"))
         observed=None
     try:
+        goals=[]
+        for item in args.hyper_goal:
+            parts=item.rsplit(":",1)
+            if len(parts)!=2:
+                raise hypergraph.HOLD("A goal must be AFFORDANCE:INTEGER")
+            try:
+                val=int(parts[1])
+            except ValueError as exc:
+                raise hypergraph.HOLD("Invalid affordance value") from exc
+            goals.append((parts[0],val))
         result=session(fetch_page=fetch,read_outputs=tuple(args.outputs),
                        specialist_ids=tuple(args.specialists),
                        source_ref=args.inspect_branch,source_query=args.query,
                        source_prefix=args.source_prefix,
-                       observed_at=observed,native=args.native)
+                       observed_at=observed,native=args.native,
+                       hyper_goals=tuple(goals),hyper_budget=args.hyper_budget,
+                       execute_hyper_selected=args.execute_hyper_selected)
         payload=json.dumps(result,indent=2,sort_keys=True)+"\n"
         if args.output:
             args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -111,7 +151,8 @@ def main():
                 "output":str(args.output)}))
         else:
             print(payload,end="")
-    except (discovery.DiscoveryHOLD,source_reader.HOLD,triad.HOLD,ring.HOLD) as exc:
+    except (discovery.DiscoveryHOLD,source_reader.HOLD,triad.HOLD,ring.HOLD,
+            hypergraph.HOLD) as exc:
         print(json.dumps({"status":"HOLD","reason":str(exc),
                           "no_execution_grant":True}),file=sys.stderr)
         raise SystemExit(2)
