@@ -1,0 +1,92 @@
+name: REASON-020 Golden Mirror Learns / two corrected circles and self-verified skill
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-020-golden-mirror-learns
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-020/**'
+      - '.github/workflows/reason-cartridge-020.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  self-and-other-learning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression — original MOTIF-003 affordance system
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regression — source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire SHA-pinned full judicial opinions for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regression — REASON-014 through REASON-019, including the real elves
+        run: |
+          for n in 014 015 016 017 018 019; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Test Golden Mirror dynamic dual-perspective self and other learning
+        run: python -m unittest discover -s experiments/reason-cartridge-020 -p 'test_*.py' -v
+      - name: Execute source-owned correction, grammar learning and all four real elves
+        run: |
+          python experiments/reason-cartridge-020/trial.py reason-020-evidence > reason-020-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("reason-020-evidence/benchmark.json").read_text())
+          assert r["synthetic_scenarios"]==16
+          assert r["development_scenarios"]==5 and r["heldout_scenarios"]==11
+          assert r["source_author_matches"]==16
+          assert r["learned_executable_templates"]==2
+          assert r["source_labeled_learning_examples"]==6
+          assert r["source_teacher_unseen_positive_correct"]==8
+          assert r["source_teacher_unseen_positive_total"]==8
+          assert r["source_teacher_unseen_negative_rejected"]==6
+          assert r["source_teacher_unseen_negative_total"]==6
+          assert r["self_skill_compilations"]==1
+          assert r["new_dynamic_source_author_stage_matches"]==16
+          assert r["new_dynamic_source_author_stage_matches"]>r["fixed_prior_source_author_stage_matches"]
+          assert r["four_real_subprocess_workers_per_case"]==4
+          assert r["minimum_subprocess_perspective_invocations"]==64
+          assert r["older_revision_cannot_reenter_consent_ledger"]
+          assert r["independent_heldout_case_review"]["author_matches"]==11
+          assert r["independent_heldout_case_review"]["separate_scope_review_failures"]==0
+          assert r["one_script_author_supplied_every_value"]
+          assert r["learned_templates_not_general_semantic_understanding"]
+          assert r["no_empathy_or_experienced_love_measured"]
+          assert not r["external_actions"]
+          assert not r["real_world_authority"]
+          print({
+            "synthetic_cases":r["synthetic_scenarios"],
+            "heldout":r["heldout_scenarios"],
+            "source_author_matches":r["source_author_matches"],
+            "original_closed_grammar_stage_matches":r["fixed_prior_source_author_stage_matches"],
+            "new_learned_grammar_stage_matches":r["new_dynamic_source_author_stage_matches"],
+            "actual_learned_template_count":r["learned_executable_templates"],
+            "source_competence_positive":r["source_teacher_unseen_positive_correct"],
+            "source_competence_negative":r["source_teacher_unseen_negative_rejected"],
+            "source_confirmed_concept_versions":r["new_goal_correction_versions"],
+            "actual_019_perspective_processes":r["minimum_subprocess_perspective_invocations"],
+            "revoked_consent_stays_revoked":r["older_revision_cannot_reenter_consent_ledger"],
+          })
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-020-golden-mirror-learning-and-corrections
+          path: |
+            reason-020-evidence/
+            reason-020-stdout.json
+          retention-days: 30
