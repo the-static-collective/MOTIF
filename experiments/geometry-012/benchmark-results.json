@@ -1,0 +1,72 @@
+{
+  "authority": "NONE",
+  "best_single_predicate": {
+    "scores": {
+      "abstentions": 20,
+      "correct": 113,
+      "total": 260,
+      "wrong": 127
+    },
+    "selected": {
+      "atoms": [
+        {
+          "channel": "noise",
+          "end": 4,
+          "start": 0,
+          "transform": "ODD"
+        }
+      ],
+      "authority": "NONE",
+      "operator": "NOT",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "state": "PENCIL"
+    }
+  },
+  "classical_direct_count_truth_table": {
+    "abstentions": 20,
+    "correct": 240,
+    "total": 260,
+    "wrong": 0
+  },
+  "developer_authored_synthetic": true,
+  "development_cases": 96,
+  "experiment": "GEOM-012 raw-event program synthesis against classical baseline",
+  "heldout": {
+    "authority": "NONE",
+    "heldout_fingerprint": "geom012-heldout:0abb0b12305fb08adbbaa4cfe6408dcc8104522f990b66ce6f37c8b58f1b70b0",
+    "live_measurement_performed": false,
+    "scores": {
+      "abstentions": 20,
+      "correct": 240,
+      "total": 260,
+      "wrong": 0
+    },
+    "status": "LOCAL_HELDOUT_TRACE_REPLAY"
+  },
+  "heldout_cases": 260,
+  "limits": "The generator uses a prescribed XOR-of-event-count-parity law. A conventional classical program search can tie. No real sensor was invented or accessed.",
+  "parity_with_classical": true,
+  "proposed_instrument": {
+    "atoms": [
+      {
+        "channel": "a",
+        "end": 8,
+        "start": 0,
+        "transform": "ODD"
+      },
+      {
+        "channel": "b",
+        "end": 8,
+        "start": 0,
+        "transform": "ODD"
+      }
+    ],
+    "authority": "NONE",
+    "operator": "XOR",
+    "scope": "synthetic:observer-a@cut-12:decoder-A",
+    "state": "PENCIL"
+  },
+  "seed": 2026110612,
+  "state": "PENCIL",
+  "visible_only_false_correct": 130
+}
