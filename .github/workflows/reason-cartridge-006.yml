@@ -1,0 +1,87 @@
+name: REASON-006 source-owned reasoning commonwealth
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-006-reasoning-commonwealth
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-006/**'
+      - '.github/workflows/reason-cartridge-006.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  commonwealth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression across source-owned REASON-001 through 005
+        run: |
+          for n in 001 002 003 004 005; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reasoning commonwealth, attribution, loop and hostile tests
+        run: python -m unittest discover -s experiments/reason-cartridge-006 -p 'test_*.py' -v
+      - name: Emit independent scenarios for ORIGINAL native Dogram
+        run: |
+          python experiments/reason-cartridge-006/cases.py reason-006-evidence
+          python -m json.tool reason-006-evidence/manifest.json > /dev/null
+      - name: Checkout exact inspected original Dogram revision, no write credentials
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: _external/dogram
+          persist-credentials: false
+      - name: Execute actual Dogram CLI and capture source-native receipts
+        run: |
+          set -eu
+          test "$(git -C _external/dogram rev-parse HEAD)" = "551b5f9df18f17ec69b452ddcdff01718e0ff771"
+          for name in council-strong council-fragile council-negative; do
+            PYTHONPATH=_external/dogram python -m dogram.cli "reason-006-evidence/${name}.json" > "reason-006-evidence/${name}.receipt.json"
+          done
+          echo 'Original source-owned Dogram emitted three receipts.'
+      - name: Remove foreign original source before local council and transferred method
+        run: |
+          rm -rf _external/dogram
+          test ! -e _external/dogram
+      - name: Run council on pinned native evidence, preserve marginal ledger and distilled method
+        run: |
+          python experiments/reason-cartridge-006/trial.py reason-006-evidence > reason-006-evidence/native-council-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("reason-006-evidence/council-receipt.json").read_text())
+          c=json.loads(Path("reason-006-evidence/learned-method.json").read_text())
+          assert r["native_foreign_teacher_mode"]=="ACTUAL_PINNED_DOGRAM"
+          assert r["foreign_teacher_source_absent"]
+          assert sum(x["native_crosscheck"] for x in r["source_owner_tests"])==3
+          assert r["source_reviews"]==3
+          assert r["new_conclusions_from_local_fixture_reviews"]==3
+          assert r["duplicate_proposals_suppressed"]==5
+          assert r["independent_method_review"]=={"cases":5,"errors":0}
+          assert r["fixture_only_read_only_admitted"]
+          assert r["external_actions"] is False
+          assert r["real_world_authority"] is False
+          assert c["status"]=="PROPOSE_ONLY"
+          assert c["external_execution"] is False
+          print({"native_checks":3,
+                 "synthetic_owner_reviews":r["source_reviews"],
+                 "corrected_conclusions":r["new_conclusions_from_local_fixture_reviews"],
+                 "duplicates_rejected":r["duplicate_proposals_suppressed"],
+                 "review":r["independent_method_review"]})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-006-original-dogram-council-receipts
+          path: reason-006-evidence/
+          retention-days: 30
