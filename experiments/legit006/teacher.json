@@ -1,0 +1,294 @@
+{
+  "schema": "motif.semantic-adversary-teacher.v1",
+  "authorship": "assistant labeled source corrections",
+  "records": [
+    {
+      "id": "T01",
+      "sentence": "there is no evidence that underwater habitat exists.",
+      "left": "there is no evidence that",
+      "right": "underwater habitat exists",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T02",
+      "sentence": "there is no evidence that underground cave exists.",
+      "left": "there is no evidence that",
+      "right": "underground cave exists",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T03",
+      "sentence": "no evidence indicates that forest fire is present.",
+      "left": "no evidence indicates that",
+      "right": "forest fire is present",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T04",
+      "sentence": "no evidence indicates that distant spacecraft is present.",
+      "left": "no evidence indicates that",
+      "right": "distant spacecraft is present",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T05",
+      "sentence": "there is evidence that underwater habitat does not exist.",
+      "left": "there is evidence that",
+      "right": "underwater habitat does not exist",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T06",
+      "sentence": "there is evidence that underground cave does not exist.",
+      "left": "there is evidence that",
+      "right": "underground cave does not exist",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T07",
+      "sentence": "evidence indicates that forest fire is absent.",
+      "left": "evidence indicates that",
+      "right": "forest fire is absent",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T08",
+      "sentence": "evidence indicates that distant spacecraft is absent.",
+      "left": "evidence indicates that",
+      "right": "distant spacecraft is absent",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T09",
+      "sentence": "there is no evidence that underwater habitat does not exist.",
+      "left": "there is no evidence that",
+      "right": "underwater habitat does not exist",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T10",
+      "sentence": "there is no evidence that underground cave does not exist.",
+      "left": "there is no evidence that",
+      "right": "underground cave does not exist",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T11",
+      "sentence": "no evidence indicates that forest fire is absent.",
+      "left": "no evidence indicates that",
+      "right": "forest fire is absent",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T12",
+      "sentence": "no evidence indicates that distant spacecraft is absent.",
+      "left": "no evidence indicates that",
+      "right": "distant spacecraft is absent",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "T13",
+      "sentence": "there is evidence that underwater habitat exists.",
+      "left": "there is evidence that",
+      "right": "underwater habitat exists",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T14",
+      "sentence": "there is evidence that underground cave exists.",
+      "left": "there is evidence that",
+      "right": "underground cave exists",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T15",
+      "sentence": "evidence indicates that forest fire is present.",
+      "left": "evidence indicates that",
+      "right": "forest fire is present",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T16",
+      "sentence": "evidence indicates that distant spacecraft is present.",
+      "left": "evidence indicates that",
+      "right": "distant spacecraft is present",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "T17",
+      "sentence": "does a negative sonar echo prove underwater habitat is absent?",
+      "left": "does a negative sonar echo",
+      "right": "prove underwater habitat is absent",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "MUST_ABSENT"
+    },
+    {
+      "id": "T18",
+      "sentence": "does a negative seismic pulse prove underground cave is absent?",
+      "left": "does a negative seismic pulse",
+      "right": "prove underground cave is absent",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "MUST_ABSENT"
+    },
+    {
+      "id": "T19",
+      "sentence": "does failing to detect infrared signature exclude forest fire?",
+      "left": "does failing to detect infrared signature",
+      "right": "exclude forest fire",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "MUST_ABSENT"
+    },
+    {
+      "id": "T20",
+      "sentence": "does failing to detect radio burst exclude distant spacecraft?",
+      "left": "does failing to detect radio burst",
+      "right": "exclude distant spacecraft",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "MUST_ABSENT"
+    },
+    {
+      "id": "T21",
+      "sentence": "can underwater habitat exist despite a negative sonar echo?",
+      "left": "can underwater habitat exist",
+      "right": "despite a negative sonar echo",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "CAN_PRESENT"
+    },
+    {
+      "id": "T22",
+      "sentence": "can underground cave exist despite a negative seismic pulse?",
+      "left": "can underground cave exist",
+      "right": "despite a negative seismic pulse",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "CAN_PRESENT"
+    },
+    {
+      "id": "T23",
+      "sentence": "could forest fire be present without detecting infrared signature?",
+      "left": "could forest fire be present",
+      "right": "without detecting infrared signature",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "CAN_PRESENT"
+    },
+    {
+      "id": "T24",
+      "sentence": "could distant spacecraft be present without detecting radio burst?",
+      "left": "could distant spacecraft be present",
+      "right": "without detecting radio burst",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "CAN_PRESENT"
+    },
+    {
+      "id": "T25",
+      "sentence": "does a positive sonar echo prove underwater habitat exists?",
+      "left": "does a positive sonar echo",
+      "right": "prove underwater habitat exists",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "MUST_PRESENT"
+    },
+    {
+      "id": "T26",
+      "sentence": "does a positive seismic pulse prove underground cave exists?",
+      "left": "does a positive seismic pulse",
+      "right": "prove underground cave exists",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "MUST_PRESENT"
+    },
+    {
+      "id": "T27",
+      "sentence": "does detecting infrared signature guarantee forest fire?",
+      "left": "does detecting infrared signature",
+      "right": "guarantee forest fire",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "MUST_PRESENT"
+    },
+    {
+      "id": "T28",
+      "sentence": "does detecting radio burst guarantee distant spacecraft?",
+      "left": "does detecting radio burst",
+      "right": "guarantee distant spacecraft",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "MUST_PRESENT"
+    },
+    {
+      "id": "T29",
+      "sentence": "can underwater habitat be absent despite a positive sonar echo?",
+      "left": "can underwater habitat be absent",
+      "right": "despite a positive sonar echo",
+      "target": "underwater habitat",
+      "indicator": "sonar echo",
+      "kind": "CAN_ABSENT"
+    },
+    {
+      "id": "T30",
+      "sentence": "can underground cave be absent despite a positive seismic pulse?",
+      "left": "can underground cave be absent",
+      "right": "despite a positive seismic pulse",
+      "target": "underground cave",
+      "indicator": "seismic pulse",
+      "kind": "CAN_ABSENT"
+    },
+    {
+      "id": "T31",
+      "sentence": "could forest fire fail to exist even when detecting infrared signature?",
+      "left": "could forest fire fail to exist",
+      "right": "even when detecting infrared signature",
+      "target": "forest fire",
+      "indicator": "infrared signature",
+      "kind": "CAN_ABSENT"
+    },
+    {
+      "id": "T32",
+      "sentence": "could distant spacecraft fail to exist even when detecting radio burst?",
+      "left": "could distant spacecraft fail to exist",
+      "right": "even when detecting radio burst",
+      "target": "distant spacecraft",
+      "indicator": "radio burst",
+      "kind": "CAN_ABSENT"
+    }
+  ]
+}
