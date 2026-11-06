@@ -1,0 +1,38 @@
+name: THOUGHT-008 parallel thought fields
+on:
+  push:
+    branches:
+      - experiment/thought-008-parallel-geometries
+    paths:
+      - 'experiments/thought-007/**'
+      - 'experiments/thought-008/**'
+      - '.github/workflows/thought-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-008/**'
+      - '.github/workflows/thought-008.yml'
+  workflow_dispatch:
+jobs:
+  isolated-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing THOUGHT-007 regression
+        run: cd experiments/thought-007 && python -m unittest -v test_field.py
+      - name: THOUGHT-008 tests
+        run: cd experiments/thought-008 && python -m unittest -v test_multiview.py
+      - name: Source-only baseline comparator
+        run: cd experiments/thought-008 && python benchmark.py
+      - name: Produce evidence and six-view SVG
+        run: cd experiments/thought-008 && python demo.py
+      - name: Upload deterministic example artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-008-parallel-views
+          path: |
+            experiments/thought-008/parallel-thought-fields.svg
+            experiments/thought-008/parallel-thought-fields.json
+            experiments/thought-008/experiment-results.json
