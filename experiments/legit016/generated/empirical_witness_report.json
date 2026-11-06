@@ -1,0 +1,336 @@
+{
+  "advice_for_next_trial": "REGISTER a previously unseen external problem suite and independent custodial provenance before evaluating; include code/discovery/proof/human-review costs, wall/CPU/memory, at least two machines and a strong matched classical portfolio. Do not infer success rates from researcher-chosen variants.",
+  "cross_trial_descriptive_comparisons": {
+    "prior_012": {
+      "independent_external_test_authorship": false,
+      "new_016_median_gain": -0.0155876,
+      "prior_014_median_gain": -0.0055286,
+      "same_exact_graphs": false,
+      "same_graph_generator_family": true,
+      "same_source_programs": true,
+      "separate_research_innovation_trials": false
+    },
+    "prior_013": {
+      "independent_external_test_authorship": false,
+      "new_016_median_gain": 0.0135928,
+      "prior_014_median_gain": 0.0196711,
+      "same_exact_graphs": false,
+      "same_graph_generator_family": true,
+      "same_source_programs": true,
+      "separate_research_innovation_trials": false
+    },
+    "strong_classical": {
+      "independent_external_test_authorship": false,
+      "new_016_median_gain": 0.1270633,
+      "prior_014_median_gain": 0.1155723,
+      "same_exact_graphs": false,
+      "same_graph_generator_family": true,
+      "same_source_programs": true,
+      "separate_research_innovation_trials": false
+    }
+  },
+  "current_observations": {
+    "prior_012": {
+      "all_candidate_samples_faster_than_all_reference_samples": false,
+      "candidate_cpu_median_ms": 44.149582,
+      "candidate_wall_median_ms": 44.146391,
+      "meets_8_percent_and_8_of_9_descriptive_gate": false,
+      "reference_cpu_median_ms": 43.47293,
+      "reference_wall_median_ms": 43.468817,
+      "relative_gain_wall": -0.0155876,
+      "wins_out_of_9_index_aligned_samples": 1
+    },
+    "prior_013": {
+      "all_candidate_samples_faster_than_all_reference_samples": false,
+      "candidate_cpu_median_ms": 44.149582,
+      "candidate_wall_median_ms": 44.146391,
+      "meets_8_percent_and_8_of_9_descriptive_gate": false,
+      "reference_cpu_median_ms": 44.749021,
+      "reference_wall_median_ms": 44.754731,
+      "relative_gain_wall": 0.0135928,
+      "wins_out_of_9_index_aligned_samples": 8
+    },
+    "strong_classical": {
+      "all_candidate_samples_faster_than_all_reference_samples": true,
+      "candidate_cpu_median_ms": 44.149582,
+      "candidate_wall_median_ms": 44.146391,
+      "meets_8_percent_and_8_of_9_descriptive_gate": true,
+      "reference_cpu_median_ms": 50.577392,
+      "reference_wall_median_ms": 50.572268,
+      "relative_gain_wall": 0.1270633,
+      "wins_out_of_9_index_aligned_samples": 9
+    }
+  },
+  "experiment": "MOTIF-LEGIT-016",
+  "hypothetical_015_growth_rate_not_used": true,
+  "new_016_observed_episode": {
+    "automatic_promotion": false,
+    "descriptive_medians_ms": {
+      "candidate_014": {
+        "cpu": 44.149582,
+        "wall": 44.146391
+      },
+      "prior_012": {
+        "cpu": 43.47293,
+        "wall": 43.468817
+      },
+      "prior_013": {
+        "cpu": 44.749021,
+        "wall": 44.754731
+      },
+      "strong_classical": {
+        "cpu": 50.577392,
+        "wall": 50.572268
+      }
+    },
+    "environment": {
+      "logical_cpu_count": 4,
+      "platform_machine": "x86_64",
+      "platform_system": "Linux",
+      "python": "3.11.18"
+    },
+    "exact_scan_reference_graphs": 24,
+    "experiment": "MOTIF-LEGIT-016",
+    "external_proof_and_source_compile_ms": 36.885444,
+    "external_z3_reverified_prior_finite_rewrite": true,
+    "generator_family_shared_with_prior": true,
+    "graph_families": {
+      "DENSE": {
+        "graphs": 8,
+        "states": 14498
+      },
+      "LIGHT": {
+        "graphs": 8,
+        "states": 5077
+      },
+      "MEDIUM": {
+        "graphs": 8,
+        "states": 8985
+      }
+    },
+    "independent_innovation_episode_count": 0,
+    "new_seed_graph_states": 28560,
+    "new_seed_graphs": 24,
+    "new_seed_start": 120000,
+    "not_matched_cpu_affinity_or_GC": true,
+    "output_mismatches": 0,
+    "peak_traced_python_allocation_sample": {
+      "candidate_014": {
+        "peak_traced_python_bytes": 246716,
+        "sample_graphs": 3
+      },
+      "prior_012": {
+        "peak_traced_python_bytes": 246836,
+        "sample_graphs": 3
+      },
+      "prior_013": {
+        "peak_traced_python_bytes": 246068,
+        "sample_graphs": 3
+      },
+      "strong_classical": {
+        "peak_traced_python_bytes": 245908,
+        "sample_graphs": 3
+      }
+    },
+    "raw_repeat_samples": {
+      "candidate_014": {
+        "cpu_ms": [
+          43.824706,
+          44.267263,
+          43.671561,
+          44.295835,
+          44.703836,
+          45.852809,
+          44.149582,
+          43.739388,
+          43.495122
+        ],
+        "wall_ms": [
+          43.818993,
+          44.262657,
+          43.668034,
+          44.291751,
+          44.699427,
+          45.847265,
+          44.146391,
+          43.734663,
+          43.491038
+        ]
+      },
+      "prior_012": {
+        "cpu_ms": [
+          43.569972,
+          44.039136,
+          43.72509,
+          43.379425,
+          43.947435,
+          43.47293,
+          43.438496,
+          43.156639,
+          42.977156
+        ],
+        "wall_ms": [
+          43.58038,
+          44.034253,
+          43.718938,
+          43.374638,
+          43.943745,
+          43.468817,
+          43.434522,
+          43.179387,
+          42.97224
+        ]
+      },
+      "prior_013": {
+        "cpu_ms": [
+          44.749021,
+          45.028883,
+          45.641253,
+          44.422362,
+          44.880696,
+          44.322706,
+          44.770841,
+          44.277231,
+          44.178978
+        ],
+        "wall_ms": [
+          44.754731,
+          45.023169,
+          45.651104,
+          44.418196,
+          44.875712,
+          44.318683,
+          44.779782,
+          44.272907,
+          44.174804
+        ]
+      },
+      "strong_classical": {
+        "cpu_ms": [
+          50.577392,
+          51.087043,
+          51.089187,
+          50.976216,
+          50.434686,
+          50.190771,
+          50.664415,
+          50.402646,
+          49.861968
+        ],
+        "wall_ms": [
+          50.572268,
+          51.095319,
+          51.103274,
+          50.969566,
+          50.430556,
+          50.186792,
+          50.667859,
+          50.408314,
+          49.858158
+        ]
+      }
+    },
+    "real_world_authority": false,
+    "sample_count_per_arm": 9,
+    "schema": "motif.empirical-improvement-episode.v1",
+    "shared_precomputed_source_index_setup_ms": 0.319794,
+    "source": "EXECUTED_ACTUAL_GENERATED_SOLVERS",
+    "source_self_improved_in_this_experiment": false,
+    "source_sha256": {
+      "candidate_014": "ac244ef7f1d5e34a1f1666af6d6c82496bc551adb31a27bcc056c4d8967e83d1",
+      "prior_012": "b9c11206bdcd0c4e61b383660aca4bd8fb98ceeb1c27da7303dc32c61bb33881",
+      "prior_013": "0077c63ec1857cd70fec245addcfdde47a37c3f412ee50547a309ae3dadef044"
+    },
+    "sources_authenticating_external_author": false,
+    "status": "RESEARCH_HOLD_UNBLINDED",
+    "strong_classical_index_setup_ms": 0.297462,
+    "test_set_independently_authored": false
+  },
+  "new_algorithm_source_generated": false,
+  "observed_compounding_rate": "NOT_ESTIMABLE",
+  "promotion_decision": "HOLD_NOT_ENOUGH_INDEPENDENT_EVIDENCE",
+  "promotion_gate": {
+    "calibrated_probability_of_future_upgrade_success": false,
+    "external_custody_authentication": false,
+    "full_end_to_end_cost_amortization_demonstrated": false,
+    "independent_test_author": false,
+    "new_016_candidate_meets_all_descriptive_thresholds": false,
+    "observed_two_successive_promoted_improvements": false,
+    "old_014_formal_correctness_proved": true,
+    "old_014_heldout_improvement_accepted": false,
+    "production_promotion_allowed": false,
+    "real_source_mathematically_checked": true,
+    "same_source_real_code_measured_again": true,
+    "statistical_generalization_across_hardware": false
+  },
+  "real_014_retrospective": {
+    "baseline_comparisons": {
+      "prior_012": {
+        "all_baseline_samples_ms_range": [
+          140.33033,
+          143.64722
+        ],
+        "all_candidate_samples_ms_range": [
+          140.179665,
+          148.013689
+        ],
+        "baseline_median_ms": 141.902589,
+        "break_even_interpretation": "Illustrative only; entire recorded discovery/proof setup cost is treated as attributable to this selected candidate, with an unchanged future workload and identical marginal cost.",
+        "candidate_median_ms": 142.687107,
+        "exploratory_full_cost_break_even_batches": null,
+        "index_aligned_sample_wins_out_of_11": 6,
+        "observed_median_ms_saved_per_80_graph_batch": -0.784518,
+        "observed_median_relative_gain": -0.0055286
+      },
+      "prior_013": {
+        "all_baseline_samples_ms_range": [
+          143.265202,
+          147.348945
+        ],
+        "all_candidate_samples_ms_range": [
+          140.179665,
+          148.013689
+        ],
+        "baseline_median_ms": 145.550245,
+        "break_even_interpretation": "Illustrative only; entire recorded discovery/proof setup cost is treated as attributable to this selected candidate, with an unchanged future workload and identical marginal cost.",
+        "candidate_median_ms": 142.687107,
+        "exploratory_full_cost_break_even_batches": 1651,
+        "index_aligned_sample_wins_out_of_11": 9,
+        "observed_median_ms_saved_per_80_graph_batch": 2.863138,
+        "observed_median_relative_gain": 0.0196711
+      },
+      "strong_classical": {
+        "all_baseline_samples_ms_range": [
+          158.67129,
+          166.383227
+        ],
+        "all_candidate_samples_ms_range": [
+          140.179665,
+          148.013689
+        ],
+        "baseline_median_ms": 161.332697,
+        "break_even_interpretation": "Illustrative only; entire recorded discovery/proof setup cost is treated as attributable to this selected candidate, with an unchanged future workload and identical marginal cost.",
+        "candidate_median_ms": 142.687107,
+        "exploratory_full_cost_break_even_batches": 254,
+        "index_aligned_sample_wins_out_of_11": 11,
+        "observed_median_ms_saved_per_80_graph_batch": 18.64559,
+        "observed_median_relative_gain": 0.1155723
+      }
+    },
+    "discovery_and_verification_setup_ms": 4724.80044,
+    "estimated_compounding_factor": "UNIDENTIFIABLE",
+    "experiment": "MOTIF-LEGIT-016",
+    "has_observed_successive_approved_improvements": false,
+    "independent_research_success_trials": 0,
+    "no_claim_of_general_superiority": true,
+    "posterior_success_probability": "UNIDENTIFIABLE",
+    "previous_trial_counting": "10 attempted source plans; 9 formally proved, 1 deliberately injected unsound falsifier; NOT 10 independent innovation trials.",
+    "read_only": true,
+    "retrospective_status": "HOLD_NO_RELIABLE_RUNTIME_IMPROVEMENT",
+    "source": "ACTUAL_FROZEN_LEGIT014",
+    "source_sha256": "ac244ef7f1d5e34a1f1666af6d6c82496bc551adb31a27bcc056c4d8967e83d1"
+  },
+  "real_world_authority": false,
+  "research_only": true,
+  "title": "THE_EMPIRICAL_COMPOUNDING_WITNESS"
+}
