@@ -318,17 +318,25 @@ def export(s,callback=None):
 class ExactContextMemory:
     def __init__(self):
         self.records={}
+        self.latest_by_recipient={}
 
     def remember(self,raw,reviewer):
         report=reviewer(raw)
-        k=(report["recipient"],report["consent_revision"],
-           report["source_scenario_sha256"])
+        recipient=report["recipient"]
+        revision=report["consent_revision"]
+        if revision<self.latest_by_recipient.get(recipient,0):
+            raise HOLD("A new remembered record cannot restore revoked consent")
+        self.latest_by_recipient[recipient]=revision
+        self.records={k:v for k,v in self.records.items()
+                      if k[0]!=recipient or k[1]>=revision}
+        k=(recipient,revision,report["source_scenario_sha256"])
         self.records[k]=report
         return k
 
     def recall(self,s):
         check(s)
         k=(s["recipient"],s["consent_revision"],digest(s))
-        if k not in self.records:
-            raise HOLD("Prior belief/permission cannot be reused across a changed context")
+        if (s["consent_revision"]!=self.latest_by_recipient.get(s["recipient"])
+                or k not in self.records):
+            raise HOLD("Stale consent cannot return after a recipient revision")
         return self.records[k]
