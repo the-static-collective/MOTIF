@@ -21,7 +21,8 @@ A point may be drawn without being *observed*. Observation, geometrically implie
 1. **Construct:** Produce the finite center field and a complete set of witnessed nearest-neighbor edges. Build the equal-radius circles and mathematically calculate circle intersections, including tangency. Never silently "fill in" missing centers.
 2. **Propose:** Given an incomplete finite observed set, intersect observed circle pairs and snap results only to calibrated lattice positions within an explicitly bounded field. Label absent positions as PROPOSAL_ONLY and score existing neighbors / modeled unseen neighbors. Nothing is inserted into the observed set.
 3. **Reason over the field:** Plan only along *observed* centers and *observed available* edges. Compare A* with consistent hex-distance heuristic to a strong classical zero-heuristic/Dijkstra control on precisely the same input graph. Both find shortest paths; performance can differ only in examined states, not invented capabilities.
-4. **Visual witness:** Draw solid observed circles and dashed inferred hypotheses into a deterministic SVG. It is a diagram of the synthetic input, not image recognition.
+4. **Portable evidence:** Export an integrity-checked JSON geometry envelope with rederived proposals, an explicit HOLD, and no effective authority. The SHA-256 digest ensures payload consistency but **does not authenticate a person, source code, or independent reality**.
+5. **Visual witness:** Draw solid observed circles and dashed inferred hypotheses into a deterministic SVG. It is a diagram of the synthetic input, not image recognition.
 
 ## Controls and falsifiers
 
@@ -49,6 +50,7 @@ The calculated **modeled unseen neighbor** count is a planning affordance estima
 
 - `geometry.py` — pure-stdlib construction, symmetry, intersections, candidate inference, shortest-path search, SVG.
 - `test_geometry.py` — invariants, masked recovery, baseline parity, hard refusals.
-- `demo.py` — reproducible evidence receipt and locally generated `flower-of-life.svg`.
+- `cartridge.py` — canonical, checked, HOLD-only portable geometry evidence.
+- `demo.py` — reproducible evidence receipt plus locally generated `flower-of-life.svg` and `example-geometry-cartridge.json`.
 
 **Standing result to seek:** geometry as a *testable structural prior* that supplies constraints and admissible search guidance. Not consciousness, permission, or automatic discovery of physical laws.
