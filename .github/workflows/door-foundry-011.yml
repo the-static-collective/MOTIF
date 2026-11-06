@@ -38,6 +38,20 @@ jobs:
           ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
           path: motif-image-source
           persist-credentials: false
+      - name: Exact original MOTIF-011 graph writer pinned for CANNON
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: c41ff828e167a406fab25ef2b0a272be5e736ad2
+          path: motif011-source
+          persist-credentials: false
+      - name: Original independent CANNON-096 source-dependency reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 74271370acf57e3e9b0dcab27336abcfd4c68e55
+          path: cannon096-source
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -137,6 +151,31 @@ jobs:
         env:
           MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
         run: python -m unittest discover -s experiments/door-foundry-011 -p 'test_source_graph.py' -v
+      - name: Independent CANNON-096 checks actual MIT source, PNG bytes, roots, copies and exact Bayesian math
+        run: |
+          node cannon096-source/experiments/cannon-096/review.mjs \
+            --motif motif011-source \
+            --question evidence/original-active-question \
+            --ledger evidence/source-dependence \
+            --out evidence/cannon-096-independent-evidence-review.json
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('evidence/cannon-096-independent-evidence-review.json','utf8'));
+          if(p.status!=='HOLD_DEPENDENCY_STRUCTURE_VERIFIED_SOURCE_INDEPENDENCE_UNATTESTED' ||
+             p.report_groups_verified!==4 ||
+             p.copied_reports_checked!==24 ||
+             p.original_motif_source.commit!=='c41ff828e167a406fab25ef2b0a272be5e736ad2' ||
+             p.independent_witness_identity_confirmed!==false ||
+             p.externally_signed!==false ||
+             p.human_contacts!==0 ||
+             p.automatic_admission!==false)
+            throw Error('Independent provenance review failed or claimed false authority');
+          console.log(JSON.stringify({independent_CANNON_status:p.status,
+             original_source_sha:p.original_motif_source.commit,
+             report_families_verified:p.report_groups_verified,
+             ignored_derivative_likelihood_factors:p.copied_reports_checked,
+             human_source_authentications:0},null,2));
+          JS
       - name: Save full future PNGs, source reviews, append-only updates and prediction results
         uses: actions/upload-artifact@v4
         with:
