@@ -77,10 +77,42 @@ jobs:
                  'direct_lookup_cost':48,
                  'hypothetical_savings':21})
           PY
+      - name: Emit 32 independently checkable original-Dogram input specimens
+        run: python experiments/reason-cartridge-008/native.py emit reason-008-native
+      - name: Checkout unmodified original Dogram at exact revision
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: _external/dogram
+          persist-credentials: false
+      - name: Run all 32 real original Dogram ablation specimens
+        run: |
+          set -eu
+          test "$(git -C _external/dogram rev-parse HEAD)" = "551b5f9df18f17ec69b452ddcdff01718e0ff771"
+          for spec in reason-008-native/reason-008-native-*.json; do
+            PYTHONPATH=_external/dogram python -m dogram.cli "$spec" > "${spec%.json}.receipt.json"
+          done
+          echo "Original Dogram generated all 32 native receipts."
+      - name: Remove foreign teacher before independent conformance check
+        run: |
+          rm -rf _external/dogram
+          test ! -e _external/dogram
+          python experiments/reason-cartridge-008/native.py verify reason-008-native
+          python - <<'PY'
+          import json
+          r=json.load(open('reason-008-native/crosscheck.json'))
+          assert r['cases']==32
+          assert r['agreement_count']==32
+          assert r['teacher_removed']
+          assert r['algorithm_agreement_not_world_evidence']
+          assert not r['real_world_authority']
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: reason-008-gap-and-capability-evidence
           path: |
             reason-008-evidence/
+            reason-008-native/
             reason-008-evidence-stdout.json
           retention-days: 30
