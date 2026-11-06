@@ -25,6 +25,10 @@ jobs:
           python -m json.tool /tmp/motif-legit017-research-trial.json > /dev/null
           python -m json.tool /tmp/motif-legit017-generated-tools.json > /dev/null
           cat /tmp/motif-legit017-console.json
+          echo "---- EXACT RESEARCH TRIAL PACKET ----"
+          cat /tmp/motif-legit017-research-trial.json
+          echo "---- EXECUTABLE RESEARCH TOOL SOURCE BUNDLE ----"
+          cat /tmp/motif-legit017-generated-tools.json
           echo "---- SOURCE AND TRIAL PROVENANCE ----"
           python - <<'PY'
           import json
