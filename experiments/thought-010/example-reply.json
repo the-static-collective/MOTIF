@@ -1,0 +1,133 @@
+{
+  "caller": "jarvis-local",
+  "claimed_witnesses_authenticated": false,
+  "export": {
+    "reason": "Explicit PUBLIC_FIXTURE and allow_export=true required",
+    "status": "HOLD"
+  },
+  "external_authority": "NONE",
+  "mode": "ideas",
+  "pen_status": "UNCHANGED",
+  "privacy": "PRIVATE_LOCAL",
+  "questions": [
+    {
+      "endpoints": [
+        "m:00",
+        "m:02"
+      ],
+      "kind": "test_association",
+      "premises": [
+        "m:01",
+        "m:03"
+      ],
+      "question": "Is there independent evidence for this proposed association?",
+      "status": "QUESTION_ONLY"
+    },
+    {
+      "endpoints": [
+        "m:01",
+        "m:03"
+      ],
+      "kind": "test_association",
+      "premises": [
+        "m:00",
+        "m:02"
+      ],
+      "question": "Is there independent evidence for this proposed association?",
+      "status": "QUESTION_ONLY"
+    }
+  ],
+  "receipt_digest": "b570c21f90916f6cd7751511bf4d2a6b03d1ffee851b687991de1d8194cfe8a7",
+  "request_id": "example:jarvis-local-001",
+  "schema": "motif.thought-door.reply.v1",
+  "selected_lenses": [
+    "association"
+  ],
+  "selection_trace": [
+    {
+      "decision": "SELECTED",
+      "goal": "association",
+      "lens": "association",
+      "priority": 0,
+      "signal_count": 2,
+      "source_only_available": true,
+      "source_rule": "typed authored evidence only; no geometry-derived facts"
+    },
+    {
+      "decision": "NO_WITNESSED_SIGNAL",
+      "goal": "dependency",
+      "lens": "dependency",
+      "priority": 1,
+      "signal_count": 0,
+      "source_only_available": true,
+      "source_rule": "typed authored evidence only; no geometry-derived facts"
+    },
+    {
+      "decision": "NO_WITNESSED_SIGNAL",
+      "goal": "tension",
+      "lens": "tension",
+      "priority": 2,
+      "signal_count": 0,
+      "source_only_available": true,
+      "source_rule": "typed authored evidence only; no geometry-derived facts"
+    }
+  ],
+  "source_evidence_digest": "866474fa69a1b48afc847bff76f4a66e5fe4ba09ab49f9d7569f69981b738133",
+  "source_only_answers": {
+    "association": [
+      {
+        "claimed_roots": [
+          "example:author",
+          "example:second-author"
+        ],
+        "meaning": "shared authored neighbors; direct link NOT established",
+        "source": "m:00",
+        "status": "QUESTION_ONLY",
+        "target": "m:02",
+        "via": [
+          "m:01",
+          "m:03"
+        ]
+      },
+      {
+        "claimed_roots": [
+          "example:author",
+          "example:second-author"
+        ],
+        "meaning": "shared authored neighbors; direct link NOT established",
+        "source": "m:01",
+        "status": "QUESTION_ONLY",
+        "target": "m:03",
+        "via": [
+          "m:00",
+          "m:02"
+        ]
+      }
+    ],
+    "dependency": {
+      "anchor": null,
+      "cycles": [],
+      "interpretation": "declared prerequisites, not independently verified necessity",
+      "required_by_anchor": [],
+      "required_edges": []
+    },
+    "tension": []
+  },
+  "source_snapshot_digest": "c3683af741b271693677fcff4567b9fbe5c24442d8c86c0e61aff42c6e62f40c",
+  "status": "PROPOSAL_ONLY",
+  "view_cost_units": 1,
+  "view_summaries": [
+    {
+      "authored_and_proposed_relations": 5,
+      "coordinate_authority": "NONE",
+      "lens": "association",
+      "placement_count": 6,
+      "source_evidence_digest": "866474fa69a1b48afc847bff76f4a66e5fe4ba09ab49f9d7569f69981b738133"
+    }
+  ],
+  "warnings": [
+    "Local source labels are not authenticated witnesses.",
+    "Coordinates are neither evidence nor semantic truth.",
+    "No downstream world has accepted this packet; external authority is NONE."
+  ]
+}
