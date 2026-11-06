@@ -36,8 +36,8 @@ def _facts(source):
 
 
 PICK=re.compile(r"^([A-Z][a-z]+) (?:got|grabbed|took|picked up) the ([a-z]+) there\.$")
-DROP_OLD=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down) the ([a-z]+)\\.$")
-DROP=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down|discarded) the ([a-z]+)(?: there)?\\.$")
+DROP_OLD=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down) the ([a-z]+)\.$")
+DROP=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down|discarded) the ([a-z]+)(?: there)?\.$")
 GIVE=re.compile(r"^([A-Z][a-z]+) (?:gave|handed|passed) the ([a-z]+) to ([A-Z][a-z]+)\.$")
 COUNT_Q=re.compile(r"^How many objects is ([A-Z][a-z]+) carrying\?$")
 COUNT_WORD={0:"none",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight"}
