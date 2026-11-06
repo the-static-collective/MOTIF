@@ -1,0 +1,43 @@
+{
+  "all_answers_equal": true,
+  "authority": "NONE",
+  "experiment": "THOUGHT-009",
+  "mixed_cost": 3,
+  "mixed_selected": [
+    "association",
+    "dependency",
+    "tension"
+  ],
+  "no_coordinate_to_fact_promotion": true,
+  "no_map_cost": 0,
+  "no_map_selected": [],
+  "question_kinds": [
+    "check_missing_requirements",
+    "resolve_contradiction",
+    "test_association"
+  ],
+  "review_selected": [],
+  "route": [
+    {
+      "decision": "SELECTED",
+      "goal": "association",
+      "signal_count": 2
+    },
+    {
+      "decision": "SELECTED",
+      "goal": "dependency",
+      "signal_count": 3
+    },
+    {
+      "decision": "SELECTED",
+      "goal": "tension",
+      "signal_count": 1
+    },
+    {
+      "decision": "BUDGET_DEFERRED",
+      "goal": "affordance",
+      "signal_count": 1
+    }
+  ],
+  "sample": "synthetic, development only"
+}

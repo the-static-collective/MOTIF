@@ -1,0 +1,138 @@
+{
+  "abstention_cases": 5,
+  "all_six_or_zero_source_control": "same classical evidence, no accuracy gain established",
+  "cases": [
+    {
+      "case": "association_bridge",
+      "expected": [
+        "association"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 1,
+      "selected": [
+        "association"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "absent_bridge",
+      "expected": [],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 0,
+      "selected": [],
+      "source_unchanged": true
+    },
+    {
+      "case": "dependency_path",
+      "expected": [
+        "dependency"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 1,
+      "selected": [
+        "dependency"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "tension",
+      "expected": [
+        "tension"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 1,
+      "selected": [
+        "tension"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "affordance_conditional",
+      "expected": [
+        "affordance"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 1,
+      "selected": [
+        "affordance"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "inventory",
+      "expected": [],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 0,
+      "selected": [],
+      "source_unchanged": true
+    },
+    {
+      "case": "mixed",
+      "expected": [
+        "association",
+        "tension"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 2,
+      "selected": [
+        "association",
+        "tension"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "budgeted",
+      "expected": [
+        "dependency"
+      ],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 1,
+      "selected": [
+        "dependency"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "case": "zero_budget",
+      "expected": [],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 0,
+      "selected": [],
+      "source_unchanged": true
+    },
+    {
+      "case": "no_evidence_tension",
+      "expected": [],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 0,
+      "selected": [],
+      "source_unchanged": true
+    },
+    {
+      "case": "no_anchor_affordance",
+      "expected": [],
+      "parity_with_no_map": true,
+      "passed": true,
+      "rendered_view_cost": 0,
+      "selected": [],
+      "source_unchanged": true
+    }
+  ],
+  "cases_total": 11,
+  "kind": "frozen synthetic development fixtures; not blind task accuracy",
+  "naive_five_geometric_views_per_case": 55,
+  "routing_cases_passed": 11,
+  "selected_total_view_units": 7,
+  "source_only_answer_parity_all": true,
+  "status": "PASS"
+}
