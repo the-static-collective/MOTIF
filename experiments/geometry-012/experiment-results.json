@@ -1,0 +1,122 @@
+{
+  "authority": "NONE",
+  "development_cases": 96,
+  "diagnosis": {
+    "authority": "NONE",
+    "interpretation": "Opposing labels on identical visible inputs cannot be resolved using those inputs alone.",
+    "scope": "synthetic:observer-a@cut-12:decoder-A",
+    "source_roots_authenticated": false,
+    "status": "NEEDS_NEW_MEASUREMENT_DIMENSION",
+    "witnesses": [
+      {
+        "negative_case": "development-ash-0-00",
+        "negative_claimed_root": "claimed:development:ash",
+        "positive_case": "development-ash-0-01",
+        "positive_claimed_root": "claimed:development:ash"
+      }
+    ]
+  },
+  "experiment": "MOTIF GEOM-012 synthetic instrument synthesis",
+  "first_search_slice": {
+    "authority": "NONE",
+    "candidate_space_size": 495,
+    "completeness": "INCOMPLETE",
+    "cursor": {
+      "domain": "geom012-search:663d9c015cade44cd145a9797c77cfa24f8ccc81b68d1fa2410e3229392a92ee",
+      "offset": 7
+    },
+    "evaluated_this_slice": 7,
+    "status": "CONTINUE_SEARCH"
+  },
+  "independence": "declared roots are not authenticated",
+  "invented_procedure": {
+    "authority": "NONE",
+    "candidate_rank": 453,
+    "candidate_space_size": 495,
+    "capability_manifest": "geom012-capability-manifest:a3ca6a9b4f45a7692ffa91e9823e769aa6e624138c0293b959007f01da0ba0cd",
+    "completeness": "FIRST_EXACT_FIT_BY_DECLARED_SIZE_COST_ORDER",
+    "development": {
+      "abstentions": 0,
+      "correct": 96,
+      "total": 96,
+      "wrong": 0
+    },
+    "development_fingerprint": "geom012-development:90ec52a2f6c3cfd2b3bcda1a7cfa52fac528a1e806975016ea6ad543f9d2810b",
+    "instrument": {
+      "atoms": [
+        {
+          "channel": "a",
+          "end": 8,
+          "start": 0,
+          "transform": "ODD"
+        },
+        {
+          "channel": "b",
+          "end": 8,
+          "start": 0,
+          "transform": "ODD"
+        }
+      ],
+      "authority": "NONE",
+      "operator": "XOR",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "state": "PENCIL"
+    },
+    "live_measurement_performed": false,
+    "procedure": [
+      {
+        "channel": "a",
+        "output": "filtered_0",
+        "step": "FILTER_RECORDED_EVENTS",
+        "window": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "filtered_0",
+        "output": "count_0",
+        "step": "COUNT"
+      },
+      {
+        "input": "count_0",
+        "output": "bit_0",
+        "step": "ODD"
+      },
+      {
+        "channel": "b",
+        "output": "filtered_1",
+        "step": "FILTER_RECORDED_EVENTS",
+        "window": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "filtered_1",
+        "output": "count_1",
+        "step": "COUNT"
+      },
+      {
+        "input": "count_1",
+        "output": "bit_1",
+        "step": "ODD"
+      },
+      {
+        "inputs": [
+          "bit_0",
+          "bit_1"
+        ],
+        "output": "proposed_measurement",
+        "step": "XOR"
+      }
+    ],
+    "search_domain": "geom012-search:663d9c015cade44cd145a9797c77cfa24f8ccc81b68d1fa2410e3229392a92ee",
+    "source_roots_authenticated": false,
+    "state": "PENCIL",
+    "status": "PENCIL_INSTRUMENT_PROPOSED",
+    "synthetic_cost": 2.4
+  },
+  "observation": "replayed existing synthetic event traces; no live measurement or physical instrument",
+  "status": "PENCIL_ONLY"
+}

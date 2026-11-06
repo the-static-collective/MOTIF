@@ -1,0 +1,5366 @@
+{
+  "budget": 3.0,
+  "capabilities": [
+    {
+      "available": true,
+      "channel": "a",
+      "cost": 1.0,
+      "permitted": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "available": true,
+      "channel": "b",
+      "cost": 1.0,
+      "permitted": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "available": true,
+      "channel": "noise",
+      "cost": 0.25,
+      "permitted": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "available": true,
+      "channel": "answer-leak",
+      "cost": 0.001,
+      "permitted": false,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    },
+    {
+      "available": false,
+      "channel": "unavailable-leak",
+      "cost": 0.001,
+      "permitted": true,
+      "scope": "synthetic:observer-a@cut-12:decoder-A"
+    }
+  ],
+  "development": [
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        }
+      ],
+      "expected": true,
+      "id": "development-oak-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-oak-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:oak",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-birch-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-birch-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:birch",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 1
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "answer-leak",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-pine-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-pine-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:pine",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 1
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-cedar-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        }
+      ],
+      "expected": false,
+      "id": "development-cedar-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:cedar",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-ash-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-ash-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:ash",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-0-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-0-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-0-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-0-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-1-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-1-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 6
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-1-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-1-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-2-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 2
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-2-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-2-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 0
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-2-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 7
+        },
+        {
+          "channel": "noise",
+          "tick": 7
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-3-00",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "unavailable-leak",
+          "tick": 2
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 5
+        },
+        {
+          "channel": "b",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 2
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 1
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-3-01",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "a",
+          "tick": 4
+        },
+        {
+          "channel": "answer-leak",
+          "tick": 5
+        },
+        {
+          "channel": "noise",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 3
+        },
+        {
+          "channel": "unavailable-leak",
+          "tick": 1
+        },
+        {
+          "channel": "a",
+          "tick": 1
+        },
+        {
+          "channel": "noise",
+          "tick": 5
+        }
+      ],
+      "expected": true,
+      "id": "development-elm-3-10",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    },
+    {
+      "after": [
+        "sprout",
+        "branch"
+      ],
+      "before": [
+        "sprout",
+        "bud"
+      ],
+      "events": [
+        {
+          "channel": "b",
+          "tick": 4
+        },
+        {
+          "channel": "b",
+          "tick": 7
+        },
+        {
+          "channel": "b",
+          "tick": 2
+        },
+        {
+          "channel": "a",
+          "tick": 3
+        },
+        {
+          "channel": "noise",
+          "tick": 0
+        },
+        {
+          "channel": "noise",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        },
+        {
+          "channel": "b",
+          "tick": 6
+        }
+      ],
+      "expected": false,
+      "id": "development-elm-3-11",
+      "scope": "synthetic:observer-a@cut-12:decoder-A",
+      "source_root": "claimed:development:elm",
+      "visible": {
+        "appearance": "same-bud",
+        "season": "synthetic-spring"
+      }
+    }
+  ],
+  "scope": "synthetic:observer-a@cut-12:decoder-A",
+  "windows": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      4,
+      8
+    ]
+  ],
+  "work_budget": 1000
+}
