@@ -253,11 +253,12 @@ def evaluate():
         }
     can=timed["candidate"]["median_ms"]
     speedup_prior=_fraction(timed["prior_013"]["median_ms"],can)
+    speedup_earlier=_fraction(timed["prior_012"]["median_ms"],can)
     speedup_strong=_fraction(timed["strong_classical"]["median_ms"],can)
     wins={
         b:sum(x<y for x,y in
               zip(timed["candidate"]["samples_ms"],timed[b]["samples_ms"]))
-        for b in ("prior_013","strong_classical")
+        for b in ("prior_012","prior_013","strong_classical")
     }
     per_family_acceptable=all(
         v["candidate_median_ms"]<=v["strong_median_ms"]*(1+MAX_STRESS_REGRESSION)
@@ -267,6 +268,7 @@ def evaluate():
         "external_z3_proved":proof["all_rules_verified"],
         "train_test_isolation":True,
         "at_least_8_percent_faster_vs_prior":speedup_prior is not None and speedup_prior>=THRESHOLD,
+        "at_least_8_percent_faster_vs_earlier_012":speedup_earlier is not None and speedup_earlier>=THRESHOLD,
         "at_least_8_percent_faster_vs_strong_classical":speedup_strong is not None and speedup_strong>=THRESHOLD,
         "win_at_least_10_of_11_repeats_vs_both":all(v>=MIN_WINS for v in wins.values()),
         "no_family_regression_gt_10_percent_vs_strong":per_family_acceptable,
@@ -276,6 +278,7 @@ def evaluate():
     internal_eligible=all(gates[x] for x in (
         "correct_all_cases","external_z3_proved","train_test_isolation",
         "at_least_8_percent_faster_vs_prior",
+        "at_least_8_percent_faster_vs_earlier_012",
         "at_least_8_percent_faster_vs_strong_classical",
         "win_at_least_10_of_11_repeats_vs_both",
         "no_family_regression_gt_10_percent_vs_strong",
@@ -298,6 +301,10 @@ def evaluate():
         "formally_proved_candidate_count":selected["trial_candidates_proved"],
         "round_two_variants_created_from_measured_feedback":selected["round_two_new_plans"],
         "training_reviews":selected["training_reviews"],
+        "training_profile_cost_ms":round(selected["profile_cost_ms"],5),
+        "candidate_formal_verification_and_compile_cost_ms":round(selected["proof_cost_ms"],5),
+        "index_build_membership_checks":strong.index_bit_comparisons,
+        "benchmark_timings_exclude_setup_and_formal_proof_overhead":True,
         "training_reference_medians":{k:v["median_ms"] for k,v in selected["training_reference"].items()},
         "frozen_selected_source_sha256":frozen_sha,
         "frozen_selected_plan":selected["selected"]["plan"],
@@ -309,6 +316,7 @@ def evaluate():
         "heldout_repeated_ms":timed,
         "heldout_family_timings_ms":families,
         "speedup_vs_prior_013_median_fraction":round(speedup_prior,6),
+        "speedup_vs_earlier_012_median_fraction":round(speedup_earlier,6),
         "speedup_vs_optimized_classical_median_fraction":round(speedup_strong,6),
         "wins_out_of_11_repeats":wins,
         "heldout_operation_counts":dict(operation_counts),
