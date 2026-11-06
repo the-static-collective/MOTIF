@@ -1,0 +1,23 @@
+name: THOUGHT-018 staged probe director
+on:
+  push:
+    paths:
+      - 'experiments/thought-018/**'
+      - '.github/workflows/thought-018.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-018/**'
+      - '.github/workflows/thought-018.yml'
+  workflow_dispatch:
+jobs:
+  staged-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run independently checkable finite research smoke
+        working-directory: experiments/thought-018
+        run: python -m unittest -v test_smoke.py
