@@ -1,0 +1,17 @@
+{
+  "frozen_plan_sha256": "0db2c88f7def3f51038c14cff1a11db99b5ebb8da2cbf878b787b78b25e39bdc",
+  "independent_external_validation": false,
+  "production_write_approved": false,
+  "research_meta_tool": "\"\"\"Generated LEGIT-017 cross-domain test-witness cache.\nNo network, file writing or deployment rights. Research only.\n\"\"\"\nNO_EXTERNAL_ACTIONS = True\ndef build(records):\n    table={}\n    for key,answer in records:\n        if key in table:\n            raise ValueError(\"Duplicate independent test witness\")\n        table[key]=answer\n    return table\ndef answer(table,key):\n    return table[key]\n",
+  "research_meta_tool_sha256": "08317ee92898e9a8e78795eb367858fb32e2fcb01a3c2da2c50293bfeac283e4",
+  "schema": "motif.research-tools-source-bundle.v1",
+  "selected_research_verifier_mode": "IMPROVED_CACHE",
+  "selected_sources_verified": {
+    "GRAPH": "c06e57ac0b1d2340e7bc392227005d46855749a39c72576d4a6043d770d083a8",
+    "SUBSET": "d7d55bd293f5b8002d213e978b1dc0a203bad4dc86723edc8e36bd4e309a0ff4"
+  },
+  "selected_tools": {
+    "GRAPH": "\"\"\"LEGIT-017 bounded generated graph reachability tool; research only.\"\"\"\nNO_EXTERNAL_ACTIONS = True\ndef build(instance):\n    n,edges=instance\n    adjacency=[[] for _ in range(n)]\n    for source,target in edges:\n        adjacency[source].append(target)\n    all_reached=[]\n    for start in range(n):\n        pending=[start]\n        visited={start}\n        while pending:\n            vertex=pending.pop()\n            for nxt in adjacency[vertex]:\n                if nxt not in visited:\n                    visited.add(nxt)\n                    pending.append(nxt)\n        all_reached.append(frozenset(visited))\n    return tuple(all_reached)\ndef answer(context,query):\n    source,target=query\n    return target in context[source]\n",
+    "SUBSET": "\"\"\"LEGIT-017 bounded generated subset-sum feasibility tool; research only.\"\"\"\nNO_EXTERNAL_ACTIONS = True\ndef build(weights):\n    possible=1\n    for value in weights:\n        possible|=possible<<value\n    return possible\ndef answer(context,target):\n    return target>=0 and ((context>>target)&1)==1\n"
+  }
+}
