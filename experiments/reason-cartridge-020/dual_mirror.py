@@ -33,7 +33,7 @@ HERE=Path(__file__).resolve().parent
 PARENT019=HERE.parent/"reason-cartridge-019"
 PREVIOUS017=HERE.parent/"reason-cartridge-017"/"engine.py"
 PIN_017="d45d44962031538f340132547b08ac975ca1d418"
-PIN_CASES="REPLACE_CASES_PIN"
+PIN_CASES="7ab259ad2f4312b4258e4d3c5201f487ba00641f"
 PIN_PRIVACY="motif.reason.golden-mirror-learns.scripted-owner.v1"
 PACKET="motif.reason.golden-mirror-learns.evidence.v1"
 
