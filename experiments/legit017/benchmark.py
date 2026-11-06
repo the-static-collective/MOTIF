@@ -215,29 +215,39 @@ def _withheld_analyses(trial,heldout):
         }
     return outcomes,family_splits
 
-def verifier_trial(trial,test):
-    """Full-cost proof-work AB test on new engineering task instances.
+def prepare_verifier(trial):
+    """Select a verification tool and oracle strategy using TRAINING ONLY.
 
-    Every candidate algorithm is compared against a separately written
-    direct exact oracle. The tool reduces duplicate oracle evaluations
-    across candidate versions and different task families.
+    The first cache was initially primed by expensive independent direct
+    oracle calls. The new meta-level candidate can instead prime the SAME
+    generated cache with the strongly optimized conventional reference,
+    after the program has independently checked that oracle's correctness.
+    Both methods are predeclared, classical and fully inspectable.
     """
     meta=compile_verifier()
-    # Training-only selection, no heldout observed yet. A short real
-    # rehearsal uses precisely the same training candidates.
-    training={m:times(lambda:check_variants(
+    rehearsal={m:times(lambda:check_variants(
         trial["train"],trial["all_tools"],m,meta),3)
-        for m in ("RECHECK","CACHE","STRONG")}
-    cache_better=(
-        training["CACHE"]["median_wall_ms"]<
-        training["RECHECK"]["median_wall_ms"])
-    # freeze this experimental decision now. Direct and strong remain
-    # controls even if the metatool fails its training acceptance gate.
+        for m in ("RECHECK","CACHE","IMPROVED_CACHE","STRONG")}
+    choice=min(("CACHE","IMPROVED_CACHE"),key=lambda m:(
+        rehearsal[m]["median_wall_ms"],m))
+    return {"meta":meta,"choice":choice,"rehearsal":rehearsal,
+            "training_selected_not_using_heldout":True}
+
+def verifier_trial(trial,test,prepared):
+    """Causal same-workload ablation of a generated meta-research tool.
+
+    An independent oracle is rechecked on the actual withheld task set
+    before witness reuse. The chosen mode was frozen on training data.
+    The closest competitor is strong, optimized CLASSICAL memoization.
+    """
+    meta=prepared["meta"]
+    chosen=prepared["choice"]
+    training=prepared["rehearsal"]
     future={m:times(lambda:check_variants(
         test,trial["all_tools"],m,meta),VERIFICATION_REPEATS)
-        for m in ("RECHECK","CACHE","STRONG")}
+        for m in ("RECHECK","CACHE","IMPROVED_CACHE","STRONG")}
     baseline_receipt=check_variants(test,trial["all_tools"],"RECHECK")
-    cached_receipt=check_variants(test,trial["all_tools"],"CACHE",meta)
+    cached_receipt=check_variants(test,trial["all_tools"],chosen,meta)
     strong_receipt=check_variants(test,trial["all_tools"],"STRONG")
     if (baseline_receipt["checked_tool_query_pairs"]!=
         cached_receipt["checked_tool_query_pairs"] or
@@ -248,15 +258,18 @@ def verifier_trial(trial,test):
     if not baseline_receipt["reference_calls"]>cached_receipt["reference_calls"]:
         raise HOLD("Meta research tool did not actually reuse evidence")
     benefit=(future["RECHECK"]["median_wall_ms"]-
-             future["CACHE"]["median_wall_ms"])
+             future[chosen]["median_wall_ms"])
     comparison_to_strong=(future["STRONG"]["median_wall_ms"]-
-                          future["CACHE"]["median_wall_ms"])
+                          future[chosen]["median_wall_ms"])
     return {
         "source":meta["source"],
         "source_sha256":meta["source_sha256"],
         "source_generated_by_fixed_template":True,
         "compiled_ms":meta["compile_ms"],
-        "training_preselected_cache":cache_better,
+        "training_selected_verifier_mode":chosen,
+        "training_preselected_cache":(
+            training[chosen]["median_wall_ms"]<
+            training["RECHECK"]["median_wall_ms"]),
         "training_ms":training,
         "test_ms":future,
         "per_trial_candidate_query_checks":n,
@@ -266,6 +279,8 @@ def verifier_trial(trial,test):
         "heldout_median_saving_vs_rechecking_ms":round(benefit,6),
         "heldout_median_saving_vs_strong_classical_ms":
             round(comparison_to_strong,6),
+        "heldout_timing_was_not_used_for_verifier_selection":True,
+        "improved_cache_uses_independently_checked_classical_oracle":True,
         "within_assistant_authored_workload":True,
         "proves_future_research_discovery_time_reduced":False,
         "does_not_establish_superiority_to_classical_memoization":True,
@@ -273,7 +288,9 @@ def verifier_trial(trial,test):
 
 def run():
     trial=training()  # task suite for HELDOUT not evaluated or built yet
+    prepared_verifier=prepare_verifier(trial)
     frozen_plan={
+        "research_verifier_mode":prepared_verifier["choice"],
         "selected":trial["selected_families"],
         "sources":trial["frozen_source_sha256"],
         "training_only_forecast":trial["ranked_best_per_family"],
@@ -289,7 +306,7 @@ def run():
         raise HOLD("Training/heldout tasks overlap")
     validated_outputs=_verify_new_tasks(heldout,trial["all_tools"])
     measured,by_family=_withheld_analyses(trial,heldout)
-    meta=verifier_trial(trial,heldout)
+    meta=verifier_trial(trial,heldout,prepared_verifier)
     prev=measured["FROZEN_PORTFOLIO"]["median_wall_ms"]
     direct_cost=measured["DIRECT"]["median_wall_ms"]
     strong_cost=measured["STRONG"]["median_wall_ms"]
@@ -365,6 +382,7 @@ def run():
     sources={
         "schema":"motif.research-tools-source-bundle.v1",
         "selected_tools":{f:t["source"] for f,t in trial["frozen"].items()},
+        "selected_research_verifier_mode":prepared_verifier["choice"],
         "selected_sources_verified":{f:t["source_sha256"]
                                      for f,t in trial["frozen"].items()},
         "research_meta_tool":meta["source"],
