@@ -37,6 +37,7 @@ class LivingRingTests(unittest.TestCase):
                               read_outputs=("verbs",),observed_at="FIXTURE")
         self.assertEqual(len(r["ring_work"]["selected_cartridges"]),1)
         self.assertEqual(r["ring_work"]["stage"],"PROPOSED")
+        self.assertEqual(r["ring_work"]["discovered_uninstalled_branches"],3)
         self.assertIsNone(r["native_specialist_work"])
 
     def test_specialist_selection_is_declared_until_native_is_explicit(self):
