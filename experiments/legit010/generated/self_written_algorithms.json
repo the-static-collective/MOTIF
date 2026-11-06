@@ -1,0 +1,426 @@
+{
+  "autonomous_sandbox_escape": false,
+  "generation_0_existing_engine": "LEGIT009_CEGIS_UNMODIFIED",
+  "generation_1_generated_search_cartridge": {
+    "allowed_ops": "TWO_COMPOSED_VERIFIED_BINARY_NAND_CARTRIDGES",
+    "candidate_compositions": 3072,
+    "distinct_truth_functions": 152,
+    "generated_by": "EXISTING_LEGIT009_CEGIS_LIBRARY_PLUS_NEW_META_VERIFIER",
+    "generated_program_requires_reverification": true,
+    "input_arity": 3,
+    "meta_counterexamples": 7,
+    "method": "COUNTEREXAMPLE_GUIDED_SEARCH_PROGRAM_CREATION",
+    "program": {
+      "cost_order": "MINIMUM_TOTAL_NAND_GATES",
+      "distinguishing_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "kind": "SEMANTIC_QUOTIENT_SEARCH"
+    },
+    "python_self_rewriting_permitted": false,
+    "real_world_authority": false,
+    "schema": "motif.self-composed-search-program.v1",
+    "sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+    "source_verification": "EXHAUSTIVE_8_ROW_BOOLEAN_MODEL",
+    "status": "FINITE_EQUIVALENCE_CLASSES_PROVED"
+  },
+  "generation_2_derived_three_input_algorithms": {
+    "ALL3": {
+      "compiled_NAND": {
+        "gate_count": 4,
+        "gates": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "output": 6,
+        "truth_mask": 128
+      },
+      "counterexample_count": 7,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 7,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 2,
+        "shape": "LEFT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "1392bc01e2589d8acbcc99f0f57f3a2f7297bd64b7178d682434de2f94768697",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "ALL3"
+    },
+    "ANY3": {
+      "compiled_NAND": {
+        "gate_count": 6,
+        "gates": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "output": 8,
+        "truth_mask": 254
+      },
+      "counterexample_count": 3,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 1,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 11,
+        "shape": "LEFT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "800854a1517c4e160f0742c28e08e1e153f2d1676f7f4c486b37875ad84f42c9",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "ANY3"
+    },
+    "NOR3": {
+      "compiled_NAND": {
+        "gate_count": 7,
+        "gates": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "output": 9,
+        "truth_mask": 1
+      },
+      "counterexample_count": 3,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 1,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 2,
+        "shape": "RIGHT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "cbf29d70a4f00e29e59070160bbe9889ead48cba4b10cffed51b349ccdb9b056",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "NOR3"
+    },
+    "ODD_PARITY3": {
+      "compiled_NAND": {
+        "gate_count": 8,
+        "gates": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "output": 10,
+        "truth_mask": 150
+      },
+      "counterexample_count": 6,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 6,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 6,
+        "shape": "LEFT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "23493700ab6dd788f1595f4d27406de800f307a66d384966d85470701e50c264",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "ODD_PARITY3"
+    },
+    "PAIR_AGREE_AND_THIRD": {
+      "compiled_NAND": {
+        "gate_count": 7,
+        "gates": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            8,
+            8
+          ]
+        ],
+        "output": 9,
+        "truth_mask": 130
+      },
+      "counterexample_count": 6,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 6,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 2,
+        "shape": "LEFT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "548f0df9c0128e4bce15a8071b970227ef4cd4410ba5abb437d67414305bcf91",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "PAIR_AGREE_AND_THIRD"
+    },
+    "PAIR_DISAGREE_AND_THIRD": {
+      "compiled_NAND": {
+        "gate_count": 6,
+        "gates": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            7,
+            7
+          ]
+        ],
+        "output": 8,
+        "truth_mask": 40
+      },
+      "counterexample_count": 6,
+      "full_three_input_domain_exhausted": true,
+      "generator": "EXECUTED_LEGIT009_CODE_WITH_META_CEGIS_SEARCH_PROGRAM",
+      "parent_search_program_sha256": "9a6158541545a8e89ca7de2e1fb268a42eee1a18eacfe31ed358df1959e8dce9",
+      "program_tree": {
+        "first": 6,
+        "order": [
+          0,
+          1,
+          2
+        ],
+        "second": 8,
+        "shape": "LEFT"
+      },
+      "real_world_authority": false,
+      "schema": "motif.self-composed-reason-cartridge.v1",
+      "sha256": "89ff41c4efa7bb6fb0e09e3a9cf2ee2d07f14b7aec1fef22c3afb21f0d5e6b59",
+      "status": "PROVED_FINITE_THREE_BIT_PROPOSAL_ONLY",
+      "task": "PAIR_DISAGREE_AND_THIRD"
+    }
+  },
+  "generation_3_reused_three_input_algorithm": {
+    "full_four_input_domain_exhausted": true,
+    "gate_count": 12,
+    "gates": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        2,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        2,
+        8
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        3,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        3,
+        12
+      ],
+      [
+        13,
+        14
+      ]
+    ],
+    "no_unrestricted_code_write": true,
+    "output": 15,
+    "parent_three_input_sha256": "23493700ab6dd788f1595f4d27406de800f307a66d384966d85470701e50c264",
+    "parent_two_input_sha256": "465cbbd646c57c9ffcbea730e9775671450ea3a1609a7d2e680a9c670793ec8d",
+    "real_world_authority": false,
+    "schema": "motif.second-generation-composed-cartridge.v1",
+    "sha256": "7886f5790361f7c8e47200c15bb2529876f7aafb2bc88fa5dbe814b46db229e6",
+    "status": "PROVED_FINITE_FOUR_BIT_PROPOSAL_ONLY",
+    "task": "ODD_PARITY4"
+  },
+  "no_python_source_was_rewritten": true,
+  "no_unreviewed_generated_code_executed": true,
+  "only_typed_boolean_interpreter_was_used": true,
+  "real_world_authority": false,
+  "schema": "motif.self-bootstrapped-research-artifacts.v1",
+  "source_authentication_performed": false,
+  "status": "DRAFT_ONLY_HUMAN_REVIEW_REQUIRED"
+}
