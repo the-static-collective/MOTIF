@@ -1,5 +1,5 @@
 {
-  "frozen_plan_sha256": "0db2c88f7def3f51038c14cff1a11db99b5ebb8da2cbf878b787b78b25e39bdc",
+  "frozen_plan_sha256": "09e4e70d51aa019e2d02ed01a506f16ece8bb4e1f6226934e337171aed3361f9",
   "independent_external_validation": false,
   "production_write_approved": false,
   "research_meta_tool": "\"\"\"Generated LEGIT-017 cross-domain test-witness cache.\nNo network, file writing or deployment rights. Research only.\n\"\"\"\nNO_EXTERNAL_ACTIONS = True\ndef build(records):\n    table={}\n    for key,answer in records:\n        if key in table:\n            raise ValueError(\"Duplicate independent test witness\")\n        table[key]=answer\n    return table\ndef answer(table,key):\n    return table[key]\n",
