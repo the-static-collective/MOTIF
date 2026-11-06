@@ -41,7 +41,7 @@ class CertifiedTransformerTests(unittest.TestCase):
         cls.artifact=produce(cls.rows)
         cls.previous=prior_search()
         cls.columns=cls.previous.build_index(cls.rows)
-        cls.solver=cls.artifact["generated_solver"]
+        cls.solver=staticmethod(cls.artifact["generated_solver"])
 
     def test_real_previous_source_loaded_and_fingerprinted(self):
         self.assertEqual(len(self.rows),152)
