@@ -37,6 +37,7 @@ CASES={
                 "Justice JACKSON","Justice STONE"]},
 }
 SCHEMA="motif.reason.complete-opinion-source-v1"
+from contract import SHA
 
 class Body(HTMLParser):
  def __init__(self):
@@ -122,6 +123,8 @@ def acquire(folder):
  summaries={}
  for case_id in CASES:
   page,html=fetch(case_id)
+  if page["raw_page_sha256"]!=SHA[case_id]["raw"] or page["opinion_body_sha256"]!=SHA[case_id]["body"]:
+   raise ValueError(f"{case_id}: exact upstream bytes or extracted full-body hash changed; source owner must review")
   (dest/(case_id.lower()+".raw.html")).write_bytes(html)
   (dest/(case_id.lower()+".full.json")).write_text(
       json.dumps(page,sort_keys=True,indent=2,ensure_ascii=False)+"\n")
