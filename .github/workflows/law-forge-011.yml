@@ -1,0 +1,76 @@
+name: MOTIF Law Forge 011 — Signed Counterfactual Critic
+
+on:
+  push:
+    branches:
+      - research/law-forge-011-signed-counterfactual-20261105
+    paths:
+      - 'experiments/law-forge-011/**'
+      - '.github/workflows/law-forge-011.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-011/**'
+      - '.github/workflows/law-forge-011.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  signed-counterfactual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Re-run inherited Law Forge 001–010 research
+        run: |
+          for generation in 001 002 003 004 005 006 007 008 009 010; do
+            python -m unittest discover -s "experiments/law-forge-${generation}" -p 'test_*.py' -v
+          done
+      - name: Verify signed counterfactual source separation, integrity and abstention
+        run: python -m unittest discover -s experiments/law-forge-011 -p 'test_*.py' -v
+      - name: Freeze comparison against strongest classical controls
+        run: |
+          mkdir -p law-forge-011-receipts
+          python experiments/law-forge-011/trial.py > law-forge-011-receipts/benchmark.json
+          python -m json.tool law-forge-011-receipts/benchmark.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("law-forge-011-receipts/benchmark.json"))
+          print(json.dumps({"development":r["development"],
+                            "evaluation":r["evaluation"],
+                            "frozen_decision":r["frozen_decision"]},indent=2))
+          PY
+      - name: Emit portable signed critic and bounded question receipt
+        run: |
+          python - <<'PY'
+          import sys,json
+          sys.path.insert(0,"experiments/law-forge-011")
+          from source_owner import UnknownOwner
+          from trial import learn
+          from signed_critic import SignedAudit
+          from desk import dispatch,SCHEMA
+          world=UnknownOwner("signed_exception",8)
+          learning,_=learn(world)
+          ledger=SignedAudit(learning)
+          out=dispatch({"schema":SCHEMA,"action":"propose",
+                        "audit_cartridge":ledger.packet(),
+                        "catalog":[q.packet() for q in world.catalog()]})
+          assert out["status"] == "PROPOSE_ONLY_SOURCE_QUESTION"
+          assert out["real_world_authority"] is False
+          open("law-forge-011-receipts/signed-cartridge.json","w").write(
+              json.dumps(ledger.packet(),indent=2,sort_keys=True)+"\n")
+          open("law-forge-011-receipts/source-proposed-question.json","w").write(
+              json.dumps(out,indent=2,sort_keys=True)+"\n")
+          PY
+      - name: Publish synthetic benchmark and evidence receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-011-signed-counterfactual-receipts
+          path: law-forge-011-receipts/
+          retention-days: 30
