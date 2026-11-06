@@ -277,6 +277,69 @@ def discovery(family,initial,oracle,max_cost=11,max_calls=24):
     return raw
 
 
+
+def replay_challenges(grammar,doc,labels):
+    """Deterministically re-run the learner's query and challenge decisions."""
+    bymask={row["mask"]:row for row in doc["public_observations"]}
+    current={m:bymask[m]["reachable"] for m in INITIAL}
+    events=doc["source_challenge_trace"]
+    if not isinstance(events,list) or len(events)>24:
+        raise HOLD("Unbounded source-owner challenge trace")
+    index=0
+    completed=False
+    for limit in LEVELS:
+        if limit>doc["complexity_cap"]: break
+        while True:
+            options=grammar.candidates(limit,current)
+            if not options: break
+            if index>=len(events): raise HOLD("Missing source challenge")
+            item=events[index]
+            index+=1
+            if len(options)>1:
+                possibilities=[]
+                for mask in ACQUISITION:
+                    if mask in current: continue
+                    ones=sum(bool(s&(1<<mask)) for s in options)
+                    zeros=len(options)-ones
+                    possibilities.append((min(ones,zeros),-abs(ones-zeros),-mask,mask))
+                if not possibilities: raise HOLD("No independent question exists")
+                best=max(possibilities)
+                mask=best[3]
+                if best[0]<=0 or mask not in bymask:
+                    raise HOLD("No source witness for discriminating query")
+                expected={"kind":"QUERY","asked":mask,
+                          "response_digest":digest(bymask[mask])}
+                if item!=expected:raise HOLD("Query differs from deterministic protocol")
+                current[mask]=bymask[mask]["reachable"]
+            else:
+                candidate=options[0]
+                if item.get("kind")=="COUNTEREXAMPLE":
+                    mask=item.get("asked")
+                    if (mask not in bymask or mask in current
+                            or bool(candidate&(1<<mask))==bymask[mask]["reachable"]):
+                        raise HOLD("Invalid falsifying observation")
+                    expected={"kind":"COUNTEREXAMPLE","asked":mask,
+                              "rejected_signature":f"{candidate:08x}",
+                              "response_digest":digest(bymask[mask])}
+                    if item!=expected:raise HOLD("Wrong challenged candidate")
+                    current[mask]=bymask[mask]["reachable"]
+                else:
+                    expected={"kind":"PASS_ACQUISITION",
+                              "signature":f"{candidate:08x}",
+                              "heldout_not_examined":True}
+                    if (item!=expected or
+                            limit!=doc["first_verified_complexity"] or
+                            candidate!=int(doc["program"]["semantic_signature"],16)):
+                        raise HOLD("Unsubstantiated first successful grammar tier")
+                    completed=True
+                    break
+        if completed: break
+    if (not completed or index!=len(events) or len(events)!=doc["source_oracle_calls"]
+            or current!=labels):
+        raise HOLD("Replay transcript incomplete or out of order")
+    return True
+
+
 def validate(raw):
     """Replay all mathematical claims without using the independent BFS."""
     if not isinstance(raw,str) or len(raw.encode())>MAX_BYTES:
@@ -339,6 +402,7 @@ def validate(raw):
     gaps=[grammar.gaps(limit,labels) for limit in lower]
     if gaps!=doc["rejected_smaller_grammar_tiers"] or any(g is None for g in gaps):
         raise HOLD("Lower grammar refutation missing or altered")
+    replay_challenges(grammar,doc,labels)
     trace=doc["source_challenge_trace"]
     if (not isinstance(trace,list) or not trace
             or len(trace)!=doc["source_oracle_calls"]
