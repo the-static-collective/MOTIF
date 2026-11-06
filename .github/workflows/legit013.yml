@@ -1,0 +1,47 @@
+name: MOTIF LEGIT-013 independent SMT self-improvement examiner
+on:
+  push:
+    paths:
+      - "experiments/legit013/**"
+      - ".github/workflows/legit013.yml"
+  pull_request:
+    paths:
+      - "experiments/legit013/**"
+      - ".github/workflows/legit013.yml"
+jobs:
+  z3-verified-self-optimizer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install external formal SMT verifier (pinned full provenance release)
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Generate new proven optimizer, evaluate sealed-source heldout graphs and classical controls
+        run: |
+          python experiments/legit013/benchmark.py --emit > /tmp/motif-legit013-examiner-results.json
+          python -m json.tool /tmp/motif-legit013-examiner-results.json >/dev/null
+          python -m json.tool /tmp/motif-legit013-formal-receipt.json >/dev/null
+          python -m py_compile /tmp/motif-legit013-generated-optimizer.py
+          cat /tmp/motif-legit013-examiner-results.json
+          echo "---- GENERATED SOURCE ----"
+          cat /tmp/motif-legit013-generated-optimizer.py
+          echo "---- GENERATED FORMAL MANIFEST ----"
+          cat /tmp/motif-legit013-formal-receipt.json
+      - name: Prove discovered source rewrites and test source/logic falsifiers
+        run: python -m unittest discover -s experiments/legit013 -p 'test_*.py' -v
+      - name: Archive genuine Z3 SMT counterexamples, generated Python and benchmark receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT013-EXTERNAL-Z3-VERIFIED-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit013-examiner-results.json
+            /tmp/motif-legit013-formal-receipt.json
+            /tmp/motif-legit013-generated-optimizer.py
+          if-no-files-found: error
+          retention-days: 30
