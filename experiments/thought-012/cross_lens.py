@@ -36,14 +36,16 @@ def _require(condition, reason):
     if not condition: raise ViewError(reason)
 
 
-def _question(kind, topic, text, witnesses, *, origin_lens, related=()):
+def _question(kind, topic, text, witnesses, *, origin_lens, related=(), seed_only=False):
     """An inquiry is a question, never testimony or an asserted relation."""
     _require(bool(text) and len(text) < 400, 'invalid question')
-    _require(bool(witnesses), 'a question must name source evidence')
+    _require(bool(witnesses) or seed_only, 'a sourced question must name source evidence')
     body={'kind':kind, 'topic':list(topic), 'question':text,
           'witness_relation_ids':sorted(set(witnesses)),
           'origin_lens':origin_lens, 'related_manifestations':sorted(set(related)),
-          'status':'QUESTION_ONLY', 'external_authority':'NONE'}
+          'status':'QUESTION_ONLY',
+          'evidence_class':'UNSOURCED_PENCIL_SEED' if seed_only else 'CLAIMED_AUTHORED_GRAPH',
+          'external_authority':'NONE'}
     return {'id':'q:'+sha(body)[:24], **body}
 
 
@@ -134,7 +136,7 @@ class CrossLensInquiry:
         return {lens:len(self._lens_questions(lens,card))
                 for lens in ('dependency','tension','affordance')}
 
-    def start(self, *, initial_question=None, max_steps=3, allow_geometry=True,
+    def start(self, *, initial_question=None, seed_pair=None, max_steps=3, allow_geometry=True,
               policy='source_first', feedback=()):
         """Compute a reproducible fresh sequence.
 
@@ -147,7 +149,17 @@ class CrossLensInquiry:
         _require(policy in ('source_first','sequential'), 'unknown routing policy')
         _require(isinstance(feedback,(tuple,list)) and len(feedback)==len(set(feedback)) and
                  all(x in LENSES for x in feedback), 'invalid operator feedback')
-        cards=self._initial_inquiries()
+        _require(not (initial_question is not None and seed_pair is not None),
+                 'choose one initial question selector')
+        if seed_pair is not None:
+            _require(isinstance(seed_pair,(list,tuple)) and len(seed_pair)==2 and
+                     all(isinstance(x,str) and x in self.engine.manifests for x in seed_pair) and
+                     seed_pair[0]!=seed_pair[1], 'seed pair requires two distinct known manifestation IDs')
+            cards=[_question('operator_pencil_seed',tuple(seed_pair),
+                'What source-backed connections, prerequisites or conflicts should be checked between these ideas?',
+                [],origin_lens='PENCIL_MANUAL',seed_only=True)]
+        else:
+            cards=self._initial_inquiries()
         if initial_question is not None:
             _require(isinstance(initial_question,str), 'initial question id must be a string')
             cards=[c for c in cards if c['id']==initial_question]
@@ -157,7 +169,8 @@ class CrossLensInquiry:
         initial=cards[0]
         carried={initial['id']:initial}
         steps=[];seen=set();previous='0'*64
-        _require(len(initial['witness_relation_ids'])>=2, 'under-supported candidate')
+        if initial['kind']!='operator_pencil_seed':
+            _require(len(initial['witness_relation_ids'])>=2, 'under-supported candidate')
         # The association proposal starts the inquiry, not a justified conclusion.
         itinerary=['dependency','tension','affordance']
         if policy=='source_first':
@@ -227,12 +240,14 @@ class CrossLensInquiry:
                  'previous receipt integrity invalid')
         initial=previous.get('initial_inquiries')
         _require(isinstance(initial,list) and len(initial)==1, 'invalid prior inquiry')
-        return self.start(initial_question=initial[0]['id'],max_steps=max_steps,
+        kwargs=({'seed_pair':initial[0]['topic']} if initial[0]['kind']=='operator_pencil_seed'
+                else {'initial_question':initial[0]['id']})
+        return self.start(**kwargs,max_steps=max_steps,
                           allow_geometry=allow_geometry,policy=previous.get('policy','source_first'),feedback=feedback)
 
-    def evidence_only_full_control(self, initial_question=None):
+    def evidence_only_full_control(self, initial_question=None, seed_pair=None):
         """Exact same questions attainable with NONE geometry, and equal access cost ignored."""
-        return self.start(initial_question=initial_question,max_steps=3,
+        return self.start(initial_question=initial_question,seed_pair=seed_pair,max_steps=3,
                           allow_geometry=False,policy='sequential')
 
 

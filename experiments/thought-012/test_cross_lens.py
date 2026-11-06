@@ -125,6 +125,32 @@ class CrossLensTests(unittest.TestCase):
         self.assertEqual(old['source_digest'],new['source_digest'])
         self.assertNotEqual(old['source_snapshot_digest'],new['source_snapshot_digest'])
 
+    def test_single_operator_can_sketch_without_fake_independent_roots(self):
+        # One operator wrote these edges. There is no supported 2-root bridge.
+        import tempfile
+        from multiview import ThoughtViews
+        with tempfile.TemporaryDirectory() as td:
+            _, e, rels = make_engine(Path(td)/'root.jsonl')
+            single=[{**r,'origin':'single:human-operator'} for r in rels]
+            engine=ThoughtViews(e._original,single)
+            solver=CrossLensInquiry(engine)
+            self.assertEqual(solver.start()['status'],'HOLD_NO_WITNESSED_BRIDGE')
+            proposal=solver.start(seed_pair=('m:food','m:meal'),policy='sequential')
+            self.assertEqual(proposal['initial_inquiries'][0]['evidence_class'],'UNSOURCED_PENCIL_SEED')
+            self.assertEqual(proposal['initial_inquiries'][0]['witness_relation_ids'],[])
+            self.assertIn('verify_prerequisite',{q['kind'] for q in proposal['carried_questions']})
+            self.assertEqual(proposal['assertion_promotion'],'NONE')
+            self.assertEqual(proposal,solver.resume(proposal))
+            self.assertEqual(proposal['carried_questions'],solver.evidence_only_full_control(seed_pair=('m:food','m:meal'))['carried_questions'])
+
+    def test_manual_seed_fail_closed_on_ambiguous_idea_labels(self):
+        with self.assertRaisesRegex(ViewError,'distinct known manifestation'):
+            self.solver.start(seed_pair=('m:home-shelter','m:home-shelter'))
+        with self.assertRaisesRegex(ViewError,'distinct known manifestation'):
+            self.solver.start(seed_pair=('m:food','Home'))
+        with self.assertRaisesRegex(ViewError,'one initial'):
+            self.solver.start(seed_pair=('m:food','m:meal'),initial_question='q:any')
+
     def test_unknown_input_max_steps_feedback_rejected(self):
         for kwargs in ({'max_steps':True},{'max_steps':99},{'allow_geometry':'yes'},
                        {'policy':'trust_flower'},{'feedback':['dependency','dependency']},
@@ -159,6 +185,29 @@ class CrossLensTests(unittest.TestCase):
 
     def test_reproducibility_on_same_source(self):
         self.assertEqual(self.solver.start(policy='sequential'),self.solver.start(policy='sequential'))
+
+    def test_actual_thought_010_local_door_uses_operator_pencil_seed(self):
+        from cross_lens_door import handle, DoorError
+        req={'schema':'motif.thought-door.request.v1','request_id':'fixture:one',
+             'caller':'jarvis-local','mode':'ideas','purpose':'local test',
+             'question':'Could these ideas be useful together?',
+             'ideas':['Food','Meal','Storage','Venue open','Venue closed'],
+             'relationships':[{'from':1,'to':3,'predicate':'requires',
+               'origin':'single:user','status':'AUTHORED'},
+               {'from':3,'to':4,'predicate':'contradicts','origin':'single:user','status':'AUTHORED'}],
+             'privacy':'PRIVATE_LOCAL','export':'NONE','allow_export':False,
+             'max_views':3,'show_geometry':True,'phase':'ABSTRACT_PENCIL'}
+        output=handle(req,0,1,max_steps=3)
+        self.assertEqual(output['schema'],'motif.thought-cross-door.reply.v1')
+        self.assertEqual(output['initial_question']['evidence_class'],'UNSOURCED_PENCIL_SEED')
+        self.assertEqual({q['kind'] for q in output['carried_questions']},
+             {'operator_pencil_seed','verify_prerequisite','resolve_tension'})
+        self.assertEqual(output['pen_status'],'UNCHANGED')
+        self.assertTrue(output['no_map_question_parity'])
+        with self.assertRaisesRegex(DoorError,'indices'):
+            handle(req,0,20)
+        with self.assertRaisesRegex(DoorError,'private'):
+            handle({**req,'privacy':'PUBLIC_FIXTURE'},0,1)
 
     def test_benchmark_and_demo(self):
         b=benchmark()

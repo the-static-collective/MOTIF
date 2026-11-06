@@ -12,7 +12,7 @@ Uses source-owned THOUGHT-007 `ThoughtField` for non-fungible concepts, manifest
 
 ## A single cross-lens reasoning cycle
 
-1. Identify a **question only** from association evidence: two separate nodes have two authored common neighbors and two *claimed* origin roots. These are NOT independently authenticated witnesses.
+1. Seed a **question only** either from a structurally supported association candidate (two common authored neighbors, two *claimed* origin roots), **or from an explicit operator-selected pair of non-fungible manifestation IDs**. The second case stays `UNSOURCED_PENCIL_SEED`, requires *no* pretended independent witnesses, and can drive the human-facing desk. Neither is authenticated truth.
 2. Bind the question to its stable manifestation IDs, exact relation witness IDs, source-evidence digest and source snapshot digest.
 3. Carry the question through 0–3 inspections: **dependency** (declared prerequisites), **tension** (explicitly contradicting claims in a small neighborhood), **affordance** (declared `enables` relationships). Each inspection may add another source-grounded QUESTION_ONLY with original evidence IDs. A question is not a new asserted relation.
 4. For each selected lens, optionally invoke the **actual** THOUGHT-008 projection and record a display digest/placement count. Geometry is *never read by* the question or eligibility logic; source-only inspection runs the same checks with zero projections.
@@ -28,7 +28,7 @@ Uses source-owned THOUGHT-007 `ThoughtField` for non-fungible concepts, manifest
 - **Dependency** adds two verification questions: a `van` and an `open venue` are listed as requirements. They have NOT been proven satisfied.
 - **Tension** adds a question about an `open venue` vs `closed venue` contradiction. A separate, irrelevant disagreement about the word `home` is correctly excluded from this local cut.
 - **Affordance** asks whether the declared `volunteers enables meal` relationship really works, including unresolved requirements.
-- Total: **one initial pencil question, four further held questions**. The engine constructs three actual geometric projections when enabled, retaining identical source and identities throughout.
+- Total: **one initial pencil question, four further held questions**. A separate 010-facing CLI test demonstrates that *a single operator* can create an unsourced pencil seed without inventing independent evidence. The engine constructs three actual geometric projections when enabled, retaining identical source and identities throughout.
 - A *source-only, no-map comprehensive comparator produces the same five questions*. Thus this is a question-management and representational workflow demonstration, **not an increase in intrinsic answer accuracy**.
 
 ## Security, provenance and implementation limits
@@ -60,4 +60,6 @@ Freeze an unseen set of genuinely tricky interpretation tasks *before modifying 
 
 ## Integration door
 
-For JAR;VIS Thought Room 011, the next controlled step would be a **separately reviewed explicit 'Cross-check this pencil question'** button, pinned original THOUGHT-012 source, and an opt-in preview endpoint that never stores raw input or upgrades to PEN. This PR does **not** claim that endpoint exists.
+`cross_lens_door.py` is an **actual executable local, private, opt-in JSON CLI** that uses THOUGHT-010's existing strict request validator and idea-to-manifestation engine. Its caller explicitly supplies two **index IDs**, preserving duplicate-label non-fungibility. It never sends, stores, exports or admits data; its response remains `HOLD_FOR_OPERATOR_REVIEW`. One operator may sketch a question, but all their authored links have one declared root and are **not** considered independent sources.
+
+A separate JAR;VIS Thought Room patch may eventually pin this code and expose an explicit **Cross-check these two ideas** button. This MOTIF PR alone does not change or deploy the JAR;VIS application.
