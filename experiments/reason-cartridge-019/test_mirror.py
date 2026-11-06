@@ -131,12 +131,15 @@ class GoldenMirrorTests(unittest.TestCase):
                       r["critic_elf"]["judgments"]["UNASKED_AID"]["refusals"])
 
     def test_other_welcome_trumps_opposite_self_wish_without_loss_of_dignity(self):
-        for case,action in (("H05_OTHER_DIFFERS","SIT_QUIETLY"),
-                            ("H14_OPPOSITE_PREFERENCES","SEND_NOTE")):
-            r=self.report(case)
-            self.assertEqual(r["selected_action"],action)
-            self.assertIn(action,r["difference_preserved"])
-        self.assertFalse(self.report("H05_OTHER_DIFFERS")["real_world_authority"])
+        r=self.report("H05_OTHER_DIFFERS")
+        self.assertEqual(r["selected_action"],"SIT_QUIETLY")
+        self.assertIn("SIT_QUIETLY",r["difference_preserved"])
+        # H14 shows projection danger on a requested-to-avoid visit; the
+        # alternative note is welcome to the recipient but UNKNOWN to self.
+        other=self.report("H14_OPPOSITE_PREFERENCES")
+        self.assertEqual(other["selected_action"],"SEND_NOTE")
+        self.assertIn("SURPRISE_VISIT",other["projection_dangers"])
+        self.assertFalse(r["real_world_authority"])
 
     def test_no_contact_refusal_overrides_elves_and_question_permission(self):
         for case in ("H02_NO_CONTACT","H12_CONSENT_REVOKED"):
