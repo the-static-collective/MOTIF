@@ -75,7 +75,8 @@ def _run(cmd, *, cwd, timeout=90, max_stdout=2_500_000):
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise HOLD("Pinned source fetch or isolated adapter failed") from exc
     if p.returncode != 0 or len(p.stdout) > max_stdout:
-        raise HOLD("Pinned source fetch / adapter failed or exceeded output bound")
+        raise HOLD("Pinned source fetch / adapter failed or exceeded output bound: "
+                   + p.stderr.strip()[-400:])
     return p.stdout.strip()
 
 
@@ -171,6 +172,7 @@ def probe(adapter: PinnedAdapter, *, repo_root: Path, python_image: str):
         raise HOLD("Docker is required for no-network isolated source execution")
     with tempfile.TemporaryDirectory(prefix="motif-triad-") as td:
         folder = Path(td)
+        folder.chmod(0o755)  # unprivileged container can traverse its read-only mount
         _extract_experiments(adapter.commit, folder, repo_root=repo_root)
         cmd = [
             "docker", "run", "--rm", "--network", "none", "--read-only",
