@@ -119,6 +119,32 @@ class ProductivityTests(unittest.TestCase):
         self.assertEqual(cache_receipt["reference_calls"],720)
         self.assertEqual(strong_receipt["reference_calls"],720)
 
+    def test_meta_tool_can_reuse_optimized_independently_checked_reference(self):
+        older=check_variants(self.train,self.tools,"CACHE",self.meta)
+        better=check_variants(self.train,self.tools,"IMPROVED_CACHE",self.meta)
+        classical=check_variants(self.train,self.tools,"STRONG")
+        self.assertEqual(older["checked_tool_query_pairs"],1440)
+        self.assertEqual(better["checked_tool_query_pairs"],1440)
+        self.assertEqual(classical["checked_tool_query_pairs"],1440)
+        self.assertEqual(better["reference_calls"],720)
+        self.assertEqual(classical["reference_calls"],720)
+        self.assertEqual(better["source"],
+                         "CONVENTIONAL_CLASSICAL_PRECOMPUTED_REFERENCE")
+
+    def test_research_about_research_selects_meta_witness_from_training_only(self):
+        report=self.report
+        meta=report["second_order_generated_verifier"]
+        self.assertEqual(meta["training_selected_verifier_mode"],
+                         report["frozen_plan"]["research_verifier_mode"])
+        self.assertEqual(self.bundle["selected_research_verifier_mode"],
+                         report["frozen_plan"]["research_verifier_mode"])
+        self.assertTrue(meta["heldout_timing_was_not_used_for_verifier_selection"])
+        self.assertIn(meta["training_selected_verifier_mode"],
+                      ("CACHE","IMPROVED_CACHE"))
+        self.assertIn("IMPROVED_CACHE",meta["test_ms"])
+        self.assertEqual(len(meta["test_ms"]),4)
+        self.assertFalse(meta["proves_future_research_discovery_time_reduced"])
+
     def test_meta_source_detects_duplicate_or_missing_witnesses(self):
         with self.assertRaises(ValueError):
             self.meta["build"]([(("T",0),True),(("T",0),False)])
