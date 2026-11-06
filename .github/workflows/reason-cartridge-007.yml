@@ -1,0 +1,59 @@
+name: REASON-007 Discovery Market
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-007-discovery-market
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-007/**'
+      - '.github/workflows/reason-cartridge-007.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  market:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inherited source-owned tests
+        run: |
+          for n in 001 002 003 004 005 006; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Discovery Market tests
+        run: python -m unittest discover -s experiments/reason-cartridge-007 -p 'test_*.py' -v
+      - name: Produce market receipt and assert independent outcomes
+        run: |
+          python experiments/reason-cartridge-007/trial.py reason-007-evidence
+          python - <<'PY'
+          import json
+          r=json.load(open('reason-007-evidence/benchmark.json'))
+          assert r['developer_supplied_circuit_candidates']==15
+          assert r['training_source_observations']==5
+          assert r['heldout_certification_cases']==11
+          assert r['heldout_errors']==0
+          assert r['proposed_sensor']==[[0,1],[2,3]]
+          assert r['one_task_winner']=='DIRECT_CLASSICAL_QUERY'
+          assert r['sixteen_task_winner']=='COMPILE_SENSOR'
+          assert r['portfolio_tasks_verified']==16
+          assert r['portfolio_errors']==0
+          assert r['hypothetical_marginal_savings']==10.0
+          assert r['duplicate_bids_rewarded']==0
+          assert not r['real_world_authority']
+          assert not r['external_actions']
+          print({'certification':11,'tasks':16,'mode':'COMPILE_SENSOR'})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-007-market-receipts
+          path: reason-007-evidence/
+          retention-days: 30
