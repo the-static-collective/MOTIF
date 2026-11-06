@@ -1,0 +1,100 @@
+name: MOTIF Ring 006 / adversarial distribution shift and fail-closed learner
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-006-adversarial-ood-loop
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-006/**'
+      - '.github/workflows/cartridge-ring-006.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source hypergraph and prior learned policy regressions
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-005 -p 'test_*.py' -v
+      - name: Distribution-shift generator, novelty membrane and forged-route denial
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-006 -p 'test_*.py' -v
+
+  real-source-falsifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pull controlled native Python image
+        run: docker pull python:3.11-slim
+      - name: Learn original RING-005 source-native policy then attack unseen input
+        run: |
+          python experiments/cartridge-ring-006/breaker.py \
+            --count 32 --out /tmp/motif-ring006-redteam.json
+      - name: Check whether adversarial shift triggered actual error and bounded demotion
+        run: |
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/motif-ring006-redteam.json'))
+          assert j['schema']=='motif.ring006.redteam-feedback-loop.v1'
+          assert j['training_cases']==64
+          assert j['first_unseen_adversarial_cases']==32
+          assert j['second_disjoint_adversarial_cases']==32
+          assert j['first_batch']['legacy']['unsafe_or_invalid_decisive_approvals']>0
+          assert j['review']['status']=='QUARANTINE_ACTIVATED_FROM_ADVERSARIAL_FAILURE'
+          a=j['second_batch']['legacy']
+          b=j['second_batch']['guarded']
+          assert b is not None
+          assert b['unsafe_or_invalid_decisive_approvals']==0
+          assert b['quarantine_count']>0
+          assert b['safe_positive_decisive_coverage']<=a['safe_positive_decisive_coverage']
+          assert j['original_router_mutated'] is False
+          assert j['new_executables_admitted']==0
+          assert j['authority']=='NONE'
+          print('Real trained original source broke on novel requests; guarded successor rejects unsafe decisives but loses some benign coverage.')
+          print('First unsafe approvals:',j['first_batch']['legacy']['unsafe_or_invalid_decisive_approvals'])
+          print('Second legacy unsafe approvals:',a['unsafe_or_invalid_decisive_approvals'])
+          print('Second guarded unsafe approvals:',b['unsafe_or_invalid_decisive_approvals'])
+          print('Second safe coverage legacy:',a['safe_positive_decisive_coverage'])
+          print('Second safe coverage guarded:',b['safe_positive_decisive_coverage'])
+          PY
+      - name: Write evidence-scoped hypergraph of observed adversarial failure and benign coverage loss
+        run: |
+          python experiments/cartridge-ring-006/drift_graph.py \
+            --trial /tmp/motif-ring006-redteam.json \
+            --out /tmp/motif-ring006-drift-hypergraph.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring006-drift-hypergraph.json'))
+          assert r['schema']=='motif.ring006.drift-evidence-hypergraph.v1'
+          assert len(r['hyperedges'])==3
+          assert r['hyperedges'][-1]['guarded_unsafe_decisive']==0
+          assert r['hyperedges'][-1]['benign_coverage_lost']>0
+          assert r['new_real_world_edges_promoted']==0
+          assert r['new_executable_cartridges_installed']==0
+          assert r['authority']=='NONE'
+          print('MOTIF stored conditional adverse-source hyperedges, not universal new abilities.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring006-novelty-adversarial-provenance
+          path: |
+            /tmp/motif-ring006-redteam.json
+            /tmp/motif-ring006-drift-hypergraph.json
+          retention-days: 30
