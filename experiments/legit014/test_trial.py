@@ -17,6 +17,7 @@ import unittest
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/"legit013"))
 sys.path.insert(0,str(HERE.parent/"legit012"))
+sys.path.insert(0,str(HERE))
 from graph_reference import cases,check_graph,scan
 from formal_oracle import prove_rule
 from transform import (HOLD,PARENT_SHA,PROPOSALS,train_profile,
