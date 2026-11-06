@@ -163,9 +163,12 @@ def discover(owner,max_inquiries=40):
         # programs as possible. This is no epistemic claim about real people.
         scored=[]
         for world in available:
-            positives=sum(prove(p,world) is not None for p in hypotheses)
-            negatives=len(hypotheses)-positives
-            disagreement=min(positives,negatives)
+            counts={label:0 for label in ("SUPPORTED","REFUTED","BOTH","UNDETERMINED")}
+            for candidate in hypotheses:
+                counts[status(candidate,world)]+=1
+            # Every different-prediction pair represents a possible source
+            # answer that rules out a distinct conceptual hypothesis.
+            disagreement=len(hypotheses)**2-sum(v*v for v in counts.values())
             scored.append((disagreement,-int(world["id"].split("-")[1]),world))
         best=max(scored,key=lambda x:(x[0],x[1]))
         if best[0]==0:break
