@@ -20,7 +20,7 @@ SCHEMA="motif.reason.impossible-court.provenance.v1"
 REVISION="motif.reason.impossible-court.fictional-v1"
 FIELDS=("forum","epoch","subject","predicate","sign")
 ALLOW_SIGNS=("YES","NO")
-SAFE=re.compile(r"^[A-Z0-9_]{1,72}$")
+SAFE=re.compile(r"^[A-Z0-9_-]{1,72}$")
 MAX_BYTES=48000
 MAX_ROUNDS=50
 
