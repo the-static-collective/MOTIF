@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "motif.observation.015.v1"
-ALLOWED_METRICS = {"artifact_completion_rate", "useful_step_completion_rate"}
+ALLOWED_METRICS = {"artifact_completion_rate", "useful_step_completion_rate", "self_report_preparation_rate"}
 
 
 class UnsafeObservation(ValueError):
