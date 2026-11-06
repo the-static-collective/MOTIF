@@ -23,7 +23,12 @@ from examiner import (
     emit,limited_load,reverify,guard_eval,answer_eval,digest
 )
 from classical_control import StrongClassicalDP,UnoptimizedClassicalDP
-from benchmark import evaluate,heldout
+from importlib.util import spec_from_file_location, module_from_spec
+_spec=spec_from_file_location("legit013_benchmark",HERE/"benchmark.py")
+_benchmark=module_from_spec(_spec)
+_spec.loader.exec_module(_benchmark)
+evaluate=_benchmark.evaluate
+heldout=_benchmark.heldout
 
 
 class AlgorithmExaminerTests(unittest.TestCase):
