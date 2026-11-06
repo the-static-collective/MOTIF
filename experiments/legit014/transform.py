@@ -35,6 +35,9 @@ PROPOSALS=(
     ("C_ZERO","ZERO"),("C_FULL","PARENT"),
     ("P_EQUALS_C","PARENT"),
 )
+# Deliberately injected unsound hypotheses probe the mathematical rejection gate.
+# They are NOT asserted as discovered shortcuts or optimization candidates.
+ADVERSARIAL_HYPOTHESES=(("P_ZERO","COLUMN"),("P_FULL","PARENT"))
 MAX_RULES=2
 WIDTHS=(8,152,256)
 
@@ -113,7 +116,7 @@ def validate(plan):
     used=set()
     for row in plan["rules"]:
         if (not isinstance(row,list) or len(row)!=2 or
-            tuple(row) not in PROPOSALS or row[0] in used):
+            tuple(row) not in PROPOSALS+ADVERSARIAL_HYPOTHESES or row[0] in used):
             raise HOLD("Duplicate or unsupported source rule")
         used.add(row[0])
 
@@ -124,7 +127,10 @@ def prove(plan):
         for width in WIDTHS:
             result=prove_rule(guard,answer,width)
             if result["result"]!="UNSAT":
-                raise HOLD("External Z3 refuted candidate rule")
+                raise HOLD("SMT_SAT_COUNTEREXAMPLE: "+
+                           json.dumps({"guard":guard,"answer":answer,
+                                       "witness":result["counterexample"]},
+                                      sort_keys=True))
             checks.append({"guard":guard,"answer":answer,"width":width,
                            "z3_verdict":result["result"]})
     local=independent_recurrence_proof()
