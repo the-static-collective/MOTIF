@@ -1,0 +1,124 @@
+{
+  "experiment": "MOTIF-GEOM-005",
+  "geometry_invoked_by_choice": "spring",
+  "mode_selected": "bridge",
+  "projection_scores": {
+    "spring": 0.010528,
+    "radial": 3.325054,
+    "flower_hex": 0.765295
+  },
+  "hypothetical_associations": [
+    {
+      "nodes": [
+        "meal",
+        "shelf"
+      ],
+      "via": [
+        "storage",
+        "volunteer"
+      ],
+      "witnesses": [
+        {
+          "via": "storage",
+          "left_origins": [
+            "mock-cook-B"
+          ],
+          "right_origins": [
+            "mock-steward-A"
+          ]
+        },
+        {
+          "via": "volunteer",
+          "left_origins": [
+            "mock-cook-D"
+          ],
+          "right_origins": [
+            "mock-steward-C"
+          ]
+        }
+      ],
+      "distinct_roots": 4,
+      "status": "HYPOTHESIS_ONLY",
+      "interpretation": "possible association; not an observed edge"
+    },
+    {
+      "nodes": [
+        "storage",
+        "volunteer"
+      ],
+      "via": [
+        "meal",
+        "shelf"
+      ],
+      "witnesses": [
+        {
+          "via": "meal",
+          "left_origins": [
+            "mock-cook-B"
+          ],
+          "right_origins": [
+            "mock-cook-D"
+          ]
+        },
+        {
+          "via": "shelf",
+          "left_origins": [
+            "mock-steward-A"
+          ],
+          "right_origins": [
+            "mock-steward-C"
+          ]
+        }
+      ],
+      "distinct_roots": 4,
+      "status": "HYPOTHESIS_ONLY",
+      "interpretation": "possible association; not an observed edge"
+    }
+  ],
+  "trace": {
+    "status": "PATH",
+    "nodes": [
+      "shelf",
+      "storage",
+      "meal"
+    ],
+    "witnesses": [
+      {
+        "source": "shelf",
+        "target": "storage",
+        "relation": "associated",
+        "origin": "mock-steward-A",
+        "confidence": 1.0,
+        "observed": true
+      },
+      {
+        "source": "meal",
+        "target": "storage",
+        "relation": "associated",
+        "origin": "mock-cook-B",
+        "confidence": 1.0,
+        "observed": true
+      }
+    ],
+    "inference": "structural connection, not causal proof",
+    "authority": "HOLD"
+  },
+  "contradictions": {
+    "status": "CONFLICTS",
+    "witnesses": [
+      {
+        "source": "claim_yes",
+        "target": "claim_no",
+        "relation": "contradicts",
+        "origin": "mock-review-K",
+        "confidence": 1.0,
+        "observed": true
+      }
+    ]
+  },
+  "free_text_terms": 6,
+  "free_text_edges": 7,
+  "no_geometry_fallback": "NONE",
+  "authority": "HOLD",
+  "remark": "Synthetic field. No genuine social, food, medical or other real-world claims."
+}

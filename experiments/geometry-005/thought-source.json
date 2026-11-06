@@ -1,0 +1,154 @@
+{
+  "nodes": [
+    {
+      "id": "claim_no",
+      "label": "Food availability unverified",
+      "kind": "claim"
+    },
+    {
+      "id": "claim_yes",
+      "label": "Food available today",
+      "kind": "claim"
+    },
+    {
+      "id": "fish",
+      "label": "Fresh food",
+      "kind": "resource"
+    },
+    {
+      "id": "meal",
+      "label": "Community meal",
+      "kind": "activity"
+    },
+    {
+      "id": "music",
+      "label": "Music night",
+      "kind": "activity"
+    },
+    {
+      "id": "neighbor",
+      "label": "Neighbors",
+      "kind": "people"
+    },
+    {
+      "id": "room",
+      "label": "Gathering space",
+      "kind": "place"
+    },
+    {
+      "id": "schedule",
+      "label": "Time window",
+      "kind": "constraint"
+    },
+    {
+      "id": "shelf",
+      "label": "Food shelf",
+      "kind": "activity"
+    },
+    {
+      "id": "storage",
+      "label": "Cold storage",
+      "kind": "resource"
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "kind": "activity"
+    },
+    {
+      "id": "volunteer",
+      "label": "Volunteers",
+      "kind": "resource"
+    }
+  ],
+  "edges": [
+    {
+      "source": "claim_yes",
+      "target": "claim_no",
+      "relation": "contradicts",
+      "origin": "mock-review-K",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "fish",
+      "target": "storage",
+      "relation": "requires",
+      "origin": "mock-note-E",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "meal",
+      "target": "room",
+      "relation": "requires",
+      "origin": "mock-note-G",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "meal",
+      "target": "storage",
+      "relation": "associated",
+      "origin": "mock-cook-B",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "meal",
+      "target": "volunteer",
+      "relation": "associated",
+      "origin": "mock-cook-D",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "music",
+      "target": "room",
+      "relation": "requires",
+      "origin": "mock-note-H",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "neighbor",
+      "target": "meal",
+      "relation": "associated",
+      "origin": "mock-note-J",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "neighbor",
+      "target": "music",
+      "relation": "associated",
+      "origin": "mock-note-I",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "shelf",
+      "target": "storage",
+      "relation": "associated",
+      "origin": "mock-steward-A",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "shelf",
+      "target": "volunteer",
+      "relation": "associated",
+      "origin": "mock-steward-C",
+      "confidence": 1.0,
+      "observed": true
+    },
+    {
+      "source": "transport",
+      "target": "schedule",
+      "relation": "requires",
+      "origin": "mock-note-F",
+      "confidence": 1.0,
+      "observed": true
+    }
+  ]
+}
