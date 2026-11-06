@@ -50,6 +50,21 @@ We did not erase the old behavior. `engines.count_before_source_repair()` preser
 
 **To avoid laundering inspection into a heldout score, we explicitly reserved source questions 251–500 of every test task as a separate, prospective evaluation slice.** That is an additional **750 independently authored test questions** beyond the inspected 750 used for diagnosis. The new slice is only evaluated **after the source-repair code was committed**. The CI artifact exposes all errors and abstentions. The exact prospective scores are read from `reason-022-evidence/benchmark.json`, not assumed to be perfect.
 
+### Measured prospective, untouched-post-repair slice (questions 251–500)
+
+The source-pinned GitHub Actions evaluation, using **750 further third-party-authored questions that were not inspected during the counting repair**, returned:
+
+| Independently authored family | Correct | Confidently incorrect | HOLD | Weak flat-answer control |
+|---|---:|---:|---:|---:|
+| Counting | **250/250** | 0 | 0 | 130/250 |
+| Ordered time | **250/250** | 0 | 0 | 55/250 |
+| Three-party transfer | **249/250** | **1** | 0 | 48/250 |
+| **Total** | **749/750** | **1** | **0** | **233/750** |
+
+**The wrong transfer prediction remains a genuine recorded failure.** Its source question ID, original gold label, emitted answer and original story receipts are available in the evidence artifact; it was not "corrected" after the reserved prospective evaluation. The three engines are still developer-supplied classical finite-state programs. Now that these results have been examined, **this slice must be considered inspected for any later changes**; a new prospective test would require a genuinely further untouched slice or a different benchmark.
+
+The complete exact-head regression run also passes **425 automated tests** (407 inherited; 18 new REASON-022 tests), plus the published external source-provenance and two-circle viewer assertions.
+
 A separate weak old-view baseline always uses a single fixed answer per task. It is presented only as a diagnostic, **not as an optimal classical comparator**. The independently authored source task answers still cannot measure real ethical competence.
 
 ### A concrete typed impossibility witness
