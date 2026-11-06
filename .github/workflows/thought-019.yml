@@ -1,0 +1,73 @@
+name: THOUGHT-019 direct local LLM research loop
+on:
+  push:
+    paths:
+      - 'experiments/thought-019/**'
+      - '.github/workflows/thought-019.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-019/**'
+      - '.github/workflows/thought-019.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-owned-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reproduce direct HTTP integration, independent oracle and no-fallback tests
+        working-directory: experiments/thought-019
+        run: python -m unittest -v test_direct_model.py
+      - name: Preserve 018 research director regression
+        working-directory: experiments/thought-018
+        run: python -m unittest -v test_director.py test_conversation_relay.py
+  direct-real-generative-model:
+    # This is a real Ollama daemon & downloaded open-weight generative model,
+    # not ChatGPT relay, scripted canned response or fake HTTP transport.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install and start local generative model (CPU)
+        uses: pydantic/ollama-action@v3
+        with:
+          model: qwen2:0.5b
+      - name: Check real daemon identifies downloaded model
+        run: |
+          ollama list
+          curl --fail --silent http://127.0.0.1:11434/api/tags | python -m json.tool
+      - name: MOTIF controls LLM calls and independently grades proposals
+        working-directory: experiments/thought-019
+        run: |
+          python run.py --model qwen2:0.5b --rounds 2 --timeout 120 \
+            --output direct-llm-results.json --allow-held-reply
+      - name: Prove direct LLM inference actually occurred, even if result HELD
+        working-directory: experiments/thought-019
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('direct-llm-results.json'))
+          assert r['motif_directly_called_llm'] is True
+          assert r['transport']=='DIRECT_LOCAL_OLLAMA_NO_FILE_RELAY'
+          assert len(r['model_calls'])>=1
+          assert all(c['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and c['http_generation_completed'] for c in r['model_calls'])
+          assert all(c['model_tag']=='qwen2:0.5b' and len(c['daemon_digest'])==64 for c in r['model_calls'])
+          assert r['installed'] is False and r['external_authority']=='NONE'
+          print({'status':r['status'],'actual_llm_http_calls':len(r['model_calls']),
+                 'accepted_typed_proposals':sum(c['proposal_passed_typed_gate'] for c in r['model_calls'])})
+          PY
+      - name: Save observed model receipts and held/approved review packet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-019-real-llm-direct-run
+          path: experiments/thought-019/direct-llm-results.json
+          if-no-files-found: ignore
