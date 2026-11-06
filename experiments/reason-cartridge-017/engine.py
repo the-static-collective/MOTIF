@@ -18,7 +18,7 @@ import json
 import re
 
 CASEBOOK=Path(__file__).with_name("casebook.py")
-CASEBOOK_BLOB="REPLACE_SOURCE_BLOB"
+CASEBOOK_BLOB="ad14325dbdc146b200e1b0fcfb6d198a7593bf8c"
 SCHEMA="motif.reason.unexpected-other.public-v1"
 PACKET="motif.reason.unexpected-other.receipt-v1"
 SOURCE_REVISION="motif.reason.unexpected-other.synthetic-testimony-v1"
