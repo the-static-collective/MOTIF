@@ -2,6 +2,7 @@
 import unittest
 from math import hypot
 
+from cartridge import export_cartridge, verify_cartridge
 from geometry import (
     circle_intersections, edges, flower, from_xy, hex_distance, pathfind,
     propose_centers, rotate60, svg_flower, to_xy,
@@ -108,6 +109,17 @@ class FlowerTests(unittest.TestCase):
                         blocked=set(cells) - {(0, 0), (1, 0)},
                         missing_edges={((0, 0), (1, 0))})
         self.assertEqual(held["status"], "HOLD")
+
+    def test_exported_geometry_cartridge_is_held_and_falsifiable(self):
+        cartridge = export_cartridge(set(flower(2)) - {(0, 1)}, 2)
+        self.assertTrue(verify_cartridge(cartridge))
+        self.assertEqual(cartridge["payload"]["admission"], "HOLD")
+        self.assertEqual(cartridge["payload"]["effective_authority"], "NONE")
+        cartridge["payload"]["observed"].pop()
+        self.assertFalse(verify_cartridge(cartridge))
+        self.assertFalse(verify_cartridge({"payload": {}}))
+        with self.assertRaises(ValueError):
+            export_cartridge({(0, 0)}, 2, radius=float("nan"))
 
     def test_svg_marks_hypothesis_distinctly(self):
         svg = svg_flower({(0, 0), (1, 0)}, {(0, 1)})
