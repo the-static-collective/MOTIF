@@ -220,6 +220,7 @@ def conventional_direct_product(worlds,kind):
     }
 
 def answer_prob(question,response,h):
+    need(question in QUESTION_MODELS,"HOLD_UNSUPPORTED_QUESTION")
     models=QUESTION_MODELS[question]
     need(response in models["responses"],"HOLD_UNSUPPORTED_ANSWER")
     return frac(models["responses"][response][HYPOTHESES.index(h)])
