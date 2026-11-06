@@ -56,6 +56,8 @@ jobs:
           assert r['heldout_source_exact']+r['heldout_safe_abstentions']==55
           assert r['strong_classical_direct_reference']==55
           assert r['independent_receiver']['source_errors']==0
+          assert r['unknown_new_source_relation_conflict']['result']=='HOLD_NEW_SOURCE_FEATURE_REQUIRES_FRESH_LEARNING'
+          assert r['unknown_new_source_relation_conflict']['old_model_revised_automatically'] is False
           assert r['no_target_rule_given_to_discovery']
           assert r['witness_binding_is_not_flat_edge_cooccurrence']
           assert r['target_meaning_is_source_author_fiction']
