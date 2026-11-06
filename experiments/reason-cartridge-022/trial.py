@@ -18,6 +18,7 @@ import json
 from acquire import SOURCES,get_sources
 from corpus import read,query_input
 from router import discover,infer,boolean_projection_witness,question_family
+from ambiguity import transfer_source_audit
 from engines import ENGINES,solve,count_before_source_repair
 from obligations import CASES,all_proofs,contradiction
 from mirror_bridge import run_all,pin as pin019
@@ -95,6 +96,7 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
                 "selected_engine_by_external_training_family"][family],
             "heldout_source_outcome_is_not_human_welfare":True,
         }
+    posthoc_ambiguity=transfer_source_audit(test["TRANSFER"])
     mirror=run_all()
     proof=all_proofs()
     cross=contradiction()
@@ -114,6 +116,7 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
         "prospective_external_test_starts_after_first_250_per_family":True,
         "external_test":families,
         "external_source_failed_or_abstained_examples":bad_examples,
+        "independent_external_posthoc_ambiguous_gold_cases":posthoc_ambiguity,
         "three_typed_representations_are_developer_written":True,
         "trained_question_type_router":model,
         "source_training_boolean_projection_impossibilities":witness,
@@ -144,6 +147,7 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
             "external_source":source_audit,
             "routed_models":model,"families":families,
             "negative_examples":bad_examples,
+            "posthoc_source_ambiguity_not_a_corrected_model_score":posthoc_ambiguity,
             "boolean_representation_counterexamples":witness,
         },sort_keys=True,indent=2)+"\n",encoding="utf8")
         (dest/"fictional-duties-and-original-elves.json").write_text(
@@ -179,6 +183,7 @@ if __name__=="__main__":
         "documented_boolean_insufficiency_pairs":sum(
             x.get("different_answer_to_same_old_view",False)
             for x in r["source_training_boolean_projection_impossibilities"]),
+        "posthoc_ambiguous_heldout_gold_cases":len(r["independent_external_posthoc_ambiguous_gold_cases"]),
         "fictional_duty_cases":r["fictional_obligation_cases"],
         "actual_original_019_subprocesses":
             r["actual_original_worker_subprocesses_primary_pass"],
