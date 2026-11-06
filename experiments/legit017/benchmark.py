@@ -286,7 +286,34 @@ def verifier_trial(trial,test,prepared):
         "does_not_establish_superiority_to_classical_memoization":True,
     }
 
+def previous_evidence_boundary():
+    """Read the ACTUAL previous empirical witness, preserve its HOLD.
+
+    A new fast source-template test does not erase the previous failure
+    to establish independent, adopted, causal compounding of discovery.
+    """
+    old=HERE.parent/"legit016"/"generated"/"empirical_witness_report.json"
+    report=json.loads(old.read_text(encoding="utf-8"))
+    original=HERE.parent/"legit014"/"generated"/"candidate_rewrite.py"
+    identity=sha256(original.read_bytes()).hexdigest()
+    prior=report.get("real_014_retrospective",{})
+    if (report.get("experiment")!="MOTIF-LEGIT-016"
+        or report.get("observed_compounding_rate")!="NOT_ESTIMABLE"
+        or report.get("promotion_decision")!="HOLD_NOT_ENOUGH_INDEPENDENT_EVIDENCE"
+        or report.get("promotion_gate",{}).get("production_promotion_allowed") is not False
+        or prior.get("source_sha256")!=identity
+        or report.get("new_016_observed_episode",{}).get("output_mismatches")!=0):
+        raise HOLD("Prior experimental evidence is not trustworthy or was promoted")
+    return {
+        "experiment":report["experiment"],
+        "compounding_rate":report["observed_compounding_rate"],
+        "promotion_decision":report["promotion_decision"],
+        "source_sha256":identity,
+        "prior_real_improvement_rate_not_calibrated":True,
+    }
+
 def run():
+    prior=previous_evidence_boundary()
     trial=training()  # task suite for HELDOUT not evaluated or built yet
     prepared_verifier=prepare_verifier(trial)
     frozen_plan={
@@ -335,6 +362,7 @@ def run():
         "title":"THE_RESEARCH_PRODUCTIVITY_ENGINE",
         "status":verdict,
         "source_from":"ACTUAL_EXECUTABLE_STATIC_GENERATOR_TEMPLATES",
+        "previous_empirical_evidence_boundary":prior,
         "training_tasks":len(trial["train"]),
         "heldout_tasks":len(heldout),
         "heldout_verified_query_answers":validated_outputs,
