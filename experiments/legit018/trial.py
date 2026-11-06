@@ -245,6 +245,64 @@ def compare_sources(runA,with_prior,without_prior):
         "causal_effect_on_unrestricted_discovery_unproven":True,
     }
 
+def posthoc_query_amortization(bank,ancestorA_source,control_tool):
+    """Explore, without changing the original frozen selection, when a
+    precomputed inherited exact-cost recurrence pays for its setup.
+
+    The workload variation was conceived after an initial test: it is
+    explicitly POST-HOC, not new preregistered evidence of general gain.
+    A separate fresh seed range avoids the first training/heldout files,
+    but its task author and generation family remain the same.
+    """
+    inherited=compile_spec(
+        typed("FORBIDDEN","BITSET_PATH",(),ancestorA_source),
+        bank,ancestorA_source)
+    if not exhaustive("FORBIDDEN",inherited)["full_small_domain_verified"]:
+        raise HOLD("Transferred recurrence fails independent finite model")
+    outputs={}
+    for count in (36,144,576):
+        cases=tuple(generate("FORBIDDEN",65000+i,queries=count)
+                    for i in range(6))
+        check(cases)
+        matched=check_tool(inherited,cases)
+        fallback=check_tool(control_tool,cases)
+        if not matched["correct"] or not fallback["correct"]:
+            raise HOLD("Unmatched invented source on volume cross-over study")
+        for task in cases:
+            idx=classical_index(task)
+            if any(classical_answer(idx,q)!=reference(task,q)
+                   for q in task.queries):
+                raise HOLD("Tuned classical reference failed volume study")
+        timings={
+            "INHERITED_DP":measure(
+                lambda:execute_source(inherited,cases),7),
+            "NO_ANCESTOR_DFS":measure(
+                lambda:execute_source(control_tool,cases),7),
+            "STRONG_CLASSICAL":measure(lambda:strong(cases),7)
+        }
+        outputs[str(count)]={
+            "graph_cases":len(cases),
+            "queries_per_graph":count,
+            "all_correct":True,
+            "total_query_checks_per_arm":matched["checked_queries"],
+            "timings":timings,
+            "inherited_dp_faster_than_restricted_dfs_on_this_batch":(
+                timings["INHERITED_DP"]["median_wall_ms"]<
+                timings["NO_ANCESTOR_DFS"]["median_wall_ms"])
+        }
+    crossings=[int(count) for count,data in outputs.items()
+               if data["inherited_dp_faster_than_restricted_dfs_on_this_batch"]]
+    return {
+        "source_sha256":inherited["source_sha256"],
+        "workloads":outputs,
+        "first_tested_profitable_query_count_per_graph":
+            min(crossings) if crossings else None,
+        "study_planned_after_initial_heldout":True,
+        "new_seed_not_independently_authored":True,
+        "algebraic_algorithm_already_known_classically":True,
+        "not_used_for_earlier_frozen_selection":True,
+    }
+
 def run():
     old=ancestry()
     # Generation A: composite graph-path-cost reasoning. The bad attempt
@@ -265,7 +323,10 @@ def run():
     }
     # Productive capability transfer can be measured even when performance
     # fails to improve or a strong classical reference is faster.
+    volume_study=posthoc_query_amortization(
+        old,legacy_source,B_without["selected_tool"])
     transferred={
+        "exploratory_query_volume_impact":volume_study,
         "episode_A_verified_bitset_source_sha256":
             A["verified_bitset_tool"]["source_sha256"],
         "episode_B_sees_verified_A_bitset":True,
