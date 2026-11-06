@@ -1,0 +1,10 @@
+{
+  "authority": "NONE",
+  "cases": 100,
+  "cases_where_fixed_view_hid_model_distinctions": 100,
+  "cases_with_no_permitted_discriminator": 0,
+  "disagreement_with_matched_classical_partition_baseline": 0,
+  "evaluation": "synthetic developer controls, not frozen independent data",
+  "mismatch_case_ids": [],
+  "seed": 20261106
+}

@@ -1,0 +1,38 @@
+name: MOTIF GEOM-007 Contextual Imagination
+on:
+  push:
+    paths:
+      - 'experiments/geometry-007/**'
+      - '.github/workflows/motif-geometry-007.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-007/**'
+      - '.github/workflows/motif-geometry-007.yml'
+jobs:
+  bounded-synthetic-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit and adversarial controls
+        run: |
+          cd experiments/geometry-007
+          python -m unittest -v test_contextual.py
+      - name: Reproducible demonstration and classical baseline
+        run: |
+          cd experiments/geometry-007
+          python demo.py > /tmp/geom007-demo.json
+          python interface.py example-input.json > /tmp/geom007-interface.json
+          python benchmark.py > /tmp/geom007-benchmark.json
+          python -m json.tool /tmp/geom007-demo.json > /dev/null
+          python -m json.tool /tmp/geom007-interface.json > /dev/null
+          python -m json.tool /tmp/geom007-benchmark.json > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom007-synthetic-evidence
+          path: |
+            /tmp/geom007-demo.json
+            /tmp/geom007-interface.json
+            /tmp/geom007-benchmark.json

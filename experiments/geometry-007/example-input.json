@@ -1,0 +1,21 @@
+{
+  "contexts": [
+    {"id":"temporal", "scope":"alice/world:9/knowledge:9/decoder:v1", "variables":["route","known"], "alternatives":[{"route":"OPEN","known":"YES"}], "source_root":"fixture:temporal"},
+    {"id":"provenance", "scope":"alice/world:9/knowledge:9/decoder:v1", "variables":["known","origin"], "alternatives":[{"known":"YES","origin":"PRIMARY"},{"known":"YES","origin":"ECHO"}], "source_root":"fixture:provenance"},
+    {"id":"affordance", "scope":"alice/world:9/knowledge:9/decoder:v1", "variables":["origin","reachable"], "alternatives":[{"origin":"PRIMARY","reachable":"YES"},{"origin":"ECHO","reachable":"NO"}], "source_root":"fixture:affordance"}
+  ],
+  "lenses": [
+    {"id":"appearance", "variables":["route","known"], "layout":"HEX"},
+    {"id":"causal", "variables":["origin","reachable"], "layout":"RADIAL"},
+    {"id":"silent", "variables":[], "layout":"NONE"}
+  ],
+  "questions": [
+    {"id":"ask-origin", "variable":"origin", "cost":1, "permitted":true},
+    {"id":"ask-reachable", "variable":"reachable", "cost":3, "permitted":true},
+    {"id":"forbidden-cheap", "variable":"reachable", "cost":0.01, "permitted":false},
+    {"id":"ask-route", "variable":"route", "cost":0.1, "permitted":true}
+  ],
+  "selected_lenses":["appearance"],
+  "display":true,
+  "budget":3
+}

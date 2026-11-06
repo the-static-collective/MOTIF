@@ -1,0 +1,102 @@
+{
+  "authority": "NONE",
+  "early_lens": {
+    "authority": "NONE",
+    "coordinates": {
+      "appearance": {
+        "known": [
+          0.0,
+          0.0
+        ],
+        "route": [
+          1.0,
+          0.0
+        ]
+      }
+    },
+    "global_sections": 2,
+    "hidden_discriminators": [
+      "origin",
+      "reachable"
+    ],
+    "instrument": "PENCIL",
+    "representation_blind": true,
+    "scope": "alice/world:9/knowledge:9/decoder:v1",
+    "status": "PLURAL_WORLD_MODELS",
+    "view_signatures": 1
+  },
+  "experiment": "GEOM-007",
+  "no_geometry_semantics_identical": true,
+  "question": {
+    "alternatives": [
+      {
+        "cost": 3,
+        "gain_per_cost": 0.333333333,
+        "information_gain_bits": 1.0,
+        "outcomes": {
+          "NO": 1,
+          "YES": 1
+        },
+        "question": "ask-reachable",
+        "requires_reframing": true,
+        "status": "PROPOSED_ONLY",
+        "variable": "reachable"
+      }
+    ],
+    "authority": "NONE",
+    "best": {
+      "cost": 1,
+      "gain_per_cost": 1.0,
+      "information_gain_bits": 1.0,
+      "outcomes": {
+        "ECHO": 1,
+        "PRIMARY": 1
+      },
+      "question": "ask-origin",
+      "requires_reframing": true,
+      "status": "PROPOSED_ONLY",
+      "variable": "origin"
+    },
+    "interpretation": "classical entropy under uniform synthetic-world weights; no probe executed",
+    "status": "QUESTION_PROPOSED"
+  },
+  "synthetic_observation_counterfactual": {
+    "authority": "NONE",
+    "matching_sections": 1,
+    "previous_sections": 2,
+    "source_root": "simulation:sensor-output",
+    "status": "PENCIL_COUNTERFACTUAL"
+  },
+  "two_lenses": {
+    "authority": "NONE",
+    "coordinates": {
+      "appearance": {
+        "known": [
+          0.0,
+          0.0
+        ],
+        "route": [
+          1.0,
+          0.0
+        ]
+      },
+      "causal": {
+        "origin": [
+          1.0,
+          0.0
+        ],
+        "reachable": [
+          -1.0,
+          0.0
+        ]
+      }
+    },
+    "global_sections": 2,
+    "hidden_discriminators": [],
+    "instrument": "PENCIL",
+    "representation_blind": false,
+    "scope": "alice/world:9/knowledge:9/decoder:v1",
+    "status": "PLURAL_WORLD_MODELS",
+    "view_signatures": 2
+  }
+}
