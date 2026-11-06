@@ -75,6 +75,20 @@ jobs:
             'projection_danger_warnings':r['projection_danger_action_observations'],
           })
           PY
+      - name: Generate interactive self/other circles from the verified real experiment
+        run: |
+          python experiments/reason-cartridge-019/viewer.py reason-019-evidence/benchmark.json reason-019-evidence/golden-mirror-viewer.html
+          python - <<'PY'
+          from pathlib import Path
+          page=Path('reason-019-evidence/golden-mirror-viewer.html')
+          html=page.read_text(encoding='utf8')
+          assert 'class="self"' in html
+          assert 'class="other"' in html
+          assert 'id="case-select"' in html
+          assert page.stat().st_size>4000
+          assert '<script src="https://' not in html
+          print({'dual_perspective_viewer':str(page),'bytes':page.stat().st_size,'offline':True})
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: reason-019-golden-mirror-perspective-receipts
