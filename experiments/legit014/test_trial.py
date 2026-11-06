@@ -158,6 +158,16 @@ class SelfImprovementTrialTests(unittest.TestCase):
                                for r in reviews),0)
         self.assertEqual(self.benchmark["proposed_candidate_count"],len(reviews))
 
+    def test_real_smt_counterexample_rejects_wrong_source_before_timing(self):
+        rejected=[x for x in self.benchmark["training_reviews"]
+                  if x["status"]=="REJECT_INCORRECT_OR_UNPROVED"]
+        self.assertGreater(len(rejected),0)
+        self.assertTrue(any("SMT_SAT_COUNTEREXAMPLE" in x["error_detail"]
+                            for x in rejected))
+        self.assertTrue(all("training_median_ms" not in x for x in rejected))
+        self.assertTrue(all(x["round"]=="ROUND_ONE_INJECTED_UNSOUND_FALSIFIER"
+                            for x in rejected))
+
     def test_source_has_no_external_authority(self):
         manifest=self.generated["manifest"]
         self.assertEqual(manifest["status"],"DRAFT_NO_AUTOMATIC_PROMOTION")
