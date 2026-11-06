@@ -1,0 +1,175 @@
+{
+  "experiment": "MOTIF-THOUGHT-006",
+  "initial_universal_promotion_rejected": true,
+  "echoed_root_rejected": true,
+  "pen_receipt": {
+    "assertion_id": "scoped",
+    "revision": 1,
+    "instrument": "PEN",
+    "status": "PEN_SCOPED",
+    "scope": "fixture:Friday-with-volunteers",
+    "supports": [
+      "echo",
+      "storage",
+      "volunteer"
+    ],
+    "support_roots": [
+      "root:staff",
+      "root:storage"
+    ],
+    "opposes": [],
+    "opposition_roots": [],
+    "dispositions": [
+      {
+        "event": 15,
+        "revision": 1,
+        "decision": "PEN_SCOPED",
+        "actor": "fixture-reviewer",
+        "justification": "Internal working interpretation only; separate fixture roots checked",
+        "evidence_roots": [
+          "root:staff",
+          "root:storage"
+        ],
+        "policy": "STRICT_LOCAL_REVIEW_V1",
+        "external_authority": "NONE"
+      }
+    ],
+    "chain_tip": "6f80da4a7be56761655b1cde94460447bc2e6b6f148b831214a572547e4fee3b",
+    "effective_external_authority": "NONE"
+  },
+  "pen_challenged": {
+    "assertion_id": "scoped",
+    "revision": 1,
+    "instrument": "PEN",
+    "status": "PEN_CHALLENGED",
+    "scope": "fixture:Friday-with-volunteers",
+    "supports": [
+      "echo",
+      "storage",
+      "volunteer"
+    ],
+    "support_roots": [
+      "root:staff",
+      "root:storage"
+    ],
+    "opposes": [
+      "cancellation"
+    ],
+    "opposition_roots": [
+      "root:closure"
+    ],
+    "dispositions": [
+      {
+        "event": 15,
+        "revision": 1,
+        "decision": "PEN_SCOPED",
+        "actor": "fixture-reviewer",
+        "justification": "Internal working interpretation only; separate fixture roots checked",
+        "evidence_roots": [
+          "root:staff",
+          "root:storage"
+        ],
+        "policy": "STRICT_LOCAL_REVIEW_V1",
+        "external_authority": "NONE"
+      }
+    ],
+    "chain_tip": "bacd4ac4dd21e408a45827be405d4448c1490b3a0202c457b6cac87676744056",
+    "effective_external_authority": "NONE"
+  },
+  "withdrawn_receipt": {
+    "assertion_id": "scoped",
+    "revision": 1,
+    "instrument": "RETIRED",
+    "status": "WITHDRAWN",
+    "scope": "fixture:Friday-with-volunteers",
+    "supports": [
+      "echo",
+      "storage",
+      "volunteer"
+    ],
+    "support_roots": [
+      "root:staff",
+      "root:storage"
+    ],
+    "opposes": [
+      "cancellation"
+    ],
+    "opposition_roots": [
+      "root:closure"
+    ],
+    "dispositions": [
+      {
+        "event": 15,
+        "revision": 1,
+        "decision": "PEN_SCOPED",
+        "actor": "fixture-reviewer",
+        "justification": "Internal working interpretation only; separate fixture roots checked",
+        "evidence_roots": [
+          "root:staff",
+          "root:storage"
+        ],
+        "policy": "STRICT_LOCAL_REVIEW_V1",
+        "external_authority": "NONE"
+      },
+      {
+        "event": 17,
+        "revision": 1,
+        "decision": "WITHDRAWN",
+        "actor": "fixture-reviewer",
+        "justification": "Scoped conclusion no longer supported by the changed fixture",
+        "external_authority": "NONE"
+      }
+    ],
+    "chain_tip": "7b558251f69732ea19904931a647b3de7637308ffc522a8d49e842c91b60a08b",
+    "effective_external_authority": "NONE"
+  },
+  "reopened_receipt": {
+    "assertion_id": "scoped",
+    "revision": 2,
+    "instrument": "PENCIL",
+    "status": "REOPENED",
+    "scope": "fixture:Friday-with-volunteers",
+    "supports": [],
+    "support_roots": [],
+    "opposes": [],
+    "opposition_roots": [],
+    "dispositions": [
+      {
+        "event": 15,
+        "revision": 1,
+        "decision": "PEN_SCOPED",
+        "actor": "fixture-reviewer",
+        "justification": "Internal working interpretation only; separate fixture roots checked",
+        "evidence_roots": [
+          "root:staff",
+          "root:storage"
+        ],
+        "policy": "STRICT_LOCAL_REVIEW_V1",
+        "external_authority": "NONE"
+      },
+      {
+        "event": 17,
+        "revision": 1,
+        "decision": "WITHDRAWN",
+        "actor": "fixture-reviewer",
+        "justification": "Scoped conclusion no longer supported by the changed fixture",
+        "external_authority": "NONE"
+      },
+      {
+        "event": 18,
+        "revision": 1,
+        "decision": "REOPENED",
+        "actor": "fixture-reviewer",
+        "justification": "Reconsider the idea as pencil; prior evidence must be reexamined",
+        "external_authority": "NONE"
+      }
+    ],
+    "chain_tip": "a79f08f0c78f4a42d572901b90b9373da4e11ebd83b582a738ee9ac6df95d3a8",
+    "effective_external_authority": "NONE"
+  },
+  "exact_replay": true,
+  "event_count": 18,
+  "head_digest": "a79f08f0c78f4a42d572901b90b9373da4e11ebd83b582a738ee9ac6df95d3a8",
+  "outside_world_authority": "NONE",
+  "note": "Synthetic fixtures and self-described reviewers, not real authenticated evidence."
+}
