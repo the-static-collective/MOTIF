@@ -165,33 +165,37 @@ class InquiryCycle:
                 'geometry_used_for_evidence':False}
 
     def observe(self, question, answer):
-        if (not isinstance(question,dict) or question.get('id') not in {q['id'] for q in self.candidates} or
-            question.get('atom') != next(q['atom'] for q in self.candidates if q['id']==question.get('id'))):
-            raise InquiryError('question must belong to current bounded inquiry catalog')
-        if answer not in (True,False,'UNKNOWN') or type(answer) is int:
+        canonical_q = next((q for q in self.candidates
+                            if isinstance(question,dict) and q['id']==question.get('id')),None)
+        if (canonical_q is None or any(question.get(key)!=value
+                for key,value in canonical_q.items()) or
+                (self.engine.input_digest != self.source_digest or
+                 self.engine.source_snapshot_digest != self.identity_digest)):
+            raise InquiryError('question/source must match current frozen inquiry catalog')
+        if not (type(answer) is bool or answer == 'UNKNOWN' and type(answer) is str):
             raise InquiryError('oracle answer must be YES, NO, or UNKNOWN')
         # Explicit source-only projection can help display, never alter posterior.
         projected = None
         if self.geometry:
-            view = self.engine.project(question['lens'],anchor=self.seed_pair[1])
+            view = self.engine.project(canonical_q['lens'],anchor=self.seed_pair[1])
             if (view['source_evidence_digest'] != self.source_digest or
                 view['relations'] != self.engine.relations or view['external_authority'] != 'NONE'):
                 raise InquiryError('representation changed source evidence')
             projected = len(view['placements'])
         old = list(self.remaining)
-        new = [w for w in old if w['atoms'][question['atom']] == answer] if answer != 'UNKNOWN' else old
+        new = [w for w in old if w['atoms'][canonical_q['atom']] == answer] if answer != 'UNKNOWN' else old
         mismatch = answer != 'UNKNOWN' and len(new) == 0
-        self.attempted.add(question['id'])
+        self.attempted.add(canonical_q['id'])
         if mismatch:
             self.stop_reason = 'HOLD_MODEL_MISMATCH'
         elif answer != 'UNKNOWN':
             self.remaining = new
-        step = {'index':len(self.steps)+1, 'question_id':question['id'],
-                'lens':question['lens'],'atom':question['atom'],
-                'relation_id':question['relation_id'], 'claimed_origin':question['claimed_origin'],
+        step = {'index':len(self.steps)+1, 'question_id':canonical_q['id'],
+                'lens':canonical_q['lens'],'atom':canonical_q['atom'],
+                'relation_id':canonical_q['relation_id'], 'claimed_origin':canonical_q['claimed_origin'],
                 'answer':'UNKNOWN' if answer=='UNKNOWN' else ('YES' if answer else 'NO'),
                 'response_is_fixture_oracle_not_world_witness':True,
-                'expected_information_gain_bits':question.get('expected_information_gain_bits',0),
+                'expected_information_gain_bits':information_gain(old,canonical_q['atom'],self.strategy),
                 'prior_model_world_count':len(old),'posterior_model_world_count':len(self.remaining),
                 'model_mismatch':mismatch,'source_digest':self.source_digest,
                 'previous_receipt':self.steps[-1]['receipt'] if self.steps else '0'*64,

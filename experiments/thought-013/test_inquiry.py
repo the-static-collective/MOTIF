@@ -160,6 +160,17 @@ class AdaptiveInquiryTests(unittest.TestCase):
         with self.assertRaises(InquiryError):
             self.make().observe({'id':'not-current','atom':'wrong'},True)
 
+    def test_forged_question_metadata_and_nonboolean_answers_refused(self):
+        a=self.make()
+        q=a.next_question()
+        altered={**q,'claimed_origin':'pretend-independent'}
+        with self.assertRaisesRegex(InquiryError,'frozen inquiry'):
+            a.observe(altered,True)
+        for invalid in (0.0, 1, None, 'YES', 1):
+            with self.assertRaisesRegex(InquiryError,'oracle answer'):
+                a.observe(q,invalid)
+        self.assertEqual(a.steps,[])
+
     def test_replay_determinism_and_no_source_change(self):
         truth=self.worlds[11]
         x=self.make().run(fixture_oracle(truth),budget=3)
