@@ -296,6 +296,13 @@ class OtherTeachesSelfTests(unittest.TestCase):
         self.assertEqual(receiver.suggest(by_id("H02"))["state"],
                          "SUGGEST_DISCUSSION_ONLY")
 
+    def test_a_forged_review_digest_alone_cannot_admit_failed_source_cases(self):
+        receiver=Receiver()
+        receiver.review_hash="rehashed-failed-review"
+        receiver.passed=False
+        with self.assertRaises(HOLD):
+            receiver.admit("ADMIT_READ_ONLY","rehashed-failed-review")
+
     def test_all_author_owned_cases_are_source_auditable_and_not_real_people(self):
         self.assertEqual(set(self.reports),set(EXPECTED))
         for s in CASES:
