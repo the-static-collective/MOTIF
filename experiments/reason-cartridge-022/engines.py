@@ -36,13 +36,14 @@ def _facts(source):
 
 
 PICK=re.compile(r"^([A-Z][a-z]+) (?:got|grabbed|took|picked up) the ([a-z]+) there\.$")
-DROP=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down) the ([a-z]+)\.$")
+DROP_OLD=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down) the ([a-z]+)\\.$")
+DROP=re.compile(r"^([A-Z][a-z]+) (?:left|dropped|put down|discarded) the ([a-z]+)(?: there)?\\.$")
 GIVE=re.compile(r"^([A-Z][a-z]+) (?:gave|handed|passed) the ([a-z]+) to ([A-Z][a-z]+)\.$")
 COUNT_Q=re.compile(r"^How many objects is ([A-Z][a-z]+) carrying\?$")
 COUNT_WORD={0:"none",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight"}
 
 
-def count(source):
+def _count_with_drop_grammar(source,drop_grammar):
     facts=_facts(source)
     m=COUNT_Q.fullmatch(source["question"])
     if not m:return outcome("HOLD",type_name="QUANTITY",reason="WRONG_QUESTION_SHAPE")
@@ -55,7 +56,7 @@ def count(source):
             who,item=x.groups()
             holdings[item]=who;witnesses[item]=number
             continue
-        x=DROP.fullmatch(text)
+        x=drop_grammar.fullmatch(text)
         if x:
             who,item=x.groups()
             if holdings.get(item)==who:
@@ -78,6 +79,20 @@ def count(source):
     return outcome("ANSWER",COUNT_WORD[len(held)],
                    [(witnesses[k],next(t for n,t in facts if n==witnesses[k]))
                     for k in held],type_name="QUANTITY")
+
+
+def count(source):
+    """Repaired counting interpreter, using observed external lexical evidence."""
+    return _count_with_drop_grammar(source,DROP)
+
+
+def count_before_source_repair(source):
+    """Initial public result: 24 mistakes in a 250-question development batch.
+
+    The original implementation is preserved so that the first-run failure
+    cannot be erased or relabeled as prospective heldout success.
+    """
+    return _count_with_drop_grammar(source,DROP_OLD)
 
 
 def transfer(source):
