@@ -140,7 +140,9 @@ class LivingConceptTests(unittest.TestCase):
         for mode in ("training_label","schema","program","external","world_sha"):
             forged=deepcopy(packet)
             if mode=="training_label":
-                forged["source_training_labels"][0]["status"]=(\n                    "REFUTED" if forged["source_training_labels"][0]["status"]=="SUPPORTED"\n                    else "SUPPORTED")
+                forged["source_training_labels"][0]["status"]=(
+                    "REFUTED" if forged["source_training_labels"][0]["status"]=="SUPPORTED"
+                    else "SUPPORTED")
                 label=forged["source_training_labels"][0]
                 label["checksum_sha256"]=digest({
                     k:v for k,v in label.items() if k!="checksum_sha256"})
