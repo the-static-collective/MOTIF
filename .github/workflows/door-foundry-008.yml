@@ -1,0 +1,157 @@
+name: MOTIF-008 — Text, Pictures and Logic Cross-Examine One Another
+
+on:
+  push:
+    branches:
+      - experiment/door-foundry-008-three-way-crossexamination
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-008/**'
+      - '.github/workflows/door-foundry-008.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bidirectional-evidence-critique:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Exact original GRAFT-030 visual-source generator
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Exact original CANNON-095 reviewer of GRAFT output
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Original MOTIF-006 PNG source for source-native CANNON replay
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original MOTIF-007 text language makes authentic, assumption-labeled PNGs
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall." \
+            --out text-scenes
+      - name: Original GRAFT source-owned generated visual grammar tests
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: Original independent CANNON source review of current real PNGs
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start text-scenes/H01/start.png --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --out evidence/independent-cannon-visual-source-review.json
+      - name: Original MOTIF-006 builds genuinely GRAFT-generated visual operator
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start text-scenes/H01/start.png \
+            --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --receipt evidence/independent-cannon-visual-source-review.json \
+            --graft graft-source --out generated-visual-motif
+      - name: Original MOTIF-006 uses generated source to produce actual future PNGs
+        run: |
+          python generated-visual-motif/run.py --out imagined-futures \
+            > evidence/original-image-imagination.json
+      - name: Original MOTIF-007 independently reconstructs words from actual images
+        run: |
+          python experiments/door-foundry-007/narrate.py \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --out evidence/previous-text-grounding.md \
+            > evidence/previous-grounding-receipt.json
+      - name: TEXT challenges a feasible image that violates the stated instruction
+        run: |
+          python experiments/door-foundry-008/cross_examine.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall. Keep the crate on the same row throughout." \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --build generated-visual-motif --out evidence/text-vetoes-picture
+      - name: IMAGE provides a conditional counterexample to an asserted impossibility
+        run: |
+          python experiments/door-foundry-008/cross_examine.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall. The wall makes the destination unreachable." \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --build generated-visual-motif --out evidence/picture-challenges-text
+      - name: TEXT overturns an unjustified image layout and synthesizes a revised PNG
+        run: |
+          python experiments/door-foundry-008/cross_examine.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall. The blue wall stretches from top to bottom." \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --build generated-visual-motif --out evidence/text-revises-image
+      - name: AGREEMENT control when image respects an explicit textual restriction
+        run: |
+          python experiments/door-foundry-008/cross_examine.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall. Do not move through the blue wall." \
+            --text-scenes text-scenes --imagined imagined-futures \
+            --build generated-visual-motif --out evidence/witnesses-agree
+      - name: Verify epistemic priority and complete finite-state impossibility proofs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('evidence')
+          a=json.loads((base/'text-vetoes-picture/judgment.json').read_text())
+          b=json.loads((base/'picture-challenges-text/judgment.json').read_text())
+          c=json.loads((base/'text-revises-image/judgment.json').read_text())
+          d=json.loads((base/'witnesses-agree/judgment.json').read_text())
+          assert a['status']=='TEXT_VETOES_VISUAL_PLAN'
+          assert a['proof']['horizontal_only_closed'] is True
+          assert a['proof']['horizontal_only_reachable'] is False
+          assert b['status']=='IMAGE_COUNTEREXAMPLE_UNDER_ASSUMED_GEOMETRY'
+          assert b['proof']['claim_about_physical_world_disproved'] is False
+          assert c['status']=='TEXT_OVERRIDES_UNGROUNDED_PICTURE_ASSUMPTION'
+          assert c['proof']['complete_state_closure'] is True
+          assert c['proof']['revised_goal_reachable'] is False
+          assert c['proof']['revised_input_is_independently_cannon_reviewed'] is False
+          assert d['status']=='TEXT_IMAGE_LOGIC_AGREE'
+          assert Path('evidence/text-revises-image/revised-start.png').read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'
+          for r in [a,b,c,d]:
+              assert r['neural_T5_calls']==0
+              assert r['physical_effects']==0
+              assert r['real_world_events_observed']==0
+              assert r['external_network_calls']==0
+              assert r['automatic_operator_admission'] is False
+          print(json.dumps({'text_veto':a['status'],
+             'image_counterexample':b['status'],
+             'model_revision':c['status'],
+             'mutual_agreement':d['status'],
+             'revised_png_generated':True,
+             'total_real_world_effects':0},indent=2))
+          PY
+      - name: Adversarial tests — evidence custody, permission, mistaken words and pixels
+        env:
+          TEXT_SCENES: ${{ github.workspace }}/text-scenes
+          IMAGINED_FRAMES: ${{ github.workspace }}/imagined-futures
+          VISUAL_BUILD: ${{ github.workspace }}/generated-visual-motif
+        run: python -m unittest discover -s experiments/door-foundry-008 -p 'test_cross_examine.py' -v
+      - name: Preserve runnable source, original imagery, repaired imagery and complete reasoning evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-008-TEXT-VISION-LOGIC-CROSS-EXAMINATION-HOLD
+          path: |
+            text-scenes/
+            imagined-futures/
+            generated-visual-motif/
+            evidence/
+          retention-days: 30
+          if-no-files-found: error
