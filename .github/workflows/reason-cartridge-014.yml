@@ -1,0 +1,19 @@
+name: REASON-014 Complete-Opinion Source Acquisition Probe
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-014-complete-opinion-retrieval
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect published opinion HTML source boundaries
+        run: python experiments/reason-cartridge-014/probe.py
