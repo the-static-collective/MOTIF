@@ -36,9 +36,9 @@ def stub_training(seed,count=32):
                 "learned_distinct_steps":2},
             "reason":{
                 "raw":{"conclusion":expected if safe else None,
-                       "source_revision":"test-owner","status":"CERTIFIED_SYNTHETIC_GRAPH_DECISION"},
+                       "source_revision":"test-owner","status":"CERTIFIED_SYNTHETIC_GRAPH_DECISION" if safe else "HOLD"},
                 "repaired":{"conclusion":expected if safe else None,
-                            "source_revision":"test-owner","status":"CERTIFIED_SYNTHETIC_GRAPH_DECISION"}},
+                            "source_revision":"test-owner","status":"CERTIFIED_SYNTHETIC_GRAPH_DECISION" if safe else "HOLD"}},
         })
     native={
         "schema":"motif.shared-native-output.v1",
