@@ -22,7 +22,11 @@ from independent_oracle import (IndependentVerifier,MaskVerifier,TASKS,
 from cartridge import conflicting_independent_origins,parity_fold
 from simulator import trial,demonstration,N
 from provenance import posterior
-from benchmark import run
+from importlib.util import spec_from_file_location,module_from_spec
+_sp=spec_from_file_location("legit009_local_benchmark",HERE/"benchmark.py")
+_benchmark=module_from_spec(_sp)
+_sp.loader.exec_module(_benchmark)
+run=_benchmark.run
 
 
 class InventionTests(unittest.TestCase):
