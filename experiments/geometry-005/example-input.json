@@ -1,0 +1,7 @@
+{
+  "text": "Food shelf. A community meal needs storage and volunteers. Volunteers bring food to the community meal. Music gathers neighbors.",
+  "origin": "sample-operator-paragraph",
+  "question": "explore possible associations",
+  "geometry_preference": "flower_hex",
+  "allow_geometry": true
+}
