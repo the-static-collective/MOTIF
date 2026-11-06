@@ -1,0 +1,151 @@
+name: MOTIF-011 — The Evidence Frontier: Sources Not Echoes
+on:
+  push:
+    branches:
+      - experiment/door-foundry-011-evidence-dependency-frontier
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-011/**'
+      - '.github/workflows/door-foundry-011.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  belief-and-decision-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original pinned source-owning GRAFT-030 visual grammar
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Independent source-pinned CANNON-095 visual code reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Source-owner exact original MOTIF-006 PNG reader
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: MOTIF-007 constrains the words and creates authentic reference PNGs
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall." \
+            --out text-scenes
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate is beside a blue wall. Move it to the other side." \
+            --out ambiguous-scenes
+      - name: Original GRAFT executable visual grammar regression tests
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: CANNON independently rechecks GRAFT against original real PNG bytes
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start text-scenes/H01/start.png --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --out evidence/independent-cannon-visual-review.json
+      - name: Original MOTIF-006 reassembles pinned GRAFT-generated image transition code
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start text-scenes/H01/start.png \
+            --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --receipt evidence/independent-cannon-visual-review.json \
+            --graft graft-source --out generated-visual-motif
+          python generated-visual-motif/run.py --out imagined-futures \
+            > evidence/original-image-imagination.json
+      - name: Original MOTIF-009 derives four ambiguous image worlds and unsent questions
+        run: |
+          python experiments/door-foundry-009/visual_question.py \
+            --ambiguous ambiguous-scenes --base text-scenes \
+            --imagined imagined-futures --build generated-visual-motif \
+            --out evidence/original-active-question \
+            > evidence/original-question-summary.json
+      - name: MOTIF-010 revises beliefs as synthetic evidence arrives in append-only sequence
+        run: |
+          python experiments/door-foundry-010/world_model.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/belief-revision \
+            > evidence/belief-benchmark-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('evidence/belief-revision/benchmark.json').read_text())
+          assert len(x['four_synthetic_cases'])==4
+          assert abs(x['frozen_mean_brier']-.25)<1e-12
+          assert abs(x['updated_mean_brier']-.0324)<1e-12
+          assert x['frozen_mean_decision_regret']==2.5
+          assert x['updated_mean_decision_regret']==0
+          assert x['fair_classical_Bayes_matches_exactly'] is True
+          assert x['reality_was_not_observed'] is True
+          print(json.dumps({'source_owned_png_worlds':4,
+             'frozen_prior_heldout_brier':x['frozen_mean_brier'],
+             'updated_heldout_brier':x['updated_mean_brier'],
+             'frozen_simulated_decision_regret':x['frozen_mean_decision_regret'],
+             'updated_simulated_decision_regret':x['updated_mean_decision_regret'],
+             'classical_Bayesian_baseline_ties':True,
+             'external_actions':0},indent=2))
+          PY
+      - name: Adversarial evidence, contradictory sensory reports and independent Bayes checks
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+        run: python -m unittest discover -s experiments/door-foundry-010 -p 'test_world_model.py' -v
+      - name: MOTIF-011 verifies provenance report dependency graph and correctly counts independent roots
+        run: |
+          python experiments/door-foundry-011/source_graph.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/source-dependence \
+            > evidence/source-dependence-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("evidence/source-dependence/benchmark.json").read_text())
+          assert len(p["cases"])==4
+          assert p["grouped_beats_naive_in_all_designed_cases"] is True
+          assert p["mean_grouped_brier"] < .03
+          assert p["mean_naive_brier"] > .9
+          assert p["mean_grouped_decision_regret"] < p["mean_naive_decision_regret"]
+          assert p["matched_classical_root_collapse_baseline_exactly_equal"] is True
+          assert p["not_a_claim_of_independent_witness_authentication"] is True
+          print(json.dumps({"synthetic_worlds":4,
+            "grouped_brier":p["mean_grouped_brier"],
+            "naive_copied_report_brier":p["mean_naive_brier"],
+            "grouped_decision_regret":p["mean_grouped_decision_regret"],
+            "naive_decision_regret":p["mean_naive_decision_regret"],
+            "classical_root_collapse_equal":True,
+            "real_people_contacted":0},indent=2))
+          PY
+      - name: Detect forged report independence, crossed sources, altered evidence and prior drift
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+        run: python -m unittest discover -s experiments/door-foundry-011 -p 'test_source_graph.py' -v
+      - name: Save full future PNGs, source reviews, append-only updates and prediction results
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-011-INDEPENDENT-ROOTS-NOT-ECHOES-HOLD
+          path: |
+            ambiguous-scenes/
+            text-scenes/
+            generated-visual-motif/
+            imagined-futures/
+            evidence/
+          retention-days: 30
+          if-no-files-found: error
