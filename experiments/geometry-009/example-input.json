@@ -1,0 +1,155 @@
+{
+  "candidate_budget": 1000,
+  "fork_budget": 100,
+  "heldout": [
+    {
+      "after": [
+        "spruce",
+        "branch"
+      ],
+      "before": [
+        "spruce",
+        "bud"
+      ],
+      "expected": true,
+      "id": "spruce",
+      "source_root": "claimed:heldout1"
+    },
+    {
+      "after": [
+        "cedar",
+        "branch"
+      ],
+      "before": [
+        "cedar",
+        "bud"
+      ],
+      "expected": true,
+      "id": "cedar",
+      "source_root": "claimed:heldout2"
+    },
+    {
+      "after": [
+        "spruce",
+        "leaf"
+      ],
+      "before": [
+        "spruce",
+        "bud"
+      ],
+      "expected": false,
+      "id": "wrong-leaf",
+      "source_root": "claimed:heldout3"
+    },
+    {
+      "after": [
+        "spruce",
+        "branch"
+      ],
+      "before": [
+        "spruce",
+        "leaf"
+      ],
+      "expected": false,
+      "id": "wrong-source",
+      "source_root": "claimed:heldout4"
+    }
+  ],
+  "parent_grammar": {
+    "rules": [
+      {
+        "find": [
+          "seed"
+        ],
+        "name": "grow-seed",
+        "replace": [
+          "bud"
+        ]
+      },
+      {
+        "find": [
+          "bud"
+        ],
+        "name": "revisit-seed",
+        "replace": [
+          "seed"
+        ]
+      }
+    ],
+    "scope": "demo:declared"
+  },
+  "seeds": [
+    [
+      "oak",
+      "seed"
+    ],
+    [
+      "pine",
+      "seed"
+    ]
+  ],
+  "targets": [
+    [
+      "oak",
+      "branch"
+    ],
+    [
+      "pine",
+      "branch"
+    ]
+  ],
+  "training": [
+    {
+      "after": [
+        "oak",
+        "branch"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": true,
+      "id": "oak",
+      "source_root": "claimed:oak"
+    },
+    {
+      "after": [
+        "pine",
+        "branch"
+      ],
+      "before": [
+        "pine",
+        "bud"
+      ],
+      "expected": true,
+      "id": "pine",
+      "source_root": "claimed:pine"
+    },
+    {
+      "after": [
+        "birch",
+        "branch"
+      ],
+      "before": [
+        "birch",
+        "bud"
+      ],
+      "expected": true,
+      "id": "birch",
+      "source_root": "claimed:birch"
+    },
+    {
+      "after": [
+        "oak",
+        "leaf"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": false,
+      "id": "negative",
+      "source_root": "claimed:control"
+    }
+  ]
+}

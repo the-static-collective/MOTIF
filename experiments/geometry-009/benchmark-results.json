@@ -1,0 +1,27 @@
+{
+  "authority": "NONE",
+  "baseline_context": "same synthetic generator; trivial classical inductive baseline could match the rule",
+  "clean_negative": 100,
+  "clean_positive": 100,
+  "experiment": "GEOM-009 fixed-seed synthetic grammar induction vs controls",
+  "heldout_cases": 220,
+  "induced_rule_heldout_correct": 200,
+  "induced_rule_heldout_false_positives": 20,
+  "induced_rule_heldout_true_positives": 100,
+  "instrument": "PENCIL",
+  "interpretation": "exceptions expose unmodeled context; withheld results do not authorize changing any live graph",
+  "memorize_training_exact_pairs_heldout_correct": 120,
+  "parent_grammar_heldout_correct": 120,
+  "proposed_rule": {
+    "find": [
+      "bud"
+    ],
+    "name": "inferred-e147b41f4afa",
+    "replace": [
+      "branch"
+    ]
+  },
+  "seed": 20261106,
+  "train_cases": 4,
+  "unmodelled_context_negatives": 20
+}
