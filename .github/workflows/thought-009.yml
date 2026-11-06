@@ -1,0 +1,36 @@
+name: THOUGHT-009 Metareasoning Router
+on:
+  push:
+    branches: [experiment/thought-009-representation-router]
+  pull_request:
+    paths:
+      - 'experiments/thought-009/**'
+      - '.github/workflows/thought-009.yml'
+      - 'experiments/thought-008/**'
+      - 'experiments/thought-007/**'
+  workflow_dispatch:
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run THOUGHT-009 unit tests
+        run: cd experiments/thought-009 && python -m unittest -v test_router.py
+      - name: Preserve 008 and 007 regression tests
+        run: |
+          cd experiments/thought-008 && python -m unittest -v test_multiview.py
+          cd ../thought-007 && python -m unittest -v test_field.py
+      - name: Benchmark against source-only control
+        run: cd experiments/thought-009 && python benchmark.py > benchmark-results.json
+      - name: Reproduce synthetic demo
+        run: cd experiments/thought-009 && python demo.py > demo-results.json
+      - name: Upload evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-009-router-evidence
+          path: |
+            experiments/thought-009/benchmark-results.json
+            experiments/thought-009/demo-results.json
