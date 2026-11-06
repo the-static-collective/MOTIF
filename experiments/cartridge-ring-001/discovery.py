@@ -42,7 +42,9 @@ def _validate(rows):
         ref = row["name"]
         commit = row.get("commit")
         sha = commit.get("sha") if isinstance(commit, dict) else None
-        if (not REF.fullmatch(ref) or ref.startswith("/") or ref.endswith("/")\n                or ".." in ref or "//" in ref or ref.startswith("-")\n                or not SHA.fullmatch(str(sha)) or ref in found):
+        if (not REF.fullmatch(ref) or ref.startswith("/") or ref.endswith("/")
+                or ".." in ref or "//" in ref or ref.startswith("-")
+                or not SHA.fullmatch(str(sha)) or ref in found):
             raise DiscoveryHOLD("Bad, missing, or duplicate branch identity")
         found.add(ref)
         clean.append((ref, sha))
