@@ -21,13 +21,14 @@ class Question:
     supporting_ids:tuple
 
 
-def read(path,family,split,limit=None):
+def read(path,family,split,limit=None,skip=0):
     if family not in ("TIME","COUNT","TRANSFER") or split not in ("train","test"):
         raise ValueError("Unknown independent dataset task family")
     lines=Path(path).read_text(encoding="utf8").splitlines()
     episode=0
     facts=[]
     questions=[]
+    seen_questions=0
     for line in lines:
         m=re.fullmatch(r"(\d+)\s+(.+)",line)
         if not m:raise ValueError("Not a standard numbered bAbI episode")
@@ -39,6 +40,9 @@ def read(path,family,split,limit=None):
             if len(fragments)!=3:raise ValueError("Noncanonical bAbI answer/support annotation")
             q,answer,support=fragments
             if "?" not in q:raise ValueError("Unrecognized question row")
+            seen_questions+=1
+            if seen_questions<=skip:
+                continue
             questions.append(Question(
                 family=family,split=split,id=f"{family}-{split}-{episode}-{no}",
                 facts=tuple(facts),question=q.strip(),
@@ -47,7 +51,7 @@ def read(path,family,split,limit=None):
         else:
             facts.append((no,body.strip()))
         if limit is not None and len(questions)>=limit:break
-    if not questions:raise ValueError("Empty third-party dataset")
+    if not questions:raise ValueError("Empty third-party dataset or out-of-range slice")
     return tuple(questions)
 
 
