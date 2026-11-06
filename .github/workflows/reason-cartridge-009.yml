@@ -57,10 +57,43 @@ jobs:
                  'renamed_future_exact':128,
                  'invention_method':'GENERAL_BINARY_AST_CEGIS'})
           PY
+      - name: Emit native specimens for the two source-owned graph families
+        run: python experiments/reason-cartridge-009/native.py emit reason-009-native
+      - name: Checkout original unmodified Dogram at the source-pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: _external/dogram
+          persist-credentials: false
+      - name: Execute 64 real original Dogram ablation experiments
+        run: |
+          set -eu
+          test "$(git -C _external/dogram rev-parse HEAD)" = "551b5f9df18f17ec69b452ddcdff01718e0ff771"
+          for file in reason-009-native/reason-009-*.json; do
+            PYTHONPATH=_external/dogram python -m dogram.cli "$file" > "${file%.json}.receipt.json"
+          done
+          echo "Ran original Dogram against 64 nonisomorphic-family specimens."
+      - name: Remove original foreign code and independently verify 64 receipts
+        run: |
+          rm -rf _external/dogram
+          test ! -e _external/dogram
+          python experiments/reason-cartridge-009/native.py verify reason-009-native
+          python - <<'PY'
+          import json
+          r=json.load(open('reason-009-native/conformance.json'))
+          assert r['native_receipts_checked']==64
+          assert r['independently_matching_source_BFS']==64
+          assert r['native_checkout_absent_at_review']
+          assert r['algorithm_agreement_not_external_world_evidence']
+          assert not r['real_world_authority']
+          print({'original_dogram':64,'independent_agreement':64})
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: reason-009-source-owned-grammar-receipts
           path: |
             reason-009-evidence/
+            reason-009-native/
             reason-009-stdout.json
           retention-days: 30
