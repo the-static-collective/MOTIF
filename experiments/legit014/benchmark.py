@@ -30,6 +30,9 @@ sys.path.insert(0,str(HERE))
 from graph_reference import cases,check_graph,make_graph,all_states,scan
 from classical_control import StrongClassicalDP
 from examiner import actual_parent as previous_012
+# The LEGIT-013 module prepends legacy directories to sys.path during import.
+# Put this experiment first *after* loading it to avoid old transform.py.
+sys.path.insert(0,str(HERE))
 from transform import (
     SCHEMA,HOLD,digest,get_parent,catalog,_make_columns,
     train_profile,propose_round_one,next_round,compile_proved,
