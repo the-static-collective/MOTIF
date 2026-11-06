@@ -133,7 +133,7 @@ def measured_feedback():
             reviews.append({"id":key,"round":round_id,"plan":plan,
                             "status":"REJECT_INCORRECT_OR_UNPROVED",
                             "reason":type(exc).__name__,
-                            "error_detail":str(exc)[:150]})
+                            "error_detail":str(exc)[:400]})
             return
         elapsed=(perf_counter_ns()-started)/1e6
         cost_proof_ms+=elapsed
@@ -159,6 +159,11 @@ def measured_feedback():
     first=propose_round_one(profiled)
     for plan in first:
         experiment(plan,"ROUND_ONE_FROM_REAL_EXECUTION_TRACE")
+    # Adversarial negative control: attractive-looking but mathematically
+    # invalid "zero parent -> use column". Z3 must construct a concrete
+    # counterexample, and the resulting source must NEVER be timed or run.
+    experiment({"parent":"FIRST","rules":[["P_ZERO","COLUMN"]]},
+               "ROUND_ONE_INJECTED_UNSOUND_FALSIFIER")
     correct=[v for v in reviews if v["status"]=="CORRECT_BUT_TIME_UNPROVEN"]
     if not correct:
         raise HOLD("Nothing formally valid; cannot invent a second round")
