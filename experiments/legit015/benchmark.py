@@ -48,6 +48,15 @@ def scenario_cases():
         Improvement("B_CAP_LIMIT",4,4)),64,12)
     guaranteed_bad=Economy(7,12,4,(
         Improvement("CERTAIN_FAILURE",7,4,0,1),),64,64)
+    # SECOND ORDER: first improvement does not increase WORK productivity.
+    # It multiplies the efficacy of doing future improvements: verification
+    # and search overhead fall from 12 tokens to ceil(12/4)=3 tokens.
+    # This is a synthetic hypothesis, not an observed MOTIF improvement.
+    second_order=Economy(7,6,3,(
+        Improvement("RESEARCH_ABOUT_RESEARCH",2,1,research_factor=4),
+        Improvement("PROGRAM_SCHOOL",12,2),
+        Improvement("REASONER_COMPOSER",12,2,requires=("PROGRAM_SCHOOL",)),
+    ),64,64)
     return {
         "CASHFLOW_COMPOUND_AND_UNLOCK":flywheel,
         "MULTIPLICATIVE_INTERACTION":independent,
@@ -56,6 +65,7 @@ def scenario_cases():
         "CAPABILITY_GATE_UNLOCKS_NEW_ACTION":unlocking,
         "SATURATION_ENDS_COMPOUNDING":saturated,
         "CERTAIN_FAILURE_SHOULD_BE_REFUSED":guaranteed_bad,
+        "SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS":second_order,
     }
 
 def stringify(result):
@@ -100,6 +110,17 @@ def execute():
                                            "INDEX_LIBRARY","PROOF_REUSE"),
         "risk_assumption_sensitivity":sensitivity(cases["UNCERTAIN_SUCCESS"],
                                                    "RISKY_REWRITE"),
+        "second_order_research_compound": {
+            "with_better_improvement_process":evaluate(
+                cases["SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS"])
+                ["best_expected_useful_work"],
+            "without_better_improvement_process":evaluate(independent_only(
+                cases["SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS"],
+                ["PROGRAM_SCHOOL","REASONER_COMPOSER"]))
+                ["best_expected_useful_work"],
+            "assumption":"A successful research-about-research investment reduces the cost of later improvement experiments, not the cost of ordinary work.",
+            "not_a_measured_future_software_gain":True,
+        },
     }
     # Semantic falsifiers, not just nice-looking results.
     if samples["CASHFLOW_COMPOUND_AND_UNLOCK"]["first_action"]!="FASTER_ENGINE":
@@ -110,6 +131,12 @@ def execute():
         raise AssertionError("Known failure was treated as growth")
     if extra["non_additive_synergy"]["net_synergy"]<=0:
         raise AssertionError("The intended multiplicative example lacks synergy")
+    if (samples["SECOND_ORDER_IMPROVE_THE_IMPROVEMENT_PROCESS"]["first_action"]
+        !="RESEARCH_ABOUT_RESEARCH"):
+        raise AssertionError("Second-order research improvement was not selected")
+    if (extra["second_order_research_compound"]["with_better_improvement_process"]
+        <=extra["second_order_research_compound"]["without_better_improvement_process"]):
+        raise AssertionError("The improvement process itself failed to create value")
     if samples["SATURATION_ENDS_COMPOUNDING"]["best_expected_useful_work"]>=(
             samples["MULTIPLICATIVE_INTERACTION"]["best_expected_useful_work"]):
         raise AssertionError("Saturation did not bound repeated gains")
