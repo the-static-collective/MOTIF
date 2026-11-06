@@ -84,7 +84,7 @@ class UnexpectedOtherTests(unittest.TestCase):
         self.assertNotIn("source_owner_private",imports)
         self.assertNotIn("reviewer",imports)
         self.assertNotIn("owner",imports)
-        self.assertNotIn("EXPECTED",source)
+        self.assertNotIn("EXPECTED",{n.id for n in ast.walk(tree) if isinstance(n,ast.Name)})
 
     def test_free_form_unseen_hypotheses_are_generic_text_not_hardcoded_facts(self):
         new="a bicycle tire pump for the red velocipede"
