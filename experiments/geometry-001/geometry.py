@@ -96,7 +96,7 @@ def propose_centers(observed: Iterable[Coord], max_ring: int,
                     radius: float = 1.0) -> list[dict]:
     """Geometrically propose (do not assert) centers supported by two circles.
 
-    Each proposal is obtained by intersecting two *observed* neighbor circles,
+    Each proposal is obtained by intersecting two *observed* circles,
     then checking exact lattice alignment and the declared finite search area.
     """
     if max_ring < 0:
@@ -107,7 +107,7 @@ def propose_centers(observed: Iterable[Coord], max_ring: int,
         raise ValueError("observed center outside declared finite field")
     parents: dict[Coord, set[tuple[Coord, Coord]]] = {}
     for a, b in combinations(sorted(nodes), 2):
-        if hex_distance(a, b) != 1:
+        if hex_distance(a, b) > 2:
             continue
         for x, y in circle_intersections(to_xy(a, radius), to_xy(b, radius), radius):
             candidate = from_xy(x, y, radius)
