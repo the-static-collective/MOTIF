@@ -111,6 +111,67 @@ class CapabilityDiscoveryTests(unittest.TestCase):
         with self.assertRaises(HOLD):
             typed("FORBIDDEN","BITSET_PATH",("REACH","SUM"))
 
+    def test_forged_prior_source_header_cannot_unlock_new_capability(self):
+        predecessor=self.sources["programs"]["A_VERIFIED_BITSET_LIBRARY"]
+        for forgery in (
+            predecessor+"\n# unverified append\n",
+            predecessor.replace("paths[v]|=(paths[u]<<w)",
+                                "paths[v]|=(paths[u]>>w)"),
+            predecessor[:len(predecessor)//2],
+        ):
+            with self.assertRaises(HOLD):
+                typed("FORBIDDEN","BITSET_PATH",(),forgery)
+
+    def test_archived_real_ci_programs_recompile_and_finitely_reverify(self):
+        report=json.loads((HERE/"generated"/"capability_discovery_report.json")
+                          .read_text(encoding="utf-8"))
+        source=json.loads((HERE/"generated"/"executable_capability_sources.json")
+                          .read_text(encoding="utf-8"))
+        self.assertEqual(report["experiment"],"MOTIF-LEGIT-018")
+        self.assertFalse(report["independent_external_challenge_author"])
+        self.assertTrue(report["actual_working_source_composed_and_reused"])
+        self.assertEqual(set(source["programs"]),{
+            "A_EXACT","A_VERIFIED_BITSET_LIBRARY",
+            "B_WITH_ANCESTRY","B_NO_ANCESTRY"})
+        prev=source["programs"]["A_VERIFIED_BITSET_LIBRARY"]
+        for name,program in source["programs"].items():
+            manifest=source["manifests"][name]
+            manifest["prechecks"]=tuple(manifest["prechecks"])
+            actual_parent=(prev if manifest["ancestor_A_sha256"] is not None
+                           else None)
+            expected=emit(manifest,actual_parent)
+            self.assertEqual(program,expected)
+            tools=(self.ancestor if manifest["prechecks"] else None)
+            built=compile_spec(manifest,tools,actual_parent,provided=program)
+            self.assertTrue(exhaustive(manifest["family"],built)
+                            ["full_small_domain_verified"])
+        self.assertEqual(report["training_proposals"]["A"]
+                         ["selected_plan"]["kernel"],"BITSET_PATH")
+        self.assertEqual(report["training_proposals"]["B_WITH_ANCESTRY"]
+                         ["selected_plan"]["kernel"],"DFS_EXACT")
+
+    def test_exploratory_amortization_threshold_is_not_pre_registered(self):
+        archived=json.loads((HERE/"generated"/"capability_discovery_report.json")
+                            .read_text(encoding="utf-8"))
+        exploratory=archived["adaptation"]["exploratory_query_volume_impact"]
+        self.assertTrue(exploratory["study_planned_after_initial_heldout"])
+        self.assertTrue(exploratory["not_used_for_earlier_frozen_selection"])
+        self.assertTrue(exploratory["new_seed_not_independently_authored"])
+        self.assertEqual(set(exploratory["workloads"]),{"36","144","576"})
+        for key,row in exploratory["workloads"].items():
+            self.assertTrue(row["all_correct"])
+            self.assertEqual(row["total_query_checks_per_arm"],6*int(key))
+            self.assertEqual(set(row["timings"]),
+                             {"INHERITED_DP","NO_ANCESTOR_DFS",
+                              "STRONG_CLASSICAL"})
+        self.assertEqual(
+            exploratory["first_tested_profitable_query_count_per_graph"],576)
+        self.assertLess(
+            exploratory["workloads"]["576"]["timings"]["INHERITED_DP"]
+            ["median_wall_ms"],
+            exploratory["workloads"]["576"]["timings"]["NO_ANCESTOR_DFS"]
+            ["median_wall_ms"])
+
     def test_revised_node_exclusion_correct_for_full_finite_domain(self):
         old=self.sources["programs"]["A_VERIFIED_BITSET_LIBRARY"]
         spec=typed("FORBIDDEN","BITSET_PATH",("REACH","SUM"),old)
