@@ -1,0 +1,47 @@
+name: THOUGHT-012 Cross-Lens Inquiry
+on:
+  push:
+    paths:
+      - 'experiments/thought-012/**'
+      - 'experiments/thought-007/**'
+      - 'experiments/thought-008/**'
+      - 'experiments/thought-009/**'
+      - '.github/workflows/thought-012.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-012/**'
+      - 'experiments/thought-007/**'
+      - 'experiments/thought-008/**'
+      - 'experiments/thought-009/**'
+      - '.github/workflows/thought-012.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-cross-lens:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New cross-lens adversarial tests
+        run: cd experiments/thought-012 && python -m unittest -v test_cross_lens.py
+      - name: Regression on source reasoning layer
+        run: |
+          cd experiments/thought-007 && python -m unittest -v test_field.py
+          cd ../thought-008 && python -m unittest -v test_multiview.py
+          cd ../thought-009 && python -m unittest -v test_router.py
+      - name: Development controls and demonstration
+        run: |
+          cd experiments/thought-012
+          python benchmark.py > benchmark-results.json
+          python demo.py > demonstration-stdout.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-012-development-receipts
+          path: |
+            experiments/thought-012/benchmark-results.json
+            experiments/thought-012/demo-results.json
+            experiments/thought-012/cross-lens-inquiry.json
+            experiments/thought-012/cross-lens-inquiry.svg
