@@ -73,7 +73,7 @@ def files_at(repo_root, commit):
     return tuple(sorted(eligible))
 
 
-def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12):
+def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12, path_prefix=None):
     if not isinstance(text_query,str) or not 2<=len(text_query)<=120:
         raise HOLD("Query must be 2 to 120 characters")
     if type(max_hits) is not int or not 1<=max_hits<=MAX_HITS:
@@ -84,6 +84,12 @@ def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12):
     if real!=sha:
         raise HOLD("Commit mismatch")
     paths=files_at(repo_root,sha)
+    if path_prefix is not None:
+        if (type(path_prefix) is not str or ".." in path_prefix
+                or path_prefix.startswith("/") or "//" in path_prefix
+                or not (path_prefix.startswith("experiments/") or path_prefix.startswith("docs/"))):
+            raise HOLD("Invalid source path prefix")
+        paths=tuple(p for p in paths if p.startswith(path_prefix.rstrip("/") + "/"))
     # Always report truncation: a bounded scan never claims exhaustive search.
     truncated=len(paths)>MAX_PATHS
     scanned=0
@@ -124,6 +130,7 @@ def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12):
         "branch_ref":ref,
         "pinned_commit":sha,
         "query":text_query,
+        "path_prefix":path_prefix,
         "status":"PARTIAL" if truncated else "BOUNDED_COMPLETE",
         "source_paths_available":len(paths),
         "source_paths_scanned":scanned,
@@ -144,10 +151,11 @@ def main():
     p.add_argument("--repo-root",type=Path,
                    default=Path(__file__).resolve().parents[2])
     p.add_argument("--hits",type=int,default=12)
+    p.add_argument("--prefix",help="Constrain to a documented experiments/ or docs/ subtree")
     args=p.parse_args()
     try:
         result=inspect(json.loads(args.catalog.read_text()),args.ref,args.query,
-                       repo_root=args.repo_root,max_hits=args.hits)
+                       repo_root=args.repo_root,max_hits=args.hits,path_prefix=args.prefix)
         print(json.dumps(result,sort_keys=True,indent=2))
     except HOLD as exc:
         print(json.dumps({"status":"HOLD","reason":str(exc),
