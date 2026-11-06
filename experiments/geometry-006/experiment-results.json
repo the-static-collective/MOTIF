@@ -1,0 +1,153 @@
+{
+  "authority": "NONE",
+  "bo_edges_at_same_cut": [
+    [
+      "e1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "e2",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "pretty",
+      "PENCIL"
+    ],
+    [
+      "temptation",
+      "PENCIL"
+    ],
+    [
+      "to_i1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "withdrawn",
+      "WITHDRAWN"
+    ]
+  ],
+  "early_edges": [
+    [
+      "e1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "e2",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "pretty",
+      "PENCIL"
+    ],
+    [
+      "temptation",
+      "PENCIL"
+    ],
+    [
+      "to_i1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "withdrawn",
+      "DECLARED_ADMITTED"
+    ]
+  ],
+  "expired_path_held": {
+    "authority": "NONE",
+    "reason": "no time-respecting admitted path",
+    "status": "HOLD"
+  },
+  "hindsight_edges": [
+    [
+      "e1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "e2",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "late",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "pretty",
+      "PENCIL"
+    ],
+    [
+      "temptation",
+      "PENCIL"
+    ],
+    [
+      "to_i1",
+      "DECLARED_ADMITTED"
+    ],
+    [
+      "withdrawn",
+      "WITHDRAWN"
+    ]
+  ],
+  "historical_path": {
+    "arrival": 3,
+    "authority": "NONE",
+    "basis": "declared-admitted synthetic route history",
+    "hops": [
+      {
+        "arrive": 2,
+        "depart": 1,
+        "edge": "e1",
+        "from": "c",
+        "to": "i0"
+      },
+      {
+        "arrive": 3,
+        "depart": 2,
+        "edge": "e2",
+        "from": "i0",
+        "to": "o0"
+      }
+    ],
+    "status": "PATH"
+  },
+  "name": "MOTIF-GEOM-006 synthetic Staircase Lab",
+  "no_geometry_invariant": true,
+  "selected_question": {
+    "alternatives": [
+      {
+        "gain_per_cost": 0.01,
+        "information_gain_bits": 1.0,
+        "outcomes": {
+          "x": [
+            "world-A"
+          ],
+          "y": [
+            "world-B"
+          ]
+        },
+        "probe": "expensive"
+      }
+    ],
+    "authority": "NONE",
+    "identified_world": null,
+    "selected": {
+      "gain_per_cost": 0.5,
+      "information_gain_bits": 1.0,
+      "outcomes": {
+        "new": [
+          "world-B"
+        ],
+        "old": [
+          "world-A"
+        ]
+      },
+      "probe": "ledger"
+    },
+    "status": "PROPOSAL_ONLY",
+    "warning": "fixture permission is not real-world authorization"
+  },
+  "unadmitted_path_held": {
+    "authority": "NONE",
+    "reason": "no time-respecting admitted path",
+    "status": "HOLD"
+  }
+}

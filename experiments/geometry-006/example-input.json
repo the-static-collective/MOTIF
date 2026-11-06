@@ -1,0 +1,255 @@
+{
+  "places": [
+    {
+      "id": "c",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i0",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i1",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i2",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i3",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i4",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "i5",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o0",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o1",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o2",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o3",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o4",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    },
+    {
+      "id": "o5",
+      "occurred_at": 0,
+      "visible_to": {
+        "ada": 0,
+        "bo": 0
+      }
+    }
+  ],
+  "query": {
+    "knowledge_cut": 10,
+    "observer": "ada",
+    "source": "c",
+    "start_at": 0,
+    "target": "o0",
+    "world_cut": 4
+  },
+  "relations": [
+    {
+      "admitted_at": 2,
+      "discovered_at": 1,
+      "duration": 1,
+      "effective_from": 1,
+      "effective_until": null,
+      "id": "e1",
+      "kind": "route",
+      "source": "c",
+      "source_root": "synthetic:e1",
+      "target": "i0",
+      "visible_to": {
+        "ada": 1,
+        "bo": 1
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": 3,
+      "discovered_at": 2,
+      "duration": 1,
+      "effective_from": 2,
+      "effective_until": null,
+      "id": "e2",
+      "kind": "route",
+      "source": "i0",
+      "source_root": "synthetic:e2",
+      "target": "o0",
+      "visible_to": {
+        "ada": 2,
+        "bo": 2
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": null,
+      "discovered_at": 1,
+      "duration": 1,
+      "effective_from": 1,
+      "effective_until": null,
+      "id": "pretty",
+      "kind": "resembles",
+      "source": "c",
+      "source_root": "synthetic:pretty",
+      "target": "o0",
+      "visible_to": {
+        "ada": 1,
+        "bo": 1
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": 9,
+      "discovered_at": 8,
+      "duration": 1,
+      "effective_from": 1,
+      "effective_until": null,
+      "id": "late",
+      "kind": "causes",
+      "source": "c",
+      "source_root": "synthetic:late",
+      "target": "i2",
+      "visible_to": {
+        "ada": 8,
+        "bo": 12
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": 3,
+      "discovered_at": 2,
+      "duration": 1,
+      "effective_from": 2,
+      "effective_until": null,
+      "id": "withdrawn",
+      "kind": "route",
+      "source": "i4",
+      "source_root": "synthetic:withdrawn",
+      "target": "o4",
+      "visible_to": {
+        "ada": 2,
+        "bo": 2
+      },
+      "withdrawn_at": 8
+    },
+    {
+      "admitted_at": 2,
+      "discovered_at": 1,
+      "duration": 2,
+      "effective_from": 1,
+      "effective_until": 3,
+      "id": "expired",
+      "kind": "route",
+      "source": "i1",
+      "source_root": "synthetic:expired",
+      "target": "o1",
+      "visible_to": {
+        "ada": 1,
+        "bo": 1
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": 3,
+      "discovered_at": 2,
+      "duration": 2,
+      "effective_from": 2,
+      "effective_until": null,
+      "id": "to_i1",
+      "kind": "route",
+      "source": "c",
+      "source_root": "synthetic:to_i1",
+      "target": "i1",
+      "visible_to": {
+        "ada": 2,
+        "bo": 2
+      },
+      "withdrawn_at": null
+    },
+    {
+      "admitted_at": null,
+      "discovered_at": 1,
+      "duration": 1,
+      "effective_from": 1,
+      "effective_until": null,
+      "id": "temptation",
+      "kind": "route",
+      "source": "i3",
+      "source_root": "synthetic:temptation",
+      "target": "o3",
+      "visible_to": {
+        "ada": 1,
+        "bo": 1
+      },
+      "withdrawn_at": null
+    }
+  ],
+  "task": "route"
+}
