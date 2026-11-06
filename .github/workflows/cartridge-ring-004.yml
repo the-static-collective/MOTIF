@@ -49,10 +49,29 @@ jobs:
               assert not r['real_world_authority']
           print('Two unseen-to-native authored synthetic worlds evaluated against strong classical control.')
           PY
+      - name: Feed measured synthetic outcomes back into hypergraph evidence layer
+        run: |
+          python experiments/cartridge-ring-004/feedback.py \
+            --trials /tmp/motif-shared32.json /tmp/motif-shared32-different.json \
+            --out /tmp/motif-shared-feedback.json
+          python - <<'PY'
+          import json
+          f=json.load(open('/tmp/motif-shared-feedback.json'))
+          assert f['tested_case_count']==64
+          assert f['independent_seed_packets']==2
+          assert f['verified_real_world_affordance_edges_added']==0
+          assert f['installed_executable_adapters_added']==0
+          assert f['strong_classical_baseline_matches_or_exceeds_full_native']
+          assert f['simple_language_plus_geometry_classical_substitute_matches_or_exceeds']
+          assert f['authority']=='NONE'
+          assert f['paired_differences_vs_full_native']['all_three_without_tiny_model']['paired_correct_count_difference']>0
+          print('Measured synthetic evidence joins hypergraph; native combo does not surpass strong classical control.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring004-shared-world-ablations
           path: |
             /tmp/motif-shared32.json
             /tmp/motif-shared32-different.json
+            /tmp/motif-shared-feedback.json
           retention-days: 30
