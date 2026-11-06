@@ -117,6 +117,11 @@ def score(query,paragraphs,method):
  scores=[]
  for i,(p,doc) in enumerate(zip(paragraphs,documents)):
   if not doc:continue
+  # A source candidate must share more than one substantive concept with a
+  # multi-term question; a stray word such as "property" cannot be cited
+  # as evidence that a courthouse is literally made of cheese.
+  lexical_overlap=len(set(qt)&set(doc))
+  if len(qt)>=3 and lexical_overlap<2:continue
   score_value=0.0
   for term in qt:
    tf=doc.get(term,0)
