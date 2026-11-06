@@ -1,0 +1,86 @@
+name: REASON-008 Missing Primitive / Typed Gap Repair
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-008-missing-primitive
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-008/**'
+      - '.github/workflows/reason-cartridge-008.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  missing-primitive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source-owned REASON 001 through 007 regressions
+        run: |
+          for n in 001 002 003 004 005 006 007; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Missing-grammar detection, independent source certification and adversarial tests
+        run: python -m unittest discover -s experiments/reason-cartridge-008 -p 'test_*.py' -v
+      - name: Independently reproduce grammar gap, source correctness, payoff and Commons handoff
+        run: |
+          python experiments/reason-cartridge-008/trial.py reason-008-evidence > reason-008-evidence-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-008-evidence/benchmark.json').read_text())
+          p=json.loads(Path('reason-008-evidence/method-cartridge.json').read_text())
+          m=json.loads(Path('reason-008-evidence/market-receipt.json').read_text())
+          assert r['five_bit_old_grammar_candidates']==45
+          assert r['legacy_programs_refuted_by_teaching']==45
+          assert r['source_witnessed_legacy_unsat'] is True
+          assert r['teaching_cases']==5
+          assert r['strongest_old_program_training_accuracy']==4
+          assert r['expanded_grammar_candidates']==100
+          assert r['surviving_new_macro_programs']==1
+          assert r['macro_program']=={'triple':[0,1,2],'pair':[3,4]}
+          assert r['independent_source_certification']['cases']==27
+          assert r['independent_source_certification']['errors']==0
+          assert r['whole_five_bit_domain_matches_classical_bfs']==32
+          assert r['one_task_winner']=='DIRECT_CLASSICAL_BFS'
+          assert r['thirty_two_task_winner']=='GAP_REPAIR_MACRO'
+          assert r['sixty_four_task_winner']=='GAP_REPAIR_MACRO'
+          assert r['thirty_two_task_correct']==32
+          assert r['thirty_two_task_direct_classical_cost']==48
+          assert r['thirty_two_task_compiled_cost']==27
+          assert r['thirty_two_task_modeled_savings']==21
+          assert r['duplicate_offers_no_credit']==0
+          assert r['new_validated_commonwealth_method_credit']==1
+          assert r['new_real_world_facts']==0
+          assert not r['fundamental_boolean_primitive_invented']
+          assert not r['outside_this_five_edge_structure_tested']
+          assert not r['graft_or_cannon_invoked']
+          assert not r['real_world_authority']
+          assert not r['external_actions']
+          assert not p['external_execution']
+          assert not m['real_world_authority']
+          print({'old_language_refutations':45,
+                 'new_programs':100,
+                 'unique_new_programs':1,
+                 'independent_holdouts':27,
+                 'source_exact_domain':32,
+                 'new_method_cost':27,
+                 'direct_lookup_cost':48,
+                 'hypothetical_savings':21})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-008-gap-and-capability-evidence
+          path: |
+            reason-008-evidence/
+            reason-008-evidence-stdout.json
+          retention-days: 30
