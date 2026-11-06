@@ -197,6 +197,47 @@ def read(id):
     }
 
 
+
+STOPWORDS={"the","a","an","does","did","is","was","are","what","which","who",
+           "why","how","and","or","to","of","in","on","for","under","this",
+           "that","it","from","court","judgment","legal","case","opinion",
+           "law","can","be","about","with","have","has","we"}
+
+def investigate(case_id,question):
+    """Return relevant source spans, NEVER a synthetic judicial yes/no.
+
+    This is a very weak classical term-overlap source-retrieval control.
+    Unsupported or low-relevance questions HOLD rather than being answered.
+    """
+    if not isinstance(question,str) or not 8<=len(question)<=300:
+        raise HOLD("Unbounded or missing research question")
+    report=read(case_id)
+    terms=set(re.findall(r"[a-z0-9]+",question.lower()))-STOPWORDS
+    if not terms:raise HOLD("No substantive question")
+    matches=[]
+    for node in report["evidence_nodes"]:
+        words=set(re.findall(r"[a-z0-9]+",node["paragraph_text"].lower()))-STOPWORDS
+        overlap=sorted(terms&words)
+        if len(overlap)>=2:
+            matches.append({"paragraph":node["paragraph"],
+                            "voice":node["judge"],
+                            "role":node["voice_role"],
+                            "source_url":node["source_url"],
+                            "source_sha256":node["source_sha256"],
+                            "overlapping_terms":overlap,
+                            "exact_excerpt":node["paragraph_text"]})
+    dedup={m["paragraph"]:m for m in matches}
+    result=sorted(dedup.values(),key=lambda x:(-len(x["overlapping_terms"]),x["paragraph"]))
+    if not result:
+        return {"stage":"HOLD_NO_RELEVANT_ANCHORED_EVIDENCE",
+                "question":question,"sources":[],
+                "legal_advice":False,"real_world_authority":False}
+    return {"stage":"SOURCE_SPANS_NEED_INTERPRETATION",
+            "question":question,"sources":result[:5],
+            "not_a_judicial_yes_no_answer":True,
+            "legal_advice":False,"real_world_authority":False}
+
+
 def export(id):
     body=read(id)
     raw=json.dumps(dict(body,checksum_sha256=digest(body)),
