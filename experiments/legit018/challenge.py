@@ -107,7 +107,7 @@ def classical_index(t):
     outgoing=[[] for _ in range(t.n)]
     for u,v,w in t.edges:outgoing[u].append((v,w))
     tables={}
-    for banned in range(-1,t.n):
+    for banned in ((-1,) if t.family=="EXACT" else range(-1,t.n)):
         for source in range(t.n):
             possibilities=[0]*t.n
             if source!=banned:
