@@ -1,0 +1,22 @@
+{
+  "schema": "motif.thought-door.request.v1",
+  "request_id": "example:jarvis-local-001",
+  "caller": "jarvis-local",
+  "mode": "ideas",
+  "purpose": "Explore a fictional community-meal idea without certifying relationships",
+  "question": "How might these ideas connect?",
+  "privacy": "PRIVATE_LOCAL",
+  "ideas": ["Food shelf", "Cold storage", "Community meal", "Volunteers", "Home", "Home"],
+  "relationships": [
+    {"from": 0, "to": 1, "predicate": "associated", "origin": "example:author", "status": "AUTHORED"},
+    {"from": 0, "to": 3, "predicate": "associated", "origin": "example:author", "status": "AUTHORED"},
+    {"from": 2, "to": 1, "predicate": "associated", "origin": "example:second-author", "status": "AUTHORED"},
+    {"from": 2, "to": 3, "predicate": "associated", "origin": "example:second-author", "status": "AUTHORED"},
+    {"from": 4, "to": 5, "predicate": "associated", "origin": "example:analogy", "status": "HYPOTHESIS_ONLY"}
+  ],
+  "goals": ["association", "dependency", "tension"],
+  "max_views": 1,
+  "include_views": false,
+  "export": "FREE_GRAPH_V0",
+  "allow_export": false
+}
