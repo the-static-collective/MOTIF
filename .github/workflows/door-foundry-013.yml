@@ -1,0 +1,344 @@
+name: 'MOTIF-013 — Detect Missing World and Generate a Held New Environmental Model'
+on:
+  push:
+    branches:
+      - experiment/door-foundry-013-missing-world
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-013/**'
+      - '.github/workflows/door-foundry-013.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  belief-and-decision-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Original pinned source-owning GRAFT-030 visual grammar
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Independent source-pinned CANNON-095 visual code reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Source-owner exact original MOTIF-006 PNG reader
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - name: Exact original MOTIF-011 graph writer pinned for CANNON
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: c41ff828e167a406fab25ef2b0a272be5e736ad2
+          path: motif011-source
+          persist-credentials: false
+      - name: Original independent CANNON-096 source-dependency reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 74271370acf57e3e9b0dcab27336abcfd4c68e55
+          path: cannon096-source
+          persist-credentials: false
+      - name: Immutable original MOTIF-012 owner bytes for independent review
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: cd4884af4cb456aeab07f8f5738d1df0f6d3c852
+          path: motif012-source
+          persist-credentials: false
+      - name: Independently owned CANNON-097 latent-source reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 788739025352b89d57928bf145953befe3db6a37
+          path: cannon097-source
+          persist-credentials: false
+      - name: Exact independent GRAFT-031 source-owning novel model grammar
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 8a4e85e2de9bdfdf74cd5bebd95fbab7cf11ab36
+          path: graft031-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: MOTIF-007 constrains the words and creates authentic reference PNGs
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall." \
+            --out text-scenes
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate is beside a blue wall. Move it to the other side." \
+            --out ambiguous-scenes
+      - name: Original GRAFT executable visual grammar regression tests
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: CANNON independently rechecks GRAFT against original real PNG bytes
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start text-scenes/H01/start.png --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --out evidence/independent-cannon-visual-review.json
+      - name: Original MOTIF-006 reassembles pinned GRAFT-generated image transition code
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start text-scenes/H01/start.png \
+            --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --receipt evidence/independent-cannon-visual-review.json \
+            --graft graft-source --out generated-visual-motif
+          python generated-visual-motif/run.py --out imagined-futures \
+            > evidence/original-image-imagination.json
+      - name: Original MOTIF-009 derives four ambiguous image worlds and unsent questions
+        run: |
+          python experiments/door-foundry-009/visual_question.py \
+            --ambiguous ambiguous-scenes --base text-scenes \
+            --imagined imagined-futures --build generated-visual-motif \
+            --out evidence/original-active-question \
+            > evidence/original-question-summary.json
+      - name: MOTIF-010 revises beliefs as synthetic evidence arrives in append-only sequence
+        run: |
+          python experiments/door-foundry-010/world_model.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/belief-revision \
+            > evidence/belief-benchmark-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('evidence/belief-revision/benchmark.json').read_text())
+          assert len(x['four_synthetic_cases'])==4
+          assert abs(x['frozen_mean_brier']-.25)<1e-12
+          assert abs(x['updated_mean_brier']-.0324)<1e-12
+          assert x['frozen_mean_decision_regret']==2.5
+          assert x['updated_mean_decision_regret']==0
+          assert x['fair_classical_Bayes_matches_exactly'] is True
+          assert x['reality_was_not_observed'] is True
+          print(json.dumps({'source_owned_png_worlds':4,
+             'frozen_prior_heldout_brier':x['frozen_mean_brier'],
+             'updated_heldout_brier':x['updated_mean_brier'],
+             'frozen_simulated_decision_regret':x['frozen_mean_decision_regret'],
+             'updated_simulated_decision_regret':x['updated_mean_decision_regret'],
+             'classical_Bayesian_baseline_ties':True,
+             'external_actions':0},indent=2))
+          PY
+      - name: Adversarial evidence, contradictory sensory reports and independent Bayes checks
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+        run: python -m unittest discover -s experiments/door-foundry-010 -p 'test_world_model.py' -v
+      - name: MOTIF-011 verifies provenance report dependency graph and correctly counts independent roots
+        run: |
+          python experiments/door-foundry-011/source_graph.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/source-dependence \
+            > evidence/source-dependence-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("evidence/source-dependence/benchmark.json").read_text())
+          assert len(p["cases"])==4
+          assert p["grouped_beats_naive_in_all_designed_cases"] is True
+          assert p["mean_grouped_brier"] < .03
+          assert p["mean_naive_brier"] > .9
+          assert p["mean_grouped_decision_regret"] < p["mean_naive_decision_regret"]
+          assert p["matched_classical_root_collapse_baseline_exactly_equal"] is True
+          assert p["not_a_claim_of_independent_witness_authentication"] is True
+          print(json.dumps({"synthetic_worlds":4,
+            "grouped_brier":p["mean_grouped_brier"],
+            "naive_copied_report_brier":p["mean_naive_brier"],
+            "grouped_decision_regret":p["mean_grouped_decision_regret"],
+            "naive_decision_regret":p["mean_naive_decision_regret"],
+            "classical_root_collapse_equal":True,
+            "real_people_contacted":0},indent=2))
+          PY
+      - name: Detect forged report independence, crossed sources, altered evidence and prior drift
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+        run: python -m unittest discover -s experiments/door-foundry-011 -p 'test_source_graph.py' -v
+      - name: Independent CANNON-096 checks actual MIT source, PNG bytes, roots, copies and exact Bayesian math
+        run: |
+          node cannon096-source/experiments/cannon-096/review.mjs \
+            --motif motif011-source \
+            --question evidence/original-active-question \
+            --ledger evidence/source-dependence \
+            --out evidence/cannon-096-independent-evidence-review.json
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('evidence/cannon-096-independent-evidence-review.json','utf8'));
+          if(p.status!=='HOLD_DEPENDENCY_STRUCTURE_VERIFIED_SOURCE_INDEPENDENCE_UNATTESTED' ||
+             p.report_groups_verified!==4 ||
+             p.copied_reports_checked!==24 ||
+             p.original_motif_source.commit!=='c41ff828e167a406fab25ef2b0a272be5e736ad2' ||
+             p.independent_witness_identity_confirmed!==false ||
+             p.externally_signed!==false ||
+             p.human_contacts!==0 ||
+             p.automatic_admission!==false)
+            throw Error('Independent provenance review failed or claimed false authority');
+          console.log(JSON.stringify({independent_CANNON_status:p.status,
+             original_source_sha:p.original_motif_source.commit,
+             report_families_verified:p.report_groups_verified,
+             ignored_derivative_likelihood_factors:p.copied_reports_checked,
+             human_source_authentications:0},null,2));
+          JS
+      - name: MOTIF-012 maintains one two and five potential hidden upstream source partitions
+        run: |
+          python experiments/door-foundry-012/hidden_source.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/hidden-sources > evidence/hidden-source-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('evidence/hidden-sources')
+          m=json.loads((p/'benchmark.json').read_text())
+          assert len(m['cases'])==5
+          assert m['independent_and_hidden_shared_controls_both_present'] is True
+          assert m['matched_classical_latent_model_and_question_tree_equal'] is True
+          shared=json.loads((p/'HIDDEN_SHARED/inference.json').read_text())
+          independent=json.loads((p/'INDEPENDENT_CONVERGENCE/inference.json').read_text())
+          uncertain=json.loads((p/'SIMILAR_WORDING_ONLY/inference.json').read_text())
+          from fractions import Fraction
+          assert Fraction(shared['source_origin_posterior']['ONE_ORIGIN']) > Fraction(19,20)
+          assert Fraction(independent['source_origin_posterior']['INDEPENDENT_FIVE']) > Fraction(19,20)
+          assert uncertain['no_decision_without_asking']['action']=='HOLD_NO_ORIGIN_CLAIM'
+          assert uncertain['question_policy_up_to_two']['kind']=='ASK'
+          for row in [shared,independent,uncertain]:
+             assert row['authority']['actual_question_sent'] is False
+             assert row['authority']['external_source_verified'] is False
+             assert row['authority']['actions_executed']==0
+          print(json.dumps({
+            'competing_hidden_origin_models':3,
+            'synthetic_fixture_families':5,
+            'hidden_single_origin_support':float(Fraction(shared['source_origin_posterior']['ONE_ORIGIN'])),
+            'independent_agreement_support':float(Fraction(independent['source_origin_posterior']['INDEPENDENT_FIVE'])),
+            'unresolved_text_resists_false_origin_claim':True,
+            'ambiguous_case_asks_before_deciding':True,
+            'human_contacts':0},indent=2))
+          PY
+      - name: MOTIF-012 adversarial false-copy, false-independence and classical control tests
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+        run: python -m unittest discover -s experiments/door-foundry-012 -p 'test_hidden_source.py' -v
+      - name: CANNON-097 independently replays original MOTIF-012 source and all five posterior+question controls
+        run: |
+          node cannon097-source/experiments/cannon-097/review.mjs \
+            --motif motif012-source \
+            --question evidence/original-active-question \
+            --hidden evidence/hidden-sources \
+            --out evidence/cannon-097-hidden-origin-review.json
+          node --input-type=module - <<'JS'
+          import {readFileSync} from 'node:fs';
+          const p=JSON.parse(readFileSync('evidence/cannon-097-hidden-origin-review.json','utf8'));
+          if(p.status!=='HOLD_LATENT_ORIGIN_MATH_REPLAYED_WITNESSES_UNAUTHENTICATED' ||
+             p.original_source_owner.commit!=='cd4884af4cb456aeab07f8f5738d1df0f6d3c852' ||
+             p.five_finite_synthetic_cases.length!==5 ||
+             p.separate_exact_rational_source_model!==true ||
+             p.separate_cost_sensitive_question_tree!==true ||
+             p.actual_human_evidence_authenticated!==false ||
+             p.external_source_independence_demonstrated!==false ||
+             p.people_contacted!==0 || p.code_admitted!==false)
+              throw Error('Independent held common-source review disagrees or claims false provenance');
+          console.log(JSON.stringify({
+            independent_cannon_review:p.status,
+            hypothesis_families_checked:p.five_finite_synthetic_cases.length,
+            original_source_commit:p.original_source_owner.commit,
+            proven_real_source_identities:0,actual_external_actions:0},null,2));
+          JS
+      - name: Original GRAFT-031 source-owned new model generator tests
+        run: node --test graft031-source/test/world-model-031.test.mjs
+      - name: MOTIF-013 detects synthetic PNG evidence that all four original models exclude
+        run: |
+          python experiments/door-foundry-013/missing_world.py \
+            --question-dir evidence/original-active-question \
+            --out evidence/missing-world > evidence/missing-world-summary.json
+      - name: Original GRAFT-031 synthesizes a new source-owned environment model from missing-world evidence
+        run: |
+          node --input-type=module - <<'JS'
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {makeTicket,fixtureSets,cultivate} from './graft031-source/src/world-model-031.mjs';
+          const dir='evidence/missing-world/';
+          const q=JSON.parse(readFileSync(dir+'missing-question.json','utf8'));
+          if(q.status!=='HOLD_ALL_ORIGINAL_FOUR_WORLDS_OUT_OF_SUPPORT' ||
+             q.synthetic_observation!==true ||
+             q.real_world_input_received!==false)
+            throw Error('No held out-of-family observation packet');
+          const ticket=makeTicket(q.before_rows,q.outside_rows);
+          const selection=await cultivate(ticket,fixtureSets());
+          if(selection.status!=='HELD_NEW_EXTERNAL_EVENT_MODEL'||
+             selection.chosen.mode!=='open_observed_pair' ||
+             selection.auto_install!==false)
+             throw Error('Did not generate a unique safe environmental state model');
+          writeFileSync(dir+'graft-ticket.json',JSON.stringify(ticket,null,2)+'\n');
+          writeFileSync(dir+'graft-receipt.json',JSON.stringify(selection,null,2)+'\n');
+          writeFileSync(dir+'generated-environment.mjs',selection.chosen.source);
+          console.log(JSON.stringify({new_model_program_sha256:selection.chosen.source_sha256,
+             candidate_families_tried:3,physical_actions:0,
+             automatic_install:false},null,2));
+          JS
+      - name: MOTIF-013 independently reruns new GRAFT source and establishes bounded new future
+        run: |
+          python experiments/door-foundry-013/missing_world.py \
+            --question-dir evidence/original-active-question \
+            --base-scenes text-scenes --imagined imagined-futures \
+            --build generated-visual-motif --graft graft031-source \
+            --probe evidence/missing-world --out evidence/held-world-answer \
+            > evidence/missing-world-answer-summary.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          base=Path('evidence/held-world-answer')
+          r=json.loads((base/'held-new-model-answer.json').read_text())
+          assert r['status']=='HOLD_NEW_MODEL_EXPLAINS_SYNTHETIC_OOD_EVENT_NOT_ADMITTED'
+          assert r['old_world_model_contains_new_image'] is False
+          assert r['old_blue_mass_cannot_decrease'] is True
+          assert r['result_before_model_update']['proof_complete'] is True
+          assert r['result_before_model_update']['reachable'] is False
+          assert r['result_after_simulated_environment_event']['proof_complete'] is True
+          assert r['result_after_simulated_environment_event']['reachable'] is True
+          assert r['source_authority']['physical_events_triggered']==0
+          assert r['model_auto_admitted'] is False
+          print(json.dumps({
+             'old_world_closed_no_route':True,
+             'new_executable_environment_model_held':True,
+             'path_exists_after_simulated_event':True,
+             'new_program_sha256':r['new_source_generated_sha256'],
+             'no_real_gate_action':True},indent=2))
+          PY
+      - name: MOTIF-013 source provenance and actual image counterexample tests
+        env:
+          MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
+          TEXT_SCENES: ${{ github.workspace }}/text-scenes
+          IMAGINED_FRAMES: ${{ github.workspace }}/imagined-futures
+          VISUAL_BUILD: ${{ github.workspace }}/generated-visual-motif
+          GRAFT031_SOURCE: ${{ github.workspace }}/graft031-source
+          MOTIF013_PROBE_DIR: ${{ github.workspace }}/evidence/missing-world
+          MOTIF013_ANSWER_DIR: ${{ github.workspace }}/evidence/held-world-answer
+        run: python -m unittest discover -s experiments/door-foundry-013 -p 'test_missing_world.py' -v
+      - name: Save full future PNGs, source reviews, append-only updates and prediction results
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-013-MISSING-WORLD-SOURCE-GENERATED-HELD
+          path: |
+            ambiguous-scenes/
+            text-scenes/
+            generated-visual-motif/
+            imagined-futures/
+            evidence/
+          retention-days: 30
+          if-no-files-found: error
