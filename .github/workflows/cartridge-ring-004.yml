@@ -1,0 +1,58 @@
+name: MOTIF Ring 004 / same-world native method falsifier
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-004-shared-evidence-trial
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-004/**'
+      - '.github/workflows/cartridge-ring-004.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shared-world:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source-owned shared evidence contracts and anti-leakage tests
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-004 -p 'test_*.py' -v
+      - name: Frozen hidden-label source packet and cross-native evaluation
+        run: |
+          docker pull python:3.11-slim
+          python experiments/cartridge-ring-004/comparator.py --count 32 --seed 2026110615 --out /tmp/motif-shared32.json
+          python experiments/cartridge-ring-004/comparator.py --count 32 --seed 2026110616 --out /tmp/motif-shared32-different.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/motif-shared32.json'))
+          b=json.load(open('/tmp/motif-shared32-different.json'))
+          assert a['schema']=='motif.shared-evidence-benchmark.v1'
+          assert a['source_packet_sha256'] != b['source_packet_sha256']
+          assert a['count']==32 and b['count']==32
+          for r in (a,b):
+              assert r['actual_independent_native_task_outputs_compared']
+              assert r['all_methods_process_identical_synthetic_case_ids']
+              assert r['training_labels_not_passed_to_native_container']
+              assert r['method_results']['strong_classical_dedup_and_bfs']['correct']==32
+              assert not r['external_action_executed']
+              assert not r['real_world_authority']
+          print('Two unseen-to-native authored synthetic worlds evaluated against strong classical control.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring004-shared-world-ablations
+          path: |
+            /tmp/motif-shared32.json
+            /tmp/motif-shared32-different.json
+          retention-days: 30
