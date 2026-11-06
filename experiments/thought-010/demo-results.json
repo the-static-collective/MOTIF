@@ -1,0 +1,27 @@
+{
+  "experiment": "THOUGHT-010",
+  "explicit_public_fixture_export": "PROPOSAL_ONLY",
+  "external_authority": "NONE",
+  "free_graph_cut": "unresolved",
+  "free_graph_links": 5,
+  "free_graph_nodes": 6,
+  "free_graph_schema": "free-graph.packet/v0",
+  "live_free_graph_owner_admission": false,
+  "live_jarvis_runtime_wired": false,
+  "local_private_export_blocked": true,
+  "pen_commitments_changed": false,
+  "questions_from_authored_relations": 2,
+  "selected_views_for_ideas": [
+    "association"
+  ],
+  "snapshot_crossing_source_digest_matches": true,
+  "snapshot_selected_views": [
+    "dependency",
+    "association"
+  ],
+  "source_labels_authenticated": false,
+  "source_only_vs_geometric_answers_identical": true,
+  "source_only_vs_geometric_questions_identical": true,
+  "status": "PROPOSAL_ONLY",
+  "synthetic_jarvis_local_request": "PASS"
+}
