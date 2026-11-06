@@ -18,7 +18,7 @@ import json
 from acquire import SOURCES,get_sources
 from corpus import read,query_input
 from router import discover,infer,boolean_projection_witness,question_family
-from engines import ENGINES,solve
+from engines import ENGINES,solve,count_before_source_repair
 from obligations import CASES,all_proofs,contradiction
 from mirror_bridge import run_all,pin as pin019
 
@@ -38,8 +38,18 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
     training={kind:read(root/entry["train"][0],kind,"train",limit=train_limit)
               for kind,entry in SOURCES.items()}
     model=discover(training)
-    test={kind:read(root/entry["test"][0],kind,"test",limit=test_limit)
+    # The first 250 queries per task were inspected during initial
+    # debugging (24 counting errors). They are now DEVELOPMENT, not blind.
+    dev={kind:read(root/entry["test"][0],kind,"test",limit=250,skip=0)
+         for kind,entry in SOURCES.items()}
+    # The following 250 questions per task are a separate, previously
+    # uninspected set reserved for the prospective post-repair evaluation.
+    test={kind:read(root/entry["test"][0],kind,"test",limit=test_limit,skip=250)
           for kind,entry in SOURCES.items()}
+    original_count=sum(count_before_source_repair(query_input(q))["answer"]==q.answer
+                       for q in dev["COUNT"])
+    repaired_dev_count=sum(solve("QUANTITY",query_input(q))["answer"]==q.answer
+                           for q in dev["COUNT"])
     witness=boolean_projection_witness(training)
     families={}
     bad_examples=[]
@@ -97,6 +107,11 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
         "original_external_source":source_audit,
         "training_questions":sum(map(len,training.values())),
         "test_questions":sum(map(len,test.values())),
+        "inspected_development_questions":sum(map(len,dev.values())),
+        "first_run_counting_development_exact_before_repair":original_count,
+        "same_inspected_counting_development_exact_after_repair":repaired_dev_count,
+        "source_repair_from_inspected_test_is_not_blind":True,
+        "prospective_external_test_starts_after_first_250_per_family":True,
         "external_test":families,
         "external_source_failed_or_abstained_examples":bad_examples,
         "three_typed_representations_are_developer_written":True,
@@ -149,8 +164,13 @@ if __name__=="__main__":
     print(json.dumps({
         "independent_external_training_questions":r["training_questions"],
         "independent_external_test_questions":r["test_questions"],
+        "inspected_development_questions":r["inspected_development_questions"],
+        "count_initial_dev_exact":r["first_run_counting_development_exact_before_repair"],
+        "count_repaired_dev_exact":r["same_inspected_counting_development_exact_after_repair"],
         "routed_representations":{
             k:v["model_type_from_source_training"] for k,v in r["external_test"].items()},
+        "external_development_count_before_repair":r["first_run_counting_development_exact_before_repair"],
+        "external_development_count_after_repair":r["same_inspected_counting_development_exact_after_repair"],
         "independent_external_results":{
             k:{"exact":v["exact_source_answers"],
                "wrong":v["incorrect_confident_answers"],
