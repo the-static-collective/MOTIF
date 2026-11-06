@@ -1,0 +1,44 @@
+name: MOTIF Thought 013 - adaptive inquiry and human talk
+on:
+  pull_request:
+    paths:
+      - 'experiments/thought-013/**'
+      - 'experiments/thought-012/**'
+      - 'experiments/thought-008/**'
+      - 'experiments/thought-007/**'
+      - '.github/workflows/thought-013.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  thought-013:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Core, legacy and adversarial tests
+        run: |
+          (cd experiments/thought-013 && python -m unittest -v test_inquiry.py)
+          (cd experiments/thought-012 && python -m unittest -q test_cross_lens.py)
+      - name: Deterministic benchmark and dialogue demonstration
+        run: |
+          (cd experiments/thought-013 && python benchmark.py > benchmark-results.json)
+          (cd experiments/thought-013 && python demo.py > demo-results.json)
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('experiments/thought-013')
+          x=json.loads((base/'benchmark-results.json').read_text())
+          assert x['trials']==16 and x['no_geometry_parity_all'] and x['strict_source_unchanged']
+          y=json.loads((base/'demo-results.json').read_text())
+          assert y['source_unchanged'] and y['dialogue']['authority']=='NONE'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thought-013-evidence
+          path: |
+            experiments/thought-013/benchmark-results.json
+            experiments/thought-013/demo-results.json
