@@ -78,6 +78,11 @@ def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12, path_pref
         raise HOLD("Query must be 2 to 120 characters")
     if type(max_hits) is not int or not 1<=max_hits<=MAX_HITS:
         raise HOLD("Invalid result bound")
+    if path_prefix is not None:
+        if (type(path_prefix) is not str or ".." in path_prefix
+                or path_prefix.startswith("/") or "//" in path_prefix
+                or not (path_prefix.startswith("experiments/") or path_prefix.startswith("docs/"))):
+            raise HOLD("Invalid source path prefix")
     passport=choose_passport(catalog,ref)
     sha=passport["commit"]
     real=_git(repo_root,["rev-parse",sha+"^{commit}"],max_bytes=1000).decode().strip()
@@ -85,10 +90,6 @@ def inspect(catalog, ref, text_query, *, repo_root: Path, max_hits=12, path_pref
         raise HOLD("Commit mismatch")
     paths=files_at(repo_root,sha)
     if path_prefix is not None:
-        if (type(path_prefix) is not str or ".." in path_prefix
-                or path_prefix.startswith("/") or "//" in path_prefix
-                or not (path_prefix.startswith("experiments/") or path_prefix.startswith("docs/"))):
-            raise HOLD("Invalid source path prefix")
         paths=tuple(p for p in paths if p.startswith(path_prefix.rstrip("/") + "/"))
     # Always report truncation: a bounded scan never claims exhaustive search.
     truncated=len(paths)>MAX_PATHS
