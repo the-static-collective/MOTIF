@@ -10,7 +10,7 @@ from __future__ import annotations
 from hashlib import sha256
 import json
 
-GUARDS=("P_ZERO","P_FULL","C_ZERO","C_FULL","P_EQUALS_C")
+GUARDS=("ALWAYS","P_ZERO","P_FULL","C_ZERO","C_FULL","P_EQUALS_C")
 ANSWERS=("ZERO","PARENT","COLUMN","FULL")
 WIDTHS=(8,152,256)
 
@@ -23,6 +23,7 @@ def _check():
 
 def guard_eval(kind,p,c,full):
     return {
+        "ALWAYS":True,
         "P_ZERO":p==0,
         "P_FULL":p==full,
         "C_ZERO":c==0,
@@ -35,6 +36,7 @@ def answer_eval(kind,p,c,full):
 
 def z3_guard(kind,p,c,full,z3):
     return {
+        "ALWAYS":z3.BoolVal(True),
         "P_ZERO":p==z3.BitVecVal(0,p.size()),
         "P_FULL":p==full,
         "C_ZERO":c==z3.BitVecVal(0,p.size()),
