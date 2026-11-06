@@ -15,8 +15,10 @@ from dataclasses import dataclass
 from hashlib import sha256
 from itertools import combinations
 import json
-from math import isfinite
 import re
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'cartridge-ring-001'))
 
 import triad
 
