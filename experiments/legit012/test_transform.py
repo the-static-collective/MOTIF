@@ -238,6 +238,23 @@ class CertifiedTransformerTests(unittest.TestCase):
         self.assertEqual(result["graphs_by_family"]["MEDIUM"]["graphs"],32)
         self.assertEqual(result["graphs_by_family"]["DENSE"]["graphs"],24)
 
+    def test_committed_search_source_replay_is_identical(self):
+        saved=(HERE/"generated"/"search_dag_v3.py").read_text(encoding="utf-8")
+        self.assertEqual(saved,self.artifact["source"])
+        proof=verify({"source":saved,"manifest":self.artifact["manifest"]},self.rows)
+        self.assertEqual(proof["fully_enumerated_partial_states"],6561)
+
+    def test_committed_inductive_certificate_equals_fresh_full_generation(self):
+        saved=json.loads((HERE/"generated"/"search_dag_proof.json").read_text(
+            encoding="utf-8"))
+        actual,generated=execute()
+        self.assertEqual(saved,generated["manifest"])
+        self.assertFalse(saved["source_eligible_for_automatic_merge"])
+        self.assertFalse(saved["independently_authored_external_proof"])
+        self.assertEqual(saved["upstream_source_sha256"],OLD_SHA)
+        self.assertEqual(actual["generated_DAG_source_sha256"],
+                         self.artifact["manifest"]["source_sha256"])
+
     def test_research_hold_and_parent_integrity(self):
         m=self.artifact["manifest"]
         self.assertEqual(m["status"],"PROOF_REQUIRED_DRAFT")
