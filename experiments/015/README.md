@@ -38,3 +38,17 @@ python observer.py example-observation.json --now 2026-11-06T09:00:00Z
 4. Export **only aggregate counts** to MOTIF. Keep the raw telemetry in PostHog, subject to retention and permission controls.
 5. Compare to a baseline/control and independently collect voluntary confirmation of useful work before any impact claims. Expect selection bias, tiny samples, instrumentation gaps, and correlated observations.
 6. Require human approval of *any* resulting experiment or deployment. No automatic changes across GitHub, Vercel, Supabase, or user communications.
+
+## ONE THING 007 — bounded cross-repository handoff
+
+The separate webZ draft PR #257 instruments exactly two events **after explicit per-visit opt-in**: `one_thing_quest_prepared` and `one_thing_return_prepared`. A random ephemeral ID represents one journey, not a distinct human being. The server remains disabled until separately provisioned and approved. No event content is imported into MOTIF.
+
+Run PostHog's verified two-step **same-ID** funnel over a frozen future time window, then have an operator review the query, consent conditions, duplicates, and cohort definition. The aggregator must provide only two counts, a query reference, and window timestamps; do not substitute event totals. `webz_bridge.py` turns that operator-provided count-only input into a MOTIF-015 packet, using metric `self_report_preparation_rate`. It is an offline adapter, **not an API connection or a verified impact estimate**.
+
+```sh
+cd experiments/015
+python -m unittest -v test_observer.py test_webz_bridge.py
+python webz_bridge.py reviewed-aggregate.json --now 2026-11-06T09:00:00Z --expected-rate 0.4 --minimum-n 30
+```
+
+The example CLI filename is a placeholder for a future operator-reviewed aggregate. None exists in this PR. A report being prepared is not evidence of completed physical work; provider acceptance is not evidence the event was indexed; one UUID is not a unique person. `source_reviewed` is an explicit, fallible human declaration, not independently authenticated proof. Keep the result at HOLD/REVIEW and preserve source provenance.
