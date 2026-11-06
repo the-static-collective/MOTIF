@@ -168,6 +168,39 @@ class SelfImprovementTrialTests(unittest.TestCase):
         self.assertTrue(all(x["round"]=="ROUND_ONE_INJECTED_UNSOUND_FALSIFIER"
                             for x in rejected))
 
+    def test_committed_candidate_source_is_provably_executable_but_inert(self):
+        saved=(HERE/"generated"/"candidate_rewrite.py").read_text(encoding="utf-8")
+        receipt=json.loads((HERE/"generated"/"candidate_manifest.json").read_text(
+            encoding="utf-8"))
+        self.assertEqual(saved,emit(receipt["source_plan"]))
+        self.assertEqual(hashlib.sha256(saved.encode()).hexdigest(),
+                         receipt["generated_source_sha256"])
+        checked=compile_proved(receipt["source_plan"])
+        self.assertEqual(checked["source"],saved)
+        self.assertEqual(independent_regression(
+            self.rows,self.cols,checked)["states"],6561)
+        self.assertFalse(receipt["automatic_promotion_permitted"])
+        self.assertTrue(receipt["human_review_required"])
+
+    def test_saved_performance_result_is_a_falsifiable_hold_not_fake_win(self):
+        archived=json.loads((HERE/"generated"/"performance_trial_report.json").read_text(
+            encoding="utf-8"))
+        saved=json.loads((HERE/"generated"/"candidate_manifest.json").read_text(
+            encoding="utf-8"))
+        # Timing selection can legitimately differ across CI runner replays:
+        # validate original frozen trial, NOT bit-for-bit match to new jitter.
+        self.assertEqual(archived["experiment"],"MOTIF-LEGIT-014")
+        self.assertEqual(archived["frozen_selected_source_sha256"],
+                         saved["generated_source_sha256"])
+        self.assertEqual(archived["frozen_selected_plan"],saved["source_plan"])
+        self.assertEqual(archived["heldout_incorrect_outputs"],0)
+        self.assertEqual(archived["heldout_graphs"],80)
+        self.assertEqual(archived["status"],"HOLD_NO_RELIABLE_RUNTIME_IMPROVEMENT")
+        self.assertFalse(archived["internal_retain_gate_passed"])
+        self.assertFalse(saved["heldout_passed_internal_speed_gate"])
+        self.assertTrue(any(row["status"]=="REJECT_INCORRECT_OR_UNPROVED"
+                            for row in archived["training_reviews"]))
+
     def test_source_has_no_external_authority(self):
         manifest=self.generated["manifest"]
         self.assertEqual(manifest["status"],"DRAFT_NO_AUTOMATIC_PROMOTION")
