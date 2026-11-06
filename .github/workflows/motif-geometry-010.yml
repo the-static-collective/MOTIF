@@ -1,0 +1,39 @@
+name: MOTIF GEOM-010 Reasoning Laboratory
+on:
+  push:
+    paths:
+      - 'experiments/geometry-010/**'
+      - '.github/workflows/motif-geometry-010.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-010/**'
+      - '.github/workflows/motif-geometry-010.yml'
+jobs:
+  conditional-symbolic-revision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Guarded reason-invention tests
+        run: |
+          cd experiments/geometry-010
+          python -m unittest -v test_reason_lab.py
+      - name: Verify demo, matched classical baseline and bounded CLI
+        run: |
+          cd experiments/geometry-010
+          python demo.py >/tmp/geom010-demo.json
+          python benchmark.py >/tmp/geom010-benchmark.json
+          python interface.py example-input.json >/tmp/geom010-interface.json
+          python -m json.tool /tmp/geom010-demo.json >/dev/null
+          python -m json.tool /tmp/geom010-benchmark.json >/dev/null
+          python -m json.tool /tmp/geom010-interface.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom010-development-and-frozen-heldout-evidence
+          path: |
+            /tmp/geom010-demo.json
+            /tmp/geom010-benchmark.json
+            /tmp/geom010-interface.json
