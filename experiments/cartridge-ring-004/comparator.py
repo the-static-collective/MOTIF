@@ -42,7 +42,9 @@ def check_native(public,native):
             or native.get("public_digest_sha256")!=canonical_digest(public)
             or native.get("authority")!="NONE"
             or native.get("external_action_executed") is not False
-            or native.get("language_model_calls")!=0
+            or native.get("language_model_kind")!="TRAINED_NAIVE_BAYES_NOT_LLM"
+            or type(native.get("language_model_calls")) is not int
+            or not 0<=native.get("language_model_calls")<=len(public["cases"])
             or not isinstance(native.get("results"),list)):
         raise HOLD("Unbound, malformed, or overclaimed native evidence")
     rows=native["results"]
@@ -56,7 +58,9 @@ def check_native(public,native):
             raise HOLD("Expected original source-owned methods missing")
         if row["geometry"].get("learned_distinct_steps")!=2:
             raise HOLD("Original learned native geometry algorithm not applied")
-        if (row["language"].get("pen_state")!="UNCHANGED"
+        if (type(row["language"].get("baseline_safe")) is not bool
+                or type(row["language"].get("safe")) is not bool
+                or row["language"].get("pen_state")!="UNCHANGED"
                 or row["geometry"]["raw"].get("authority")!="NONE"
                 or row["geometry"]["repaired"].get("authority")!="NONE"):
             raise HOLD("Native source attempted unexpected authority")
@@ -85,6 +89,7 @@ def predictions(c,n):
     # secretly from the full composition.
     return {
         "all_three_native": valid(fixed_reason) if safe else "HOLD",
+        "all_three_without_tiny_model": valid(fixed_reason) if lang["baseline_safe"] else "HOLD",
         "reason_only_raw_witnesses":valid(raw_reason),
         "language_plus_reason_raw":valid(raw_reason) if safe else "HOLD",
         "geometry_plus_reason_no_language":valid(fixed_reason),
@@ -160,6 +165,8 @@ def summarize(public,labels,native):
         "native_worker_is_a_reviewed_adapter_not_independent_source_evidence":True,
         "all_methods_process_identical_synthetic_case_ids":True,
         "native_methods_invoked":list(STAGES),
+        "source_native_trained_language_classifier_was_used":True,
+        "native_language_model_calls":native["language_model_calls"],
         "training_labels_not_passed_to_native_container":True,
         "synthetic_author_generated_fixture":True,
         "independent_human_labeled_real_data":False,
