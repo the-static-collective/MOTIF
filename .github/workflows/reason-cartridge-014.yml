@@ -1,0 +1,77 @@
+name: REASON-014 Complete Judicial Opinion Retrieval / sealed-source tests
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-014-complete-opinion-retrieval
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-014/**'
+      - '.github/workflows/reason-cartridge-014.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  complete-opinion-retrieval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress all prior REASON-001 through REASON-013 experiments
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Download entire historical opinion bodies from pinned court reproductions
+        run: |
+          python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Confirm full-body integrity and adversarial no-hallucination tests
+        run: |
+          python -m unittest discover -s experiments/reason-cartridge-014 -p 'test_*.py' -v
+      - name: Independently evaluate 11 questions on two never-developed cases
+        run: |
+          python experiments/reason-cartridge-014/trial.py reason-014-sources reason-014-evidence
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-014-evidence/benchmark.json').read_text())
+          assert r['development_cases']==['MCBOYLE','NIX']
+          assert r['never_developed_opinion_cases']==['KIRBY','BALLARD']
+          assert r['full_source_html_pin_passed_for_all']
+          assert r['heldout_question_count']==11
+          assert r['total_source_words']>8000
+          assert r['complete_opinion_body_words']['KIRBY']>1000
+          assert r['complete_opinion_body_words']['BALLARD']>5000
+          assert r['plain_BM25_is_a_strong_classical_retrieval_baseline']
+          assert len(r['out_of_source_questions'])==2
+          assert all(x['status']=='HOLD_NO_ANCHORED_EVIDENCE'
+                     for x in r['out_of_source_questions'])
+          assert all(x['no_legal_outcome_inferred']
+                     for x in r['relevant_but_epistemically_unanswerable'])
+          assert not r['legal_holding_from_text_automatically_inferred']
+          assert not r['verified_current_law']
+          assert not r['external_actions_in_reader']
+          assert not r['real_world_authority']
+          for name,metrics in r['classical_benchmarks'].items():
+              assert metrics['questions']==11
+              assert metrics['recall_at_1']<=metrics['recall_at_3']<=metrics['recall_at_5']<=11
+          print({'full_opinion_source_words':r['total_source_words'],
+                 'heldout_questions':11,
+                 'retrieval_comparison':r['classical_benchmarks']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-014-full-source-raw-html-and-paragraphs
+          path: reason-014-sources/
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-014-retrieval-benchmark-and-evidence
+          path: reason-014-evidence/
+          retention-days: 30
