@@ -1,0 +1,44 @@
+name: MOTIF LEGIT-012 certified solver transformation
+on:
+  push:
+    paths:
+      - "experiments/legit012/**"
+      - ".github/workflows/legit012.yml"
+  pull_request:
+    paths:
+      - "experiments/legit012/**"
+      - ".github/workflows/legit012.yml"
+jobs:
+  source-transformation-and-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial graph DAG invariants, independent proof, generated source review
+        run: python -m unittest discover -s experiments/legit012 -p 'test_*.py' -v
+      - name: Actually compile generated DAG solver and compare measured strong classical baselines
+        run: |
+          python experiments/legit012/benchmark.py --emit > /tmp/motif-legit012-results.json
+          python -m json.tool /tmp/motif-legit012-results.json > /dev/null
+          python -m json.tool /tmp/motif-legit012-source-proof.json > /dev/null
+          python -m py_compile /tmp/motif-legit012-generated-search.py
+          cat /tmp/motif-legit012-results.json
+          echo "---- GENERATED SOURCE ----"
+          cat /tmp/motif-legit012-generated-search.py
+          echo "---- GENERATED MANIFEST ----"
+          cat /tmp/motif-legit012-source-proof.json
+      - name: Preserve full proof and generated algorithm for independent review
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT012-CERTIFIED-DAG-TRANSFORM-DRAFT
+          path: |
+            /tmp/motif-legit012-results.json
+            /tmp/motif-legit012-source-proof.json
+            /tmp/motif-legit012-generated-search.py
+          if-no-files-found: error
+          retention-days: 30
