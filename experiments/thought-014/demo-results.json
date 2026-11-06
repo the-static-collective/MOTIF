@@ -1,0 +1,47 @@
+{
+  "authority": "NONE",
+  "claim": "MOTIF invoked a tiny trained language model as a dev-test subject; no local LLM present",
+  "installed": false,
+  "language_development_correct": [
+    8,
+    15,
+    16
+  ],
+  "language_frozen_correct": [
+    7,
+    14,
+    15
+  ],
+  "language_rules_staged": 4,
+  "model_inference_calls": 12,
+  "model_kind": "TRAINED_NAIVE_BAYES_NOT_LLM",
+  "pen_unchanged": true,
+  "policy_development": {
+    "decision": {
+      "queries": 12,
+      "resolved": 8
+    },
+    "world": {
+      "queries": 20,
+      "resolved": 8
+    }
+  },
+  "policy_frozen": {
+    "decision": {
+      "queries": 12,
+      "resolved": 8
+    },
+    "world": {
+      "queries": 20,
+      "resolved": 8
+    }
+  },
+  "safety_passed": [
+    8,
+    8
+  ],
+  "schema": "motif.thought014.demo.v1",
+  "selected_reasoning_policy": "decision",
+  "staged_only": true,
+  "status": "CANDIDATE_FOR_HUMAN_REVIEW_NOT_INSTALLED"
+}

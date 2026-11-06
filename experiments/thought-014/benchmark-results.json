@@ -1,0 +1,399 @@
+{
+  "dialogue_utterances": [
+    {
+      "alternative_interpretations": [],
+      "epistemic_status": "UNRESOLVED_OR_HELD",
+      "external_authority": "NONE",
+      "instrument": "PENCIL",
+      "model_accepted_as_hypothesis": false,
+      "model_consulted": false,
+      "model_error": null,
+      "model_kind_if_consulted": null,
+      "model_reported_probability_unverified": null,
+      "pen_state": "UNCHANGED",
+      "selected_manifestations": [
+        "m:food",
+        "m:meal"
+      ],
+      "source_class": "BOUNDED_LOCAL_GRAMMAR",
+      "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+      "speaker": "HUMAN",
+      "speech_act": "UNKNOWN",
+      "status": "HOLD",
+      "text": "I wonder whether food and a meal can connect",
+      "utterance_id": "u:4bccc3e7fa133c1aa4540fba"
+    },
+    {
+      "alternative_interpretations": [
+        "UNKNOWN"
+      ],
+      "epistemic_status": "UNVERIFIED_MODEL_GUESS",
+      "external_authority": "NONE",
+      "instrument": "PENCIL",
+      "model_accepted_as_hypothesis": true,
+      "model_consulted": true,
+      "model_error": null,
+      "model_kind_if_consulted": "TRAINED_NAIVE_BAYES_NOT_LLM",
+      "model_reported_probability_unverified": 0.984164,
+      "pen_state": "UNCHANGED",
+      "selected_manifestations": [
+        "m:food",
+        "m:meal"
+      ],
+      "source_class": "UNVERIFIED_EXTERNAL_PROPOSAL",
+      "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+      "speaker": "HUMAN",
+      "speech_act": "EXPLORE_POSSIBILITY",
+      "status": "TYPED_ONLY",
+      "text": "I wonder whether food and a meal can connect",
+      "utterance_id": "u:d0a8cd938cc5469ba60c57e1"
+    }
+  ],
+  "experiment": "THOUGHT-014",
+  "external_authority": "NONE",
+  "language_developer": {
+    "changed_source_code": false,
+    "development_baseline": 8,
+    "development_final": 15,
+    "development_total": 16,
+    "external_authority": "NONE",
+    "frozen_baseline": 7,
+    "frozen_candidate": 14,
+    "frozen_total": 15,
+    "independent_audit_after_proposals": true,
+    "installed_rules": false,
+    "limitations": "Small author-designed synthetic fixtures. Model used training data; selected on development; heldout checked once. No blind real-world evidence or LLM tested.",
+    "model_kind": "TRAINED_NAIVE_BAYES_NOT_LLM",
+    "model_proposals": 8,
+    "pen_state": "UNCHANGED",
+    "receipt_digest": "1c83ff368ce1f20935aabe44edf6bb9abf6f0ceffc47089ab27eadfd502cef1c",
+    "rounds": [
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "point me toward evidence",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "INSPECT_EVIDENCE"
+        },
+        "dev_after": 10,
+        "dev_before": 8,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "8ecfd9fca589b821787aa64cb502d0e4246f5b7bbc21f1f0974e5b56e8c89654",
+        "regressions": 0,
+        "round": 1,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "what would disprove",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "CHALLENGE"
+        },
+        "dev_after": 12,
+        "dev_before": 10,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "2a43dfde3a32d14b896dca64309d92ed5b89fd3c7afca32d47547a96a42ca2f7",
+        "regressions": 0,
+        "round": 2,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "i wonder whether",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "EXPLORE_POSSIBILITY"
+        },
+        "dev_after": 14,
+        "dev_before": 12,
+        "dev_improvement": 2,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "65dff1cc7019b013ee35724a6a46bf1844828a0ecec7a5432f0581d90cec96ed",
+        "regressions": 0,
+        "round": 3,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      },
+      {
+        "candidate": {
+          "match": "prefix",
+          "origin": "tiny-supervised-language-model",
+          "pattern": "how are the",
+          "schema": "motif.thought014.rule-candidate.v1",
+          "speech_act": "COMPARE"
+        },
+        "dev_after": 15,
+        "dev_before": 14,
+        "dev_improvement": 1,
+        "disposition": "STAGED_PENCIL_CANDIDATE",
+        "external_authority": "NONE",
+        "receipt_digest": "9a45317dacb8b0390d3f9fa7606effb2c7fad879af1a04b26c22e126e684188b",
+        "regressions": 0,
+        "round": 4,
+        "safety_correct": 8,
+        "safety_total": 8,
+        "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd"
+      }
+    ],
+    "safety_passed": 8,
+    "safety_total": 8,
+    "schema": "motif.thought014.self-developer.v1",
+    "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+    "staged_rules": [
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "point me toward evidence",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "INSPECT_EVIDENCE"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "what would disprove",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "CHALLENGE"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "i wonder whether",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "EXPLORE_POSSIBILITY"
+      },
+      {
+        "match": "prefix",
+        "origin": "tiny-supervised-language-model",
+        "pattern": "how are the",
+        "schema": "motif.thought014.rule-candidate.v1",
+        "speech_act": "COMPARE"
+      }
+    ],
+    "status": "CANDIDATE_FOR_HUMAN_REVIEW_NOT_INSTALLED"
+  },
+  "limitations": "Tiny supervised classifier, user-authored synthetic tasks, small holdout; no real LLM or autonomous software engineering benchmark.",
+  "local_ollama_called": false,
+  "model_inference_calls": 12,
+  "model_reflection_receipts": 4,
+  "model_tested_kind": "TRAINED_NAIVE_BAYES_NOT_LLM",
+  "no_automatic_code_edit": true,
+  "no_pen_promotion": true,
+  "policy_developer": {
+    "development": {
+      "decision": {
+        "cases": 8,
+        "queries": 12,
+        "receipts": [
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:00"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:01"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:02"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:03"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:04"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:05"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:06"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:07"
+          }
+        ],
+        "resolved": 8
+      },
+      "world": {
+        "cases": 8,
+        "queries": 20,
+        "receipts": [
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:00"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:01"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:02"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:03"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:04"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:05"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:06"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:07"
+          }
+        ],
+        "resolved": 8
+      }
+    },
+    "external_authority": "NONE",
+    "heldout": {
+      "decision": {
+        "cases": 8,
+        "queries": 12,
+        "receipts": [
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:08"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:09"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:10"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:11"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:12"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:13"
+          },
+          {
+            "questions": 1,
+            "success": true,
+            "world": "hypothesis:14"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:15"
+          }
+        ],
+        "resolved": 8
+      },
+      "world": {
+        "cases": 8,
+        "queries": 20,
+        "receipts": [
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:08"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:09"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:10"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:11"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:12"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:13"
+          },
+          {
+            "questions": 2,
+            "success": true,
+            "world": "hypothesis:14"
+          },
+          {
+            "questions": 3,
+            "success": true,
+            "world": "hypothesis:15"
+          }
+        ],
+        "resolved": 8
+      }
+    },
+    "policy_installed": false,
+    "schema": "motif.thought014.policy-self-test.v1",
+    "selected_after_dev": "decision",
+    "selected_improvement_over_alternate_queries": 8,
+    "selection_uses_hidden_worlds": false,
+    "source_digest": "609f22ba293c2a23e0eff6d2933cf524ff78b9f85a78a5d8590856475cac69bd",
+    "warning": "Hypothetical worlds and fixed rules; matched classical comparators, not a model objectively proving itself."
+  },
+  "runtime_model_backend_available": "OPTIONAL_LOCAL_OLLAMA",
+  "status": "LOCAL_SYNTHETIC_DEVELOPMENT"
+}
