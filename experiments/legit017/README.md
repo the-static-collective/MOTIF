@@ -51,9 +51,9 @@ In a passing CI trial, the median wall-clock time across the same
 
 | Implementation | Median batch time |
 | --- | ---: |
-| Recompute direct reference per question | 66.478 ms |
-| **Frozen generated portfolio** | **1.159 ms** |
-| Strong optimized classical indexed portfolio | 1.205 ms |
+| Recompute direct reference per question | 83.540 ms |
+| **Frozen generated portfolio** | **1.508 ms** |
+| Strong optimized classical indexed portfolio | 1.574 ms |
 
 The generated approach is much faster than repeatedly recomputing
 unindexed answers but effectively tied with standard classical indexed
@@ -95,10 +95,10 @@ One passing seven-repeat heldout trial measured:
 
 | Method | Median full verification time |
 | --- | ---: |
-| RECHECK | 137.499 ms |
-| Original generated CACHE | 72.041 ms |
-| **Revised generated IMPROVED_CACHE** | **7.035 ms** |
-| Strong separately implemented classical cache | **6.665 ms** |
+| RECHECK | 174.534 ms |
+| Original generated CACHE | 94.044 ms |
+| **Revised generated IMPROVED_CACHE** | **10.352 ms** |
+| Strong separately implemented classical cache | **9.294 ms** |
 
 That is real measured reduction in redundant experimental verification
 work on these cases, and the generated tool can transfer its interface
