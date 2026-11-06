@@ -52,7 +52,7 @@ sys.path.append(str(ROOT / "reason-cartridge-005"))
 sys.path.append(str(ROOT / "reason-cartridge-003"))
 from engine import Objection, ToyOwner, Model, owner4, stress, validate as validate_005  # noqa: E402
 from critic import Critic  # noqa: E402
-from pupil import verify_native  # noqa: E402
+from pupil import verify_native, HOLD as FOREIGN_HOLD  # noqa: E402
 
 
 def exact_proof(q):
@@ -132,7 +132,10 @@ def foreign_crosscheck(q, specimen, receipt, reference):
     expected = independent_specimen(q, reference)
     if specimen != expected:
         raise HOLD("Native foreign result is for a different source graph")
-    native = verify_native(specimen, receipt)
+    try:
+        native = verify_native(specimen, receipt)
+    except FOREIGN_HOLD as exc:
+        raise HOLD("Foreign source refused or returned unbound evidence") from exc
     local = owner4.decide(q)
     if local["status"] not in ("PROVED_REACHABLE", "PROVED_UNREACHABLE"):
         raise HOLD("Cannot corroborate unsettled graph world")
