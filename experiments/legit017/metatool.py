@@ -76,18 +76,20 @@ def check_variants(tasks,tools,mode,cache_tool=None):
       RECHECK: independent oracle once PER candidate verification.
       CACHE: independent oracle once PER task/query, reusable generated
              witness cache shared across ALL tested strategies and families.
+      IMPROVED_CACHE: prime generated cache from the independently checked
+             strong classical oracle (the same oracle used by STRONG).
       STRONG: conventional indexed classical truth builder once per
               task/query, then reuse Python dictionary lookup.
     """
-    if mode not in ("RECHECK","CACHE","STRONG"):
+    if mode not in ("RECHECK","CACHE","IMPROVED_CACHE","STRONG"):
         raise HOLD("Unknown verification ablation mode")
-    if mode=="CACHE" and cache_tool is None:
+    if mode in ("CACHE","IMPROVED_CACHE") and cache_tool is None:
         raise HOLD("No verified generated research instrument")
     records=None
     table=None
     if mode!="RECHECK":
         records=_record(tasks,"ORACLE" if mode=="CACHE" else "STRONG")
-        if mode=="CACHE":
+        if mode in ("CACHE","IMPROVED_CACHE"):
             table=cache_tool["build"](records)
         else:
             table=dict(records)
@@ -104,7 +106,8 @@ def check_variants(tasks,tools,mode,cache_tool=None):
                     raise HOLD("Invalid Boolean answer")
                 correct=(direct(task,q) if mode=="RECHECK"
                          else cache_tool["answer"](table,witness_key(task,i))
-                         if mode=="CACHE" else table[witness_key(task,i)])
+                         if mode in ("CACHE","IMPROVED_CACHE")
+                         else table[witness_key(task,i)])
                 if answer!=correct:
                     raise HOLD("Algorithm failed externally checked reference")
                 comparisons+=1
@@ -112,7 +115,7 @@ def check_variants(tasks,tools,mode,cache_tool=None):
         "checked_tool_query_pairs":comparisons,
         "reference_calls":(
             comparisons if mode=="RECHECK" else len(records)),
-        "source":"INDEPENDENT_PER_QUESTION" if mode!="STRONG"
-                  else "CONVENTIONAL_CLASSICAL_PRECOMPUTED_REFERENCE",
+        "source":("INDEPENDENT_PER_QUESTION" if mode in ("RECHECK","CACHE")
+                  else "CONVENTIONAL_CLASSICAL_PRECOMPUTED_REFERENCE"),
         "no_candidate_was_exempted_from_correctness":True,
     }
