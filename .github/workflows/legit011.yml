@@ -1,0 +1,44 @@
+name: MOTIF LEGIT-011 self-rewriting search
+on:
+  push:
+    paths:
+      - "experiments/legit011/**"
+      - ".github/workflows/legit011.yml"
+  pull_request:
+    paths:
+      - "experiments/legit011/**"
+      - ".github/workflows/legit011.yml"
+jobs:
+  generative-rewriter-and-classical-falsifiers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Counterexample synthesis, proof of all 6561 search states, adversarial source checks
+        run: python -m unittest discover -s experiments/legit011 -p 'test_*.py' -v
+      - name: Actually write new Python search source and run next CEGIS with it
+        run: |
+          python experiments/legit011/benchmark.py --emit > /tmp/motif-legit011-rewrite-results.json
+          python -m json.tool /tmp/motif-legit011-rewrite-results.json > /dev/null
+          python -m json.tool /tmp/motif-legit011-rewrite-manifest.json > /dev/null
+          python -m py_compile /tmp/motif-legit011-search-rewrite.py
+          cat /tmp/motif-legit011-rewrite-results.json
+          echo "---- GENERATED SOURCE ----"
+          cat /tmp/motif-legit011-search-rewrite.py
+          echo "---- GENERATED MANIFEST ----"
+          cat /tmp/motif-legit011-rewrite-manifest.json
+      - name: Preserve actual generated search source, counterexample proof and matched classical controls
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT011-SELF-WRITTEN-SEARCH-DRAFT
+          path: |
+            /tmp/motif-legit011-rewrite-results.json
+            /tmp/motif-legit011-rewrite-manifest.json
+            /tmp/motif-legit011-search-rewrite.py
+          if-no-files-found: error
+          retention-days: 30
