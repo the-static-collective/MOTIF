@@ -68,6 +68,14 @@ jobs:
           assert not r['external_actions']
           assert not p['external_execution']
           assert not m['real_world_authority']
+          h=json.loads(Path('reason-008-evidence/graft-cannon-review-proposal.json').read_text())
+          assert r['graft_intake_state']=='REQUEST_INDEPENDENT_CLEAN_SOURCE_REVIEW'
+          assert r['cannon_selection_state']=='NOT_CANON'
+          assert h['graft']['approved_for_public_graft'] is False
+          assert h['graft']['target_donor_branch']=='NOT_CREATED'
+          assert h['cannon']['state']=='NOT_CANON'
+          assert h['cannon']['signature_supplied'] is False
+          assert h['external_writes'] is False
           print({'old_language_refutations':45,
                  'new_programs':100,
                  'unique_new_programs':1,
