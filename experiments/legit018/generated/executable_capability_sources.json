@@ -1,0 +1,43 @@
+{
+  "manifests": {
+    "A_EXACT": {
+      "ancestor_A_sha256": null,
+      "family": "EXACT",
+      "kernel": "BITSET_PATH",
+      "prechecks": []
+    },
+    "A_VERIFIED_BITSET_LIBRARY": {
+      "ancestor_A_sha256": null,
+      "family": "EXACT",
+      "kernel": "BITSET_PATH",
+      "prechecks": [
+        "REACH",
+        "SUM"
+      ]
+    },
+    "B_NO_ANCESTRY": {
+      "ancestor_A_sha256": null,
+      "family": "FORBIDDEN",
+      "kernel": "DFS_EXACT",
+      "prechecks": []
+    },
+    "B_WITH_ANCESTRY": {
+      "ancestor_A_sha256": null,
+      "family": "FORBIDDEN",
+      "kernel": "DFS_EXACT",
+      "prechecks": []
+    }
+  },
+  "prior_017_hashes": {
+    "GRAPH": "c06e57ac0b1d2340e7bc392227005d46855749a39c72576d4a6043d770d083a8",
+    "SUBSET": "d7d55bd293f5b8002d213e978b1dc0a203bad4dc86723edc8e36bd4e309a0ff4"
+  },
+  "production_authority": false,
+  "programs": {
+    "A_EXACT": "\"\"\"LEGIT-018 generated typed DAG path program; no external actions.\nKnown algorithm fragments composed under a research-only grammar.\n\"\"\"\nRESEARCH_ONLY = True\nNO_PRODUCTION_WRITE = True\n\ndef build(task, reach_build=None, subset_build=None):\n    n=task.n\n    edges=task.edges\n    outgoing=[[] for _ in range(n)]\n    for u,v,w in edges:\n        outgoing[u].append((v,w))\n    closure=None\n    sum_mask=None\n    masks={}\n    for excluded in (-1,):\n        for source in range(n):\n            paths=[0]*n\n            if source!=excluded:\n                paths[source]=1\n            for u in range(source,n):\n                if u==excluded:\n                    continue\n                for v,w in outgoing[u]:\n                    if v!=excluded:\n                        paths[v]|=(paths[u]<<w)\n            masks[excluded,source]=tuple(paths)\n    return (outgoing,closure,sum_mask,masks)\n\ndef answer(ctx,query):\n    outgoing,closure,sum_mask,masks=ctx\n    source,target,cost,excluded=query\n    if source==excluded or target==excluded:\n        return False\n    return ((masks[excluded,source][target]>>cost)&1)==1\n",
+    "A_VERIFIED_BITSET_LIBRARY": "\"\"\"LEGIT-018 generated typed DAG path program; no external actions.\nKnown algorithm fragments composed under a research-only grammar.\n\"\"\"\nRESEARCH_ONLY = True\nNO_PRODUCTION_WRITE = True\n\ndef build(task, reach_build=None, subset_build=None):\n    n=task.n\n    edges=task.edges\n    outgoing=[[] for _ in range(n)]\n    for u,v,w in edges:\n        outgoing[u].append((v,w))\n    closure=(reach_build((n,tuple((u,v) for u,v,w in edges)))\n             if reach_build is not None else None)\n    sum_mask=(subset_build(tuple(w for u,v,w in edges))\n              if subset_build is not None else None)\n    masks={}\n    for excluded in (-1,):\n        for source in range(n):\n            paths=[0]*n\n            if source!=excluded:\n                paths[source]=1\n            for u in range(source,n):\n                if u==excluded:\n                    continue\n                for v,w in outgoing[u]:\n                    if v!=excluded:\n                        paths[v]|=(paths[u]<<w)\n            masks[excluded,source]=tuple(paths)\n    return (outgoing,closure,sum_mask,masks)\n\ndef answer(ctx,query):\n    outgoing,closure,sum_mask,masks=ctx\n    source,target,cost,excluded=query\n    if source==excluded or target==excluded:\n        return False\n    if closure is not None and target not in closure[source]:\n        return False\n    if sum_mask is not None and ((sum_mask>>cost)&1)==0:\n        return False\n    return ((masks[excluded,source][target]>>cost)&1)==1\n",
+    "B_NO_ANCESTRY": "\"\"\"LEGIT-018 generated typed DAG path program; no external actions.\nKnown algorithm fragments composed under a research-only grammar.\n\"\"\"\nRESEARCH_ONLY = True\nNO_PRODUCTION_WRITE = True\n\ndef build(task, reach_build=None, subset_build=None):\n    n=task.n\n    edges=task.edges\n    outgoing=[[] for _ in range(n)]\n    for u,v,w in edges:\n        outgoing[u].append((v,w))\n    closure=None\n    sum_mask=None\n    masks=None\n    return (outgoing,closure,sum_mask,masks)\n\ndef answer(ctx,query):\n    outgoing,closure,sum_mask,masks=ctx\n    source,target,cost,excluded=query\n    if source==excluded or target==excluded:\n        return False\n    todo=[(source,0)]\n    while todo:\n        vertex,weight=todo.pop()\n        if weight>cost:\n            continue\n        if vertex==target:\n            if weight==cost:\n                return True\n            continue\n        for nxt,w in outgoing[vertex]:\n            if nxt!=excluded and nxt<=target:\n                todo.append((nxt,weight+w))\n    return False\n",
+    "B_WITH_ANCESTRY": "\"\"\"LEGIT-018 generated typed DAG path program; no external actions.\nKnown algorithm fragments composed under a research-only grammar.\n\"\"\"\nRESEARCH_ONLY = True\nNO_PRODUCTION_WRITE = True\n\ndef build(task, reach_build=None, subset_build=None):\n    n=task.n\n    edges=task.edges\n    outgoing=[[] for _ in range(n)]\n    for u,v,w in edges:\n        outgoing[u].append((v,w))\n    closure=None\n    sum_mask=None\n    masks=None\n    return (outgoing,closure,sum_mask,masks)\n\ndef answer(ctx,query):\n    outgoing,closure,sum_mask,masks=ctx\n    source,target,cost,excluded=query\n    if source==excluded or target==excluded:\n        return False\n    todo=[(source,0)]\n    while todo:\n        vertex,weight=todo.pop()\n        if weight>cost:\n            continue\n        if vertex==target:\n            if weight==cost:\n                return True\n            continue\n        for nxt,w in outgoing[vertex]:\n            if nxt!=excluded and nxt<=target:\n                todo.append((nxt,weight+w))\n    return False\n"
+  },
+  "schema": "motif.legit018.generated-compositional-sources.v1"
+}
