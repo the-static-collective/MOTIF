@@ -221,6 +221,29 @@ class SelfRewriteTests(unittest.TestCase):
         self.assertFalse(b["bundle"]["committed_to_main"])
         self.assertEqual(len(a["new_successor_task_receipts"]),7)
 
+    def test_committed_generated_source_exactly_matches_new_replay(self):
+        source=(HERE/"generated"/"search_v2.py").read_text(encoding="utf-8")
+        self.assertEqual(source,self.upgrade["source"])
+        result=verify_upgrade(self.upgrade["manifest"],source,self.candidates)
+        self.assertEqual(result["partial_truth_tables_checked"],6561)
+
+    def test_committed_manifest_matches_reverified_replay(self):
+        saved=json.loads((HERE/"generated"/"search_rewrite_manifest.json").read_text(
+            encoding="utf-8"))
+        actual,generated=execute()
+        self.assertEqual(saved,generated["bundle"])
+        self.assertEqual(saved["source_code_sha256"],
+                         self.upgrade["source_checked"]["source_sha256"])
+        self.assertFalse(saved["external_network_access_granted"])
+        self.assertEqual(saved["status"],"DRAFT_SOURCE_CHANGE_REQUIRES_HUMAN_REVIEW")
+
+    def test_non_template_code_fails_even_if_ast_safe_and_same_header(self):
+        changed=self.upgrade["source"]+"def sneaky():\n    return 42\n"
+        self.assertEqual(static_source_validation(changed)["status"],
+                         "STATIC_SOURCE_TEMPLATE_CHECK_PASSED")
+        with self.assertRaises(HOLD):
+            load_generated_source(changed)
+
     def test_generated_file_receipts_are_only_research(self):
         manifest=self.upgrade["manifest"]
         self.assertFalse(manifest["source_changes_production"])
