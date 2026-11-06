@@ -1,0 +1,40 @@
+name: MOTIF GEOM-008 Free Graph Frontier
+on:
+  push:
+    paths:
+      - 'experiments/geometry-008/**'
+      - '.github/workflows/motif-geometry-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-008/**'
+      - '.github/workflows/motif-geometry-008.yml'
+jobs:
+  synthetic-free-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Tests and independent small-case oracles
+        run: |
+          cd experiments/geometry-008
+          python -m unittest -v test_geometry008.py
+      - name: Demonstrate persistent graph and bounded reason synthesis
+        run: |
+          cd experiments/geometry-008
+          python demo.py > /tmp/geom008-demo.json
+          python benchmark.py --expansions 1200 > /tmp/geom008-benchmark.json
+          python interface.py example-input.json --dot /tmp/geom008-view.dot > /tmp/geom008-interface.json
+          python -m json.tool /tmp/geom008-demo.json > /dev/null
+          python -m json.tool /tmp/geom008-benchmark.json > /dev/null
+          python -m json.tool /tmp/geom008-interface.json > /dev/null
+          test -s /tmp/geom008-view.dot
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom008-synthetic-evidence
+          path: |
+            /tmp/geom008-demo.json
+            /tmp/geom008-benchmark.json
+            /tmp/geom008-interface.json
+            /tmp/geom008-view.dot

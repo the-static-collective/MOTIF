@@ -1,0 +1,224 @@
+{
+  "first_slice": {
+    "authority": "NONE",
+    "expanded_this_slice": 100,
+    "grammar": "grammar:d9a37438db38607c51a40b2ba2eea10ad9729d65d3cb0a2772f11511b7837466",
+    "new_nodes": 200,
+    "new_relations": 300,
+    "state": "PENCIL",
+    "status": "WORK_SLICE_COMPLETE",
+    "totals": {
+      "db_bytes_allocated_approx": 557056,
+      "expanded": 100,
+      "nodes": 201,
+      "relations": 300,
+      "unexpanded": 101
+    }
+  },
+  "integrity": {
+    "foreign_key_errors": 0,
+    "integrity": "ok"
+  },
+  "limits": {
+    "epistemic": "PENCIL only, never authenticated PEN",
+    "global_edges": "no artificial cap",
+    "global_nodes": "no artificial cap",
+    "invocation": "finite work/time budget",
+    "relation_arity": "no artificial cap"
+  },
+  "name": "MOTIF-GEOM-008 \u2014 Grammar-Grown Living Graph",
+  "preserved_cartridge": {
+    "authority": "NONE",
+    "candidate_node": "macro:d965bf199cee10c790105d0f51dbdeecb1719ec7f4834dd4803941a60d03c27f",
+    "status": "PENCIL_CARTRIDGE_STORED",
+    "witness_count": 12
+  },
+  "reason_cartridge": {
+    "authority": "NONE",
+    "baseline_single_relation": {
+      "heldout": {
+        "accuracy": 0.5,
+        "correct": 3,
+        "total": 6
+      },
+      "program": [
+        {
+          "direction": "forward",
+          "relation": "carry"
+        }
+      ],
+      "train": {
+        "accuracy": 0.5,
+        "correct": 3,
+        "total": 6
+      }
+    },
+    "evaluated_this_slice": 4,
+    "heldout": {
+      "accuracy": 1.0,
+      "correct": 6,
+      "total": 6
+    },
+    "length": 2,
+    "limitations": "search grammar is existing relation atoms; heldout data is synthetic; no new atomic semantics",
+    "method": "classical enumerative typed path-composition program synthesis",
+    "program": [
+      {
+        "direction": "forward",
+        "relation": "carry"
+      },
+      {
+        "direction": "forward",
+        "relation": "serve"
+      }
+    ],
+    "representation_gap": true,
+    "scope": "observer:demo|cut:0|decoder:literal",
+    "source_roots": [
+      "fixture:neg",
+      "fixture:pos"
+    ],
+    "status": "COMPOSITION_PROPOSED",
+    "status_of_assertion": "PENCIL",
+    "train": {
+      "accuracy": 1.0,
+      "correct": 6,
+      "total": 6
+    }
+  },
+  "relational_query": {
+    "authority": "NONE",
+    "endpoints": [
+      {
+        "node_id": "expr:3a7f7d1182c1d78c78260eb09ee086d3fb4612e8ecf2141b4b26c0aa48e66473",
+        "relation_witnesses": [
+          "rel:126c7510df35d5ce0539680bc10e4243189ba6ba9214c7e3a0da12a755672a1b",
+          "rel:7f3f310a38affcdedf5dd3261c3ce8f4cd222d771a8b9891ec176dbc6bf68f14"
+        ]
+      },
+      {
+        "node_id": "expr:896bc55d48e15df5d091734b7ddd5d9fd4b2552e8cb3a37c77d7220d77eeda37",
+        "relation_witnesses": [
+          "rel:42c1efa6d8eda74021b1dfbb532a54a2b144341af3970eb23db7cfb988312690",
+          "rel:cfabf3f18f3b80c88d8ee580df12565d5a338e64c8b863b3a5aee9c8fcfee331"
+        ]
+      },
+      {
+        "node_id": "expr:faf8952f623eeb3b50625bfe49c89eef195a3c9a54de71228791949ea5f8956e",
+        "relation_witnesses": [
+          "rel:126c7510df35d5ce0539680bc10e4243189ba6ba9214c7e3a0da12a755672a1b",
+          "rel:6def39c79a279e00bcbcf658857ec97b66c8f416563d1db0a681658e34dd7b14"
+        ]
+      },
+      {
+        "node_id": "expr:fc45ef49c28c4a128c830184e8992bbd15b6729223411fe4468199889573af1d",
+        "relation_witnesses": [
+          "rel:42c1efa6d8eda74021b1dfbb532a54a2b144341af3970eb23db7cfb988312690",
+          "rel:e93733233e5cde92334680c2f5e88168a58019a07e20dd57c3d044fd429cbe3e"
+        ]
+      }
+    ],
+    "interpretation": "derived path over PENCIL relations, not admitted evidence",
+    "state": "PENCIL",
+    "status": "COMPLETE_WITHIN_OPERATOR_AND_GRAPH",
+    "transitions_seen": 6
+  },
+  "sample_view": {
+    "authority": "NONE",
+    "center": "expr:3f08a9ca409663e711f75ee55dd5a5d3c611c93cf2b61bd3cf17d38672066a6e",
+    "nodes": [
+      {
+        "id": "expr:0a11680144e21759a614cdc5e27a25b5019aaad9d300fd3301e41f9a72726ef6",
+        "kind": "expression",
+        "label": "0 #",
+        "status": "PENCIL"
+      },
+      {
+        "id": "expr:111d47c6e6f418facaad6f05a833d4f6e7a0b93dc56d3fa51031b65a1f379071",
+        "kind": "expression",
+        "label": "1 #",
+        "status": "PENCIL"
+      },
+      {
+        "id": "expr:3f08a9ca409663e711f75ee55dd5a5d3c611c93cf2b61bd3cf17d38672066a6e",
+        "kind": "expression",
+        "label": "#",
+        "status": "PENCIL"
+      }
+    ],
+    "note": "bounded view only; not a graph-size limit or evidence of proximity",
+    "partial_view": true,
+    "relations": [
+      {
+        "id": "rel:126c7510df35d5ce0539680bc10e4243189ba6ba9214c7e3a0da12a755672a1b",
+        "kind": "rewrite",
+        "participants": [
+          {
+            "node_id": "expr:3f08a9ca409663e711f75ee55dd5a5d3c611c93cf2b61bd3cf17d38672066a6e",
+            "role": "from"
+          },
+          {
+            "node_id": "expr:0a11680144e21759a614cdc5e27a25b5019aaad9d300fd3301e41f9a72726ef6",
+            "role": "to"
+          }
+        ],
+        "source_root": "grammar:grammar:d9a37438db38607c51a40b2ba2eea10ad9729d65d3cb0a2772f11511b7837466",
+        "status": "PENCIL"
+      },
+      {
+        "id": "rel:42c1efa6d8eda74021b1dfbb532a54a2b144341af3970eb23db7cfb988312690",
+        "kind": "rewrite",
+        "participants": [
+          {
+            "node_id": "expr:3f08a9ca409663e711f75ee55dd5a5d3c611c93cf2b61bd3cf17d38672066a6e",
+            "role": "from"
+          },
+          {
+            "node_id": "expr:111d47c6e6f418facaad6f05a833d4f6e7a0b93dc56d3fa51031b65a1f379071",
+            "role": "to"
+          }
+        ],
+        "source_root": "grammar:grammar:d9a37438db38607c51a40b2ba2eea10ad9729d65d3cb0a2772f11511b7837466",
+        "status": "PENCIL"
+      },
+      {
+        "id": "rel:820cf42e2585b9eb5414e33d4da3e8aa97e2cc420ebbca57e90332865b767e2a",
+        "kind": "branch",
+        "participants": [
+          {
+            "node_id": "expr:3f08a9ca409663e711f75ee55dd5a5d3c611c93cf2b61bd3cf17d38672066a6e",
+            "role": "parent"
+          },
+          {
+            "node_id": "expr:0a11680144e21759a614cdc5e27a25b5019aaad9d300fd3301e41f9a72726ef6",
+            "role": "child"
+          },
+          {
+            "node_id": "expr:111d47c6e6f418facaad6f05a833d4f6e7a0b93dc56d3fa51031b65a1f379071",
+            "role": "child"
+          }
+        ],
+        "source_root": "grammar:grammar:d9a37438db38607c51a40b2ba2eea10ad9729d65d3cb0a2772f11511b7837466",
+        "status": "PENCIL"
+      }
+    ],
+    "state": "PENCIL"
+  },
+  "scope": "observer:demo|cut:0|decoder:literal",
+  "second_slice": {
+    "authority": "NONE",
+    "expanded_this_slice": 200,
+    "grammar": "grammar:d9a37438db38607c51a40b2ba2eea10ad9729d65d3cb0a2772f11511b7837466",
+    "new_nodes": 400,
+    "new_relations": 600,
+    "state": "PENCIL",
+    "status": "WORK_SLICE_COMPLETE",
+    "totals": {
+      "db_bytes_allocated_approx": 1519616,
+      "expanded": 300,
+      "nodes": 601,
+      "relations": 900,
+      "unexpanded": 301
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "disclaimer": "no visual geometry required; developer-generated train/test share structural generator; scale is machine dependent",
+  "experiment": "GEOM-008 synthetic growth & composition",
+  "growth": {
+    "elapsed_seconds_environment_specific": 0.839,
+    "first_slice_nodes": 1201,
+    "frontier_remaining": 1201,
+    "integrity": {
+      "foreign_key_errors": 0,
+      "integrity": "ok"
+    },
+    "sqlite_allocated_bytes": 5955584,
+    "total_nodes": 2401,
+    "total_relations": 3600
+  },
+  "operator_search": {
+    "authority": "NONE",
+    "heldout": {
+      "accuracy": 1.0,
+      "correct": 100,
+      "total": 100
+    },
+    "length": 2,
+    "matched_best_atomic_baseline": {
+      "heldout": {
+        "accuracy": 0.5,
+        "correct": 50,
+        "total": 100
+      },
+      "program": [
+        {
+          "direction": "forward",
+          "relation": "carry"
+        }
+      ],
+      "train": {
+        "accuracy": 0.5,
+        "correct": 10,
+        "total": 20
+      }
+    },
+    "operator": [
+      {
+        "direction": "forward",
+        "relation": "carry"
+      },
+      {
+        "direction": "forward",
+        "relation": "serve"
+      }
+    ],
+    "status": "COMPOSITION_PROPOSED",
+    "train": {
+      "accuracy": 1.0,
+      "correct": 20,
+      "total": 20
+    }
+  },
+  "requested_expansions": 1200
+}
