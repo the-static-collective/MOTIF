@@ -155,3 +155,40 @@ def cases(seed,n=32):
         key=all_values[rng.randrange(len(all_values))]
         selected.append(key)
     return make_graph("Case_"+str(seed),selected)
+
+
+class StrongCachedDP:
+    """Tuned conventional classical DP with index preprocessing amortized.
+
+    Uses LAST parent, unlike the candidate compiler (which uses FIRST).
+    It never imports generated source, and runs one bitset transition per
+    nonempty graph state. A strong fair benchmark should tie the operation
+    count; any measured time difference is local implementation detail.
+    """
+    def __init__(self,rows):
+        self.n=len(rows)
+        if not 1<=self.n<=3072:raise ValueError("Unknown library")
+        self.cols={}
+        self.setup_operations=0
+        for row in range(ROWS):
+            for flag in (False,True):
+                survivors=0
+                for i,entry in enumerate(rows):
+                    self.setup_operations+=1
+                    if ((entry["truth_mask"]>>row)&1)==int(flag):
+                        survivors |= (1<<i)
+                self.cols[row,flag]=survivors
+
+    def solve(self,normalized):
+        state={(): (1<<self.n)-1}
+        count=0
+        for facts,parents in normalized:
+            if not facts:
+                continue
+            previous=parents[-1]
+            delta=next(item for item in facts if item not in previous)
+            state[facts]=state[previous]&self.cols[delta]
+            count+=1
+        return ({key:((mask&-mask).bit_length()-1 if mask else None)
+                 for key,mask in state.items()},
+                {"bitset_updates":count})
