@@ -79,9 +79,9 @@ class CartridgeRingTests(unittest.TestCase):
 
     def test_missing_needed_installed_method_holds(self):
         caps = tuple(c for c in ring.door.registry()
-                     if c.handler != "frontier_original_003")
+                     if c.handler != "compile_original_006")
         with self.assertRaisesRegex(ring.HOLD, "No admitted"):
-            ring.choose(("frontier",), caps)
+            ring.choose(("macro_replay",), caps)
 
     def test_budget_limits_are_real_and_explicit(self):
         with self.assertRaisesRegex(ring.HOLD, "No admitted"):
