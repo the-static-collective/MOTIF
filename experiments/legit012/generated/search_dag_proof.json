@@ -1,0 +1,157 @@
+{
+  "finite_proof": {
+    "actual_production_change": false,
+    "external_formal_prover_used": false,
+    "fully_enumerated_partial_states": 6561,
+    "inductive_local_Boolean_transitions": 4,
+    "source_sha256": "b9c11206bdcd0c4e61b383660aca4bd8fb98ceeb1c27da7303dc32c61bb33881",
+    "status": "VERIFIED_FINITE_AND_INDUCTIVE_RESEARCH_ONLY",
+    "strong_classical_exact_agreement": true
+  },
+  "independently_authored_external_proof": false,
+  "proof_carrying_source_manifest": {
+    "cegis_counterexamples": 4,
+    "counterexample_transcript": [
+      {
+        "candidate": {
+          "join": "OR",
+          "mode": "REUSE_PARENT",
+          "on_empty": "FALLBACK_ZERO",
+          "pick": "LAST"
+        },
+        "counterexample": {
+          "actual": 151,
+          "expected": 0,
+          "graph_id": "Case_12000",
+          "partial": []
+        },
+        "round": 1
+      },
+      {
+        "candidate": {
+          "join": "OR",
+          "mode": "REUSE_PARENT",
+          "on_empty": "FALLBACK_ZERO",
+          "pick": "FIRST"
+        },
+        "counterexample": {
+          "actual": 0,
+          "expected": 3,
+          "graph_id": "Case_12000",
+          "partial": [
+            [
+              0,
+              true
+            ]
+          ]
+        },
+        "round": 2
+      },
+      {
+        "candidate": {
+          "join": "OR",
+          "mode": "RESTART_EACH_STATE",
+          "on_empty": "FALLBACK_ZERO",
+          "pick": "FIRST"
+        },
+        "counterexample": {
+          "actual": 0,
+          "expected": 1,
+          "graph_id": "Case_12000",
+          "partial": [
+            [
+              0,
+              false
+            ],
+            [
+              1,
+              false
+            ]
+          ]
+        },
+        "round": 3
+      },
+      {
+        "candidate": {
+          "join": "AND",
+          "mode": "REUSE_PARENT",
+          "on_empty": "FALLBACK_ZERO",
+          "pick": "FIRST"
+        },
+        "counterexample": {
+          "actual": 0,
+          "expected": null,
+          "graph_id": "Case_12000",
+          "partial": [
+            [
+              0,
+              true
+            ],
+            [
+              1,
+              true
+            ],
+            [
+              2,
+              false
+            ],
+            [
+              4,
+              true
+            ],
+            [
+              5,
+              false
+            ],
+            [
+              6,
+              true
+            ]
+          ]
+        },
+        "round": 4
+      },
+      {
+        "candidate": {
+          "join": "AND",
+          "mode": "REUSE_PARENT",
+          "on_empty": "HOLD",
+          "pick": "FIRST"
+        },
+        "counterexample": null,
+        "round": 5
+      }
+    ],
+    "independently_blinded_benchmark": false,
+    "inductive_edge_certificate": {
+      "external_SMT_solver_invoked": false,
+      "independently_authored_formal_checker": false,
+      "invariant": "Surviving program at a child = program survives parent AND matches added observation",
+      "membership_transitions": 4,
+      "proof": "Structural induction over topologically sorted evidence DAG with one added constraint per edge. For multi-parent merges every parent must yield the same canonical partial set.",
+      "source": "finite Boolean truth table + independent graph edge validator"
+    },
+    "parent_legit011_sha256": "09f0e39892526f3ecf0cb5cfa7e3d210b74e5e72c2648b2648f887ce5e7c899a",
+    "partial_truth_states_verified": 6561,
+    "production_patch_approved": false,
+    "read_only_candidate_graphs": true,
+    "real_world_authority": false,
+    "schema": "motif.certified-evidence-dag-transform.v1",
+    "sha256": "b66016ad360b6308c8a3cf127d2b5f7df0ac0d403825f98370e23b7f3aee6317",
+    "source_identity_authenticated": false,
+    "source_sha256": "b9c11206bdcd0c4e61b383660aca4bd8fb98ceeb1c27da7303dc32c61bb33881",
+    "status": "PROOF_REQUIRED_DRAFT",
+    "transformation_recipe": {
+      "join": "AND",
+      "mode": "REUSE_PARENT",
+      "on_empty": "HOLD",
+      "pick": "FIRST"
+    }
+  },
+  "real_world_authority": false,
+  "schema": "motif.generated-research-dag-transform.v1",
+  "source_eligible_for_automatic_merge": false,
+  "status": "DRAFT_HUMAN_CODE_REVIEW_REQUIRED",
+  "upstream_source_sha256": "09f0e39892526f3ecf0cb5cfa7e3d210b74e5e72c2648b2648f887ce5e7c899a",
+  "upstream_source_verified_relative_to_local_commit": true
+}
