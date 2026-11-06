@@ -115,3 +115,21 @@ def canonical_sop_xor():
 def direct_builtin_disagreement(a,b):
     """Strong conventional Boolean XOR reference; no NAND instruction cap."""
     return a!=b
+
+
+class MaskVerifier(IndependentVerifier):
+    """Generic unseen two-bit Boolean specifications, expressed as 4-bit mask.
+
+    Evaluator owns the task truth mask. Synthesizer sees one counterexample
+    at a time, not this object or its internal truth-label field.
+    """
+    def __init__(self,truth_mask):
+        if type(truth_mask) is not int or not 0<=truth_mask<=15:
+            raise ValueError("Four-bit truth specification required")
+        self.task_id="TruthMask_"+str(truth_mask)
+        self._truth_mask=truth_mask
+
+    def truth(self,a,b):
+        if type(a) is not bool or type(b) is not bool:
+            raise ValueError("Boolean truth arguments required")
+        return bool((self._truth_mask>>(2*int(a)+int(b)))&1)
