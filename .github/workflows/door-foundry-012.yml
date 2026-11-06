@@ -52,6 +52,20 @@ jobs:
           ref: 74271370acf57e3e9b0dcab27336abcfd4c68e55
           path: cannon096-source
           persist-credentials: false
+      - name: Immutable original MOTIF-012 owner bytes for independent review
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: cd4884af4cb456aeab07f8f5738d1df0f6d3c852
+          path: motif012-source
+          persist-credentials: false
+      - name: Independently owned CANNON-097 latent-source reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 788739025352b89d57928bf145953befe3db6a37
+          path: cannon097-source
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -214,6 +228,31 @@ jobs:
         env:
           MOTIF009_QUESTION_DIR: ${{ github.workspace }}/evidence/original-active-question
         run: python -m unittest discover -s experiments/door-foundry-012 -p 'test_hidden_source.py' -v
+      - name: CANNON-097 independently replays original MOTIF-012 source and all five posterior+question controls
+        run: |
+          node cannon097-source/experiments/cannon-097/review.mjs \
+            --motif motif012-source \
+            --question evidence/original-active-question \
+            --hidden evidence/hidden-sources \
+            --out evidence/cannon-097-hidden-origin-review.json
+          node --input-type=module - <<'JS'
+          import {readFileSync} from 'node:fs';
+          const p=JSON.parse(readFileSync('evidence/cannon-097-hidden-origin-review.json','utf8'));
+          if(p.status!=='HOLD_LATENT_ORIGIN_MATH_REPLAYED_WITNESSES_UNAUTHENTICATED' ||
+             p.original_source_owner.commit!=='cd4884af4cb456aeab07f8f5738d1df0f6d3c852' ||
+             p.five_finite_synthetic_cases.length!==5 ||
+             p.separate_exact_rational_source_model!==true ||
+             p.separate_cost_sensitive_question_tree!==true ||
+             p.actual_human_evidence_authenticated!==false ||
+             p.external_source_independence_demonstrated!==false ||
+             p.people_contacted!==0 || p.code_admitted!==false)
+              throw Error('Independent held common-source review disagrees or claims false provenance');
+          console.log(JSON.stringify({
+            independent_cannon_review:p.status,
+            hypothesis_families_checked:p.five_finite_synthetic_cases.length,
+            original_source_commit:p.original_source_owner.commit,
+            proven_real_source_identities:0,actual_external_actions:0},null,2));
+          JS
       - name: Save full future PNGs, source reviews, append-only updates and prediction results
         uses: actions/upload-artifact@v4
         with:
