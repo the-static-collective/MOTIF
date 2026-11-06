@@ -77,6 +77,12 @@ counted quantities, time order, directed three-party relationships, and conditio
 <div class="metric">Explicit HOLD<b id="held">—</b></div>
 <div class="metric">Weak fixed-answer control<b id="naive">—</b></div></div>
 <p id="skill" class="sub"></p><h3>Selected source-linked failures and abstentions</h3><pre id="failures"></pre></div>
+<div class="card"><h2>When the external benchmark's answer is not unique</h2>
+<p>A separate <strong>posthoc</strong> evaluator found that a single bAbI question's
+official answer is supported by one original story sentence, but a different
+answer is ALSO supported by another original sentence. The typed solver chose
+the latter with excessive confidence. This remains an official scoring mismatch
+and is not retroactively corrected.</p><pre id="ambiguity"></pre></div>
 <div class="card"><h2>Where an old Boolean view breaks</h2>
 <p>Two independently authored training examples can share the same impoverished feature summary while requiring different answers. A model using <em>only</em> that old summary cannot fit both. This says nothing about the limits of general Boolean logic.</p>
 <pre id="witnesses"></pre></div>
@@ -110,6 +116,7 @@ function showFamily(){
 }
 el("family").addEventListener("change",showFamily);showFamily();
 el("witnesses").textContent=fmt(source.source_training_boolean_projection_impossibilities);
+el("ambiguity").textContent=fmt(source.independent_external_posthoc_ambiguous_gold_cases||[]);
 for(const p of source.fictional_duty_source_proofs){
  const item=document.createElement("option");item.value=p.source_case_id;
  item.textContent=p.source_case_id.replaceAll("_"," ");
