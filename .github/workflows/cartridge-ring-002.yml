@@ -41,10 +41,28 @@ jobs:
           assert all(not p['executable'] for p in d['passports'])
           print('Indexed',d['cartridges_indexed_non_executable'],'non-executable branch source pointers.')
           PY
+      - name: Live MOTIF router consumes the fresh census and calls only one needed owner module
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python experiments/cartridge-ring-001/living_ring.py --outputs verbs --output /tmp/motif-living-ring.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/motif-living-ring.json'))
+          assert d['schema']=='motif.living-cartridge-ring.v1'
+          assert d['ring_work']['stage']=='PROPOSED'
+          assert len(d['ring_work']['selected_cartridges'])==1
+          assert d['ring_work']['discovered_uninstalled_branches']==d['source_only_cartridges_addressable']
+          assert d['native_specialist_work'] is None
+          assert d['authority']=='NONE'
+          print('Living ring used one needed handler with current dynamic branch census.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: live-branch-garden
-          path: /tmp/motif-branch-garden-live.json
+          path: |
+            /tmp/motif-branch-garden-live.json
+            /tmp/motif-living-ring.json
           retention-days: 30
 
   triad:
