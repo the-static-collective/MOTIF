@@ -175,7 +175,7 @@ def _learn_single(samples,already):
         transcript.append(event)
         if certified["result"]=="SAT":
             bad=certified["counterexample"]
-            known.append((bad["parent"],bad["column"],bad["reference"]))
+            known.append((int(bad["parent"],16),int(bad["column"],16),int(bad["reference"],16)))
             rejected.add((guard,answer))
             continue
         if certified["result"]!="UNSAT":
