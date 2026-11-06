@@ -1,0 +1,30 @@
+name: MOTIF LEGIT-001 reason routing
+on:
+  push:
+    paths:
+      - "experiments/legit001/**"
+      - ".github/workflows/legit001.yml"
+  pull_request:
+    paths:
+      - "experiments/legit001/**"
+      - ".github/workflows/legit001.yml"
+jobs:
+  stranger-gate-authored-synthetic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial and classical-control tests
+        run: python -m unittest discover -s experiments/legit001 -p 'test_*.py' -v
+      - name: Reproducible authored benchmark
+        run: |
+          python experiments/legit001/benchmark.py > /tmp/motif-legit001.json
+          echo "__MOTIF_LEGIT001_START__"
+          cat /tmp/motif-legit001.json
+          echo "__MOTIF_LEGIT001_END__"
+          python -m json.tool /tmp/motif-legit001.json >/dev/null
