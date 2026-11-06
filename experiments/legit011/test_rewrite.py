@@ -24,7 +24,13 @@ from rewrite import (HOLD,produce_upgrade,verify_upgrade,load_generated_source,
                      build_columns,synthesize_rewrite,validate_recipe)
 from search_reference import (ScanOracle,StrongClassicalIndex,states,
                               independent_update_check)
-from benchmark import execute,exhaustive_partial_check,learn_three
+from importlib.util import spec_from_file_location,module_from_spec
+_spec=spec_from_file_location("legit011_local_benchmark",HERE/"benchmark.py")
+_benchmark=module_from_spec(_spec)
+_spec.loader.exec_module(_benchmark)
+execute=_benchmark.execute
+exhaustive_partial_check=_benchmark.exhaustive_partial_check
+learn_three=_benchmark.learn_three
 
 
 class SelfRewriteTests(unittest.TestCase):
