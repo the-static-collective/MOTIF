@@ -1,19 +1,32 @@
-name: REASON-014 Complete-Opinion Source Acquisition Probe
+name: REASON-014 Complete Judicial Opinion Acquisition
 on:
   push:
     branches:
       - experiment/reason-cartridge-014-complete-opinion-retrieval
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-014/**'
+      - '.github/workflows/reason-cartridge-014.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  source-probe:
+  complete-opinion-retrieval:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Inspect published opinion HTML source boundaries
-        run: python experiments/reason-cartridge-014/probe.py
+      - name: Fetch complete published judicial opinion bodies and preserve SHA pins
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Run Python source integrity tests
+        run: python -m unittest discover -s experiments/reason-cartridge-014 -p 'test_*.py' -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-014-full-court-sources
+          path: reason-014-sources/
+          retention-days: 30
