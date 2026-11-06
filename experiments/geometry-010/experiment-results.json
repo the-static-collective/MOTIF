@@ -1,0 +1,180 @@
+{
+  "archive": {
+    "authority": "NONE",
+    "feedback_cases": 74,
+    "node_id": "conditional-revision:9034748d8cc74ccb8b36665437568edac20d7a202b16937863afa5718782a0ce",
+    "status": "ARCHIVED_PENCIL_ONLY"
+  },
+  "archive_counts": {
+    "db_bytes_allocated_approx": 143360,
+    "expanded": 0,
+    "nodes": 75,
+    "relations": 1,
+    "unexpanded": 0
+  },
+  "authority": "NONE",
+  "counterfactual_graph_forks": {
+    "forbidden": {
+      "parent": {
+        "authority": "NONE",
+        "expanded": 2,
+        "seen": 2,
+        "status": "SATURATED_NO_TARGET"
+      },
+      "revised": {
+        "authority": "NONE",
+        "expanded": 2,
+        "seen": 2,
+        "status": "SATURATED_NO_TARGET"
+      },
+      "unconditional": {
+        "authority": "NONE",
+        "expanded": 2,
+        "rules": [
+          "sprout",
+          "inferred-e147b41f4afa"
+        ],
+        "status": "PATH",
+        "steps": 2
+      }
+    },
+    "permitted": {
+      "parent": {
+        "authority": "NONE",
+        "expanded": 2,
+        "seen": 2,
+        "status": "SATURATED_NO_TARGET"
+      },
+      "revised": {
+        "authority": "NONE",
+        "expanded": 2,
+        "rules": [
+          "sprout",
+          "inferred-e147b41f4afa"
+        ],
+        "status": "PATH",
+        "steps": 2
+      },
+      "unconditional": {
+        "authority": "NONE",
+        "expanded": 2,
+        "rules": [
+          "sprout",
+          "inferred-e147b41f4afa"
+        ],
+        "status": "PATH",
+        "steps": 2
+      }
+    },
+    "unknown": {
+      "parent": {
+        "authority": "NONE",
+        "expanded": 2,
+        "seen": 2,
+        "status": "SATURATED_NO_TARGET"
+      },
+      "revised": {
+        "authority": "NONE",
+        "expanded": 2,
+        "seen": 2,
+        "status": "HOLD_UNKNOWN_CONTEXT"
+      },
+      "unconditional": {
+        "authority": "NONE",
+        "expanded": 2,
+        "rules": [
+          "sprout",
+          "inferred-e147b41f4afa"
+        ],
+        "status": "PATH",
+        "steps": 2
+      }
+    }
+  },
+  "experiment": "MOTIF GEOM-010: synthetic critic/inventor/explorer grammar revision",
+  "heldout_scores": {
+    "always_false_baseline": {
+      "correct": 200,
+      "total": 260
+    },
+    "round_one_guard": {
+      "abstentions": 0,
+      "correct": 180,
+      "false_negatives": 0,
+      "false_positives": 80,
+      "total": 260,
+      "true_negatives": 120,
+      "true_positives": 60
+    },
+    "round_two_guard": {
+      "abstentions": 20,
+      "correct": 240,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 260,
+      "true_negatives": 180,
+      "true_positives": 60
+    },
+    "unconditional": {
+      "abstentions": 0,
+      "correct": 60,
+      "false_negatives": 0,
+      "false_positives": 200,
+      "total": 260,
+      "true_negatives": 0,
+      "true_positives": 60
+    }
+  },
+  "heldout_seed": 20261106,
+  "initial_symbolic_rule": {
+    "find": [
+      "bud"
+    ],
+    "name": "inferred-e147b41f4afa",
+    "replace": [
+      "branch"
+    ]
+  },
+  "instrument": "PENCIL",
+  "integrity": {
+    "foreign_key_errors": 0,
+    "integrity": "ok"
+  },
+  "interpretation": "training/dev-driven classical conditional rule induction; no claims of unsupervised semantics",
+  "round_one": {
+    "critic_after": "DEVELOPMENT_FIT",
+    "critic_false_positives": 28,
+    "development": {
+      "abstentions": 0,
+      "correct": 46,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 46,
+      "true_negatives": 32,
+      "true_positives": 14
+    },
+    "guard": {
+      "moisture": "wet",
+      "season": "warm"
+    }
+  },
+  "round_two": {
+    "critic_after": "DEVELOPMENT_FIT",
+    "critic_false_positives": 14,
+    "development": {
+      "abstentions": 0,
+      "correct": 74,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 74,
+      "true_negatives": 46,
+      "true_positives": 28
+    },
+    "guard": {
+      "moisture": "wet",
+      "nutrient": "good",
+      "season": "warm"
+    }
+  },
+  "scope": "synthetic:observer-alpha:t1:decoder-v1"
+}

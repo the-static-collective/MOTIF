@@ -1,0 +1,63 @@
+{
+  "authority": "NONE",
+  "best_classical_conjunction": {
+    "moisture": "wet",
+    "nutrient": "good",
+    "season": "warm"
+  },
+  "classical_match": true,
+  "developer_authored_synthetic": true,
+  "development_cases": 74,
+  "experiment": "GEOM-010 paired classical conditional induction",
+  "frozen_seed": 20261106,
+  "heldout_cases": 260,
+  "instrument": "PENCIL",
+  "interpretation": "Both methods tie on synthetic features. No novel algorithm or generalized self-improvement is demonstrated.",
+  "proposed_conjunction": {
+    "moisture": "wet",
+    "nutrient": "good",
+    "season": "warm"
+  },
+  "scores": {
+    "always_false": {
+      "correct": 200,
+      "total": 260
+    },
+    "first_revision": {
+      "abstentions": 0,
+      "correct": 180,
+      "false_negatives": 0,
+      "false_positives": 80,
+      "total": 260,
+      "true_negatives": 120,
+      "true_positives": 60
+    },
+    "matched_classical_conjunction": {
+      "abstentions": 20,
+      "correct": 240,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 260,
+      "true_negatives": 180,
+      "true_positives": 60
+    },
+    "second_revision": {
+      "abstentions": 20,
+      "correct": 240,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "total": 260,
+      "true_negatives": 180,
+      "true_positives": 60
+    },
+    "unconditional": {
+      "abstentions": 0,
+      "correct": 60,
+      "false_negatives": 0,
+      "false_positives": 200,
+      "total": 260,
+      "true_negatives": 0,
+      "true_positives": 60
+    }
+  }
+}

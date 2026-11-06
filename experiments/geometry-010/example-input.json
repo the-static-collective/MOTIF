@@ -1,0 +1,911 @@
+{
+  "parent_grammar": {
+    "scope": "synthetic:observer-alpha:t1:decoder-v1",
+    "rules": [
+      {
+        "name": "sprout",
+        "find": [
+          "seed"
+        ],
+        "replace": [
+          "bud"
+        ]
+      },
+      {
+        "name": "recede",
+        "find": [
+          "bud"
+        ],
+        "replace": [
+          "seed"
+        ]
+      }
+    ]
+  },
+  "initial_rule": {
+    "name": "inferred-e147b41f4afa",
+    "find": [
+      "bud"
+    ],
+    "replace": [
+      "branch"
+    ]
+  },
+  "development": [
+    {
+      "id": "early-good-0",
+      "before": [
+        "early-good-0",
+        "bud"
+      ],
+      "after": [
+        "early-good-0",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-0",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-0",
+      "before": [
+        "early-cold-0",
+        "bud"
+      ],
+      "after": [
+        "early-cold-0",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-0",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-0",
+      "before": [
+        "early-dry-0",
+        "bud"
+      ],
+      "after": [
+        "early-dry-0",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-0",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-1",
+      "before": [
+        "early-good-1",
+        "bud"
+      ],
+      "after": [
+        "early-good-1",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-1",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-1",
+      "before": [
+        "early-cold-1",
+        "bud"
+      ],
+      "after": [
+        "early-cold-1",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-1",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-1",
+      "before": [
+        "early-dry-1",
+        "bud"
+      ],
+      "after": [
+        "early-dry-1",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-1",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-2",
+      "before": [
+        "early-good-2",
+        "bud"
+      ],
+      "after": [
+        "early-good-2",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-2",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-2",
+      "before": [
+        "early-cold-2",
+        "bud"
+      ],
+      "after": [
+        "early-cold-2",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-2",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-2",
+      "before": [
+        "early-dry-2",
+        "bud"
+      ],
+      "after": [
+        "early-dry-2",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-2",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-3",
+      "before": [
+        "early-good-3",
+        "bud"
+      ],
+      "after": [
+        "early-good-3",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-3",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-3",
+      "before": [
+        "early-cold-3",
+        "bud"
+      ],
+      "after": [
+        "early-cold-3",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-3",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-3",
+      "before": [
+        "early-dry-3",
+        "bud"
+      ],
+      "after": [
+        "early-dry-3",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-3",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-4",
+      "before": [
+        "early-good-4",
+        "bud"
+      ],
+      "after": [
+        "early-good-4",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-4",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-4",
+      "before": [
+        "early-cold-4",
+        "bud"
+      ],
+      "after": [
+        "early-cold-4",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-4",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-4",
+      "before": [
+        "early-dry-4",
+        "bud"
+      ],
+      "after": [
+        "early-dry-4",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-4",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-5",
+      "before": [
+        "early-good-5",
+        "bud"
+      ],
+      "after": [
+        "early-good-5",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-5",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-5",
+      "before": [
+        "early-cold-5",
+        "bud"
+      ],
+      "after": [
+        "early-cold-5",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-5",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-5",
+      "before": [
+        "early-dry-5",
+        "bud"
+      ],
+      "after": [
+        "early-dry-5",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-5",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-6",
+      "before": [
+        "early-good-6",
+        "bud"
+      ],
+      "after": [
+        "early-good-6",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-6",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-6",
+      "before": [
+        "early-cold-6",
+        "bud"
+      ],
+      "after": [
+        "early-cold-6",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-6",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-6",
+      "before": [
+        "early-dry-6",
+        "bud"
+      ],
+      "after": [
+        "early-dry-6",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-6",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-7",
+      "before": [
+        "early-good-7",
+        "bud"
+      ],
+      "after": [
+        "early-good-7",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-7",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-7",
+      "before": [
+        "early-cold-7",
+        "bud"
+      ],
+      "after": [
+        "early-cold-7",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-7",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-7",
+      "before": [
+        "early-dry-7",
+        "bud"
+      ],
+      "after": [
+        "early-dry-7",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-7",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-8",
+      "before": [
+        "early-good-8",
+        "bud"
+      ],
+      "after": [
+        "early-good-8",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-8",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-8",
+      "before": [
+        "early-cold-8",
+        "bud"
+      ],
+      "after": [
+        "early-cold-8",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-8",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-8",
+      "before": [
+        "early-dry-8",
+        "bud"
+      ],
+      "after": [
+        "early-dry-8",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-8",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-9",
+      "before": [
+        "early-good-9",
+        "bud"
+      ],
+      "after": [
+        "early-good-9",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-9",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-9",
+      "before": [
+        "early-cold-9",
+        "bud"
+      ],
+      "after": [
+        "early-cold-9",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-9",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-9",
+      "before": [
+        "early-dry-9",
+        "bud"
+      ],
+      "after": [
+        "early-dry-9",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-9",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-10",
+      "before": [
+        "early-good-10",
+        "bud"
+      ],
+      "after": [
+        "early-good-10",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-10",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-10",
+      "before": [
+        "early-cold-10",
+        "bud"
+      ],
+      "after": [
+        "early-cold-10",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-10",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-10",
+      "before": [
+        "early-dry-10",
+        "bud"
+      ],
+      "after": [
+        "early-dry-10",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-10",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-11",
+      "before": [
+        "early-good-11",
+        "bud"
+      ],
+      "after": [
+        "early-good-11",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-11",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-11",
+      "before": [
+        "early-cold-11",
+        "bud"
+      ],
+      "after": [
+        "early-cold-11",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-11",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-11",
+      "before": [
+        "early-dry-11",
+        "bud"
+      ],
+      "after": [
+        "early-dry-11",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-11",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-12",
+      "before": [
+        "early-good-12",
+        "bud"
+      ],
+      "after": [
+        "early-good-12",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-12",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-12",
+      "before": [
+        "early-cold-12",
+        "bud"
+      ],
+      "after": [
+        "early-cold-12",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-12",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-12",
+      "before": [
+        "early-dry-12",
+        "bud"
+      ],
+      "after": [
+        "early-dry-12",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-12",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-good-13",
+      "before": [
+        "early-good-13",
+        "bud"
+      ],
+      "after": [
+        "early-good-13",
+        "branch"
+      ],
+      "expected": true,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-good-13",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-cold-13",
+      "before": [
+        "early-cold-13",
+        "bud"
+      ],
+      "after": [
+        "early-cold-13",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "cold"
+      },
+      "source_root": "claimed:development:early-cold-13",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-dry-13",
+      "before": [
+        "early-dry-13",
+        "bud"
+      ],
+      "after": [
+        "early-dry-13",
+        "branch"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "dry",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-dry-13",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-leaf-0",
+      "before": [
+        "early-leaf-0",
+        "bud"
+      ],
+      "after": [
+        "early-leaf-0",
+        "leaf"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-leaf-0",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-leaf-1",
+      "before": [
+        "early-leaf-1",
+        "bud"
+      ],
+      "after": [
+        "early-leaf-1",
+        "leaf"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-leaf-1",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-leaf-2",
+      "before": [
+        "early-leaf-2",
+        "bud"
+      ],
+      "after": [
+        "early-leaf-2",
+        "leaf"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-leaf-2",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    },
+    {
+      "id": "early-leaf-3",
+      "before": [
+        "early-leaf-3",
+        "bud"
+      ],
+      "after": [
+        "early-leaf-3",
+        "leaf"
+      ],
+      "expected": false,
+      "facts": {
+        "moisture": "wet",
+        "nutrient": "good",
+        "season": "warm"
+      },
+      "source_root": "claimed:development:early-leaf-3",
+      "scope": "synthetic:observer-alpha:t1:decoder-v1"
+    }
+  ],
+  "work_budget": 1000
+}
