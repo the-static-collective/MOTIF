@@ -10,6 +10,7 @@ from source import Case, TRAIN, CERT, training, deployment, bfs_truth, SOURCE_RE
 from compiler import propose, validate, classify, pin_source, PROGRAMS
 from receiver import Receiver
 from market import Bid, DiscoveryMarket, packet, validate_packet, COST
+from bridge006 import transfer
 
 
 def certified():
@@ -35,6 +36,7 @@ def run(path=None):
     wide=deployment(16)
     raw=packet(artifact,receiver,offers(),wide)
     reviewed=validate_packet(raw,receiver)
+    inherited_ledger=transfer(raw,receiver)
     market=reviewed["receipt"]
     tiny=DiscoveryMarket(artifact,receiver,offers(),deployment(1)).evaluate()
     larger=DiscoveryMarket(artifact,receiver,offers(),deployment(32)).evaluate()
@@ -67,6 +69,7 @@ def run(path=None):
                                      for e in market["offers"] if not e["new_validated_offer"]),
         "duplicate_bids_suppressed":market["duplicate_offers"],
         "market_winner_receipt_digest":reviewed["checksum_sha256"],
+        "reused_prior_commonwealth_ledger":inherited_ledger,
         "validation_receipt_digest":certification["review_digest"],
         "full_information_classical_solver_would_match_accuracy":True,
         "classical_optimizing_planner_can_make_same_choice":True,
