@@ -14,6 +14,7 @@ from worlds import train_worlds,heldout_worlds
 from oracle import SourceOwner,source_label
 from inventor import discover,suggest,programs,export,pin
 from reviewer import Receiver,reviewed_evaluation
+from drift import source_revision,detect
 
 
 def flat_unjoined_baseline(w):
@@ -54,6 +55,7 @@ def run(out=None):
     for x in examples:
         statuses[x["source_status"]]=statuses.get(x["source_status"],0)+1
     checked=receiver.suggest(heldout_worlds()[0])
+    correction=detect(model,source_revision())
     answer={
         "schema":"motif.reason.living-concept.benchmark.v1",
         "training_worlds_available":len(train_worlds()),
@@ -79,6 +81,7 @@ def run(out=None):
         "source_graph_nodes_grow_beyond_training":True,
         "independent_receiver":review,
         "first_independently_admitted_source_case":checked,
+        "unknown_new_source_relation_conflict":correction,
         "label_source_is_synthetic":True,
         "general_language_understanding_not_proven":True,
         "human_welfare_love_emotion_not_measured":True,
@@ -90,6 +93,8 @@ def run(out=None):
         (dest/"compiled-relation-cartridge.json").write_text(payload,encoding="utf8")
         (dest/"benchmark.json").write_text(
             json.dumps(answer,indent=2,sort_keys=True)+"\n",encoding="utf8")
+        (dest/"unrepresented-new-relation.json").write_text(
+            json.dumps(correction,indent=2,sort_keys=True)+"\\n",encoding="utf8")
         (dest/"heldout-four-valued-source-audit.json").write_text(
             json.dumps(examples,indent=2,sort_keys=True)+"\n",encoding="utf8")
     return answer
@@ -110,5 +115,6 @@ if __name__=="__main__":
         "heldout_wrong_with_confidence":result["heldout_incorrect_confident"],
         "flat_unjoined_weak_baseline":result["weak_unjoined_relation_bag_baseline"],
         "strong_classical_reference":result["strong_classical_direct_reference"],
+        "new_source_correction_result":result["unknown_new_source_relation_conflict"]["result"],
         "synthetic_source_truth_counts":result["heldout_source_four_state_counts"],
     },indent=2,sort_keys=True))
