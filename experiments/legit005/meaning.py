@@ -169,7 +169,7 @@ def parse(question,grammar):
                           "HOLD_UNSUPPORTED_MEANING"),
                 "matched_rules":len(matches),"real_world_authority":False}
     return dict(matches[0],status="PARSED_PROPOSAL_ONLY",
-                "matched_rules":1,"real_world_authority":False)
+                matched_rules=1,real_world_authority=False)
 
 
 def counterexample_truth(kind,proxy_is_positive,target_exists):
