@@ -1,0 +1,31 @@
+name: MOTIF THOUGHT-006 pencil and pen ledger
+on:
+  push:
+    paths:
+      - 'experiments/thought-006/**'
+      - '.github/workflows/thought-006.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-006/**'
+      - '.github/workflows/thought-006.yml'
+jobs:
+  pencil-pen-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test epistemic gates and exact replay
+        working-directory: experiments/thought-006
+        run: python -m unittest -v test_ledger.py
+      - name: Verify deterministic synthetic scenario
+        working-directory: experiments/thought-006
+        run: |
+          python demo.py > /tmp/ledger-result.json
+          python -c "import json; d=json.load(open('/tmp/ledger-result.json')); assert all(d[k] for k in ('initial_universal_promotion_rejected','echoed_root_rejected','exact_replay')); assert d['pen_receipt']['effective_external_authority']=='NONE' and d['reopened_receipt']['instrument']=='PENCIL'"
+      - name: Upload inspectable development receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-006-fixture-receipt
+          path: /tmp/ledger-result.json
