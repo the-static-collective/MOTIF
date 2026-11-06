@@ -1,0 +1,35 @@
+name: MOTIF LEGIT-015 compounding improvement economy
+on:
+  push:
+    paths:
+      - "experiments/legit015/**"
+      - ".github/workflows/legit015.yml"
+  pull_request:
+    paths:
+      - "experiments/legit015/**"
+      - ".github/workflows/legit015.yml"
+jobs:
+  compounding-counterfactual-economics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Independently falsify compounding, cost of waiting and uncertainty policies
+        run: python -m unittest discover -s experiments/legit015 -p 'test_*.py' -v
+      - name: Run actual recursive reinvestment planner with exact classical control
+        run: |
+          python experiments/legit015/benchmark.py --emit > /tmp/motif-legit015-economy-console.json
+          python -m json.tool /tmp/motif-legit015-improvement-economy.json > /dev/null
+          cat /tmp/motif-legit015-improvement-economy.json
+      - name: Preserve transparent synthetic assumptions and source evidence boundary
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT015-COMPOUNDING-ECONOMY-RESEARCH-HOLD
+          path: /tmp/motif-legit015-improvement-economy.json
+          if-no-files-found: error
+          retention-days: 30
