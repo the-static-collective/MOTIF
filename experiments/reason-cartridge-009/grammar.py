@@ -234,6 +234,13 @@ def discovery(family,initial,oracle,max_cost=11,max_calls=24):
             break
     if selected is None or selected_limit is None:
         raise HOLD("No source-tested program inside bounded recursive grammar")
+    # Final gap certificates must bind the COMPLETE public teaching transcript,
+    # not the smaller intermediate evidence state from an earlier tier.
+    all_labels={m:row["reachable"] for m,row in observations.items()}
+    failed=[grammar.gaps(level,all_labels) for level in LEVELS
+            if level<selected_limit]
+    if any(proof is None for proof in failed):
+        raise HOLD("A supposedly insufficient grammar fits the final observations")
     expression=grammar.expressions[selected][1]
     records=[observations[mask] for mask in sorted(observations)]
     program={
