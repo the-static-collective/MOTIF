@@ -8,6 +8,8 @@ from tempfile import TemporaryDirectory
 
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'thought-007'))
 from field import ThoughtField,canonical
+# Prevent the sibling THOUGHT-007/demo.py from shadowing this experiment's demo.
+sys.path.pop(0)
 from multiview import ThoughtViews,ViewError,LENSES
 from demo import synthetic,main
 from render import render_board
