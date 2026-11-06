@@ -1,0 +1,48 @@
+name: Cartridge Ring 001 / source-pinned multi-method test
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-001-branch-constellation
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-001/**'
+      - 'experiments/door-foundry-001/**'
+      - 'experiments/002/**'
+      - 'experiments/003/**'
+      - 'experiments/006/**'
+      - '.github/workflows/cartridge-ring-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Parent owner-module tests
+        run: python -m unittest discover -s experiments/door-foundry-001 -p 'test_*.py' -v
+      - name: Ring selection and adversarial tests
+        run: python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+      - name: Zero, one, parallel, and serial receipts
+        run: |
+          python experiments/cartridge-ring-001/ring.py --outputs > /tmp/ring-idle.json
+          python experiments/cartridge-ring-001/ring.py --outputs verbs > /tmp/ring-single.json
+          python experiments/cartridge-ring-001/ring.py --outputs frontier macro_replay > /tmp/ring-parallel.json
+          python experiments/cartridge-ring-001/ring.py --outputs frontier macro_replay --serial > /tmp/ring-serial.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          load = lambda x: json.loads(Path('/tmp/ring-' + x + '.json').read_text())
+          assert load('idle')['stage'] == 'IDLE'
+          assert len(load('single')['selected_cartridges']) == 1
+          assert len(load('parallel')['selected_cartridges']) == 4
+          assert load('parallel') == load('serial')
+          print('Verified: IDLE, 1 installed method, 4 composed methods, deterministic concurrent parity')
+          PY
