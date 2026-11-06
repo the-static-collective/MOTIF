@@ -1,0 +1,33 @@
+name: MOTIF GEOM-006 temporal staircase
+on:
+  pull_request:
+    paths:
+      - 'experiments/geometry-006/**'
+      - '.github/workflows/motif-geometry-006.yml'
+  push:
+    branches:
+      - 'experiment/geometry-006-temporal-staircase'
+    paths:
+      - 'experiments/geometry-006/**'
+      - '.github/workflows/motif-geometry-006.yml'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test temporal graph
+        run: |
+          cd experiments/geometry-006
+          python -m unittest -v test_staircase.py
+      - name: Reproduce synthetic evidence
+        run: |
+          cd experiments/geometry-006
+          python demo.py > experiment-results.json
+          python -m json.tool experiment-results.json > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom-006-evidence
+          path: experiments/geometry-006/experiment-results.json
