@@ -37,7 +37,7 @@ PIN_CASES="7ab259ad2f4312b4258e4d3c5201f487ba00641f"
 PIN_PRIVACY="motif.reason.golden-mirror-learns.scripted-owner.v1"
 PACKET="motif.reason.golden-mirror-learns.evidence.v1"
 
-sys.path.insert(0,str(PARENT019))
+sys.path.append(str(PARENT019))
 import golden_mirror as original_mirror
 
 
