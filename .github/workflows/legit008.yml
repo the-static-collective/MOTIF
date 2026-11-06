@@ -1,0 +1,37 @@
+name: MOTIF LEGIT-008 proof-carrying metareasoner
+on:
+  push:
+    paths:
+      - "experiments/legit008/**"
+      - ".github/workflows/legit008.yml"
+  pull_request:
+    paths:
+      - "experiments/legit008/**"
+      - ".github/workflows/legit008.yml"
+jobs:
+  bounded-metareasoning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Challenge proof pins, source spoofing, classical Bellman parity and strategy holdout
+        run: python -m unittest discover -s experiments/legit008 -p 'test_*.py' -v
+      - name: Test independent source provenance crosswire remains reproducible
+        run: python experiments/legit007/bridge_013.py
+      - name: Archive exact unseen 160-case decision and compute results
+        run: |
+          python experiments/legit008/benchmark.py > /tmp/motif-legit008-benchmark.json
+          python -m json.tool /tmp/motif-legit008-benchmark.json > /dev/null
+          cat /tmp/motif-legit008-benchmark.json
+      - name: Preserve inspectable synthetic proof and search receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT008-PROOF-STRATEGY-RESEARCH-HOLD
+          path: /tmp/motif-legit008-benchmark.json
+          retention-days: 30
+          if-no-files-found: error
