@@ -83,6 +83,24 @@ jobs:
             "revoked_consent_stays_revoked":r["older_revision_cannot_reenter_consent_ledger"],
           })
           PY
+      - name: Build the actual learned self and other circles visual interface
+        run: |
+          python experiments/reason-cartridge-020/viewer.py reason-020-evidence/benchmark.json reason-020-evidence/golden-mirror-learns.html
+          python - <<'PY'
+          from pathlib import Path
+          page=Path("reason-020-evidence/golden-mirror-learns.html")
+          text=page.read_text(encoding="utf8")
+          assert 'class="diagram"' in text
+          assert 'id="other"' in text and 'id="self"' in text
+          assert 'id="case"' in text
+          assert "SELF" in text and "OTHER" in text and "MIRROR" in text
+          assert '<script src="http' not in text
+          assert page.stat().st_size>8000
+          print({"interactive_two_circles":str(page),
+                 "size":page.stat().st_size,
+                 "real_person_data":False,
+                 "network_access":False})
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: reason-020-golden-mirror-learning-and-corrections
