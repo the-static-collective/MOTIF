@@ -25,7 +25,7 @@ TEXT = re.compile(r"^[a-z0-9 ,?.:'-]{1,400}$")
 RISKY_NOUN = re.compile(
     r"\b(no|not|never|none|neither|nor|except|unless|despite|without|"
     r"does|doesn't|cannot|can't|prove|rule|exclude|exists|exist|is|are|"
-    r"absent|present|evidence|indicates|implies|guarantee|some|all)\b")
+    r"absent|present|missing|evidence|indicates|implies|guarantee|some|all)\b")
 TYPES = {
     "NO_POSITIVE_EVIDENCE":("target",),
     "HAS_NEGATIVE_EVIDENCE":("target",),
