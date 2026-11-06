@@ -127,11 +127,12 @@ class SelfImprovementTrialTests(unittest.TestCase):
                          {"prior_012","prior_013","strong_classical","candidate"})
         self.assertTrue(all(len(row["samples_ms"])==11 for row in timings.values()))
         self.assertEqual(set(self.benchmark["wins_out_of_11_repeats"]),
-                         {"prior_013","strong_classical"})
+                         {"prior_012","prior_013","strong_classical"})
 
     def test_acceptance_requires_explicit_predeclared_improvement_gates(self):
         gates=self.benchmark["gate"]
         self.assertIn("at_least_8_percent_faster_vs_prior",gates)
+        self.assertIn("at_least_8_percent_faster_vs_earlier_012",gates)
         self.assertIn("at_least_8_percent_faster_vs_strong_classical",gates)
         self.assertIn("win_at_least_10_of_11_repeats_vs_both",gates)
         self.assertIn("no_family_regression_gt_10_percent_vs_strong",gates)
