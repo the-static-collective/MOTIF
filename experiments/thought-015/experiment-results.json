@@ -1,0 +1,133 @@
+{
+  "audit": {
+    "after": 60,
+    "before": 50,
+    "total": 60
+  },
+  "candidate_config": {
+    "enforce_budget": true,
+    "relax_improved": true,
+    "resource_state": true,
+    "weighted_priority": true
+  },
+  "candidate_source_sha256": "9038afbf6b920e0f6861cfb48f1a1bb6fec5bb4d03c93f10ee06714adc812453",
+  "counterexample": null,
+  "development": {
+    "after": 8,
+    "before": 0,
+    "total": 8
+  },
+  "external_authority": "NONE",
+  "frozen_audit_inspected_after_proposals": true,
+  "installed": false,
+  "limitations": "Synthetic developer-authored task; tiny trained classifier selects repairs from a four-operator DSL. No original algorithm invention or LLM execution. Python -I is not a secure OS sandbox.",
+  "model_authored_python_source": false,
+  "model_chose_from_fixed_dsl": true,
+  "model_kind": "TRAINED_NAIVE_BAYES_REPAIR_DIAGNOSTIC_NOT_LLM",
+  "operator_review_required": true,
+  "pen_state": "UNCHANGED",
+  "proposals": [
+    {
+      "dev_after": 0,
+      "dev_before": 0,
+      "dev_total": 8,
+      "digest": "69979e45ed4d26f810a63758331cbf497e20321b806c9ba67be99ee9772b0808",
+      "external_authority": "NONE",
+      "from_sha256": "461949103008e99ff54da6f495f4fb86c66d6ab81e429318d1c0aee675379d87",
+      "proposal": {
+        "proposer": "tiny-supervised-debug-model",
+        "reason": "Model diagnosed: A two leg route is cheaper than the first direct route despite more steps",
+        "repair": "WEIGHTED_PRIORITY",
+        "schema": "motif.thought015.patch-proposal.v1"
+      },
+      "regressions": [],
+      "round": 1,
+      "safety_passed": 2,
+      "safety_total": 4,
+      "status": "STAGED_NEUTRAL_IN_SCRATCH",
+      "to_sha256": "e2e46c296b85755ee853f3f41327ae96ccfbf1c0bc5fd280510efab1b21c2519"
+    },
+    {
+      "dev_after": 2,
+      "dev_before": 0,
+      "dev_total": 8,
+      "digest": "a830110c5b36a23a68ef60ac7ffd2083ff9b7cde479ab8b04f77a25761589d25",
+      "external_authority": "NONE",
+      "from_sha256": "e2e46c296b85755ee853f3f41327ae96ccfbf1c0bc5fd280510efab1b21c2519",
+      "proposal": {
+        "proposer": "tiny-supervised-debug-model",
+        "reason": "Model diagnosed: The cheapest direct path exceeds the risk budget; a safer expensive path is valid",
+        "repair": "ENFORCE_BUDGET",
+        "schema": "motif.thought015.patch-proposal.v1"
+      },
+      "regressions": [],
+      "round": 2,
+      "safety_passed": 3,
+      "safety_total": 4,
+      "status": "STAGED_IMPROVED_IN_SCRATCH",
+      "to_sha256": "d5cecdda57196ad4531d47c63eb4edce0a62b9db41055f873cf7f3a396566ec6"
+    },
+    {
+      "dev_after": 5,
+      "dev_before": 2,
+      "dev_total": 8,
+      "digest": "f6b3ec500aeccd14402f9c8da5afc2cb55279897b13de5366f43c56dbf4ada7f",
+      "external_authority": "NONE",
+      "from_sha256": "d5cecdda57196ad4531d47c63eb4edce0a62b9db41055f873cf7f3a396566ec6",
+      "proposal": {
+        "proposer": "tiny-supervised-debug-model",
+        "reason": "Model diagnosed: An alternate arrival at the same node has lower risk, allowing the goal",
+        "repair": "RESOURCE_STATE",
+        "schema": "motif.thought015.patch-proposal.v1"
+      },
+      "regressions": [],
+      "round": 3,
+      "safety_passed": 3,
+      "safety_total": 4,
+      "status": "STAGED_IMPROVED_IN_SCRATCH",
+      "to_sha256": "1e9e71732f65b2a62d0324a925e6a59ea061d267bc4bc995f07ea341205ed19c"
+    },
+    {
+      "dev_after": 8,
+      "dev_before": 5,
+      "dev_total": 8,
+      "digest": "ace0b9c79e981e15bf2fbc6637beed8ad33688f4ac029e106d7aff162b93cfaa",
+      "external_authority": "NONE",
+      "from_sha256": "1e9e71732f65b2a62d0324a925e6a59ea061d267bc4bc995f07ea341205ed19c",
+      "proposal": {
+        "proposer": "tiny-supervised-debug-model",
+        "reason": "Model diagnosed: A later arrival improves the cost of an already discovered node",
+        "repair": "RELAX_IMPROVED",
+        "schema": "motif.thought015.patch-proposal.v1"
+      },
+      "regressions": [],
+      "round": 4,
+      "safety_passed": 4,
+      "safety_total": 4,
+      "status": "STAGED_IMPROVED_IN_SCRATCH",
+      "to_sha256": "9038afbf6b920e0f6861cfb48f1a1bb6fec5bb4d03c93f10ee06714adc812453"
+    }
+  ],
+  "proposed_patch_available": true,
+  "real_world_gain_demonstrated": false,
+  "receipt_digest": "0ceaada5c7eec919e27ca3d991c7bbdfbfe6c8a86f577f18722e98342410a3f4",
+  "reference_source_sha256": "461949103008e99ff54da6f495f4fb86c66d6ab81e429318d1c0aee675379d87",
+  "safety": {
+    "after": 4,
+    "before": 2,
+    "total": 4
+  },
+  "sandbox_is_os_isolation": false,
+  "schema": "motif.thought015.experimental-developer.v1",
+  "staged_repair_sequence": [
+    "WEIGHTED_PRIORITY",
+    "ENFORCE_BUDGET",
+    "RESOURCE_STATE",
+    "RELAX_IMPROVED"
+  ],
+  "status": "PATCH_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+  "stress": {
+    "after": 55,
+    "total": 55
+  }
+}
