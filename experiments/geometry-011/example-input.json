@@ -1,0 +1,1165 @@
+{
+  "base_rewrite": {
+    "find": [
+      "bud"
+    ],
+    "replace": [
+      "branch"
+    ]
+  },
+  "candidate_sensors": [
+    {
+      "available": true,
+      "cost": 1.0,
+      "id": "signal-a",
+      "permitted": true,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    },
+    {
+      "available": true,
+      "cost": 1.0,
+      "id": "signal-b",
+      "permitted": true,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    },
+    {
+      "available": true,
+      "cost": 0.5,
+      "id": "unrelated",
+      "permitted": true,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    },
+    {
+      "available": true,
+      "cost": 0.01,
+      "id": "forbidden-leak",
+      "permitted": false,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    },
+    {
+      "available": true,
+      "cost": 0.1,
+      "id": "missing-sensor",
+      "permitted": true,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    },
+    {
+      "available": false,
+      "cost": 0.01,
+      "id": "unavailable",
+      "permitted": true,
+      "scope": "synthetic:observer-a@tick-11:decoder-A"
+    }
+  ],
+  "development": [
+    {
+      "after": [
+        "oak",
+        "branch"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": false,
+      "id": "oak:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:oak",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "oak",
+        "branch"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": true,
+      "id": "oak:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:oak",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "oak",
+        "branch"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": true,
+      "id": "oak:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:oak",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "oak",
+        "branch"
+      ],
+      "before": [
+        "oak",
+        "bud"
+      ],
+      "expected": false,
+      "id": "oak:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:oak",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "pine",
+        "branch"
+      ],
+      "before": [
+        "pine",
+        "bud"
+      ],
+      "expected": false,
+      "id": "pine:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:pine",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "pine",
+        "branch"
+      ],
+      "before": [
+        "pine",
+        "bud"
+      ],
+      "expected": true,
+      "id": "pine:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:pine",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "pine",
+        "branch"
+      ],
+      "before": [
+        "pine",
+        "bud"
+      ],
+      "expected": true,
+      "id": "pine:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:pine",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "pine",
+        "branch"
+      ],
+      "before": [
+        "pine",
+        "bud"
+      ],
+      "expected": false,
+      "id": "pine:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:pine",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "cedar",
+        "branch"
+      ],
+      "before": [
+        "cedar",
+        "bud"
+      ],
+      "expected": false,
+      "id": "cedar:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:cedar",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "cedar",
+        "branch"
+      ],
+      "before": [
+        "cedar",
+        "bud"
+      ],
+      "expected": true,
+      "id": "cedar:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:cedar",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "cedar",
+        "branch"
+      ],
+      "before": [
+        "cedar",
+        "bud"
+      ],
+      "expected": true,
+      "id": "cedar:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:cedar",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "cedar",
+        "branch"
+      ],
+      "before": [
+        "cedar",
+        "bud"
+      ],
+      "expected": false,
+      "id": "cedar:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:cedar",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "birch",
+        "branch"
+      ],
+      "before": [
+        "birch",
+        "bud"
+      ],
+      "expected": false,
+      "id": "birch:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:birch",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "birch",
+        "branch"
+      ],
+      "before": [
+        "birch",
+        "bud"
+      ],
+      "expected": true,
+      "id": "birch:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:birch",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "birch",
+        "branch"
+      ],
+      "before": [
+        "birch",
+        "bud"
+      ],
+      "expected": true,
+      "id": "birch:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:birch",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "birch",
+        "branch"
+      ],
+      "before": [
+        "birch",
+        "bud"
+      ],
+      "expected": false,
+      "id": "birch:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:birch",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "willow",
+        "branch"
+      ],
+      "before": [
+        "willow",
+        "bud"
+      ],
+      "expected": false,
+      "id": "willow:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:willow",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "willow",
+        "branch"
+      ],
+      "before": [
+        "willow",
+        "bud"
+      ],
+      "expected": true,
+      "id": "willow:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:willow",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "willow",
+        "branch"
+      ],
+      "before": [
+        "willow",
+        "bud"
+      ],
+      "expected": true,
+      "id": "willow:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:willow",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "willow",
+        "branch"
+      ],
+      "before": [
+        "willow",
+        "bud"
+      ],
+      "expected": false,
+      "id": "willow:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:willow",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "maple",
+        "branch"
+      ],
+      "before": [
+        "maple",
+        "bud"
+      ],
+      "expected": false,
+      "id": "maple:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:maple",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "maple",
+        "branch"
+      ],
+      "before": [
+        "maple",
+        "bud"
+      ],
+      "expected": true,
+      "id": "maple:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:maple",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "maple",
+        "branch"
+      ],
+      "before": [
+        "maple",
+        "bud"
+      ],
+      "expected": true,
+      "id": "maple:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:maple",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    },
+    {
+      "after": [
+        "maple",
+        "branch"
+      ],
+      "before": [
+        "maple",
+        "bud"
+      ],
+      "expected": false,
+      "id": "maple:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "source_root": "claimed:maple",
+      "visible": {
+        "growth": "bud",
+        "period": "spring"
+      }
+    }
+  ],
+  "measurement_budget": 3.0,
+  "pilot_readings": [
+    {
+      "case_id": "oak:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:oak:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:oak:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:oak:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:oak:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:oak:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:oak:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:oak:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:oak:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:oak:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:oak:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:oak:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:oak:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:oak:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:oak:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "oak:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:oak:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "oak:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:oak:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:pine:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:pine:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:pine:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:pine:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:pine:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:pine:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:pine:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:pine:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:pine:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:pine:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:pine:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:pine:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:pine:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:pine:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "pine:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:pine:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "pine:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:pine:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:cedar:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:cedar:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:cedar:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:cedar:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:cedar:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:cedar:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:cedar:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:cedar:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:cedar:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:cedar:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:cedar:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:cedar:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:cedar:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:cedar:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "cedar:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:cedar:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "cedar:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:cedar:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:birch:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:birch:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:birch:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:birch:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:birch:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:birch:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:birch:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:birch:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:birch:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:birch:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:birch:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:birch:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:birch:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:birch:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "birch:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:birch:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "birch:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:birch:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:willow:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:willow:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:willow:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:willow:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:willow:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:willow:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:willow:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:willow:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:willow:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:willow:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:willow:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:willow:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:willow:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:willow:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "willow:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:willow:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "willow:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:willow:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:maple:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:maple:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:maple:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:00",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:maple:forbidden-leak",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:maple:signal-a",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:maple:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:maple:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:01",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:maple:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:maple:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:maple:signal-b",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:maple:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:10",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:maple:forbidden-leak",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-a",
+      "source_root": "pilot:maple:signal-a",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "signal-b",
+      "source_root": "pilot:maple:signal-b",
+      "value": "1"
+    },
+    {
+      "case_id": "maple:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "unrelated",
+      "source_root": "pilot:maple:unrelated",
+      "value": "0"
+    },
+    {
+      "case_id": "maple:11",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "sensor_id": "forbidden-leak",
+      "source_root": "pilot:maple:forbidden-leak",
+      "value": "0"
+    }
+  ],
+  "scope": "synthetic:observer-a@tick-11:decoder-A",
+  "work_budget": 100
+}

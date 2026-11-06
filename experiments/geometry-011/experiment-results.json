@@ -1,0 +1,220 @@
+{
+  "authority": "NONE",
+  "diagnosis": {
+    "authority": "NONE",
+    "conflict_witnesses": [
+      {
+        "negative_case": "birch:00",
+        "negative_claimed_root": "claimed:birch",
+        "positive_case": "birch:01",
+        "positive_claimed_root": "claimed:birch",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      },
+      {
+        "negative_case": "cedar:00",
+        "negative_claimed_root": "claimed:cedar",
+        "positive_case": "cedar:01",
+        "positive_claimed_root": "claimed:cedar",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      },
+      {
+        "negative_case": "maple:00",
+        "negative_claimed_root": "claimed:maple",
+        "positive_case": "maple:01",
+        "positive_claimed_root": "claimed:maple",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      },
+      {
+        "negative_case": "oak:00",
+        "negative_claimed_root": "claimed:oak",
+        "positive_case": "oak:01",
+        "positive_claimed_root": "claimed:oak",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      },
+      {
+        "negative_case": "pine:00",
+        "negative_claimed_root": "claimed:pine",
+        "positive_case": "pine:01",
+        "positive_claimed_root": "claimed:pine",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      },
+      {
+        "negative_case": "willow:00",
+        "negative_claimed_root": "claimed:willow",
+        "positive_case": "willow:01",
+        "positive_claimed_root": "claimed:willow",
+        "reason": "same supplied before/after and visible features; opposing declared labels",
+        "visible_signature": {
+          "growth": "bud",
+          "period": "spring"
+        }
+      }
+    ],
+    "development_cases": 24,
+    "instrument": "PENCIL",
+    "interpretation": "No deterministic classifier restricted to supplied visible inputs fits contradictory labels. Labels and roots are declarations.",
+    "status": "MISSING_DISTINCTION_CERTIFICATE"
+  },
+  "experiment": "GEOM-011 Missing Dimension (synthetic pilot, local-only)",
+  "instrument": "PENCIL",
+  "interpretation": "Individual recorded synthetic signals are uninformative; their XOR composition discriminates conflicting labels. No sensor reading is invented or performed.",
+  "partial_search": {
+    "authority": "NONE",
+    "completeness": "INCOMPLETE",
+    "considered_this_slice": 2,
+    "cursor": {
+      "domain": "geom011-search:838be0a42fd4527d849f8dffe6e8533d238c4b1db090dbfbbad2ed32dd1f7590",
+      "offset": 2
+    },
+    "status": "CONTINUE_SEARCH"
+  },
+  "possible_probes": {
+    "authority": "NONE",
+    "best": {
+      "actual_measurement_executed": false,
+      "declared_cost": 2.0,
+      "gain_per_cost": 0.5,
+      "pilot_information_gain_bits": 1.0,
+      "sensors": [
+        "signal-a",
+        "signal-b"
+      ],
+      "status": "PROPOSED_ONLY",
+      "synergy_bits_above_best_single": 1.0
+    },
+    "instrument": "PENCIL",
+    "interpretation": "Data-dependent synthetic pilot scores; selection is not a physical measurement.",
+    "options": [
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 2.0,
+        "gain_per_cost": 0.5,
+        "pilot_information_gain_bits": 1.0,
+        "sensors": [
+          "signal-a",
+          "signal-b"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 1.0
+      },
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 0.5,
+        "gain_per_cost": 0.0,
+        "pilot_information_gain_bits": 0.0,
+        "sensors": [
+          "unrelated"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 0.0
+      },
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 1.0,
+        "gain_per_cost": 0.0,
+        "pilot_information_gain_bits": 0.0,
+        "sensors": [
+          "signal-a"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 0.0
+      },
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 1.0,
+        "gain_per_cost": 0.0,
+        "pilot_information_gain_bits": 0.0,
+        "sensors": [
+          "signal-b"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 0.0
+      },
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 1.5,
+        "gain_per_cost": 0.0,
+        "pilot_information_gain_bits": 0.0,
+        "sensors": [
+          "signal-a",
+          "unrelated"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 0.0
+      },
+      {
+        "actual_measurement_executed": false,
+        "declared_cost": 1.5,
+        "gain_per_cost": 0.0,
+        "pilot_information_gain_bits": 0.0,
+        "sensors": [
+          "signal-b",
+          "unrelated"
+        ],
+        "status": "PROPOSED_ONLY",
+        "synergy_bits_above_best_single": 0.0
+      }
+    ],
+    "status": "PILOT_BASED_PROBE_RANKING",
+    "unmeasured_development_cases_by_sensor": {
+      "missing-sensor": 24
+    },
+    "visible_conditional_entropy_bits": 1.0
+  },
+  "scope": "synthetic:observer-a@tick-11:decoder-A",
+  "synthesized_cartridge": {
+    "authority": "NONE",
+    "cartridge": {
+      "authority": "NONE",
+      "base_rewrite": {
+        "find": [
+          "bud"
+        ],
+        "replace": [
+          "branch"
+        ]
+      },
+      "instrument": "PENCIL",
+      "operator": "XOR",
+      "scope": "synthetic:observer-a@tick-11:decoder-A",
+      "signals": [
+        "signal-a",
+        "signal-b"
+      ]
+    },
+    "completeness": "MINIMAL_ARITY_FIRST_EXACT_FIT_IN_ORDER",
+    "development": {
+      "abstentions": 0,
+      "correct": 24,
+      "total": 24,
+      "wrong": 0
+    },
+    "evaluated_candidate_prefix": 9,
+    "instrument": "PENCIL",
+    "measurement_budget": 3.0,
+    "search_domain": "geom011-search:838be0a42fd4527d849f8dffe6e8533d238c4b1db090dbfbbad2ed32dd1f7590",
+    "search_space": 24,
+    "source_roots_are_authenticated": false,
+    "status": "PENCIL_DIMENSION_PROPOSED"
+  }
+}

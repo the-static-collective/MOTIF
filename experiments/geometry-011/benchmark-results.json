@@ -1,0 +1,42 @@
+{
+  "authority": "NONE",
+  "experiment": "GEOM-011 frozen synthetic paired-sensor benchmark",
+  "geom011_scores": {
+    "abstentions": 20,
+    "correct": 240,
+    "total": 260,
+    "wrong": 0
+  },
+  "heldout_cases": 260,
+  "heldout_missing_probe_cases": 20,
+  "independent_classical_truth_table": {
+    "abstentions": 20,
+    "correct": 240,
+    "total": 260,
+    "wrong": 0
+  },
+  "instrument": "PENCIL",
+  "limits": "Developer-authored XOR world, not externally frozen independent science. A classical depth-two decision tree can match this result.",
+  "matched_classical_baseline": true,
+  "seed": 20261106,
+  "synthesized_dimension": {
+    "authority": "NONE",
+    "base_rewrite": {
+      "find": [
+        "bud"
+      ],
+      "replace": [
+        "branch"
+      ]
+    },
+    "instrument": "PENCIL",
+    "operator": "XOR",
+    "scope": "synthetic:observer-a@tick-11:decoder-A",
+    "signals": [
+      "signal-a",
+      "signal-b"
+    ]
+  },
+  "training_cases": 24,
+  "visible_only_always_false_correct": 130
+}
