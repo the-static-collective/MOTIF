@@ -1,0 +1,84 @@
+name: REASON-019 Golden Mirror — independent perspective elves and reciprocity
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-019-golden-mirror
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-019/**'
+      - '.github/workflows/reason-cartridge-019.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-golden-mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress original MOTIF-003 affordance method
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regress all source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire exact byte-pinned complete opinions for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress REASON-014 through REASON-018
+        run: |
+          for n in 014 015 016 017 018; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Run Golden Rule perspective-isolation, consent and correction tests
+        run: python -m unittest discover -s experiments/reason-cartridge-019 -p 'test_*.py' -v
+      - name: Execute all synthetic golden-mirror scenarios and inspect source receipts
+        run: |
+          python experiments/reason-cartridge-019/trial.py reason-019-evidence > reason-019-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-019-evidence/benchmark.json').read_text())
+          assert r['source_scenarios']==24
+          assert r['training_scenarios']==5 and r['unseen_scenarios']==19
+          assert r['source_author_expected_stage_and_choice_matches']==24
+          assert r['subprocess_perspective_workers_per_scenario']==4
+          assert r['total_perspective_worker_invocations']==96
+          assert r['naive_projective_golden_rule_choice_matches']<24
+          assert r['safe_other_only_baseline_choice_matches']<24
+          assert r['improve_self_before_assist_cases']==2
+          assert r['stale_recipient_consent_cannot_be_reused']
+          assert r['independent_heldout_review']['source_author_matches']==19
+          assert r['independent_heldout_review']['independent_constraint_errors']==0
+          assert r['prior_reason018_actual_relational_source']['independent_graph_proof_does_not_authorize_interference']
+          assert r['all_ethics_and_welfare_variables_are_synthetic_author_assumptions']
+          assert r['subprocess_separation_is_not_true_VM_security']
+          assert r['human_love_or_welfare_not_measured']
+          assert not r['no_external_actions']
+          assert not r['real_world_authority']
+          print({
+            'synthetic_cases':r['source_scenarios'],
+            'heldout':r['unseen_scenarios'],
+            'source_expected_matches':r['source_author_expected_stage_and_choice_matches'],
+            'projection_baseline_matches':r['naive_projective_golden_rule_choice_matches'],
+            'other_only_rules_baseline_matches':r['safe_other_only_baseline_choice_matches'],
+            'self_improvement_selected':r['improve_self_before_assist_cases'],
+            'subprocess_workers_primary_pass':r['total_perspective_worker_invocations'],
+            'projection_danger_warnings':r['projection_danger_action_observations'],
+          })
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-019-golden-mirror-perspective-receipts
+          path: |
+            reason-019-evidence/
+            reason-019-stdout.json
+          retention-days: 30
