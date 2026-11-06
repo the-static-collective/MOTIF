@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from geometry import DIRECTIONS, flower, pathfind, propose_centers, svg_flower
+from cartridge import export_cartridge, verify_cartridge
 
 
 def run() -> dict:
@@ -25,6 +26,10 @@ def run() -> dict:
     astar = pathfind(field, start, goal, geometry_heuristic=True)
     dijkstra = pathfind(field, start, goal, geometry_heuristic=False)
 
+    cartridge = export_cartridge(observed, max_ring=2)
+    Path(__file__).with_name("example-geometry-cartridge.json").write_text(
+        json.dumps(cartridge, indent=2) + "\n", encoding="utf-8"
+    )
     svg = svg_flower(observed, found)
     Path(__file__).with_name("flower-of-life.svg").write_text(
         svg, encoding="utf-8"
@@ -46,6 +51,7 @@ def run() -> dict:
             "zero_heuristic": {k: v for k, v in dijkstra.items() if k != "path"},
             "same_optimal_distance": astar.get("distance") == dijkstra.get("distance"),
         },
+        "cartridge_revalidated": verify_cartridge(cartridge),
         "authority": "proposal-only; no inferred center or route causes external action",
         "svg": "flower-of-life.svg",
     }
