@@ -16,13 +16,15 @@ from hashlib import sha256
 import json
 
 
-def fixture(id,capacity,due_hour,amount,prior,contact=True,scope=True,\n            current_hour=12,max_units_per_hour=2):
+def fixture(id,capacity,due_hour,amount,prior,contact=True,scope=True,
+            current_hour=12,max_units_per_hour=2):
     return {
         "id":id,"schema":"motif.reason022.typed-duty.v1",
         "source_is_synthetic":True,
         "person":"OTHER_RECIPIENT_"+id,
         "capacity_units":capacity,
-        "new_help_units":amount,"new_help_due_hour":due_hour,\n        "current_hour":current_hour,"max_units_per_hour":max_units_per_hour,
+        "new_help_units":amount,"new_help_due_hour":due_hour,
+        "current_hour":current_hour,"max_units_per_hour":max_units_per_hour,
         "prior_duties":prior,
         "contact_allowed":contact,"options_discussion_allowed":scope,
         "real_world_permission":False,
@@ -53,7 +55,8 @@ CASES=(
 def source_proof(source):
     if (not isinstance(source,dict) or set(source)!={
         "id","schema","source_is_synthetic","person","capacity_units",
-        "new_help_units","new_help_due_hour","prior_duties",\n        "current_hour","max_units_per_hour",
+        "new_help_units","new_help_due_hour","prior_duties",
+        "current_hour","max_units_per_hour",
         "contact_allowed","options_discussion_allowed","real_world_permission"}
         or source["schema"]!="motif.reason022.typed-duty.v1"
         or source["source_is_synthetic"] is not True
@@ -72,7 +75,26 @@ def source_proof(source):
         if source["new_help_units"]>remaining:
             state="HOLD_PRIOR_DUTIES";reason="DIRECTED_COMMITMENTS_EXCEED_FIXED_CAPACITY"
         else:
-            state="SUGGEST_DISCUSSION_ONLY";reason="FIXTURE_CONSTRAINTS_SATISFIED"
+            # Deadline feasibility uses quantities (units), time order
+            # (hour), and separately owed prior duties (directed edges).
+            # Units are toy abstract capacity, not claimed actual welfare.
+            deadlines=sorted(set([source["new_help_due_hour"]]+[
+                d["due_hour"] for d in source["prior_duties"]]))
+            failed=None
+            for hour in deadlines:
+                owed=sum(d["units"] for d in source["prior_duties"]
+                        if d["due_hour"]<=hour)
+                if source["new_help_due_hour"]<=hour:
+                    owed+=source["new_help_units"]
+                possible=max(0,hour-source["current_hour"])*source["max_units_per_hour"]
+                if owed>possible:
+                    failed=(hour,owed,possible)
+                    break
+            if failed:
+                state="HOLD_DEADLINE_CAPACITY"
+                reason="SOURCE_COMMITMENTS_CANNOT_FIT_TIME_ORDERED_CAPACITY"
+            else:
+                state="SUGGEST_DISCUSSION_ONLY";reason="FIXTURE_CONSTRAINTS_SATISFIED"
     body={
         "schema":"motif.reason022.typed-duty-proof.v1",
         "source_case_id":source["id"],
@@ -83,7 +105,9 @@ def source_proof(source):
         "requested_units":source["new_help_units"],
         "relevant_deadlines":[{
             "owed_to":d["owed_to"],"hour":d["due_hour"]} for d in source["prior_duties"]],
-        "new_request_deadline":source["new_help_due_hour"],\n        "current_hour":source["current_hour"],\n        "production_capacity_per_hour":source["max_units_per_hour"],
+        "new_request_deadline":source["new_help_due_hour"],
+        "current_hour":source["current_hour"],
+        "production_capacity_per_hour":source["max_units_per_hour"],
         "synthetic_source_fixed_budget_not_dynamic_scheduling":True,
         "source_consent_not_inferred_from_a_model":True,
         "permission_to_execute":False,
