@@ -71,7 +71,7 @@ def evaluate():
         generated_ands+=new_counts["bitset_intersections"]
         generated_skips+=new_counts["branch_skips"]
         strong_skips+=strong_counts["branch_skips"]
-        if generated_ands+new_counts["branch_skips"]!=old_counts["bitset_updates"]:
+        if new_counts["bitset_intersections"]+new_counts["branch_skips"]!=old_counts["bitset_updates"]:
             raise AssertionError("Generated source missed DAG transition")
     # Complete bounded model against every partial Boolean input.
     lattice=check_graph(make_graph("EntireTruthLattice",all_states()))
