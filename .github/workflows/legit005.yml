@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-005 meaning frontier
+on:
+  push:
+    paths:
+      - "experiments/legit005/**"
+      - ".github/workflows/legit005.yml"
+  pull_request:
+    paths:
+      - "experiments/legit005/**"
+      - ".github/workflows/legit005.yml"
+jobs:
+  semantic-consequence-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial semantic composition and exact logic falsifiers
+        run: python -m unittest discover -s experiments/legit005 -p 'test_*.py' -v
+      - name: Reproduce public clinical problem distinction without diagnosis
+        run: |
+          python experiments/legit005/runner.py > /tmp/motif-legit005-neuro.json
+          python -m json.tool /tmp/motif-legit005-neuro.json >/dev/null
+          cat /tmp/motif-legit005-neuro.json
+      - name: Frozen 48-case matched baseline contest
+        run: |
+          python experiments/legit005/benchmark.py > /tmp/motif-legit005-benchmark.json
+          python -m json.tool /tmp/motif-legit005-benchmark.json >/dev/null
+          cat /tmp/motif-legit005-benchmark.json
+      - name: Archive exact hold receipts and reproducible counterexamples
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT005-MEANING-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit005-neuro.json
+            /tmp/motif-legit005-benchmark.json
+          retention-days: 30
+          if-no-files-found: error
