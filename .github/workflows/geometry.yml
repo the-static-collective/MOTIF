@@ -1,0 +1,33 @@
+name: Flower of Life geometry cartridge
+on:
+  push:
+    paths:
+      - 'experiments/geometry-001/**'
+      - '.github/workflows/geometry.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-001/**'
+      - '.github/workflows/geometry.yml'
+jobs:
+  geom-001:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify geometric invariants and fair controls
+        working-directory: experiments/geometry-001
+        run: python -m unittest -v test_geometry.py
+      - name: Reproduce evidence and draw a finite SVG
+        working-directory: experiments/geometry-001
+        run: |
+          python demo.py > experiment-results.json
+          python -c "import json; d=json.load(open('experiment-results.json')); assert d['completion_ties_topological_control'] and d['navigation']['same_optimal_distance']"
+      - name: Save inspectable diagram and result
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-geometry-001
+          path: |
+            experiments/geometry-001/flower-of-life.svg
+            experiments/geometry-001/experiment-results.json
