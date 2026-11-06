@@ -1,0 +1,70 @@
+name: REASON-013 adversarial opinion reader / scoped argument graphs
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-013-adversarial-reader
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-013/**'
+      - '.github/workflows/reason-cartridge-013.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  legal-opinion-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: All inherited REASON-001 through REASON-012 tests
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Unfamiliar opinion sources, adversarial authorship and proof/replay cases
+        run: python -m unittest discover -s experiments/reason-cartridge-013 -p 'test_*.py' -v
+      - name: Reproduce heldout tomato vs fish interpretations and safe HOLD
+        run: |
+          python experiments/reason-cartridge-013/trial.py reason-013-evidence > reason-013-stdout.json
+          python - <<'PY'
+          import json
+          r=json.load(open('reason-013-evidence/benchmark.json'))
+          assert r['training_cases']==['MCBOYLE','VINEGAR']
+          assert r['unseen_opinion_cases']==['NIX','YATES']
+          assert r['independent_field_errors']==0
+          assert r['labeled_historical_review_fields_correct']==16
+          assert r['labeled_historical_review_fields_total']==16
+          y=r['heldout_court_readings']['YATES']
+          assert y['disposition_alignment']==[5,4]
+          assert len(y['judicial_voices'])==3
+          voices=y['four_value_per_voice']
+          assert voices['GINSBURG']['reported_legal_interpretation_status']=='SUPPORTED'
+          assert voices['ALITO']['reported_legal_interpretation_status']=='SUPPORTED'
+          assert voices['KAGAN']['reported_legal_interpretation_status']=='REFUTED'
+          assert r['no_false_four_value_BOTH_in_individual_voice']
+          assert r['unsupported_cheese_retrieval_stage']=='HOLD_NO_RELEVANT_ANCHORED_EVIDENCE'
+          assert r['full_opinions_not_parsed']
+          assert r['opinion_source_data_is_curated_partial_transcription']
+          assert r['strong_classical_rule_based_reader_can_match']
+          assert r['real_world_authority'] is False
+          print({'heldout_court_families':2,
+                 'reviewed_role_fields':16,
+                 'role_errors':0,
+                 'split':[5,4],
+                 'source_only_hold':'courthouse-made-of-cheese'})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-013-adversarial-opinion-graphs
+          path: |
+            reason-013-evidence/
+            reason-013-stdout.json
+          retention-days: 30
