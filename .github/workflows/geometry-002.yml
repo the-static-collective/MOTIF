@@ -1,0 +1,40 @@
+name: MOTIF GEOM-002 rule discovery
+on:
+  push:
+    paths:
+      - 'experiments/geometry-002/**'
+      - '.github/workflows/geometry-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-002/**'
+      - '.github/workflows/geometry-002.yml'
+jobs:
+  rule-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate bounded inference and refusals
+        working-directory: experiments/geometry-002
+        run: python -m unittest -v test_discovery.py
+      - name: Reproduce full development benchmark
+        working-directory: experiments/geometry-002
+        run: |
+          python benchmark.py
+          python -c 'import json; d=json.load(open("benchmark-results.json")); assert d["negative_controls_held"] == 24 and d["family_correct"] == 36 and d["masked_centers_recovered"] == 60'
+      - name: Generate held cartridge, synthetic result, and flower witness
+        working-directory: experiments/geometry-002
+        run: |
+          python demo.py
+          python -c 'import json; d=json.load(open("experiment-results.json")); assert d["recovered_withheld_centers"] == 3 and d["cartridge_verified"]'
+      - name: Preserve evidence artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-geometry-002-witness
+          path: |
+            experiments/geometry-002/benchmark-results.json
+            experiments/geometry-002/experiment-results.json
+            experiments/geometry-002/example-discovery-cartridge.json
+            experiments/geometry-002/flower-discovery.svg
