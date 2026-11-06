@@ -1,0 +1,125 @@
+name: MOTIF Ring 003 / multi-use hypergraph research
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-003-hypergraph-affordance-router
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-003/**'
+      - 'experiments/cartridge-ring-001/**'
+      - '.github/workflows/cartridge-ring-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hypergraph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing live ring regressions
+        run: python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+      - name: Hypergraph and source-based multi-use adversarial tests
+        run: python -m unittest discover -s experiments/cartridge-ring-003 -p 'test_*.py' -v
+      - name: Declared-goal exact routing, greedy and always-all controls
+        run: |
+          python experiments/cartridge-ring-003/hypergraph.py --out /tmp/hypergraph.json
+          python experiments/cartridge-ring-003/benchmark.py --out /tmp/hypergraph-benchmark.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/hypergraph-benchmark.json'))
+          assert r['schema']=='motif.hypergraph-benchmark.v1'
+          assert r['status']=='SYNTHETIC_DECLARED_UTILITY_ONLY'
+          assert r['summary']['exact_above_greedy']>=1
+          assert r['summary']['exact_above_fixed_all']>=1
+          assert r['unseen_real_world_generalization']=='NOT_TESTED'
+          print('Verified synthetic multi-use complementarity; no real-world gain claim.')
+          PY
+      - name: Verify newly discoverable branches remain non-executable graph sources
+        run: |
+          python experiments/cartridge-ring-001/discovery.py --offline-frozen --output /tmp/frozen-garden.json
+          python experiments/cartridge-ring-003/hypergraph.py --catalog /tmp/frozen-garden.json --out /tmp/hypergraph-with-sources.json
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/hypergraph-with-sources.json'))
+          c=j['discovered_sources']
+          assert c['source_candidate_count']==149
+          assert all(not x['admitted_reasoning_capabilities'] for x in c['indexed_source_candidates'])
+          assert c['authority']=='NONE'
+          print('149 original branch source nodes: no execution authority.')
+          PY
+      - name: Real pinned GEOM-013 branch multi-use source-line analysis
+        run: |
+          python experiments/cartridge-ring-003/candidate_lens.py \
+            --catalog /tmp/frozen-garden.json \
+            --ref experiment/geometry-013-self-redesigning-instrument \
+            --prefix experiments/geometry-013 \
+            --terms instrument counterexample question \
+            --out /tmp/geom-multiuse.json
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/geom-multiuse.json'))
+          assert j['schema']=='motif.branch-multiuse-analysis.v1'
+          assert len(j['proposed_uses'])>=2
+          assert all(e['kind']=='SOURCE_WORD_MATCH_ONLY' for e in j['hyperedges'])
+          assert all(not e['admitted_for_execution'] for e in j['hyperedges'])
+          print('Real source-line evidence supports multiple UNVERIFIED use hypotheses.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring003-hypergraph-audit
+          path: |
+            /tmp/hypergraph.json
+            /tmp/hypergraph-benchmark.json
+            /tmp/hypergraph-with-sources.json
+            /tmp/geom-multiuse.json
+          retention-days: 30
+
+  native-source-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Repeat RING-003 adversarial tests
+        run: python -m unittest discover -s experiments/cartridge-ring-003 -p 'test_*.py' -v
+      - name: Run actual source-native triad inside existing no-network isolated sandbox
+        run: |
+          docker pull python:3.11-slim
+          python experiments/cartridge-ring-001/triad.py --output /tmp/triad-native.json
+          python experiments/cartridge-ring-003/receipt_bridge.py \
+            --triad-receipt /tmp/triad-native.json \
+            --goal interpretation-objection-bridge \
+            --budget 4 > /tmp/hypergraph-native-joined.json
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/hypergraph-native-joined.json'))
+          assert j['native_method_evidence']['admitted_new_affordance_edges']==0
+          assert len(j['native_method_evidence']['evidence_vertices'])==3
+          assert j['route']['selected']['selected']==['reason.proof-objection','thought.language-dev']
+          assert j['actual_shared_task_outcomes'] is None
+          assert j['cross_method_interoperability']=='UNPROVEN'
+          assert j['authority']=='NONE'
+          print('Actual independent native experiments attached to hypergraph; no shared-world conclusion.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring003-pinned-native-evidence
+          path: |
+            /tmp/triad-native.json
+            /tmp/hypergraph-native-joined.json
+          retention-days: 30
