@@ -1,0 +1,15 @@
+{
+  "grammar": {
+    "scope": "observer:demo|cut:0|decoder:literal",
+    "rules": [
+      {"name": "append-0", "find": ["#"], "replace": ["0", "#"]},
+      {"name": "append-1", "find": ["#"], "replace": ["1", "#"]},
+      {"name": "drop-0", "find": ["0"], "replace": []},
+      {"name": "swap-01", "find": ["0", "1"], "replace": ["1", "0"]}
+    ]
+  },
+  "seed": ["#"],
+  "source_root": "user-declared:synthetic-seed",
+  "work_budget": 80,
+  "view": {"hops": 2, "node_budget": 12, "relation_budget": 24}
+}
