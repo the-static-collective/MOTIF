@@ -1,0 +1,54 @@
+name: MOTIF geometry 003 constructive-synthesis witness
+on:
+  push:
+    paths:
+      - 'experiments/geometry-003/**'
+      - '.github/workflows/geometry-003.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-003/**'
+      - '.github/workflows/geometry-003.yml'
+jobs:
+  geom-003:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact construction, geometry-002 crossing, HOLD and source tamper checks
+        working-directory: experiments/geometry-003
+        run: python -m unittest -v test_synthesis.py
+      - name: Reproduce strong classical parity and ablations
+        working-directory: experiments/geometry-003
+        run: |
+          python benchmark.py > benchmark-results.json
+          python - <<'PY'
+          import json
+          x=json.load(open('benchmark-results.json'))
+          assert x['learned_macro_heldout_errors']==0
+          assert x['direct_classical_oracle_heldout_errors']==0
+          assert x['ablations']['without_midpoint']=='HOLD'
+          assert x['ablations']['without_perpendicular']=='HOLD'
+          PY
+      - name: Export inspectable program cartridge and geometry witness
+        working-directory: experiments/geometry-003
+        run: |
+          python demo.py > demo-report.json
+          python - <<'PY'
+          import json
+          x=json.load(open('demo-report.json'))
+          assert x['carrier_revalidated']
+          assert all(x['exact_certificates'].values())
+          assert x['geom002_crossing']['status']=='PROPOSE_ONLY'
+          assert x['geom002_crossing']['admission']=='HOLD'
+          PY
+      - name: Store evidence, not automatic admission
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-geom-003-evidence
+          path: |
+            experiments/geometry-003/benchmark-results.json
+            experiments/geometry-003/demo-report.json
+            experiments/geometry-003/example-method-cartridge.json
+            experiments/geometry-003/triangle-nine-point.svg
