@@ -1,0 +1,67 @@
+{
+  "candidate_proposal_digest": "7243f54731643a72171420f8cf611b6fe339df88d450e36c3312e6dc16aa5b4d",
+  "developer_probes": {
+    "candidate": 3,
+    "total": 3
+  },
+  "development": {
+    "baseline": 3,
+    "candidate": 8,
+    "total": 8
+  },
+  "development_receipts": [
+    {
+      "baseline": 3,
+      "candidate": 8,
+      "stage": "DEVELOPMENT",
+      "total": 8
+    },
+    {
+      "baseline": 27,
+      "candidate": 64,
+      "stage": "NEW_PRIMITIVE_TRUTH_TABLE",
+      "total": 64
+    },
+    {
+      "disposition": "STAGED_FOR_FROZEN_AUDIT",
+      "stage": "MODEL_CANDIDATE_GATE"
+    }
+  ],
+  "execution_is_os_isolated": false,
+  "external_authority": "NONE",
+  "first_counterexample": null,
+  "frozen_audit": {
+    "baseline": 30,
+    "candidate": 60,
+    "total": 60
+  },
+  "frozen_evaluated_after_staging": true,
+  "generated_source_is_fixed_template": true,
+  "generated_source_sha256": "988e1d61b5c452b6554ad2f1c74ec4ab842ae433c11df5090f762745d9c751fb",
+  "installed": false,
+  "limitations": "A GPT-6 conversationally supplied typed proposal, not MOTIF autonomously running an LLM. New macro from trusted difference/union primitives; deliberately constructed cases. No claims of novel computer science or held-out independent real-world validation.",
+  "model_proposer": "GPT-6 conversation-proposed candidate; offline evaluation, not autonomous Ollama",
+  "model_wrote_python": false,
+  "new_primitive": "set_difference composing bidirectional differences and union",
+  "old_016_grammar_can_express_deletion": false,
+  "pen_unchanged": true,
+  "proposer_seen_frozen_audit": false,
+  "python_I_is_not_security_sandbox": true,
+  "receipt_digest": "86943346550795402ed63803bb12ea065dd41b9883a472ae8b716ff0d7de5144",
+  "safety": {
+    "candidate": 4,
+    "total": 4
+  },
+  "schema": "motif.thought017.algorithm-inventor-trial.v1",
+  "status": "PATCH_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+  "stress": {
+    "candidate": 80,
+    "total": 80
+  },
+  "trained_local_llm_executed": false,
+  "truth_table": {
+    "baseline": 27,
+    "candidate": 64,
+    "total": 64
+  }
+}
