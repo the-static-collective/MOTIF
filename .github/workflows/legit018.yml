@@ -1,0 +1,45 @@
+name: MOTIF LEGIT-018 sequential capability discovery and ablation
+on:
+  push:
+    paths:
+      - "experiments/legit018/**"
+      - ".github/workflows/legit018.yml"
+  pull_request:
+    paths:
+      - "experiments/legit018/**"
+      - ".github/workflows/legit018.yml"
+jobs:
+  composed-capabilities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Execute sequential exact-path and forbidden-path source composition
+        run: |
+          python experiments/legit018/trial.py --emit > /tmp/motif-legit018-console.json
+          python -m json.tool /tmp/motif-legit018-discovery-report.json >/dev/null
+          python -m json.tool /tmp/motif-legit018-programs.json >/dev/null
+          cat /tmp/motif-legit018-console.json
+          echo "---- FULL EVIDENCE PACKET ----"
+          cat /tmp/motif-legit018-discovery-report.json
+          echo "---- EXACT GENERATED SOURCE BUNDLE ----"
+          cat /tmp/motif-legit018-programs.json
+      - name: Independent exhaustive falsifiers and prior-source tampering tests
+        run: |
+          python -m unittest discover -s experiments/legit018 -p 'test_*.py' -v
+      - name: Archive counterexamples, frozen source and strong classical resource controls
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT018-COMPOSITIONAL-DISCOVERY-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit018-console.json
+            /tmp/motif-legit018-discovery-report.json
+            /tmp/motif-legit018-programs.json
+          if-no-files-found: warn
+          retention-days: 30
