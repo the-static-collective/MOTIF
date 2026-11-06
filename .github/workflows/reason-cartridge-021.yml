@@ -1,0 +1,87 @@
+name: REASON-021 The Other Teaches the Self / novel source relational dimension
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-021-other-teaches-self
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-021/**'
+      - '.github/workflows/reason-cartridge-021.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  other-corrects-self:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress foundational MOTIF-003 affordance system
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: Regress source-owned REASON-001 through REASON-013
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire SHA-pinned complete judicial opinions for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress REASON-014 through REASON-020 including earlier Golden Mirrors
+        run: |
+          for n in 014 015 016 017 018 019 020; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Newly unrepresented source feature, counterexample and permission tests
+        run: python -m unittest discover -s experiments/reason-cartridge-021 -p 'test_*.py' -v
+      - name: Execute Other Teaches Self and independently verify heldout source worlds
+        run: |
+          python experiments/reason-cartridge-021/trial.py reason-021-evidence > reason-021-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("reason-021-evidence/benchmark.json").read_text())
+          assert r["synthetic_source_owners"]==11
+          assert r["development_cases"]==3 and r["heldout_cases"]==8
+          assert r["author_outcome_matches"]==11
+          assert r["reason_DNF_grammar_size_old"]==44
+          assert r["reason_DNF_grammar_size_with_new_typed_dimension"]==377
+          assert r["old_feature_space_impossibility_witnesses"]>=2
+          assert r["source_supplied_new_feature_models"]>=2
+          assert r["source_refused_new_feature_and_system_held"]==1
+          assert r["no_contact_source_cases"]==2
+          assert r["heldout_source_reviewer"]["matches_author_reference"]==8
+          assert r["heldout_source_reviewer"]["independent_scope_failures"]==0
+          assert r["exact_heldout_world_outcomes"]==r["total_heldout_world_outcomes"]
+          assert r["minimum_real_perspective_subprocesses_in_primary_run"]==44
+          assert r["latest_source_revision_invalidates_old_consent"]
+          assert r["full_information_classical_reference_could_tie"]
+          assert r["not_an_independently_authored_human_ethics_experiment"]
+          assert r["not_a_mind_or_love_measurement"]
+          assert not r["no_external_actions"]
+          assert not r["real_world_authority"]
+          print({
+            "source_owners":r["synthetic_source_owners"],
+            "author_expected_matches":r["author_outcome_matches"],
+            "representation_impossibility_pairs":r["old_feature_space_impossibility_witnesses"],
+            "new_typed_source_features":r["source_supplied_new_feature_models"],
+            "source_feature_withheld_hold":r["source_refused_new_feature_and_system_held"],
+            "heldout_true":r["exact_heldout_world_outcomes"],
+            "heldout_total":r["total_heldout_world_outcomes"],
+            "original_golden_mirror_subprocesses":r["minimum_real_perspective_subprocesses_in_primary_run"],
+            "revocation_in_memory":r["latest_source_revision_invalidates_old_consent"],
+          })
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-021-other-teaches-self-source-corrections
+          path: |
+            reason-021-evidence/
+            reason-021-stdout.json
+          retention-days: 30
