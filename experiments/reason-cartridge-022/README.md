@@ -75,7 +75,7 @@ This is precisely where a future MOTIF reasoner should emit **the competing sour
 
 **The wrong transfer prediction remains a genuine recorded failure.** Its source question ID, original gold label, emitted answer and original story receipts are available in the evidence artifact; it was not "corrected" after the reserved prospective evaluation. The three engines are still developer-supplied classical finite-state programs. Now that these results have been examined, **this slice must be considered inspected for any later changes**; a new prospective test would require a genuinely further untouched slice or a different benchmark.
 
-The complete exact-head regression run also passes **425 automated tests** (407 inherited; 18 new REASON-022 tests), plus the published external source-provenance and two-circle viewer assertions.
+The complete exact-head regression run also passes **426 automated tests** (407 inherited; 19 new REASON-022 tests), plus the published external source-provenance and two-circle viewer assertions.
 
 A separate weak old-view baseline always uses a single fixed answer per task. It is presented only as a diagnostic, **not as an optimal classical comparator**. The independently authored source task answers still cannot measure real ethical competence.
 
