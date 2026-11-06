@@ -7,7 +7,9 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-ROOT=Path(__file__).resolve().parent.parent
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+if str(HERE) not in sys.path:sys.path.append(str(HERE))
 for family in ('thought-010','thought-008'):
     folder=ROOT/family
     if not folder.is_dir():folder=ROOT/family.replace('-','')

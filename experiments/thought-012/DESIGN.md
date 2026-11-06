@@ -60,6 +60,6 @@ Freeze an unseen set of genuinely tricky interpretation tasks *before modifying 
 
 ## Integration door
 
-`cross_lens_door.py` is an **actual executable local, private, opt-in JSON CLI** that uses THOUGHT-010's existing strict request validator and idea-to-manifestation engine. Its caller explicitly supplies two **index IDs**, preserving duplicate-label non-fungibility. It never sends, stores, exports or admits data; its response remains `HOLD_FOR_OPERATOR_REVIEW`. One operator may sketch a question, but all their authored links have one declared root and are **not** considered independent sources.
+`cross_lens_door.py` is an **actual executable local, private, opt-in JSON CLI** that uses THOUGHT-010's existing strict request validator and idea-to-manifestation engine. Its caller explicitly supplies two **index IDs** and works under isolated `python -I -B`, preserving duplicate-label non-fungibility. It never sends, stores, exports or admits data; its response remains `HOLD_FOR_OPERATOR_REVIEW`. One operator may sketch a question, but all their authored links have one declared root and are **not** considered independent sources.
 
 A separate JAR;VIS Thought Room patch may eventually pin this code and expose an explicit **Cross-check these two ideas** button. This MOTIF PR alone does not change or deploy the JAR;VIS application.
