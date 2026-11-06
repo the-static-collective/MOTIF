@@ -62,7 +62,7 @@ jobs:
           assert r['all_ethics_and_welfare_variables_are_synthetic_author_assumptions']
           assert r['subprocess_separation_is_not_true_VM_security']
           assert r['human_love_or_welfare_not_measured']
-          assert not r['no_external_actions']
+          assert r['no_external_actions']
           assert not r['real_world_authority']
           print({
             'synthetic_cases':r['source_scenarios'],
