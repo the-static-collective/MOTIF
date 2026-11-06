@@ -37,11 +37,11 @@ def validate_inputs(worlds,weights,costs):
             for w in worlds)):
         raise HOLD("HOLD_DIFFERENT_PICTURE_FAMILY")
     if (set(weights)!=set(WORLD_IDS) or
-        any(type(v) is not Fraction or v<0 for v in weights.values()) or
+        any(type(v) is not Fraction or v<=0 for v in weights.values()) or
         sum(weights.values())<=0):
         raise HOLD("HOLD_INVALID_ASSUMED_PRIOR")
     if (set(costs)!=set(QUESTIONS) or
-        any(type(v) is not Fraction or v<0 for v in costs.values())):
+        any(type(v) is not Fraction or v<=0 for v in costs.values())):
         raise HOLD("HOLD_INVALID_QUERY_COST_LEDGER")
     return True
 
