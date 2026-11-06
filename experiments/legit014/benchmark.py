@@ -26,6 +26,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/"legit013"))
 sys.path.insert(0,str(HERE.parent/"legit012"))
+sys.path.insert(0,str(HERE))
 from graph_reference import cases,check_graph,make_graph,all_states,scan
 from classical_control import StrongClassicalDP
 from examiner import actual_parent as previous_012
