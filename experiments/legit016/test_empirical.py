@@ -156,6 +156,40 @@ class EmpiricalWitnessTests(unittest.TestCase):
         self.assertFalse(gates["full_end_to_end_cost_amortization_demonstrated"])
         self.assertFalse(gates["external_custody_authentication"])
 
+    def test_committed_trial_packet_has_real_raw_samples_and_retains_hold(self):
+        saved=json.loads((HERE/"generated"/"empirical_witness_report.json")
+                         .read_text(encoding="utf-8"))
+        self.assertEqual(saved["experiment"],"MOTIF-LEGIT-016")
+        self.assertEqual(saved["new_016_observed_episode"]["new_seed_graph_states"],
+                         28560)
+        self.assertEqual(saved["new_016_observed_episode"]["new_seed_graphs"],24)
+        self.assertEqual(saved["promotion_decision"],
+                         "HOLD_NOT_ENOUGH_INDEPENDENT_EVIDENCE")
+        self.assertFalse(saved["promotion_gate"]["production_promotion_allowed"])
+        self.assertFalse(saved["promotion_gate"]["independent_test_author"])
+        self.assertEqual(saved["real_014_retrospective"],self.retrospective)
+        # A rerun on another runner is expected to have *different* timings.
+        # Validate the committed raw measurements internally rather than
+        # demanding they match the current, noisy runtime.
+        from decision import _checked
+        stats=_checked(saved["new_016_observed_episode"])
+        self.assertGreater(stats["candidate_014"]["wall_ms"],0)
+        self.assertEqual(saved["new_016_observed_episode"]["source_sha256"],
+                         registered_source_hashes())
+        self.assertEqual(saved["current_observations"]["prior_012"]
+                         ["meets_8_percent_and_8_of_9_descriptive_gate"],False)
+        self.assertEqual(saved["observed_compounding_rate"],"NOT_ESTIMABLE")
+
+    def test_real_source_remeasurement_still_loses_to_012_in_frozen_episode(self):
+        saved=json.loads((HERE/"generated"/"empirical_witness_report.json")
+                         .read_text(encoding="utf-8"))
+        ours=saved["current_observations"]["prior_012"]
+        self.assertLess(ours["relative_gain_wall"],0)
+        self.assertLess(ours["wins_out_of_9_index_aligned_samples"],8)
+        self.assertFalse(ours["all_candidate_samples_faster_than_all_reference_samples"])
+        self.assertEqual(saved["real_014_retrospective"]["baseline_comparisons"]
+                         ["prior_012"]["exploratory_full_cost_break_even_batches"],None)
+
     def test_fake_faster_timings_cannot_change_epistemic_provenance(self):
         fake=deepcopy(self.measurement)
         for item in fake["raw_repeat_samples"]["candidate_014"]["wall_ms"]:
