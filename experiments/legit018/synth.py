@@ -152,6 +152,10 @@ BAD_ANSWER='''    return (closure is not None and target in closure[source]
 '''
 
 def emit(spec,stageA_source=None):
+    # The trial passes the available A source for the whole B search.
+    # A branchless fallback candidate must not suddenly claim ancestry.
+    if spec.get("ancestor_A_sha256") is None:
+        stageA_source=None
     checked=typed(spec["family"],spec["kernel"],spec["prechecks"],
                   stageA_source)
     if checked!=spec:
@@ -161,7 +165,14 @@ def emit(spec,stageA_source=None):
     source=HEADER
     source+=REACH_BUILD if with_reach else NO_REACH
     source+=SUM_BUILD if with_sum else NO_SUM
-    source+=DP_BUILD if spec["kernel"]=="BITSET_PATH" else DP_NO
+    if spec["kernel"]=="BITSET_PATH":
+        # A computed only unblocked paths. B emits a NEW program which
+        # extends that verified recurrence with a forbidden-node axis.
+        target=("range(-1,n)" if spec["family"]=="FORBIDDEN" else "(-1,)")
+        source+=DP_BUILD.replace(
+            '(range(-1,n) if task.family=="FORBIDDEN" else (-1,))',target)
+    else:
+        source+=DP_NO
     source+=RETURN
     if with_reach:source+=REACH_GUARD
     if with_sum:source+=SUM_GUARD
