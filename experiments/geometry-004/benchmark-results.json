@@ -1,0 +1,20 @@
+{
+  "experiment": "MOTIF-GEOM-004",
+  "method": "intersection(line(A,midpoint(B,C)),line(B,midpoint(A,C)))",
+  "method_size": 11,
+  "invented_macro": {
+    "name": "median_line",
+    "definition": "line(vertex, midpoint(opposite_a, opposite_b))",
+    "nature": "composition of existing operators, not novel primitive"
+  },
+  "old_grammar_candidates": 3,
+  "expanded_grammar_candidates": 15,
+  "teacher_triangles": 3,
+  "adversarial_triangles": 20,
+  "holdout_triangles": 60,
+  "learned_correct": 60,
+  "classical_correct": 60,
+  "learned_wrong": 0,
+  "authority": "HOLD",
+  "claim": "invented reusable intermediate macro; not a new math primitive"
+}
