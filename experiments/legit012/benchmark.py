@@ -21,7 +21,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/"legit010"))
 from bootstrap import invent_successor_search,_compressed_candidates
-from independent_oracle import (
+from graph_reference import (
     check_graph,make_graph,all_states,cases,scan,classical_dp,StrongCachedDP
 )
 from transform import produce,verify,prior_search
