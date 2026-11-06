@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-016 real empirical improvement witness
+on:
+  push:
+    paths:
+      - "experiments/legit016/**"
+      - ".github/workflows/legit016.yml"
+  pull_request:
+    paths:
+      - "experiments/legit016/**"
+      - ".github/workflows/legit016.yml"
+jobs:
+  empirical-ledger-and-external-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install external Z3 needed to reverify the actual old generated source
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Execute REAL generated MOTIF code on registered new synthetic graphs
+        run: |
+          python experiments/legit016/benchmark.py --emit > /tmp/motif-legit016-run.txt
+          python -m json.tool /tmp/motif-legit016-empirical-witness.json > /dev/null
+          cat /tmp/motif-legit016-empirical-witness.json
+      - name: Adversarial tests of archived measurement, math and false compounding claims
+        run: |
+          python -m unittest discover -s experiments/legit016 -p 'test_*.py' -v
+      - name: Preserve complete raw measured evidence and refusal receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT016-REAL-EMPIRICAL-NO-HYPE-WITNESS
+          path: |
+            /tmp/motif-legit016-empirical-witness.json
+            /tmp/motif-legit016-run.txt
+          if-no-files-found: warn
+          retention-days: 30
