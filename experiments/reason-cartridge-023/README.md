@@ -98,6 +98,27 @@ The dataset is the public Facebook bAbI v1.1 copy published by [iamtrask/Grokkin
 
 The trial reports *all three* of those categories, the original single-answer algorithm's performance, and an independent all-source-events classical baseline. A HOLD isn't counted as a correct gold answer; it reduces forced certainty at a cost of coverage. Even when the official gold is included in a multi-answer set, we do **not** call that an exact single-answer success.
 
+### Actual result — including the cost of being cautious
+
+The first and now-inspected external reserved 501–750 run is complete.
+
+| Independent test metric | Exact result |
+|---|---:|
+| Independent bAbI transfer questions | **250** |
+| Original REASON-022 single-answer parser | **250/250 exact; 0 HOLD** |
+| New source graph: unique supported answer, matching gold | **183/250** |
+| New source graph: confident mistakes | **0** |
+| New source graph: multiple different answers explicitly supported | **67/250 HOLD** |
+| Of those 67, official gold included among the supported options | **67/67** |
+| No grounded candidate | **0** |
+| Strong independent exhaustive-source classical baseline agrees with candidate set | **250/250** |
+
+**This is not an accuracy win.** The old system answers all 250 gold questions correctly; the conservative new answer policy abstains on **26.8%** of them. It does expose **67 sets of multiple literal-source answers**, but the original bAbI scorer expects a single response, and implicit recency, discourse focus or annotated supporting lines may legitimately resolve those questions. The model's **single-answer coverage fell from 100% to 73.2%** without preventing a single actual original-model mistake on this new slice.
+
+The result therefore tests a genuine tradeoff: **source literal evidence preservation vs. answer coverage on an artificial dataset**. Do not claim 250/250 official correctness for the new policy, and do not claim the 67 abstentions rescued 67 errors; they did **not**. This is a **negative result for task-answer efficiency** and a positive implementation result for inspectable multi-source provenance and non-forced selection.
+
+The previously identified one wrong original-model answer was on the *earlier* 251–500 slice. We did not reuse that inspected slice as fresh external performance. This next slice (501–750) is **now also inspected**; any posthoc correction requires a further unseen test set.
+
 The official dataset author did not necessarily intend a multi-answer question. Literal support is an alternative interpretation, not proof of equivalence with the official annotation. Every confident mistake and abstention is retained in the CI artifact.
 
 These 250 examples are **prospective only up until the first completed run**. Once results are inspected, any later repair must use an additional uninspected source slice or dataset. Do not call the same observations independently blind twice.
