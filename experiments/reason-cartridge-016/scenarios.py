@@ -117,7 +117,7 @@ CASES=(
       [pref("FOOD",["GIVE_FOOD"]),pref("SPACE",["WAIT"])],
       [act("GIVE_FOOD",fit=4,options=3,gain=10,cost=1),WAIT],
       [ask("Q_FOOD","Would food help?",{"FOOD":"YES","SPACE":"NO"})],
-      "WAIT"),
+      ),
  case("QUIET_GRIEF","PERSON_M",1,"I don't want to be fixed","YES",True,
       ["FORCE_JOY","SIT_QUIETLY"],
       [pref("PRESENCE",["SIT_QUIETLY"]),pref("ALONE",["WAIT"])],
