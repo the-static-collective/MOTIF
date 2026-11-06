@@ -1,0 +1,373 @@
+{
+  "experiment": "THOUGHT-018",
+  "finite_policy_controls": {
+    "adaptive": {
+      "resolved": 5,
+      "total_questions": 5
+    },
+    "cases": {
+      "adaptive": [
+        {
+          "policy": "adaptive",
+          "questions": 1,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 3,
+              "policy": "DIRECTOR_ACTIVE_INFORMATION_TEST",
+              "survivors": [
+                "KEEP"
+              ],
+              "toggle_mask": 5
+            }
+          ],
+          "survivors": [
+            "KEEP"
+          ],
+          "target": "KEEP"
+        },
+        {
+          "policy": "adaptive",
+          "questions": 1,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 3,
+              "policy": "DIRECTOR_ACTIVE_INFORMATION_TEST",
+              "survivors": [
+                "GROW"
+              ],
+              "toggle_mask": 5
+            }
+          ],
+          "survivors": [
+            "GROW"
+          ],
+          "target": "GROW"
+        },
+        {
+          "policy": "adaptive",
+          "questions": 1,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 3,
+              "policy": "DIRECTOR_ACTIVE_INFORMATION_TEST",
+              "survivors": [
+                "DRAIN"
+              ],
+              "toggle_mask": 5
+            }
+          ],
+          "survivors": [
+            "DRAIN"
+          ],
+          "target": "DRAIN"
+        },
+        {
+          "policy": "adaptive",
+          "questions": 1,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 3,
+              "policy": "DIRECTOR_ACTIVE_INFORMATION_TEST",
+              "survivors": [
+                "REPLACE"
+              ],
+              "toggle_mask": 5
+            }
+          ],
+          "survivors": [
+            "REPLACE"
+          ],
+          "target": "REPLACE"
+        },
+        {
+          "policy": "adaptive",
+          "questions": 1,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 3,
+              "policy": "DIRECTOR_ACTIVE_INFORMATION_TEST",
+              "survivors": [
+                "FLIP"
+              ],
+              "toggle_mask": 5
+            }
+          ],
+          "survivors": [
+            "FLIP"
+          ],
+          "target": "FLIP"
+        }
+      ],
+      "fixed": [
+        {
+          "policy": "fixed",
+          "questions": 2,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW",
+                "KEEP",
+                "REPLACE"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 0,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "KEEP"
+              ],
+              "toggle_mask": 1
+            }
+          ],
+          "survivors": [
+            "KEEP"
+          ],
+          "target": "KEEP"
+        },
+        {
+          "policy": "fixed",
+          "questions": 3,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW",
+                "KEEP",
+                "REPLACE"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 0,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW",
+                "REPLACE"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW"
+              ],
+              "toggle_mask": 0
+            }
+          ],
+          "survivors": [
+            "GROW"
+          ],
+          "target": "GROW"
+        },
+        {
+          "policy": "fixed",
+          "questions": 2,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "DRAIN",
+                "FLIP"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 0,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "DRAIN"
+              ],
+              "toggle_mask": 1
+            }
+          ],
+          "survivors": [
+            "DRAIN"
+          ],
+          "target": "DRAIN"
+        },
+        {
+          "policy": "fixed",
+          "questions": 3,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW",
+                "KEEP",
+                "REPLACE"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 0,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "GROW",
+                "REPLACE"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "REPLACE"
+              ],
+              "toggle_mask": 0
+            }
+          ],
+          "survivors": [
+            "REPLACE"
+          ],
+          "target": "REPLACE"
+        },
+        {
+          "policy": "fixed",
+          "questions": 2,
+          "resolved": true,
+          "steps": [
+            {
+              "on_mask": 1,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "DRAIN",
+                "FLIP"
+              ],
+              "toggle_mask": 1
+            },
+            {
+              "on_mask": 0,
+              "policy": "FIXED_PREDECLARED_CONTROL",
+              "survivors": [
+                "FLIP"
+              ],
+              "toggle_mask": 1
+            }
+          ],
+          "survivors": [
+            "FLIP"
+          ],
+          "target": "FLIP"
+        }
+      ]
+    },
+    "fixed": {
+      "resolved": 5,
+      "total_questions": 12
+    },
+    "honest_note": "These are five author-designed finite transition families. Not evidence of open-ended algorithm discovery."
+  },
+  "known_limits": "Offline supervised NB ranker, not a real generative LLM. Typed candidates from finite human-reviewed DSL. Audit artificial and frozen only against model feedback.",
+  "model_invocations": [
+    {
+      "audit_access": false,
+      "choice": "GROW",
+      "event": "ACTUAL_TRAINED_MODEL_INFERENCE",
+      "feedback_count": 0
+    },
+    {
+      "audit_access": false,
+      "choice": "FLIP",
+      "event": "ACTUAL_TRAINED_MODEL_INFERENCE",
+      "feedback_count": 1
+    }
+  ],
+  "trial": {
+    "audit_inspected_after_selection": true,
+    "dev_probe_count": 1,
+    "dev_truth_table": {
+      "passed": 64,
+      "total": 64
+    },
+    "development_graph": {
+      "passed": 8,
+      "total": 8
+    },
+    "external_authority": "NONE",
+    "failed_audit_counterexample": null,
+    "frozen_audit_seen_by_model": false,
+    "frozen_graph_audit": {
+      "passed": 60,
+      "total": 60
+    },
+    "installed": false,
+    "learned_new_general_algorithm": false,
+    "limitations": "Finite typed macro grammar and author-designed synthetic oracle. NB model ranks familiar templates; generative backend optional. Model cannot self-grade. No proof of novel algorithms or improvement at general development.",
+    "local_ollama_http_calls": 0,
+    "model_calls": 2,
+    "model_feedback_records": 1,
+    "model_kind": "TRAINED_NAIVE_BAYES_FIXED_GRAMMAR",
+    "model_output_grants_authority": false,
+    "model_written_python_executed": false,
+    "next_research_question": "Can a mechanism generalize to a new state grammar and independently authored test family without increasing false positives?",
+    "pen_state": "UNCHANGED",
+    "real_model_identity_verified": false,
+    "receipt_digest": "f66ec2ca7885b480f62968cb99a1811955cc574f31c60667fc36f369d0aa191e",
+    "research_brief": "What if toggles make previously held keys vanish after another visit?",
+    "safety_graph": {
+      "passed": 4,
+      "total": 4
+    },
+    "schema": "motif.thought018.research-director.v1",
+    "selected_mechanism": "FLIP",
+    "selected_proposal_digest": "93a3cd2a90df0a2494d1a72bc1854ba054652ba308ca0e7b1926866630966d74",
+    "status": "PATCH_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+    "steps": [
+      {
+        "authority": "NONE",
+        "director_chosen_test": {
+          "on_mask": 3,
+          "toggles_mask": 5
+        },
+        "disposition": "REFUTED_ON_DEV",
+        "independent_oracle_output": 6,
+        "model_candidate": "GROW",
+        "model_candidate_output": 7,
+        "model_proposal_digest": "d61482a8a951a386c99a3454fe4fc7738d01247acea90e12d9a7a0c6e82bb1bf",
+        "model_suggested_test": {
+          "on": [
+            "red"
+          ],
+          "reason": "Model-suggested discriminating specimen",
+          "toggles": [
+            "red"
+          ]
+        },
+        "receipt_digest": "9978f8c50e9ccdc417c43c8496d0a196d088d88ef4cf433114129ef6344e082e",
+        "remaining_mechanisms": [
+          "FLIP"
+        ],
+        "round": 1,
+        "source_graph_modified": false,
+        "suggestion_disposition": "MODEL_TEST_DEFERRED_INFORMATIVE_ALTERNATIVE"
+      },
+      {
+        "authority": "NONE",
+        "disposition": "CANDIDATE_MATCHES_PRIOR_DEV_DISCRIMINATION",
+        "model_candidate": "FLIP",
+        "round": 2
+      }
+    ],
+    "stress_graph_audit": {
+      "passed": 80,
+      "total": 80
+    },
+    "trusted_template_only": true
+  }
+}

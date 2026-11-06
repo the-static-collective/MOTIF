@@ -1,4 +1,4 @@
-name: THOUGHT-018 staged probe director
+name: THOUGHT-018 model-directed experiments
 on:
   push:
     paths:
@@ -10,14 +10,33 @@ on:
       - '.github/workflows/thought-018.yml'
   workflow_dispatch:
 jobs:
-  staged-smoke:
+  test-research-director:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run independently checkable finite research smoke
+      - name: Test independent director and model membrane
         working-directory: experiments/thought-018
-        run: python -m unittest -v test_smoke.py
+        run: python -m unittest -v test_director.py
+      - name: Reproduce model-guided research receipt
+        working-directory: experiments/thought-018
+        run: python benchmark.py > experiment-results.json
+      - name: Replay actual GPT-6 conversation research proposals against owner oracle
+        working-directory: experiments/thought-018
+        run: |
+          python -m unittest -v test_conversation_relay.py
+          python conversation_relay.py > /dev/null
+      - name: Retain provenance of noninstalled proposal
+        uses: actions/upload-artifact@v4
+        with:
+          name: motif-thought-018-review-only
+          path: |
+            experiments/thought-018/experiment-results.json
+            experiments/thought-018/conversation-gpt6-results.json
+            experiments/thought-018/conversation-gpt6-proposals.json
+      - name: THOUGHT-017 source-owner regression
+        working-directory: experiments/thought-017
+        run: python -m unittest -v test_lab.py
