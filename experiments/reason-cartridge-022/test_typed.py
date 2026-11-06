@@ -19,6 +19,7 @@ from router import discover,infer,boolean_projection_witness,question_family
 from obligations import CASES,all_proofs,source_proof,contradiction,old_binary_projection
 from mirror_bridge import four_elves,run_all,pin
 from trial import run
+from ambiguity import transfer_source_audit
 
 ROOT=Path("reason-022-sources")
 
@@ -168,6 +169,23 @@ class TypedConceptTests(unittest.TestCase):
                 self.assertEqual(git_blob(raw),sha)
         self.assertEqual(len(COMMIT),40)
 
+    def test_external_gold_can_choose_one_answer_when_two_are_supported(self):
+        if not ROOT.is_dir():self.skipTest("External dataset not acquired")
+        rows=read(ROOT/SOURCES["TRANSFER"]["test"][0],"TRANSFER","test",
+                  limit=250,skip=250)
+        audit=transfer_source_audit(rows)
+        self.assertEqual(len(audit),1)
+        ambiguity=audit[0]
+        self.assertEqual(ambiguity["official_dataset_gold"],"football")
+        self.assertEqual(ambiguity["model_latest_matching_transfer"],"apple")
+        self.assertEqual(set(ambiguity["all_source_supported_distinct_answer_options"]),
+                         {"apple","football"})
+        self.assertIn(22,ambiguity["official_supporting_line_ids_for_scoring"])
+        self.assertEqual(ambiguity["posthoc_finding"],
+                         "MULTIPLE_EXPLICITLY_SUPPORTED_ANSWERS")
+        self.assertTrue(ambiguity["model_was_overconfident_about_a_non_unique_answer"])
+        self.assertTrue(ambiguity["gold_used_only_in_posthoc_audit_not_in_engine"])
+
     def test_real_independent_babi_eval_respects_coverage_and_reports_errors(self):
         if not ROOT.is_dir():self.skipTest("External datasets not acquired")
         result=run(source_dir=ROOT,train_limit=60,test_limit=250)
@@ -178,6 +196,7 @@ class TypedConceptTests(unittest.TestCase):
         self.assertEqual(result["same_inspected_counting_development_exact_after_repair"],250)
         self.assertTrue(result["prospective_external_test_starts_after_first_250_per_family"])
         self.assertEqual(len(result["external_test"]),3)
+        self.assertEqual(len(result["independent_external_posthoc_ambiguous_gold_cases"]),1)
         self.assertEqual(set(result["trained_question_type_router"][
                             "question_grammar_to_typed_engine"].values()),
                          {"QUANTITY","ORDERED_TIME","TRIADIC_TRANSFER"})
