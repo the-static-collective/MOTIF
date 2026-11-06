@@ -22,10 +22,10 @@
     "examiner_transcript": [
       {
         "counterexample": {
-          "column": 5.352178677506166e+45,
-          "incorrect": 5.352178677506166e+45,
-          "parent": 3.568120933176734e+44,
-          "reference": 0
+          "column": "0xefffff7ffffffffffffffffffffffffffeffff",
+          "incorrect": "0xefffff7ffffffffffffffffffffffffffeffff",
+          "parent": "0x10000080000000000000000000000000010000",
+          "reference": "0x0"
         },
         "external_smt_result": "SAT",
         "hypothesis": {
@@ -47,10 +47,10 @@
       },
       {
         "counterexample": {
-          "column": 5.352178677506166e+45,
-          "incorrect": 5.352178677506166e+45,
-          "parent": 3.568120933176734e+44,
-          "reference": 0
+          "column": "0xefffff7ffffffffffffffffffffffffffeffff",
+          "incorrect": "0xefffff7ffffffffffffffffffffffffffeffff",
+          "parent": "0x10000080000000000000000000000000010000",
+          "reference": "0x0"
         },
         "external_smt_result": "SAT",
         "hypothesis": {
@@ -118,7 +118,7 @@
       }
     ],
     "schema": "motif.self-improvement-examiner.v1",
-    "sha256": "062f4916669ac57ae3173e589ade4e72d6b8daece8925b3366e8f1c512d1375b",
+    "sha256": "17fe9ec7b418fb525aae973a41abf52c51e5b8f221e1d6fdb3bd2a72ccf90c3b",
     "source_sha256": "0077c63ec1857cd70fec245addcfdde47a37c3f412ee50547a309ae3dadef044",
     "status": "PROOF_GATED_DRAFT_ONLY",
     "training_profiler": {
