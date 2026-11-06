@@ -22,8 +22,6 @@ jobs:
       - name: Install external formal SMT verifier (pinned full provenance release)
         run: |
           python -m pip install --only-binary=:all: z3-solver==4.16.0.0
-      - name: Prove discovered source rewrites and test source/logic falsifiers
-        run: python -m unittest discover -s experiments/legit013 -p 'test_*.py' -v
       - name: Generate new proven optimizer, evaluate sealed-source heldout graphs and classical controls
         run: |
           python experiments/legit013/benchmark.py --emit > /tmp/motif-legit013-examiner-results.json
@@ -35,6 +33,8 @@ jobs:
           cat /tmp/motif-legit013-generated-optimizer.py
           echo "---- GENERATED FORMAL MANIFEST ----"
           cat /tmp/motif-legit013-formal-receipt.json
+      - name: Prove discovered source rewrites and test source/logic falsifiers
+        run: python -m unittest discover -s experiments/legit013 -p 'test_*.py' -v
       - name: Archive genuine Z3 SMT counterexamples, generated Python and benchmark receipts
         uses: actions/upload-artifact@v4
         with:
