@@ -78,9 +78,9 @@ def prove_rule(guard,answer,width):
         c0=model.eval(c,model_completion=True).as_long()
         return {
             "result":"SAT","valid_all_masks":False,"width":width,
-            "counterexample":{"parent":p0,"column":c0,
-                              "reference":p0&c0,
-                              "incorrect":answer_eval(answer,p0,c0,(1<<width)-1)},
+            "counterexample":{"parent":hex(p0),"column":hex(c0),
+                              "reference":hex(p0&c0),
+                              "incorrect":hex(answer_eval(answer,p0,c0,(1<<width)-1))},
             "external_solver_version":z3.get_version_string(),
         }
     raise RuntimeError("SMT result UNKNOWN: fail closed")
