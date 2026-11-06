@@ -18,7 +18,7 @@ OPINIONS={
   "url":"https://law.justia.com/cases/new-york/appellate-division-first-department/1991/169-a-d-2d-254-572-n-y-s-2d-672.html",
   "spans":[
    ("S1","defendant is estopped to deny their existence and, as a matter of law, the house is haunted","majority opinion, paragraph beginning Whether the source"),
-   ("S2","allow the buyer to seek rescission of the contract of sale","majority opinion, paragraph beginning While I agree"),
+   ("S2","allow the buyer to seek rescission","majority opinion, paragraph beginning While I agree"),
   ],
  },
  "LEONARD":{
