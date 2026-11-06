@@ -238,4 +238,13 @@ def next_round(previous_best,profiled,already):
                 candidates.append({"parent":previous_best["parent"],
                                    "rules":previous_best["rules"]+[list(rule)]})
                 break
-    return [p for p in distinct(candidates) if digest(p) not in already]
+    novel=[p for p in distinct(candidates) if digest(p) not in already]
+    if not novel:
+        # A fast branchless first-round winner can exhaust the obvious
+        # mutations. The feedback loop must still try an actually new
+        # counter-hypothesis, not mislabel an empty round as invention.
+        other=("LAST" if previous_best["parent"]=="FIRST" else "FIRST")
+        probes=[{"parent":other,"rules":[list(rule)]} for rule in ranked[:3]]
+        probes += [{"parent":other,"rules":[list(x) for x in ranked[:2]]}]
+        novel=[p for p in distinct(probes) if digest(p) not in already]
+    return novel[:3]
