@@ -20,7 +20,7 @@ import json
 from worlds import RELATIONS,train_worlds,heldout_worlds,make
 
 WORLD_SOURCE=Path(__file__).with_name("worlds.py")
-WORLD_BLOB="REPLACE_WORLDS_SHA"
+WORLD_BLOB="41176cafaf679fbf42dbdb4632ebcfda98510499"
 SCHEMA="motif.reason.living-concept.cartridge.v1"
 PACKET="motif.reason.living-concept.training-receipt.v1"
 SHAPES=(
