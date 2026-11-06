@@ -183,6 +183,25 @@ class AlgorithmExaminerTests(unittest.TestCase):
             self.assertEqual(old,control)
             self.assertEqual(current,control)
 
+    def test_committed_generated_source_matches_fresh_generator(self):
+        committed=(HERE/"generated"/"optimized_search_v4.py").read_text(
+            encoding="utf-8")
+        self.assertEqual(committed,self.artifact["source"])
+        self.assertEqual(reverify({"source":committed,
+                                   "manifest":self.artifact["manifest"]})
+                         ["status"],"EXTERNAL_SMT_VERIFIED_TYPED_REWRITE")
+
+    def test_committed_formal_certificate_matches_new_Z3_replay(self):
+        committed=json.loads((HERE/"generated"/"formal_certificate.json").read_text(
+            encoding="utf-8"))
+        self.assertEqual(committed["source_manifest"],self.artifact["manifest"])
+        verified=reverify(self.artifact)
+        self.assertEqual(committed["formal_verification"],verified)
+        self.assertEqual(committed["source_sha256"],
+                         self.artifact["manifest"]["source_sha256"])
+        self.assertFalse(committed["production_write_permitted"])
+        self.assertFalse(committed["automatic_algorithm_promotion"])
+
     def test_current_generation_has_no_production_write_permission(self):
         m=self.artifact["manifest"]
         self.assertEqual(m["status"],"PROOF_GATED_DRAFT_ONLY")
