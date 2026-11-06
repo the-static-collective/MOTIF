@@ -1,0 +1,141 @@
+{
+  "automatic_algorithm_promotion": false,
+  "formal_verification": {
+    "automatic_promotion_permitted": false,
+    "external_formal_solver_actually_invoked": true,
+    "independent_specification_author": false,
+    "real_world_authority": false,
+    "rules_checked": 2,
+    "source_sha256": "0077c63ec1857cd70fec245addcfdde47a37c3f412ee50547a309ae3dadef044",
+    "status": "EXTERNAL_SMT_VERIFIED_TYPED_REWRITE",
+    "z3_widths_checked": [
+      8,
+      152,
+      256
+    ]
+  },
+  "independent_test_authorship": false,
+  "production_write_permitted": false,
+  "real_world_authority": false,
+  "schema": "motif.proof-carrying-examiner-artifacts.v1",
+  "source_manifest": {
+    "examiner_transcript": [
+      {
+        "counterexample": {
+          "column": 5.352178677506166e+45,
+          "incorrect": 5.352178677506166e+45,
+          "parent": 3.568120933176734e+44,
+          "reference": 0
+        },
+        "external_smt_result": "SAT",
+        "hypothesis": {
+          "answer": "COLUMN",
+          "guard": "ALWAYS"
+        },
+        "observed_training_support": 24904,
+        "round": 1
+      },
+      {
+        "counterexample": null,
+        "external_smt_result": "UNSAT",
+        "hypothesis": {
+          "answer": "COLUMN",
+          "guard": "P_FULL"
+        },
+        "observed_training_support": 509,
+        "round": 2
+      },
+      {
+        "counterexample": {
+          "column": 5.352178677506166e+45,
+          "incorrect": 5.352178677506166e+45,
+          "parent": 3.568120933176734e+44,
+          "reference": 0
+        },
+        "external_smt_result": "SAT",
+        "hypothesis": {
+          "answer": "COLUMN",
+          "guard": "ALWAYS"
+        },
+        "observed_training_support": 24395,
+        "round": 1
+      },
+      {
+        "counterexample": null,
+        "external_smt_result": "UNSAT",
+        "hypothesis": {
+          "answer": "ZERO",
+          "guard": "P_ZERO"
+        },
+        "observed_training_support": 9,
+        "round": 2
+      }
+    ],
+    "external_smt_proved_hypotheses": 2,
+    "external_smt_verifier": "z3-solver",
+    "generated_python_source_in_production": false,
+    "genuine_smt_counterexamples": 2,
+    "open_world_correctness_verified": false,
+    "parent_generated_source_sha256": "b9c11206bdcd0c4e61b383660aca4bd8fb98ceeb1c27da7303dc32c61bb33881",
+    "proof_independent_specification_authorship": false,
+    "real_world_authority": false,
+    "recursive_smt_certificate": {
+      "all_properties_proved_in_encoded_finite_BitVec_theory": true,
+      "bitvector_width": 152,
+      "external_formal_checker_actually_invoked": true,
+      "logical_formulas_authored_by_project": true,
+      "properties": {
+        "child_gain_outside_evidence": "UNSAT",
+        "child_gain_outside_parent": "UNSAT",
+        "full_parent_changes_column": "UNSAT",
+        "zero_parent_has_nonzero_child": "UNSAT"
+      },
+      "solver": "Z3",
+      "version": "4.16.0"
+    },
+    "rules": [
+      {
+        "answer": "COLUMN",
+        "externally_verified_widths": [
+          8,
+          152,
+          256
+        ],
+        "guard": "P_FULL",
+        "proof_obligation": "guard(P,C) IMPLIES proposed(P,C) == P BITAND C",
+        "source_training_support": 509
+      },
+      {
+        "answer": "ZERO",
+        "externally_verified_widths": [
+          8,
+          152,
+          256
+        ],
+        "guard": "P_ZERO",
+        "proof_obligation": "guard(P,C) IMPLIES proposed(P,C) == P BITAND C",
+        "source_training_support": 9
+      }
+    ],
+    "schema": "motif.self-improvement-examiner.v1",
+    "sha256": "062f4916669ac57ae3173e589ade4e72d6b8daece8925b3366e8f1c512d1375b",
+    "source_sha256": "0077c63ec1857cd70fec245addcfdde47a37c3f412ee50547a309ae3dadef044",
+    "status": "PROOF_GATED_DRAFT_ONLY",
+    "training_profiler": {
+      "benchmark_test_cases_accessed": false,
+      "parent_sha256": "b9c11206bdcd0c4e61b383660aca4bd8fb98ceeb1c27da7303dc32c61bb33881",
+      "source": "ACTUAL_GENERATED_MOTIF012_DAG_PYTHON",
+      "training_graphs": 32,
+      "training_seeds_range": [
+        41000,
+        41031
+      ],
+      "training_transitions": 24904,
+      "unchanged_nonzero_transitions": 49,
+      "world_truth_not_used": true,
+      "zero_parent_transitions": 9
+    }
+  },
+  "source_sha256": "0077c63ec1857cd70fec245addcfdde47a37c3f412ee50547a309ae3dadef044",
+  "status": "DRAFT_HUMAN_REVIEW_REQUIRED"
+}
