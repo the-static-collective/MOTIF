@@ -25,7 +25,7 @@ ROLES = {"U_NEG":("proxy","target"), "CAN_NEG":("target","proxy"),
          "U_POS":("proxy","target"), "CAN_POS":("proxy","target")}
 CAPTURE = r"([a-z][a-z0-9 -]{0,79}?)"
 SLOT = re.compile(r"(\{proxy\}|\{target\})")
-FORBIDDEN_CAPTURE = re.compile(r"\\b(not|never|except|unless|despite|without|neither|nor|isnt|arent|cannot|can't|won't|no|that|is|are|was|were|present|absent|exists|exist|and|or)\\b")
+FORBIDDEN_CAPTURE = re.compile(r"\b(not|never|except|unless|despite|without|neither|nor|isnt|arent|cannot|can't|won't|no|that|is|are|was|were|present|absent|exists|exist|and|or)\b")
 ACCEPTED = re.compile(r"^[a-z0-9 ,?.:'-]{1,400}$")
 
 
