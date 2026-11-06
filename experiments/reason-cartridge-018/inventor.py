@@ -50,10 +50,10 @@ def pin():
 
 
 def programs():
-    """All 4 * 6^4 finite joined-graph compositions; target not supplied."""
+    """Finite joined-graph compositions; deduplicate commutative AB conjuncts."""
     return tuple((shape,one,two,three,gate)
                  for shape in range(len(SHAPES))
-                 for one,two,three,gate in product(RELATIONS,repeat=4))
+                 for one,two,three,gate in product(RELATIONS,repeat=4)\n                 if one<=gate)
 
 
 def edges(world):
