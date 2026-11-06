@@ -145,8 +145,10 @@ def _summary(kind: str, value: object) -> dict:
 
 def run(targets: tuple[str, ...] = ("door",), *,
         world=None, goal=None, max_cost: int = 12, max_steps: int = 8,
-        parallel: bool = True) -> dict:
-    branches = inventory()
+        parallel: bool = True, census_count: int | None = None) -> dict:
+    branches = inventory()  # historical ancestry; never executable branch imports
+    if census_count is not None and (type(census_count) is not int or not 0 <= census_count <= 2000):
+        raise HOLD("Invalid live branch census count")
     caps = door.registry()
     plan = choose(targets, caps, max_cost, max_steps)
     result = {
@@ -156,7 +158,7 @@ def run(targets: tuple[str, ...] = ("door",), *,
         "real_world_authority": False,
         "external_action_executed": False,
         "observed_outcome": None,
-        "discovered_uninstalled_branches": len(branches),
+        "discovered_uninstalled_branches": (len(branches) if census_count is None else census_count),
         "requested_outputs": list(targets),
         "selected_cartridges": [],
         "waves": [],
