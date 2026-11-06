@@ -1,0 +1,158 @@
+{
+  "archive_counts": {
+    "db_bytes_allocated_approx": 57344,
+    "expanded": 0,
+    "nodes": 9,
+    "relations": 1,
+    "unexpanded": 0
+  },
+  "archive_integrity": {
+    "foreign_key_errors": 0,
+    "integrity": "ok"
+  },
+  "archived_pencil_receipt": {
+    "authority": "NONE",
+    "heldout_cases": 4,
+    "node_id": "grammar-revision:596cdb1c92353be25985d05af5fc2684fd67b58e99d5b3b4f2171b2fc6f3819b",
+    "status": "PENCIL_REVISION_ARCHIVED",
+    "training_cases": 4
+  },
+  "experiment": "GEOM-009 self-questioning grammar / synthetic",
+  "interpretation": "classical supervised rewrite induction; no automatic grammar binding or real-world knowledge",
+  "isolated_counterfactual_graphs": {
+    "authority": "NONE",
+    "comparison": {
+      "parent": {
+        "counts": {
+          "db_bytes_allocated_approx": 57344,
+          "expanded": 4,
+          "nodes": 4,
+          "relations": 4,
+          "unexpanded": 0
+        },
+        "growth_status": "SATURATED_FOR_CURRENT_GRAMMAR",
+        "integrity": {
+          "foreign_key_errors": 0,
+          "integrity": "ok"
+        },
+        "target_hits": 0,
+        "target_results": [
+          false,
+          false
+        ],
+        "unobserved_targets_are_negative": true
+      },
+      "revised": {
+        "counts": {
+          "db_bytes_allocated_approx": 57344,
+          "expanded": 6,
+          "nodes": 6,
+          "relations": 8,
+          "unexpanded": 0
+        },
+        "growth_status": "SATURATED_FOR_CURRENT_GRAMMAR",
+        "integrity": {
+          "foreign_key_errors": 0,
+          "integrity": "ok"
+        },
+        "target_hits": 2,
+        "target_results": [
+          true,
+          true
+        ],
+        "unobserved_targets_are_negative": true
+      }
+    },
+    "note": "non-mutating synthetic fork; finite incomplete frontier means misses are not negative evidence",
+    "parent_fingerprint": "grammar:16b8b12a3452d04468501a8ceb0f8e699581cc692d38008b3aa4c309b55f9e61",
+    "revised_fingerprint": "grammar:f80a64c1d7ee643812bd5c470047b57f5266410865b7d1d48f22d1b04c5b3ae9",
+    "scope": "demo:declared",
+    "status": "PENCIL_COUNTERFACTUAL_FORK"
+  },
+  "proposal": {
+    "authority": "NONE",
+    "candidate_space_size": 2,
+    "claimed_positive_roots": 3,
+    "completeness": "COMPLETE_FOR_ONE_SPAN_GRAMMAR",
+    "evaluated_this_slice": 2,
+    "existing_grammar_gap": {
+      "diagnosis": "single-step observed transition unavailable from present vocabulary",
+      "unexplained_positive_cases": [
+        "oak",
+        "pine",
+        "birch"
+      ]
+    },
+    "heldout": {
+      "correct": 4,
+      "false_positives": 0,
+      "predictions": [
+        {
+          "expected": true,
+          "id": "spruce",
+          "predicted": true
+        },
+        {
+          "expected": true,
+          "id": "cedar",
+          "predicted": true
+        },
+        {
+          "expected": false,
+          "id": "wrong-leaf",
+          "predicted": false
+        },
+        {
+          "expected": false,
+          "id": "wrong-source",
+          "predicted": false
+        }
+      ],
+      "total": 4,
+      "true_positives": 2
+    },
+    "instrument": "PENCIL",
+    "limitations": "single-span induction from labeled synthetic examples; no new semantic ontology",
+    "parent_fingerprint": "grammar:16b8b12a3452d04468501a8ceb0f8e699581cc692d38008b3aa4c309b55f9e61",
+    "proposed_fingerprint": "grammar:f80a64c1d7ee643812bd5c470047b57f5266410865b7d1d48f22d1b04c5b3ae9",
+    "rule": {
+      "find": [
+        "bud"
+      ],
+      "name": "inferred-e147b41f4afa",
+      "replace": [
+        "branch"
+      ]
+    },
+    "scope": "demo:declared",
+    "status": "PENCIL_GRAMMAR_REVISION_PROPOSED",
+    "training": {
+      "correct": 4,
+      "false_positives": 0,
+      "predictions": [
+        {
+          "expected": true,
+          "id": "oak",
+          "predicted": true
+        },
+        {
+          "expected": true,
+          "id": "pine",
+          "predicted": true
+        },
+        {
+          "expected": true,
+          "id": "birch",
+          "predicted": true
+        },
+        {
+          "expected": false,
+          "id": "negative",
+          "predicted": false
+        }
+      ],
+      "total": 4,
+      "true_positives": 3
+    }
+  }
+}

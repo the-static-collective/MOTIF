@@ -1,0 +1,41 @@
+name: MOTIF GEOM-009 Self-Questioning Graph Grammar
+on:
+  push:
+    paths:
+      - 'experiments/geometry-009/**'
+      - '.github/workflows/motif-geometry-009.yml'
+  pull_request:
+    paths:
+      - 'experiments/geometry-009/**'
+      - '.github/workflows/motif-geometry-009.yml'
+jobs:
+  geometry-grammar-experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Synthetic grammar tests and independent oracle
+        run: |
+          cd experiments/geometry-009
+          python -m unittest -v test_grammar_invention.py
+      - name: Demonstration and honest baseline
+        run: |
+          cd experiments/geometry-009
+          python demo.py > /tmp/geom009-demo.json
+          python benchmark.py > /tmp/geom009-benchmark.json
+          python interface.py example-input.json > /tmp/geom009-interface.json
+          python stress_frontier.py --seconds 0.2 0.2 > /tmp/geom009-small-stress.json
+          python -m json.tool /tmp/geom009-demo.json > /dev/null
+          python -m json.tool /tmp/geom009-benchmark.json > /dev/null
+          python -m json.tool /tmp/geom009-interface.json > /dev/null
+          python -m json.tool /tmp/geom009-small-stress.json > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geom009-synthetic-evidence
+          path: |
+            /tmp/geom009-demo.json
+            /tmp/geom009-benchmark.json
+            /tmp/geom009-interface.json
+            /tmp/geom009-small-stress.json

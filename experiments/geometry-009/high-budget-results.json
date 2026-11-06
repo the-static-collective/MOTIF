@@ -1,0 +1,34 @@
+{
+  "expanded_last_slice": 29832,
+  "experiment": "GEOM-009 high-budget persistent stress",
+  "final_slice_seconds_limit": 30,
+  "final_snapshot": {
+    "db_bytes_allocated_approx": 353157120,
+    "expanded": 70516,
+    "nodes": 141033,
+    "relations": 211548,
+    "unexpanded": 70517
+  },
+  "growth_invariants": "N=2E+1, R=3E, frontier=E+1",
+  "integrity": {
+    "foreign_key_errors": 0,
+    "integrity": "ok"
+  },
+  "max_rss_kilobytes_last_slice": 98828,
+  "notes": [
+    "Earlier 70-second multi-slice attempt was externally interrupted; its unreported intermediate snapshots are not claimed as completed checks.",
+    "Interruption left a persistent local SQLite file whose counts and integrity were verified before resumption.",
+    "The graph remains PENCIL; no new mathematical insight or operator capability follows from raw growth.",
+    "Large requested work budget removed this cap as active stopping cause; 30-second time cut and physical resources remained."
+  ],
+  "starting_snapshot": {
+    "db_bytes_allocated_approx": 203264000,
+    "expanded": 40684,
+    "nodes": 81369,
+    "relations": 122052,
+    "unexpanded": 40685
+  },
+  "stop_reason": "TIME_SLICE_COMPLETE",
+  "total_elapsed_seconds_including_verification_last_slice": 33.586,
+  "work_budget_requested_for_final_slice": 1000000000000000
+}
