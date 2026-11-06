@@ -149,7 +149,7 @@ def native_run(packet):
             "source_native_geometry_procedure_learned_from_other_cases":True,
             "all_three_native_algorithms_receive_same_case_ids":True,
             "language_model_kind":"TRAINED_NAIVE_BAYES_NOT_LLM",
-            "language_model_calls":"ONLY_WHEN_BOUNDARY_INTERPRETER_UNKNOWN",
+            "language_model_calls":sum(1 for row in rows if row["language"]["model_consulted"]),
             "external_action_executed":False,"authority":"NONE",
             "results":rows}
     return output
