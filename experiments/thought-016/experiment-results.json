@@ -1,0 +1,249 @@
+{
+  "audit": {
+    "after": 72,
+    "before": 62,
+    "total": 72
+  },
+  "base_program": {
+    "effects": {
+      "held_keys": {
+        "ref": "state.held_keys"
+      },
+      "position": {
+        "ref": "edge.v"
+      },
+      "spent_risk": {
+        "args": [
+          {
+            "ref": "state.spent_risk"
+          },
+          {
+            "ref": "edge.risk"
+          }
+        ],
+        "op": "add"
+      }
+    },
+    "frontier": "cost",
+    "guards": [
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "state.spent_risk"
+              },
+              {
+                "ref": "edge.risk"
+              }
+            ],
+            "op": "add"
+          },
+          {
+            "ref": "input.risk_budget"
+          }
+        ],
+        "op": "le"
+      }
+    ],
+    "identity": [
+      "position",
+      "spent_risk"
+    ],
+    "initial": {
+      "held_keys": {
+        "ref": "start.pickups"
+      },
+      "position": {
+        "ref": "input.start"
+      },
+      "spent_risk": {
+        "lit": 0
+      }
+    },
+    "relax": true,
+    "revisit": false,
+    "schema": "motif.thought016.typed-program.v1"
+  },
+  "candidate_program": {
+    "effects": {
+      "held_keys": {
+        "args": [
+          {
+            "ref": "state.held_keys"
+          },
+          {
+            "ref": "arrived.pickups"
+          }
+        ],
+        "op": "union"
+      },
+      "position": {
+        "ref": "edge.v"
+      },
+      "spent_risk": {
+        "args": [
+          {
+            "ref": "state.spent_risk"
+          },
+          {
+            "ref": "edge.risk"
+          }
+        ],
+        "op": "add"
+      }
+    },
+    "frontier": "cost",
+    "guards": [
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "state.spent_risk"
+              },
+              {
+                "ref": "edge.risk"
+              }
+            ],
+            "op": "add"
+          },
+          {
+            "ref": "input.risk_budget"
+          }
+        ],
+        "op": "le"
+      },
+      {
+        "args": [
+          {
+            "ref": "edge.need"
+          },
+          {
+            "ref": "state.held_keys"
+          }
+        ],
+        "op": "subset"
+      }
+    ],
+    "identity": [
+      "position",
+      "spent_risk",
+      "held_keys"
+    ],
+    "initial": {
+      "held_keys": {
+        "ref": "start.pickups"
+      },
+      "position": {
+        "ref": "input.start"
+      },
+      "spent_risk": {
+        "lit": 0
+      }
+    },
+    "relax": true,
+    "revisit": true,
+    "schema": "motif.thought016.typed-program.v1"
+  },
+  "candidate_source_sha256": "bfc5e55644131113d3dac91b8411a003f233ee702a1cd49e1ae7101de0e6e6d9",
+  "counterexample": null,
+  "development": {
+    "after": 9,
+    "before": 3,
+    "total": 9
+  },
+  "execution_is_os_sandbox": false,
+  "external_authority": "NONE",
+  "heldout_exposed_to_developer": false,
+  "human_merge_required": true,
+  "installed_fragments": [
+    "GATE",
+    "PICKUP",
+    "KEY_STATE",
+    "REVISIT"
+  ],
+  "limitations": "Synthetic key-gate problem, human-designed grammar, tiny classifier, fixed trusted source template; no arbitrary model-code sandbox, no claim of novel search mathematics or live LLM.",
+  "model_authored_arbitrary_python": false,
+  "model_calls": 5,
+  "model_kind": "OFFLINE_SUPERVISED_BAYES_PROGRAM_COMPOSITION_PROPOSER",
+  "model_output_is_program_ast_not_python": true,
+  "model_proposed_test": {
+    "audit_membership": false,
+    "independent_grade_not_model_answer": true,
+    "oracle_answer_cost": null,
+    "proposal": {
+      "case_index": 0,
+      "kind": "REMOVE_PICKUP",
+      "node": 1,
+      "rationale": "challenge claimed key acquisition",
+      "schema": "motif.thought016.probe.v1"
+    },
+    "test_problem_digest": "d79a58590dc700ba7ef902c3c425090ab0612f73d484348af105736924f44e8b"
+  },
+  "model_test_result": {
+    "passed": 1,
+    "total": 1
+  },
+  "new_mathematics_proven": false,
+  "old_four_repair_dsl_sufficient_for_new_key_state_problem": false,
+  "pen_state": "UNCHANGED",
+  "receipt_digest": "afc12e522381e0f0fdec068da6fb0899cf3a2c799f56bdb27acca66f90a140a1",
+  "reference_source_sha256": "784f6b6a2ff82c2015faa358274f8100d68650a78b84c5ec6d70ec4e71cd14e7",
+  "safety": {
+    "after": 4,
+    "before": 3,
+    "total": 4
+  },
+  "schema": "motif.thought016.algorithm-inventor.v1",
+  "staged_compositions": [
+    {
+      "candidate_count": 3,
+      "decision": "SCRATCH_ONLY_NO_RUNTIME_INSTALL",
+      "development_correct": 5,
+      "development_total": 9,
+      "external_authority": "NONE",
+      "model_probe_correct": 1,
+      "model_ranked_fragments": [
+        "GATE",
+        "PICKUP",
+        "KEY_STATE",
+        "REVISIT"
+      ],
+      "receipt_digest": "1616780c9b4ddd9646c0ef0f92105c768501c8396ced01e64e2aba0e930861f6",
+      "round": 1,
+      "safety_correct": 4,
+      "selected_typed_expression_changes": [
+        "GATE",
+        "PICKUP"
+      ],
+      "source_digest": "061205ea5aa69ad98bc2a1d944947b117a1de849069d6c6a0ac124bb4b6af931"
+    },
+    {
+      "candidate_count": 3,
+      "decision": "SCRATCH_ONLY_NO_RUNTIME_INSTALL",
+      "development_correct": 9,
+      "development_total": 9,
+      "external_authority": "NONE",
+      "model_probe_correct": 1,
+      "model_ranked_fragments": [
+        "KEY_STATE",
+        "REVISIT"
+      ],
+      "receipt_digest": "b573611179c9a99a4af74839f1823279b26e64849ae64a7064643ac737964566",
+      "round": 2,
+      "safety_correct": 4,
+      "selected_typed_expression_changes": [
+        "KEY_STATE",
+        "REVISIT"
+      ],
+      "source_digest": "bfc5e55644131113d3dac91b8411a003f233ee702a1cd49e1ae7101de0e6e6d9"
+    }
+  ],
+  "status": "PATCH_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+  "stress": {
+    "after": 54,
+    "total": 54
+  },
+  "written_to_project_implementation": false
+}
