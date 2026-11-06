@@ -62,6 +62,29 @@ class ReadonlyBranchTests(unittest.TestCase):
         self.assertEqual(r["source_paths_scanned"],0)
         self.assertEqual(r["source_paths_available"],650)
 
+    def test_prefix_limits_search_to_selected_original_subtree(self):
+        repo=Path.cwd()
+        def fake_git(root,args,*,max_bytes=1_000_000):
+            if args[0]=="rev-parse":return ("f"*40+"\n").encode()
+            if args[0]=="ls-tree":
+                return b"experiments/other/demo.py\nexperiments/future-X/demo.py\n"
+            if args[0]=="cat-file":
+                self.assertIn("experiments/future-X/demo.py",args[-1])
+                return b"30\n"
+            if args[0]=="show":return b"method event available\n"
+            raise AssertionError(args)
+        with patch.object(source_reader,"_git",side_effect=fake_git):
+            r=source_reader.inspect(self.catalog(),"experiment/future-X",
+                                    "event",repo_root=repo,
+                                    path_prefix="experiments/future-X")
+        self.assertEqual(r["source_paths_scanned"],1)
+        self.assertEqual(len(r["matches"]),1)
+        self.assertEqual(r["path_prefix"],"experiments/future-X")
+        with self.assertRaisesRegex(source_reader.HOLD,"prefix"):
+            source_reader.inspect(self.catalog(),"experiment/future-X",
+                                  "event",repo_root=repo,
+                                  path_prefix="../secrets")
+
     def test_ref_never_produces_executable_admission(self):
         card=source_reader.choose_passport(self.catalog(),"experiment/future-X")
         self.assertFalse(card["executable"])
