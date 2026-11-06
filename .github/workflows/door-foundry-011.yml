@@ -1,4 +1,4 @@
-name: MOTIF-011 — The Evidence Frontier: Sources Not Echoes
+name: 'MOTIF-011 — The Evidence Frontier: Sources Not Echoes'
 on:
   push:
     branches:
