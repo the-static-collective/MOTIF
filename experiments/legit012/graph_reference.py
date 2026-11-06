@@ -58,6 +58,7 @@ def check_graph(graph):
     if not isinstance(nodes,list) or not 1<=len(nodes)<=6561:
         raise ValueError("Unexpected bounded DAG size")
     seen=set()
+    seen_ids=set()
     normalized=[]
     for node in nodes:
         if not isinstance(node,dict) or set(node)!={"id","facts","parents"}:
@@ -67,6 +68,9 @@ def check_graph(graph):
             not isinstance(node["facts"],list) or
             not isinstance(node["parents"],list)):
             raise ValueError("Invalid node declaration")
+        if node["id"] in seen_ids:
+            raise ValueError("Duplicate source node ID")
+        seen_ids.add(node["id"])
         parts=node["facts"]
         if any(not isinstance(p,list) or len(p)!=2 or
                type(p[0]) is not int or type(p[1]) is not bool or
