@@ -66,9 +66,7 @@ def example():
         "scope":"SYNTHETIC_ONLY",
         "target":"hidden shelter",
         "indicator":"sonar ping",
-        "reports":[{"id":"negative_1","root":"instrument_a",
-                    "kind":"NEGATIVE_SENSOR","assurance":"DECLARED_VALID",
-                    "coverage":"PARTIAL","detection":"UNKNOWN"}]}
+        "reports":[]}
     left="there is no evidence that hidden shelter exists."
     right="there is evidence that hidden shelter does not exist."
     return {
