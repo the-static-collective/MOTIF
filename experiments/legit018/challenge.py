@@ -107,8 +107,11 @@ def classical_index(t):
     outgoing=[[] for _ in range(t.n)]
     for u,v,w in t.edges:outgoing[u].append((v,w))
     tables={}
-    for banned in ((-1,) if t.family=="EXACT" else range(-1,t.n)):
-        for source in range(t.n):
+    # A strong conventional baseline computes ONLY the actual query
+    # (excluded-node, source) pairs. It should not be penalized by
+    # indexing forbidden cases never asked by the experiment.
+    needed=sorted({(q[3],q[0]) for q in t.queries})
+    for banned,source in needed:
             possibilities=[0]*t.n
             if source!=banned:
                 possibilities[source]=1
