@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-003 grammar of the unknown
+on:
+  push:
+    paths:
+      - "experiments/legit003/**"
+      - ".github/workflows/legit003.yml"
+  pull_request:
+    paths:
+      - "experiments/legit003/**"
+      - ".github/workflows/legit003.yml"
+jobs:
+  exact-countermodel-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial evidence and independent classical tests
+        run: python -m unittest discover -s experiments/legit003 -p 'test_*.py' -v
+      - name: Compile public neuroscience aggregate as two countermodels
+        run: |
+          python experiments/legit003/bridge.py > /tmp/motif-legit003-public.json
+          python -m json.tool /tmp/motif-legit003-public.json > /dev/null
+          cat /tmp/motif-legit003-public.json
+      - name: Frozen cross-domain brute-force benchmark
+        run: |
+          python experiments/legit003/challenge.py > /tmp/motif-legit003-benchmark.json
+          python -m json.tool /tmp/motif-legit003-benchmark.json > /dev/null
+          cat /tmp/motif-legit003-benchmark.json
+      - name: Archive actual executable research receipts (HOLD)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT003-COUNTERMODEL-FROZEN-HOLD
+          path: |
+            /tmp/motif-legit003-public.json
+            /tmp/motif-legit003-benchmark.json
+          retention-days: 30
+          if-no-files-found: error
