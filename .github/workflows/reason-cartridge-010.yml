@@ -1,0 +1,71 @@
+name: REASON-010 Strange Court Cases / Legal Type Lens
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-010-strange-law
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-010/**'
+      - '.github/workflows/reason-cartridge-010.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-court-stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression for source-owned REASON-001 through REASON-009
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: New real-opinion source-bound legal reasoning test
+        run: |
+          python -m unittest discover -s experiments/reason-cartridge-010 -p 'test_*.py' -v
+      - name: Reproduce disjoint train/heldout case evaluation
+        run: |
+          python experiments/reason-cartridge-010/trial.py reason-010-evidence > reason-010-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-010-evidence/benchmark.json').read_text())
+          c=json.loads(Path('reason-010-evidence/typed-operator.json').read_text())
+          assert r['training_cases']==['STAMBOVSKY','LEONARD']
+          assert r['heldout_cases']==['NARUTO','PIERSON']
+          assert r['teaching_questions']==6
+          assert r['heldout_correct']==6 and r['heldout_total']==6
+          assert r['independent_review']['errors']==0
+          assert r['typed_subset_candidates']==63
+          assert len(r['selected_typed_operator'])==6
+          assert r['type_guard_ablation_witnesses']==6
+          assert r['unknown_questions_holding_without_fabrication']==3
+          assert not r['fantastical_claim_treated_as_literal_empirical_fact']
+          assert not r['constitutional_and_statutory_standing_collapsed']
+          assert not r['dissent_treated_as_majority']
+          assert not r['resuscitated_claim_mistaken_for_final_relief']
+          assert r['owner_curated_annotation_not_unstructured_judgment_reasoning']
+          assert not r['general_legal_reasoning_demonstrated']
+          assert not r['current_law_advice_offered']
+          assert not r['external_actions']
+          assert not c['law_firm_or_judicial_authority']
+          print({'training_issues':6,'heldout_issues':6,
+                 'synthesized_type_guards':r['selected_typed_operator'],
+                 'unsupported_queries_refused':3})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-010-weird-court-opinions-evidence
+          path: |
+            reason-010-evidence/
+            reason-010-stdout.json
+          retention-days: 30
