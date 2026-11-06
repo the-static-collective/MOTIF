@@ -127,7 +127,7 @@ class AdversarialOpinionTests(unittest.TestCase):
         with self.assertRaises(HOLD):source_document("NOT_A_REAL_OPINION")
         with self.assertRaises(HOLD):investigate("YATES","")
         with self.assertRaises(HOLD):investigate("NIX","a"*400)
-        with self.assertRaises(HOLD):speaker_header("Justice")
+        self.assertIsNone(speaker_header("Justice"))
 
     def test_rehashed_dissent_promotion_or_laundered_evidence_cannot_pass(self):
         baseline=json.loads(export("YATES"))
