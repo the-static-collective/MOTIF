@@ -11,6 +11,7 @@ from discover import (pin, LEGACY, EXPANDED, detect_gap, synthesize,
                       validate, old_eval, expanded_eval)
 from receiver import Receiver
 from market import Bid, DiscoveryMarket, make_receipt, validate_receipt
+from handoff import draft as review_draft, validate_draft
 
 
 def bids():
@@ -40,6 +41,8 @@ def run(out=None):
     extended=DiscoveryMarket(raw,receiver,bids(),deployment(64)).evaluate()
     exact_receipt=make_receipt(raw,receiver,bids(),deployment(32))
     reviewed=validate_receipt(exact_receipt,receiver)
+    handoff_raw=review_draft(raw,exact_receipt,receiver)
+    checked_handoff=validate_draft(handoff_raw,raw,exact_receipt,receiver)
     program=method["proposed_extension"]["program"]
     typed=(tuple(program["triple"]),tuple(program["pair"]))
     whole_domain_correct=sum(
@@ -84,6 +87,9 @@ def run(out=None):
             bulk["commonwealth_new_method_credit"],
         "new_real_world_facts":bulk["commonwealth_new_source_facts"],
         "market_receipt_checksum":reviewed["checksum_sha256"],
+        "graft_intake_state":checked_handoff["graft"]["intake_state"],
+        "cannon_selection_state":checked_handoff["cannon"]["state"],
+        "review_handoff_checksum":checked_handoff["checksum_sha256"],
         "read_only_fixture_admitted":receiver.admitted,
         "strong_classical_bfs_comparison_correct":32,
         "classical_planner_with_same_costs_can_match":True,
@@ -96,6 +102,8 @@ def run(out=None):
         folder.mkdir(parents=True,exist_ok=True)
         (folder/"method-cartridge.json").write_text(raw,encoding="utf-8")
         (folder/"market-receipt.json").write_text(exact_receipt,encoding="utf-8")
+        (folder/"graft-cannon-review-proposal.json").write_text(
+            handoff_raw,encoding="utf-8")
         (folder/"benchmark.json").write_text(
             json.dumps(result,sort_keys=True,indent=2)+"\n",encoding="utf-8")
     return result
