@@ -53,7 +53,7 @@ def programs():
     """All four shape families x six allowed relations in four ordered slots."""
     return tuple((shape,one,two,three,gate)
                  for shape in range(len(SHAPES))
-                 for one,two,three,gate in product(RELATIONS,repeat=4)\n                 if one<=gate)
+                 for one,two,three,gate in product(RELATIONS,repeat=4))
 
 
 def edges(world):
