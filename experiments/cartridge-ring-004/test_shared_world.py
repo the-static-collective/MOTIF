@@ -23,6 +23,7 @@ def native_fixture(public):
                 "REASON-006.run_council"],
             "language":{"speech_act":"CHALLENGE" if safe else "HOLD_EFFECT_REQUEST",
                         "status":"TYPED_ONLY" if safe else "HOLD","safe":safe,
+                        "baseline_safe":safe,
                         "pen_state":"UNCHANGED"},
             "geometry":{"raw":{"value":raw_v,"authority":"NONE","status":"LOCAL_SYNTHETIC_REPLAY"},
                         "repaired":{"value":repaired_v,"authority":"NONE","status":"LOCAL_SYNTHETIC_REPLAY"},
@@ -40,6 +41,7 @@ def native_fixture(public):
         "world":"ONE_SHARED_AUTHORED_SYNTHETIC_EVIDENCE_PACKET",
         "public_digest_sha256":comparator.canonical_digest(public),
         "authority":"NONE","external_action_executed":False,
+        "language_model_kind":"TRAINED_NAIVE_BAYES_NOT_LLM",
         "language_model_calls":0,
         "results":rows
     }
