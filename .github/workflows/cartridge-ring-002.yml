@@ -79,6 +79,23 @@ jobs:
           python-version: '3.11'
       - name: Validate synthetic router contracts
         run: python -m unittest discover -s experiments/cartridge-ring-001 -p 'test_*.py' -v
+      - name: Verify a real indexed source cartridge can read pinned GEOM-013 by file and line
+        run: |
+          python experiments/cartridge-ring-001/discovery.py --offline-frozen --output /tmp/motif-frozen-census.json
+          python experiments/cartridge-ring-001/source_reader.py \
+            --catalog /tmp/motif-frozen-census.json \
+            --ref experiment/geometry-013-self-redesigning-instrument \
+            --prefix experiments/geometry-013 \
+            --query RedesignLab > /tmp/motif-source-proof.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/motif-source-proof.json'))
+          assert d['schema']=='motif.readonly-source-cartridge.v1'
+          assert d['matches'] and any('geometry-013' in m['path'] for m in d['matches'])
+          assert d['branch_code_executed'] is False
+          assert d['authority']=='NONE'
+          print('Read source-only GEOM-013 cartridge at pinned immutable commit.')
+          PY
       - name: Pull controlled Python image, then run no-network isolated original experiments
         run: |
           docker pull python:3.11-slim
