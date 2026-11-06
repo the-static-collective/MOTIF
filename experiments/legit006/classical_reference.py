@@ -59,7 +59,7 @@ CAPTURE=r"([a-z][a-z0-9-]*(?: [a-z][a-z0-9-]*){0,7}?)"
 UNSAFE=re.compile(
     r"\b(no|not|never|none|neither|nor|except|unless|despite|without|"
     r"does|doesn't|cannot|can't|prove|rule|exclude|exists|exist|is|are|"
-    r"absent|present|evidence|indicates|implies|guarantee|some|all)\b")
+    r"absent|present|missing|evidence|indicates|implies|guarantee|some|all)\b")
 
 
 def _regex(kind,one,two):
