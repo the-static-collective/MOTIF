@@ -1,0 +1,81 @@
+name: REASON-017 Unexpected Other / novel correction and scoped consent
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-017-unexpected-other
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-017/**'
+      - '.github/workflows/reason-cartridge-017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  open-vocabulary-respect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regress original MOTIF-003 affordance reasoner
+        run: python -m unittest discover -s experiments/003 -p 'test_*.py' -v
+      - name: All source-owned REASON-001 through REASON-013 checks
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010 011 012 013; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Reacquire byte-pinned complete court opinion sources for REASON-014
+        run: python experiments/reason-cartridge-014/acquire.py reason-014-sources
+      - name: Regress full-opinion reader REASON-014 and care REASON-015/016
+        run: |
+          for n in 014 015 016; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Novel unknown recipient preference, correction, scope and hostile source tests
+        run: python -m unittest discover -s experiments/reason-cartridge-017 -p 'test_*.py' -v
+      - name: Independently replay synthetic recipient source and compare closed-vocabulary REASON-016
+        run: |
+          python experiments/reason-cartridge-017/trial.py reason-017-evidence > reason-017-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-017-evidence/benchmark.json').read_text())
+          assert r['case_count']==13
+          assert r['development_cases']==4 and r['unseen_synthetic_cases']==9
+          assert r['source_owned_expected_matches']==13
+          assert r['read_only_options_suggestions']==5
+          assert r['no_contact_cases_rejected']==2
+          assert r['novel_hypotheses_created']==7
+          assert r['question_count']==24
+          assert r['two_step_human_author_correction']['newly_reported_goal']=='a map of the bus route'
+          assert len(r['two_step_human_author_correction']['new_hypothesis_versions'])==2
+          assert r['older_consent_recall_refused_after_new_revision']
+          assert r['original_reason016_closed_grammar_control']['previous_reader_result']=='HOLD_OUTSIDE_ENUMERATED_PREFERENCE_VOCAB'
+          assert r['heldout_independent_review']['errors']==0
+          assert r['always_hold_source_reference_matches']<13
+          assert r['no_empathy_or_human_mental_state_inferred']
+          assert r['not_general_natural_language_semantic_parsing']
+          assert r['no_real_intervention_executed'] if 'no_real_intervention_executed' in r else not r['external_actions']
+          assert not r['external_actions']
+          assert not r['real_world_authority']
+          print({'source_owned_cases':13,
+                 'correct_source_author_outcomes':r['source_owned_expected_matches'],
+                 'unforeseen_new_hypotheses':r['novel_hypotheses_created'],
+                 'recipient_reply_turns':r['question_count'],
+                 'always_hold_baseline':r['always_hold_source_reference_matches'],
+                 'new_reply_scope_only':'OFFER_OPTIONS_ONLY'})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-017-unexpected-other-dialogue-and-source-provenance
+          path: |
+            reason-017-evidence/
+            reason-017-stdout.json
+          retention-days: 30
