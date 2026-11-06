@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-007 adversarial witness
+on:
+  push:
+    paths:
+      - "experiments/legit007/**"
+      - ".github/workflows/legit007.yml"
+  pull_request:
+    paths:
+      - "experiments/legit007/**"
+      - ".github/workflows/legit007.yml"
+jobs:
+  source-provenance-head-to-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial provenance and independent exact Bayesian falsifiers
+        run: python -m unittest discover -s experiments/legit007 -p 'test_*.py' -v
+      - name: Exercise actual existing MOTIF-013 witness model
+        run: |
+          python experiments/legit007/bridge_013.py > /tmp/motif-legit007-crosswire.json
+          python -m json.tool /tmp/motif-legit007-crosswire.json > /dev/null
+          cat /tmp/motif-legit007-crosswire.json
+      - name: Score hidden-world 320-case matched Bayesian experiment
+        run: |
+          python experiments/legit007/benchmark.py > /tmp/motif-legit007-results.json
+          python -m json.tool /tmp/motif-legit007-results.json > /dev/null
+          cat /tmp/motif-legit007-results.json
+      - name: Archive honest HOLD research receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT007-SOURCE-WITNESS-HOLD
+          path: |
+            /tmp/motif-legit007-crosswire.json
+            /tmp/motif-legit007-results.json
+          if-no-files-found: error
+          retention-days: 30
