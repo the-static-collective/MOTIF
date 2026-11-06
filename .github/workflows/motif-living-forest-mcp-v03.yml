@@ -1,0 +1,41 @@
+name: MOTIF living forest MCP v0.3 (packaged tests)
+on:
+  pull_request:
+    paths:
+      - 'integrations/motif-living-reasoner/**'
+      - '.github/workflows/motif-living-forest-mcp-v03.yml'
+  push:
+    branches:
+      - 'integration/motif-living-forest-mcp-v03'
+    paths:
+      - 'integrations/motif-living-reasoner/**'
+      - '.github/workflows/motif-living-forest-mcp-v03.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unpack packaged, source-visible MOTIF server
+        run: |
+          mkdir -p /tmp/motif-forest-mcp
+          unzip -q integrations/motif-living-reasoner/release-v0.3.zip -d /tmp/motif-forest-mcp
+          test -f /tmp/motif-forest-mcp/motif-living-reasoner/mcp_server/forest.py
+      - name: Install server runtime requirements
+        working-directory: /tmp/motif-forest-mcp/motif-living-reasoner
+        run: python -m pip install -r requirements.txt
+      - name: Test original local shared-case engine
+        working-directory: /tmp/motif-forest-mcp/motif-living-reasoner
+        run: python -m unittest discover -s skills/motif-reasoner/tests -p 'test_*.py' -v
+      - name: Test MCP router, source forest and review checkpoints
+        working-directory: /tmp/motif-forest-mcp/motif-living-reasoner
+        run: python -m unittest discover -s mcp_server/tests -p 'test_*.py' -v
+      - name: Confirm source-native execution is not claimed in this job
+        run: |
+          echo 'Only wrapper tests run: no Docker native triad benchmark or deployment claimed.'
