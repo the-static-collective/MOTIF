@@ -25,7 +25,7 @@ import json
 from casebook import by_id,ORDER,world,BASE_FEATURES,SCHEMA as PUBLIC_SCHEM
 
 PUBLIC=Path(__file__).with_name("casebook.py")
-PUBLIC_BLOB="REPLACE_CASEBOOK_BLOB"
+PUBLIC_BLOB="0cac9e6103bb7554f45c53820e2d58096c7aff09"
 SOURCE_VERSION="motif.reason.other-teaches-self.owner.v1"
 PACKET="motif.reason.other-teaches-self.learned-concept.v1"
 
