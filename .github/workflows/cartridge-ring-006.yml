@@ -74,8 +74,27 @@ jobs:
           print('Second safe coverage legacy:',a['safe_positive_decisive_coverage'])
           print('Second safe coverage guarded:',b['safe_positive_decisive_coverage'])
           PY
+      - name: Write evidence-scoped hypergraph of observed adversarial failure and benign coverage loss
+        run: |
+          python experiments/cartridge-ring-006/drift_graph.py \
+            --trial /tmp/motif-ring006-redteam.json \
+            --out /tmp/motif-ring006-drift-hypergraph.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring006-drift-hypergraph.json'))
+          assert r['schema']=='motif.ring006.drift-evidence-hypergraph.v1'
+          assert len(r['hyperedges'])==3
+          assert r['hyperedges'][-1]['guarded_unsafe_decisive']==0
+          assert r['hyperedges'][-1]['benign_coverage_lost']>0
+          assert r['new_real_world_edges_promoted']==0
+          assert r['new_executable_cartridges_installed']==0
+          assert r['authority']=='NONE'
+          print('MOTIF stored conditional adverse-source hyperedges, not universal new abilities.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring006-novelty-adversarial-provenance
-          path: /tmp/motif-ring006-redteam.json
+          path: |
+            /tmp/motif-ring006-redteam.json
+            /tmp/motif-ring006-drift-hypergraph.json
           retention-days: 30
