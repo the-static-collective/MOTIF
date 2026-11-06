@@ -250,6 +250,30 @@ class SelfBootstrappingTests(unittest.TestCase):
         strong=independent_minimal_composition(self.methods,"ODD_PARITY3")
         self.assertEqual(strong["least_total_NAND_gates"],8)
 
+    def test_committed_algorithms_were_actually_self_generated_and_replay(self):
+        stored=json.loads((HERE/"generated"/"self_written_algorithms.json").read_text(
+            encoding="utf-8"))
+        report,recomputed=execute()
+        self.assertEqual(stored,recomputed)
+        self.assertEqual(stored["status"],"DRAFT_ONLY_HUMAN_REVIEW_REQUIRED")
+        self.assertFalse(stored["autonomous_sandbox_escape"])
+        self.assertFalse(stored["source_authentication_performed"])
+
+    def test_saved_self_generated_methods_can_be_reverified_fresh(self):
+        stored=json.loads((HERE/"generated"/"self_written_algorithms.json").read_text(
+            encoding="utf-8"))
+        meta=stored["generation_1_generated_search_cartridge"]
+        self.assertEqual(len(_compressed_candidates(meta)),152)
+        methods=stored["generation_2_derived_three_input_algorithms"]
+        for task,program in methods.items():
+            proof=reverify_successor(program,TernaryVerifier(task),meta)
+            self.assertEqual(proof["status"],
+                             "VERIFIED_TYPED_THREE_INPUT_ALGORITHM",task)
+        final=stored["generation_3_reused_three_input_algorithm"]
+        self.assertEqual(reverify_four_input(
+            final,QuaternaryVerifier(),methods["ODD_PARITY3"])["status"],
+            "VERIFIED_TYPED_FOUR_INPUT_ALGORITHM")
+
     def test_full_replay_generates_standalone_artifacts_not_code_edits(self):
         report,bundle=execute()
         self.assertEqual(report["experiment"],"MOTIF-LEGIT-010")
