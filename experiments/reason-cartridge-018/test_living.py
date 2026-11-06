@@ -18,6 +18,7 @@ from inventor import (HOLD,SCHEMA,SHAPES,programs,prove,core,status,
 from reviewer import Receiver,independent_reference,reviewed_evaluation,replay
 from trial import flat_unjoined_baseline,run as run_trial
 from bridge017 import probe as prior_probe
+from drift import source_revision,detect
 
 
 class LivingConceptTests(unittest.TestCase):
@@ -201,6 +202,29 @@ class LivingConceptTests(unittest.TestCase):
         self.assertFalse(self.model["external_actions"])
         self.assertTrue(self.model["human_love_or_welfare_not_observed"])
         self.assertTrue(self.model["strong_classical_synthesis_can_match"])
+
+    def test_later_source_revision_with_unmodeled_withdrawal_forces_hold(self):
+        correction=source_revision()
+        result=detect(self.model,correction)
+        self.assertEqual(result["old_model_reported"],"SUPPORTED")
+        self.assertEqual(result["new_source_owner_outcome"],"REFUTED")
+        self.assertEqual(result["result"],
+                         "HOLD_NEW_SOURCE_FEATURE_REQUIRES_FRESH_LEARNING")
+        self.assertTrue(result["old_grammar_cannot_express_new_relation"])
+        self.assertFalse(result["old_model_revised_automatically"])
+        self.assertTrue(result["no_claim_that_source_correction_is_real_human_consent"])
+
+    def test_forged_new_semantic_relations_cannot_be_silently_adopted(self):
+        original=source_revision()
+        for field,new in (("new_four_state","SUPPORTED"),
+                          ("observed_new_relation","SENTIENT_CHEESE"),
+                          ("new_source_owner_outcome","SUPPORTED")):
+            forged=deepcopy(original)
+            forged[field]=new
+            forged["checksum_sha256"]=digest({
+                k:v for k,v in forged.items() if k!="checksum_sha256"})
+            with self.subTest(field=field),self.assertRaises(HOLD):
+                detect(self.model,forged)
 
     def test_benchmark_is_honest_on_all_55_source_cases(self):
         results=run_trial()
