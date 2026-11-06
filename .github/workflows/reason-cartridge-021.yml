@@ -78,6 +78,22 @@ jobs:
             "revocation_in_memory":r["latest_source_revision_invalidates_old_consent"],
           })
           PY
+      - name: Render the evidence-driven two-circle source correction viewer
+        run: |
+          python experiments/reason-cartridge-021/viewer.py reason-021-evidence/benchmark.json reason-021-evidence/other-teaches-self.html
+          python - <<'PY'
+          from pathlib import Path
+          file=Path("reason-021-evidence/other-teaches-self.html")
+          html=file.read_text(encoding="utf8")
+          assert 'class="self"' in html and 'class="other"' in html
+          assert 'id="source-select"' in html
+          assert "MIRROR" in html
+          assert "TRAIN-6" in html
+          assert "<script src=" not in html
+          assert file.stat().st_size>9000
+          print({"actual_source_driven_dual_circle_viewer":str(file),
+                 "bytes":file.stat().st_size,"network":False})
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: reason-021-other-teaches-self-source-corrections
