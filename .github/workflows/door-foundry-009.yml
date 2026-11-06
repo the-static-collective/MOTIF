@@ -1,0 +1,124 @@
+name: MOTIF-009 — The Question That Resolves the Picture
+on:
+  push:
+    branches:
+      - experiment/door-foundry-009-active-visual-question
+  pull_request:
+    paths:
+      - 'experiments/door-foundry-009/**'
+      - '.github/workflows/door-foundry-009.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual-questioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Exact original GRAFT visual source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GRAFT
+          ref: 0347c492c5e517788c0cbd87ee6f57aef3ce2a81
+          path: graft-source
+          persist-credentials: false
+      - name: Original independent CANNON visual code reviewer
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/CANNON
+          ref: 3f2210ba6272a9538843d093edb64d1b29d2f294
+          path: cannon-source
+          persist-credentials: false
+      - name: Exact original MOTIF PNG image-in source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 6abd24ad0cb04434b22a07f56b28c638a1bdd146
+          path: motif-image-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original MOTIF-007 produces reference text → verified PNGs
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate starts left of a blue wall. Move it to the right of the wall." \
+            --out text-scenes
+      - name: Original MOTIF-007 produces TWO genuine ambiguous PNG hypotheses
+        run: |
+          python experiments/door-foundry-007/text_to_visual.py \
+            --text "A red crate is beside a blue wall. Move it to the other side." \
+            --out ambiguous-scenes
+      - name: Original GRAFT visual source-generated operator test suite
+        run: node --test graft-source/test/visual-grammar-030.test.mjs
+      - name: Original CANNON checks GRAFT-generated code against real original PNG input
+        run: |
+          mkdir -p evidence
+          node cannon-source/experiments/cannon-095/review.mjs \
+            --graft graft-source --motif motif-image-source \
+            --start text-scenes/H01/start.png --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --out evidence/cannon-visual-review.json
+      - name: Original MOTIF builds GRAFT-generated held visual executable
+        run: |
+          python experiments/door-foundry-006/build.py \
+            --start text-scenes/H01/start.png \
+            --goal text-scenes/H01/target.png \
+            --gap text-scenes/H01/visual-gap.json \
+            --receipt evidence/cannon-visual-review.json \
+            --graft graft-source --out generated-visual-motif
+      - name: Original generated visual source creates multi-step imagined PNGs
+        run: |
+          python generated-visual-motif/run.py --out imagined-futures \
+            > evidence/original-imagination.json
+      - name: MOTIF-009 evaluates four real PNG pictures and an unsent adaptive question
+        run: |
+          python experiments/door-foundry-009/visual_question.py \
+            --ambiguous ambiguous-scenes --base text-scenes \
+            --imagined imagined-futures --build generated-visual-motif \
+            --out evidence/active-question > evidence/active-question-summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('evidence/active-question/active-question.json').read_text())
+          x=p['analysis']
+          assert len(p['visual_worlds'])==4
+          assert x['zero_question_expected_loss']==1.
+          assert x['one_question_expected_loss']==.7
+          assert x['two_question_expected_loss']==.32
+          assert x['two_question_policy']['question_id']=='ASK_WALL_EXTENT'
+          assert x['entropy_greedy']['first_question']=='ASK_START_SIDE'
+          assert x['entropy_greedy']['two_question_expected_loss_if_heuristic_first']==.4
+          assert x['classical_brute_control']['two_query_loss']==.32
+          assert p['custody']['question_sent'] is False
+          assert p['custody']['actual_answer_observed'] is False
+          print(json.dumps({'worlds_as_real_pngs':4,
+             'recommended_first_unsent_question':'ASK_WALL_EXTENT',
+             'cost_without_asking':1.,'cost_with_up_to_two':.32,
+             'entropy_heuristic_worse':True,'classical_equal':True,
+             'contacted_people':0},indent=2))
+          PY
+      - name: Model uncertainty, Bayesian value-of-information and refusal tests
+        env:
+          AMBIGUOUS_SCENES: ${{ github.workspace }}/ambiguous-scenes
+          TEXT_SCENES: ${{ github.workspace }}/text-scenes
+          IMAGINED_FRAMES: ${{ github.workspace }}/imagined-futures
+          VISUAL_BUILD: ${{ github.workspace }}/generated-visual-motif
+        run: python -m unittest discover -s experiments/door-foundry-009 -p 'test_question.py' -v
+      - name: Keep four PNG worlds, complete unsent question tree and code review
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-009-ACTIVE-QUESTION-FOUR-PICTURES-HOLD
+          path: |
+            evidence/
+            ambiguous-scenes/
+            text-scenes/
+            imagined-futures/
+            generated-visual-motif/
+          if-no-files-found: error
+          retention-days: 30
