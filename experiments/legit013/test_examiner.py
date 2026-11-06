@@ -82,7 +82,7 @@ class AlgorithmExaminerTests(unittest.TestCase):
             counterexample=prove_rule(*proposal,152)
             self.assertEqual(counterexample["result"],"SAT")
             x=counterexample["counterexample"]
-            self.assertNotEqual(x["incorrect"],x["reference"])
+            self.assertNotEqual(int(x["incorrect"],16),int(x["reference"],16))
 
     def test_external_SMT_proves_sound_shortcut_for_all_BitVec_masks(self):
         for proposal in (("P_ZERO","ZERO"),("P_ZERO","PARENT"),
@@ -108,11 +108,11 @@ class AlgorithmExaminerTests(unittest.TestCase):
                 continue
             bad=entry["counterexample"]
             rule=entry["hypothesis"]
-            self.assertTrue(guard_eval(rule["guard"],bad["parent"],
-                                       bad["column"],(1<<152)-1))
+            p=int(bad["parent"],16)
+            c=int(bad["column"],16)
+            self.assertTrue(guard_eval(rule["guard"],p,c,(1<<152)-1))
             self.assertNotEqual(
-                answer_eval(rule["answer"],bad["parent"],bad["column"],(1<<152)-1),
-                bad["parent"]&bad["column"])
+                answer_eval(rule["answer"],p,c,(1<<152)-1),p&c)
 
     def test_generated_python_contains_actual_guard_logic(self):
         code=self.artifact["source"]
@@ -208,10 +208,11 @@ class AlgorithmExaminerTests(unittest.TestCase):
                 continue
             cex=event["counterexample"]
             rule=event["hypothesis"]
-            self.assertTrue(guard_eval(rule["guard"],cex["parent"],
-                                       cex["column"],(1<<152)-1))
-            self.assertEqual(cex["reference"],cex["parent"]&cex["column"])
-            self.assertNotEqual(cex["incorrect"],cex["reference"])
+            p=int(cex["parent"],16)
+            c=int(cex["column"],16)
+            self.assertTrue(guard_eval(rule["guard"],p,c,(1<<152)-1))
+            self.assertEqual(int(cex["reference"],16),p&c)
+            self.assertNotEqual(int(cex["incorrect"],16),p&c)
         verified=reverify({"source":self.artifact["source"],
                            "manifest":archive})
         self.assertEqual(committed["formal_verification"],verified)
