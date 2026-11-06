@@ -124,10 +124,9 @@ def run(source_dir="reason-022-sources",out=None,train_limit=60,test_limit=250):
         "verified_original_golden_mirror_git_blob":pin019(),
         "actual_original_worker_subprocesses_primary_pass":4*len(CASES),
         "correct_obligation_source_to_critic_agreement":sum(
-            m["typed_proof"]["state"]==(
-                "SUGGEST_DISCUSSION_ONLY" if m[
-                    "critic_eligible_for_read_only_discussion"] else
-                m["typed_proof"]["state"]) for m in mirror),
+            m["critic_eligible_for_read_only_discussion"]==
+            (m["typed_proof"]["state"]=="SUGGEST_DISCUSSION_ONLY")
+            for m in mirror),
         "no_real_world_permission_or_personal_assistance":True,
         "independent_external_QA_is_not_independent_human_ethics_evaluation":True,
         "external_examples_and_gold_never_enter_the_moral_other_circle":True,
