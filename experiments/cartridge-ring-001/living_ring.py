@@ -24,7 +24,7 @@ SCHEMA = "motif.living-cartridge-ring.v1"
 
 
 def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
-            source_query=None, repo_root=None, observed_at=None, native=False):
+            source_query=None, source_prefix=None, repo_root=None, observed_at=None, native=False):
     """Observe current branch heads on demand and recruit only needed organs."""
     roots = Path(repo_root) if repo_root is not None else Path(__file__).resolve().parents[2]
     rows = discovery.get_branches(fetch_page)
@@ -54,7 +54,7 @@ def session(*, fetch_page, read_outputs=(), specialist_ids=(), source_ref=None,
     }
     if source_ref is not None:
         receipt["source_inspection"]=source_reader.inspect(
-            catalog,source_ref,source_query,repo_root=roots)
+            catalog,source_ref,source_query,repo_root=roots,path_prefix=source_prefix)
     if read_outputs:
         receipt["ring_work"]=ring.run(tuple(read_outputs), census_count=catalog["cartridges_indexed_non_executable"])
     if specialist_ids:
@@ -82,6 +82,7 @@ def main():
                    help="Execute specifically pinned native adapters in Docker only")
     p.add_argument("--inspect-branch")
     p.add_argument("--query")
+    p.add_argument("--source-prefix")
     p.add_argument("--output",type=Path)
     args=p.parse_args()
     if args.offline_frozen:
@@ -98,6 +99,7 @@ def main():
         result=session(fetch_page=fetch,read_outputs=tuple(args.outputs),
                        specialist_ids=tuple(args.specialists),
                        source_ref=args.inspect_branch,source_query=args.query,
+                       source_prefix=args.source_prefix,
                        observed_at=observed,native=args.native)
         payload=json.dumps(result,indent=2,sort_keys=True)+"\n"
         if args.output:
