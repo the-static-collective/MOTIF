@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-006 semantic adversary
+on:
+  push:
+    paths:
+      - "experiments/legit006/**"
+      - ".github/workflows/legit006.yml"
+  pull_request:
+    paths:
+      - "experiments/legit006/**"
+      - ".github/workflows/legit006.yml"
+jobs:
+  adversarial-scope-and-source-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test semantic minimal pairs, provenance, and independent classical oracle
+        run: python -m unittest discover -s experiments/legit006 -p 'test_*.py' -v
+      - name: Two-sentence semantic adversary demonstration
+        run: |
+          python experiments/legit006/runner.py > /tmp/motif-legit006-demo.json
+          python -m json.tool /tmp/motif-legit006-demo.json >/dev/null
+          cat /tmp/motif-legit006-demo.json
+      - name: Freeze ninety-two-case benchmark and external NLI boundary report
+        run: |
+          python experiments/legit006/benchmark.py > /tmp/motif-legit006-benchmark.json
+          python -m json.tool /tmp/motif-legit006-benchmark.json >/dev/null
+          cat /tmp/motif-legit006-benchmark.json
+      - name: Preserve actual semantic HOLD, source echo and classical win receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT006-SEMANTIC-ADVERSARY-HOLD
+          path: |
+            /tmp/motif-legit006-demo.json
+            /tmp/motif-legit006-benchmark.json
+          if-no-files-found: error
+          retention-days: 30

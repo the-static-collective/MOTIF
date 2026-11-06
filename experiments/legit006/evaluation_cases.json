@@ -1,0 +1,834 @@
+{
+  "schema": "motif.semantic-adversary-eval.v1",
+  "authorship": "assistant-authored source separated, NOT independent",
+  "items": [
+    {
+      "id": "Q001",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "there is no evidence that orbiting exoplanet exists.",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q002",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "there is no evidence that buried chamber exists.",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q003",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "no evidence indicates that living microorganism is present.",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q004",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "no evidence indicates that forest combustion is present.",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q005",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "there is no evidence that malicious intrusion is present.",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q006",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "there is no evidence that hidden reactor is present.",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q007",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "no evidence indicates that submarine habitat exists.",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q008",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "no evidence indicates that engine fire exists.",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q009",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "there is evidence that orbiting exoplanet does not exist.",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q010",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "there is evidence that buried chamber does not exist.",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q011",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "evidence indicates that living microorganism is absent.",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q012",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "evidence indicates that forest combustion is absent.",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q013",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "there is evidence that malicious intrusion is absent.",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q014",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "there is evidence that hidden reactor is absent.",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q015",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "evidence indicates that submarine habitat does not exist.",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q016",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "evidence indicates that engine fire does not exist.",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q017",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "there is no evidence that orbiting exoplanet does not exist.",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q018",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "there is no evidence that buried chamber does not exist.",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q019",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "no evidence indicates that living microorganism is absent.",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q020",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "no evidence indicates that forest combustion is absent.",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q021",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "there is no evidence that malicious intrusion is absent.",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q022",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "there is no evidence that hidden reactor is absent.",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q023",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "no evidence indicates that submarine habitat does not exist.",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q024",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "no evidence indicates that engine fire does not exist.",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q025",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "there is evidence that orbiting exoplanet exists.",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q026",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "there is evidence that buried chamber exists.",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q027",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "evidence indicates that living microorganism is present.",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q028",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "evidence indicates that forest combustion is present.",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q029",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "there is evidence that malicious intrusion is present.",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q030",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "there is evidence that hidden reactor is present.",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q031",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "evidence indicates that submarine habitat exists.",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q032",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "evidence indicates that engine fire exists.",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q033",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "does a negative transit spectrometer prove orbiting exoplanet is absent?",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q034",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "does a negative geological radar prove buried chamber is absent?",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q035",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "does failing to detect cellular assay exclude living microorganism?",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q036",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "does failing to detect meteorological satellite exclude forest combustion?",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q037",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "does a negative network anomaly sensor exclude malicious intrusion?",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q038",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "does a negative radiation counter exclude hidden reactor?",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q039",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "does failing to detect ocean hydrophone prove submarine habitat is absent?",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q040",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "does failing to detect thermal camera prove engine fire is absent?",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q041",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "can orbiting exoplanet exist despite a negative transit spectrometer?",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q042",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "can buried chamber exist despite a negative geological radar?",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q043",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "could living microorganism be present without detecting cellular assay?",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q044",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "could forest combustion be present without detecting meteorological satellite?",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q045",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "can malicious intrusion exist without detecting network anomaly sensor?",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q046",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "can hidden reactor exist without detecting radiation counter?",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q047",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "could submarine habitat be present despite a negative ocean hydrophone?",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q048",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "could engine fire be present despite a negative thermal camera?",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q049",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "does a positive transit spectrometer prove orbiting exoplanet exists?",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q050",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "does a positive geological radar prove buried chamber exists?",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q051",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "does detecting cellular assay guarantee living microorganism?",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q052",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "does detecting meteorological satellite guarantee forest combustion?",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q053",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "does a positive network anomaly sensor guarantee malicious intrusion?",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q054",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "does a positive radiation counter guarantee hidden reactor?",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q055",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "does detecting ocean hydrophone prove submarine habitat exists?",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q056",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "does detecting thermal camera prove engine fire exists?",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q057",
+      "split": "learned_pair_new_topic",
+      "domain": 0,
+      "sentence": "can orbiting exoplanet be absent despite a positive transit spectrometer?",
+      "indicator": "transit spectrometer",
+      "target": "orbiting exoplanet",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q058",
+      "split": "learned_pair_new_topic",
+      "domain": 1,
+      "sentence": "can buried chamber be absent despite a positive geological radar?",
+      "indicator": "geological radar",
+      "target": "buried chamber",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q059",
+      "split": "learned_pair_new_topic",
+      "domain": 2,
+      "sentence": "could living microorganism fail to exist even when detecting cellular assay?",
+      "indicator": "cellular assay",
+      "target": "living microorganism",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q060",
+      "split": "learned_pair_new_topic",
+      "domain": 3,
+      "sentence": "could forest combustion fail to exist even when detecting meteorological satellite?",
+      "indicator": "meteorological satellite",
+      "target": "forest combustion",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q061",
+      "split": "unseen_component_recomposition",
+      "domain": 4,
+      "sentence": "can malicious intrusion be absent even when detecting network anomaly sensor?",
+      "indicator": "network anomaly sensor",
+      "target": "malicious intrusion",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q062",
+      "split": "unseen_component_recomposition",
+      "domain": 5,
+      "sentence": "can hidden reactor be absent even when detecting radiation counter?",
+      "indicator": "radiation counter",
+      "target": "hidden reactor",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q063",
+      "split": "unseen_component_recomposition",
+      "domain": 6,
+      "sentence": "could submarine habitat fail to exist despite a positive ocean hydrophone?",
+      "indicator": "ocean hydrophone",
+      "target": "submarine habitat",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q064",
+      "split": "unseen_component_recomposition",
+      "domain": 7,
+      "sentence": "could engine fire fail to exist despite a positive thermal camera?",
+      "indicator": "thermal camera",
+      "target": "engine fire",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q065",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 0,
+      "sentence": "no proof supports distant asteroid existing.",
+      "indicator": "laser sweep",
+      "target": "distant asteroid",
+      "gold_kind": "NO_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q066",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 1,
+      "sentence": "a negative report supports hidden fault being absent.",
+      "indicator": "vibration probe",
+      "target": "hidden fault",
+      "gold_kind": "HAS_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q067",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 2,
+      "sentence": "can lost spacecraft still exist if radar burst is not detected?",
+      "indicator": "radar burst",
+      "target": "lost spacecraft",
+      "gold_kind": "CAN_PRESENT"
+    },
+    {
+      "id": "Q068",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 3,
+      "sentence": "does a successful sonar ping measurement ensure underwater cave exists?",
+      "indicator": "sonar ping",
+      "target": "underwater cave",
+      "gold_kind": "MUST_PRESENT"
+    },
+    {
+      "id": "Q069",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 4,
+      "sentence": "no reports indicate that microbial colony is not present.",
+      "indicator": "enzyme signal",
+      "target": "microbial colony",
+      "gold_kind": "NO_NEGATIVE_EVIDENCE"
+    },
+    {
+      "id": "Q070",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 5,
+      "sentence": "there is support for the presence of underground spring.",
+      "indicator": "magnetic field",
+      "target": "underground spring",
+      "gold_kind": "HAS_POSITIVE_EVIDENCE"
+    },
+    {
+      "id": "Q071",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 6,
+      "sentence": "could deep lake be absent even with a sonar bounce?",
+      "indicator": "sonar bounce",
+      "target": "deep lake",
+      "gold_kind": "CAN_ABSENT"
+    },
+    {
+      "id": "Q072",
+      "split": "genuinely_unseen_lexicon",
+      "domain": 7,
+      "sentence": "does a missing radiation pulse rule out nuclear source?",
+      "indicator": "radiation pulse",
+      "target": "nuclear source",
+      "gold_kind": "MUST_ABSENT"
+    },
+    {
+      "id": "Q073",
+      "split": "hostile_scope_or_negation",
+      "domain": 0,
+      "sentence": "there is evidence that hidden station is not absent.",
+      "indicator": "radio ping",
+      "target": "hidden station",
+      "gold_kind": null
+    },
+    {
+      "id": "Q074",
+      "split": "hostile_scope_or_negation",
+      "domain": 1,
+      "sentence": "there is no evidence that solar flare does exist.",
+      "indicator": "solar flare sensor",
+      "target": "solar flare",
+      "gold_kind": null
+    },
+    {
+      "id": "Q075",
+      "split": "hostile_scope_or_negation",
+      "domain": 2,
+      "sentence": "there is evidence that no viral marker exists.",
+      "indicator": "virus detector",
+      "target": "viral marker",
+      "gold_kind": null
+    },
+    {
+      "id": "Q076",
+      "split": "hostile_scope_or_negation",
+      "domain": 3,
+      "sentence": "there is evidence that buried temple is not present.",
+      "indicator": "ground scanner",
+      "target": "buried temple",
+      "gold_kind": null
+    },
+    {
+      "id": "Q077",
+      "split": "hostile_scope_or_negation",
+      "domain": 4,
+      "sentence": "does a negative radio pulse not prove satellite is absent?",
+      "indicator": "radio pulse",
+      "target": "satellite",
+      "gold_kind": null
+    },
+    {
+      "id": "Q078",
+      "split": "hostile_scope_or_negation",
+      "domain": 5,
+      "sentence": "can hidden habitat exist unless sonar echo is detected?",
+      "indicator": "sonar echo",
+      "target": "hidden habitat",
+      "gold_kind": null
+    },
+    {
+      "id": "Q079",
+      "split": "hostile_scope_or_negation",
+      "domain": 6,
+      "sentence": "does a positive optical blink prove submerged cave is absent?",
+      "indicator": "optical blink",
+      "target": "submerged cave",
+      "gold_kind": null
+    },
+    {
+      "id": "Q080",
+      "split": "hostile_scope_or_negation",
+      "domain": 7,
+      "sentence": "could forest fire fail to exist even when no heat signal appears?",
+      "indicator": "heat signal",
+      "target": "forest fire",
+      "gold_kind": null
+    },
+    {
+      "id": "Q081",
+      "split": "hostile_scope_or_negation",
+      "domain": 0,
+      "sentence": "there is no evidence that missing is present.",
+      "indicator": "detector",
+      "target": "missing",
+      "gold_kind": null
+    },
+    {
+      "id": "Q082",
+      "split": "hostile_scope_or_negation",
+      "domain": 1,
+      "sentence": "there is evidence that evidence is absent.",
+      "indicator": "detector",
+      "target": "evidence",
+      "gold_kind": null
+    },
+    {
+      "id": "Q083",
+      "split": "hostile_scope_or_negation",
+      "domain": 2,
+      "sentence": "there is no evidence that underground chamber exists unless it does.",
+      "indicator": "radar pulse",
+      "target": "underground chamber",
+      "gold_kind": null
+    },
+    {
+      "id": "Q084",
+      "split": "hostile_scope_or_negation",
+      "domain": 3,
+      "sentence": "can a lost probe be absent without not detecting its signal?",
+      "indicator": "sensor",
+      "target": "lost probe",
+      "gold_kind": null
+    },
+    {
+      "id": "Q085",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 0,
+      "sentence": "there is evidence that hidden island exists.",
+      "indicator": "marine lidar",
+      "target": "underground chamber",
+      "gold_kind": null
+    },
+    {
+      "id": "Q086",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 1,
+      "sentence": "there is no evidence that buried lake exists.",
+      "indicator": "radar camera",
+      "target": "rare tree",
+      "gold_kind": null
+    },
+    {
+      "id": "Q087",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 2,
+      "sentence": "does a negative pulse detector prove alien signal is absent?",
+      "indicator": "magnetic probe",
+      "target": "alien signal",
+      "gold_kind": null
+    },
+    {
+      "id": "Q088",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 3,
+      "sentence": "can hidden glacier exist despite a negative sonar pulse?",
+      "indicator": "radar pulse",
+      "target": "hidden glacier",
+      "gold_kind": null
+    },
+    {
+      "id": "Q089",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 4,
+      "sentence": "does a positive vibration sensor prove pipe fracture exists?",
+      "indicator": "thermal camera",
+      "target": "pipe fracture",
+      "gold_kind": null
+    },
+    {
+      "id": "Q090",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 5,
+      "sentence": "could forest fire be absent even when detecting infrared signature?",
+      "indicator": "ultrasound reader",
+      "target": "forest fire",
+      "gold_kind": null
+    },
+    {
+      "id": "Q091",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 6,
+      "sentence": "there is no evidence that buried ruins does not exist.",
+      "indicator": "ground detector",
+      "target": "different ruins",
+      "gold_kind": null
+    },
+    {
+      "id": "Q092",
+      "split": "source_target_or_sensor_mismatch",
+      "domain": 7,
+      "sentence": "can submerged tunnel be absent despite a positive sonar ping?",
+      "indicator": "infrared scope",
+      "target": "submerged tunnel",
+      "gold_kind": null
+    }
+  ]
+}
