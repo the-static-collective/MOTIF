@@ -13,8 +13,8 @@ from hashlib import sha256
 import json
 from pathlib import Path
 
+import hypergraph  # resolves the audited RING-002 source-only toolkit
 import source_reader
-import hypergraph
 
 # A bounded, auditable vocabulary. Tokens are searched as literal text.
 # Many use heads can come from one token. The same use can be proposed by
