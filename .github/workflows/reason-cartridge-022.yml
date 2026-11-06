@@ -71,6 +71,8 @@ jobs:
           for family,s in r["external_test"].items():
               assert s["independently_authored_test_questions"]==250
               assert s["exact_source_answers"]+s["incorrect_confident_answers"]+s["explicit_abstentions"]==250
+          assert len(r["independent_external_posthoc_ambiguous_gold_cases"])==1
+          assert r["independent_external_posthoc_ambiguous_gold_cases"][0]["posthoc_finding"]=="MULTIPLE_EXPLICITLY_SUPPORTED_ANSWERS"
           assert r["fictional_obligation_cases"]==7
           assert r["actual_original_worker_subprocesses_primary_pass"]==28
           assert r["no_real_world_permission_or_personal_assistance"]
