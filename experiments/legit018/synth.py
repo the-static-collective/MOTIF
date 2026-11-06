@@ -70,12 +70,23 @@ def typed(family,kernel,prechecks=(),stageA_source=None):
         raise HOLD("Outside finite typed source grammar")
     if kernel=="BAD_JOIN" and set(prechecks)!=set(CAPS):
         raise HOLD("Naive AND join requires both tools")
-    if family=="FORBIDDEN" and kernel=="BITSET_PATH":
-        if type(stageA_source) is not str or not stageA_source.startswith(
-            '"""LEGIT-018 generated typed DAG path'):
-            raise HOLD("Exact-weight path solver not transferred from Episode A")
-    if family=="EXACT" and stageA_source is not None:
-        raise HOLD("Episode A cannot use a later source")
+    if stageA_source is not None:
+        if family!="FORBIDDEN":
+            raise HOLD("Only Episode B can inherit Episode A")
+        # A header or self-reported digest does not establish provenance.
+        # Require exact bytes of a correctly composed A bitset program.
+        # The evidence packet also binds the selected A source hash.
+        allowed_A=tuple(
+            emit({
+                "family":"EXACT",
+                "kernel":"BITSET_PATH",
+                "prechecks":checks,
+                "ancestor_A_sha256":None
+            }) for checks in ((),("REACH",),("SUM",),("REACH","SUM")))
+        if type(stageA_source) is not str or stageA_source not in allowed_A:
+            raise HOLD("Forged or unknown Episode A source, cannot unlock B DP")
+    if family=="FORBIDDEN" and kernel=="BITSET_PATH" and stageA_source is None:
+        raise HOLD("No verified source to transfer from Episode A")
     return {"family":family,"kernel":kernel,"prechecks":prechecks,
             "ancestor_A_sha256":(sha256(stageA_source.encode()).hexdigest()
                                  if stageA_source is not None else None)}
