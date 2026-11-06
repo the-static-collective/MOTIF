@@ -9,9 +9,10 @@ from custody import HOLD,seal_simulated,verify,guarded,sha
 from planner import plan,decide,rollout
 from strong_reference import exhaustive,simulate
 from synthesis import synthesize,selected_plan,TRAIN_SAMPLES,GRAMMAR,features
-from benchmark import benchmark
 from pathlib import Path
 import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from benchmark import benchmark
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"legit007"))
 from simulator import demonstration,trial,N
 from provenance import posterior,route as previous_route
