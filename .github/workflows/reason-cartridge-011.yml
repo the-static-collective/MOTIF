@@ -1,0 +1,65 @@
+name: REASON-011 Impossible Court / four-valued legal hypotheticals
+
+on:
+  push:
+    branches:
+      - experiment/reason-cartridge-011-impossible-court
+  pull_request:
+    paths:
+      - 'experiments/reason-cartridge-011/**'
+      - '.github/workflows/reason-cartridge-011.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  impossible-court:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: All prior REASON-001 through REASON-010 regression tests
+        run: |
+          for n in 001 002 003 004 005 006 007 008 009 010; do
+            python -m unittest discover -s "experiments/reason-cartridge-$n" -p 'test_*.py' -v
+          done
+      - name: Four-valued inference, strict scope, provenance and spoofing tests
+        run: python -m unittest discover -s experiments/reason-cartridge-011 -p 'test_*.py' -v
+      - name: Compare to independent classical fixed-point and inspect novel contradictions
+        run: |
+          python experiments/reason-cartridge-011/trial.py reason-011-evidence > reason-011-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('reason-011-evidence/benchmark.json').read_text())
+          assert r['case_count']==4
+          assert r['query_count']==10
+          assert r['independent_four_valued_reference_mismatches']==0
+          assert r['epistemic_summary']=={
+              'SUPPORTED':1,'REFUTED':2,'BOTH':3,'UNDETERMINED':4
+          }
+          assert r['both_represented_without_arbitrary_facts']==3
+          assert r['truly_unknown_remained_unknown']==4
+          assert r['provenance_bound_review_options']>=2
+          assert r['four_state_information_lost_if_forced_binary']==7
+          assert not r['model_fitted_to_real_judgments']
+          assert not r['new_legal_rule_invented']
+          assert not r['real_world_authority']
+          assert not r['external_actions']
+          print({'four_values':r['epistemic_summary'],
+                 'independent_mismatches':r['independent_four_valued_reference_mismatches'],
+                 'hypothetical_review_options':r['provenance_bound_review_options']})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reason-011-impossible-court-provenance-receipts
+          path: |
+            reason-011-evidence/
+            reason-011-stdout.json
+          retention-days: 30
