@@ -254,6 +254,18 @@ class CompoundingEconomyTests(unittest.TestCase):
                                  sc.horizon)
             self.assertLessEqual(r["bellman_states_evaluated"],50000)
 
+    def test_frozen_economy_packet_matches_fresh_exact_replay(self):
+        saved=json.loads((HERE/"generated"/"economy_trial_report.json")
+                         .read_text(encoding="utf-8"))
+        self.assertEqual(saved,execute())
+        self.assertEqual(len(saved["examples"]),8)
+        self.assertEqual(saved["demonstrations"]["second_order_research_compound"]
+                         ["with_better_improvement_process"],"42")
+        self.assertEqual(saved["demonstrations"]["second_order_research_compound"]
+                         ["without_better_improvement_process"],"30")
+        self.assertFalse(saved["real_prior_trial_boundary"]
+                         ["permitted_to_count_as_real_compounding_return"])
+
     def test_benchmark_admits_negative_results_and_never_auto_installs(self):
         out=execute()
         self.assertEqual(out["experiment"],"MOTIF-LEGIT-015")
