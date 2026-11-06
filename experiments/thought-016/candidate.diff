@@ -1,0 +1,62 @@
+--- experiments/thought-016/reference_solver.py
++++ experiments/thought-016/candidate_solver.py
+@@ -2,7 +2,15 @@
+ # {
+ #   "effects": {
+ #     "held_keys": {
+-#       "ref": "state.held_keys"
++#       "args": [
++#         {
++#           "ref": "state.held_keys"
++#         },
++#         {
++#           "ref": "arrived.pickups"
++#         }
++#       ],
++#       "op": "union"
+ #     },
+ #     "position": {
+ #       "ref": "edge.v"
+@@ -39,11 +47,23 @@
+ #         }
+ #       ],
+ #       "op": "le"
++#     },
++#     {
++#       "args": [
++#         {
++#           "ref": "edge.need"
++#         },
++#         {
++#           "ref": "state.held_keys"
++#         }
++#       ],
++#       "op": "subset"
+ #     }
+ #   ],
+ #   "identity": [
+ #     "position",
+-#     "spent_risk"
++#     "spent_risk",
++#     "held_keys"
+ #   ],
+ #   "initial": {
+ #     "held_keys": {
+@@ -57,7 +77,7 @@
+ #     }
+ #   },
+ #   "relax": true,
+-#   "revisit": false,
++#   "revisit": true,
+ #   "schema": "motif.thought016.typed-program.v1"
+ # }
+ """Generated THOUGHT-016 typed-plan executor. HOLD / human review only."""
+@@ -65,7 +85,7 @@
+ import sys
+ import heapq
+ 
+-PROGRAM = json.loads('{"effects":{"held_keys":{"ref":"state.held_keys"},"position":{"ref":"edge.v"},"spent_risk":{"args":[{"ref":"state.spent_risk"},{"ref":"edge.risk"}],"op":"add"}},"frontier":"cost","guards":[{"args":[{"args":[{"ref":"state.spent_risk"},{"ref":"edge.risk"}],"op":"add"},{"ref":"input.risk_budget"}],"op":"le"}],"identity":["position","spent_risk"],"initial":{"held_keys":{"ref":"start.pickups"},"position":{"ref":"input.start"},"spent_risk":{"lit":0}},"relax":true,"revisit":false,"schema":"motif.thought016.typed-program.v1"}')
++PROGRAM = json.loads('{"effects":{"held_keys":{"args":[{"ref":"state.held_keys"},{"ref":"arrived.pickups"}],"op":"union"},"position":{"ref":"edge.v"},"spent_risk":{"args":[{"ref":"state.spent_risk"},{"ref":"edge.risk"}],"op":"add"}},"frontier":"cost","guards":[{"args":[{"args":[{"ref":"state.spent_risk"},{"ref":"edge.risk"}],"op":"add"},{"ref":"input.risk_budget"}],"op":"le"},{"args":[{"ref":"edge.need"},{"ref":"state.held_keys"}],"op":"subset"}],"identity":["position","spent_risk","held_keys"],"initial":{"held_keys":{"ref":"start.pickups"},"position":{"ref":"input.start"},"spent_risk":{"lit":0}},"relax":true,"revisit":true,"schema":"motif.thought016.typed-program.v1"}')
+ 
+ def ev(node, values):
+     if 'ref' in node:
