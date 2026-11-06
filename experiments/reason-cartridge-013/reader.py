@@ -56,8 +56,6 @@ def speaker_header(line):
     match=re.search(r"\bjustice\s+(\w+)",line,re.I)
     if not match:raise HOLD("Missing declared judicial voice")
     author=match.group(1).upper()
-    if author=="HOLMES" or author=="BUTLER" or author=="GRAY":
-        pass  # Names are parsed from text, not used in rule selection.
     lower=line.lower()
     role=("DISSENT" if "dissenting" in lower else
           "CONCURRENCE_IN_JUDGMENT" if "concurring" in lower else
@@ -80,8 +78,8 @@ def speaker_header(line):
 # Developer-supplied lexical feature grammar, calibrated on simple opinions
 # and FROZEN before the heldout sources are evaluated.
 CUES=(
- ("RESTRICTED_SCOPE",re.compile(r"\b(?:must be one used to record or preserve information|does not spring to mind|not fish)\b",re.I)),
- ("EXPANSIVE_SCOPE",re.compile(r"\b(?:covers physical objects of all kinds|covers fish)\b",re.I)),
+ ("RESTRICTED_SCOPE",re.compile(r"\b(?:must be one used to|does not spring to mind)\b",re.I)),
+ ("EXPANSIVE_SCOPE",re.compile(r"\b(?:covers\s+(?:[a-z-]+\s+){0,5}[a-z-]+)\b",re.I)),
  ("BOTANICAL_FRUIT",re.compile(r"\bbotanically speaking\b.{0,90}\bfruit\b",re.I)),
  ("ORDINARY_VEGETABLE",re.compile(r"\bcommon language\b.{0,90}\bvegetables\b",re.I)),
  ("CONCERN_WITH_EVIDENCE",re.compile(r"\b(?:record or preserve information|statutory construction|financial.fraud mooring|ordinary meaning)\b",re.I)),
