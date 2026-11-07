@@ -328,6 +328,97 @@ class Garden:
         return apply(graph, target, rule)
 
 
+
+@dataclass(frozen=True)
+class Grafted:
+    """One locally reviewed expression made from a verified earlier feature."""
+    inherited_question: str
+    inherited_pin: str
+    new_question: str
+    program: Expr
+    effects: tuple[Template, ...]
+    truth_table: tuple[tuple[str, str], ...]
+    evidence_hash: str
+    validation_hash: str
+    expressions_tested_on_train: int
+    status: str = STATUS
+
+    def pin(self):
+        return seal((self.inherited_question, self.inherited_pin,
+                     self.new_question, self.program.code(), self.truth_table,
+                     self.evidence_hash, self.validation_hash, self.status))
+
+
+def graft_from_library(garden: Garden, donor: str, new_question: str,
+                       train: tuple[Episode, ...], valid: tuple[Episode, ...]):
+    """Try generic compositions of a donor program and primitive relations.
+
+    We select ONLY on TRAIN. Once a candidate is selected, VALIDATE either
+    accepts it or returns HOLD; it never selects a later candidate by peeking.
+    This saves syntax search on this designed task, not proof of general
+    compounding research productivity or equal-budget superiority.
+    """
+    source = dict(garden.entries).get(donor)
+    if source is None or not new_question or new_question == donor:
+        return None
+    if source.status != STATUS or source.proposal.status != "CANDIDATE_ONLY":
+        return None
+    check_batch(train, "TRAIN")
+    check_batch(valid, "VALIDATE")
+    if {r.evidence_id for r in train} & {r.evidence_id for r in valid}:
+        raise ValueError("Cross-split evidence reused in feature graft")
+    data = labelled(train)
+    effects = tuple(sorted({delta for _, _, delta in data}))
+    if len(effects) != 2 or any(
+        sum(delta == effect for _, _, delta in data) < 2 for effect in effects
+    ):
+        return None
+    programs = set()
+    for item in ATOMS:
+        atom = Expr(item)
+        for op in BINARY:
+            programs.add(Expr(op, atom, source.proposal.program))
+            programs.add(Expr(op, source.proposal.program, atom))
+    for op in UNARY:
+        programs.add(Expr(op, source.proposal.program))
+    candidates = sorted((p for p in programs if p.well_typed()
+                         and p.cost <= MAX_AST_COST),
+                        key=lambda p: (p.cost,p.code()))
+    for checked, p in enumerate(candidates, 1):
+        table = separate(p, data)
+        if table is None:
+            continue
+        # First TRAIN fit is frozen before VALIDATE; failed validation is HOLD.
+        if separate(p, labelled(valid)) != table:
+            return None
+        return Grafted(donor, source.pin(), new_question, p, effects, table,
+                       episode_id(train), episode_id(valid), checked)
+    return None
+
+
+def apply_grafted(graft: Grafted | None, donor_rule: Reviewed | None,
+                  graph: Graph, target: tuple[str, str]):
+    """A graft cannot outlive its source, even if its equation still parses."""
+    if graft is None or donor_rule is None:
+        return None
+    if (graft.status != STATUS or donor_rule.status != STATUS or
+            donor_rule.pin() != graft.inherited_pin):
+        return None
+    target = edge(*target)
+    if target not in graph.edges:
+        return None
+    class_value = query(graft.program, graph, target)
+    choice = dict(graft.truth_table).get(str(class_value))
+    rule = next((effect for effect in graft.effects if effect.seal() == choice),None)
+    if rule is None:
+        return None
+    actual = apply_template(graph,target,rule)
+    if actual is None:
+        return None
+    return Result(actual,Witness(graft.pin(),graph.receipt(),target,class_value,
+                                 rule.seal(),actual.receipt()))
+
+
 def oracle_semantics(question: str, graph: Graph, target: tuple[str, str]) -> bool:
     """Source owner evaluation, deliberately separate from the learned AST."""
     a, b = edge(*target)
@@ -511,6 +602,30 @@ def report():
                 x["edges"]==x["correct"] for x in counter),
             "all_edge_counts":counter,
         }
+    # A controlled example of feature vocabulary re-entry: the validated
+    # triangle question is eligible as a subexpression for the square task.
+    # This is a designed favorable task ordering; cold search remains the
+    # principal and independently reviewed benchmark.
+    square_train, square_valid, square_test = fixtures("square")
+    graft = graft_from_library(garden,"triangle","square-from-triangle",
+                               square_train,square_valid)
+    donor = dict(garden.entries).get("triangle")
+    if graft:
+        rows = labelled(square_test)
+        graft_correct = sum(
+            (res := apply_grafted(graft,donor,graph,anchors)) is not None
+            and equivalent_new(graph,row.after,res.graph)
+            for row,(graph,anchors,_) in zip(square_test,rows))
+    else:
+        graft_correct = 0
+    runs["square"]["graft_from_triangle"] = {
+        "validated": graft is not None,
+        "composed_program": graft.program.code() if graft else None,
+        "train_proposals_checked": graft.expressions_tested_on_train if graft else None,
+        "heldout_correct": graft_correct,
+        "heldout_total": len(square_test),
+        "dependent_on_donor_pin": True,
+    }
     return {"experiment":"QC-004","status":"SYNTHETIC_RESEARCH_ONLY",
             "grammar_primitives":ATOMS+UNARY+BINARY,"cost_limit":MAX_AST_COST,
             "task_outcomes":runs,
