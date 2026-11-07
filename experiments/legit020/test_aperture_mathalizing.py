@@ -225,6 +225,32 @@ class ApertureMathalizerTests(unittest.TestCase):
         self.assertTrue(comparison["no_superiority_over_strong_context_parser"])
         self.assertTrue(comparison["not_fair_open_world_language_benchmark"])
 
+    def test_ci_archived_mathematical_proof_and_ambiguity_witness(self):
+        saved=json.loads((HERE/"generated"/"aperture_mathalizing_witness.json")
+                         .read_text(encoding="utf-8"))
+        self.assertEqual(saved["experiment"],"MOTIF-LEGIT-020")
+        self.assertEqual(saved["status"],STATUS)
+        self.assertEqual(saved["original_Dogram_math_sources"],
+                         self.report["original_Dogram_math_sources"])
+        self.assertEqual(saved["perspective_geometry"],
+                         self.report["perspective_geometry"])
+        self.assertEqual(saved["comparison"],self.report["comparison"])
+        self.assertEqual(len(saved["registered_context_cases"]),9)
+        self.assertTrue(all(x["original_alternatives_preserved"]
+                            and not x["admitted"]
+                            for x in saved["registered_context_cases"]))
+        x=int(saved["bitvector_signedness_counterexample"]["example_x"],16)
+        self.assertEqual(hex(x>>1),
+            saved["bitvector_signedness_counterexample"]
+            ["unsigned_logical_result"])
+        self.assertEqual(hex(((x if x<1<<63 else x-(1<<64))>>1)&((1<<64)-1)),
+            saved["bitvector_signedness_counterexample"]
+            ["signed_arithmetic_result_twos_complement"])
+        self.assertTrue(verify_double_math()["external_Z3_proves_equivalence"])
+        self.assertFalse(saved["gates"]["general_language_understanding_demonstrated"])
+        self.assertFalse(saved["gates"]["new_math_historically_original"])
+        self.assertFalse(saved["gates"]["automatic_source_promotion"])
+
     def test_receipt_has_no_new_math_or_auto_promotions(self):
         gates=self.report["gates"]
         self.assertFalse(gates["general_language_understanding_demonstrated"])
