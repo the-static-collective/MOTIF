@@ -1,0 +1,26 @@
+name: MOTIF QC-002 structural re-entry and unseen geometry
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode002/**'
+      - '.github/workflows/quantum-code-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode002/**'
+      - '.github/workflows/quantum-code-002.yml'
+permissions:
+  contents: read
+jobs:
+  independent-structural-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Adversarial and geometric tests
+        working-directory: experiments/quantumcode002
+        run: python -m unittest -v test_structural.py
+      - name: Show exact held-out benchmark and classical comparison
+        working-directory: experiments/quantumcode002
+        run: python structural.py
