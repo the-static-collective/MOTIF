@@ -62,11 +62,15 @@ jobs:
               old=group['old_unguarded']
               blanket=group['blanket_novelty_guard']
               review=group['reviewed_investigation']
-              assert old['unsafe_or_invalid_decisive_approvals']>0
+              if old is None:
+                  assert group['old_unguarded_source_status']=='SOURCE_NATIVE_PROOF_REQUIREMENT_HOLD_ABORTED_BATCH'
+              else:
+                  assert old['unsafe_or_invalid_decisive_approvals']>0
               assert blanket['unsafe_or_invalid_decisive_approvals']==0
               assert review['unsafe_or_invalid_decisive_approvals']==0
               assert review['safe_positive_decisive_coverage'] > blanket['safe_positive_decisive_coverage']
-              assert review['safe_positive_decisive_coverage'] <= old['safe_positive_decisive_coverage']
+              if old is not None:
+                  assert review['safe_positive_decisive_coverage'] <= old['safe_positive_decisive_coverage']
               assert group['native_original_language_hypotheses']>0
               assert group['expected_labels_were_not_mounted']
           assert r['newly_installed_arbitrary_branch_methods']==0
