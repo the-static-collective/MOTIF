@@ -67,10 +67,30 @@ jobs:
           assert r['authority']=='NONE'
           print('Falsification results retain all incorrect predictions and abstentions; no claims of universal understanding.')
           PY
+      - name: Record learned relations, coverage and incorrect generalization in conditional hypergraph
+        run: |
+          python experiments/cartridge-ring-009/evidence_graph.py \
+            --frozen /tmp/motif-ring009-frozen.json \
+            --benchmark /tmp/motif-ring009-transfer.json \
+            --out /tmp/motif-ring009-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/motif-ring009-hypergraph.json'))
+          assert g['schema']=='motif.ring009.measured-relation-invention-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['learned_new_relational_rule_instances']>5
+          assert not g['invented_new_unrestricted_programming_primitives']
+          assert not g['source_labels_independently_human_verified']
+          assert g['new_real_world_capability_edges_promoted']==0
+          assert g['new_executable_methods_installed']==0
+          assert g['authority']=='NONE'
+          print('Measured source hyperedges preserve precision-vs-coverage and synthesis limits.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring009-synthesized-semantic-relations
           path: |
             /tmp/motif-ring009-frozen.json
             /tmp/motif-ring009-transfer.json
+            /tmp/motif-ring009-hypergraph.json
           retention-days: 30
