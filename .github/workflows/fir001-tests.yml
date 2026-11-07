@@ -1,0 +1,25 @@
+name: FIR-001 field-book checks
+
+on:
+  push:
+    branches:
+      - 'experiment/fir-001-before-the-arrow'
+  pull_request:
+    paths:
+      - 'experiments/fir001/**'
+      - '.github/workflows/fir001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  fir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Twelve Worlds
+        working-directory: experiments/fir001
+        run: python -m unittest -v test_fir.py
