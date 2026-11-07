@@ -157,8 +157,19 @@ class DirectLocalLLM:
         # Fail closed before any HTTP request on malformed inputs.
         prompt=self._instruction(brief,feedback)
         meta=self.verify_local_model()
+        # Ollama's structured-output mode constrains the envelope shape.
+        # The existing source-owned validators still decide whether the
+        # expression and proposed test are meaningful, safe and well typed.
+        format_schema={'type':'object','properties':{
+            'expression':{'type':'object'},
+            'purpose':{'type':'string'},'proposer':{'type':'string'},
+            'on':{'type':'array','items':{'type':'string'}},
+            'toggles':{'type':'array','items':{'type':'string'}},
+            'reason':{'type':'string'}},
+            'required':['expression','purpose','proposer','on','toggles','reason'],
+            'additionalProperties':False}
         body={'model': self.model, 'prompt': prompt, 'stream': False,
-              'format':'json', 'options': {'temperature':0, 'num_predict':420,
+              'format':format_schema, 'options': {'temperature':0, 'num_predict':420,
                                           'num_ctx':2048, 'num_thread':2}}
         payload=compact(body).encode()
         if len(payload)>8192:
