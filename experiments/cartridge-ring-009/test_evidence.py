@@ -7,7 +7,11 @@ from __future__ import annotations
 from copy import deepcopy
 import unittest
 
-import benchmark,induce,search,evidence_graph
+import benchmark,induce,search
+# RING-008 also has an evidence_graph.py, and importing its engine can put
+# RING-008 ahead of this directory on sys.path. Force the scoped module.
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+import evidence_graph
 
 
 class HypergraphAuditTests(unittest.TestCase):
@@ -49,7 +53,7 @@ class HypergraphAuditTests(unittest.TestCase):
             k:v for k,v in broken["program"].items() if k!="receipt_sha256"})
         broken["receipt_sha256"]=induce.digest({
             k:v for k,v in broken.items() if k!="receipt_sha256"})
-        with self.assertRaisesRegex(benchmark.HOLD,"reproducible"):
+        with self.assertRaisesRegex(induce.HOLD,"Forbidden"):
             benchmark.verify_artifact(broken)
 
     def test_repeated_test_packet_does_not_count_as_independent_seed(self):
