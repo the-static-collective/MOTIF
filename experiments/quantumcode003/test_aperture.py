@@ -75,7 +75,7 @@ class ApertureTests(unittest.TestCase):
         for row in self.train:
             anchors, effect = infer_delta(row)
             alternate = feature(row.before, anchors, GENERATED)
-            self.assertEqual(alternate, not bool(effect.remove_edges))
+            self.assertEqual(alternate, bool(effect.remove_edges))
 
     def test_independently_implemented_union_find_agrees(self):
         for row in self.test:
