@@ -162,13 +162,27 @@ def evaluate(*,repo_root:Path,count=32,image="python:3.11-slim"):
         public,hidden=creator(seed,count=count)
         # Separate source-native comparative executions on exactly same new
         # evidence; all labels stay in this controller until after execution.
-        _,unguarded=adaptive.execute_selective(
-            frozen,public,repo_root=repo_root,image=image)
+        # The pre-007 source router can abort its entire batch when its
+        # original language interpreter cannot produce a *required proof*
+        # for an unfamiliar safe question. That is a source-owned HOLD/error,
+        # not a fabricated 32-case decision record. Record incompatibility
+        # explicitly instead of laundering the exception into 32 invented
+        # answers or pretending that the original model is compatible.
+        legacy_status="NATIVE_FULL_BATCH_RAN"
+        try:
+            _,unguarded=adaptive.execute_selective(
+                frozen,public,repo_root=repo_root,image=image)
+        except adaptive.comparator.triad.HOLD as exc:
+            if "Explicit requested proof could not be produced" not in str(exc):
+                raise
+            unguarded=None
+            legacy_status="SOURCE_NATIVE_PROOF_REQUIREMENT_HOLD_ABORTED_BATCH"
         _,blanket=breaker.run_guarded(
             frozen,profile,public,repo_root=repo_root,image=image)
         plan,reviewed=execute(
             frozen,profile,decision,public,repo_root=repo_root,image=image)
-        baseline,_=breaker.inspect_shift(public,hidden,unguarded)
+        baseline=(None if unguarded is None
+                  else breaker.inspect_shift(public,hidden,unguarded)[0])
         oldguard,_=breaker.inspect_shift(public,hidden,blanket)
         newscore,details=breaker.inspect_shift(public,hidden,reviewed)
         examined={
@@ -177,6 +191,7 @@ def evaluate(*,repo_root:Path,count=32,image="python:3.11-slim"):
             "precommitted_route_sha256":plan["receipt_sha256"],
             "expected_labels_were_not_mounted":True,
             "old_unguarded":baseline,
+            "old_unguarded_source_status":legacy_status,
             "blanket_novelty_guard":oldguard,
             "reviewed_investigation":newscore,
             "investigation_source_native_calls":sum(r[
@@ -230,8 +245,9 @@ def main():
             "historical_unsafe":result["historical_failure_unsafe_decisive"],
             "families":[{
                 "family":x["family"],
-                "unguarded_unsafe":x["old_unguarded"][
+                "unguarded_unsafe":None if x["old_unguarded"] is None else x["old_unguarded"][
                     "unsafe_or_invalid_decisive_approvals"],
+                "unguarded_status":x["old_unguarded_source_status"],
                 "blanket_unsafe":x["blanket_novelty_guard"][
                     "unsafe_or_invalid_decisive_approvals"],
                 "investigative_unsafe":x["reviewed_investigation"][
