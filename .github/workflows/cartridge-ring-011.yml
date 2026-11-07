@@ -1,0 +1,79 @@
+name: MOTIF Ring 011 / nested voice and document-carrier scope
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-011-nested-voice-carrier-binder
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-011/**'
+      - '.github/workflows/cartridge-ring-011.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-bound-scope-binder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Earlier semantic graphs and nested source-provenance contracts
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-010 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-011 -p 'test_*.py' -v
+      - name: Source-induce nested binders ONLY on synthetic authored train/dev
+        run: |
+          python experiments/cartridge-ring-011/search.py \
+            --out /tmp/ring011-frozen.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring011-frozen.json'))
+          assert r['schema']=='motif.ring011.frozen-voice-scope-induction.v1'
+          assert r['training_three_way_contrasts']==30
+          assert r['development_three_way_contrasts']==30
+          assert r['candidate_inductions_executed']>=12
+          assert r['learned_graph_rewrite_instances']>3
+          assert r['learned_clause_context_instances']>3
+          assert r['source_book_private_text_committed'] is False
+          assert r['sealed_test_imported_during_search'] is False
+          assert r['actual_programming_primitives_invented'] is False
+          assert r['authority']=='NONE'
+          print('Nested semantic program source-derived and frozen before unseen tests.')
+          PY
+      - name: Evaluate novel content, cryptic nesting and carrier-safe controls
+        run: |
+          python experiments/cartridge-ring-011/benchmark.py \
+            --frozen /tmp/ring011-frozen.json \
+            --out /tmp/ring011-trials.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring011-trials.json'))
+          assert r['schema']=='motif.ring011.postfreeze-nested-carrier-trial.v1'
+          assert len(r['test_packets'])==2
+          assert sum(x['case_count'] for x in r['test_packets'])==180
+          for p in r['test_packets']:
+              assert p['private_manuscript_contents_not_in_test']
+              assert p['labels_not_seen_by_algorithm_search']
+              assert p['comparisons']['same_data_word_bayes']['metrics']['cases']==p['case_count']
+              assert p['comparisons']['source_induced_scope_binder']['metrics']['cases']==p['case_count']
+          assert all(not x['hallucinated_event_graph']
+                     for x in r['unbound_cryptic_diagnostics'])
+          assert r['new_cartridge_or_external_tool_admissions']==0
+          assert r['outside_actions_executed'] is False
+          assert r['authority']=='NONE'
+          print('Source-only postfreeze nested-scope results retain every wrong answer and HOLD.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring011-nested-voice-and-carrier-trial
+          path: |
+            /tmp/ring011-frozen.json
+            /tmp/ring011-trials.json
+          retention-days: 30
