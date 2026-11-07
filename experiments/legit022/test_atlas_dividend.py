@@ -254,6 +254,51 @@ class IndependentChallengeTests(unittest.TestCase):
         self.assertGreater(costs["cpu_ms"],0)
         self.assertIsNone(costs["full_original_human_and_prior_021_engineering_cost"])
 
+    def test_mutated_external_atlas_source_identity_is_rejected(self):
+        import atlas
+        old=atlas.EXPECTED_ATLAS_SHA256
+        try:
+            atlas.EXPECTED_ATLAS_SHA256="0"*64
+            with self.assertRaises(HOLD):
+                cohort()
+        finally:
+            atlas.EXPECTED_ATLAS_SHA256=old
+
+    def test_frozen_actual_CI_witness_tracks_source_and_distinguishing_costs(self):
+        archived=json.loads((HERE/"generated"/"atlas_dividend_witness.json")
+                            .read_text(encoding="utf-8"))
+        self.assertEqual(archived["experiment"],"MOTIF-LEGIT-022")
+        self.assertEqual(archived["status"],STATUS)
+        self.assertEqual(archived["source"],self.result[
+            "externally_originated_carrier_source"])
+        original=self.result["two_research_episodes"]["prior_aperture_reuse"]
+        self.assertEqual(archived["frozen_probe_orders_sha256"],
+                         original["source_plans_frozen_sha256"])
+        self.assertEqual(archived["frozen_probe_orders"],
+                         original["actual_frozen_probe_orders"])
+        self.assertEqual(archived["observed_heldout_summary"],
+                         original["heldout_matched_observations"])
+        self.assertFalse(archived["novelty_claimed"])
+        self.assertFalse(archived["recursive_compounding_certified"])
+        self.assertFalse(archived["automatic_source_promotion"])
+        for arm,rows in archived["per_pair_actions"].items():
+            self.assertEqual(len(rows),TEST_SIZE)
+            self.assertEqual(
+                sum(r["questions"] for r in rows),
+                archived["observed_heldout_summary"][arm]["total_queries"])
+            self.assertTrue(all(r["resolved"] for r in rows))
+            frozen=archived["actual_uncached_timings"][arm]
+            self.assertEqual(len(frozen["cpu_ms"]),3)
+            self.assertEqual(len(frozen["wall_ms"]),3)
+            self.assertAlmostEqual(median(frozen["cpu_ms"]),
+                                   frozen["median_cpu_ms"],places=5)
+        self.assertGreater(
+            archived["observed_heldout_summary"]["LEGIT021_ACQUIRED_APERTURES_FIRST"]
+                ["total_queries"],
+            archived["observed_heldout_summary"]
+                ["STRONG_CLASSICAL_TRAINED_COST_SENSITIVE"]["total_queries"])
+        self.assertFalse(archived["match_and_provenance_flags"]["externally_blind"])
+
     def test_scientific_holds_are_not_bypassed_by_marginal_performance(self):
         r=self.result
         self.assertEqual(r["status"],STATUS)
