@@ -42,7 +42,7 @@ class EvidenceGraphTests(unittest.TestCase):
             "test_packets"][1]["author_created_source_sha256"]
         changed["receipt_sha256"]=corpus.digest({
             k:v for k,v in changed.items() if k!="receipt_sha256"})
-        with self.assertRaisesRegex(evidence_graph.HOLD,"Duplicate"):
+        with self.assertRaisesRegex(evidence_graph.HOLD,"duplicate|Duplicate"):
             evidence_graph.build(self.frozen,changed)
 
     def test_forged_carrier_truth_is_rejected_even_with_rehashed_packet(self):
