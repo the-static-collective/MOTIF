@@ -94,6 +94,7 @@ def make(frozen,profile,decision,public):
         "public_digest_sha256":digest(public),
         "frozen_policy_receipt_sha256":frozen["receipt_sha256"],
         "original_profile_receipt_sha256":profile["receipt_sha256"],
+        "frozen_language_profile":dict(profile),
         "strategy_receipt_sha256":decision["receipt_sha256"],
         "selected_strategy":decision["selected"],
         "routes":routes,
