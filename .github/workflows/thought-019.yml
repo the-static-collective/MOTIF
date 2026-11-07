@@ -48,7 +48,7 @@ jobs:
             sleep 2
           done
           curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
-          ollama pull qwen2:0.5b
+          ollama pull qwen2.5:1.5b
       - name: Check real daemon identifies downloaded model
         run: |
           ollama list
@@ -56,7 +56,7 @@ jobs:
       - name: MOTIF controls LLM calls and independently grades proposals
         working-directory: experiments/thought-019
         run: |
-          python run.py --model qwen2:0.5b --rounds 2 --timeout 120 \
+          python run.py --model qwen2.5:1.5b --rounds 2 --timeout 120 \
             --output direct-llm-results.json --allow-held-reply
       - name: Prove direct LLM inference actually occurred, even if result HELD
         working-directory: experiments/thought-019
@@ -68,7 +68,7 @@ jobs:
           assert r['transport']=='DIRECT_LOCAL_OLLAMA_NO_FILE_RELAY'
           assert len(r['model_calls'])>=1
           assert all(c['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and c['http_generation_completed'] for c in r['model_calls'])
-          assert all(c['model_tag']=='qwen2:0.5b' and len(c['daemon_digest'])==64 for c in r['model_calls'])
+          assert all(c['model_tag']=='qwen2.5:1.5b' and len(c['daemon_digest'])==64 for c in r['model_calls'])
           assert r['installed'] is False and r['external_authority']=='NONE'
           print({'status':r['status'],'actual_llm_http_calls':len(r['model_calls']),
                  'accepted_typed_proposals':sum(c['proposal_passed_typed_gate'] for c in r['model_calls'])})
