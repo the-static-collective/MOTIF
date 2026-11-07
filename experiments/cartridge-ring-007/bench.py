@@ -244,8 +244,7 @@ def main():
             } for x in result["unseen_families"]],
             "receipt_sha256":result["receipt_sha256"],
         },sort_keys=True))
-    except (HOLD,arbitration.HOLD,manifest.HOLD,frames.ValueError
-            if hasattr(frames,"ValueError") else ValueError,
+    except (HOLD,arbitration.HOLD,manifest.HOLD,
             breaker.HOLD,adaptive.HOLD,policy.HOLD,
             adaptive.comparator.HOLD,adaptive.comparator.triad.HOLD,
             ValueError) as exc:
