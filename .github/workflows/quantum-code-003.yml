@@ -1,0 +1,26 @@
+name: MOTIF QC-003 unlabelled aperture invention
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode003/**'
+      - '.github/workflows/quantum-code-003.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode003/**'
+      - '.github/workflows/quantum-code-003.yml'
+permissions:
+  contents: read
+jobs:
+  aperture-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check unlabeled learning, refusals and classical controls
+        working-directory: experiments/quantumcode003
+        run: python -m unittest -v test_aperture.py
+      - name: Reproduce aperture-promotion and recursive re-entry
+        working-directory: experiments/quantumcode003
+        run: python aperture.py
