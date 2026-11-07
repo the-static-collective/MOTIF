@@ -1,6 +1,6 @@
 # THOUGHT-019 — MOTIF directly invokes an LLM, without a conversation relay
 
-**Status:** Bounded executable integration. A real open-weight generative model can run inside a GitHub Actions CPU runner (`qwen2:0.5b`) or the operator's local Ollama daemon. The standard unit tests are transport fakes and **do not prove LLM inference**. The separate `direct-real-generative-model` job is the actual inference test; do not claim success until its CI result and raw receipts are inspected.
+**Status:** Bounded executable integration. A real open-weight generative model can run inside a GitHub Actions CPU runner (`qwen2:0.5b`) or the operator's local Ollama daemon. The standard unit tests are transport fakes and **do not prove LLM inference**. The separate `direct-real-generative-model` job is the actual inference test; do not claim success until its CI result and raw receipts are inspected. Initial third-party setup action failed downloading a 9-byte 404 archive; replaced by the documented official Linux installer, still pending verification.
 
 ## Change since THOUGHT-018
 
@@ -42,7 +42,7 @@ python run.py --model qwen2:0.5b --rounds 3 \
 - The exact typed AST, bounded colors, source-owned independent oracle, hardcoded developer probes, frozen audit, and zero-authority constraints are preserved from 017 and 018. No arbitrary model-generated Python execution.
 - Any invalid model response is HOLD; a real HTTP generation is still recorded separately from *passing validation*. No silent fallback to tiny Naive Bayes or hard-coded FLIP JSON.
 - The local runtime uses the existing source-owned trusted Python compiler. `python -I` is not an OS security sandbox, but generated Python cannot be controlled except through the checked, code-free DSL.
-- The real LLM is run only in an **ephemeral GitHub Actions runner** and the operator's optional local Ollama. The workflow uses a third-party Ollama setup action; that action is part of the CI supply chain and should be pinned to a reviewed commit before promoting to a trusted production process.
+- The real LLM is run only in an **ephemeral GitHub Actions runner** and the operator's optional local Ollama. The workflow obtains Ollama from the current official Linux install script; this unpinned installation is a CI supply-chain risk and must be version-pinned/reviewed before any trusted production process.
 - The public fixture brief must contain no personal data or private accounts. The workflow uploads only synthetic development receipts. It requests read-only GitHub permissions.
 - Results depend on chosen model weights, daemon version, prompt, hardware and random variation, so inference pass/fail may vary between model versions. Repeated model calls, counters and validity flags are measured directly instead of guessed.
 
