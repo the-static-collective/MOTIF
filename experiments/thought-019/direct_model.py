@@ -133,7 +133,8 @@ class DirectLocalLLM:
             safe.append({'your_candidate_name':str(item.get('mechanism'))[:35],
                          'developer_test_actual':item.get('observed_result'),
                          'developer_oracle_expected':item.get('oracle_expected'),
-                         'disposition':item.get('disposition')})
+                         'disposition':item.get('disposition'),
+                         'surviving_reviewed_hypotheses':item.get('surviving_mechanisms')})
         # This is data-only and contains no evaluator target or frozen tasks.
         task = compact({'brief':brief,'development_only_feedback':safe})
         system = (
@@ -147,6 +148,9 @@ class DirectLocalLLM:
             'on and toggles are arrays containing distinct colors from red, blue, green. '
             'purpose and proposer must each be at least 5 letters; reason must be a natural-language sentence longer than 8 characters. '
             'Your expression should model the task, NOT replay a previous guess. '
+            'If developer feedback refuted a previous proposal, correct it. '
+            'A listed survivor is only a DEV hypothesis, not proof; use the tests '
+            'to guide your next candidate. Do not claim test success. '
             'No Python, shell, URLs, external actions, fake test results or credentials. '
             'Return strictly JSON; unknown results are acceptable. '
             'Example of valid JSON STRUCTURE but NOT necessarily correct behavior: '
