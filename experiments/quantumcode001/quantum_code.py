@@ -114,10 +114,16 @@ def local_review(candidates: tuple[Candidate, ...],
     grouped: dict[tuple[str, str, str], list[Observation]] = defaultdict(list)
     for row in validation:
         grouped[row.key].append(row)
+    # Never accept a caller-supplied candidate without replaying its training
+    # derivation and its evidence checksum against the actual TRAIN split.
+    canonical_candidates = {c.key: c for c in propose(train, minimum)}
+    if len({c.key for c in candidates}) != len(candidates):
+        raise ValueError("Duplicate candidate key")
     reviewed = []
     for candidate in candidates:
-        if candidate.status != "CANDIDATE_ONLY":
-            raise ValueError("Unexpected candidate authority")
+        if (candidate.status != "CANDIDATE_ONLY"
+                or canonical_candidates.get(candidate.key) != candidate):
+            raise ValueError("Candidate lacks matching training evidence")
         rows = grouped.get(candidate.key, ())
         if len(rows) < minimum or any(r.result != candidate.result for r in rows):
             continue
