@@ -179,6 +179,40 @@ def derive(train,*,min_support=2,n=2,gap=12,purity=0.9,
                         observed_deltas[(rel,a[rel],b[rel])]+=1
     if examples<20:
         raise HOLD("Too little independent contrast support to induce binder")
+    # Counterexample-guided repair: source-pair DIFFERENCES identify a token
+    # inserted around the same action when only EVENT_POLARITY changes.
+    # No English negation token is hardcoded; each trigger is learned from
+    # an actual POS/NEG contrast while all other typed source axes agree.
+    polarity_inserts=Counter()
+    for triple in train["contrasts"]:
+        arms=list(triple.values())
+        for i,first in enumerate(arms):
+            for second in arms[i+1:]:
+                va,vb=target(first),target(second)
+                if (va["ROOT_FORCE"]!=vb["ROOT_FORCE"]
+                        or va["EVENT_SCOPE"]!=vb["EVENT_SCOPE"]
+                        or va["EVENT_POLARITY"]==vb["EVENT_POLARITY"]):
+                    continue
+                negative=first if va["EVENT_POLARITY"]=="NEG" else second
+                positive=second if negative is first else first
+                neg=abstract(negative["text"],negative["observed_event"])
+                pos=abstract(positive["text"],positive["observed_event"])
+                pos_terms=set(pos["tokens"])
+                anchor=neg["event_index"]
+                for i,token in enumerate(neg["tokens"]):
+                    if (token in pos_terms or not token.isalpha()
+                            or neg["depth"][i]!=neg["depth"][anchor]
+                            or not 0<=anchor-i-1<=5):
+                        continue
+                    polarity_inserts[token]+=1
+    polarity_rules=[
+        {"opcode":"SOURCE_CONTRAST_POLARITY_INSERTION",
+         "cue_token":token,"source_pair_support":support,
+         "same_event_clause_required":True,"max_preceding_distance":5}
+        for token,support in sorted(polarity_inserts.items(),
+                                    key=lambda x:(-x[1],x[0]))
+        if support>=min_support
+    ][:8]
     rules=[]
     for (rel,val,feature),support in counts.items():
         conflict=sum(c for (r,v,f),c in counts.items()
@@ -221,6 +255,9 @@ def derive(train,*,min_support=2,n=2,gap=12,purity=0.9,
         "source_induced_relation_count":len(rules),
         "source_induced_edge_rewrites":len(deltas),
         "defaults_only_for_polarity":defaults,
+        "source_derived_polarity_insertions":polarity_rules,
+        "source_derived_polarity_insertion_count":len(polarity_rules),
+        "debugging_origin":"PREVIOUS_SYNTHETIC_FALSIFIER_EXPOSED_POLARITY_OVERWEIGHT",
         "parameters":{
             "min_support":min_support,"n":n,"gap":gap,"purity":purity,
             "binder":binder,"min_margin":min_margin,
@@ -245,6 +282,9 @@ def validate(program):
             or program.get("source_induced_edge_rewrites")!=len(
                 program.get("derived_relation_graph_transitions",[]))
             or not 1<=program["source_induced_relation_count"]<=MAX_RULES
+            or program.get("source_derived_polarity_insertion_count")!=len(
+                program.get("source_derived_polarity_insertions",[]))
+            or not 1<=program["source_derived_polarity_insertion_count"]<=8
             or program.get("receipt_sha256")!=digest({
                 k:v for k,v in program.items() if k!="receipt_sha256"})):
         raise HOLD("Unknown or changed source-derived graph binder")
@@ -272,6 +312,15 @@ def validate(program):
             raise HOLD("Invalid graph-diff transformation")
     if set(program.get("defaults_only_for_polarity",{}))!={"EVENT_POLARITY"}:
         raise HOLD("Unreviewed default could promote an apparent directive")
+    for rule in program["source_derived_polarity_insertions"]:
+        if (rule.get("opcode")!="SOURCE_CONTRAST_POLARITY_INSERTION"
+                or type(rule.get("cue_token")) is not str
+                or not re.fullmatch("[a-z]+",rule["cue_token"])
+                or type(rule.get("source_pair_support")) is not int
+                or rule["source_pair_support"]<params["min_support"]
+                or rule.get("same_event_clause_required") is not True
+                or rule.get("max_preceding_distance")!=5):
+            raise HOLD("Unreviewed learned source polarity insertion operator")
     return program
 
 
@@ -328,6 +377,34 @@ def predict(program,text,observed,carrier):
             "feature":chosen[3]["feature"],
             "source_support":chosen[3]["source_support"],
             "speaker_source":"EXPLICIT_OBSERVED_EVENT_NOT_INFERRED",
+        })
+    # Typed polarity edit applied only to the action clause that owns the
+    # observed event. A learned insertion beats generic high-frequency POS
+    # context cues: those previously contaminated many nested test cases.
+    anchor=info["event_index"]
+    neg_evidence=[
+        rule for rule in program["source_derived_polarity_insertions"]
+        if any(word==rule["cue_token"]
+               and info["depth"][i]==info["depth"][anchor]
+               and 0<=anchor-i-1<=rule["max_preceding_distance"]
+               for i,word in enumerate(info["tokens"]))
+    ]
+    if neg_evidence:
+        winner=neg_evidence[0]
+        assigned["EVENT_POLARITY"]="NEG"
+        receipts.append({
+            "opcode":"SOURCE_CONTRAST_POLARITY_INSERTION",
+            "relation":"EVENT_POLARITY","value":"NEG",
+            "cue_token":winner["cue_token"],
+            "source_pair_support":winner["source_pair_support"],
+            "negates_only_the_source_bound_event_not_the_speech_act":True,
+        })
+    else:
+        assigned["EVENT_POLARITY"]=program[
+            "defaults_only_for_polarity"]["EVENT_POLARITY"]
+        receipts.append({
+            "relation":"EVENT_POLARITY","value":assigned["EVENT_POLARITY"],
+            "provenance":"ABSENCE_OF_DERIVED_NEGATION_CUE_NOT_TRUTH_PROOF",
         })
     force,scope,polarity=(assigned[r] for r in RELS)
     graph=corpus.frame(force,scope,polarity,carrier,observed)
