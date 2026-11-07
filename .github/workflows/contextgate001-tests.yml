@@ -1,0 +1,35 @@
+name: CONTEXT-GATE-001 conditional policy selection
+
+on:
+  push:
+    branches:
+      - 'experiment/context-gate-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/contextgate001/**'
+      - '.github/workflows/contextgate001-tests.yml'
+      - 'experiments/selfmirror001/**'
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+
+permissions:
+  contents: read
+
+jobs:
+  context-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Constitutional prerequisites
+        run: |
+          (cd experiments/fir001 && python -m unittest -v test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -v test_mathal.py)
+          (cd experiments/selfmirror001 && python -m unittest -v test_selfmirror.py)
+      - name: Context routing with inverted-sensor hostile test
+        working-directory: experiments/contextgate001
+        run: |
+          python -m unittest -v test_contextgate.py
+          python contextgate.py
