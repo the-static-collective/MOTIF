@@ -423,6 +423,23 @@ def fixture():
     return buckets["TRAIN"], buckets["VALIDATE"], buckets["TEST"]
 
 
+def equivalent_fresh(before: Graph, expected: Graph, actual: Graph) -> bool:
+    """The newly created vertex's spelling is not part of its topology."""
+    old = before.vertices
+    expected_new = expected.vertices - old
+    actual_new = actual.vertices - old
+    if (len(expected_new) != 1 or len(actual_new) != 1 or
+            not old.issubset(actual.vertices) or
+            not old.issubset(expected.vertices)):
+        return False
+    source = next(iter(expected_new))
+    target = next(iter(actual_new))
+    mapped = frozenset(edge(target if a == source else a,
+                            target if b == source else b)
+                       for a, b in expected.edges)
+    return mapped == actual.edges and len(actual.vertices) == len(expected.vertices)
+
+
 def score(rules: tuple[ReviewedRule, ...], test: tuple[Episode, ...]):
     check_batch(test, "TEST")
     covered = correct = 0
@@ -432,7 +449,7 @@ def score(rules: tuple[ReviewedRule, ...], test: tuple[Episode, ...]):
         if result is None:
             continue
         covered += 1
-        correct += int(result.graph == episode.after)
+        correct += int(equivalent_fresh(episode.before, episode.after, result.graph))
     return {"covered": covered, "correct": correct, "wrong": covered-correct,
             "held": len(test)-covered}
 
