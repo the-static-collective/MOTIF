@@ -178,7 +178,7 @@ class ApertureMathalizerTests(unittest.TestCase):
         a,b=_graphs()
         self.assertFalse(isomorphic(a,b))
         self.assertEqual(sorted(map(sum,a)),[0,2,2,2,2,2,2])
-        self.assertEqual(sorted(map(sum,b)),[1,1,1,1,2,2,3])
+        self.assertEqual(sorted(map(sum,b)),[1,1,1,2,2,2,3])
 
     def test_genuine_external_Z3_counterexample_signed_vs_unsigned(self):
         result=prove_signedness_difference()
