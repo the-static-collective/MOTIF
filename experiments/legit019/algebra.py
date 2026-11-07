@@ -177,7 +177,7 @@ def conjecture_mine(max_tries=96):
             witness=int(evidence["counterexample"]["x"],16)
             if witness not in probes:
                 probes.append(witness)
-        if len(proof)>=8 and len(refuted)>=2:
+        if len(proof)>=8 and len(refuted)>=1:
             break
     if not proof or not refuted:
         raise HOLD("No actual checked proof/counterexample pair discovered")
