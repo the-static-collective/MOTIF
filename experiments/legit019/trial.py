@@ -22,6 +22,7 @@ from __future__ import annotations
 from hashlib import sha256
 from pathlib import Path
 from statistics import median
+from time import perf_counter_ns,process_time_ns
 import json
 import sys
 
@@ -40,8 +41,12 @@ def run():
     training=train_only(tasks)
     # All source training and theorem discovery happens before the
     # external 100-example challenge is accessed through the task API.
+    start_wall=perf_counter_ns()
+    start_cpu=process_time_ns()
     proofs=conjecture_mine()
     rewrites=verified_rewrites(proofs)
+    proof_wall_ms=round((perf_counter_ns()-start_wall)/1e6,6)
+    proof_cpu_ms=round((process_time_ns()-start_cpu)/1e6,6)
     frozen={}
     for identifier,rows in training:
         runs={}
@@ -116,6 +121,8 @@ def run():
         "math_discovery":{
             "conjecture_search":proofs,
             "verified_rewrite_count":len(rewrites),
+            "hypothesis_generation_Z3_proof_and_reproof_wall_ms":proof_wall_ms,
+            "hypothesis_generation_Z3_proof_and_reproof_cpu_ms":proof_cpu_ms,
             "proved_64bit_equations":self_proved_count,
             "genuine_wrong_conjectures_refuted":actual_refutations,
             "all_generated_hypotheses_from_code_not_handwritten_equations":True,
@@ -141,7 +148,11 @@ def run():
             "heldout_full_success_only_with_rewrites":wins,
             "unassisted_total_median_search_cpu_ms":round(total_compute_no,6),
             "assisted_total_median_search_cpu_ms_excluding_proof":round(total_compute_treated,6),
-            "Z3_lemma_discovery_and_checker_compute_cost_fully_measured":False,
+            "Z3_lemma_discovery_and_checker_compute_cost_fully_measured":True,
+            "total_treated_search_plus_mining_cpu_ms":round(
+                total_compute_treated+proof_cpu_ms,6),
+            "treated_search_plus_mining_paid_back_by_four_tasks":(
+                total_compute_treated+proof_cpu_ms<total_compute_no),
             "researcher_chose_tasks_after_inspecting_some_training_examples":True,
             "public_100_example_tasks_not_cryptographically_blinded":True,
         },
