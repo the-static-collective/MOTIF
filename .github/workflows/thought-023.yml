@@ -1,0 +1,100 @@
+name: THOUGHT-023 grammar gardener proof and direct LLM proposal
+on:
+  push:
+    paths:
+      - 'experiments/thought-023/**'
+      - '.github/workflows/thought-023.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-023/**'
+      - '.github/workflows/thought-023.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-owned-grammar-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New grammar proof, negative controls and executable candidate checks
+        working-directory: experiments/thought-023
+        run: python -m unittest -v test_gardener.py
+      - name: Previous 022 synthesis race regression
+        working-directory: experiments/thought-022
+        run: python -m unittest -v test_race.py
+      - name: Reproduce prior-model-suggestion offline test, not new inference
+        working-directory: experiments/thought-023
+        run: python gardener_benchmark.py
+      - name: Verify concise expression audit
+        working-directory: experiments/thought-023
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          trial=r['gardener']; a=trial['report']
+          assert a['baseline_grammar_functions']==8
+          assert a['expanded_grammar_functions']==16
+          assert a['new_invert_frozen_passed']==64
+          assert trial['executable_audit']['passed']==64
+          assert r['new_real_llm_inference'] is False
+          assert not r['grammar_installed']
+          print({'stage':trial['stage'],'closure_gain':a['new_distinct_functions']})
+          PY
+      - name: Keep review-only source and evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-023-offline-grammar-proof
+          path: |
+            experiments/thought-023/offline-results.json
+            experiments/thought-023/candidate_solver.py
+  direct-real-llm-grammar-advice:
+    # Separate genuinely-invoked model; never replace an invalid answer with
+    # the prior 022 recommendation, or silently install a grammar.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama in untrusted ephemeral research CI
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start and select one explicit local 3B model
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 50); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: MOTIF requests one real generative-model grammar recommendation and tests it
+        working-directory: experiments/thought-023
+        run: python gardener_cli.py --backend ollama --model qwen2.5:3b --output live-results.json
+      - name: Verify actual direct inference and safe disposition
+        working-directory: experiments/thought-023
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('live-results.json'))
+          assert r['model_directly_called'] and r['model_calls']==1
+          assert r['model_receipts'][0]['http_generation_completed'] is True
+          assert not r['new_grammar_installed'] and not r['installed']
+          assert r['external_authority']=='NONE'
+          print({'status':r['status'],'llm_calls':r['model_calls'],
+                 'candidate_extension':r['gardener']['advice']['extension'] if r['gardener'] else None})
+          PY
+      - name: Archive actual Qwen inference receipts including negative results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-023-qwen3b-real-grammar-suggestion
+          path: experiments/thought-023/live-results.json
+          if-no-files-found: ignore
