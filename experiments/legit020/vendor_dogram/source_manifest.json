@@ -1,0 +1,34 @@
+{
+  "schema": "motif.legit020.dogram-source-manifest.v1",
+  "upstream_repository": "the-static-collective/Dogram",
+  "upstream_commit": "551b5f9df18f17ec69b452ddcdff01718e0ff771",
+  "upstream_is_canonical": true,
+  "code_is_pinned_research_copy_not_live_dependency": true,
+  "read_only": true,
+  "files": [
+    {
+      "path": "dogram/probe_partition_refinement.py",
+      "upstream_git_blob_sha": "c201ce28ff7bb18a28496c0a2eefe2f9451526cc",
+      "vendored_path": "experiments/legit020/vendor_dogram/probe_partition_refinement.py",
+      "raw_byte_count": 5681
+    },
+    {
+      "path": "dogram/anti_collapse_reachability.py",
+      "upstream_git_blob_sha": "7b2fbdcee1822f0f2046ced101e8274883972373",
+      "vendored_path": "experiments/legit020/vendor_dogram/anti_collapse_reachability.py",
+      "raw_byte_count": 3424
+    },
+    {
+      "path": "dogram/operation_reachability_quotient.py",
+      "upstream_git_blob_sha": "1cf0fbe211ae5f93104c98d1b511588ba2412324",
+      "vendored_path": "experiments/legit020/vendor_dogram/operation_reachability_quotient.py",
+      "raw_byte_count": 3181
+    },
+    {
+      "path": "dogram/path_tree_test_language.py",
+      "upstream_git_blob_sha": "8fbff59fb1fe819eb06e0d58f6e74e4690dee934",
+      "vendored_path": "experiments/legit020/vendor_dogram/path_tree_test_language.py",
+      "raw_byte_count": 2691
+    }
+  ]
+}
