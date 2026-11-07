@@ -1,0 +1,226 @@
+{
+  "ablations": {
+    "alternatives_tested_independently": [
+      "none",
+      "empty_constant",
+      "universe_constant",
+      "set_complement"
+    ],
+    "controls": {
+      "empty_constant": {
+        "baseline_grammar_functions": 8,
+        "expanded_grammar_functions": 8,
+        "extension": "empty_constant",
+        "external_authority": "NONE",
+        "grammar_installed": false,
+        "independent_set_verification": null,
+        "installed": false,
+        "model_authored_source_executed": false,
+        "new_distinct_functions": 0,
+        "new_invert_expression": null,
+        "new_invert_expression_nodes": null,
+        "new_invert_frozen_passed": null,
+        "new_invert_oracle_calls": 1,
+        "new_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "new_task_family_coverage_after_selection": {
+          "all_on": false,
+          "invert": false,
+          "nand": false,
+          "nor": false
+        },
+        "no_model_can_grade_itself": true,
+        "old_functions_preserved": 8,
+        "original_invert_oracle_calls": 1,
+        "original_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "receipt_digest": "14d2adea95df87de35dbbe081c0f6c561be8aa13e7cefed166b4a33e0078f420",
+        "schema": "motif.thought023.grammar-gardener.v1"
+      },
+      "none": {
+        "baseline_grammar_functions": 8,
+        "expanded_grammar_functions": 8,
+        "extension": "none",
+        "external_authority": "NONE",
+        "grammar_installed": false,
+        "independent_set_verification": null,
+        "installed": false,
+        "model_authored_source_executed": false,
+        "new_distinct_functions": 0,
+        "new_invert_expression": null,
+        "new_invert_expression_nodes": null,
+        "new_invert_frozen_passed": null,
+        "new_invert_oracle_calls": 1,
+        "new_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "new_task_family_coverage_after_selection": {
+          "all_on": false,
+          "invert": false,
+          "nand": false,
+          "nor": false
+        },
+        "no_model_can_grade_itself": true,
+        "old_functions_preserved": 8,
+        "original_invert_oracle_calls": 1,
+        "original_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "receipt_digest": "b8e03bd9e3b2f791e9fcf6475d7bcefb3fce175f3bd75ce830e5caa9c50ca948",
+        "schema": "motif.thought023.grammar-gardener.v1"
+      },
+      "set_complement": {
+        "baseline_grammar_functions": 8,
+        "expanded_grammar_functions": 16,
+        "extension": "set_complement",
+        "external_authority": "NONE",
+        "grammar_installed": false,
+        "independent_set_verification": {
+          "set_interpreter_passed": 64,
+          "total": 64
+        },
+        "installed": false,
+        "model_authored_source_executed": false,
+        "new_distinct_functions": 8,
+        "new_invert_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "complement"
+        },
+        "new_invert_expression_nodes": 2,
+        "new_invert_frozen_passed": 64,
+        "new_invert_oracle_calls": 2,
+        "new_invert_status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "new_task_family_coverage_after_selection": {
+          "all_on": true,
+          "invert": true,
+          "nand": true,
+          "nor": true
+        },
+        "no_model_can_grade_itself": true,
+        "old_functions_preserved": 8,
+        "original_invert_oracle_calls": 1,
+        "original_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "receipt_digest": "c95d2e51effa1d42fdd191f5ae85dbb7ef8cdc9a2a0236a86f745e0c031a3c8e",
+        "schema": "motif.thought023.grammar-gardener.v1"
+      },
+      "universe_constant": {
+        "baseline_grammar_functions": 8,
+        "expanded_grammar_functions": 16,
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "grammar_installed": false,
+        "independent_set_verification": {
+          "set_interpreter_passed": 64,
+          "total": 64
+        },
+        "installed": false,
+        "model_authored_source_executed": false,
+        "new_distinct_functions": 8,
+        "new_invert_expression": {
+          "args": [
+            {
+              "ref": "universe"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        },
+        "new_invert_expression_nodes": 3,
+        "new_invert_frozen_passed": 64,
+        "new_invert_oracle_calls": 2,
+        "new_invert_status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "new_task_family_coverage_after_selection": {
+          "all_on": true,
+          "invert": true,
+          "nand": true,
+          "nor": true
+        },
+        "no_model_can_grade_itself": true,
+        "old_functions_preserved": 8,
+        "original_invert_oracle_calls": 1,
+        "original_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+        "receipt_digest": "b8f01c0cde665a674e3841284b47b301d1b3139f8dda295cd5993fc5581d881f",
+        "schema": "motif.thought023.grammar-gardener.v1"
+      }
+    },
+    "explanation": "Only the restricted typed syntax changes. These controls assess closure and program expressivity, not a blind model discovery. The fixed task family is author-designed.",
+    "external_authority": "NONE",
+    "grammar_installed": false,
+    "installed": false,
+    "model_called": false,
+    "receipt_digest": "2faadf741330806ab0fcb7c6a25390f7e7cb2bd2d7bae4f58ee0b1d0269e7a66",
+    "schema": "motif.thought023.source-owned-ablation.v1"
+  },
+  "external_authority": "NONE",
+  "gardener": {
+    "advice": {
+      "extension": "universe_constant",
+      "missing_primitive": "constant_universe",
+      "reason": "Introduce a universal switch set so the language can express inversion."
+    },
+    "executable_audit": {
+      "execution": "TRUSTED_FIXED_TEMPLATE_SUBPROCESS_NOT_SECURITY_SANDBOX",
+      "external_authority": "NONE",
+      "passed": 64,
+      "programs_from_untrusted_model": 0,
+      "source_sha256": "7d0e997cece6a144c1430c0ec77823c596e1901d62a0bcb6a977513742022770",
+      "total": 64
+    },
+    "external_authority": "NONE",
+    "grammar_installed": false,
+    "installed": false,
+    "llm_invocations_during_this_offline_run": 0,
+    "model_authored_python_executed": false,
+    "receipt_digest": "043318eafec38fb6c2dc4aca3599482ef47df93ab4ea912bd1f8f5198a03a814",
+    "report": {
+      "baseline_grammar_functions": 8,
+      "expanded_grammar_functions": 16,
+      "extension": "universe_constant",
+      "external_authority": "NONE",
+      "grammar_installed": false,
+      "independent_set_verification": {
+        "set_interpreter_passed": 64,
+        "total": 64
+      },
+      "installed": false,
+      "model_authored_source_executed": false,
+      "new_distinct_functions": 8,
+      "new_invert_expression": {
+        "args": [
+          {
+            "ref": "universe"
+          },
+          {
+            "ref": "state.on"
+          }
+        ],
+        "op": "difference"
+      },
+      "new_invert_expression_nodes": 3,
+      "new_invert_frozen_passed": 64,
+      "new_invert_oracle_calls": 2,
+      "new_invert_status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+      "new_task_family_coverage_after_selection": {
+        "all_on": true,
+        "invert": true,
+        "nand": true,
+        "nor": true
+      },
+      "no_model_can_grade_itself": true,
+      "old_functions_preserved": 8,
+      "original_invert_oracle_calls": 1,
+      "original_invert_status": "HOLD_GRAMMAR_INADEQUATE",
+      "receipt_digest": "b8f01c0cde665a674e3841284b47b301d1b3139f8dda295cd5993fc5581d881f",
+      "schema": "motif.thought023.grammar-gardener.v1"
+    },
+    "schema": "motif.thought023.gardener-comparison.v1",
+    "source": "REPLAY_OF_PREVIOUSLY_OBSERVED_QWEN_RECOMMENDATION",
+    "stage": "CANDIDATE_GRAMMAR_FOR_HUMAN_REVIEW_NOT_INSTALLED"
+  },
+  "grammar_installed": false,
+  "installed": false,
+  "new_real_llm_inference": false,
+  "prior_model_suggestion_replayed_not_reinvoked": true,
+  "prior_suggestion_provenance": "THOUGHT-022 Qwen2.5:3B run 42397463098",
+  "schema": "motif.thought023.offline-reproduction.v1"
+}
