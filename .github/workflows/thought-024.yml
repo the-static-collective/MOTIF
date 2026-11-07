@@ -1,0 +1,105 @@
+name: THOUGHT-024 typed cross-domain vocabulary transfer
+on:
+  push:
+    paths:
+      - 'experiments/thought-024/**'
+      - '.github/workflows/thought-024.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-024/**'
+      - '.github/workflows/thought-024.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-transfer-and-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New 024 evaluator, type boundaries and simulated HTTP fixture
+        working-directory: experiments/thought-024
+        run: python -m unittest -v test_transfer.py
+      - name: Source-owner 023 grammar gardener regressions
+        working-directory: experiments/thought-023
+        run: python -m unittest -v test_gardener.py
+      - name: Reproduce source-only cross-domain transfer comparison
+        working-directory: experiments/thought-024
+        run: python benchmark.py
+      - name: Reject overclaim and verify positive and negative controls
+        working-directory: experiments/thought-024
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('offline-results.json'))
+          rows={r['task']:r for r in x['results']}
+          for key in ('permits_reverse','missing_supplies','not_endorsed','unblocked_access'):
+              assert rows[key]['old']['status']=='HOLD_GRAMMAR_INADEQUATE'
+              assert rows[key]['expanded']['status']=='REVIEW_CANDIDATE_NOT_INSTALLED'
+              assert rows[key]['expanded']['frozen_correct']==64
+          for key in ('expire_names','inventory_eligible','shift_override','renew_flip','add_donations'):
+              assert rows[key]['old']['frozen_correct']==64
+          assert rows['cross_category_threshold']['expanded']['status'].startswith('HOLD_')
+          assert rows['open_world_truth']['expanded']['status']=='HOLD_NON_BOOLEAN_DOMAIN_MISMATCH'
+          assert not x['model_called'] and not x['installed']
+          print('source-only checks:',len(rows),'synthetic tasks, four novel-vocabulary transfers, two safe holds')
+          PY
+      - name: Preserve synthetic offline results
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-024-classical-finite-transfer
+          path: experiments/thought-024/offline-results.json
+  direct-qwen-cross-domain-trial:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama in untrusted ephemeral research environment
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start local Qwen 3B model (no remote inference provider)
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 50); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: MOTIF independently tests actual model proposals, preserving any negative result
+        working-directory: experiments/thought-024
+        run: |
+          python run.py --backend ollama --model qwen2.5:3b --rounds 2 \
+            --tasks permits_reverse,missing_supplies,not_endorsed,expire_names,cross_category_threshold,open_world_truth \
+            --output live-results.json
+      - name: Verify actual inference and no unauthorized promotion
+        working-directory: experiments/thought-024
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('live-results.json'))
+          assert r['model_calls']>0
+          assert r['real_direct_llm_http_calls']==r['model_calls']
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['http_generation_completed'] for x in r['model_receipts'])
+          assert r['llm_trials']['open_world_truth']['model_calls']==0
+          assert r['llm_trials']['cross_category_threshold']['status'].startswith('HOLD_')
+          assert not r['installed'] and not r['source_or_grammar_installed']
+          assert r['external_authority']=='NONE'
+          print({k:{'status':v['status'],'model_calls':v['model_calls'],'audit':v.get('frozen_correct')}
+                 for k,v in r['llm_trials'].items()})
+          PY
+      - name: Preserve genuine Qwen inference receipts even if result is HOLD
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-024-direct-qwen3b-cross-domain-transfer
+          path: experiments/thought-024/live-results.json
+          if-no-files-found: ignore
