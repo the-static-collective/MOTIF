@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from hashlib import sha256
 from pathlib import Path
-from statistics import mean
+from statistics import mean,median
 from unittest.mock import patch
 import json
 import sys
