@@ -42,3 +42,9 @@ python abstraction_cli.py --backend ollama --model qwen2.5:3b --max-calls 2 \
 ```
 
 The project only emits review reports and receipts. All outputs have `installed:false`, `external_authority:NONE`; no GitHub merge, PEN crossing, deployment, email or database write results from a model proposal.
+
+## First direct Qwen observation and compiler iteration
+
+The first real Qwen2.5:3B CI run (GitHub Actions `42415732280`) made **six** genuine generation calls. All six returned syntactically valid outer JSON but failed the original strict core AST validator (`GrammarError`); therefore **zero model proposals advanced to development oracle tests** and **zero abstractions were validated**. Both workflow jobs passed because handling invalid proposals as HOLD is an expected experimental outcome. Those runs used 2,356 prompt tokens and 672 response tokens in total (server-reported). The two nonBoolean/underspecified controls were explicitly held by the evaluator without LLM calls.
+
+This is useful negative evidence: the model-to-core-grammar interface itself was a bottleneck. The follow-up source-only change adds a **reviewed surface-math compiler**: `intersection`, `xor` / `symmetric_difference`, and `complement` lower into the already-licensed `union`/`difference` AST, then the existing core validator applies its depth/node bounds. This does not expand the underlying 16-function Boolean semantics, does not accept model-written Python, and does not grant new authority. The prompt now contains a structural example using deliberately *reversed* abstract field bindings, identified as an example rather than the answer. Additional bounded diagnostics record only proposed operator/referent labels, not raw model text. Any new real-model outcome is a distinct run and should be reported separately.

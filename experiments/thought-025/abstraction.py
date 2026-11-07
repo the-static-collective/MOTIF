@@ -23,6 +23,36 @@ class AbstractionError(ValueError):pass
 
 def digest(obj):return hashlib.sha256(canonical(obj).encode()).hexdigest()
 
+def lower_surface_math(expression, depth=0, counter=None):
+    """Source-reviewed compiler: familiar high-level set operations -> 023 core.
+
+    Every accepted surface program becomes a checked, bounded union/difference
+    AST; this does not give any model-produced code execution or new functions.
+    """
+    if counter is None:counter=[0]
+    counter[0]+=1
+    if depth>4 or counter[0]>19 or type(expression) is not dict:
+        raise AbstractionError('out-of-bounds surface expression')
+    if set(expression)=={'ref'}:
+        if type(expression['ref']) is not str or expression['ref'] not in ('state.on','arrival.toggles','universe'):
+            raise AbstractionError('unknown abstract role or constant')
+        return deepcopy(expression)
+    if set(expression)!={'op','args'} or type(expression['op']) is not str or type(expression['args']) is not list:
+        raise AbstractionError('unknown surface node fields')
+    operation=expression['op']
+    binary={'union','difference','intersection','xor','symmetric_difference'}
+    unary={'complement'}
+    if (operation in binary and len(expression['args'])!=2) or (operation in unary and len(expression['args'])!=1) or operation not in binary|unary:
+        raise AbstractionError('unsupported source-owned operator')
+    args=[lower_surface_math(arg,depth+1,counter) for arg in expression['args']]
+    def op(name,a,b):return {'op':name,'args':[a,b]}
+    if operation in ('union','difference'):return op(operation,*args)
+    if operation=='intersection':return op('difference',args[0],op('difference',args[0],args[1]))
+    if operation in ('xor','symmetric_difference'):
+        return op('union',op('difference',args[0],args[1]),op('difference',args[1],args[0]))
+    if operation=='complement':return op('difference',{'ref':'universe'},args[0])
+    raise AbstractionError('unrecognized surface expression')
+
 def validate_proposal(task,reply):
     if not isinstance(task,Specimen):raise AbstractionError('typed task required')
     if type(reply) is not dict or set(reply)!={'schema','bindings','expression','rationale'} or reply['schema']!=SCHEMA:
@@ -34,7 +64,7 @@ def validate_proposal(task,reply):
     rationale=reply['rationale']
     if type(rationale) is not str or not 8<=len(rationale)<=250 or any(ord(c)<32 for c in rationale):
         raise AbstractionError('bounded rationale required')
-    ex=validate_expression(reply['expression'],'universe_constant')
+    ex=validate_expression(lower_surface_math(reply['expression']),'universe_constant')
     return {'schema':SCHEMA,'bindings':deepcopy(b),'expression':ex,'rationale':rationale}
 
 def as_set(v):return frozenset(c for i,c in enumerate(COLORS) if v&(1<<i))
@@ -89,7 +119,7 @@ def model_trial(task,proposer,max_calls=2,dev=DEV):
             proposal=validate_proposal(task,raw)
         except Exception as exc:
             attempts.append({'round':round_no+1,'disposition':'HOLD_BAD_MODEL_OUTPUT',
-                             'error_type':type(exc).__name__});break
+                             'error_type':type(exc).__name__,'error_detail':str(exc)[:120]});break
         # Budget at most four oracle calls in all, not four per model proposal.
         # For a second proposal recheck previous observed constraints and 2 fresh cases.
         probes=(dev[:2] if round_no==0 else dev[:4])

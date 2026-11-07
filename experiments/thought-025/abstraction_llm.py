@@ -48,6 +48,8 @@ class DirectAbstractionLLM(DirectLocalLLM):
             'DO NOT invent IDs, semantic rules, test results, or more fields. '
             'The independent evaluator, NOT you, decides correctness. '
         )
+        example=compact({'bindings':{'current':ids[1],'event':ids[0]},'expression':{'op':'difference','args':[{'ref':'state.on'},{'ref':'arrival.toggles'}]},'rationale':'Example of output JSON structure only; not the correct mathematical answer.'})
+        instruction += '\nFORMAT_EXAMPLE_NOT_AN_ANSWER=' + example
         packet=compact({'task':public_task,'dev_feedback':list(feedback)})
         prompt=instruction+'\nTASK_JSON_DATA='+packet
         model=self.verify_local_model()
@@ -75,6 +77,17 @@ class DirectAbstractionLLM(DirectLocalLLM):
         try:
             value=json.loads(raw)
             if type(value) is not dict or set(value)!={'bindings','expression','rationale'}:raise ValueError('wrong fields')
+            stack=[value['expression']]; ops=[];refs=[]
+            for _ in range(30):
+                if not stack:break
+                x=stack.pop()
+                if type(x) is not dict:continue
+                if type(x.get('op')) is str:ops.append(x['op'][:35])
+                if type(x.get('ref')) is str:refs.append(x['ref'][:35])
+                if type(x.get('args')) is list:stack.extend(x['args'][:3])
+            receipt['surface_operator_names']=sorted(set(ops))
+            receipt['surface_referent_names']=sorted(set(refs))
+            receipt['binding_fields_declared']=sorted(str(x)[:35] for x in value['bindings'].values()) if type(value['bindings']) is dict else []
             reply={'schema':SCHEMA,**value}
             # The evaluator's source-owned validator independently checks binding and expression.
             receipt['envelope_valid']=True

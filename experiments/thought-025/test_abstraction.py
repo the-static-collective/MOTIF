@@ -3,7 +3,7 @@ import copy, json, threading, unittest
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from specimens import TASKS,BY_KEY,public_brief,independent_target
 from abstraction import (SCHEMA,AbstractionError,validate_proposal,evaluate_reply,
- check_truth,source_owned_program_check,model_trial,classical_without_language)
+ check_truth,source_owned_program_check,model_trial,classical_without_language,lower_surface_math)
 from abstraction_llm import DirectAbstractionLLM
 from abstraction_cli import main
 
@@ -50,6 +50,17 @@ class AbstractionTests(unittest.TestCase):
         r=make(task,diff(ref('universe'),ref('state.on')))
         self.assertEqual(check_truth(task,r)['correct'],64)
         self.assertEqual(source_owned_program_check(task,r)['correct'],64)
+    def test_surface_math_is_lowered_to_fixed_source_grammar(self):
+        task=BY_KEY['volunteer_eligible']
+        a=ref('state.on');b=ref('arrival.toggles')
+        high=make(task,{'op':'intersection','args':[a,b]})
+        self.assertEqual(check_truth(task,high)['correct'],64)
+        self.assertEqual(source_owned_program_check(task,high)['correct'],64)
+        flip=BY_KEY['cancel_or_add']
+        self.assertEqual(check_truth(flip,make(flip,{'op':'xor','args':[a,b]}))['correct'],64)
+        comp=BY_KEY['not_on_shelf']
+        self.assertEqual(check_truth(comp,make(comp,{'op':'complement','args':[a]}))['correct'],64)
+
     def test_unknown_binding_and_unsupported_operator_hold(self):
         task=BY_KEY['food_safe'];base=make(task,ref('state.on'))
         for bad in [{**base,'bindings':{'current':'ghost','event':'register_g'}},
