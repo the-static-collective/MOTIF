@@ -307,6 +307,9 @@ def run_experiment() -> dict[str, object]:
                    ("extend", "branch", "curve", "release"), reviewed),
     }
     fixed_only = tuple(r for r in reviewed if r.key in KNOWN_PRIMITIVES)
+    # The output trace itself is now a checked, reusable macro candidate.
+    macro_a = compile_path(World("POINT", "A"), routes["A"], reviewed)
+    replay_a = preview_path(World("POINT", "A"), macro_a, reviewed)
     return {
         "experiment": "MOTIF-QC-001",
         "status": "SYNTHETIC_LOCAL_PREVIEW_ONLY",
@@ -323,6 +326,12 @@ def run_experiment() -> dict[str, object]:
         "same_data_classical_table": score(reviewed, test),
         "feedback_route_final": {k: None if v is None else v.carrier
                                  for k, v in routes.items()},
+        "generated_macro": {
+            "status": macro_a.status,
+            "operations": list(macro_a.operations),
+            "replay_verified": replay_a == routes["A"],
+            "pin_count": len(macro_a.source_rule_pins),
+        },
         "frozen_route_final": {
             k: None if route(World("POINT", k), ops, fixed_only) is None
             else route(World("POINT", k), ops, fixed_only).carrier
