@@ -111,7 +111,8 @@ class ScopeGrammarTests(unittest.TestCase):
 
     def test_changed_source_carrier_even_with_recomputed_checksum_refused(self):
         corrupted=deepcopy(self.source)
-        corrupted["contrasts"][0]["b"]["carrier"]="RECORD"
+        before=corrupted["contrasts"][0]["b"]["carrier"]
+        corrupted["contrasts"][0]["b"]["carrier"]=("SONG" if before!="SONG" else "NOTE")
         corrupted["receipt_sha256"]=corpus.digest({
             k:v for k,v in corrupted.items() if k!="receipt_sha256"})
         with self.assertRaisesRegex(ValueError,"Unbound source"):
