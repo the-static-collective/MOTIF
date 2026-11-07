@@ -38,7 +38,7 @@ from aperture import open_aperture,mathalize,receipt_hash
 from graph_inventor import (
     HOLD,cycles,dogram_calibration,grammar,characterize,
     count,reference_count,all_path_collision,invent_separator,
-    independent_minimal_separator,classical_optimal_tree,
+    independent_minimal_separator,adaptive_aperture_lift,classical_optimal_tree,
     selected_action_tree,execute_tree
 )
 from math_apertures import (
@@ -204,6 +204,17 @@ def run():
         not branching_pair["with_actual_prior_generated_apertures"]["selected"]["four_cycle"]):
         raise HOLD("Must discover genuinely NEW four-cycle observation")
     tree=active_world_trial()
+    # This trial is a source-language boundary, NOT a fabricated new
+    # mathematical identity: every pattern with <=4 vertices collides,
+    # but the distinct graph carriers differ in component count. Let
+    # the generic grammar grow one approved arity and re-test.
+    lift_carriers=(cycles(10),cycles(5,5))
+    lift_path_certificate=all_path_collision(lift_carriers)
+    aperture_lift=adaptive_aperture_lift(lift_carriers)
+    if (not aperture_lift["lift_needed"] or
+        not aperture_lift["new_separator"]["five_cycle"] or
+        aperture_lift["new_mathematical_observation_counts"]!=[0,20]):
+        raise HOLD("Arity-5 perspective generator failed exact graph test")
     bv=invent_bitvector_counterprobe()
     no_distinction=indistinguishable_math()
     identical=invent_separator((cycles(6),cycles(6)))
@@ -232,6 +243,11 @@ def run():
         "actual_previous_generation_apertures":[characterize(x) for x in inherited],
         "validation_trials":heldout,
         "active_three_world_mathematical_viewpoint":tree,
+        "blind_below_four_vertices_therefore_expand_probe_language":{
+            "all_length_path_collision":lift_path_certificate,
+            "source_test_from_smaller_grammar_to_bounded_larger_grammar":
+                aperture_lift,
+        },
         "bitvector_new_counterprobe":bv,
         "bitvector_provably_no_possible_numeric_separator":no_distinction,
         "identical_world_abstention":{
@@ -262,6 +278,8 @@ def run():
             "assumed_carrier_worlds_are_known_finite_set":True,
             "problem_distribution_curated_by_experiment_author":True,
             "source_language_and_bitvector_ops_handwritten":True,
+            "max_graph_query_arity_researcher_declared":5,
+            "grown_source_language_does_not_prove_open_ended_invention":True,
             "not_general_mathematical_operation_invention":True,
             "public_SyGuS_benchmark_not_rerun":True,
             "automatic_source_merge_or_deploy":False,
@@ -298,6 +316,10 @@ def main():
         "strong_exact_classical_optimum":report["active_three_world_mathematical_viewpoint"]
                             ["strong_exact_classical_decision_tree"]
                             ["minimum_mean_questions"],
+        "grown_aperture":report[
+            "blind_below_four_vertices_therefore_expand_probe_language"
+        ]["source_test_from_smaller_grammar_to_bounded_larger_grammar"]
+        ["new_separator"],
         "signedness_counterexample":report["bitvector_new_counterprobe"]
                                      ["witness_unsigned_x"],
         "no_mathematical_separator_for_double":report[
