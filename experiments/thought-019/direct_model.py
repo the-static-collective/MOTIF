@@ -145,7 +145,7 @@ class DirectLocalLLM:
             '{"ref":"arrival.toggles"}, or {"op":"union"|"difference",'
             '"args":[expression,expression]}. Make no other operators. '
             'on and toggles are arrays containing distinct colors from red, blue, green. '
-            'purpose, proposer, reason must be short plain text. '
+            'purpose and proposer must each be at least 5 letters; reason must be a natural-language sentence longer than 8 characters. '
             'Your expression should model the task, NOT replay a previous guess. '
             'No Python, shell, URLs, external actions, fake test results or credentials. '
             'Return strictly JSON; unknown results are acceptable. '
@@ -170,10 +170,11 @@ class DirectLocalLLM:
         # expression and proposed test are meaningful, safe and well typed.
         format_schema={'type':'object','properties':{
             'expression':{'type':'object'},
-            'purpose':{'type':'string'},'proposer':{'type':'string'},
+            'purpose':{'type':'string','minLength':5,'maxLength':260},
+            'proposer':{'type':'string','minLength':5,'maxLength':260},
             'on':{'type':'array','items':{'type':'string'}},
             'toggles':{'type':'array','items':{'type':'string'}},
-            'reason':{'type':'string'}},
+            'reason':{'type':'string','minLength':8,'maxLength':120}},
             'required':['expression','purpose','proposer','on','toggles','reason'],
             'additionalProperties':False}
         body={'model': self.model, 'prompt': prompt, 'stream': False,
