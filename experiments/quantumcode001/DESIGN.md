@@ -42,7 +42,8 @@ These are abstract labels, **not** Hebrew characters, claims of letter evolution
 - **Decoder / receiving world:** a named context A or B. It affects legal outcomes.
 - **Operation:** an action vocabulary such as extend, branch, curve, close.
 - **Formation trace:** immutable sequence of locally previewed steps with rule-source checksums.
-- **Re-entry:** each output topology becomes the next operation's input.
+- **Re-entry I:** each output topology becomes the next operation's input.
+- **Re-entry II / self-writing toy:** a complete, verified result trace is compiled into a new **composite macro cartridge**, whose exact source-rule hashes are pinned and whose parts must be checked and replayed on every use. The output thereby changes the *available local planning vocabulary*; it does not install an operator or write unrestricted executable code.
 - **Rule induction:** only deterministic relations with at least two TRAIN receipts.
 - **Validation:** at least two separate VALIDATE receipts; any contradiction forces HOLD for that key.
 - **Authority:** exactly LOCAL_PREVIEW_ONLY, never external dispatch or permanent operator admission.
@@ -59,13 +60,13 @@ The two decoders specifically disagree on FORK + curve:
 
 Proposed source traces use independently named records but are deterministic fixture duplicates; IDs do not demonstrate genuinely independent real witnesses.
 
-**Prediction:** the typed validated table should cover exactly 20/22 held-out TEST records at 20/20 accuracy with **no** admission of the shortcut, and should complete two four-step routes starting at POINT. The frozen primitive grammar should stop after two operations. A context-blind table should be wrong on at least one of the two decoder-specific curve cases. Same-output histories must retain different digests. Unknown decoders and tampered receipts must HOLD.
+**Prediction:** the typed validated table should cover exactly 20/22 held-out TEST records at 20/20 accuracy with **no** admission of the shortcut, and should complete two four-step routes starting at POINT. The frozen primitive grammar should stop after two operations. A validated four-step result should compile into a local macro which replays only with all four original rule pins present; removing one or changing decoder must HOLD. A context-blind table should be wrong on at least one of the two decoder-specific curve cases. Same-output histories must retain different digests. Unknown decoders and tampered receipts must HOLD.
 
 **Null and stronger control:** a standard classical dictionary lookup given the **same decoded data** should match the learned version's outcomes. This is expected, not a defeat to hide. Improved performance relative to a deliberately weaker frozen grammar is no evidence of special generalization.
 
 **Falsifiers:** shortcut admission, lost context contrast, loss of history, inconsistent predicted transitions, test-label leakage, unsafe provenance acceptance, unsound status escalation, or outperformance claims beyond the finite fixture.
 
-**Scope warning:** the target labels, action sequences, decoder distinction and simulator are researcher-designed. The version here does not induce a visual topology from pixels, invent new operators beyond the fixed vocabulary, handle free human speech, run actual quantum circuits, infer missing physical laws, or update MOTIF production rules. The same 20/20 synthetic result can be produced by a conventional lookup table.
+**Scope warning:** the target labels, action sequences, decoder distinction and simulator are researcher-designed. The version here does not induce visual topology from pixels, invent primitive operators beyond the fixed vocabulary, handle free human speech, run actual quantum circuits, infer missing physical laws, or update MOTIF production rules. The trace-to-macro step is bounded *composition* (conceptually adjacent to existing MOTIF-006), not independent self-reprogramming. The same 20/20 synthetic result can be produced by a conventional lookup table.
 
 ## Reproduce
 
