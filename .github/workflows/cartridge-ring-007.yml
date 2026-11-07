@@ -78,8 +78,28 @@ jobs:
           assert r['authority']=='NONE'
           print('Two native synthetic shifted source-worlds: more benign coverage without reintroducing flagged unsafe classifications.')
           PY
+      - name: Record both additional benign decisions and safety/uncertainty costs in source-bound hypergraph
+        run: |
+          python experiments/cartridge-ring-007/evidence_graph.py \
+            --trial /tmp/motif-ring007-evidence.json \
+            --out /tmp/motif-ring007-hypergraph.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring007-hypergraph.json'))
+          assert r['schema']=='motif.ring007.investigation-evidence-hypergraph.v1'
+          assert len(r['hyperedges'])==2
+          assert r['total_additional_benign_decisive_answers']>0
+          assert r['all_observed_reviews_held_invalid_or_unsafe'] is True
+          assert all(len(e['tails'])==3 and len(e['heads'])==4 for e in r['hyperedges'])
+          assert r['new_real_world_affordance_edges_promoted']==0
+          assert r['new_executable_branch_admissions']==0
+          assert r['authority']=='NONE'
+          print('Evidence hypergraph records both recovered useful answers and additional method costs.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring007-reviewed-investigation-evidence
-          path: /tmp/motif-ring007-evidence.json
+          path: |
+            /tmp/motif-ring007-evidence.json
+            /tmp/motif-ring007-hypergraph.json
           retention-days: 30
