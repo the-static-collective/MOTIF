@@ -1,0 +1,32 @@
+name: MATHAL-001 + NUNUMATHAL-001 controls
+
+on:
+  push:
+    branches:
+      - 'experiment/mathal-001-nunumathal-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+      - '.github/workflows/mathal001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mathal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: FIR prerequisites
+        working-directory: experiments/fir001
+        run: python -m unittest -v test_fir.py
+      - name: Typed mathals + hostile controls
+        working-directory: experiments/mathal001
+        run: python -m unittest -v test_mathal.py
+      - name: Reproducible sample
+        working-directory: experiments/mathal001
+        run: python demo.py
