@@ -408,6 +408,22 @@ def predict(program,text,observed,carrier):
         })
     force,scope,polarity=(assigned[r] for r in RELS)
     graph=corpus.frame(force,scope,polarity,carrier,observed)
+    # Review-gated structural scope protection added AFTER observing the
+    # original RING-011 synthetic falsifier. A source event embedded in
+    # parentheses/brackets cannot be automatically treated as an OUTER
+    # operative request, even when the learned force/scope rules disagree.
+    # Conservative: some legitimate direct requests will be held.
+    # This is a DEVELOPER-AUTHORED restriction, not an invented parser.
+    if (force=="DIRECTIVE" and scope=="ROOT" and polarity=="POS"
+            and info["event_depth"]>0):
+        return {
+            "status":"HOLD","graph":None,
+            "reason":"EMBEDDED_EVENT_NOT_PROVEN_AS_ROOT_ACTION_REQUEST",
+            "source_event_bracket_depth":info["event_depth"],
+            "original_sha256":source_sha,
+            "source_graph_edits":receipts,
+            "external_effect_permission":"NONE",
+        }
     path=list(info["segments"][info["event_index"]].split("/"))
     if path==[""]:
         path=[]
