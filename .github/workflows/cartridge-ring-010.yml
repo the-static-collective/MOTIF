@@ -1,0 +1,99 @@
+name: MOTIF Ring 010 / contrast-induced semantic graph rewrites
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-010-latent-graph-grammar
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-010/**'
+      - '.github/workflows/cartridge-ring-010.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph-rewrite-invention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing contrastive operator and new graph-rewrite safety tests
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-009 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-010 -p 'test_*.py' -v
+      - name: Derive typed semantic graph transitions and freeze program from train/dev only
+        run: |
+          python experiments/cartridge-ring-010/search.py \
+            --out /tmp/ring010-frozen.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/ring010-frozen.json'))
+          assert p['schema']=='motif.ring010.frozen-graph-rewrite-invention.v1'
+          assert p['configurations_executed']>5
+          assert p['source_derived_graph_transitions']>=3
+          assert p['source_derived_surface_graph_operators']>=3
+          assert p['training_pairs']==60 and p['development_pairs']==60
+          assert p['heldout_language_module_imported_during_search'] is False
+          assert p['heldout_labels_consulted'] is False
+          assert p['base_graph_rewrite_opcode_invented'] is False
+          assert p['authority']=='NONE'
+          print('Derived source-bound graph-rewrite instances from contrasts; program frozen.')
+          PY
+      - name: Falsify frozen graph program with OOV variables and nested scope on same source cases as strong baselines
+        run: |
+          python experiments/cartridge-ring-010/benchmark.py \
+            --frozen /tmp/ring010-frozen.json \
+            --out /tmp/ring010-postfreeze.json
+          python - <<'PY'
+          import json
+          b=json.load(open('/tmp/ring010-postfreeze.json'))
+          assert b['schema']=='motif.ring010.postfreeze-compositional-graph-trial.v1'
+          assert len(b['test_packets'])==2
+          assert sum(x['count'] for x in b['test_packets'])==240
+          assert b['sampled_new_verb_and_entity_lexemes_heldout_from_training'] is True
+          assert b['speaker_agent_verb_patient_bound_externally'] is True
+          assert b['novel_graph_primitives_invented'] is False
+          assert b['open_domain_language_understanding_demonstrated'] is False
+          assert b['newly_installed_cartridge_methods']==0
+          assert b['external_actions_executed'] is False
+          assert b['real_world_authority']=='NONE'
+          for pack in b['test_packets']:
+              assert pack['heldout_labels_were_not_used_to_select_program']
+              assert pack['models']['induced_graph_relations']['metrics']['cases']==pack['count']
+              assert pack['models']['word_bayes_same_training']['metrics']['cases']==pack['count']
+          print('Two heldout author-created graph worlds independently scored on identical cases.')
+          PY
+      - name: Preserve induced graph relations AND source-observed false-directive errors
+        run: |
+          python experiments/cartridge-ring-010/evidence_graph.py \
+            --frozen /tmp/ring010-frozen.json \
+            --benchmark /tmp/ring010-postfreeze.json \
+            --out /tmp/ring010-evidence-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/ring010-evidence-hypergraph.json'))
+          assert g['schema']=='motif.ring010.measured-graph-operator-hypergraph.v1'
+          assert g['data_only_new_graph_rewrite_instances_derived'] is True
+          assert g['genuine_new_mathematical_relation_primitives_verified'] is False
+          assert g['no_private_user_messages_copied_into_public_repo'] is True
+          assert g['hyperedges'][1]['exact_semantic_graph']>0
+          assert g['hyperedges'][1]['false_directive_clearances']>0
+          assert g['real_world_capability_edges_promoted']==0
+          assert g['real_world_authority']=='NONE'
+          print('Measured graph structure invention with retained nested-scope safety failures.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring010-graph-operator-falsifier
+          path: |
+            /tmp/ring010-frozen.json
+            /tmp/ring010-postfreeze.json
+            /tmp/ring010-evidence-hypergraph.json
+          retention-days: 30
