@@ -81,12 +81,12 @@ Four variants received **the same heldout pair tasks**:
 
 | Variant | Total questions | Actual hom calls | Uncached median CPU, 3 runs |
 | --- | ---: | ---: | ---: |
-| All 18 patterns, including disconnected | 283 | 566 | 131.82 ms |
-| Canonical connected-only ordering | 139 | 278 | 56.52 ms |
-| **Prior LEGIT-021 questions before fallback** | **60** | **120** | **50.38 ms** |
-| **Strong conventional training-optimized priority** | **56** | **112** | **38.23 ms** |
+| All 18 patterns, including disconnected | 283 | 566 | 183.75 ms |
+| Canonical connected-only ordering | 139 | 278 | 79.18 ms |
+| **Prior LEGIT-021 questions before fallback** | **60** | **120** | **69.86 ms** |
+| **Strong conventional training-optimized priority** | **56** | **112** | **52.95 ms** |
 
-All **28/28** pairs were distinguished by each arm; successful
+In the frozen source-grounded GitHub Actions run 42417388613, all **28/28** pairs were distinguished by each arm; successful
 observations were independently checked. Query counts include
 unsuccessful probes, not just winning ones. The CPU figures were
 actually executed with no global cached-answer benefit, three runs
