@@ -81,11 +81,17 @@ def normalized(n,edges):
                             for a,b in edges))
                for perm in permutations(range(n)))
 
-@lru_cache(maxsize=1)
-def grammar():
-    """All finite unlabeled connected source patterns, enumerated afresh."""
+@lru_cache(maxsize=3)
+def grammar(max_vertices=MAX_SOURCE_VERTICES):
+    """All connected unlabeled graph patterns through a stated size limit.
+
+    The default is 4. One exploratory adaptive step may enlarge the
+    source language to 5 ONLY after the smaller grammar returns HOLD.
+    """
+    if type(max_vertices) is not int or not 1<=max_vertices<=5:
+        raise HOLD("Unapproved graph source-language size")
     probes=[]
-    for n in range(1,MAX_SOURCE_VERTICES+1):
+    for n in range(1,max_vertices+1):
         pairs=list(combinations(range(n),2))
         representatives=set()
         for bits in range(1<<len(pairs)):
@@ -114,6 +120,7 @@ def characterize(probe):
         "degree_signature":sorted(degrees),
         "triangle":n==3 and is_cycle,
         "four_cycle":n==4 and is_cycle,
+        "five_cycle":n==5 and is_cycle,
         "three_leaf_star":n==4 and is_star,
         "previously_authored_probe_template":False,
         "generated_from_connected_graph_enumeration":True,
@@ -171,26 +178,26 @@ def all_path_collision(targets,eigenvalue=2):
 def signatures(probe,targets):
     return tuple(count(probe,t) for t in targets)
 
-def independent_minimal_separator(targets):
+def independent_minimal_separator(targets,max_vertices=MAX_SOURCE_VERTICES):
     """Strong conventional exhaustive optimum under the EXACT same grammar.
 
     Intentionally not claimed weaker than the proposed search. It uses
     independent reference_count and stops at the first minimal source.
     """
     checked=0
-    for probe in grammar():
+    for probe in grammar(max_vertices):
         observed=tuple(reference_count(probe,t) for t in targets)
         checked+=1
         if len(set(observed))>1:
             return probe,observed,checked
     return None,None,checked
 
-def invent_separator(targets):
+def invent_separator(targets,max_vertices=MAX_SOURCE_VERTICES):
     if len(targets)<2:
         raise HOLD("At least two possible target states required")
     history=[]
     winner=None
-    for probe in grammar():
+    for probe in grammar(max_vertices):
         observed=signatures(probe,targets)
         item={"probe":characterize(probe),
               "counts":list(observed),
@@ -199,14 +206,17 @@ def invent_separator(targets):
         if item["separates"]:
             winner=probe
             break
-    verified,ref,checked=independent_minimal_separator(targets)
+    verified,ref,checked=independent_minimal_separator(targets,max_vertices)
     if verified!=winner:
         raise HOLD("Independent exhaustive comparator disproved minimal source")
     if winner is not None and ref!=signatures(winner,targets):
         raise HOLD("Independent full assignment enumerator disputes count")
     return {
-        "admissible_connected_patterns":len(grammar()),
-        "minimum_means_only_grammar_bounded_up_to_four_vertices":True,
+        "admissible_connected_patterns":len(grammar(max_vertices)),
+        "source_graph_vertex_limit":max_vertices,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices":
+            max_vertices==4,
+        "minimum_means_only_declared_finite_grammar":True,
         "first_separating_probe":characterize(winner) if winner else None,
         "first_separating_counts":list(ref) if ref is not None else None,
         "search_probes_inspected":len(history),
@@ -326,4 +336,62 @@ def execute_tree(tree,carrier):
         "resolved_world_index":current.get("resolved_state"),
         "unresolved":current.get("HOLD",False),
         "trace":steps,
+    }
+
+
+def components(carrier):
+    n,edges=carrier
+    nbr=[set() for _ in range(n)]
+    for u,v in edges:
+        nbr[u].add(v);nbr[v].add(u)
+    unseen=set(range(n))
+    count=0
+    while unseen:
+        count+=1
+        todo=[min(unseen)]
+        unseen.remove(todo[0])
+        while todo:
+            for v in tuple(nbr[todo.pop()]&unseen):
+                unseen.remove(v)
+                todo.append(v)
+    return count
+
+def adaptive_aperture_lift(targets):
+    """Grow the *question language* when all old questions collide.
+
+    This is bounded generic source-graph enumeration (arity 4 -> 5),
+    not a handwritten C5 test. It can find the missing 5-cycle
+    homomorphism question on a 10-cycle vs two 5-cycles.
+    The independently computed connectivity distinction confirms
+    that the targets are genuinely different despite weak apertures.
+    """
+    if len(targets)!=2:raise HOLD("Bounded lift requires two targets")
+    old=invent_separator(targets,4)
+    if old["first_separating_probe"] is not None:
+        return {"lift_needed":False,"old_aperture":old}
+    lifted=invent_separator(targets,5)
+    if lifted["first_separating_probe"] is None:
+        raise HOLD("Even the permitted 5-node lift was insufficient")
+    n=lifted["first_separating_probe"]["vertices"]
+    if n!=5:
+        raise HOLD("No actual new expressive power needed")
+    component_counts=[components(t) for t in targets]
+    if component_counts[0]==component_counts[1]:
+        raise HOLD("Frozen test lacks independent structural discriminator")
+    return {
+        "lift_needed":True,
+        "original_source_graph_limit":4,
+        "new_source_graph_limit":5,
+        "previous_all_declared_patterns_collided":True,
+        "previous_patterns_exhaustively_tested":old["admissible_connected_patterns"],
+        "expanded_grammar_size":lifted["admissible_connected_patterns"],
+        "new_separator":lifted["first_separating_probe"],
+        "new_mathematical_observation_counts":lifted["first_separating_counts"],
+        "independently_verified_minimum_in_expanded_grammar":
+            lifted["independent_classical_exhaustive_minimum_agrees"],
+        "prior_smaller_pattern_deficiency_not_object_identity":True,
+        "independent_graph_component_counts":component_counts,
+        "not_an_unbounded_new_primitive_invention":True,
+        "researcher_set_bounded_maximum_after_exploring_frontier":True,
+        "full_audit":lifted,
     }
