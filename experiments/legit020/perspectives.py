@@ -242,7 +242,7 @@ def graph_probe_ladder():
     data=graph_spectrum()
     g,h=_graphs()
     states=("G","H")
-    path=tuple(total_walk_counts(graph,8) for graph in (g,h))
+    path=tuple(tuple(total_walk_counts(graph,8)) for graph in (g,h))
     star1=tuple(branching_star_hom_count(graph,1) for graph in (g,h))
     star2=tuple(branching_star_hom_count(graph,2) for graph in (g,h))
     star3=tuple(branching_star_hom_count(graph,3) for graph in (g,h))
