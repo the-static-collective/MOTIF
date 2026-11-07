@@ -1,0 +1,98 @@
+name: THOUGHT-025 language-to-math abstraction discovery
+on:
+  push:
+    paths:
+      - 'experiments/thought-025/**'
+      - '.github/workflows/thought-025.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-025/**'
+      - '.github/workflows/thought-025.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-abstraction-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify 025 binding semantics, frozen audit, fail-closed controls and HTTP stub
+        working-directory: experiments/thought-025
+        run: python -m unittest -v test_abstraction.py
+      - name: Reproduce grammar-only and oracle-aided classical baseline
+        working-directory: experiments/thought-025
+        run: python benchmark.py
+      - name: Assert bounded classical performance and honest unsupported-task holds
+        working-directory: experiments/thought-025
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          baseline=r['classical_oracle_aided_comparison']
+          assert sum(x['status']=='REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED' for x in baseline.values())==8
+          assert all(x['frozen_correct']==64 for x in baseline.values() if x['frozen_correct'] is not None)
+          assert baseline['vague_access']['status']=='HOLD_AMBIGUOUS_INTENT'
+          assert baseline['unknown_beliefs']['status']=='HOLD_NON_BOOLEAN_SEMANTICS'
+          assert not r['model_called'] and not r['installed']
+          print('025 offline: eight bounded source-only oracle-aided solutions, two honest holds')
+          PY
+      - name: Run prior THOUGHT-024 regression suite
+        working-directory: experiments/thought-024
+        run: python -m unittest -v test_transfer.py
+      - name: Preserve offline baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-025-offline-abstraction-baseline
+          path: experiments/thought-025/offline-results.json
+  real-qwen-abstractor:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama in disposable research runner only (un-pinned supply-chain risk)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start local model and ensure it is available
+        run: |
+          (ollama serve >"$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 55); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Ask Qwen to discover bindings and expressions on synthetic unseen field layouts
+        working-directory: experiments/thought-025
+        run: |
+          python abstraction_cli.py --backend ollama --model qwen2.5:3b --max-calls 2 \
+             --tasks food_safe,food_recalled_elsewhere,volunteer_eligible,not_on_shelf,cancel_or_add,reverse_outreach,vague_access,unknown_beliefs \
+             --output real-model-results.json
+      - name: Verify real generative HTTP transport and preserve negative outcomes
+        working-directory: experiments/thought-025
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('real-model-results.json'))
+          assert r['real_llm_generations']>0 and r['model_called']
+          assert len(r['model_receipts'])==r['real_llm_generations']
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['completed'] for x in r['model_receipts'])
+          assert all(v['model_calls']==0 for k,v in r['model_trials'].items() if k in ('vague_access','unknown_beliefs'))
+          assert not r['installed'] and r['pen_unchanged'] and r['external_authority']=='NONE'
+          print({k:{'status':v['status'],'generations':v['model_calls'],'frozen_correct': v['frozen']['correct'] if v['frozen'] else None} for k,v in r['model_trials'].items()})
+          PY
+      - name: Archive true model inference receipts including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-025-real-qwen-abstraction-results
+          path: experiments/thought-025/real-model-results.json
+          if-no-files-found: ignore
