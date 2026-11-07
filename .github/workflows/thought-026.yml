@@ -1,0 +1,100 @@
+name: THOUGHT-026 staged abstraction and independent meaning verification
+on:
+  push:
+    paths:
+      - 'experiments/thought-026/**'
+      - '.github/workflows/thought-026.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-026/**'
+      - '.github/workflows/thought-026.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-stage-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate partial hypotheses, repairs, oracle boundaries and independent compiler
+        working-directory: experiments/thought-026
+        run: python -m unittest -v test_stages.py
+      - name: Run deterministic source-only pipeline (not an LLM)
+        working-directory: experiments/thought-026
+        run: python stage_cli.py --backend offline --output offline-results.json
+      - name: Verify fixtures did not become model evidence
+        working-directory: experiments/thought-026
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          assert r['direct_llm_calls']==0
+          assert len(r['results'])==10
+          assert all(v['status']=='CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED' and v['frozen']['correct']==64
+                     for v in r['results'].values() if v['frozen'] is not None)
+          assert r['results']['vague_access']['status']=='HOLD_AMBIGUOUS_INTENT'
+          assert r['results']['unknown_beliefs']['status']=='HOLD_NON_BOOLEAN_SEMANTICS'
+          assert not r['installed']
+          PY
+      - name: THOUGHT-025 single-shot regression
+        working-directory: experiments/thought-025
+        run: python -m unittest -v test_abstraction.py
+  actual-qwen-staged-reasoning:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama for disposable research CI only (unpinned research dependency)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start loopback model daemon and provision real open-weight model
+        run: |
+          (ollama serve >"$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Run staged real Qwen and original monolithic adapter on same tasks
+        working-directory: experiments/thought-026
+        run: |
+          python stage_cli.py --backend ollama --model qwen2.5:3b --repair yes \
+            --tasks food_safe,food_recalled_elsewhere,volunteer_eligible,not_on_shelf,vague_access,unknown_beliefs \
+            --compare-monolithic --output real-model-results.json
+      - name: Assert real HTTP generations and independently checked hold/success receipts
+        working-directory: experiments/thought-026
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('real-model-results.json'))
+          assert r['direct_llm_calls']>=1
+          assert r['monolithic_direct_llm_calls']>=1
+          assert len(r['model_receipts'])==r['direct_llm_calls']
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['http_generation_completed'] for x in r['model_receipts'])
+          for mode in ('vague_access','unknown_beliefs'):
+              assert r['results'][mode]['model_calls']==0
+          for k,v in r['results'].items():
+              if v['frozen'] is not None and v['status']=='CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED':
+                  assert v['frozen']['correct']==64 and v['fixed_template_program']['correct']==64
+          assert not r['installed'] and r['external_authority']=='NONE'
+          print({'staged':{k:v['status'] for k,v in r['results'].items()},
+                 'monolithic':{k:v['status'] for k,v in r['monolithic_025_comparison'].items()},
+                 'llm_calls':r['direct_llm_calls'],'monolithic_calls':r['monolithic_direct_llm_calls']})
+          PY
+      - name: Preserve real model receipts regardless of successes or failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-026-real-staged-qwen-results
+          path: experiments/thought-026/real-model-results.json
+          if-no-files-found: ignore
