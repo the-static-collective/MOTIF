@@ -106,7 +106,7 @@ class RelationGraphTests(unittest.TestCase):
             self.assertIsNone(induce.parse(self.program,phrase,ctx)[
                 "semantic_graph"])
 
-    def test_real-world_graph_knowledge_not_inferred_from_synthetic_labels(self):
+    def test_real_world_graph_knowledge_not_inferred_from_synthetic_labels(self):
         self.assertTrue(self.program["observed_event_context_required"])
         self.assertTrue(self.program["speaker_agent_action_patient_not_inferred_from_free_text"])
         self.assertFalse(self.program["new_base_computational_primitive_invented"])
