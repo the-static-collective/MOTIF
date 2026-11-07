@@ -20,6 +20,7 @@ from random import Random
 import json
 
 VERSION="3.4.2"
+EXPECTED_ATLAS_SHA256="73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d"
 SEED=22022
 TRAIN_SIZE=14
 TEST_SIZE=28
@@ -42,7 +43,10 @@ def _networkx():
     raw=data.read_bytes()
     if len(raw)<6000 or len(raw)>30000:
         raise HOLD("Unexpected atlas source data size")
-    return nx,sha256(raw).hexdigest(),len(raw)
+    digest=sha256(raw).hexdigest()
+    if digest!=EXPECTED_ATLAS_SHA256:
+        raise HOLD("External Atlas bytes changed from originally pinned trial")
+    return nx,digest,len(raw)
 
 def _carrier(graph):
     nodes=tuple(sorted(graph.nodes()))
