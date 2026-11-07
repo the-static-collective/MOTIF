@@ -91,6 +91,21 @@ class TwoFrontierFalsifiers(unittest.TestCase):
             self.assertFalse(prove_equal(a,b)["identity_valid"])
             self.assertIn(cex["x"],proof["probe_values"])
 
+    def test_discovered_nonconstant_cross_operator_theorem_is_actually_proved(self):
+        receipt=self.result["math_discovery"]["conjecture_search"]
+        complex_proofs=[row for row in receipt["z3_formal_proved"]
+                        if row["search_round"]=="CROSS_OPERATOR_DISCOVERY"]
+        self.assertGreaterEqual(len(complex_proofs),1)
+        self.assertEqual(receipt["proved_cross_operator_nonconstant_equations"],
+                         len(complex_proofs))
+        for row in complex_proofs:
+            a,b=as_tuple(row["lhs"]),as_tuple(row["rhs"])
+            self.assertNotEqual(a[0],b[0])
+            self.assertNotEqual(len({val(a,x) for x in (0,1,2,3,123456)}),1)
+            self.assertTrue(prove_equal(a,b)["identity_valid"])
+            self.assertTrue(all(val(a,x,8)==val(b,x,8) for x in range(256)))
+        self.assertFalse(receipt["mathematical_laws_historically_new"])
+
     def test_forged_proof_can_never_become_rewrite(self):
         report=deepcopy(self.result["math_discovery"]["conjecture_search"])
         report["rewrites"].append([["x"],["k",1]])
