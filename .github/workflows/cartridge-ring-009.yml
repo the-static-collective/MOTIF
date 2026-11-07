@@ -1,0 +1,96 @@
+name: MOTIF Ring 009 / contrastive semantic-operator invention
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-009-contrastive-relational-induction
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-009/**'
+      - '.github/workflows/cartridge-ring-009.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-program-invention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original RING-008 and new source-induced operator contracts
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-008 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-009 -p 'test_*.py' -v
+      - name: Induce NEW relational operator AST instances from contrast pairs
+        run: |
+          python experiments/cartridge-ring-009/search.py --out /tmp/motif-ring009-frozen.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/motif-ring009-frozen.json'))
+          assert p['schema']=='motif.ring009.frozen-contrastive-operator-invention.v1'
+          assert p['candidate_derivations_executed']>=30
+          assert p['invented_relational_rule_instances']>=1
+          assert p['source_pair_count']==60
+          assert p['new_distinct_relational_instances_automatically_derived']
+          assert p['new_python_semantic_primitives_invented'] is False
+          assert p['novel_test_module_imported_during_search'] is False
+          assert p['heldout_labels_consulted'] is False
+          assert p['external_action_executed'] is False
+          assert p['authority']=='NONE'
+          print('Original source-trained semantic-relations program frozen before test label load.')
+          PY
+      - name: Evaluate frozen program on nested clauses and out-of-vocabulary task verbs
+        run: |
+          python experiments/cartridge-ring-009/benchmark.py \
+            --frozen /tmp/motif-ring009-frozen.json \
+            --out /tmp/motif-ring009-transfer.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring009-transfer.json'))
+          assert r['schema']=='motif.ring009.frozen-operator-transfer-trial.v1'
+          assert len(r['test_packets'])==2
+          assert sum(p['case_count'] for p in r['test_packets'])==240
+          assert 'induced_relational_operator' in r['combined']
+          assert 'ring008_feature_parser_same_training' in r['combined']
+          assert r['new_induced_operator_instances']>0
+          assert r['general_language_understanding_verified'] is False
+          assert r['true_new_mathematical_primitives_discovered'] is False
+          assert r['new_executable_or_network_capabilities_admitted']==0
+          assert r['external_actions_executed'] is False
+          assert r['authority']=='NONE'
+          print('Falsification results retain all incorrect predictions and abstentions; no claims of universal understanding.')
+          PY
+      - name: Record learned relations, coverage and incorrect generalization in conditional hypergraph
+        run: |
+          python experiments/cartridge-ring-009/evidence_graph.py \
+            --frozen /tmp/motif-ring009-frozen.json \
+            --benchmark /tmp/motif-ring009-transfer.json \
+            --out /tmp/motif-ring009-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/motif-ring009-hypergraph.json'))
+          assert g['schema']=='motif.ring009.measured-relation-invention-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['learned_new_relational_rule_instances']>5
+          assert not g['invented_new_unrestricted_programming_primitives']
+          assert not g['source_labels_independently_human_verified']
+          assert g['new_real_world_capability_edges_promoted']==0
+          assert g['new_executable_methods_installed']==0
+          assert g['authority']=='NONE'
+          print('Measured source hyperedges preserve precision-vs-coverage and synthesis limits.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring009-synthesized-semantic-relations
+          path: |
+            /tmp/motif-ring009-frozen.json
+            /tmp/motif-ring009-transfer.json
+            /tmp/motif-ring009-hypergraph.json
+          retention-days: 30
