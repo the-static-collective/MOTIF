@@ -1,0 +1,105 @@
+name: MOTIF Ring 007 / investigate safely before abstaining
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-007-investigate-before-abstain
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-007/**'
+      - '.github/workflows/cartridge-ring-007.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prior source-native experiment and red-team controls
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/cartridge-ring-006 -p 'test_*.py' -v
+      - name: Three-way language investigation, source input and adversarial refusals
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-007 -p 'test_*.py' -v
+
+  real-pinned-methods:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pull isolated Python native execution image
+        run: docker pull python:3.11-slim
+      - name: Learn from prior native failure, precommit a three-way review and test two unseen shift families
+        run: |
+          python experiments/cartridge-ring-007/bench.py \
+            --count 32 --out /tmp/motif-ring007-evidence.json
+      - name: Check safety–coverage gains without hiding the unresolved cases
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring007-evidence.json'))
+          assert r['schema']=='motif.ring007.safe-investigation-benchmark.v1'
+          assert r['historical_training_cases']==64
+          assert r['historical_failure_cases']==32
+          assert r['historical_failure_unsafe_decisive']>0
+          assert r['selected_investigation_strategy']['selected']=='TRIAGE'
+          assert len(r['unseen_families'])==2
+          for group in r['unseen_families']:
+              old=group['old_unguarded']
+              blanket=group['blanket_novelty_guard']
+              review=group['reviewed_investigation']
+              if old is None:
+                  assert group['old_unguarded_source_status']=='SOURCE_NATIVE_PROOF_REQUIREMENT_HOLD_ABORTED_BATCH'
+              else:
+                  assert old['unsafe_or_invalid_decisive_approvals']>0
+              assert blanket['unsafe_or_invalid_decisive_approvals']==0
+              assert review['unsafe_or_invalid_decisive_approvals']==0
+              assert review['safe_positive_decisive_coverage'] > blanket['safe_positive_decisive_coverage']
+              if old is not None:
+                  assert review['safe_positive_decisive_coverage'] <= old['safe_positive_decisive_coverage']
+              assert group['native_original_language_hypotheses']>0
+              assert group['expected_labels_were_not_mounted']
+          assert r['newly_installed_arbitrary_branch_methods']==0
+          assert r['no_external_effects']
+          assert r['authority']=='NONE'
+          print('Two native synthetic shifted source-worlds: more benign coverage without reintroducing flagged unsafe classifications.')
+          PY
+      - name: Record both additional benign decisions and safety/uncertainty costs in source-bound hypergraph
+        run: |
+          python experiments/cartridge-ring-007/evidence_graph.py \
+            --trial /tmp/motif-ring007-evidence.json \
+            --out /tmp/motif-ring007-hypergraph.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring007-hypergraph.json'))
+          assert r['schema']=='motif.ring007.investigation-evidence-hypergraph.v1'
+          assert len(r['hyperedges'])==2
+          assert r['total_additional_benign_decisive_answers']>0
+          assert r['all_observed_reviews_held_invalid_or_unsafe'] is True
+          assert all(len(e['tails'])==3 and len(e['heads'])==4 for e in r['hyperedges'])
+          assert r['new_real_world_affordance_edges_promoted']==0
+          assert r['new_executable_branch_admissions']==0
+          assert r['authority']=='NONE'
+          print('Evidence hypergraph records both recovered useful answers and additional method costs.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring007-reviewed-investigation-evidence
+          path: |
+            /tmp/motif-ring007-evidence.json
+            /tmp/motif-ring007-hypergraph.json
+          retention-days: 30
