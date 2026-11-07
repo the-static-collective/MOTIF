@@ -154,6 +154,53 @@ def study(pair,ordered,independent=True):
 def run_policy(test,order):
     return [study(pair,order) for pair in test]
 
+def actually_execute_uncached_policy(test,ordering):
+    """Repeat the computational task with NO global lru_cache advantage.
+
+    Independently implemented assignment enumeration, identical graph
+    carriers, no test-derived query-order changes. Each observation is
+    recomputed, including unsuccessful queries; not a synthetic speedup.
+    """
+    n=0
+    for item in test:
+        for probe in ordering:
+            observed=tuple(reference_count(probe,x) for x in item.graphs)
+            n+=1
+            if observed[0]!=observed[1]:
+                break
+    return n
+
+def benchmark_actual_execution(test,policies,repetitions=3):
+    if repetitions!=3:
+        raise HOLD("Predeclared small computational study must use three repeats")
+    observed={arm:{"wall_ms":[],"cpu_ms":[],"questions":[]} for arm in policies}
+    names=tuple(policies)
+    for trial in range(repetitions):
+        # Rotation avoids always measuring the same arm first.
+        for arm in names[trial:]+names[:trial]:
+            t0=perf_counter_ns()
+            c0=process_time_ns()
+            count_calls=actually_execute_uncached_policy(test,policies[arm])
+            cpu=round((process_time_ns()-c0)/1e6,6)
+            wall=round((perf_counter_ns()-t0)/1e6,6)
+            observed[arm]["wall_ms"].append(wall)
+            observed[arm]["cpu_ms"].append(cpu)
+            observed[arm]["questions"].append(count_calls)
+    result={}
+    for name,record in observed.items():
+        if len(set(record["questions"]))!=1:
+            raise HOLD("Repeated performance study lost its semantic comparability")
+        result[name]={
+            **record,
+            "median_wall_ms":round(median(record["wall_ms"]),6),
+            "median_cpu_ms":round(median(record["cpu_ms"]),6),
+            "full_uncached_source_homomorphism_evaluations":
+                2*record["questions"][0],
+            "repeat_count":repetitions,
+            "not_generalizable_single_CI_runner":True,
+        }
+    return result
+
 def counterfactual(train,test,priors):
     all_sources=all_unlabeled_sources_up_to_four()
     connected=grammar()
@@ -177,6 +224,7 @@ def counterfactual(train,test,priors):
     frozen_hash=sha256(json.dumps(frozen,sort_keys=True,
                                   separators=(",",":")).encode()).hexdigest()
     observed={arm:run_policy(test,items) for arm,items in policies.items()}
+    actual_uncached=benchmark_actual_execution(test,policies)
     summary={}
     for arm,records in observed.items():
         n=sum(int(x["resolved"]) for x in records)
@@ -203,6 +251,7 @@ def counterfactual(train,test,priors):
         "source_plans_frozen_sha256":frozen_hash,
         "actual_frozen_probe_orders":frozen,
         "heldout_matched_observations":summary,
+        "actual_uncached_cpu_and_wall_microbenchmarks":actual_uncached,
         "query_receipts":{k:[
             {"pair_atlas_ids":list(t.atlas_ids),**x}
             for t,x in zip(test,items)]
@@ -223,9 +272,16 @@ def run():
     verify_prepared(train,test,atlas_source)
     priors,history=prior_apertures()
     # Separate SOURCE discovery and formal theorem proof, training only.
+    training_start_wall=perf_counter_ns()
+    training_start_cpu=process_time_ns()
     hypothesis=propose_composition_rule(train)
     factorization=certify_factorization(train[:5])
     invalid=challenge_degree_conjecture(train)
+    training_theorem_ms={
+        "wall_ms":round((perf_counter_ns()-training_start_wall)/1e6,6),
+        "cpu_ms":round((process_time_ns()-training_start_cpu)/1e6,6),
+        "full_original_human_and_prior_021_engineering_cost":None,
+    }
     if hypothesis["selected"]!="PRODUCT":
         raise HOLD("No mathematical theorem candidate")
     verdict=counterfactual(train,test,priors)
@@ -245,6 +301,7 @@ def run():
         "source_predecessor":history,
         "math_novelty_attempt":{
             "source_decomposition_rule_hypothesis":hypothesis,
+            "actual_theorem_hypothesis_and_finite_verification_cost_ms":training_theorem_ms,
             "independent_finite_and_combinatorial_certificate":factorization,
             "overgeneralized_degree_to_tree_conjecture":invalid,
             "historically_novel_theorem_credible":False,
