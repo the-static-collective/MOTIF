@@ -1,0 +1,36 @@
+name: MOTIF SELF-MIRROR-001 synthetic policy revision
+
+on:
+  push:
+    branches:
+      - 'experiment/self-mirror-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/selfmirror001/**'
+      - '.github/workflows/selfmirror001-tests.yml'
+      - 'experiments/fir001/**'
+      - 'experiments/mathal001/**'
+
+permissions:
+  contents: read
+
+jobs:
+  self-mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: FIR constitutional gate
+        working-directory: experiments/fir001
+        run: python -m unittest -v test_fir.py
+      - name: Mathal + nunumathal prerequisites
+        working-directory: experiments/mathal001
+        run: python -m unittest -v test_mathal.py
+      - name: SELF-MIRROR-001 frozen IID and OOD checks
+        working-directory: experiments/selfmirror001
+        run: python -m unittest -v test_selfmirror.py
+      - name: Print honest benchmark receipt
+        working-directory: experiments/selfmirror001
+        run: python selfmirror.py
