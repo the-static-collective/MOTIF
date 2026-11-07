@@ -127,7 +127,7 @@ def evaluate_frozen(frozen):
     train,model=verify_frozen(frozen)
     # Absolute isolation: the invented program and its config are already
     # selected, source-bound, and have been re-derived before this import.
-    import novel
+    import novel,novel_harder
     cases=corpus.flatten(train)
     systems={
         "source_induced_scope_binder":Induced(model),
@@ -139,8 +139,11 @@ def evaluate_frozen(frozen):
     for family,seed in (
         ("OOV_CONTENT",2026111108),
         ("CRYPTIC_NESTED",2026111109),
+        ("COUNTEREXAMPLE_FOLLOWUP",2026111119),
     ):
-        new=novel.generate(family=family,seed=seed,rounds=5)
+        new=(novel_harder.generate(seed=seed,rounds=6)
+             if family=="COUNTEREXAMPLE_FOLLOWUP" else
+             novel.generate(family=family,seed=seed,rounds=5))
         examples=corpus.flatten(new)
         rows={name:search.measure(
             decoder.parse,examples)
@@ -156,6 +159,9 @@ def evaluate_frozen(frozen):
             "labels_not_seen_by_algorithm_search":True,
             "source_events_and_carriers_externally_supplied":True,
             "private_manuscript_contents_not_in_test":True,
+            "is_fresh_to_repaired_algorithm":family=="COUNTEREXAMPLE_FOLLOWUP",
+            "first_two_families_used_to_identify_previous_model_defect":
+                family!="COUNTEREXAMPLE_FOLLOWUP",
         })
     totals={}
     for name in systems:
@@ -188,6 +194,8 @@ def evaluate_frozen(frozen):
         "corpus_inspired_by_private_editing_structure_not_private_quotes":True,
         "synthetic_editorial_carrier_categories_from_read_source":True,
         "not_independently_human_authored_or_annotated":True,
+        "original_two_test_families_are_now_debugging_regressions":True,
+        "third_family_created_after_post_falsifier_source_fix":True,
         "source_event_and_carrier_not_open_language_discoveries":True,
         "scope_grammar_runtime_predefined":True,
         "new_base_computational_operator_invented":False,
