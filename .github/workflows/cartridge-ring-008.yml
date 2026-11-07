@@ -1,0 +1,73 @@
+name: MOTIF Ring 008 / program-synthesized language semantics
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-008-language-algorithm-foundry
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-008/**'
+      - '.github/workflows/cartridge-ring-008.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typed-program-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Typed program grammar and leakage-boundary tests
+        run: python -m unittest discover -s experiments/cartridge-ring-008 -p 'test_*.py' -v
+      - name: Search new semantic algorithms ONLY on training and dev meaning examples
+        run: |
+          python experiments/cartridge-ring-008/synthesizer.py --out /tmp/motif-invented-program.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/motif-invented-program.json'))
+          assert p['schema']=='motif.ring008.frozen-generated-semantic-program.v1'
+          assert p['candidate_programs_tried']>p['seed_program_count']
+          assert p['heldout_challenge_module_imported'] is False
+          assert p['test_outcomes_consulted_during_search'] is False
+          assert p['tool_execution_authority']=='NONE'
+          assert p['selected_program_sha256'] and p['source_train_sha256'] and p['source_dev_sha256']
+          print('Search froze a typed program before any novel-world labels were imported.')
+          PY
+      - name: Falsify FROZEN program on unfamiliar constructions, adversarial utterances and OOV
+        run: |
+          python experiments/cartridge-ring-008/benchmark.py \
+            --artifact /tmp/motif-invented-program.json \
+            --out /tmp/motif-meaning-heldout.json
+          python - <<'PY'
+          import json
+          b=json.load(open('/tmp/motif-meaning-heldout.json'))
+          assert b['schema']=='motif.ring008.postfreeze-semantic-falsification.v1'
+          assert b['status']=='GENERATED_PROGRAM_TESTED_AFTER_FREEZE'
+          assert len(b['test_packets'])==2
+          assert b['candidate_programs_tried_before_heldout']>8
+          assert b['external_action_executed'] is False
+          assert b['new_native_executable_admissions']==0
+          assert b['utterances_and_labels_author_generated'] is True
+          assert b['normal_language_human_intent_verification']=='NOT_DEMONSTRATED'
+          assert b['authority']=='NONE'
+          all_rows=b['test_packets']
+          for packet in all_rows:
+              assert packet['labels_not_used_for_program_search']
+              assert packet['systems']['synthesized']['metrics']['count']==packet['case_count']
+              assert packet['systems']['atomic_seed']['metrics']['count']==packet['case_count']
+          print('Frozen search outcome compared on 2 new author-created challenge packs; no claim of general language understanding.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring008-generated-language-algorithm-falsifier
+          path: |
+            /tmp/motif-invented-program.json
+            /tmp/motif-meaning-heldout.json
+          retention-days: 30
