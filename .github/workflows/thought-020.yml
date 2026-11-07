@@ -1,0 +1,79 @@
+name: THOUGHT-020 bounded development critic vs direct LLM control
+on:
+  push:
+    paths:
+      - 'experiments/thought-020/**'
+      - '.github/workflows/thought-020.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-020/**'
+      - '.github/workflows/thought-020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  critic-unit-and-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Critic adversarial and deterministic tests
+        working-directory: experiments/thought-020
+        run: python -m unittest -v test_critic.py
+      - name: Existing real-HTTP client mock-transport regression
+        working-directory: experiments/thought-019
+        run: python -m unittest -v test_direct_model.py
+      - name: Existing independent research director regression
+        working-directory: experiments/thought-018
+        run: python -m unittest -v test_director.py test_conversation_relay.py
+  real-llm-matched-trial:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama for ephemeral untrusted research trial
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start local inference server and pull same model for both arms
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:1.5b
+      - name: Run both arms with same at-most-three model-call budget
+        working-directory: experiments/thought-020
+        run: python run.py --model qwen2.5:1.5b --rounds 3 --timeout 120 --output critic-vs-control.json
+      - name: Verify actual generations and independent HOLD or audit decision
+        working-directory: experiments/thought-020
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('critic-vs-control.json'))
+          assert a['installed'] is False and a['external_authority']=='NONE'
+          for mode in ('control','critic'):
+              r=a[mode]
+              assert 1<=len(r['model_receipts'])<=3, (mode,len(r['model_receipts']))
+              assert all(c['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and c['http_generation_completed'] for c in r['model_receipts'])
+              assert r['director_report']['external_authority']=='NONE'
+              print(mode,{'status':r['status'],'calls':len(r['model_receipts']),
+                         'probes':r['director_dev_probes'],
+                         'semantic_replays_vetoed':r['semantic_replays_vetoed']})
+          PY
+      - name: Preserve independent real-model comparison including negative results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-020-real-llm-critic-control
+          path: experiments/thought-020/critic-vs-control.json
+          if-no-files-found: ignore
