@@ -224,6 +224,36 @@ class IndependentChallengeTests(unittest.TestCase):
                         separators=(",",":")).encode()
         self.assertEqual(sha256(text).hexdigest(),packet["source_plans_frozen_sha256"])
 
+    def test_pinned_atlas_sha256_not_just_package_semver(self):
+        from atlas import EXPECTED_ATLAS_SHA256
+        self.assertEqual(len(EXPECTED_ATLAS_SHA256),64)
+        self.assertEqual(self.origin["atlas_data_sha256"],EXPECTED_ATLAS_SHA256)
+
+    def test_real_uncached_cpu_samples_account_for_every_probe(self):
+        packet=self.result["two_research_episodes"]["prior_aperture_reuse"]
+        expected=packet["heldout_matched_observations"]
+        costs=packet["actual_uncached_cpu_and_wall_microbenchmarks"]
+        self.assertEqual(set(costs),set(expected))
+        for arm,row in costs.items():
+            self.assertEqual(row["repeat_count"],3)
+            self.assertEqual(len(row["wall_ms"]),3)
+            self.assertEqual(len(row["cpu_ms"]),3)
+            self.assertEqual(len(set(row["questions"])),1)
+            self.assertGreater(row["median_wall_ms"],0)
+            self.assertGreater(row["median_cpu_ms"],0)
+            self.assertEqual(row["questions"][0],expected[arm]["total_queries"])
+            self.assertEqual(row["full_uncached_source_homomorphism_evaluations"],
+                             expected[arm]["total_homomorphism_calls"])
+            self.assertAlmostEqual(median(row["cpu_ms"]),
+                                   row["median_cpu_ms"],places=5)
+
+    def test_mined_math_proof_has_real_setup_cost_but_not_forged_prior_costs(self):
+        costs=self.result["math_novelty_attempt"][
+            "actual_theorem_hypothesis_and_finite_verification_cost_ms"]
+        self.assertGreater(costs["wall_ms"],0)
+        self.assertGreater(costs["cpu_ms"],0)
+        self.assertIsNone(costs["full_original_human_and_prior_021_engineering_cost"])
+
     def test_scientific_holds_are_not_bypassed_by_marginal_performance(self):
         r=self.result
         self.assertEqual(r["status"],STATUS)
