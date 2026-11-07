@@ -1,6 +1,6 @@
 # THOUGHT-019 — MOTIF directly invokes an LLM, without a conversation relay
 
-**Status:** Bounded executable integration. A real open-weight generative model can run inside a GitHub Actions CPU runner (`qwen2:0.5b`) or the operator's local Ollama daemon. The standard unit tests are transport fakes and **do not prove LLM inference**. The separate `direct-real-generative-model` job is the actual inference test; do not claim success until its CI result and raw receipts are inspected. Initial third-party setup action failed downloading a 9-byte 404 archive; replaced by the documented official Linux installer, still pending verification.
+**Status:** Bounded executable integration. A real open-weight generative model can run inside a GitHub Actions CPU runner (`qwen2.5:1.5b`) or the operator's local Ollama daemon. The standard unit tests are transport fakes and **do not prove LLM inference**. The separate `direct-real-generative-model` job is the actual inference test; do not claim success until its CI result and raw receipts are inspected. Initial third-party setup action failed downloading a 9-byte 404 archive; replaced by the documented official Linux installer, still pending verification.
 
 ## Change since THOUGHT-018
 
@@ -29,11 +29,11 @@ The known 018 benchmark uses small synthetic set-state transition tasks. Its eva
 # Only an explicitly selected, already-installed model may be used.
 cd experiments/thought-019
 python -m unittest -v test_direct_model.py
-python run.py --model qwen2:0.5b --rounds 3 \
+python run.py --model qwen2.5:1.5b --rounds 3 \
     --timeout 120 --output direct-llm-results.json --allow-held-reply
 ```
 
-`--allow-held-reply` allows a run to finish even if the model's proposal fails the grammar or evaluator; **it does not fabricate a successful experiment**. An absent model or no actual HTTP inference still returns a failure exit code. The model may return an invalid typed reply; that outcome is interesting negative evidence and must remain HOLD.
+`--allow-held-reply` allows a run to finish even if the model's proposal fails the grammar or evaluator; **it does not fabricate a successful experiment**. An absent model or no actual HTTP inference still returns a failure exit code. The model may return an invalid typed reply; that outcome is interesting negative evidence and must remain HOLD. Our first real CI run used a smaller `qwen2:0.5b`: it made one verified model HTTP generation but returned an invalid typed proposal, so the director correctly held the result. A follow-up experiment uses `qwen2.5:1.5b` and JSON-envelope constraints.
 
 ## Boundaries and audit criteria
 
