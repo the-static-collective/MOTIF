@@ -1,0 +1,42 @@
+name: MOTIF LEGIT-020 Aperture Dogram Mathalizing bridge
+on:
+  push:
+    paths:
+      - "experiments/legit020/**"
+      - ".github/workflows/legit020.yml"
+  pull_request:
+    paths:
+      - "experiments/legit020/**"
+      - ".github/workflows/legit020.yml"
+jobs:
+  aperture-language-math-provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install actual external Z3 used by prior LEGIT-019
+        run: python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Execute original Dogram kernels, language apertures and actual Z3 proof bridge
+        run: |
+          python experiments/legit020/benchmark.py --emit > /tmp/motif-legit020-summary.json
+          python -m json.tool /tmp/motif-legit020-aperture-mathalizing.json >/dev/null
+          cat /tmp/motif-legit020-summary.json
+          echo "---- COMPLETE SOURCE-PINNED APERTURE-MATHALIZING RESEARCH RECEIPT ----"
+          cat /tmp/motif-legit020-aperture-mathalizing.json
+      - name: Hostile tests for semantic anti-collapse, false intent and external mathematical witnesses
+        run: python -m unittest discover -s experiments/legit020 -p 'test_*.py' -v
+      - name: Preserve real Dogram computations and proof-carrying perspective evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT020-APERTURE-DOGRAM-MATHALIZER-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit020-summary.json
+            /tmp/motif-legit020-aperture-mathalizing.json
+          if-no-files-found: warn
+          retention-days: 30
