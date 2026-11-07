@@ -186,6 +186,46 @@ def route(start: World, operations: tuple[str, ...],
     return current
 
 
+@dataclass(frozen=True)
+class PathCartridge:
+    """New candidate *macro* generated from a successful local output trace."""
+    decoder: str
+    start_carrier: str
+    expected_end: str
+    operations: tuple[str, ...]
+    source_rule_pins: tuple[str, ...]
+    source_witness: str
+    status: str = "LOCAL_PREVIEW_ONLY"
+
+
+def compile_path(start: World, observed: World,
+                 rules: tuple[ReviewedRule, ...]) -> PathCartridge:
+    """A result becomes a reusable operation, without inventing new primitives."""
+    if start.steps or not observed.steps or start.decoder != observed.decoder:
+        raise ValueError("Need a finite same-decoder trace from a fresh origin")
+    ops = tuple(s.operation for s in observed.steps)
+    replayed = route(start, ops, rules)
+    if replayed is None or replayed != observed:
+        raise ValueError("Cannot compile an unverified or edited synthetic trace")
+    return PathCartridge(start.decoder, start.carrier, observed.carrier, ops,
+                         tuple(s.rule_pin for s in observed.steps),
+                         observed.witness())
+
+
+def preview_path(start: World, card: PathCartridge,
+                 rules: tuple[ReviewedRule, ...]) -> World | None:
+    """Re-check every source dependency and step of the generated candidate."""
+    if (card.status != "LOCAL_PREVIEW_ONLY" or start.steps
+            or start.decoder != card.decoder or start.carrier != card.start_carrier):
+        return None
+    outcome = route(start, card.operations, rules)
+    if (outcome is None or outcome.carrier != card.expected_end
+            or tuple(s.rule_pin for s in outcome.steps) != card.source_rule_pins
+            or outcome.witness() != card.source_witness):
+        return None
+    return outcome
+
+
 # Hidden fixture belongs to the experiment DESIGN / evaluator, not the learner.
 # Both contexts share most rules but intentionally disagree on FORK+curve.
 # All fields and observations are synthetic, chosen before inspection.
