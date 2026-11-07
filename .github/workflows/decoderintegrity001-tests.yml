@@ -1,0 +1,37 @@
+name: DECODER-INTEGRITY-001 sequential witness integrity
+
+on:
+  push:
+    branches:
+      - 'experiment/decoder-integrity-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/decoderintegrity001/**'
+      - 'experiments/contextgate001/**'
+      - 'experiments/selfmirror001/**'
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+      - '.github/workflows/decoderintegrity001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  decoder-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run stacked prerequisites
+        run: |
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/selfmirror001 && python -m unittest -q test_selfmirror.py)
+          (cd experiments/contextgate001 && python -m unittest -q test_contextgate.py)
+      - name: Hostile decoder controls
+        working-directory: experiments/decoderintegrity001
+        run: |
+          python -m unittest -v test_decoderintegrity.py
+          python decoderintegrity.py
