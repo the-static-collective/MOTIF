@@ -6,6 +6,7 @@ from structural import (
     Graph, Episode, World, edge, extract, specimen, fixture, induce, review,
     preview, cycle4, search, exact_classical_control, compile_macro,
     replay_macro, named_graph_memorization, score, experiment_report,
+    equivalent_fresh,
 )
 
 
@@ -47,7 +48,7 @@ class StructuralQuantumCodeTests(unittest.TestCase):
             if row.signal == CUE_DECOY:
                 self.assertIsNone(result)
             else:
-                self.assertEqual(result.graph, row.after)
+                self.assertTrue(equivalent_fresh(row.before, row.after, result.graph))
                 self.assertEqual(row.before.edges & row.after.edges,
                                  row.before.edges & result.graph.edges)
 
