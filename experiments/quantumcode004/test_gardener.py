@@ -7,6 +7,7 @@ from gardener import (
     relation, query, fixtures, discover, review, Garden, apply, replay,
     oracle_semantics, evaluator_graph, oracle_edit, evaluate, all_edges,
     infer_delta, labelled, separate, Graph, edge, equivalent_new, report,
+    graft_from_library, apply_grafted,
 )
 
 
@@ -246,6 +247,44 @@ class GrammarGardenerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             Garden().keep("triangle",bad2,train,valid)
 
+    def test_prior_feature_is_reused_to_construct_another_program(self):
+        ttrain,tvalid,_,_,donor=self.cases["triangle"]
+        strain,svalid,stest,_,_=self.cases["square"]
+        garden=Garden().keep("triangle",donor,ttrain,tvalid)
+        graft=graft_from_library(garden,"triangle","square-from-triangle",
+                                 strain,svalid)
+        self.assertIsNotNone(graft)
+        self.assertIn(donor.proposal.program.code(),graft.program.code())
+        self.assertEqual(graft.program.cost,5)
+        count=0
+        for row in stest:
+            target,_=infer_delta(row)
+            result=apply_grafted(graft,donor,row.before,target)
+            self.assertIsNotNone(result)
+            count+=int(equivalent_new(row.before,row.after,result.graph))
+        self.assertEqual(count,8)
+
+    def test_library_graft_refuses_revoked_or_tampered_parent(self):
+        ttrain,tvalid,_,_,donor=self.cases["triangle"]
+        strain,svalid,stest,_,_=self.cases["square"]
+        garden=Garden().keep("triangle",donor,ttrain,tvalid)
+        graft=graft_from_library(garden,"triangle","square",strain,svalid)
+        row=stest[0]
+        target,_=infer_delta(row)
+        self.assertIsNone(apply_grafted(graft,replace(donor,validation_hash="gone"),
+                                         row.before,target))
+        self.assertIsNone(apply_grafted(replace(graft,status="INSTALLED"),donor,
+                                         row.before,target))
+        self.assertIsNone(graft_from_library(Garden(),"triangle","square",strain,svalid))
+
+    def test_grafted_feature_validation_does_not_tune_second_candidate(self):
+        ttrain,tvalid,_,_,donor=self.cases["triangle"]
+        strain,svalid,_,_,_=self.cases["square"]
+        garden=Garden().keep("triangle",donor,ttrain,tvalid)
+        fake_valid=(replace(svalid[0],after=svalid[1].after),)+svalid[1:]
+        self.assertIsNone(graft_from_library(garden,"triangle","square",
+                                              strain,fake_valid))
+
     def test_report_does_not_claim_compounding_or_quantum(self):
         x=report()
         self.assertEqual(x["reviewed_question_cartridges"],3)
@@ -253,6 +292,8 @@ class GrammarGardenerTests(unittest.TestCase):
         self.assertFalse(x["quantum_execution"])
         self.assertFalse(x["produced_executable_source"])
         self.assertTrue(all(r["reviewed"] for r in x["task_outcomes"].values()))
+        self.assertTrue(x["task_outcomes"]["square"]["graft_from_triangle"]["validated"])
+        self.assertEqual(x["task_outcomes"]["square"]["graft_from_triangle"]["heldout_correct"],8)
 
 
 if __name__=="__main__":
