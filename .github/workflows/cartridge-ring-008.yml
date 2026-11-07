@@ -64,10 +64,32 @@ jobs:
               assert packet['systems']['atomic_seed']['metrics']['count']==packet['case_count']
           print('Frozen search outcome compared on 2 new author-created challenge packs; no claim of general language understanding.')
           PY
+      - name: Preserve both successful semantic transfer AND unsafe OOD errors in hypergraph
+        run: |
+          python experiments/cartridge-ring-008/evidence_graph.py \
+            --artifact /tmp/motif-invented-program.json \
+            --benchmark /tmp/motif-meaning-heldout.json \
+            --out /tmp/motif-meaning-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/motif-meaning-hypergraph.json'))
+          assert g['schema']=='motif.ring008.generated-semantic-program-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['auto_composed_new_grammar_program_within_dsl']
+          assert g['source_falsification_preserved']
+          assert g['unsafe_false_clearances_are_not_suppressed']
+          assert g['true_general_language_invention_verified'] is False
+          assert g['new_real_world_affordance_edges_promoted']==0 if 'new_real_world_affordance_edges_promoted' in g else True
+          assert g['real_world_algorithm_permission_promotions']==0
+          assert g['external_action_executed'] is False
+          assert g['authority']=='NONE'
+          print('Source-bound evidence records BOTH newly composed parsing AND observed incorrect generalization.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring008-generated-language-algorithm-falsifier
           path: |
             /tmp/motif-invented-program.json
             /tmp/motif-meaning-heldout.json
+            /tmp/motif-meaning-hypergraph.json
           retention-days: 30
