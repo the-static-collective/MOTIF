@@ -56,13 +56,15 @@ jobs:
           import json
           r=json.load(open('/tmp/ring011-trials.json'))
           assert r['schema']=='motif.ring011.postfreeze-nested-carrier-trial.v1'
-          assert len(r['test_packets'])==2
-          assert sum(x['case_count'] for x in r['test_packets'])==180
+          assert len(r['test_packets'])==3
+          assert sum(x['case_count'] for x in r['test_packets'])==288
           for p in r['test_packets']:
               assert p['private_manuscript_contents_not_in_test']
               assert p['labels_not_seen_by_algorithm_search']
               assert p['comparisons']['same_data_word_bayes']['metrics']['cases']==p['case_count']
               assert p['comparisons']['source_induced_scope_binder']['metrics']['cases']==p['case_count']
+          assert r['test_packets'][2]['is_fresh_to_repaired_algorithm'] is True
+          assert r['original_two_test_families_are_now_debugging_regressions'] is True
           assert all(not x['hallucinated_event_graph']
                      for x in r['unbound_cryptic_diagnostics'])
           assert r['new_cartridge_or_external_tool_admissions']==0
