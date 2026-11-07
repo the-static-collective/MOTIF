@@ -1,0 +1,81 @@
+name: THOUGHT-021 counterexample-guided direct LLM vs control
+on:
+  push:
+    paths:
+      - 'experiments/thought-021/**'
+      - '.github/workflows/thought-021.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-021/**'
+      - '.github/workflows/thought-021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-proof-and-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run typed witnessed-constraint and adversarial tests
+        working-directory: experiments/thought-021
+        run: python -m unittest -v test_constraints.py
+      - name: Verify predecessor source-owned semantic critic regressions
+        working-directory: experiments/thought-020
+        run: python -m unittest -v test_critic.py
+      - name: Verify independent direct-model HTTP unit regressions
+        working-directory: experiments/thought-019
+        run: python -m unittest -v test_direct_model.py
+  real-llm-comparative-trial:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama (unpinned official installer; research runner only)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start loopback daemon and install the same real model for all arms
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:1.5b
+          ollama list
+      - name: Direct LLM proposes under matched call limits; independent evaluator judges
+        working-directory: experiments/thought-021
+        run: python run.py --model qwen2.5:1.5b --rounds 4 --timeout 120 --output critic-vs-constraints.json
+      - name: Verify every arm actually called the local model, even on HOLD
+        working-directory: experiments/thought-021
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('critic-vs-constraints.json'))
+          assert r['installed'] is False and r['external_authority']=='NONE'
+          for name in ('control','semantic','constraint'):
+              arm=r['runs'][name]
+              receipts=arm['model_receipts']
+              assert len(receipts)>=1, (name,receipts)
+              assert all(x.get('transport')=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x.get('http_generation_completed') for x in receipts)
+              assert arm['external_authority']=='NONE' and not arm['installed']
+              print(name, {'status':arm['status'],'model_calls':len(receipts),
+                'dev_probes':arm['director_dev_probes'],
+                'constraint_veto':arm['constraint_veto_count']})
+          PY
+      - name: Save positive or negative research receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-021-live-qwen-control-critic-constraints
+          path: experiments/thought-021/critic-vs-constraints.json
+          if-no-files-found: ignore
