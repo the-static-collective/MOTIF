@@ -121,8 +121,11 @@ class ThreeWayTests(unittest.TestCase):
         self.assertEqual(m["routes"][3]["kind"],"BLOCK")
         self.assertEqual(m["routes"][4]["kind"],"INVESTIGATE")
         self.assertEqual(m["routes"][5]["kind"],"INVESTIGATE")
-        self.assertEqual(m["routes"][6]["kind"],"UNCERTAIN")
-        self.assertEqual(h["labels"][6]["expected"],"HOLD")
+        # Index 6 additionally has a missing ID in the older fixture;
+        # index 14 isolates an ambiguous phrase with valid evidence.
+        self.assertEqual(m["routes"][6]["kind"],"PRECHECK_HOLD")
+        self.assertEqual(m["routes"][14]["kind"],"UNCERTAIN")
+        self.assertEqual(h["labels"][14]["expected"],"HOLD")
 
     def test_worker_rejects_changed_unsafe_route_even_rehashed(self):
         frozen,profile,selected=training()
