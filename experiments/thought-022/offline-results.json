@@ -1,0 +1,233 @@
+{
+  "classical": [
+    {
+      "candidate_expression": {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          },
+          {
+            "args": [
+              {
+                "ref": "arrival.toggles"
+              },
+              {
+                "ref": "state.on"
+              }
+            ],
+            "op": "difference"
+          }
+        ],
+        "op": "union"
+      },
+      "candidate_nodes": 7,
+      "development_witnesses": [
+        {
+          "eliminated_count": 0,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 0,
+          "on_mask": 0,
+          "selection": "OUT_OF_VOCABULARY_COVERAGE_GUARD",
+          "toggle_mask": 0
+        },
+        {
+          "eliminated_count": 7,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 6,
+          "on_mask": 3,
+          "selection": "MAX_DISAGREEMENT",
+          "toggle_mask": 5
+        }
+      ],
+      "external_authority": "NONE",
+      "frozen_full_domain_passed": 64,
+      "installed": false,
+      "mode": "classical",
+      "oracle_calls": 2,
+      "pen_status": "UNCHANGED",
+      "receipt_digest": "c0ecd5fa6e19f4e1b05484d5d9a450031e43204c05bd91f79e210df76a5b5ad4",
+      "remaining_consistent_semantics": 1,
+      "schema": "motif.thought022.classical-cegis.v1",
+      "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+      "task": "flip"
+    },
+    {
+      "candidate_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          }
+        ],
+        "op": "difference"
+      },
+      "candidate_nodes": 5,
+      "development_witnesses": [
+        {
+          "eliminated_count": 0,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 0,
+          "on_mask": 0,
+          "selection": "OUT_OF_VOCABULARY_COVERAGE_GUARD",
+          "toggle_mask": 0
+        },
+        {
+          "eliminated_count": 7,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 1,
+          "on_mask": 3,
+          "selection": "MAX_DISAGREEMENT",
+          "toggle_mask": 5
+        }
+      ],
+      "external_authority": "NONE",
+      "frozen_full_domain_passed": 64,
+      "installed": false,
+      "mode": "classical",
+      "oracle_calls": 2,
+      "pen_status": "UNCHANGED",
+      "receipt_digest": "f3f77b672b0e13f0d64e47951f22fdbeb88aa95b6792a9980fe87cac4eb44551",
+      "remaining_consistent_semantics": 1,
+      "schema": "motif.thought022.classical-cegis.v1",
+      "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+      "task": "intersection"
+    },
+    {
+      "candidate_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      },
+      "candidate_nodes": 3,
+      "development_witnesses": [
+        {
+          "eliminated_count": 0,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 0,
+          "on_mask": 0,
+          "selection": "OUT_OF_VOCABULARY_COVERAGE_GUARD",
+          "toggle_mask": 0
+        },
+        {
+          "eliminated_count": 7,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 2,
+          "on_mask": 3,
+          "selection": "MAX_DISAGREEMENT",
+          "toggle_mask": 5
+        }
+      ],
+      "external_authority": "NONE",
+      "frozen_full_domain_passed": 64,
+      "installed": false,
+      "mode": "classical",
+      "oracle_calls": 2,
+      "pen_status": "UNCHANGED",
+      "receipt_digest": "562a6e163a0e56192ac34c22d005c519f788d816007cf0fbcf652e1b087e91fd",
+      "remaining_consistent_semantics": 1,
+      "schema": "motif.thought022.classical-cegis.v1",
+      "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+      "task": "drain"
+    },
+    {
+      "candidate_expression": {
+        "ref": "arrival.toggles"
+      },
+      "candidate_nodes": 1,
+      "development_witnesses": [
+        {
+          "eliminated_count": 0,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 0,
+          "on_mask": 0,
+          "selection": "OUT_OF_VOCABULARY_COVERAGE_GUARD",
+          "toggle_mask": 0
+        },
+        {
+          "eliminated_count": 7,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 5,
+          "on_mask": 3,
+          "selection": "MAX_DISAGREEMENT",
+          "toggle_mask": 5
+        }
+      ],
+      "external_authority": "NONE",
+      "frozen_full_domain_passed": 64,
+      "installed": false,
+      "mode": "classical",
+      "oracle_calls": 2,
+      "pen_status": "UNCHANGED",
+      "receipt_digest": "6dd3bbac258b7bd418acc4c5431462d8b208c4b3cd1d9ebed82202eee299c38b",
+      "remaining_consistent_semantics": 1,
+      "schema": "motif.thought022.classical-cegis.v1",
+      "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+      "task": "replace"
+    },
+    {
+      "candidate_expression": null,
+      "candidate_nodes": null,
+      "development_witnesses": [
+        {
+          "eliminated_count": 8,
+          "observation": "DEV_ONLY_ORACLE_BITMASK",
+          "observed_mask": 7,
+          "on_mask": 0,
+          "selection": "OUT_OF_VOCABULARY_COVERAGE_GUARD",
+          "toggle_mask": 0
+        }
+      ],
+      "external_authority": "NONE",
+      "frozen_full_domain_passed": null,
+      "installed": false,
+      "mode": "classical",
+      "oracle_calls": 1,
+      "pen_status": "UNCHANGED",
+      "receipt_digest": "2a35c09993e6010e7a569c6dc9566b3f4dee98c33e57f318036db986acba9a54",
+      "remaining_consistent_semantics": 0,
+      "schema": "motif.thought022.classical-cegis.v1",
+      "status": "HOLD_GRAMMAR_INADEQUATE",
+      "task": "invert"
+    }
+  ],
+  "external_authority": "NONE",
+  "grammar_distinct_functions": 8,
+  "grammar_inadequate": 1,
+  "installed": false,
+  "not_external_benchmark": true,
+  "oracle_budget_per_task": 2,
+  "schema": "motif.thought022.source-only-baselines.v1",
+  "solved": 4,
+  "tasks": [
+    "flip",
+    "intersection",
+    "drain",
+    "replace",
+    "invert"
+  ],
+  "total_oracle_calls": 9
+}
