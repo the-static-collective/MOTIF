@@ -1,0 +1,44 @@
+name: MOTIF LEGIT-022 externally sourced Atlas aperture dividend
+on:
+  push:
+    paths:
+      - "experiments/legit022/**"
+      - ".github/workflows/legit022.yml"
+  pull_request:
+    paths:
+      - "experiments/legit022/**"
+      - ".github/workflows/legit022.yml"
+jobs:
+  externally-originated-math-and-matched-research-ablations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Load pinned external Read-Wilson Graph Atlas (NetworkX)
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Execute pre-registered Atlas cohort and prior-aperture vs optimized classical controls
+        run: |
+          python experiments/legit022/trial.py --emit > /tmp/motif-legit022-summary.json
+          python -m json.tool /tmp/motif-legit022-atlas-evidence.json >/dev/null
+          cat /tmp/motif-legit022-summary.json
+          echo "---- EXACT EXTERNALLY ORIGINATED GRAPH ATLAS MATH RESEARCH PACKET ----"
+          cat /tmp/motif-legit022-atlas-evidence.json
+      - name: Adversarial test of source origin, theorem hypotheses, causal controls and refusal
+        run: |
+          python -m unittest discover -s experiments/legit022 -p 'test_*.py' -v
+      - name: Archive all actual original-source and research counterfactual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT022-ATLAS-APERTURE-DIVIDEND-RESEARCH-HOLD
+          path: |
+            /tmp/motif-legit022-summary.json
+            /tmp/motif-legit022-atlas-evidence.json
+          if-no-files-found: warn
+          retention-days: 30
