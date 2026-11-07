@@ -1,0 +1,44 @@
+name: MOTIF LEGIT-019 external mathematical discovery and compounding challenge
+on:
+  push:
+    paths:
+      - "experiments/legit019/**"
+      - ".github/workflows/legit019.yml"
+  pull_request:
+    paths:
+      - "experiments/legit019/**"
+      - ".github/workflows/legit019.yml"
+jobs:
+  two-frontier-prover-and-matched-public-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Require real external Z3 theorem solver (no fake internal fallback)
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Discover actual mathematical conjectures and challenge matched research variants on external SyGuS 2017
+        run: |
+          python experiments/legit019/trial.py --emit > /tmp/motif-legit019-summary.json
+          python -m json.tool /tmp/motif-legit019-two-frontier-receipt.json >/dev/null
+          cat /tmp/motif-legit019-summary.json
+          echo "---- FULL MATHEMATICS & PUBLISHED BENCHMARK RECEIPT ----"
+          cat /tmp/motif-legit019-two-frontier-receipt.json
+      - name: Independent semantic, source custody, SMT counterexample and prior-library falsifiers
+        run: |
+          python -m unittest discover -s experiments/legit019 -p 'test_*.py' -v
+      - name: Archive honest theorem and independent-task evaluation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT019-PUBLIC-SYGUS-AND-MATH-PROVER-HOLD
+          path: |
+            /tmp/motif-legit019-summary.json
+            /tmp/motif-legit019-two-frontier-receipt.json
+          if-no-files-found: warn
+          retention-days: 30

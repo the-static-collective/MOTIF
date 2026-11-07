@@ -1,0 +1,1022 @@
+{
+  "claimed_independently_verified_compounding": false,
+  "claimed_novel_mathematics": false,
+  "equal_budget_research_trial": {
+    "Z3_lemma_discovery_and_checker_compute_cost_fully_measured": true,
+    "assisted_total_median_search_cpu_ms_excluding_proof": 57.465711,
+    "frozen_train_decisions_sha256": "99247bf17df5323e838beb9b82cd369e953856299b6c990a9106e3aaff47a126",
+    "heldout_full_success_only_with_rewrites": [],
+    "previously_discovered_proven_rewrites_available_only_to_treatment": true,
+    "public_100_example_tasks_not_cryptographically_blinded": true,
+    "public_external_task_ids": [
+      101,
+      112,
+      100,
+      103
+    ],
+    "published_external_100_example_results": {
+      "100": {
+        "UNASSISTED": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        }
+      },
+      "101": {
+        "UNASSISTED": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        }
+      },
+      "103": {
+        "UNASSISTED": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "exact_match_rate": 0,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 0,
+          "solved": false
+        }
+      },
+      "112": {
+        "UNASSISTED": {
+          "exact_match_rate": 1,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 100,
+          "solved": true
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "exact_match_rate": 1,
+          "examples": 100,
+          "first_counterexample": null,
+          "no_new_program_selected_after_test": true,
+          "passed": 100,
+          "solved": true
+        }
+      }
+    },
+    "published_public_test_examples_per_task": 100,
+    "repeat_searches_per_arm": 3,
+    "researcher_chose_tasks_after_inspecting_some_training_examples": true,
+    "same_observational_semantic_deduplication_for_both_arms": true,
+    "total_treated_search_plus_mining_cpu_ms": 96.744207,
+    "train_examples_per_task": 10,
+    "training_search": {
+      "100": {
+        "UNASSISTED": {
+          "candidates_evaluated": 2254,
+          "cpu_ms": 12.950331,
+          "formally_checked_rewrites_applied": 0,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 13.058242,
+          "median_wall_ms": 13.058123,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 12.950331,
+              "wall_ms": 12.950042
+            },
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 13.058242,
+              "wall_ms": 13.058123
+            },
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 13.185131,
+              "wall_ms": 13.185032
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1143,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1111,
+          "wall_ms": 12.950042
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "candidates_evaluated": 2254,
+          "cpu_ms": 19.062896,
+          "formally_checked_rewrites_applied": 3,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 19.062896,
+          "median_wall_ms": 19.062612,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 19.062896,
+              "wall_ms": 19.062612
+            },
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 22.769904,
+              "wall_ms": 22.769492
+            },
+            {
+              "candidates_evaluated": 2254,
+              "cpu_ms": 18.545915,
+              "wall_ms": 18.545069
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1143,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1111,
+          "wall_ms": 19.062612
+        }
+      },
+      "101": {
+        "UNASSISTED": {
+          "candidates_evaluated": 2259,
+          "cpu_ms": 13.878665,
+          "formally_checked_rewrites_applied": 0,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 13.878665,
+          "median_wall_ms": 13.877125,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 13.878665,
+              "wall_ms": 13.877125
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 13.058232,
+              "wall_ms": 13.057732
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 14.44489,
+              "wall_ms": 14.44376
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1139,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1120,
+          "wall_ms": 13.877125
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "candidates_evaluated": 2259,
+          "cpu_ms": 19.683502,
+          "formally_checked_rewrites_applied": 3,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 19.21997,
+          "median_wall_ms": 19.219195,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 19.683502,
+              "wall_ms": 19.688164
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 19.21997,
+              "wall_ms": 19.219195
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 18.97195,
+              "wall_ms": 18.971776
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1139,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1120,
+          "wall_ms": 19.688164
+        }
+      },
+      "103": {
+        "UNASSISTED": {
+          "candidates_evaluated": 2259,
+          "cpu_ms": 12.58783,
+          "formally_checked_rewrites_applied": 0,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 12.58783,
+          "median_wall_ms": 12.588111,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 12.58783,
+              "wall_ms": 12.588111
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 12.576043,
+              "wall_ms": 12.575432
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 12.833868,
+              "wall_ms": 12.833457
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1139,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1120,
+          "wall_ms": 12.588111
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "candidates_evaluated": 2259,
+          "cpu_ms": 18.611293,
+          "formally_checked_rewrites_applied": 3,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 18.611293,
+          "median_wall_ms": 18.610377,
+          "no_external_source_100_examples_used": true,
+          "program": null,
+          "program_complexity": null,
+          "program_text": null,
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 18.611293,
+              "wall_ms": 18.610377
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 18.264966,
+              "wall_ms": 18.26451
+            },
+            {
+              "candidates_evaluated": 2259,
+              "cpu_ms": 18.867795,
+              "wall_ms": 18.867471
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 1139,
+          "solved_10_training_examples": false,
+          "unique_training_output_signatures": 1120,
+          "wall_ms": 18.610377
+        }
+      },
+      "112": {
+        "UNASSISTED": {
+          "candidates_evaluated": 115,
+          "cpu_ms": 0.414979,
+          "formally_checked_rewrites_applied": 0,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 0.412135,
+          "median_wall_ms": 0.412035,
+          "no_external_source_100_examples_used": true,
+          "program": [
+            "not",
+            [
+              "shl1",
+              [
+                "not",
+                [
+                  "x"
+                ]
+              ]
+            ]
+          ],
+          "program_complexity": 34,
+          "program_text": "not(shl1(not(x)))",
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.414979,
+              "wall_ms": 0.414899
+            },
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.412135,
+              "wall_ms": 0.412035
+            },
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.401418,
+              "wall_ms": 0.401369
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 60,
+          "solved_10_training_examples": true,
+          "unique_training_output_signatures": 54,
+          "wall_ms": 0.414899
+        },
+        "WITH_SELF_PROVED_LEMMAS": {
+          "candidates_evaluated": 115,
+          "cpu_ms": 0.571552,
+          "formally_checked_rewrites_applied": 3,
+          "heldout_data_accessed": false,
+          "limit_exhausted": false,
+          "literal_py_exec_permitted": false,
+          "max_ast_size": 5,
+          "max_expansions": 12000,
+          "median_cpu_ms": 0.571552,
+          "median_wall_ms": 0.571483,
+          "no_external_source_100_examples_used": true,
+          "program": [
+            "not",
+            [
+              "shl1",
+              [
+                "not",
+                [
+                  "x"
+                ]
+              ]
+            ]
+          ],
+          "program_complexity": 34,
+          "program_text": "not(shl1(not(x)))",
+          "raw_search_runs": [
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.571552,
+              "wall_ms": 0.571483
+            },
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.636489,
+              "wall_ms": 0.636409
+            },
+            {
+              "candidates_evaluated": 115,
+              "cpu_ms": 0.552785,
+              "wall_ms": 0.552704
+            }
+          ],
+          "research_solver_externally_authored": false,
+          "retained_limit_prunes": 0,
+          "semantic_deduplications": 60,
+          "solved_10_training_examples": true,
+          "unique_training_output_signatures": 54,
+          "wall_ms": 0.571483
+        }
+      }
+    },
+    "treated_search_plus_mining_paid_back_by_four_tasks": false,
+    "unassisted_total_median_search_cpu_ms": 39.936872
+  },
+  "experiment": "MOTIF-LEGIT-019",
+  "external_benchmark_provenance": {
+    "benchmark_labels_public_not_private_blind": true,
+    "competition_2017_precedes_experiment_2026": true,
+    "no_independent_experiment_operator": true,
+    "origin": "SyGuS-Org/benchmarks",
+    "original_public_repository_commit": "13c8deb68a873635879c9a69bc78caebd340f646",
+    "researcher_selected_task_ids": [
+      101,
+      112,
+      100,
+      103
+    ],
+    "source_blob_git_sha1": {
+      "100": {
+        "10": "ab142b0920e31d61506c61a8c128e6c1b6ee3d67",
+        "100": "f50baa55fe1ead9080a6db28d24a9c1f83d0fd58"
+      },
+      "101": {
+        "10": "1334b310e913333a746a3f305e277c6ce3fa6f2a",
+        "100": "677b212023c9352449e272ce4448d649af2f488b"
+      },
+      "103": {
+        "10": "7460e8a2666a0483c2560f4ca2511b347122503e",
+        "100": "02cfe2e5695a0bcda9d875922ef1f21ce9f2887a"
+      },
+      "112": {
+        "10": "446aee85eb45cb923934f874c49d85054d342c48",
+        "100": "23f5b6d5075c5713ab9e839534018651fb2cecd5"
+      }
+    },
+    "task_authors_independent_of_MOTIF": true,
+    "track": "SyGuS-Comp 2017 PBE_BV"
+  },
+  "external_write_actions": 0,
+  "gate": {
+    "actual_SMT_counterexamples": true,
+    "actual_third_party_SMT_proofs": true,
+    "actually_adopted_research_upgrade_causally_enables_later_new_invention": false,
+    "competition_benchmark_adjudication_blinded_by_external_organizer": false,
+    "external_operator_verified_compounding_growth": false,
+    "externally_authored_public_math_challenges": true,
+    "full_human_research_labor_accounted": false,
+    "historically_novel_mathematical_theorem_independently_certified": false,
+    "matched_research_search_language_and_budget": true,
+    "second_generation_beats_first_on_entire_published_test_for_at_least_one_task": false,
+    "second_generation_end_to_end_proof_cost_and_search_beat_control": false,
+    "software_auto_deploy_permitted": false
+  },
+  "math_discovery": {
+    "all_generated_hypotheses_from_code_not_handwritten_equations": true,
+    "conjecture_search": {
+      "engine": "COUNTEREXAMPLE_GUIDED_BITVECTOR_IDENTITY_CONJECTURE",
+      "examined_proposals": 12,
+      "independent_external_theorem_checker": "Z3_THIRD_PARTY_BOUNDED_BITVECTORS",
+      "independent_source": "NONE_FOR_NEWNESS_ESTIMATE",
+      "mathematical_laws_historically_new": false,
+      "new_math_novelty_authenticated": false,
+      "probe_values": [
+        "0x0",
+        "0x1",
+        "0xfffbfffffffffffe"
+      ],
+      "proved_cross_operator_nonconstant_equations": 3,
+      "rewrites": [
+        [
+          [
+            "or",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "and",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "or",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "add",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "xor",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "and",
+            [
+              "not",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "or",
+            [
+              "shl1",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "or",
+            [
+              "shr1",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "x"
+          ]
+        ],
+        [
+          [
+            "xor",
+            [
+              "not",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "not",
+            [
+              "x"
+            ]
+          ]
+        ],
+        [
+          [
+            "add",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          [
+            "shl1",
+            [
+              "x"
+            ]
+          ]
+        ]
+      ],
+      "unbounded_integer_theorems_proved": false,
+      "z3_formal_proved": [
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "or",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": 0,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "and",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": 1,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "or",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          "search_round": 2,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "add",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          "search_round": 3,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "xor",
+            [
+              "x"
+            ],
+            [
+              "k",
+              0
+            ]
+          ],
+          "search_round": 5,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "and",
+            [
+              "not",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": 6,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "or",
+            [
+              "shl1",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": 7,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "or",
+            [
+              "shr1",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": 8,
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "not",
+            [
+              "x"
+            ]
+          ],
+          "not_historically_novel_without_literature_review": true,
+          "rhs": [
+            "xor",
+            [
+              "not",
+              [
+                "k",
+                0
+              ]
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": "CROSS_OPERATOR_DISCOVERY",
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "shl1",
+            [
+              "x"
+            ]
+          ],
+          "not_historically_novel_without_literature_review": true,
+          "rhs": [
+            "add",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": "CROSS_OPERATOR_DISCOVERY",
+          "secondary_exhaustive_8bit_check": 256
+        },
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": null,
+            "identity_valid": true,
+            "width": 64,
+            "z3_result": "UNSAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "or",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          "not_historically_novel_without_literature_review": true,
+          "rhs": [
+            "and",
+            [
+              "x"
+            ],
+            [
+              "x"
+            ]
+          ],
+          "search_round": "CROSS_OPERATOR_DISCOVERY",
+          "secondary_exhaustive_8bit_check": 256
+        }
+      ],
+      "z3_formal_refuted": [
+        {
+          "candidate_pool_size": 436,
+          "formal": {
+            "counterexample": {
+              "left": "0xfffbfffffffffffe",
+              "right": "0x0",
+              "x": "0xfffbfffffffffffe"
+            },
+            "identity_valid": false,
+            "width": 64,
+            "z3_result": "SAT"
+          },
+          "initial_probe_agreement": true,
+          "lhs": [
+            "x"
+          ],
+          "rhs": [
+            "and",
+            [
+              "x"
+            ],
+            [
+              "k",
+              1
+            ]
+          ],
+          "search_round": 4
+        }
+      ]
+    },
+    "formal_checker_is_external_z3": true,
+    "genuine_wrong_conjectures_refuted": 1,
+    "historical_originality_not_tested_or_verified": true,
+    "hypothesis_generation_Z3_proof_and_reproof_cpu_ms": 39.278496,
+    "hypothesis_generation_Z3_proof_and_reproof_wall_ms": 39.046267,
+    "proved_64bit_equations": 11,
+    "second_exhaustive_8bit_verifier_executed": true,
+    "validity_proven_in_64bit_BitVec_not_arbitrary_integers": true,
+    "verified_rewrite_count": 10
+  },
+  "new_tool_autonomously_promoted": false,
+  "reported_result": "OBSERVED_PROGRAM_SYNTHESIS_AND_THEOREM_PROOFS_ONLY",
+  "schema": "motif.independent-math-and-compounding-challenge.v1",
+  "status": "RESEARCH_HOLD_UNVERIFIED_HISTORICAL_NOVELTY_AND_COMPOUNDING",
+  "title": "THE_TWO_FRONTIER_FALSIFICATION"
+}
