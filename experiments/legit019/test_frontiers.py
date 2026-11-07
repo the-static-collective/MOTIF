@@ -206,6 +206,42 @@ class TwoFrontierFalsifiers(unittest.TestCase):
         self.assertFalse(self.result["gate"][
             "competition_benchmark_adjudication_blinded_by_external_organizer"])
 
+    def test_saved_CI_report_is_cryptographically_source_grounded_and_reproves(self):
+        saved=json.loads((HERE/"generated"/"two_frontier_external_challenge_receipt.json")
+                         .read_text(encoding="utf-8"))
+        self.assertEqual(saved["experiment"],"MOTIF-LEGIT-019")
+        self.assertFalse(saved["claimed_novel_mathematics"])
+        self.assertFalse(saved["claimed_independently_verified_compounding"])
+        self.assertEqual(saved["math_discovery"]["conjecture_search"]
+                         ["proved_cross_operator_nonconstant_equations"],3)
+        self.assertEqual(saved["math_discovery"]["genuine_wrong_conjectures_refuted"],1)
+        self.assertEqual(saved["external_benchmark_provenance"]
+                         ["original_public_repository_commit"],REVISION)
+        for case in self.corpus:
+            shas=saved["external_benchmark_provenance"]["source_blob_git_sha1"][
+                str(case.identifier)]
+            self.assertEqual(shas["10"],case.sha_train)
+            self.assertEqual(shas["100"],case.sha_test)
+            both=saved["equal_budget_research_trial"]["training_search"][
+                str(case.identifier)]
+            for method,r in both.items():
+                self.assertEqual(len(r["raw_search_runs"]),3)
+                self.assertAlmostEqual(median(
+                    [v["cpu_ms"] for v in r["raw_search_runs"]]),
+                    r["median_cpu_ms"],places=5)
+                evaluated=frozen_public_evaluation(r,case.test)
+                self.assertEqual(evaluated,
+                    saved["equal_budget_research_trial"][
+                        "published_external_100_example_results"][
+                            str(case.identifier)][method])
+        for item in saved["math_discovery"]["conjecture_search"]["z3_formal_proved"]:
+            self.assertTrue(prove_equal(as_tuple(item["lhs"]),
+                                        as_tuple(item["rhs"]))["identity_valid"])
+        self.assertFalse(saved["gate"][
+            "historically_novel_mathematical_theorem_independently_certified"])
+        # Never require fresh CPU durations equal saved GitHub Actions values;
+        # the invariant is the program/proof/outcome, not wall time noise.
+
     def test_compounding_is_not_claimed_without_causal_successive_inventions(self):
         self.assertEqual(self.result["status"],STATUS)
         self.assertFalse(self.result["claimed_independently_verified_compounding"])
