@@ -180,9 +180,10 @@ The second command generates a complete evidence packet at:
 
     /tmp/motif-legit019-two-frontier-receipt.json
 
-Its results contain ALL evaluated formulas, actual UNSAT proofs and
-SAT counterexamples, raw per-arm times, training-frozen expression
-sources, exact external source hashes and heldout scores.
+Its results preserve the proposed and formally checked equalities,
+actual UNSAT proofs and SAT counterexamples, per-arm timing samples,
+training-frozen expression sources, source hashes and heldout scores.
+They do not archive every intermediate enumerated candidate expression.
 
 The initial passing run with the 11 cross-checked identities, one
 counterexample and four published challenge tasks is committed at:
