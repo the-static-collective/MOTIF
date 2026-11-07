@@ -1,0 +1,44 @@
+name: MOTIF LEGIT-021 Aperture Inventor
+on:
+  push:
+    paths:
+      - "experiments/legit021/**"
+      - ".github/workflows/legit021.yml"
+  pull_request:
+    paths:
+      - "experiments/legit021/**"
+      - ".github/workflows/legit021.yml"
+jobs:
+  mathematical-question-invention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Require external Z3 formal bitvector proof checker
+        run: |
+          python -m pip install --only-binary=:all: z3-solver==4.16.0.0
+      - name: Actually synthesize mathematical probes and run exact classical comparator
+        run: |
+          python experiments/legit021/benchmark.py --emit > /tmp/motif-legit021-console.json
+          python -m json.tool /tmp/motif-legit021-aperture-inventor.json >/dev/null
+          cat /tmp/motif-legit021-console.json
+          echo "---- FULL APERTURE-INVENTOR PROOF AND TRANSFER RECEIPT ----"
+          cat /tmp/motif-legit021-aperture-inventor.json
+      - name: Falsify graph probe minimality, prior-source transfer, Z3 results and semantic authority
+        run: |
+          python -m unittest discover -s experiments/legit021 -p 'test_*.py' -v
+      - name: Archive all source generated probes, classical checks and concrete proof witnesses
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT021-APERTURE-INVENTOR-HOLD
+          path: |
+            /tmp/motif-legit021-console.json
+            /tmp/motif-legit021-aperture-inventor.json
+          if-no-files-found: warn
+          retention-days: 30
