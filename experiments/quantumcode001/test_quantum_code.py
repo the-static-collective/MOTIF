@@ -86,6 +86,18 @@ class QuantumCodeTrial(unittest.TestCase):
         with self.assertRaises(ValueError):
             local_review(self.proposals, self.train, forged)
 
+    def test_fabricated_candidate_rejected(self):
+        original = self.proposals[0]
+        forged = replace(original, result="LOOP", train_digest="fabricated")
+        with self.assertRaises(ValueError):
+            local_review((forged,), self.train, self.valid)
+
+    def test_duplicate_candidate_key_rejected(self):
+        with self.assertRaises(ValueError):
+            local_review((self.proposals[0], self.proposals[0]),
+                         self.train, self.valid)
+
+
     def test_fake_provenance_rejected(self):
         forged = replace(self.train[0], provenance="REAL_WORLD")
         with self.assertRaises(ValueError):
