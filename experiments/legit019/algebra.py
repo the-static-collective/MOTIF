@@ -181,6 +181,55 @@ def conjecture_mine(max_tries=96):
             break
     if not proof or not refuted:
         raise HOLD("No actual checked proof/counterexample pair discovered")
+    # Search for nonconstant equalities BETWEEN different algebraic
+    # operators. The candidate equations are obtained from the same
+    # automatically generated syntax pool, NOT hand-coded as theorems.
+    # This is more informative than only finding x|0=x or x&x=x.
+    signatures={}
+    for expr in candidates:
+        sig=tuple(val(expr,x) for x in probes)
+        if len(set(sig))<2:
+            continue
+        if expr[0] not in OPS_BINARY+OPS_UNARY:
+            continue
+        if 'x' not in repr(expr):
+            continue
+        signatures.setdefault(sig,[]).append(expr)
+    complex_eqs=[]
+    for group in signatures.values():
+        group=sorted(group,key=lambda t:(len(repr(t)),repr(t)))
+        for left,right in combinations(group[:25],2):
+            if left[0]==right[0]:
+                continue
+            # Exclude known purely constant cases and identities already
+            # checked during the first CEGIS search.
+            key=tuple(sorted((repr(left),repr(right))))
+            if key in tried:
+                continue
+            tried.add(key)
+            evidence=prove_equal(left,right)
+            proposal_count+=1
+            if evidence["identity_valid"]:
+                if not all(val(left,x,8)==val(right,x,8) for x in range(256)):
+                    raise HOLD("Independent finite checker refuted proposed law")
+                rec={
+                    "lhs":left,"rhs":right,
+                    "initial_probe_agreement":True,
+                    "formal":evidence,
+                    "search_round":"CROSS_OPERATOR_DISCOVERY",
+                    "candidate_pool_size":len(candidates),
+                    "secondary_exhaustive_8bit_check":256,
+                    "not_historically_novel_without_literature_review":True,
+                }
+                proof.append(rec)
+                complex_eqs.append(rec)
+                break
+            if len(complex_eqs)>=3:
+                break
+        if len(complex_eqs)>=3:
+            break
+    if not complex_eqs:
+        raise HOLD("Unable to prove any nonconstant cross-operator equality")
     # Select executable rewrites from proven equalities only. Normalize
     # the longer side toward the shorter side, replacing subtrees by exact
     # structural match (no untrusted wildcard matching).
@@ -200,6 +249,7 @@ def conjecture_mine(max_tries=96):
         "independent_source":"NONE_FOR_NEWNESS_ESTIMATE",
         "z3_formal_proved":proof,
         "z3_formal_refuted":refuted,
+        "proved_cross_operator_nonconstant_equations":len(complex_eqs),
         "rewrites":rewrites,
         "new_math_novelty_authenticated":False,
         "mathematical_laws_historically_new":False,
