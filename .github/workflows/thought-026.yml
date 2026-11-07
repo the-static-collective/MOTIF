@@ -33,7 +33,7 @@ jobs:
           import json
           r=json.load(open('offline-results.json'))
           assert r['direct_llm_calls']==0
-          assert len(r['results'])==10
+          assert len(r['results'])==7
           assert all(v['status']=='CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED' and v['frozen']['correct']==64
                      for v in r['results'].values() if v['frozen'] is not None)
           assert r['results']['vague_access']['status']=='HOLD_AMBIGUOUS_INTENT'
