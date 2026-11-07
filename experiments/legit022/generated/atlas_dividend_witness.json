@@ -1,0 +1,5781 @@
+{
+  "schema": "motif.legit022.frozen-observation-audit.v1",
+  "original_green_ci_run_id": 42417388613,
+  "original_ci_commit": "150d4c8b158715878310a8e5364c286d85078e41",
+  "full_raw_evidence": "GitHub Actions artifact MOTIF-LEGIT022-ATLAS-APERTURE-DIVIDEND-RESEARCH-HOLD",
+  "experiment": "MOTIF-LEGIT-022",
+  "status": "RESEARCH_HOLD_NO_VERIFIED_HISTORICAL_NOVELTY_OR_RECURSIVE_COMPOUNDING",
+  "source": {
+    "atlas_data_bytes": 8887,
+    "atlas_data_sha256": "73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d",
+    "atlas_graphs": 1253,
+    "benchmark_is_public_and_not_externally_blind": true,
+    "challenge_pairing_and_split_authored_by_MOTIF": true,
+    "challenge_pairs_selected_without_probing_homomorphism_outcomes": true,
+    "heldout_task_ids": [
+      [
+        1027,
+        1028
+      ],
+      [
+        634,
+        635
+      ],
+      [
+        1050,
+        1051
+      ],
+      [
+        1029,
+        1030
+      ],
+      [
+        873,
+        874
+      ],
+      [
+        871,
+        872
+      ],
+      [
+        604,
+        605
+      ],
+      [
+        987,
+        988
+      ],
+      [
+        857,
+        858
+      ],
+      [
+        930,
+        931
+      ],
+      [
+        957,
+        958
+      ],
+      [
+        482,
+        483
+      ],
+      [
+        1093,
+        1094
+      ],
+      [
+        1048,
+        1049
+      ],
+      [
+        1095,
+        1096
+      ],
+      [
+        1121,
+        1122
+      ],
+      [
+        421,
+        422
+      ],
+      [
+        1035,
+        1036
+      ],
+      [
+        729,
+        730
+      ],
+      [
+        393,
+        394
+      ],
+      [
+        1021,
+        1022
+      ],
+      [
+        449,
+        450
+      ],
+      [
+        552,
+        553
+      ],
+      [
+        690,
+        691
+      ],
+      [
+        837,
+        838
+      ],
+      [
+        877,
+        878
+      ],
+      [
+        742,
+        743
+      ],
+      [
+        517,
+        518
+      ]
+    ],
+    "networkx_version": "3.4.2",
+    "original_carrier_authorship_independent_of_MOTIF": true,
+    "pair_rule": "match exact degree multisets; adjacent index pairs",
+    "pair_shuffle_seed": 22022,
+    "selected_candidate_pair_count": 402,
+    "seven_node_graphs": 1044,
+    "source": "Read-Wilson, An Atlas of Graphs (1998), via NetworkX",
+    "train_task_ids": [
+      [
+        897,
+        898
+      ],
+      [
+        802,
+        803
+      ],
+      [
+        923,
+        924
+      ],
+      [
+        609,
+        610
+      ],
+      [
+        281,
+        282
+      ],
+      [
+        820,
+        821
+      ],
+      [
+        406,
+        407
+      ],
+      [
+        818,
+        819
+      ],
+      [
+        438,
+        439
+      ],
+      [
+        658,
+        659
+      ],
+      [
+        769,
+        770
+      ],
+      [
+        456,
+        457
+      ],
+      [
+        589,
+        590
+      ],
+      [
+        709,
+        710
+      ]
+    ]
+  },
+  "prior_source": {
+    "previously_historical_math_novelty_claimed": false,
+    "prior_apertures": [
+      {
+        "degree_signature": [
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "five_cycle": false,
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": true,
+        "vertices": 3
+      },
+      {
+        "degree_signature": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "five_cycle": false,
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": true,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "five_cycle": false,
+        "four_cycle": true,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      }
+    ],
+    "prior_experiment": "MOTIF-LEGIT-021",
+    "prior_mathematical_witnesses_replayed": true,
+    "prior_source_receipt_sha256": "7125957d58c39cce4cd2aca6cf5c4ba5d3650dc4deab34997d611056302cf254",
+    "prior_source_selection_not_based_on_atlas_heldout": true
+  },
+  "mathematical_hypotheses": {
+    "actual_theorem_hypothesis_and_finite_verification_cost_ms": {
+      "cpu_ms": 146.039188,
+      "full_original_human_and_prior_021_engineering_cost": null,
+      "wall_ms": 146.042317
+    },
+    "external_literature_screening_note": "Lovasz 1967 graph-hom count characterization; multiplicativity of disjoint source hom counts is elementary and established",
+    "historically_novel_theorem_credible": false,
+    "independent_finite_and_combinatorial_certificate": {
+      "combinatorial_argument": "every adjacency-preserving map from a disconnected source uniquely restricts to one independent map per component; independent component maps uniquely glue to one full map",
+      "connected_sources_kept": 10,
+      "disconnected_sources_mathematically_redundant_for_separation": 8,
+      "finite_assignment_checks_not_independent_new_theorem_proof": true,
+      "independent_exhaustive_assignment_comparisons": 80,
+      "known_identity": "hom(disjoint_union(F_i), G) = product_i hom(F_i, G)",
+      "literature_novelty_not_claimed": true,
+      "universal_proof_argument_written_by_researcher": true,
+      "unlabeled_sources_total": 18
+    },
+    "overgeneralized_degree_to_tree_conjecture": {
+      "basis": "degree-matched graph carriers and simpler tree probes",
+      "counterexample": {
+        "actual_counterexample_to_overgeneralization": true,
+        "atlas_ids": [
+          897,
+          898
+        ],
+        "equal_degree_multisets": [
+          1,
+          3,
+          3,
+          3,
+          4,
+          4,
+          6
+        ],
+        "observed_path4_homomorphisms": [
+          362,
+          360
+        ],
+        "source_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      "hypothesis_refuted": true,
+      "is_known_graph_theory_not_historically_new": true,
+      "no_general_all_tree_equivalence_theorem_claimed": true,
+      "speculative_broad_conjecture": "identical degree multisets imply identical all-tree hom counts",
+      "test_source": "independently originated Read/Wilson Atlas training graphs"
+    },
+    "source_decomposition_rule_hypothesis": {
+      "all_cases_user_experiment_selected": true,
+      "candidate_operation_language": [
+        "PRODUCT",
+        "SUM",
+        "MAX",
+        "MIN"
+      ],
+      "disconnected_source_graphs": 8,
+      "failed_hypotheses": [
+        "SUM",
+        "MAX",
+        "MIN"
+      ],
+      "formal_proof_autonomously_generated": false,
+      "genuinely_computed_training_spectra": {
+        "MAX": {
+          "disconnected_source_types": 8,
+          "first_counterexample": {
+            "component_order": [
+              1,
+              1
+            ],
+            "observed": 49,
+            "proposed": 7,
+            "source": [
+              2,
+              []
+            ],
+            "target_node_count": 7
+          },
+          "survived_training": false,
+          "training_graphs": 16,
+          "training_pairs": 8
+        },
+        "MIN": {
+          "disconnected_source_types": 8,
+          "first_counterexample": {
+            "component_order": [
+              1,
+              1
+            ],
+            "observed": 49,
+            "proposed": 7,
+            "source": [
+              2,
+              []
+            ],
+            "target_node_count": 7
+          },
+          "survived_training": false,
+          "training_graphs": 16,
+          "training_pairs": 8
+        },
+        "PRODUCT": {
+          "disconnected_source_types": 8,
+          "first_counterexample": null,
+          "survived_training": true,
+          "training_graphs": 16,
+          "training_pairs": 8
+        },
+        "SUM": {
+          "disconnected_source_types": 8,
+          "first_counterexample": {
+            "component_order": [
+              1,
+              1
+            ],
+            "observed": 49,
+            "proposed": 14,
+            "source": [
+              2,
+              []
+            ],
+            "target_node_count": 7
+          },
+          "survived_training": false,
+          "training_graphs": 16,
+          "training_pairs": 8
+        }
+      },
+      "historically_novel_mathematics": false,
+      "selected": "PRODUCT"
+    },
+    "source_grammar_discovery_is_bounded_by_handwritten_ops": true
+  },
+  "frozen_probe_orders_sha256": "a61808c471741f0e0465b79c2a0ff4e22c04b2defbe469430a00654e86ce05d4",
+  "frozen_probe_orders": {
+    "ALL_UNFILTERED_SOURCE_GRAPHS": [
+      [
+        1,
+        []
+      ],
+      [
+        2,
+        []
+      ],
+      [
+        2,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        3,
+        []
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        []
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ]
+    ],
+    "CANONICAL_CONNECTED_ONLY": [
+      [
+        1,
+        []
+      ],
+      [
+        2,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ]
+    ],
+    "LEGIT021_ACQUIRED_APERTURES_FIRST": [
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      [
+        1,
+        []
+      ],
+      [
+        2,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ]
+    ],
+    "STRONG_CLASSICAL_TRAINED_COST_SENSITIVE": [
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      [
+        1,
+        []
+      ],
+      [
+        2,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        3,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ]
+    ]
+  },
+  "match_and_provenance_flags": {
+    "shared_heldout_pairs_across_all_arms": true,
+    "independent_source_hom_oracle_for_positive_answers": true,
+    "candidate_probes_not_retrained_after_heldout": true,
+    "source_grammar_matched": true,
+    "complete_full_human_cost": false,
+    "externally_blind": false
+  },
+  "observed_heldout_summary": {
+    "ALL_UNFILTERED_SOURCE_GRAPHS": {
+      "all_vertex_mapping_trial_budget": 500486,
+      "correct_hold_pairs": 0,
+      "mean_questions_per_external_pair": 10.107142857142858,
+      "resolved_pairs": 28,
+      "source_question_grammar_same_connected_for_three_arms": false,
+      "total_homomorphism_calls": 566,
+      "total_queries": 283
+    },
+    "CANONICAL_CONNECTED_ONLY": {
+      "all_vertex_mapping_trial_budget": 171206,
+      "correct_hold_pairs": 0,
+      "mean_questions_per_external_pair": 4.964285714285714,
+      "resolved_pairs": 28,
+      "source_question_grammar_same_connected_for_three_arms": true,
+      "total_homomorphism_calls": 278,
+      "total_queries": 139
+    },
+    "LEGIT021_ACQUIRED_APERTURES_FIRST": {
+      "all_vertex_mapping_trial_budget": 145656,
+      "correct_hold_pairs": 0,
+      "mean_questions_per_external_pair": 2.142857142857143,
+      "resolved_pairs": 28,
+      "source_question_grammar_same_connected_for_three_arms": true,
+      "total_homomorphism_calls": 120,
+      "total_queries": 60
+    },
+    "STRONG_CLASSICAL_TRAINED_COST_SENSITIVE": {
+      "all_vertex_mapping_trial_budget": 112840,
+      "correct_hold_pairs": 0,
+      "mean_questions_per_external_pair": 2,
+      "resolved_pairs": 28,
+      "source_question_grammar_same_connected_for_three_arms": true,
+      "total_homomorphism_calls": 112,
+      "total_queries": 56
+    }
+  },
+  "actual_uncached_timings": {
+    "ALL_UNFILTERED_SOURCE_GRAPHS": {
+      "cpu_ms": [
+        183.367561,
+        183.746577,
+        185.26813
+      ],
+      "full_uncached_source_homomorphism_evaluations": 566,
+      "median_cpu_ms": 183.746577,
+      "median_wall_ms": 183.763055,
+      "not_generalizable_single_CI_runner": true,
+      "questions": [
+        283,
+        283,
+        283
+      ],
+      "repeat_count": 3,
+      "wall_ms": [
+        183.386351,
+        183.763055,
+        185.272995
+      ]
+    },
+    "CANONICAL_CONNECTED_ONLY": {
+      "cpu_ms": [
+        78.364714,
+        79.1761,
+        79.724924
+      ],
+      "full_uncached_source_homomorphism_evaluations": 278,
+      "median_cpu_ms": 79.1761,
+      "median_wall_ms": 79.254514,
+      "not_generalizable_single_CI_runner": true,
+      "questions": [
+        139,
+        139,
+        139
+      ],
+      "repeat_count": 3,
+      "wall_ms": [
+        78.36931,
+        79.254514,
+        79.729993
+      ]
+    },
+    "LEGIT021_ACQUIRED_APERTURES_FIRST": {
+      "cpu_ms": [
+        69.052755,
+        69.859292,
+        72.135932
+      ],
+      "full_uncached_source_homomorphism_evaluations": 120,
+      "median_cpu_ms": 69.859292,
+      "median_wall_ms": 69.869141,
+      "not_generalizable_single_CI_runner": true,
+      "questions": [
+        60,
+        60,
+        60
+      ],
+      "repeat_count": 3,
+      "wall_ms": [
+        69.057435,
+        69.869141,
+        72.149211
+      ]
+    },
+    "STRONG_CLASSICAL_TRAINED_COST_SENSITIVE": {
+      "cpu_ms": [
+        52.9198,
+        52.945828,
+        53.336036
+      ],
+      "full_uncached_source_homomorphism_evaluations": 112,
+      "median_cpu_ms": 52.945828,
+      "median_wall_ms": 52.953362,
+      "not_generalizable_single_CI_runner": true,
+      "questions": [
+        56,
+        56,
+        56
+      ],
+      "repeat_count": 3,
+      "wall_ms": [
+        52.953362,
+        52.950345,
+        53.340995
+      ]
+    }
+  },
+  "per_pair_actions": {
+    "ALL_UNFILTERED_SOURCE_GRAPHS": [
+      {
+        "ids": [
+          1027,
+          1028
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          634,
+          635
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1050,
+          1051
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1029,
+          1030
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          873,
+          874
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          871,
+          872
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          604,
+          605
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          987,
+          988
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          857,
+          858
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          930,
+          931
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          957,
+          958
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          482,
+          483
+        ],
+        "questions": 16,
+        "actual_source_hom_calls": 32,
+        "enumerative_assignment_trial_budget": 46172,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1093,
+          1094
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1048,
+          1049
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1095,
+          1096
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1121,
+          1122
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          421,
+          422
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1035,
+          1036
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          729,
+          730
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          393,
+          394
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1021,
+          1022
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          449,
+          450
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          552,
+          553
+        ],
+        "questions": 15,
+        "actual_source_hom_calls": 30,
+        "enumerative_assignment_trial_budget": 41370,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          690,
+          691
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          837,
+          838
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          877,
+          878
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 2954,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          742,
+          743
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          517,
+          518
+        ],
+        "questions": 14,
+        "actual_source_hom_calls": 28,
+        "enumerative_assignment_trial_budget": 36568,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      }
+    ],
+    "CANONICAL_CONNECTED_ONLY": [
+      {
+        "ids": [
+          1027,
+          1028
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          634,
+          635
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1050,
+          1051
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1029,
+          1030
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          873,
+          874
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          871,
+          872
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          604,
+          605
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          987,
+          988
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          857,
+          858
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          930,
+          931
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          957,
+          958
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          482,
+          483
+        ],
+        "questions": 8,
+        "actual_source_hom_calls": 16,
+        "enumerative_assignment_trial_budget": 20692,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1093,
+          1094
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1048,
+          1049
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1095,
+          1096
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1121,
+          1122
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          421,
+          422
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1035,
+          1036
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          729,
+          730
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          393,
+          394
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1021,
+          1022
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          449,
+          450
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          552,
+          553
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 15890,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          690,
+          691
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          837,
+          838
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          877,
+          878
+        ],
+        "questions": 4,
+        "actual_source_hom_calls": 8,
+        "enumerative_assignment_trial_budget": 1484,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          742,
+          743
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          517,
+          518
+        ],
+        "questions": 6,
+        "actual_source_hom_calls": 12,
+        "enumerative_assignment_trial_budget": 11088,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      }
+    ],
+    "LEGIT021_ACQUIRED_APERTURES_FIRST": [
+      {
+        "ids": [
+          1027,
+          1028
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 15890,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          634,
+          635
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1050,
+          1051
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1029,
+          1030
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          873,
+          874
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          871,
+          872
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          604,
+          605
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          987,
+          988
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          857,
+          858
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          930,
+          931
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          957,
+          958
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          482,
+          483
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1093,
+          1094
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1048,
+          1049
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1095,
+          1096
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1121,
+          1122
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          421,
+          422
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1035,
+          1036
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          729,
+          730
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          393,
+          394
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1021,
+          1022
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          449,
+          450
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          552,
+          553
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          690,
+          691
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          837,
+          838
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          877,
+          878
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          742,
+          743
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 15890,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          517,
+          518
+        ],
+        "questions": 3,
+        "actual_source_hom_calls": 6,
+        "enumerative_assignment_trial_budget": 10290,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      }
+    ],
+    "STRONG_CLASSICAL_TRAINED_COST_SENSITIVE": [
+      {
+        "ids": [
+          1027,
+          1028
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          634,
+          635
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1050,
+          1051
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1029,
+          1030
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          873,
+          874
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          871,
+          872
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          604,
+          605
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          987,
+          988
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          857,
+          858
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          930,
+          931
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          957,
+          958
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          482,
+          483
+        ],
+        "questions": 8,
+        "actual_source_hom_calls": 16,
+        "enumerative_assignment_trial_budget": 20692,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1093,
+          1094
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1048,
+          1049
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1095,
+          1096
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1121,
+          1122
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          421,
+          422
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 15890,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          1035,
+          1036
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          729,
+          730
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          393,
+          394
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          1021,
+          1022
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          449,
+          450
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          552,
+          553
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          690,
+          691
+        ],
+        "questions": 7,
+        "actual_source_hom_calls": 14,
+        "enumerative_assignment_trial_budget": 15890,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          837,
+          838
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          877,
+          878
+        ],
+        "questions": 1,
+        "actual_source_hom_calls": 2,
+        "enumerative_assignment_trial_budget": 686,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        }
+      },
+      {
+        "ids": [
+          742,
+          743
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      },
+      {
+        "ids": [
+          517,
+          518
+        ],
+        "questions": 2,
+        "actual_source_hom_calls": 4,
+        "enumerative_assignment_trial_budget": 5488,
+        "resolved": true,
+        "separating_probe": {
+          "degree_signature": [
+            1,
+            2,
+            2,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "five_cycle": false,
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        }
+      }
+    ]
+  },
+  "novelty_claimed": false,
+  "recursive_compounding_certified": false,
+  "automatic_source_promotion": false
+}
