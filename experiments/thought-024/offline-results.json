@@ -1,0 +1,773 @@
+{
+  "domain_adapter_is_predefined_by_developer": true,
+  "expanded_grammar_size": 16,
+  "external_authority": "NONE",
+  "general_world_model_transfer_demonstrated": false,
+  "installed": false,
+  "model_called": false,
+  "models_receive_oracle_answers_only_during_dev": true,
+  "old_grammar_size": 8,
+  "results": [
+    {
+      "domain": "permissions",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "universe"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "permits_reverse",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 4,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "frozen_correct": null,
+        "oracle_calls": 1,
+        "remaining_candidates": 0,
+        "selected_expression": null,
+        "status": "HOLD_GRAMMAR_INADEQUATE",
+        "task": "permits_reverse",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "permits_reverse"
+    },
+    {
+      "domain": "food_inventory",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "universe"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "missing_supplies",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 4,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "frozen_correct": null,
+        "oracle_calls": 1,
+        "remaining_candidates": 0,
+        "selected_expression": null,
+        "status": "HOLD_GRAMMAR_INADEQUATE",
+        "task": "missing_supplies",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "missing_supplies"
+    },
+    {
+      "domain": "belief_bookkeeping",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "universe"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "not_endorsed",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 4,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "frozen_correct": null,
+        "oracle_calls": 1,
+        "remaining_candidates": 0,
+        "selected_expression": null,
+        "status": "HOLD_GRAMMAR_INADEQUATE",
+        "task": "not_endorsed",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "not_endorsed"
+    },
+    {
+      "domain": "access_controls",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "universe"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "unblocked_access",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 4,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "frozen_correct": null,
+        "oracle_calls": 1,
+        "remaining_candidates": 0,
+        "selected_expression": null,
+        "status": "HOLD_GRAMMAR_INADEQUATE",
+        "task": "unblocked_access",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "unblocked_access"
+    },
+    {
+      "domain": "permissions",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "expire_names",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 2,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "expire_names",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 2,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "expire_names"
+    },
+    {
+      "domain": "food_inventory",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "args": [
+                {
+                  "ref": "state.on"
+                },
+                {
+                  "ref": "arrival.toggles"
+                }
+              ],
+              "op": "difference"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "inventory_eligible",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 1,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "args": [
+                {
+                  "ref": "state.on"
+                },
+                {
+                  "ref": "arrival.toggles"
+                }
+              ],
+              "op": "difference"
+            }
+          ],
+          "op": "difference"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "inventory_eligible",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 1,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "inventory_eligible"
+    },
+    {
+      "domain": "volunteer_schedule",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "ref": "arrival.toggles"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "shift_override",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 5,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "ref": "arrival.toggles"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "shift_override",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 5,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "shift_override"
+    },
+    {
+      "domain": "membership",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "args": [
+                {
+                  "ref": "state.on"
+                },
+                {
+                  "ref": "arrival.toggles"
+                }
+              ],
+              "op": "difference"
+            },
+            {
+              "args": [
+                {
+                  "ref": "arrival.toggles"
+                },
+                {
+                  "ref": "state.on"
+                }
+              ],
+              "op": "difference"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "renew_flip",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 6,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "args": [
+                {
+                  "ref": "state.on"
+                },
+                {
+                  "ref": "arrival.toggles"
+                }
+              ],
+              "op": "difference"
+            },
+            {
+              "args": [
+                {
+                  "ref": "arrival.toggles"
+                },
+                {
+                  "ref": "state.on"
+                }
+              ],
+              "op": "difference"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "renew_flip",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 6,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "renew_flip"
+    },
+    {
+      "domain": "food_inventory",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "add_donations",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 64,
+        "frozen_first_counterexample": null,
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "REVIEW_CANDIDATE_NOT_INSTALLED",
+        "task": "add_donations",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "add_donations"
+    },
+    {
+      "domain": "access_controls",
+      "expanded": {
+        "extension": "universe_constant",
+        "external_authority": "NONE",
+        "frozen_correct": 21,
+        "frozen_first_counterexample": {
+          "a": 0,
+          "actual": 1,
+          "b": 1,
+          "expected": 0
+        },
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "HOLD_FROZEN_COUNTEREXAMPLE",
+        "task": "cross_category_threshold",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "old": {
+        "extension": "none",
+        "external_authority": "NONE",
+        "frozen_correct": 21,
+        "frozen_first_counterexample": {
+          "a": 0,
+          "actual": 1,
+          "b": 1,
+          "expected": 0
+        },
+        "installed": false,
+        "oracle_calls": 2,
+        "remaining_candidates": 1,
+        "selected_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        },
+        "status": "HOLD_FROZEN_COUNTEREXAMPLE",
+        "task": "cross_category_threshold",
+        "witnesses": [
+          {
+            "a": 0,
+            "b": 0,
+            "observed": 0,
+            "source": "DEV_ORACLE_ONLY"
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "observed": 7,
+            "source": "DEV_ORACLE_ONLY"
+          }
+        ]
+      },
+      "representable": true,
+      "task": "cross_category_threshold"
+    },
+    {
+      "domain": "belief_bookkeeping",
+      "expanded": {
+        "extension": "universe_constant",
+        "frozen_correct": null,
+        "oracle_calls": 0,
+        "selected_expression": null,
+        "status": "HOLD_NON_BOOLEAN_DOMAIN_MISMATCH",
+        "task": "open_world_truth",
+        "witnesses": []
+      },
+      "old": {
+        "extension": "none",
+        "frozen_correct": null,
+        "oracle_calls": 0,
+        "selected_expression": null,
+        "status": "HOLD_NON_BOOLEAN_DOMAIN_MISMATCH",
+        "task": "open_world_truth",
+        "witnesses": []
+      },
+      "representable": false,
+      "task": "open_world_truth"
+    }
+  ],
+  "schema": "motif.thought024.transfer.v1",
+  "status": "OFFLINE_COMPARISON_ONLY"
+}
