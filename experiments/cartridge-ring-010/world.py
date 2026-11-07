@@ -199,7 +199,7 @@ def check(dataset,*,split=None):
                     or set(tuple(e) for e in g["edges"]) != set(
                         tuple(e) for e in edges(*[
                             next((e[2] for e in g["edges"] if e[1]==rel),None)
-                            for rel in RELATIONS])):
+                            for rel in RELATIONS]))):
                 raise ValueError("Graph edge contract violated")
             for relation in RELATIONS:
                 entry=[e for e in g["edges"] if e[1]==relation]
