@@ -218,21 +218,33 @@ class GrammarGardenerTests(unittest.TestCase):
 
     def test_garden_keeps_three_explicit_task_cartridges(self):
         garden=Garden()
-        for task,(_,_,test,_,model) in self.cases.items():
-            garden=garden.keep(task,model)
+        for task,(train,valid,test,_,model) in self.cases.items():
+            garden=garden.keep(task,model,train,valid)
         self.assertEqual(len(garden.entries),3)
         self.assertIsNone(garden.use("unknown",self.cases["square"][2][0].before,
                                      next(iter(self.cases["square"][2][0].before.edges))))
         with self.assertRaises(ValueError):
-            garden.keep("triangle",self.cases["triangle"][4])
+            garden.keep("triangle",self.cases["triangle"][4],
+                        self.cases["triangle"][0],self.cases["triangle"][1])
         with self.assertRaises(ValueError):
-            garden.keep("fake",self.cases["triangle"][3])
+            garden.keep("fake",self.cases["triangle"][3],
+                        self.cases["triangle"][0],self.cases["triangle"][1])
 
     def test_garden_is_not_mutated_by_retention(self):
         first=Garden()
-        second=first.keep("triangle",self.cases["triangle"][4])
+        second=first.keep("triangle",self.cases["triangle"][4],
+                          self.cases["triangle"][0],self.cases["triangle"][1])
         self.assertEqual(first.entries,())
         self.assertEqual(len(second.entries),1)
+
+    def test_forged_reviewed_envelope_cannot_enter_garden(self):
+        train, valid, _, _, certified=self.cases["triangle"]
+        bad=replace(certified,validation_hash="spoofed")
+        with self.assertRaises(ValueError):
+            Garden().keep("triangle",bad,train,valid)
+        bad2=replace(certified,proposal=replace(certified.proposal,evidence_hash="spoofed"))
+        with self.assertRaises(ValueError):
+            Garden().keep("triangle",bad2,train,valid)
 
     def test_report_does_not_claim_compounding_or_quantum(self):
         x=report()
