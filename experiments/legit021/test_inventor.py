@@ -26,8 +26,16 @@ from math_apertures import (
     invent_bitvector_counterprobe,indistinguishable_math,
     perspective_lattice_for_worlds,verify_dogram_source
 )
-from benchmark import (
-    CALIBRATION,VALIDATION,STATUS,run,reuse_search,experiment_on_pair
+# LEGIT-020 adds its own directory to sys.path; use an exact file import
+# rather than silently importing the older "benchmark" module.
+import importlib.util
+_spec=importlib.util.spec_from_file_location(
+    "LEGIT021_BENCHMARK_UNDER_TEST",HERE/"benchmark.py")
+_actual=importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_actual)
+CALIBRATION,VALIDATION,STATUS=_actual.CALIBRATION,_actual.VALIDATION,_actual.STATUS
+run,reuse_search,experiment_on_pair=(
+    _actual.run,_actual.reuse_search,_actual.experiment_on_pair
 )
 
 class InventorTests(unittest.TestCase):
