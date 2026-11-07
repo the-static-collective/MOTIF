@@ -1,0 +1,599 @@
+{
+  "backend": "offline",
+  "compared_at_equal_model_call_budget": false,
+  "direct_llm_calls": 0,
+  "external_authority": "NONE",
+  "installed": false,
+  "mathematic_language_grounding_verified_on_author_designed_tasks_only": true,
+  "model": null,
+  "model_did_not_select_oracle_or_frozen_cases": true,
+  "model_receipts": [
+    {
+      "simulated": true,
+      "stage": "BIND"
+    },
+    {
+      "simulated": true,
+      "stage": "RELATION"
+    },
+    {
+      "simulated": true,
+      "stage": "BIND"
+    },
+    {
+      "simulated": true,
+      "stage": "RELATION"
+    },
+    {
+      "simulated": true,
+      "stage": "BIND"
+    },
+    {
+      "simulated": true,
+      "stage": "RELATION"
+    },
+    {
+      "simulated": true,
+      "stage": "BIND"
+    },
+    {
+      "simulated": true,
+      "stage": "RELATION"
+    },
+    {
+      "simulated": true,
+      "stage": "BIND"
+    },
+    {
+      "simulated": true,
+      "stage": "RELATION"
+    }
+  ],
+  "monolithic_025_comparison": {},
+  "monolithic_direct_llm_calls": 0,
+  "monolithic_model_receipts": [],
+  "no_model_written_source_executed": true,
+  "partial_stages_preserved_even_on_hold": true,
+  "pen_unchanged": true,
+  "receipt_digest": "23adb9c4318e57eecea567d47ba8bf201553912e6760d70218d85978021de8d3",
+  "results": {
+    "cancel_or_add": {
+      "compiled_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "xor"
+      },
+      "dev_oracle_queries": 4,
+      "development_witnesses": [
+        {
+          "inputs": {
+            "change_sheet": 5,
+            "state_sheet": 3
+          },
+          "observed": 6,
+          "passed": true,
+          "predicted": 6
+        },
+        {
+          "inputs": {
+            "change_sheet": 3,
+            "state_sheet": 5
+          },
+          "observed": 6,
+          "passed": true,
+          "predicted": 6
+        },
+        {
+          "inputs": {
+            "change_sheet": 0,
+            "state_sheet": 7
+          },
+          "observed": 7,
+          "passed": true,
+          "predicted": 7
+        },
+        {
+          "inputs": {
+            "change_sheet": 7,
+            "state_sheet": 0
+          },
+          "observed": 7,
+          "passed": true,
+          "predicted": 7
+        }
+      ],
+      "external_authority": "NONE",
+      "failure": null,
+      "fixed_template_program": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "model_calls": 2,
+      "model_constructed_source_code": false,
+      "no_source_installed": true,
+      "partial_understanding_preserved": true,
+      "receipt_digest": "122ad30a7951a2e6f573120b3d09e74ecc2119ddef945e8cfb1889d404509a5b",
+      "relation_stage": {
+        "rationale": "Scripted fixture relation selection",
+        "relation": "SYMMETRIC_DIFFERENCE"
+      },
+      "role_stage": {
+        "bindings": {
+          "current": "state_sheet",
+          "event": "change_sheet"
+        },
+        "rationale": "Scripted fixture field selection"
+      },
+      "schema": "motif.thought026.staged-abstraction.v1",
+      "stage_history": [
+        {
+          "binding_digest": "f8a9b71c0dde450323cb60ac68c34396a3a15444825ac953bc20cd02abbb7d9c",
+          "stage": "GROUND_FIELDS",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "relation_name": "SYMMETRIC_DIFFERENCE",
+          "stage": "DISCOVER_RELATION",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "dev_passed": 4,
+          "dev_total": 4,
+          "stage": "TEST_COMPOSED_MATH",
+          "status": "PASS_DEV"
+        }
+      ],
+      "status": "CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+      "task": "cancel_or_add"
+    },
+    "food_recalled_elsewhere": {
+      "compiled_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      },
+      "dev_oracle_queries": 4,
+      "development_witnesses": [
+        {
+          "inputs": {
+            "register_f": 3,
+            "register_g": 5
+          },
+          "observed": 4,
+          "passed": true,
+          "predicted": 4
+        },
+        {
+          "inputs": {
+            "register_f": 5,
+            "register_g": 3
+          },
+          "observed": 2,
+          "passed": true,
+          "predicted": 2
+        },
+        {
+          "inputs": {
+            "register_f": 7,
+            "register_g": 0
+          },
+          "observed": 0,
+          "passed": true,
+          "predicted": 0
+        },
+        {
+          "inputs": {
+            "register_f": 0,
+            "register_g": 7
+          },
+          "observed": 7,
+          "passed": true,
+          "predicted": 7
+        }
+      ],
+      "external_authority": "NONE",
+      "failure": null,
+      "fixed_template_program": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "model_calls": 2,
+      "model_constructed_source_code": false,
+      "no_source_installed": true,
+      "partial_understanding_preserved": true,
+      "receipt_digest": "ebdad07415cc990da1639a15db58146d5718d31ff35e23ffcecd108b079944e0",
+      "relation_stage": {
+        "rationale": "Scripted fixture relation selection",
+        "relation": "DIFFERENCE"
+      },
+      "role_stage": {
+        "bindings": {
+          "current": "register_g",
+          "event": "register_f"
+        },
+        "rationale": "Scripted fixture field selection"
+      },
+      "schema": "motif.thought026.staged-abstraction.v1",
+      "stage_history": [
+        {
+          "binding_digest": "7fbfb312e16cb5b4980f739822ce4e731c2e1654236fc8ad51945ad53ce3bb61",
+          "stage": "GROUND_FIELDS",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "relation_name": "DIFFERENCE",
+          "stage": "DISCOVER_RELATION",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "dev_passed": 4,
+          "dev_total": 4,
+          "stage": "TEST_COMPOSED_MATH",
+          "status": "PASS_DEV"
+        }
+      ],
+      "status": "CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+      "task": "food_recalled_elsewhere"
+    },
+    "food_safe": {
+      "compiled_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      },
+      "dev_oracle_queries": 4,
+      "development_witnesses": [
+        {
+          "inputs": {
+            "register_f": 3,
+            "register_g": 5
+          },
+          "observed": 2,
+          "passed": true,
+          "predicted": 2
+        },
+        {
+          "inputs": {
+            "register_f": 5,
+            "register_g": 3
+          },
+          "observed": 4,
+          "passed": true,
+          "predicted": 4
+        },
+        {
+          "inputs": {
+            "register_f": 7,
+            "register_g": 0
+          },
+          "observed": 7,
+          "passed": true,
+          "predicted": 7
+        },
+        {
+          "inputs": {
+            "register_f": 0,
+            "register_g": 7
+          },
+          "observed": 0,
+          "passed": true,
+          "predicted": 0
+        }
+      ],
+      "external_authority": "NONE",
+      "failure": null,
+      "fixed_template_program": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "model_calls": 2,
+      "model_constructed_source_code": false,
+      "no_source_installed": true,
+      "partial_understanding_preserved": true,
+      "receipt_digest": "28162a4412168b824cfdc23f8c18512de1b9964731151aaec2c46b8095d1db6b",
+      "relation_stage": {
+        "rationale": "Scripted fixture relation selection",
+        "relation": "DIFFERENCE"
+      },
+      "role_stage": {
+        "bindings": {
+          "current": "register_f",
+          "event": "register_g"
+        },
+        "rationale": "Scripted fixture field selection"
+      },
+      "schema": "motif.thought026.staged-abstraction.v1",
+      "stage_history": [
+        {
+          "binding_digest": "4fd1ec3f3bfaeed2b87210a1543193e6d6b8f97fefb34ddc7da03ef58fbd4dd1",
+          "stage": "GROUND_FIELDS",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "relation_name": "DIFFERENCE",
+          "stage": "DISCOVER_RELATION",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "dev_passed": 4,
+          "dev_total": 4,
+          "stage": "TEST_COMPOSED_MATH",
+          "status": "PASS_DEV"
+        }
+      ],
+      "status": "CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+      "task": "food_safe"
+    },
+    "not_on_shelf": {
+      "compiled_expression": {
+        "args": [
+          {
+            "ref": "universe"
+          },
+          {
+            "ref": "state.on"
+          }
+        ],
+        "op": "difference"
+      },
+      "dev_oracle_queries": 4,
+      "development_witnesses": [
+        {
+          "inputs": {
+            "queue_sheet": 5,
+            "stock_sheet": 3
+          },
+          "observed": 4,
+          "passed": true,
+          "predicted": 4
+        },
+        {
+          "inputs": {
+            "queue_sheet": 3,
+            "stock_sheet": 5
+          },
+          "observed": 2,
+          "passed": true,
+          "predicted": 2
+        },
+        {
+          "inputs": {
+            "queue_sheet": 0,
+            "stock_sheet": 7
+          },
+          "observed": 0,
+          "passed": true,
+          "predicted": 0
+        },
+        {
+          "inputs": {
+            "queue_sheet": 7,
+            "stock_sheet": 0
+          },
+          "observed": 7,
+          "passed": true,
+          "predicted": 7
+        }
+      ],
+      "external_authority": "NONE",
+      "failure": null,
+      "fixed_template_program": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "model_calls": 2,
+      "model_constructed_source_code": false,
+      "no_source_installed": true,
+      "partial_understanding_preserved": true,
+      "receipt_digest": "7cdef2407ec9031fbe6a11d6661d9b1d1e36efb1db9ea71161374c86155d77e3",
+      "relation_stage": {
+        "rationale": "Scripted fixture relation selection",
+        "relation": "COMPLEMENT"
+      },
+      "role_stage": {
+        "bindings": {
+          "current": "stock_sheet",
+          "event": "queue_sheet"
+        },
+        "rationale": "Scripted fixture field selection"
+      },
+      "schema": "motif.thought026.staged-abstraction.v1",
+      "stage_history": [
+        {
+          "binding_digest": "8c360b67bbf72d0ef6608117cf92e24457cc94dd0ed13295095650d51f06e764",
+          "stage": "GROUND_FIELDS",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "relation_name": "COMPLEMENT",
+          "stage": "DISCOVER_RELATION",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "dev_passed": 4,
+          "dev_total": 4,
+          "stage": "TEST_COMPOSED_MATH",
+          "status": "PASS_DEV"
+        }
+      ],
+      "status": "CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+      "task": "not_on_shelf"
+    },
+    "unknown_beliefs": {
+      "dev_oracle_queries": 0,
+      "frozen": null,
+      "gate_owner": "EVALUATOR_NOT_MODEL",
+      "installed": false,
+      "model_calls": 0,
+      "relation_stage": null,
+      "role_stage": null,
+      "status": "HOLD_NON_BOOLEAN_SEMANTICS",
+      "task": "unknown_beliefs"
+    },
+    "vague_access": {
+      "dev_oracle_queries": 0,
+      "frozen": null,
+      "gate_owner": "EVALUATOR_NOT_MODEL",
+      "installed": false,
+      "model_calls": 0,
+      "relation_stage": null,
+      "role_stage": null,
+      "status": "HOLD_AMBIGUOUS_INTENT",
+      "task": "vague_access"
+    },
+    "volunteer_eligible": {
+      "compiled_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "intersection"
+      },
+      "dev_oracle_queries": 4,
+      "development_witnesses": [
+        {
+          "inputs": {
+            "stream_a": 3,
+            "stream_b": 5
+          },
+          "observed": 1,
+          "passed": true,
+          "predicted": 1
+        },
+        {
+          "inputs": {
+            "stream_a": 5,
+            "stream_b": 3
+          },
+          "observed": 1,
+          "passed": true,
+          "predicted": 1
+        },
+        {
+          "inputs": {
+            "stream_a": 7,
+            "stream_b": 0
+          },
+          "observed": 0,
+          "passed": true,
+          "predicted": 0
+        },
+        {
+          "inputs": {
+            "stream_a": 0,
+            "stream_b": 7
+          },
+          "observed": 0,
+          "passed": true,
+          "predicted": 0
+        }
+      ],
+      "external_authority": "NONE",
+      "failure": null,
+      "fixed_template_program": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "model_calls": 2,
+      "model_constructed_source_code": false,
+      "no_source_installed": true,
+      "partial_understanding_preserved": true,
+      "receipt_digest": "feab628ef239030e3d47324328057dc143cfe8e26b6dc0d0b95e4d4099a8b908",
+      "relation_stage": {
+        "rationale": "Scripted fixture relation selection",
+        "relation": "INTERSECTION"
+      },
+      "role_stage": {
+        "bindings": {
+          "current": "stream_a",
+          "event": "stream_b"
+        },
+        "rationale": "Scripted fixture field selection"
+      },
+      "schema": "motif.thought026.staged-abstraction.v1",
+      "stage_history": [
+        {
+          "binding_digest": "8fda966ff124233579ae91f1b718e37ab41ac7d5aba2517cd8458f05e829ce0a",
+          "stage": "GROUND_FIELDS",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "relation_name": "INTERSECTION",
+          "stage": "DISCOVER_RELATION",
+          "status": "TYPED_HYPOTHESIS_NOT_YET_VERIFIED"
+        },
+        {
+          "dev_passed": 4,
+          "dev_total": 4,
+          "stage": "TEST_COMPOSED_MATH",
+          "status": "PASS_DEV"
+        }
+      ],
+      "status": "CANDIDATE_ABSTRACTION_FOR_HUMAN_REVIEW_NOT_INSTALLED",
+      "task": "volunteer_eligible"
+    }
+  },
+  "schema": "motif.thought026.staged-experiment.v1"
+}
