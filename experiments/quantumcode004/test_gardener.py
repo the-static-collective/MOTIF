@@ -7,7 +7,7 @@ from gardener import (
     relation, query, fixtures, discover, review, Garden, apply, replay,
     oracle_semantics, evaluator_graph, oracle_edit, evaluate, all_edges,
     infer_delta, labelled, separate, Graph, edge, equivalent_new, report,
-    graft_from_library, apply_grafted,
+    graft_from_library, apply_grafted, apply_template,
 )
 
 
@@ -281,7 +281,13 @@ class GrammarGardenerTests(unittest.TestCase):
         ttrain,tvalid,_,_,donor=self.cases["triangle"]
         strain,svalid,_,_,_=self.cases["square"]
         garden=Garden().keep("triangle",donor,ttrain,tvalid)
-        fake_valid=(replace(svalid[0],after=svalid[1].after),)+svalid[1:]
+        # Keep the SAME edge, but intentionally claim the opposite edit.
+        # Merely copying the other row's output would move the inferred
+        # boundary anchor and would NOT create a contradiction.
+        target,_=infer_delta(svalid[0])
+        contrary=infer_delta(svalid[1])[1]
+        false_after=apply_template(svalid[0].before,target,contrary)
+        fake_valid=(replace(svalid[0],after=false_after),)+svalid[1:]
         self.assertIsNone(graft_from_library(garden,"triangle","square",
                                               strain,fake_valid))
 
