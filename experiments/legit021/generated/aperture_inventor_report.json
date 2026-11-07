@@ -1,0 +1,2750 @@
+{
+  "active_three_world_mathematical_viewpoint": {
+    "Dogram_probe_refinement": {
+      "four_cycle_counts": [
+        48,
+        48,
+        64
+      ],
+      "graph_identity_not_inferred_from_one_projection": true,
+      "linear_path_counts_equal_for_all_lengths": true,
+      "no_world_evidence_authority_from_partitions": true,
+      "original_Dogram_partition_relations": [
+        [
+          "TRIANGLE_MAPPINGS",
+          "LINEAR_PATHS"
+        ],
+        [
+          "SQUARE_MAPPINGS",
+          "LINEAR_PATHS"
+        ]
+      ],
+      "original_Dogram_partitions": {
+        "LINEAR_PATHS": [
+          [
+            "C8",
+            "C3_PLUS_C5",
+            "C4_PLUS_C4"
+          ]
+        ],
+        "SQUARE_MAPPINGS": [
+          [
+            "C8",
+            "C3_PLUS_C5"
+          ],
+          [
+            "C4_PLUS_C4"
+          ]
+        ],
+        "TRIANGLE_MAPPINGS": [
+          [
+            "C8",
+            "C4_PLUS_C4"
+          ],
+          [
+            "C3_PLUS_C5"
+          ]
+        ]
+      },
+      "source_probe_is_part_of_mathematical_question": true,
+      "triangle_counts": [
+        0,
+        6,
+        0
+      ],
+      "worlds": [
+        "C8",
+        "C3_PLUS_C5",
+        "C4_PLUS_C4"
+      ]
+    },
+    "invented_adaptive_tree": {
+      "question": {
+        "degree_signature": [
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": true,
+        "vertices": 3
+      },
+      "question_index": 3,
+      "response_branches": {
+        "0": {
+          "question": {
+            "degree_signature": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                3
+              ]
+            ],
+            "four_cycle": true,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": false,
+            "triangle": false,
+            "vertices": 4
+          },
+          "question_index": 7,
+          "response_branches": {
+            "48": {
+              "resolved_state": 0
+            },
+            "64": {
+              "resolved_state": 2
+            }
+          }
+        },
+        "6": {
+          "resolved_state": 1
+        }
+      }
+    },
+    "inventor_training_search_trace": [
+      {
+        "candidate": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "distinct_responses": [
+          0,
+          6
+        ],
+        "splitting_score": 4,
+        "state_indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "candidate": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        },
+        "distinct_responses": [
+          48,
+          64
+        ],
+        "splitting_score": 2,
+        "state_indices": [
+          0,
+          2
+        ]
+      }
+    ],
+    "matches_exact_optimum_question_count": true,
+    "mean_questions_under_declared_uniform_world_prior": 1.6666666666666667,
+    "original_path_aperture_cannot_separate_any_world": {
+      "certificates": [
+        {
+          "degree_vector": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "eigenvalue": 2,
+          "first_walk_count": 16,
+          "valid": true,
+          "vertex_count": 8
+        },
+        {
+          "degree_vector": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "eigenvalue": 2,
+          "first_walk_count": 16,
+          "valid": true,
+          "vertex_count": 8
+        },
+        {
+          "degree_vector": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "eigenvalue": 2,
+          "first_walk_count": 16,
+          "valid": true,
+          "vertex_count": 8
+        }
+      ],
+      "different_carriers_not_inferred_from_path_equivalence": true,
+      "eigenvalue": 2,
+      "first_nine_walk_counts": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "same_all_finite_paths": true,
+      "why_proved": "for each carrier, A*d=lambda*d; same vertex count and total degree"
+    },
+    "replayed_all_worlds": [
+      {
+        "resolved_world_index": 0,
+        "trace": [
+          {
+            "observed": 0,
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            }
+          },
+          {
+            "observed": 48,
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "four_cycle": true,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            }
+          }
+        ],
+        "unresolved": false
+      },
+      {
+        "resolved_world_index": 1,
+        "trace": [
+          {
+            "observed": 6,
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            }
+          }
+        ],
+        "unresolved": false
+      },
+      {
+        "resolved_world_index": 2,
+        "trace": [
+          {
+            "observed": 0,
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            }
+          },
+          {
+            "observed": 64,
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "four_cycle": true,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            }
+          }
+        ],
+        "unresolved": false
+      }
+    ],
+    "source_question_language_grammar_pinned": true,
+    "strong_exact_classical_decision_tree": {
+      "entire_declared_probe_family_considered": 10,
+      "exact_classical_finite_dynamic_programming": true,
+      "first_probe": {
+        "degree_signature": [
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": true,
+        "vertices": 3
+      },
+      "minimum_mean_questions": 1.6666666666666667,
+      "minimum_sum_questions": 5,
+      "minimum_weighted_vertex_cost": 17,
+      "states": 3
+    },
+    "total_questions_all_three_states": 5,
+    "uniform_world_prior_is_researcher_assumption": true,
+    "world_description": [
+      "C8",
+      "C3_PLUS_C5",
+      "C4_PLUS_C4"
+    ]
+  },
+  "actual_previous_generation_apertures": [
+    {
+      "degree_signature": [
+        2,
+        2,
+        2
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "four_cycle": false,
+      "generated_from_connected_graph_enumeration": true,
+      "previously_authored_probe_template": false,
+      "three_leaf_star": false,
+      "triangle": true,
+      "vertices": 3
+    },
+    {
+      "degree_signature": [
+        1,
+        1,
+        1,
+        3
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "four_cycle": false,
+      "generated_from_connected_graph_enumeration": true,
+      "previously_authored_probe_template": false,
+      "three_leaf_star": true,
+      "triangle": false,
+      "vertices": 4
+    }
+  ],
+  "bitvector_new_counterprobe": {
+    "arithmetic_output_twos_complement": "0xc000000000000000",
+    "historically_novel_math": false,
+    "independent_Z3_exists_witness": "SAT",
+    "independent_Z3_no_smaller_unsigned_witness": "UNSAT",
+    "interpretation_authority": "HUMAN_CONTEXT_REQUIRED",
+    "logical_output": "0x4000000000000000",
+    "mathalizer_initial_aperture": {
+      "accepted_meaning": null,
+      "declared_context": "",
+      "general_language_comprehension_claimed": false,
+      "human_authority_admitted": false,
+      "language_to_math_candidates": [
+        {
+          "authority": "PROPOSAL_ONLY",
+          "domain": "BITVECTOR",
+          "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+          "id": "SHIFT_UNSIGNED",
+          "lineage": "e568387d10321c0a7507fcf3b9c170d637fa6d92501b3a39886b510679fe15f9",
+          "readable_gloss": "64-bit logical right shift of an unsigned word",
+          "semantic_role": "IDEA",
+          "substance": "SOURCE_BOUND_INTERPRETATION",
+          "typed_mathematical_question": "LOGICAL_SHR1"
+        },
+        {
+          "authority": "PROPOSAL_ONLY",
+          "domain": "BITVECTOR",
+          "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+          "id": "SHIFT_SIGNED",
+          "lineage": "e568387d10321c0a7507fcf3b9c170d637fa6d92501b3a39886b510679fe15f9",
+          "readable_gloss": "64-bit arithmetic right shift of a signed word",
+          "semantic_role": "IDEA",
+          "substance": "SOURCE_BOUND_INTERPRETATION",
+          "typed_mathematical_question": "ARITH_SHR1"
+        }
+      ],
+      "mathematical_proof_establishes_linguistic_intent": false,
+      "original_raw": "Shift x right by one bit.",
+      "original_raw_sha256": "e568387d10321c0a7507fcf3b9c170d637fa6d92501b3a39886b510679fe15f9",
+      "parent_receipt_sha256": null,
+      "receipt_sha256": "2e47f55810aec2d4e6709d5d0cab74b290b0f7aee41b12d6130bf3a1b12e62cf",
+      "schema": "motif.aperture.mathalizer.v1",
+      "sparse_27_cell_addresses": [
+        [
+          "SIGNAL",
+          "FACT",
+          "SUBSTANCE"
+        ],
+        [
+          "GAP",
+          "IDEA",
+          "AUTHORITY"
+        ]
+      ],
+      "unresolved_gaps": [
+        "INTENDED_READING_NOT_ESTABLISHED"
+      ]
+    },
+    "minimal_within_all_unsigned_64bit_inputs": true,
+    "model_does_not_claim_to_know_user_intent": true,
+    "new_question": "Which 64-bit signedness is intended, or what output is expected at this counterexample?",
+    "original_language": "Shift x right by one bit.",
+    "probe_type": "MINIMUM_UNSIGNED_COUNTEREXAMPLE",
+    "witness_unsigned_x": "0x8000000000000000"
+  },
+  "bitvector_provably_no_possible_numeric_separator": {
+    "candidate_probes_tested": "ALL_UNSIGNED_64BIT_WORDS_BY_FORMAL_SMT",
+    "different_observation_possible": false,
+    "does_not_erase_source_reading_difference": true,
+    "initial_aperture": {
+      "accepted_meaning": null,
+      "declared_context": "",
+      "general_language_comprehension_claimed": false,
+      "human_authority_admitted": false,
+      "language_to_math_candidates": [
+        {
+          "authority": "PROPOSAL_ONLY",
+          "domain": "BITVECTOR",
+          "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+          "id": "DOUBLE_ADD",
+          "lineage": "a216ea4220fe753431b2a2d35135df194555d96d8ef03c7da7803fbad6a749e4",
+          "readable_gloss": "x + x modulo 2^64",
+          "semantic_role": "IDEA",
+          "substance": "SOURCE_BOUND_INTERPRETATION",
+          "typed_mathematical_question": "BV64_ADD_X_X"
+        },
+        {
+          "authority": "PROPOSAL_ONLY",
+          "domain": "BITVECTOR",
+          "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+          "id": "DOUBLE_SHIFT",
+          "lineage": "a216ea4220fe753431b2a2d35135df194555d96d8ef03c7da7803fbad6a749e4",
+          "readable_gloss": "x shifted left once as a 64-bit word",
+          "semantic_role": "IDEA",
+          "substance": "SOURCE_BOUND_INTERPRETATION",
+          "typed_mathematical_question": "BV64_SHL1"
+        }
+      ],
+      "mathematical_proof_establishes_linguistic_intent": false,
+      "original_raw": "Double x modulo 2^64.",
+      "original_raw_sha256": "a216ea4220fe753431b2a2d35135df194555d96d8ef03c7da7803fbad6a749e4",
+      "parent_receipt_sha256": null,
+      "receipt_sha256": "0c4023c8829b5e778cd433552f94fec423f469fd02f527cadbb2787d294106da",
+      "schema": "motif.aperture.mathalizer.v1",
+      "sparse_27_cell_addresses": [
+        [
+          "SIGNAL",
+          "FACT",
+          "SUBSTANCE"
+        ],
+        [
+          "GAP",
+          "IDEA",
+          "AUTHORITY"
+        ]
+      ],
+      "unresolved_gaps": [
+        "INTENDED_READING_NOT_ESTABLISHED"
+      ]
+    },
+    "known_identity_reused_from_LEGIT019": true,
+    "original_language": "Double x modulo 2^64.",
+    "separation_query_Z3_result": "UNSAT",
+    "suggested_next_action": "HOLD_NO_NUMERICAL_DISTINCTION; ask about implementation or operator intent only when needed"
+  },
+  "bounded_generated_source_grammar": {
+    "actual_grammar": [
+      {
+        "degree_signature": [
+          0
+        ],
+        "edges": [],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 1
+      },
+      {
+        "degree_signature": [
+          1,
+          1
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 2
+      },
+      {
+        "degree_signature": [
+          1,
+          1,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 3
+      },
+      {
+        "degree_signature": [
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": true,
+        "vertices": 3
+      },
+      {
+        "degree_signature": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": true,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "four_cycle": true,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      },
+      {
+        "degree_signature": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": false,
+        "vertices": 4
+      }
+    ],
+    "connected_simple_undirected_source_graphs_at_most_vertices": 4,
+    "minimum_is_only_within_declared_grammar": true,
+    "no_triangle_star_or_cycle_templates_in_enumerator": true,
+    "unlabeled_isomorphism_types": 10
+  },
+  "experiment": "MOTIF-LEGIT-021",
+  "identical_world_abstention": {
+    "candidate_pattern_count": 10,
+    "correct_behavior": "HOLD_PROVABLY_NO_SEPARATION_WITHIN_REGISTERED_FINITE_GRAMMAR",
+    "input": "C6 vs C6",
+    "invented_separator": null
+  },
+  "limits": {
+    "assumed_carrier_worlds_are_known_finite_set": true,
+    "automatic_source_merge_or_deploy": false,
+    "human_intent_not_inferred_from_probe": true,
+    "not_general_mathematical_operation_invention": true,
+    "problem_distribution_curated_by_experiment_author": true,
+    "public_SyGuS_benchmark_not_rerun": true,
+    "source_language_and_bitvector_ops_handwritten": true,
+    "world_facts_not_established_by_language_parser": true
+  },
+  "measured_planner_comparison": {
+    "calibration_learned_apertures_are_really_reused": true,
+    "independent_external_challenge_author": false,
+    "independently_demonstrated_recursive_compounding": false,
+    "new_historical_math_proven": false,
+    "previously_missing_probe_generated_within_declared_grammar": true,
+    "strong_classical_exact_decision_tree_compared": true,
+    "strong_classical_exact_minimality_compared": true,
+    "theorem_graph_path_collision_known_from_Dogram": true,
+    "transfer_proposal_counts_before_independent_proof": [
+      {
+        "name": "NEW_7_VERTEX_TRIANGLE",
+        "reuse": 1,
+        "scratch": 4
+      },
+      {
+        "name": "NEW_8_VERTEX_TRIANGLE",
+        "reuse": 1,
+        "scratch": 4
+      },
+      {
+        "name": "NEW_8_VERTEX_SQUARE",
+        "reuse": 8,
+        "scratch": 8
+      }
+    ],
+    "unmodified_fixed_probe_order": false
+  },
+  "raw_language_aperture": {
+    "accepted_meaning": null,
+    "declared_context": "",
+    "general_language_comprehension_claimed": false,
+    "human_authority_admitted": false,
+    "language_to_math_candidates": [
+      {
+        "authority": "PROPOSAL_ONLY",
+        "domain": "GRAPH",
+        "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+        "id": "WALK_EQ",
+        "lineage": "8865c6c960f54d48e027856a4e612656265adee2fb1b937e6070e03d8a06b6dc",
+        "readable_gloss": "same total counts of finite linear walks",
+        "semantic_role": "IDEA",
+        "substance": "SOURCE_BOUND_INTERPRETATION",
+        "typed_mathematical_question": "WALK_HOM_COUNT_EQUAL"
+      },
+      {
+        "authority": "PROPOSAL_ONLY",
+        "domain": "GRAPH",
+        "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+        "id": "CLAW_EQ",
+        "lineage": "8865c6c960f54d48e027856a4e612656265adee2fb1b937e6070e03d8a06b6dc",
+        "readable_gloss": "same counts of branching three-leaf star mappings",
+        "semantic_role": "IDEA",
+        "substance": "SOURCE_BOUND_INTERPRETATION",
+        "typed_mathematical_question": "K13_HOM_COUNT_EQUAL"
+      },
+      {
+        "authority": "PROPOSAL_ONLY",
+        "domain": "GRAPH",
+        "epistemic_status": "POSSIBLE_NOT_ADMITTED",
+        "id": "ISOMORPHIC",
+        "lineage": "8865c6c960f54d48e027856a4e612656265adee2fb1b937e6070e03d8a06b6dc",
+        "readable_gloss": "same full graph structure up to relabelling",
+        "semantic_role": "IDEA",
+        "substance": "SOURCE_BOUND_INTERPRETATION",
+        "typed_mathematical_question": "GRAPH_ISOMORPHIC"
+      }
+    ],
+    "mathematical_proof_establishes_linguistic_intent": false,
+    "original_raw": "Are these two graphs the same?",
+    "original_raw_sha256": "8865c6c960f54d48e027856a4e612656265adee2fb1b937e6070e03d8a06b6dc",
+    "parent_receipt_sha256": null,
+    "receipt_sha256": "1f408d80ca0bf7a9d3518846c52ebf46ce83c7901c5e3c66ea4528da366e0de0",
+    "schema": "motif.aperture.mathalizer.v1",
+    "sparse_27_cell_addresses": [
+      [
+        "SIGNAL",
+        "FACT",
+        "SUBSTANCE"
+      ],
+      [
+        "GAP",
+        "IDEA",
+        "AUTHORITY"
+      ]
+    ],
+    "unresolved_gaps": [
+      "INTENDED_READING_NOT_ESTABLISHED"
+    ]
+  },
+  "schema": "motif.legit021.aperture-inventor.v1",
+  "source_modules": {
+    "aperture_protocol": "LEGIT020/APERTURE",
+    "bitvector_proof": "EXTERNAL_Z3_THROUGH_MOTIF",
+    "math_and_graph_kernel": "PINNED_CANONICAL_DOGRAM",
+    "verified_original_Dogram": {
+      "actual_dogram_modules_verified": {
+        "dogram/anti_collapse_reachability.py": "7b2fbdcee1822f0f2046ced101e8274883972373",
+        "dogram/operation_reachability_quotient.py": "1cf0fbe211ae5f93104c98d1b511588ba2412324",
+        "dogram/path_tree_test_language.py": "8fbff59fb1fe819eb06e0d58f6e74e4690dee934",
+        "dogram/probe_partition_refinement.py": "c201ce28ff7bb18a28496c0a2eefe2f9451526cc"
+      },
+      "original_commit": "551b5f9df18f17ec69b452ddcdff01718e0ff771",
+      "original_repository": "the-static-collective/Dogram",
+      "vendor_copy_is_canonical_project_ownership": false
+    }
+  },
+  "status": "HOLD_RESEARCH_ONLY_BOUNDED_APERTURE_DISCOVERY_NOT_NEW_MATH",
+  "title": "THE_APERTURE_INVENTOR",
+  "two_calibration_invention_trials": [
+    {
+      "does_not_establish_carrier_identity_from_path_equality": true,
+      "name": "PATH_COLLISION_TRIANGLE",
+      "new_probe": {
+        "actual_failed_probe_receipts": [
+          {
+            "counts": [
+              6,
+              6
+            ],
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              12,
+              12
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              24,
+              24
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false
+          }
+        ],
+        "admissible_connected_patterns": 10,
+        "classical_full_assignment_cases_inspected": 4,
+        "first_separating_counts": [
+          0,
+          12
+        ],
+        "first_separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "independent_classical_exhaustive_minimum_agrees": true,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices": true,
+        "no_preselected_triangle_star_square_names_in_enumerator": true,
+        "search_probes_inspected": 4,
+        "source_graph_uniqueness_isomorphism_quotiented": true
+      },
+      "same_under_every_finite_path": {
+        "certificates": [
+          {
+            "degree_vector": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "eigenvalue": 2,
+            "first_walk_count": 12,
+            "valid": true,
+            "vertex_count": 6
+          },
+          {
+            "degree_vector": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "eigenvalue": 2,
+            "first_walk_count": 12,
+            "valid": true,
+            "vertex_count": 6
+          }
+        ],
+        "different_carriers_not_inferred_from_path_equivalence": true,
+        "eigenvalue": 2,
+        "first_nine_walk_counts": [
+          6,
+          12,
+          24,
+          48,
+          96,
+          192,
+          384,
+          768,
+          1536
+        ],
+        "same_all_finite_paths": true,
+        "why_proved": "for each carrier, A*d=lambda*d; same vertex count and total degree"
+      },
+      "verified_separating_source_type": {
+        "degree_signature": [
+          2,
+          2,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": false,
+        "triangle": true,
+        "vertices": 3
+      }
+    },
+    {
+      "does_not_establish_carrier_identity_from_path_equality": true,
+      "name": "DOGRAM_PATH_COLLISION_BRANCH",
+      "new_probe": {
+        "actual_failed_probe_receipts": [
+          {
+            "counts": [
+              7,
+              7
+            ],
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              12,
+              12
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              24,
+              24
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              0,
+              0
+            ],
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            },
+            "separates": false
+          }
+        ],
+        "admissible_connected_patterns": 10,
+        "classical_full_assignment_cases_inspected": 5,
+        "first_separating_counts": [
+          48,
+          54
+        ],
+        "first_separating_probe": {
+          "degree_signature": [
+            1,
+            1,
+            1,
+            3
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": true,
+          "triangle": false,
+          "vertices": 4
+        },
+        "independent_classical_exhaustive_minimum_agrees": true,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices": true,
+        "no_preselected_triangle_star_square_names_in_enumerator": true,
+        "search_probes_inspected": 5,
+        "source_graph_uniqueness_isomorphism_quotiented": true
+      },
+      "same_under_every_finite_path": {
+        "certificates": [
+          {
+            "degree_vector": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              0
+            ],
+            "eigenvalue": 2,
+            "first_walk_count": 12,
+            "valid": true,
+            "vertex_count": 7
+          },
+          {
+            "degree_vector": [
+              3,
+              2,
+              1,
+              2,
+              2,
+              1,
+              1
+            ],
+            "eigenvalue": 2,
+            "first_walk_count": 12,
+            "valid": true,
+            "vertex_count": 7
+          }
+        ],
+        "different_carriers_not_inferred_from_path_equivalence": true,
+        "eigenvalue": 2,
+        "first_nine_walk_counts": [
+          7,
+          12,
+          24,
+          48,
+          96,
+          192,
+          384,
+          768,
+          1536
+        ],
+        "same_all_finite_paths": true,
+        "why_proved": "for each carrier, A*d=lambda*d; same vertex count and total degree"
+      },
+      "verified_separating_source_type": {
+        "degree_signature": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "four_cycle": false,
+        "generated_from_connected_graph_enumeration": true,
+        "previously_authored_probe_template": false,
+        "three_leaf_star": true,
+        "triangle": false,
+        "vertices": 4
+      }
+    }
+  ],
+  "validation_trials": [
+    {
+      "all_paths_certified_equal": true,
+      "name": "NEW_7_VERTEX_TRIANGLE",
+      "same_target_problems_and_allowed_question_grammar": true,
+      "scratch": {
+        "actual_failed_probe_receipts": [
+          {
+            "counts": [
+              7,
+              7
+            ],
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              14,
+              14
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              28,
+              28
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false
+          }
+        ],
+        "admissible_connected_patterns": 10,
+        "classical_full_assignment_cases_inspected": 4,
+        "first_separating_counts": [
+          0,
+          6
+        ],
+        "first_separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "independent_classical_exhaustive_minimum_agrees": true,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices": true,
+        "no_preselected_triangle_star_square_names_in_enumerator": true,
+        "search_probes_inspected": 4,
+        "source_graph_uniqueness_isomorphism_quotiented": true
+      },
+      "with_actual_prior_generated_apertures": {
+        "actual_trace": [
+          {
+            "origin": "PRIOR_GENERATION",
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            },
+            "separates": true,
+            "values": [
+              0,
+              6
+            ]
+          }
+        ],
+        "does_not_declare_open_world_discovery": true,
+        "original_prior_probes_reused": [
+          {
+            "degree_signature": [
+              2,
+              2,
+              2
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": false,
+            "triangle": true,
+            "vertices": 3
+          },
+          {
+            "degree_signature": [
+              1,
+              1,
+              1,
+              3
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": true,
+            "triangle": false,
+            "vertices": 4
+          }
+        ],
+        "probes_evaluated_including_prior_failures": 1,
+        "reference_oracle_minimum": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "selected": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "selected_matches_grammar_global_minimum": true,
+        "strong_exhaustive_classical_comparison_probes": 4
+      }
+    },
+    {
+      "all_paths_certified_equal": true,
+      "name": "NEW_8_VERTEX_TRIANGLE",
+      "same_target_problems_and_allowed_question_grammar": true,
+      "scratch": {
+        "actual_failed_probe_receipts": [
+          {
+            "counts": [
+              8,
+              8
+            ],
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              16,
+              16
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              32,
+              32
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false
+          }
+        ],
+        "admissible_connected_patterns": 10,
+        "classical_full_assignment_cases_inspected": 4,
+        "first_separating_counts": [
+          0,
+          6
+        ],
+        "first_separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "independent_classical_exhaustive_minimum_agrees": true,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices": true,
+        "no_preselected_triangle_star_square_names_in_enumerator": true,
+        "search_probes_inspected": 4,
+        "source_graph_uniqueness_isomorphism_quotiented": true
+      },
+      "with_actual_prior_generated_apertures": {
+        "actual_trace": [
+          {
+            "origin": "PRIOR_GENERATION",
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            },
+            "separates": true,
+            "values": [
+              0,
+              6
+            ]
+          }
+        ],
+        "does_not_declare_open_world_discovery": true,
+        "original_prior_probes_reused": [
+          {
+            "degree_signature": [
+              2,
+              2,
+              2
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": false,
+            "triangle": true,
+            "vertices": 3
+          },
+          {
+            "degree_signature": [
+              1,
+              1,
+              1,
+              3
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": true,
+            "triangle": false,
+            "vertices": 4
+          }
+        ],
+        "probes_evaluated_including_prior_failures": 1,
+        "reference_oracle_minimum": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "selected": {
+          "degree_signature": [
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "four_cycle": false,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": true,
+          "vertices": 3
+        },
+        "selected_matches_grammar_global_minimum": true,
+        "strong_exhaustive_classical_comparison_probes": 4
+      }
+    },
+    {
+      "all_paths_certified_equal": true,
+      "name": "NEW_8_VERTEX_SQUARE",
+      "same_target_problems_and_allowed_question_grammar": true,
+      "scratch": {
+        "actual_failed_probe_receipts": [
+          {
+            "counts": [
+              8,
+              8
+            ],
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              16,
+              16
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              32,
+              32
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              0,
+              0
+            ],
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              64,
+              64
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                1,
+                3
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": true,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              64,
+              64
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false
+          },
+          {
+            "counts": [
+              0,
+              0
+            ],
+            "probe": {
+              "degree_signature": [
+                1,
+                2,
+                2,
+                3
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false
+          }
+        ],
+        "admissible_connected_patterns": 10,
+        "classical_full_assignment_cases_inspected": 8,
+        "first_separating_counts": [
+          48,
+          64
+        ],
+        "first_separating_probe": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        },
+        "independent_classical_exhaustive_minimum_agrees": true,
+        "minimum_means_only_grammar_bounded_up_to_four_vertices": true,
+        "no_preselected_triangle_star_square_names_in_enumerator": true,
+        "search_probes_inspected": 8,
+        "source_graph_uniqueness_isomorphism_quotiented": true
+      },
+      "with_actual_prior_generated_apertures": {
+        "actual_trace": [
+          {
+            "origin": "PRIOR_GENERATION",
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": true,
+              "vertices": 3
+            },
+            "separates": false,
+            "values": [
+              0,
+              0
+            ]
+          },
+          {
+            "origin": "PRIOR_GENERATION",
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                1,
+                3
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": true,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false,
+            "values": [
+              64,
+              64
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                0
+              ],
+              "edges": [],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 1
+            },
+            "separates": false,
+            "values": [
+              8,
+              8
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                1,
+                1
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 2
+            },
+            "separates": false,
+            "values": [
+              16,
+              16
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 3
+            },
+            "separates": false,
+            "values": [
+              32,
+              32
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                1,
+                1,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false,
+            "values": [
+              64,
+              64
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                1,
+                2,
+                2,
+                3
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "four_cycle": false,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": false,
+            "values": [
+              0,
+              0
+            ]
+          },
+          {
+            "origin": "NEW_ENUMERATION",
+            "probe": {
+              "degree_signature": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "edges": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "four_cycle": true,
+              "generated_from_connected_graph_enumeration": true,
+              "previously_authored_probe_template": false,
+              "three_leaf_star": false,
+              "triangle": false,
+              "vertices": 4
+            },
+            "separates": true,
+            "values": [
+              48,
+              64
+            ]
+          }
+        ],
+        "does_not_declare_open_world_discovery": true,
+        "original_prior_probes_reused": [
+          {
+            "degree_signature": [
+              2,
+              2,
+              2
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": false,
+            "triangle": true,
+            "vertices": 3
+          },
+          {
+            "degree_signature": [
+              1,
+              1,
+              1,
+              3
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ]
+            ],
+            "four_cycle": false,
+            "generated_from_connected_graph_enumeration": true,
+            "previously_authored_probe_template": false,
+            "three_leaf_star": true,
+            "triangle": false,
+            "vertices": 4
+          }
+        ],
+        "probes_evaluated_including_prior_failures": 8,
+        "reference_oracle_minimum": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        },
+        "selected": {
+          "degree_signature": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "four_cycle": true,
+          "generated_from_connected_graph_enumeration": true,
+          "previously_authored_probe_template": false,
+          "three_leaf_star": false,
+          "triangle": false,
+          "vertices": 4
+        },
+        "selected_matches_grammar_global_minimum": true,
+        "strong_exhaustive_classical_comparison_probes": 8
+      }
+    }
+  ]
+}
