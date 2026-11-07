@@ -56,7 +56,7 @@ jobs:
       - name: MOTIF controls LLM calls and independently grades proposals
         working-directory: experiments/thought-019
         run: |
-          python run.py --model qwen2.5:1.5b --rounds 2 --timeout 120 \
+          python run.py --model qwen2.5:1.5b --rounds 3 --timeout 120 \
             --output direct-llm-results.json --allow-held-reply
       - name: Prove direct LLM inference actually occurred, even if result HELD
         working-directory: experiments/thought-019
