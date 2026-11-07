@@ -148,7 +148,15 @@ class DirectLocalLLM:
             'purpose, proposer, reason must be short plain text. '
             'Your expression should model the task, NOT replay a previous guess. '
             'No Python, shell, URLs, external actions, fake test results or credentials. '
-            'Return strictly JSON; unknown results are acceptable.'
+            'Return strictly JSON; unknown results are acceptable. '
+            'Example of valid JSON STRUCTURE but NOT necessarily correct behavior: '
+            '{"expression":{"op":"union","args":[{"ref":"state.on"},'
+            '{"ref":"arrival.toggles"}]},'
+            '"purpose":"Explore whether arrival permanently collects switches",'
+            '"proposer":"local generative research model",'
+            '"on":["red"],"toggles":["red"],'
+            '"reason":"Check whether a repeated switch turns off"}. '
+            'Do not assume the example answer is correct. Try to propose your own mechanism.'
         )
         return system + '\nTASK AS JSON DATA: ' + task
 
@@ -206,6 +214,7 @@ class DirectLocalLLM:
             model_json=json.loads(model_text)
             if type(model_json) is not dict or set(model_json)!={
                 'expression','purpose','proposer','on','toggles','reason'}:
+                receipt['typed_failure_code']='MODEL_PROPOSAL_FIELDS_INVALID'
                 raise ModelTransportError('MODEL_PROPOSAL_FIELDS_INVALID')
             untrusted={'schema':MODEL_SCHEMA,
                 'mechanism':{'schema':SCHEMA,'expression':model_json['expression'],
@@ -213,7 +222,11 @@ class DirectLocalLLM:
                 'suggested_test':{'on':model_json['on'],'toggles':model_json['toggles'],
                                   'reason':model_json['reason']},
                 'model_kind':self.kind,'declared_name':None}
-            checked_mechanism,checked_probe=validate_model_reply(untrusted)
+            try:
+                checked_mechanism,checked_probe=validate_model_reply(untrusted)
+            except Exception as exc:
+                receipt['typed_failure_code']=type(exc).__name__+': '+str(exc)[:160]
+                raise
             receipt['proposal_passed_typed_gate']=True
             return {'schema':MODEL_SCHEMA,'mechanism':checked_mechanism,
                     'suggested_test':checked_probe,
