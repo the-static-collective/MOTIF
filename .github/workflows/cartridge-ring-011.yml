@@ -72,10 +72,33 @@ jobs:
           assert r['authority']=='NONE'
           print('Source-only postfreeze nested-scope results retain every wrong answer and HOLD.')
           PY
+      - name: Preserve both semantic gains AND known false root-action inference in typed hypergraph
+        run: |
+          python experiments/cartridge-ring-011/evidence_graph.py \
+            --frozen /tmp/ring011-frozen.json \
+            --benchmark /tmp/ring011-trials.json \
+            --out /tmp/ring011-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/ring011-hypergraph.json'))
+          assert g['schema']=='motif.ring011.carrier-scope-measured-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['hyperedges'][1]['total_cases']==288
+          assert g['hyperedges'][1]['false_root_action_readings']>=0
+          assert g['hard_carrier_evidence_classes_preserved']
+          assert g['two_debugging_families_not_independent_clean_tests']
+          assert not g['original_book_quotes_or_personal_details_included']
+          assert not g['real_world_semantic_ontology_independently_invented']
+          assert g['new_executable_methods_installed']==0
+          assert g['external_action_executed'] is False
+          assert g['authority']=='NONE'
+          print('Source evidence graph retains all wrong predictions and editorial carrier provenance.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring011-nested-voice-and-carrier-trial
           path: |
             /tmp/ring011-frozen.json
             /tmp/ring011-trials.json
+            /tmp/ring011-hypergraph.json
           retention-days: 30
