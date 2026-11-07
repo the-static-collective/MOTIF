@@ -1,0 +1,27 @@
+name: MOTIF QC-004 compositional grammar gardener
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode004/**'
+      - '.github/workflows/quantum-code-004.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode004/**'
+      - '.github/workflows/quantum-code-004.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-relational-synthesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Independently test graph question synthesis and refusal conditions
+        working-directory: experiments/quantumcode004
+        run: python -m unittest -v test_gardener.py
+      - name: Verify executable benchmark and strong classical controls
+        working-directory: experiments/quantumcode004
+        run: python gardener.py
