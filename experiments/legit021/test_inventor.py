@@ -19,7 +19,8 @@ sys.path.insert(0,str(HERE))
 from graph_inventor import (
     grammar,characterize,connected,normalized,cycles,
     dogram_calibration,count,reference_count,all_path_collision,
-    independent_minimal_separator,invent_separator,selected_action_tree,
+    independent_minimal_separator,invent_separator,adaptive_aperture_lift,
+    components,selected_action_tree,
     execute_tree,classical_optimal_tree,uniform_entropy_split,HOLD
 )
 from math_apertures import (
@@ -195,6 +196,83 @@ class InventorTests(unittest.TestCase):
         self.assertEqual(uniform_entropy_split((4,4,4),(0,1,2)),0)
         self.assertEqual(uniform_entropy_split((3,4,3),(0,1,2)),4)
         self.assertEqual(uniform_entropy_split((3,4,5),(0,1,2)),6)
+
+    def test_expression_language_can_be_grown_when_all_old_probes_fail(self):
+        original=grammar()
+        extended=grammar(5)
+        self.assertEqual(len(original),10)
+        self.assertEqual(len(extended),31)
+        self.assertEqual(tuple(extended[:10]),original)
+        self.assertEqual(sum(p[0]==5 for p in extended),21)
+        with self.assertRaises(HOLD):
+            grammar(6)
+        with self.assertRaises(HOLD):
+            grammar(True)
+
+    def test_new_probe_not_same_as_carrier_identity_when_arity_too_small(self):
+        pair=(cycles(10),cycles(5,5))
+        self.assertEqual([components(x) for x in pair],[1,2])
+        self.assertTrue(all_path_collision(pair)["same_all_finite_paths"])
+        old=invent_separator(pair,4)
+        self.assertIsNone(old["first_separating_probe"])
+        self.assertEqual(old["search_probes_inspected"],10)
+        # Real distinction exists even though all ten admitted apertures
+        # leave it invisible. That is NOT proof of world identity.
+        self.assertNotEqual(pair[0],pair[1])
+
+    def test_conditional_aperture_lift_recovers_five_cycle_witness(self):
+        result=self.packet[
+            "blind_below_four_vertices_therefore_expand_probe_language"
+        ]["source_test_from_smaller_grammar_to_bounded_larger_grammar"]
+        self.assertTrue(result["lift_needed"])
+        self.assertEqual(result["previous_patterns_exhaustively_tested"],10)
+        self.assertEqual(result["expanded_grammar_size"],31)
+        self.assertEqual(result["original_source_graph_limit"],4)
+        self.assertEqual(result["new_source_graph_limit"],5)
+        self.assertTrue(result["new_separator"]["five_cycle"])
+        self.assertEqual(result["new_mathematical_observation_counts"],[0,20])
+        self.assertEqual(result["independent_graph_component_counts"],[1,2])
+        self.assertTrue(result["independently_verified_minimum_in_expanded_grammar"])
+        self.assertTrue(result["not_an_unbounded_new_primitive_invention"])
+
+    def test_generic_enumeration_finds_the_five_cycle_not_hardcoded(self):
+        pattern=next(p for p in grammar(5) if characterize(p)["five_cycle"])
+        pair=(cycles(10),cycles(5,5))
+        self.assertEqual(tuple(count(pattern,t) for t in pair),(0,20))
+        self.assertEqual(tuple(reference_count(pattern,t) for t in pair),
+                         (0,20))
+        self.assertTrue(all(p[0]==5 for p in grammar(5)[10:]))
+
+    def test_committed_CI_report_proves_mathematical_witnesses_without_promotion(self):
+        source=HERE/"generated"/"aperture_inventor_report.json"
+        receipt=json.loads(source.read_text(encoding="utf-8"))
+        self.assertEqual(receipt["experiment"],"MOTIF-LEGIT-021")
+        self.assertEqual(receipt["status"],STATUS)
+        self.assertEqual(receipt["active_three_world_mathematical_viewpoint"]
+                         ["mean_questions_under_declared_uniform_world_prior"],
+                         5/3)
+        self.assertEqual(receipt["active_three_world_mathematical_viewpoint"]
+                         ["strong_exact_classical_decision_tree"]
+                         ["minimum_mean_questions"],5/3)
+        self.assertEqual(receipt["bitvector_new_counterprobe"]
+                         ["witness_unsigned_x"],"0x8000000000000000")
+        self.assertEqual(receipt["bitvector_provably_no_possible_numeric_separator"]
+                         ["separation_query_Z3_result"],"UNSAT")
+        self.assertEqual(receipt[
+            "blind_below_four_vertices_therefore_expand_probe_language"
+        ]["source_test_from_smaller_grammar_to_bounded_larger_grammar"]
+            ["new_mathematical_observation_counts"],[0,20])
+        self.assertFalse(receipt["measured_planner_comparison"]
+                         ["independently_demonstrated_recursive_compounding"])
+        self.assertFalse(receipt["limits"]["automatic_source_merge_or_deploy"])
+        # Mathematical witnesses deterministic; do not demand matching
+        # source-builder CPU timings or inherently arbitrary Z3 models.
+        for case in receipt["validation_trials"]:
+            self.assertTrue(case["all_paths_certified_equal"])
+            self.assertTrue(case["scratch"]
+                            ["independent_classical_exhaustive_minimum_agrees"])
+            self.assertTrue(case["with_actual_prior_generated_apertures"]
+                            ["selected_matches_grammar_global_minimum"])
 
     def test_Z3_invents_globally_minimum_unsigned_signedness_witness(self):
         proof=invent_bitvector_counterprobe()
