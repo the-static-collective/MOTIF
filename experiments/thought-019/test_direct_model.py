@@ -86,6 +86,7 @@ class DirectLLMTests(unittest.TestCase):
             self.assertEqual(posts[0]['model'],'test-llm:0.5b')
             self.assertEqual(posts[1]['stream'],False)
             self.assertIn('REFUTED_ON_DEV',posts[1]['prompt'])
+            self.assertIn('surviving_reviewed_hypotheses',posts[1]['prompt'])
             self.assertNotIn('frozen_audit',posts[1]['prompt'])
             self.assertNotIn('AUDIT',posts[1]['prompt'])
 
