@@ -4,6 +4,7 @@ from dataclasses import replace
 from quantum_code import (
     Observation, World, Candidate, KNOWN_PRIMITIVES, context_blind_score,
     fixture, local_review, preview, propose, route, run_experiment, score,
+    compile_path, preview_path,
 )
 
 
@@ -59,6 +60,35 @@ class QuantumCodeTrial(unittest.TestCase):
         self.assertEqual(after.observable(), beginning.observable())
         self.assertNotEqual(after.witness(), beginning.witness())
         self.assertEqual(len(after.steps), 2)
+
+    def test_result_compiles_into_a_new_pinned_macro(self):
+        start = World("POINT", "A")
+        result = route(start, ("extend", "branch", "curve", "close"), self.reviewed)
+        compiled = compile_path(start, result, self.reviewed)
+        self.assertEqual(compiled.operations, ("extend", "branch", "curve", "close"))
+        self.assertEqual(compiled.status, "LOCAL_PREVIEW_ONLY")
+        self.assertEqual(preview_path(start, compiled, self.reviewed), result)
+        self.assertTrue(run_experiment()["generated_macro"]["replay_verified"])
+
+    def test_macro_rechecks_missing_or_changed_sources(self):
+        start = World("POINT", "A")
+        result = route(start, ("extend", "branch", "curve", "close"), self.reviewed)
+        compiled = compile_path(start, result, self.reviewed)
+        filtered = tuple(r for r in self.reviewed
+                         if r.key != ("A", "FORK", "curve"))
+        self.assertIsNone(preview_path(start, compiled, filtered))
+        self.assertIsNone(preview_path(World("POINT", "B"),
+                                       compiled, self.reviewed))
+        self.assertIsNone(preview_path(start, replace(compiled, status="INSTALLED"),
+                                       self.reviewed))
+        self.assertIsNone(preview_path(start, replace(compiled, source_rule_pins=("x",)),
+                                       self.reviewed))
+
+    def test_fake_output_cannot_become_macro(self):
+        start = World("POINT", "A")
+        result = route(start, ("extend", "branch", "curve", "close"), self.reviewed)
+        with self.assertRaises(ValueError):
+            compile_path(start, replace(result, carrier="CUP"), self.reviewed)
 
     def test_unknown_decoder_holds(self):
         self.assertIsNone(preview(World("FORK", "C"), "curve", self.reviewed))
