@@ -307,11 +307,16 @@ class Garden:
     # Explicit task domains are problem declarations, not "secret user needs".
     entries: tuple[tuple[str, Reviewed], ...] = ()
 
-    def keep(self, question: str, certified: Reviewed):
+    def keep(self, question: str, certified: Reviewed,
+             train: tuple[Episode, ...], valid: tuple[Episode, ...]):
         if (not question or not isinstance(certified, Reviewed)
                 or certified.status != STATUS or
                 certified.proposal.status != "CANDIDATE_ONLY"):
             raise ValueError("Only reviewed local question cartridges are retainable")
+        # Replay the evidence gates when admitting a program. A naked
+        # dataclass with a status string is NOT itself trusted authority.
+        if review(certified.proposal, train, valid) != certified:
+            raise ValueError("Unproven reviewed-program envelope")
         if any(q == question for q, _ in self.entries):
             raise ValueError("Question already admitted, need explicit revision")
         return Garden(self.entries+((question, certified),))
@@ -491,7 +496,7 @@ def report():
         candidate=discover(train)
         model=review(candidate,train,valid) if candidate else None
         if model is not None:
-            garden=garden.keep(question,model)
+            garden=garden.keep(question,model,train,valid)
         graphs=tuple(test[i].before for i in range(0,len(test),2))
         counter=all_edges(question,model,graphs) if model else ()
         runs[question]={
