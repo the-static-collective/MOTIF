@@ -1,0 +1,26 @@
+name: MOTIF QC-001 synthetic grammar experiment
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode001/**'
+      - '.github/workflows/quantum-code-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode001/**'
+      - '.github/workflows/quantum-code-001.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-classical-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run hostile and negative-control tests
+        working-directory: experiments/quantumcode001
+        run: python -m unittest -v test_quantum_code.py
+      - name: Reproduce frozen and decoder-sensitive comparison
+        working-directory: experiments/quantumcode001
+        run: python quantum_code.py
