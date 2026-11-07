@@ -1,0 +1,218 @@
+{
+  "backend": "offline",
+  "classical_oracle_aided_comparison": {
+    "cancel_or_add": {
+      "chosen_roles": {
+        "current": "state_sheet",
+        "event": "change_sheet"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "cancel_or_add",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 1
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 6
+        }
+      ]
+    },
+    "food_donations": {
+      "chosen_roles": {
+        "current": "stream_a",
+        "event": "stream_b"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "food_donations",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 3
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 7
+        }
+      ]
+    },
+    "food_recalled_elsewhere": {
+      "chosen_roles": {
+        "current": "register_f",
+        "event": "register_g"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "food_recalled_elsewhere",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 1
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 4
+        }
+      ]
+    },
+    "food_safe": {
+      "chosen_roles": {
+        "current": "register_f",
+        "event": "register_g"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "food_safe",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 0
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 2
+        }
+      ]
+    },
+    "not_on_shelf": {
+      "chosen_roles": {
+        "current": "stock_sheet",
+        "event": "queue_sheet"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "not_on_shelf",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 5
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 4
+        }
+      ]
+    },
+    "reverse_outreach": {
+      "chosen_roles": {
+        "current": "availability",
+        "event": "declines"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "reverse_outreach",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 1
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 4
+        }
+      ]
+    },
+    "shifts_override": {
+      "chosen_roles": {
+        "current": "old_roster",
+        "event": "new_roster"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "shifts_override",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 3
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 5
+        }
+      ]
+    },
+    "unknown_beliefs": {
+      "dev_oracle_calls": 0,
+      "frozen_correct": null,
+      "status": "HOLD_NON_BOOLEAN_SEMANTICS",
+      "task": "unknown_beliefs"
+    },
+    "vague_access": {
+      "dev_oracle_calls": 0,
+      "frozen_correct": null,
+      "status": "HOLD_AMBIGUOUS_INTENT",
+      "task": "vague_access"
+    },
+    "volunteer_eligible": {
+      "chosen_roles": {
+        "current": "stream_a",
+        "event": "stream_b"
+      },
+      "dev_oracle_calls": 2,
+      "frozen_correct": 64,
+      "remaining": 1,
+      "status": "REVIEW_CLASSICAL_CANDIDATE_NOT_INSTALLED",
+      "task": "volunteer_eligible",
+      "witnesses": [
+        {
+          "a": 2,
+          "b": 3,
+          "observed": 2
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "observed": 1
+        }
+      ]
+    }
+  },
+  "domain_to_abstract_roles_prebound_for_model": false,
+  "external_authority": "NONE",
+  "independent_evaluator_knows_hand_authored_task_policy": true,
+  "installed": false,
+  "known_truth_policy_not_in_public_prompt": true,
+  "matched_total_compute_budget": false,
+  "model": null,
+  "model_called": false,
+  "model_receipts": [],
+  "model_trials": {},
+  "no_model_written_source_executed": true,
+  "nonboolean_and_ambiguous_gates_evaluator_owned_not_model_discovery": true,
+  "pen_unchanged": true,
+  "real_llm_generations": 0,
+  "receipt_digest": "68127c278543b0a3fdd613453022bf6a731415f8b19b70d7bd99acbf36c91e07",
+  "schema": "motif.thought025.abstraction-discovery.v1",
+  "synthetic_author_designed_tasks": true
+}
