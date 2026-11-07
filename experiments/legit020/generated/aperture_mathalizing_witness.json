@@ -1,0 +1,569 @@
+{
+  "Dogram_anti_collapse_probes": {
+    "bank": {
+      "collapsed_projection": "SINGLE_UNQUALIFIED_ANSWER",
+      "deterministic_factorization": [
+        [
+          [
+            "BANK_INSTITUTION",
+            "LANGUAGE",
+            null
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ],
+        [
+          [
+            "RIVERBANK",
+            "LANGUAGE",
+            null
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ]
+      ],
+      "dogram_original_api": "analyze_collapse / analyze_operation_reachability",
+      "lawful_quotient": true,
+      "lost_future_operation_executability": true,
+      "lost_operation_questions": [
+        [
+          "RIVERBANK",
+          "BANK_INSTITUTION",
+          "RUN_RIVERBANK",
+          true,
+          false
+        ],
+        [
+          "RIVERBANK",
+          "BANK_INSTITUTION",
+          "RUN_BANK_INSTITUTION",
+          false,
+          true
+        ]
+      ],
+      "lost_reading_pairs": [
+        [
+          "RIVERBANK",
+          "BANK_INSTITUTION"
+        ]
+      ],
+      "mathematical_loss_is_not_world_meaning_or_authority": true,
+      "source_readings": [
+        "RIVERBANK",
+        "BANK_INSTITUTION"
+      ]
+    },
+    "graph": {
+      "collapsed_projection": "SINGLE_UNQUALIFIED_ANSWER",
+      "deterministic_factorization": [
+        [
+          [
+            "CLAW_EQ",
+            "GRAPH",
+            "K13_HOM_COUNT_EQUAL"
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ],
+        [
+          [
+            "ISOMORPHIC",
+            "GRAPH",
+            "GRAPH_ISOMORPHIC"
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ],
+        [
+          [
+            "WALK_EQ",
+            "GRAPH",
+            "WALK_HOM_COUNT_EQUAL"
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ]
+      ],
+      "dogram_original_api": "analyze_collapse / analyze_operation_reachability",
+      "lawful_quotient": true,
+      "lost_future_operation_executability": true,
+      "lost_operation_questions": [
+        [
+          "WALK_EQ",
+          "CLAW_EQ",
+          "RUN_WALK_EQ",
+          true,
+          false
+        ],
+        [
+          "WALK_EQ",
+          "ISOMORPHIC",
+          "RUN_WALK_EQ",
+          true,
+          false
+        ],
+        [
+          "WALK_EQ",
+          "CLAW_EQ",
+          "RUN_CLAW_EQ",
+          false,
+          true
+        ],
+        [
+          "CLAW_EQ",
+          "ISOMORPHIC",
+          "RUN_CLAW_EQ",
+          true,
+          false
+        ],
+        [
+          "WALK_EQ",
+          "ISOMORPHIC",
+          "RUN_ISOMORPHIC",
+          false,
+          true
+        ],
+        [
+          "CLAW_EQ",
+          "ISOMORPHIC",
+          "RUN_ISOMORPHIC",
+          false,
+          true
+        ]
+      ],
+      "lost_reading_pairs": [
+        [
+          "WALK_EQ",
+          "CLAW_EQ"
+        ],
+        [
+          "WALK_EQ",
+          "ISOMORPHIC"
+        ],
+        [
+          "CLAW_EQ",
+          "ISOMORPHIC"
+        ]
+      ],
+      "mathematical_loss_is_not_world_meaning_or_authority": true,
+      "source_readings": [
+        "WALK_EQ",
+        "CLAW_EQ",
+        "ISOMORPHIC"
+      ]
+    },
+    "shift": {
+      "collapsed_projection": "SINGLE_UNQUALIFIED_ANSWER",
+      "deterministic_factorization": [
+        [
+          [
+            "SHIFT_SIGNED",
+            "BITVECTOR",
+            "ARITH_SHR1"
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ],
+        [
+          [
+            "SHIFT_UNSIGNED",
+            "BITVECTOR",
+            "LOGICAL_SHR1"
+          ],
+          "SINGLE_UNQUALIFIED_ANSWER"
+        ]
+      ],
+      "dogram_original_api": "analyze_collapse / analyze_operation_reachability",
+      "lawful_quotient": true,
+      "lost_future_operation_executability": true,
+      "lost_operation_questions": [
+        [
+          "SHIFT_UNSIGNED",
+          "SHIFT_SIGNED",
+          "RUN_SHIFT_UNSIGNED",
+          true,
+          false
+        ],
+        [
+          "SHIFT_UNSIGNED",
+          "SHIFT_SIGNED",
+          "RUN_SHIFT_SIGNED",
+          false,
+          true
+        ]
+      ],
+      "lost_reading_pairs": [
+        [
+          "SHIFT_UNSIGNED",
+          "SHIFT_SIGNED"
+        ]
+      ],
+      "mathematical_loss_is_not_world_meaning_or_authority": true,
+      "source_readings": [
+        "SHIFT_UNSIGNED",
+        "SHIFT_SIGNED"
+      ]
+    }
+  },
+  "aperture_contract": {
+    "T5_optional_provider_not_semantic_authority": true,
+    "axes": [
+      "SIGNAL_CONTEXT_GAP",
+      "FACT_IDEA_RELATION",
+      "SUBSTANCE_LINEAGE_AUTHORITY"
+    ],
+    "context_creates_descendant_not_history_rewrite": true,
+    "context_not_authority": true,
+    "initial_ambiguity_preserved": true,
+    "source_document": "the-static-collective/the-daily-slice/slices/2026/09/2026-09-17/aperture-hold-the-meanings-open.md",
+    "sparse_address_space_size": 27,
+    "unknown_language_holds": true
+  },
+  "bitvector_double_math_language_bridge": {
+    "English": "Double x modulo 2^64.",
+    "external_Z3_proves_equivalence": true,
+    "historically_novel_math": false,
+    "math_to_language_is_gloss_not_proof_of_user_intent": true,
+    "possible_maths": [
+      "64-bit bitvector x+x",
+      "64-bit left shift by one"
+    ],
+    "prior_actual_LEGIT019_receipt_verified": true,
+    "proof_width_bits": 64,
+    "proven_formula_relation": {
+      "counterexample": null,
+      "identity_valid": true,
+      "width": 64,
+      "z3_result": "UNSAT"
+    },
+    "translation_variants_distinct": true
+  },
+  "bitvector_signedness_counterexample": {
+    "ambiguous_untyped_language": "Shift x right by one bit.",
+    "candidate_semantics": [
+      "64-bit logical unsigned shift",
+      "64-bit arithmetic signed shift"
+    ],
+    "example_x": "0x8000000000000000",
+    "external_z3_status": "SAT_COUNTEREXAMPLE_TO_EQUIVALENCE",
+    "forced_early_type_resolution_would_erase_a_math_difference": true,
+    "low_magnitude_inputs_may_collide": true,
+    "mathal": "SHIFT_RIGHT_ONE",
+    "semantics_after_context_is_compatibility_not_human_intent": true,
+    "signed_arithmetic_result_twos_complement": "0xc000000000000000",
+    "unsigned_logical_result": "0x4000000000000000"
+  },
+  "comparison": {
+    "aperture_after_declared_context_matches": 9,
+    "deliberately_early_single_reading_baseline_matches": 4,
+    "early_single_guess_is_intentionally_weak_ablation": true,
+    "mathalizer_has_only_declared_grammar": true,
+    "no_superiority_over_strong_context_parser": true,
+    "not_fair_open_world_language_benchmark": true,
+    "strong_context_aware_parser_matches": 9,
+    "tests": 9
+  },
+  "dogram_graph_probe_ladder": {
+    "branch_projection_equivalence_class": [
+      [
+        "G"
+      ],
+      [
+        "H"
+      ]
+    ],
+    "min_separating_probe_in_supplied_family": [
+      "BRANCH_3"
+    ],
+    "minimality_only_in_supplied_family": true,
+    "path_is_strictly_weaker_than_branch_on_this_pair": true,
+    "path_projection_equivalence_class": [
+      [
+        "G",
+        "H"
+      ]
+    ],
+    "separation_underlying_carrier_change": false
+  },
+  "experiment": "MOTIF-LEGIT-020",
+  "gates": {
+    "actual_external_Z3_equivalent_double_implementations": true,
+    "actual_external_Z3_signedness_difference": true,
+    "actual_graph_path_equivalence_vs_branch_separation": true,
+    "ambiguous_language_not_silently_collapsed": true,
+    "automatic_source_promotion": false,
+    "general_language_understanding_demonstrated": false,
+    "improves_external_SyGuS_2017_results": false,
+    "independently_verified_recursive_compounding": false,
+    "new_math_historically_original": false,
+    "original_Dogram_math_modules_pinned": true,
+    "reversible_raw_provenance_and_context_lineage": true
+  },
+  "human_intent_deduced_from_math": false,
+  "main_branch_automatically_changed": false,
+  "new_public_Dogram_operator": false,
+  "original_Dogram_math_sources": {
+    "actual_dogram_modules_verified": {
+      "dogram/anti_collapse_reachability.py": "7b2fbdcee1822f0f2046ced101e8274883972373",
+      "dogram/operation_reachability_quotient.py": "1cf0fbe211ae5f93104c98d1b511588ba2412324",
+      "dogram/path_tree_test_language.py": "8fbff59fb1fe819eb06e0d58f6e74e4690dee934",
+      "dogram/probe_partition_refinement.py": "c201ce28ff7bb18a28496c0a2eefe2f9451526cc"
+    },
+    "original_commit": "551b5f9df18f17ec69b452ddcdff01718e0ff771",
+    "original_repository": "the-static-collective/Dogram",
+    "vendor_copy_is_canonical_project_ownership": false
+  },
+  "perspective_geometry": {
+    "general_new_mathematics_claimed": false,
+    "perspective_BRANCH": {
+      "equal": false,
+      "independent_complete_four_node_claw_mapping": {
+        "left": 48,
+        "right": 54
+      },
+      "meaning": "equal three-leaf star-homomorphism counts",
+      "smallest_separating_star_within_1_to_3": 3,
+      "star_sequence": [
+        {
+          "distinguishes": false,
+          "leaves": 1,
+          "left_count": 12,
+          "probe": "K1_1",
+          "right_count": 12
+        },
+        {
+          "distinguishes": false,
+          "leaves": 2,
+          "left_count": 24,
+          "probe": "K1_2",
+          "right_count": 24
+        },
+        {
+          "distinguishes": true,
+          "leaves": 3,
+          "left_count": 48,
+          "probe": "K1_3",
+          "right_count": 54
+        }
+      ]
+    },
+    "perspective_ISOMORPHISM": {
+      "different_degree_multisets_certify_nonisomorphism": true,
+      "equal": false,
+      "meaning": "graph isomorphism under bijective vertex relabelling"
+    },
+    "perspective_PATH": {
+      "all_lengths_proof_by_exact_recurrence": true,
+      "equal": true,
+      "finite_sample_walks": [
+        7,
+        12,
+        24,
+        48,
+        96,
+        192,
+        384,
+        768,
+        1536
+      ],
+      "left_linear_path_recurrence": {
+        "degree_vector": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "eigenvalue": 2,
+        "first_walk_count": 12,
+        "valid": true,
+        "vertex_count": 7
+      },
+      "meaning": "equal homomorphism counts from every finite linear path",
+      "right_linear_path_recurrence": {
+        "degree_vector": [
+          3,
+          2,
+          1,
+          2,
+          2,
+          1,
+          1
+        ],
+        "eigenvalue": 2,
+        "first_walk_count": 12,
+        "valid": true,
+        "vertex_count": 7
+      }
+    },
+    "same_under_one_projection_not_same_under_all": true
+  },
+  "real_world_authority": false,
+  "registered_context_cases": [
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "WALK_EQ",
+      "context": "I mean compare linear walks.",
+      "context_receipt": "6a3ecc83a380e5472caa51450292c42719b1198e281028be1eea36cc92ce5357",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "same total counts of finite linear walks",
+      "mathematical_question_after_cut": "WALK_HOM_COUNT_EQUAL",
+      "one_first_guess_happened_to_match": true,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "WALK_EQ",
+        "CLAW_EQ",
+        "ISOMORPHIC"
+      ],
+      "original_receipt": "1f408d80ca0bf7a9d3518846c52ebf46ce83c7901c5e3c66ea4528da366e0de0",
+      "raw": "Are these two graphs the same?",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "CLAW_EQ",
+      "context": "I mean compare branching three-leaf trees.",
+      "context_receipt": "12ab98e04e78f63a3fbb5505fc275f08645657cde55befd513e300503b5c684f",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "same counts of branching three-leaf star mappings",
+      "mathematical_question_after_cut": "K13_HOM_COUNT_EQUAL",
+      "one_first_guess_happened_to_match": false,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "WALK_EQ",
+        "CLAW_EQ",
+        "ISOMORPHIC"
+      ],
+      "original_receipt": "1f408d80ca0bf7a9d3518846c52ebf46ce83c7901c5e3c66ea4528da366e0de0",
+      "raw": "Are these two graphs the same?",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "ISOMORPHIC",
+      "context": "I mean compare graph isomorphism.",
+      "context_receipt": "cc5d84f0fadc301579f9d1000d03cf20b66bc9ff961b584491af42ee56b11737",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "same full graph structure up to relabelling",
+      "mathematical_question_after_cut": "GRAPH_ISOMORPHIC",
+      "one_first_guess_happened_to_match": false,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "WALK_EQ",
+        "CLAW_EQ",
+        "ISOMORPHIC"
+      ],
+      "original_receipt": "1f408d80ca0bf7a9d3518846c52ebf46ce83c7901c5e3c66ea4528da366e0de0",
+      "raw": "Are these two graphs the same?",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "SHIFT_UNSIGNED",
+      "context": "Treat x as an unsigned 64-bit word.",
+      "context_receipt": "d0f6510cd34e36da093a4ed044434385f50dd4b149950774f98e9f84017e2a3b",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "64-bit logical right shift of an unsigned word",
+      "mathematical_question_after_cut": "LOGICAL_SHR1",
+      "one_first_guess_happened_to_match": true,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "SHIFT_UNSIGNED",
+        "SHIFT_SIGNED"
+      ],
+      "original_receipt": "2e47f55810aec2d4e6709d5d0cab74b290b0f7aee41b12d6130bf3a1b12e62cf",
+      "raw": "Shift x right by one bit.",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "SHIFT_SIGNED",
+      "context": "Treat x as a signed 64-bit word.",
+      "context_receipt": "40bc8794ba1da7bbffc99cca3f15c128ad2fb230932f9cf91e739583abc0f8c1",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "64-bit arithmetic right shift of a signed word",
+      "mathematical_question_after_cut": "ARITH_SHR1",
+      "one_first_guess_happened_to_match": false,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "SHIFT_UNSIGNED",
+        "SHIFT_SIGNED"
+      ],
+      "original_receipt": "2e47f55810aec2d4e6709d5d0cab74b290b0f7aee41b12d6130bf3a1b12e62cf",
+      "raw": "Shift x right by one bit.",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "RIVERBANK",
+      "context": "Erosion shifted the riverbank.",
+      "context_receipt": "d1fd108e21a9879500b9d77f6400d0daea3413e1e897c6ebaf5545ac257a20e1",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "the physical riverbank changed its position",
+      "mathematical_question_after_cut": null,
+      "one_first_guess_happened_to_match": true,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "RIVERBANK",
+        "BANK_INSTITUTION"
+      ],
+      "original_receipt": "b9a7b3291949f7bbae18f3bee8ea4a6d4cbcdbc81365a2020869552d3985c460",
+      "raw": "The bank moved.",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "BANK_INSTITUTION",
+      "context": "A financial institution moved its branch office.",
+      "context_receipt": "4a42b7267ac82c99372035017f6dcf1b0197c2a3fc209b8b3776cd9643a39ebd",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "a banking institution or branch relocated",
+      "mathematical_question_after_cut": null,
+      "one_first_guess_happened_to_match": false,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "RIVERBANK",
+        "BANK_INSTITUTION"
+      ],
+      "original_receipt": "b9a7b3291949f7bbae18f3bee8ea4a6d4cbcdbc81365a2020869552d3985c460",
+      "raw": "The bank moved.",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "DOUBLE_ADD",
+      "context": "Use bitvector addition.",
+      "context_receipt": "222d9f41fdd3d20355d873224ce300d8439604af18155488debd7fd12c3073de",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "x + x modulo 2^64",
+      "mathematical_question_after_cut": "BV64_ADD_X_X",
+      "one_first_guess_happened_to_match": true,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "DOUBLE_ADD",
+        "DOUBLE_SHIFT"
+      ],
+      "original_receipt": "0c4023c8829b5e778cd433552f94fec423f469fd02f527cadbb2787d294106da",
+      "raw": "Double x modulo 2^64.",
+      "strong_context_parser_agrees_with_aperture": true
+    },
+    {
+      "admitted": false,
+      "compatible_reading_after_cut": "DOUBLE_SHIFT",
+      "context": "Use bitvector left shift.",
+      "context_receipt": "7f895828914d717cc2d488855f88905d40d6ee51916647b3078744013dc6ebe7",
+      "contextual_resolution_not_authorized_intent": true,
+      "gloss_back_to_language": "x shifted left once as a 64-bit word",
+      "mathematical_question_after_cut": "BV64_SHL1",
+      "one_first_guess_happened_to_match": false,
+      "original_alternatives_preserved": true,
+      "original_possible_readings": [
+        "DOUBLE_ADD",
+        "DOUBLE_SHIFT"
+      ],
+      "original_receipt": "0c4023c8829b5e778cd433552f94fec423f469fd02f527cadbb2787d294106da",
+      "raw": "Double x modulo 2^64.",
+      "strong_context_parser_agrees_with_aperture": true
+    }
+  ],
+  "schema": "motif.legit020.aperture-mathalizer-report.v1",
+  "source": "PINNED_CANONICAL_DOGRAM_AND_APERTURE_ARCHITECTURE",
+  "status": "RESEARCH_HOLD_NARROW_DETERMINISTIC_LANGUAGE_AND_KNOWN_MATH",
+  "title": "APERTURE_DOGRAM_MATHALIZING"
+}
