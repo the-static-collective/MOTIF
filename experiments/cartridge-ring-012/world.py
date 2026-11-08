@@ -72,7 +72,7 @@ def generate(family,*,seed,rounds=4):
             for _ in range(rounds):
                 event={k:rng.choice(v) for k,v in TEST_LEX.items()}
                 carrier=rng.choice(corpus.CARRIERS)
-                readings=(readings,) if kind=="UNIQUE" else readings
+                possible=(readings,) if kind=="UNIQUE" else readings
                 # In KNOWN_SHAPES_NEW_SOURCE_EVENTS, keep the unknown action
                 # lexemes and source event explicit while using common syntax.
                 text=template.format(**event)
@@ -86,9 +86,9 @@ def generate(family,*,seed,rounds=4):
                     "text":text,
                     "observed_event":event,
                     "carrier":carrier,
-                    "reading_count":len(readings),
+                    "reading_count":len(possible),
                     "admissible_graphs":[corpus.frame(*x,carrier,event)
-                                         for x in readings],
+                                         for x in possible],
                     "author_tag":kind,
                 })
     for text in UNBOUND:
