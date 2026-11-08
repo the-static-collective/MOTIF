@@ -39,7 +39,8 @@ class SourceCompilationTests(unittest.TestCase):
         )
         new_mechanism=MechanismSpec(
             "ask_a_person_for_community_referral",
-            (new_source.id,),"PERSON",(("someone_nearby",YES),),ROUTING,
+            (new_source.id,),"PERSON",(("someone_nearby",YES),
+                      ("safe_person_to_approach",YES)),ROUTING,
             "Ask a safely approachable person whether a community resource "
             "can be identified; not a food availability guarantee.",
         )
@@ -53,7 +54,8 @@ class SourceCompilationTests(unittest.TestCase):
         self.assertEqual(added.verdict,"CONDITIONAL")
         actual=recover(
             synthetic_case("no_phone_no_car_no_food").append(
-                "someone_nearby",YES,"user:someone_safe_to_ask"),
+                "someone_nearby",YES,"user:someone_safe_to_ask").append(
+                "safe_person_to_approach",YES,"user:approach_ok"),
             sources,specs)
         enabled=next(x for x in actual.routes if x.route_id==new_mechanism.id)
         self.assertEqual(enabled.verdict,"POSSIBLE_REFERRAL")
@@ -71,6 +73,14 @@ class SourceCompilationTests(unittest.TestCase):
         candidate=MechanismSpec(
             "unbacked",("no_such_source",),"PERSON",
             (("someone_nearby",YES),),ROUTING,"Someone might help")
+        with self.assertRaises(ValueError):
+            compile_public_routes(self.sources,self.specs+(candidate,))
+
+    def test_new_person_route_without_safety_guard_is_refused(self):
+        candidate=MechanismSpec(
+            "unsafe_channel",("usagov_emergency_food",),"PERSON",
+            (("someone_nearby",YES),),ROUTING,
+            "Do not auto-approach somebody merely because nearby")
         with self.assertRaises(ValueError):
             compile_public_routes(self.sources,self.specs+(candidate,))
 
