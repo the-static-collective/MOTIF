@@ -73,10 +73,33 @@ jobs:
               assert len(pack['case_witnesses'])==pack['case_count']
           print('Source-native RING-012 uncertainty and safe multi-step simulated actions compared against STOP, GREEDY, ASK, and SMASH controls.')
           PY
+      - name: Reconcile all case-level value results with non-authoritative evidence hypergraph
+        run: |
+          python experiments/cartridge-ring-013/evidence_graph.py \
+            --frozen /tmp/motif-ring013-frozen.json \
+            --trial /tmp/motif-ring013-action-trial.json \
+            --out /tmp/motif-ring013-option-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/motif-ring013-option-hypergraph.json'))
+          assert g['schema']=='motif.ring013.option-value-evidence-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['hyperedges'][1]['total_cases']==60
+          assert g['positive_action_value_can_proceed_without_ambiguity_resolution']
+          assert g['interest_alone_can_be_outweighed_by_time_and_risk']
+          assert g['no_action_without_authorized_internal_permission']
+          assert g['truthful_negative_results_preserved']
+          assert not g['real_world_autonomous_execution_demonstrated']
+          assert g['new_external_tool_permissions']==0
+          assert g['external_actions_executed'] is False
+          assert g['authority']=='NONE'
+          print('Source receipt hypergraph preserves value, uncertainty, safe progress and bad decisions.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring013-value-of-next-action
           path: |
             /tmp/motif-ring013-frozen.json
             /tmp/motif-ring013-action-trial.json
+            /tmp/motif-ring013-option-hypergraph.json
           retention-days: 30
