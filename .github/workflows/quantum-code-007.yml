@@ -21,7 +21,10 @@ jobs:
           python-version: '3.11'
       - name: Run adversarial meanings, food security horizons and nonterminal planning tests
         working-directory: experiments/quantumcode007
-        run: python -m unittest -v test_living_field.py
+        run: python -m unittest -v test_living_field.py test_domain_kernel.py
       - name: Generate deterministic synthetic action-network benchmark
         working-directory: experiments/quantumcode007
         run: python living_field.py
+      - name: Reproduce second cross-domain action network benchmark
+        working-directory: experiments/quantumcode007
+        run: python domain_kernel.py
