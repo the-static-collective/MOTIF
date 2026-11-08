@@ -255,7 +255,8 @@ def reenter(prior:Assessment, feedback:Feedback, candidates):
         raise ValueError("Research kernel never issues external execution")
     if feedback.outcome=="FAILED":
         successor=tuple(x.id for x in candidates
-                        if x.id!=prior.action)
+                        if x.id!=prior.action
+                        and x.exposure in ("INQUIRY","REVERSIBLE"))
         return Trail(prior,"FAILED",feedback.pin,feedback.observed_effects,
                      True,"REOPEN_ALTERNATIVE_ACTION_FIELD",
                      successor)
