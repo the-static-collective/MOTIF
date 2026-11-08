@@ -43,7 +43,11 @@ class PortalTests(unittest.TestCase):
 
     def test_claimed_proof_dependency_graph_exposes_ancestry_not_truth(self):
         p=sample_portal()
-        g=[v for v in p.graphs(limit=30)['items'] if 'claimed-proof-lineage.json' in v['id']]
+        g=[];cursor=0
+        while cursor is not None:
+            page=p.graphs(cursor=cursor,limit=30)
+            g.extend(v for v in page['items'] if 'claimed-proof-lineage.json' in v['id'])
+            cursor=page['next_cursor']
         self.assertEqual(len(g),1)
         self.assertGreaterEqual(g[0]['edge_count'],2)
         self.assertIn('UNVERIFIED',g[0]['truth_status'])
