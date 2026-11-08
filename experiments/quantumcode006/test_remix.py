@@ -14,6 +14,7 @@ from remix import (
 )
 import gardener
 from foreign_worlds import hosts, topology
+from classical_meanings import learn_classically, predict_classically, native_interpret
 
 
 class RemixChecks(unittest.TestCase):
@@ -235,10 +236,30 @@ class RemixChecks(unittest.TestCase):
             has_isolate=bool(row.before.vertices-used_vertices(row.before))
             self.assertEqual(has_isolate,bool(effect.remove_edges))
 
+    def test_matched_sample_classical_synthesis_selects_same_grammar(self):
+        control=learn_classically(self.train,self.valid)
+        self.assertEqual(control["status"],"CLASSICAL_REVIEWED")
+        self.assertEqual(control["program"],self.proposal.program.notation())
+        self.assertEqual(control["examined"],self.proposal.examined)
+        self.assertEqual(predict_classically(control,self.test)["correct"],16)
+
+    def test_separately_interpreted_meanings_agree_on_foreign_worlds(self):
+        from gardener import Graph
+        for _,native in hosts():
+            graph=topology(native)
+            ab=edge(*next(iter(graph.edges)))
+            ours=interpret(self.proposal.program,graph,ab)
+            theirs=native_interpret(self.proposal.program,graph,ab)
+            self.assertEqual(ours,theirs)
+
     def test_report_no_unearned_authority(self):
         results=report()
         self.assertEqual(results["heldout_world_meaning_correct"],16)
         self.assertEqual(results["heldout_world_meaning_total"],16)
+        self.assertEqual(results["external_graph_correct"],48)
+        self.assertEqual(results["external_graphs_and_isolate_interventions"],48)
+        self.assertTrue(results["independent_classical_synthesizer"]["same_program"])
+        self.assertTrue(results["independent_classical_synthesizer"]["same_candidates_examined"])
         self.assertEqual(results["external_actions"],0)
         self.assertFalse(results["production_installation"])
         self.assertFalse(results["quantum_experiment"])
