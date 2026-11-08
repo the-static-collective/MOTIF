@@ -5,7 +5,14 @@ from importlib.util import spec_from_file_location,module_from_spec
 from pathlib import Path
 import unittest
 
-import lattice,calibration,evidence_graph
+import lattice,calibration
+
+# RING-011 also has a module named evidence_graph.py. Explicit source
+# module identity prevents an inherited import from masking RING-012 tests.
+evidence_spec=spec_from_file_location(
+    "ring012_evidence_graph",Path(__file__).resolve().parent/"evidence_graph.py")
+evidence_graph=module_from_spec(evidence_spec)
+evidence_spec.loader.exec_module(evidence_graph)
 
 spec=spec_from_file_location(
     "ring012_trial_for_provenance",Path(__file__).resolve().parent/"benchmark.py")
