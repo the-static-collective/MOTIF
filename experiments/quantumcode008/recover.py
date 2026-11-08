@@ -179,8 +179,12 @@ class Route:
                    for k,v in self.prereqs)
             or self.directly_provides_food or self.local_service_verified
             or any(h not in ("IMMEDIATE","PERSISTENT")
-                   for h in self.helps_horizons)):
-            raise ValueError("No fabricated provider outcomes may be admitted")
+                   for h in self.helps_horizons)
+            or (self.channel=="ON_FOOT" and
+                not {("can_walk",YES),("safe_to_walk",YES)}.issubset(self.prereqs))
+            or (self.channel=="PERSON" and
+                ("safe_person_to_approach",YES) not in self.prereqs)):
+            raise ValueError("No fabricated or unsafe provider routes admitted")
 
 
 @dataclass(frozen=True)
