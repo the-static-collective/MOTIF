@@ -10,6 +10,7 @@ from living_field import (
     dominates, fixture_field, frontier, meets_need, plan, possible_actions,
     reenter, report, run_case, scenario, vector, receive_feedback,
     accrue_from_feedback, diagnose_report, single_step_food_baseline,
+    infer_action_hypotheses,
 )
 
 
@@ -144,6 +145,40 @@ class LivingFieldChecks(unittest.TestCase):
         self.assertIn("one_step_baseline",cases["acute"])
         self.assertIn("one_step_baseline",cases["persistent"])
         self.assertFalse(cases["persistent"]["one_step_baseline"]["meets_need"])
+
+    def test_joint_meanings_nominate_new_actions_without_fabricating_effects(self):
+        w,c=scenario("persistent")
+        view=aperture(self.field,c,possible_actions(w,self.inventory,(),c))
+        hypotheses=infer_action_hypotheses(self.field,view)
+        self.assertGreaterEqual(len(hypotheses),2)
+        self.assertTrue(all(h.status=="HOLD_UNVERIFIED_ACTION_AFFORDANCE"
+                            for h in hypotheses))
+        self.assertTrue(any("bread.continuity" in h.source_meanings
+                            for h in hypotheses))
+        self.assertTrue(all("Verify real availability" in h.question
+                            for h in hypotheses))
+        self.assertTrue(all(not hasattr(h,"transition")
+                            for h in hypotheses))
+
+    def test_hypothesis_generation_does_not_mutate_action_inventory(self):
+        w,c=scenario("acute")
+        view=aperture(self.field,c,possible_actions(w,self.inventory,(),c))
+        before_ids=tuple(a.id for a in self.inventory)
+        candidates=infer_action_hypotheses(self.field,view)
+        self.assertEqual(before_ids,tuple(a.id for a in self.inventory))
+        self.assertTrue(all(h.source_field_receipt==self.field.receipt()
+                            for h in candidates))
+        self.assertFalse(any(h.relation=="TENSIONS" for h in candidates))
+
+    def test_stale_meaning_view_cannot_generate_action_affordances(self):
+        w,c=scenario("acute")
+        view=aperture(self.field,c,possible_actions(w,self.inventory,(),c))
+        later=Meaning("bread.new","bread","later possibility",
+                      frozenset({"urgent_food"}),frozenset({"connect"}),
+                      "sourced:later","HYPOTHESIS",12)
+        changed=self.field.add(later)
+        with self.assertRaises(ValueError):
+            infer_action_hypotheses(changed,view)
 
     def test_acute_and_persistent_are_distinct_goal_conditions(self):
         _,acute=scenario("acute")
