@@ -1,0 +1,43 @@
+name: WITNESS-CHAIN-001 recursive evidence controls
+
+on:
+  push:
+    branches:
+      - 'experiment/witness-chain-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/witnesschain001/**'
+      - 'experiments/provenanceprobe001/**'
+      - 'experiments/decoderintegrity001/**'
+      - 'experiments/contextgate001/**'
+      - 'experiments/selfmirror001/**'
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+      - '.github/workflows/witnesschain001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  witness-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Earlier constitutional and evidence-regression suites
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -v test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -v test_mathal.py)
+          (cd experiments/selfmirror001 && python -m unittest -v test_selfmirror.py)
+          (cd experiments/contextgate001 && python -m unittest -v test_contextgate.py)
+          (cd experiments/decoderintegrity001 && python -m unittest -v test_decoderintegrity.py)
+          (cd experiments/provenanceprobe001 && python -m unittest -v test_provenanceprobe.py)
+      - name: Witness-chain exhaustive symmetry and hostile-reference checks
+        working-directory: experiments/witnesschain001
+        run: |
+          python -m unittest -v test_witnesschain.py
+          python witnesschain.py
+          python benchmark.py
