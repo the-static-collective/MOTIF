@@ -102,7 +102,7 @@ def unsupported_certificate(records: tuple[Episode, ...]):
         "indistinguishable_relational_programs": considered-len(counterexamples),
         "accidental_distinguishing_programs": counterexamples[:5],
         "candidate_admitted": candidate is not None,
-        "reason": "isolated vertex parity invisible to endpoint binary-relation DSL",
+        "reason": "isolated-component presence invisible to old-component endpoint-relation DSL",
     }
 
 
