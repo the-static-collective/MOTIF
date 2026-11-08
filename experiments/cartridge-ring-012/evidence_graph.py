@@ -110,6 +110,13 @@ def verify(policy,report):
         for witness in witnesses:
             if (witness.get("carrier") not in lattice.corpus.CARRIERS
                     or witness.get("open_world_always") is not True
+                    or witness.get("ambiguity_does_not_force_an_interruption") is not True
+                    or not isinstance(witness.get("source_conditional_invariants"),dict)
+                    or witness.get("optional_discriminator") not in (
+                        None,"WHO_IF_ANY_REQUESTED_THIS_EVENT",
+                        "WHICH_SCOPE_OWNS_THE_EVENT",
+                        "IS_THIS_DIRECT_SPEECH_OR_REPORTED_SPEECH",
+                        "DOES_NEGATION_APPLY_TO_THIS_EVENT")
                     or witness.get("author_meanings_do_not_authenticate_real_events") is not True
                     or type(witness.get("source_sha256")) is not str
                     or len(witness["source_sha256"])!=64
@@ -148,6 +155,12 @@ def build(policy,report):
             "counts":pack["author_tag_distribution"],
         })
     m=report["combined"]["open_perspective_lattice"]
+    conditional_cases=sum(
+        bool(x["source_conditional_invariants"])
+        for p in packs for x in p["case_witnesses"])
+    discriminator_cases=sum(
+        x["optional_discriminator"] is not None
+        for p in packs for x in p["case_witnesses"])
     union=report["combined"]["uncalibrated_method_union"]
     full=report["combined"]["all_24_possible_graphs"]
     edges=[
@@ -170,7 +183,11 @@ def build(policy,report):
                      "cost:excess_hypothesized_worlds",
                      "risk:excluded_true_author_readings",
                      "risk:false_single_directive_root",
-                     "frontier:independent_human_ambiguity_judgments"],
+                     "frontier:independent_human_ambiguity_judgments",
+                     "benefit:conditional_invariants_without_forced_disambiguation"],
+            "conditional_invariant_case_count":conditional_cases,
+            "optional_discriminator_case_count":discriminator_cases,
+            "automatic_ambiguity_interruption_count":0,
             "total_test_cases":m["cases"],
             "authored_admissible_reading_coverage":m[
                 "complete_author_reading_coverage"],
