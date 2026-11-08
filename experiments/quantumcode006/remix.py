@@ -357,11 +357,33 @@ def report():
         anchors,expected=infer_delta(row)
         finding=lex.ask(SYMBOL,WHOLE,row.before,anchors)
         correct+=int(finding["effect"]==expected.seal())
-    old_binary_collision=True
     # An isolated vertex doesn't affect original-component relation queries.
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"quantumcode005"))
     from trial import paired_isolation_unsupported, unsupported_certificate
     hold=unsupported_certificate(paired_isolation_unsupported())
+    # Independent classical synthesis consumes exactly the same
+    # source-owned TRAIN/VALIDATE data, grammar and candidate order.
+    # Its implementation evaluates programs via NetworkX, not this module.
+    from classical_meanings import learn_classically,predict_classically
+    conventional=learn_classically(train,valid)
+    conventional_test=predict_classically(conventional,test)
+    # Additional out-of-training-graph tests use NetworkX host families
+    # and an independent native graph degree/isolate evaluator.
+    sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"quantumcode005"))
+    from foreign_worlds import hosts,topology
+    import networkx as nx
+    outside_correct=outside_total=0
+    for name, source in hosts():
+        for count in (0,1,2,3):
+            native=source.copy()
+            for k in range(count):
+                native.add_node(f"qc006_extra_isolated_{k}")
+            graph=topology(native)
+            target=edge(*next(iter(native.edges)))
+            answer=lex.ask(SYMBOL,WHOLE,graph,target)
+            truth=nx.number_of_isolates(native)>0
+            outside_total+=1
+            outside_correct+=int(answer.get("value")==truth)
     return {
         "experiment":"QC-006",
         "status":"SYNTHETIC_REPRESENTATION_REMIX_REVIEW_ONLY",
@@ -371,6 +393,15 @@ def report():
         "previous_language_collision":hold["status"],
         "heldout_world_meaning_correct":correct,
         "heldout_world_meaning_total":len(test),
+        "external_graphs_and_isolate_interventions":outside_total,
+        "external_graph_correct":outside_correct,
+        "independent_classical_synthesizer":{
+            "status":conventional["status"],
+            "same_program":conventional.get("program")==candidate.program.notation(),
+            "same_candidates_examined":conventional["examined"]==candidate.examined,
+            "heldout":conventional_test,
+            "actual_compute_budget_matched":False,
+        },
         "shared_symbol":SYMBOL,
         "decoders":{
             WHOLE:certified.proposal.program.notation(),
