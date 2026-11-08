@@ -8,7 +8,8 @@ from living_field import (
     Action, ActionField, ClaimedWitness, FieldView, Meaning, MeaningEdge,
     MeaningField, Path, STATUS, World, action_inventory, aperture, digest,
     dominates, fixture_field, frontier, meets_need, plan, possible_actions,
-    reenter, report, run_case, scenario, vector,
+    reenter, report, run_case, scenario, vector, receive_feedback,
+    accrue_from_feedback, diagnose_report,
 )
 
 
@@ -317,6 +318,72 @@ class LivingFieldChecks(unittest.TestCase):
         self.assertTrue(all(x["suppressed_pareto_disclosure"]>=0 for x in r["cases"].values()))
         self.assertGreaterEqual(r["cases"]["acute"]["paths_meeting_synthetic_need"],2)
         self.assertGreaterEqual(r["cases"]["persistent"]["paths_meeting_synthetic_need"],2)
+
+    def test_feedback_records_surprise_without_overwriting_a_past_path(self):
+        path=self.results["acute"].pareto_paths[0]
+        failed=replace(path.state,meals_today=0)
+        record=receive_feedback(path,failed,"fixture:food-did-not-arrive",
+                                path.parent_receipt)
+        self.assertTrue(record.disagrees)
+        note=diagnose_report(path,record)
+        self.assertEqual(note["status"],"HOLD_MODEL_REVIEW")
+        self.assertEqual(note["prediction_preserved"],path.receipt())
+        self.assertFalse(note["reported_as_fact"])
+
+    def test_reported_agreement_is_not_external_verification(self):
+        path=self.results["acute"].pareto_paths[0]
+        record=receive_feedback(path,path.state,"fixture:claim",
+                                path.parent_receipt)
+        self.assertFalse(record.disagrees)
+        note=diagnose_report(path,record)
+        self.assertEqual(note["status"],"AGREEMENT_REPORTED_NOT_VERIFIED")
+
+    def test_feedback_can_accrue_a_cautious_new_meaning_not_a_rewrite(self):
+        before=self.field
+        path=self.results["acute"].pareto_paths[0]
+        feedback=receive_feedback(path,replace(path.state,meals_today=0),
+                                  "fixture:missed-supper",path.parent_receipt)
+        expanded=accrue_from_feedback(
+            before,"bread.nutrition",feedback,
+            "bread.failed-route","an offered meal may not arrive",11,
+            frozenset({"urgent_food","ongoing_food"}),
+            frozenset({"connect","access"}))
+        self.assertEqual(len(expanded.meanings),len(before.meanings)+1)
+        self.assertEqual(expanded.meanings[-1].kind,"HYPOTHESIS")
+        self.assertEqual(expanded.meanings[-1].witness_id,feedback.seal())
+        self.assertEqual(expanded.as_of(10).receipt(),before.receipt())
+        self.assertEqual(len(expanded.links),len(before.links)+1)
+        self.assertEqual(expanded.links[-1].relationship,"REINTERPRETS")
+
+    def test_unsupported_feedback_cannot_create_meaning(self):
+        path=self.results["acute"].pareto_paths[0]
+        with self.assertRaises(ValueError):
+            receive_feedback(path,path.state,"","counterfeit")
+        claim=receive_feedback(path,path.state,"fixture:ok",path.parent_receipt)
+        with self.assertRaises(ValueError):
+            accrue_from_feedback(self.field,"nonexistent",claim,
+                                 "new","fake",11,frozenset(),frozenset())
+        with self.assertRaises(ValueError):
+            accrue_from_feedback(self.field,"bread.nutrition",claim,
+                                 "new","backdated",1,frozenset(),frozenset())
+
+    def test_feedback_cannot_be_moved_to_another_prediction(self):
+        one,two=self.results["acute"].pareto_paths[:2]
+        record=receive_feedback(one,one.state,"fixture:first",one.parent_receipt)
+        with self.assertRaises(ValueError):
+            diagnose_report(two,record)
+
+    def test_retrospective_meaning_does_not_claim_past_prediction(self):
+        path=self.results["acute"].pareto_paths[0]
+        feedback=receive_feedback(path,path.state,"fixture:later",
+                                  path.parent_receipt)
+        expanded=accrue_from_feedback(
+            self.field,"bread.table",feedback,
+            "bread.later-reading","new meaning after the event",11,
+            frozenset({"community"}),frozenset({"connect"}))
+        self.assertNotIn("bread.later-reading",
+                         {m.id for m in expanded.as_of(10).meanings})
+        self.assertIn("bread.later-reading",{m.id for m in expanded.meanings})
 
     def test_no_hidden_claim_that_modelled_access_is_guaranteed(self):
         for item in self.inventory:
