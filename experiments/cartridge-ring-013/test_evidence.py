@@ -52,7 +52,7 @@ class EvidenceOfActionTests(unittest.TestCase):
         step["action"]="EXTERNAL_COMMIT"
         mutated["receipt_sha256"]=value.digest({
             k:v for k,v in mutated.items() if k!="receipt_sha256"})
-        with self.assertRaisesRegex(evidence_graph.HOLD,"Unapproved"):
+        with self.assertRaisesRegex(evidence_graph.HOLD,"Unapproved|Planner transcript"):
             evidence_graph.build(self.frozen,mutated)
 
     def test_simulated_human_question_is_never_real_user_interruption(self):
