@@ -21,7 +21,10 @@ jobs:
           python-version: '3.11'
       - name: Test offline and survival field reasoning
         working-directory: experiments/quantumcode009
-        run: python -m unittest -v test_street_sense.py
+        run: python -m unittest -v test_street_sense.py test_field_atlas.py
       - name: Reproduce eight scenario and network-cut reports
         working-directory: experiments/quantumcode009
         run: python street_sense.py
+      - name: Replay offline atlas outages and freshness decay
+        working-directory: experiments/quantumcode009
+        run: python field_atlas.py
