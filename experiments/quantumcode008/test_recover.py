@@ -125,6 +125,34 @@ class AffordanceRecoveryTests(unittest.TestCase):
         self.assertNotIn("look_for_safe_public_destination",
                          result.next_field)
 
+    def test_a_nearby_person_is_not_automatically_safe_to_approach(self):
+        state=self.base.append("someone_nearby",YES,"user:someone_there")
+        out=recover(state)
+        nearby=next(x for x in out.routes if
+                    x.route_id=="ask_nearby_person_for_help")
+        self.assertEqual(nearby.verdict,"CONDITIONAL")
+        self.assertIn("safe_person_to_approach",nearby.unknown)
+        self.assertNotIn(nearby.route_id,out.next_field)
+
+    def test_an_unsafe_nearby_person_is_not_a_referral_route(self):
+        state=(self.base.append("someone_nearby",YES,"user:present")
+               .append("safe_person_to_approach",NO,"user:unsafe"))
+        out=recover(state)
+        nearby=next(x for x in out.routes if
+                    x.route_id=="ask_nearby_person_for_help")
+        self.assertEqual(nearby.verdict,"BLOCKED")
+        self.assertIn("safe_person_to_approach",nearby.blocked)
+
+    def test_severe_symptoms_override_formerly_safe_walking_evidence(self):
+        state=synthetic_case("known_safe_walk").append(
+            "medical_red_flags",YES,"fixture:new_sudden_symptoms")
+        out=recover(state)
+        self.assertEqual(out.status,"PRIORITIZE_URGENT_HUMAN_ASSISTANCE")
+        walking=next(x for x in out.routes if
+                     x.route_id=="ask_in_person_for_food_referral")
+        self.assertEqual(walking.verdict,"BLOCKED")
+        self.assertIn("medical_red_flags",walking.blocked)
+
     def test_phone_opening_is_referral_not_nutrition(self):
         x=recover(synthetic_case("phone_available"))
         self.assertEqual(x.status,"REFERRAL_PATH_POSSIBLE_NOT_FOOD")
@@ -165,7 +193,8 @@ class AffordanceRecoveryTests(unittest.TestCase):
                             for q in same))
 
     def test_user_answer_reopens_care_route_without_user_phoning(self):
-        state=self.base.append("someone_nearby",YES,"user:explicit")
+        state=(self.base.append("someone_nearby",YES,"user:explicit")
+                .append("safe_person_to_approach",YES,"user:safety_confirmed"))
         x=recover(state)
         self.assertIn("ask_nearby_person_for_help",
                       {y.route_id for y in x.routes
