@@ -193,40 +193,18 @@ class RouteStatus:
     guaranteed_food: bool = False
 
 
-def routing_cards():
-    return (
-        Route(
-            "call_211",ROUTING,(("has_phone",YES),),
-            ("united_way_211","usagov_emergency_food"),"TELEPHONE",
-            "Contact 211 to ask for local food resources; hours and "
-            "eligibility need independent verification."),
-        Route(
-            "feeding_america_search",ROUTING,(("has_internet",YES),),
-            ("feeding_america_locator",),"WEB_SEARCH",
-            "Use ZIP-code lookup to identify food-bank partners; verify "
-            "distribution hours, eligibility, travel and present availability."),
-        Route(
-            "ask_in_person_for_food_referral",ROUTING,
-            (("can_walk",YES),("safe_to_walk",YES),
-             ("safe_public_destination_known",YES)),
-            ("usagov_emergency_food",),"ON_FOOT",
-            "If safe and genuinely accessible, approach a known staffed "
-            "community organization to request a referral or assistance. "
-            "A staffed destination and services are not assumed."),
-        Route(
-            "ask_nearby_person_for_help",ROUTING,
-            (("someone_nearby",YES),),
-            ("usagov_emergency_food",),"PERSON",
-            "Ask a safely approachable person for help reaching resources; "
-            "no person or food supply is presumed."),
-        Route(
-            "research_ongoing_access",ONGOING,
-            (("has_phone",YES),),
-            ("united_way_211","usagov_emergency_food"),"TELEPHONE",
-            "Ask about continuing food sources, eligibility and options "
-            "for recurring access; no enrollment is assumed.",
-            helps_horizons=("PERSISTENT",)),
-    )
+def routing_cards(sources=None, specs=None):
+    """Build route inventory from separately reviewed source-linked mechanisms.
+
+    Adding a new sufficiently documented general navigation route does not
+    require adding domain-specific branches to this planner.
+    """
+    from source_routes import compile_public_routes,catalogued_public_mechanisms
+    if sources is None:
+        sources=public_source_registry()
+    if specs is None:
+        specs=catalogued_public_mechanisms()
+    return compile_public_routes(tuple(sources),tuple(specs))
 
 
 def route_status(route:Route,situation:Situation,sources):
@@ -432,7 +410,7 @@ class Recovery:
     notes: str = ""
 
 
-def recover(situation:Situation, sources=None):
+def recover(situation:Situation, sources=None, mechanisms=None):
     """Recover a *next useful move* even when there is no known food route.
 
     Critical principle: an information action is not a meal, yet can be
@@ -444,7 +422,7 @@ def recover(situation:Situation, sources=None):
     if sources is None:
         sources=public_source_registry()
     pins=registry_receipts(sources)
-    routes=tuple(r for r in routing_cards()
+    routes=tuple(r for r in routing_cards(sources,mechanisms)
                  if situation.horizon in r.helps_horizons)
     assessed=tuple(route_status(r,situation,sources) for r in routes)
     available=tuple(x.route_id for x in assessed
