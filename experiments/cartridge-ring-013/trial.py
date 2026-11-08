@@ -111,7 +111,10 @@ def run_frozen(frozen):
                         "value_trace":receipt,
                         "hidden_true_viability_not_given_to_planner":True,
                         "external_authority":"NONE",
+                        "control_action_traces":{},
                     })
+                else:
+                    witnesses[i]["control_action_traces"][strategy]=receipt
         # A genuinely unwarranted "smash" spends time. The perfect-info
         # benchmark only scores what's possible under authored hidden world,
         # never a claim the planner could actually know that future.
