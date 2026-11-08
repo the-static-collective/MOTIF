@@ -1,0 +1,596 @@
+{
+  "composition_candidate_semantics": 8,
+  "derived_card": {
+    "construction_kind": "LICENSED_COMPOSITION",
+    "external_authority": "NONE",
+    "function_sha256": "4e30225eeeb7eb5fc1a633d6f85541fc4171a69d69b8e195ca11d0bed15d0525",
+    "independent_evaluation": {
+      "correct": 64,
+      "first_counterexample": null,
+      "total": 64
+    },
+    "installed": false,
+    "origin_authenticated": false,
+    "parent_proof_digests": [
+      "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
+      "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
+    ],
+    "proof_digest": "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385",
+    "proposal": {
+      "bindings": {
+        "current": "state_sheet",
+        "event": "change_sheet"
+      },
+      "expression": {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "arrival.toggles"
+              },
+              {
+                "ref": "state.on"
+              }
+            ],
+            "op": "difference"
+          },
+          {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          }
+        ],
+        "op": "union"
+      },
+      "rationale": "Scoped evidence candidate; new meaning remains unverified",
+      "schema": "motif.thought025.abstraction-proposal.v1"
+    },
+    "proposal_digest": "bd90d59de95ef0e5f62b3f3f3f01b031fcca2a63d4f97c17673c7239a135bf22",
+    "schema": "motif.thought028.derived-evidence.v1",
+    "source_task_meaning_not_transferred_as_truth": true,
+    "status": "VERIFIED_ONLY_FOR_THIS_SYNTHETIC_TASK",
+    "task_key": "cancel_or_add",
+    "task_spec_sha256": "c6c546021f0f4c3a5e6f634d51e0fae517f60b50ba53f3e319d4d26f8a3f547a",
+    "trusted_template_evaluation": {
+      "correct": 64,
+      "model_written_python": false,
+      "total": 64,
+      "trusted_template": true
+    }
+  },
+  "external_authority": "NONE",
+  "initial_direct_attempt": {
+    "automatic_install_disabled": true,
+    "candidate_choice_did_not_use_target_frozen_truth": true,
+    "candidate_count": 3,
+    "development_observations": [
+      {
+        "candidates_before": 3,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_sheet": 3,
+          "state_sheet": 1
+        },
+        "source_owner_oracle_observed": 2
+      },
+      {
+        "candidates_before": 1,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_sheet": 1,
+          "state_sheet": 1
+        },
+        "source_owner_oracle_observed": 0
+      }
+    ],
+    "development_queries": 2,
+    "external_authority": "NONE",
+    "frozen": {
+      "correct": 27,
+      "first_counterexample": {
+        "actual": 0,
+        "expected": 1,
+        "inputs": {
+          "change_sheet": 0,
+          "state_sheet": 1
+        }
+      },
+      "total": 64
+    },
+    "full_domain_verification_only_after_candidate_selection": true,
+    "installed": false,
+    "linguistic_mapping_not_demonstrated": true,
+    "mode": "direct",
+    "probes_chosen_without_looking_at_expected_result": true,
+    "proposal": {
+      "bindings": {
+        "current": "change_sheet",
+        "event": "state_sheet"
+      },
+      "expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      },
+      "rationale": "Scoped evidence candidate; new meaning remains unverified",
+      "schema": "motif.thought025.abstraction-proposal.v1"
+    },
+    "receipt_digest": "8d33ec1b9f497ec3ed3a22c3c58173c39ad12e43416ac5aa80312203b65340ff",
+    "remaining_after_development": 1,
+    "schema": "motif.thought028.proof-weave.v1",
+    "selected_origin": "SOURCE_PROOF_KERNEL",
+    "source_proof_digests": [
+      "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
+    ],
+    "status": "HOLD_FROZEN_COUNTEREXAMPLE_NO_POST_AUDIT_REPAIR",
+    "task": "cancel_or_add",
+    "trusted_runtime": null
+  },
+  "initial_source_proofs": 2,
+  "installed": false,
+  "licensed_operators": [
+    "difference",
+    "union"
+  ],
+  "model_generations": 0,
+  "new_compositional_attempt": {
+    "automatic_install_disabled": true,
+    "candidate_choice_did_not_use_target_frozen_truth": true,
+    "candidate_count": 6,
+    "development_observations": [
+      {
+        "candidates_before": 6,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_sheet": 5,
+          "state_sheet": 3
+        },
+        "source_owner_oracle_observed": 6
+      },
+      {
+        "candidates_before": 1,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_sheet": 1,
+          "state_sheet": 1
+        },
+        "source_owner_oracle_observed": 0
+      }
+    ],
+    "development_queries": 2,
+    "external_authority": "NONE",
+    "frozen": {
+      "correct": 64,
+      "first_counterexample": null,
+      "total": 64
+    },
+    "full_domain_verification_only_after_candidate_selection": true,
+    "installed": false,
+    "linguistic_mapping_not_demonstrated": true,
+    "mode": "compose",
+    "probes_chosen_without_looking_at_expected_result": true,
+    "proposal": {
+      "bindings": {
+        "current": "state_sheet",
+        "event": "change_sheet"
+      },
+      "expression": {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "arrival.toggles"
+              },
+              {
+                "ref": "state.on"
+              }
+            ],
+            "op": "difference"
+          },
+          {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          }
+        ],
+        "op": "union"
+      },
+      "rationale": "Scoped evidence candidate; new meaning remains unverified",
+      "schema": "motif.thought025.abstraction-proposal.v1"
+    },
+    "receipt_digest": "8e8935ab7485b41a8f1c7e602db8238bc74ba46bcc9edf6c80294f18f4ecbee0",
+    "remaining_after_development": 1,
+    "schema": "motif.thought028.proof-weave.v1",
+    "selected_origin": "LICENSED_COMPOSITION",
+    "source_proof_digests": [
+      "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
+      "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
+    ],
+    "status": "REVIEW_SCOPED_CANDIDATE_NOT_INSTALLED",
+    "task": "cancel_or_add",
+    "trusted_runtime": {
+      "correct": 64,
+      "model_written_python": false,
+      "total": 64,
+      "trusted_template": true
+    }
+  },
+  "no_post_frozen_model_repair": true,
+  "non_boolean_hold": {
+    "candidate_count": 0,
+    "development_queries": 0,
+    "external_authority": "NONE",
+    "installed": false,
+    "mode": "retrieved",
+    "schema": "motif.thought028.proof-weave.v1",
+    "status": "HOLD_SOURCE_OWNER_NONBOOLEAN_OR_AMBIGUOUS",
+    "task": "ternary_unknown"
+  },
+  "receipt_digest": "1349e46693c887888d5cd63085528434075d5f26d8e659778edfaf4d51e5585e",
+  "retained_task_transfer": {
+    "automatic_install_disabled": true,
+    "candidate_choice_did_not_use_target_frozen_truth": true,
+    "candidate_count": 4,
+    "development_observations": [
+      {
+        "candidates_before": 4,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_log": 5,
+          "equipment_state": 3
+        },
+        "source_owner_oracle_observed": 6
+      },
+      {
+        "candidates_before": 1,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "change_log": 1,
+          "equipment_state": 1
+        },
+        "source_owner_oracle_observed": 0
+      }
+    ],
+    "development_queries": 2,
+    "external_authority": "NONE",
+    "frozen": {
+      "correct": 64,
+      "first_counterexample": null,
+      "total": 64
+    },
+    "full_domain_verification_only_after_candidate_selection": true,
+    "installed": false,
+    "linguistic_mapping_not_demonstrated": true,
+    "mode": "retrieved",
+    "probes_chosen_without_looking_at_expected_result": true,
+    "proposal": {
+      "bindings": {
+        "current": "equipment_state",
+        "event": "change_log"
+      },
+      "expression": {
+        "args": [
+          {
+            "args": [
+              {
+                "ref": "arrival.toggles"
+              },
+              {
+                "ref": "state.on"
+              }
+            ],
+            "op": "difference"
+          },
+          {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          }
+        ],
+        "op": "union"
+      },
+      "rationale": "Scoped evidence candidate; new meaning remains unverified",
+      "schema": "motif.thought025.abstraction-proposal.v1"
+    },
+    "receipt_digest": "0da998c1beb3fc0850976046879426f95a7915354718abfd20802d91f5e3db4d",
+    "remaining_after_development": 1,
+    "schema": "motif.thought028.proof-weave.v1",
+    "selected_origin": "RETRIEVED_PROOF",
+    "source_proof_digests": [
+      "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385"
+    ],
+    "status": "REVIEW_SCOPED_CANDIDATE_NOT_INSTALLED",
+    "task": "toggle_equipment",
+    "trusted_runtime": {
+      "correct": 64,
+      "model_written_python": false,
+      "total": 64,
+      "trusted_template": true
+    }
+  },
+  "reversed_role_transfer": {
+    "automatic_install_disabled": true,
+    "candidate_choice_did_not_use_target_frozen_truth": true,
+    "candidate_count": 4,
+    "development_observations": [
+      {
+        "candidates_before": 4,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "recall_register": 5,
+          "shelf_register": 3
+        },
+        "source_owner_oracle_observed": 4
+      },
+      {
+        "candidates_before": 1,
+        "candidates_remaining": 1,
+        "raw_inputs": {
+          "recall_register": 1,
+          "shelf_register": 1
+        },
+        "source_owner_oracle_observed": 0
+      }
+    ],
+    "development_queries": 2,
+    "external_authority": "NONE",
+    "frozen": {
+      "correct": 64,
+      "first_counterexample": null,
+      "total": 64
+    },
+    "full_domain_verification_only_after_candidate_selection": true,
+    "installed": false,
+    "linguistic_mapping_not_demonstrated": true,
+    "mode": "retrieved",
+    "probes_chosen_without_looking_at_expected_result": true,
+    "proposal": {
+      "bindings": {
+        "current": "recall_register",
+        "event": "shelf_register"
+      },
+      "expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      },
+      "rationale": "Scoped evidence candidate; new meaning remains unverified",
+      "schema": "motif.thought025.abstraction-proposal.v1"
+    },
+    "receipt_digest": "af3566aa1c63764b76cf61c48378a51e063156e4ea1aa1f9311e8d92c1b672e3",
+    "remaining_after_development": 1,
+    "schema": "motif.thought028.proof-weave.v1",
+    "selected_origin": "SOURCE_PROOF_KERNEL",
+    "source_proof_digests": [
+      "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
+    ],
+    "status": "REVIEW_SCOPED_CANDIDATE_NOT_INSTALLED",
+    "task": "reverse_recall",
+    "trusted_runtime": {
+      "correct": 64,
+      "model_written_python": false,
+      "total": 64,
+      "trusted_template": true
+    }
+  },
+  "schema": "motif.thought028.offline-proof-weave-benchmark.v1",
+  "serialized_proof_cards": 3,
+  "serialized_store_reverified": true,
+  "source_fixture_provenance": "SCRIPTED_SOURCE_OWNER_AWARE_NOT_LLM",
+  "source_owner_oracle_required_for_new_task": true,
+  "store": {
+    "contains_nonboolean_world_model": false,
+    "derived_cards": [
+      {
+        "construction_kind": "LICENSED_COMPOSITION",
+        "external_authority": "NONE",
+        "function_sha256": "4e30225eeeb7eb5fc1a633d6f85541fc4171a69d69b8e195ca11d0bed15d0525",
+        "independent_evaluation": {
+          "correct": 64,
+          "first_counterexample": null,
+          "total": 64
+        },
+        "installed": false,
+        "origin_authenticated": false,
+        "parent_proof_digests": [
+          "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
+          "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
+        ],
+        "proof_digest": "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385",
+        "proposal": {
+          "bindings": {
+            "current": "state_sheet",
+            "event": "change_sheet"
+          },
+          "expression": {
+            "args": [
+              {
+                "args": [
+                  {
+                    "ref": "arrival.toggles"
+                  },
+                  {
+                    "ref": "state.on"
+                  }
+                ],
+                "op": "difference"
+              },
+              {
+                "args": [
+                  {
+                    "ref": "state.on"
+                  },
+                  {
+                    "ref": "arrival.toggles"
+                  }
+                ],
+                "op": "difference"
+              }
+            ],
+            "op": "union"
+          },
+          "rationale": "Scoped evidence candidate; new meaning remains unverified",
+          "schema": "motif.thought025.abstraction-proposal.v1"
+        },
+        "proposal_digest": "bd90d59de95ef0e5f62b3f3f3f01b031fcca2a63d4f97c17673c7239a135bf22",
+        "schema": "motif.thought028.derived-evidence.v1",
+        "source_task_meaning_not_transferred_as_truth": true,
+        "status": "VERIFIED_ONLY_FOR_THIS_SYNTHETIC_TASK",
+        "task_key": "cancel_or_add",
+        "task_spec_sha256": "c6c546021f0f4c3a5e6f634d51e0fae517f60b50ba53f3e319d4d26f8a3f547a",
+        "trusted_template_evaluation": {
+          "correct": 64,
+          "model_written_python": false,
+          "total": 64,
+          "trusted_template": true
+        }
+      }
+    ],
+    "external_authority": "NONE",
+    "installed": false,
+    "integrity_digest": "b1580bf9f6cd0cd19750ebbdc21b0347a3569b88b7f186adc745f9ab9604aee9",
+    "model_provenance_authenticated": false,
+    "schema": "motif.thought028.operator-owned-evidence-store.v1",
+    "source_cards": [
+      {
+        "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+        "external_authority": "NONE",
+        "full_domain_cases_passed": 64,
+        "function_sha256": "259e192ad817d4baf9340874c00f6fbfb1714eb33ccb5dc4922c7acf921eb593",
+        "identifiability": {
+          "binding_status": "SUPPORTED_ON_FINITE_WORLD",
+          "compatible_pair_count": 1,
+          "consistent_bindings": [
+            [
+              "register_f",
+              "register_g"
+            ]
+          ],
+          "consistent_relations": [
+            "DIFFERENCE"
+          ],
+          "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+          "language_meaning_independently_verified": false,
+          "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+        },
+        "individual_stage_correctness_not_assumed": true,
+        "installed": false,
+        "learned_meaning_from_human_language_proven": false,
+        "model_written_code_executed": false,
+        "oracle_function_sha256": "259e192ad817d4baf9340874c00f6fbfb1714eb33ccb5dc4922c7acf921eb593",
+        "origin_label_unverified": "SCRIPTED_026_FIXTURE_NOT_GENERATIVE_LLM",
+        "proof_digest": "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7",
+        "relation": "DIFFERENCE",
+        "roles": {
+          "current": "register_f",
+          "event": "register_g"
+        },
+        "schema": "motif.thought027.proof-carrying-fragment.v1",
+        "source_owner_not_real_world_verification": true,
+        "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+        "task_key": "food_safe",
+        "task_spec_sha256": "6e046a61bc672445c9e0a4219f29def540089d1a62da260b1381ddfdd4767ef0",
+        "trusted_template_cases_passed": 64,
+        "typed_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        }
+      },
+      {
+        "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+        "external_authority": "NONE",
+        "full_domain_cases_passed": 64,
+        "function_sha256": "637b842bc419a08f65381e2958f548a2fb90a07f3acee8f01e8dd902bdf3efce",
+        "identifiability": {
+          "binding_status": "UNDERDETERMINED",
+          "compatible_pair_count": 2,
+          "consistent_bindings": [
+            [
+              "stream_a",
+              "stream_b"
+            ],
+            [
+              "stream_b",
+              "stream_a"
+            ]
+          ],
+          "consistent_relations": [
+            "UNION"
+          ],
+          "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+          "language_meaning_independently_verified": false,
+          "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+        },
+        "individual_stage_correctness_not_assumed": true,
+        "installed": false,
+        "learned_meaning_from_human_language_proven": false,
+        "model_written_code_executed": false,
+        "oracle_function_sha256": "637b842bc419a08f65381e2958f548a2fb90a07f3acee8f01e8dd902bdf3efce",
+        "origin_label_unverified": "SCRIPTED_026_FIXTURE_NOT_GENERATIVE_LLM",
+        "proof_digest": "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
+        "relation": "UNION",
+        "roles": {
+          "current": "stream_a",
+          "event": "stream_b"
+        },
+        "schema": "motif.thought027.proof-carrying-fragment.v1",
+        "source_owner_not_real_world_verification": true,
+        "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+        "task_key": "food_donations",
+        "task_spec_sha256": "3bc800deb6336ddcf527d1b631e45e874a5a0223c8a6ec18d8328697e49ddb51",
+        "trusted_template_cases_passed": 64,
+        "typed_expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        }
+      }
+    ],
+    "source_owner_created_and_controls_export": true
+  },
+  "task_meaning_not_inferred_from_unfamiliar_language": true,
+  "threshold_outside_licensed_grammar": true
+}
