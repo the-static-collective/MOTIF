@@ -1,0 +1,109 @@
+name: MOTIF Ring 015 / conditional value of real second test
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-015-conditional-real-test-followups
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-015/**'
+      - '.github/workflows/cartridge-ring-015.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-conditional-source-investigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Provision official test-only Python runtime before removing network
+        run: |
+          docker pull python:3.11-slim
+          docker image inspect python:3.11-slim --format '{{.Id}}'
+      - name: Verify real AST scope triage, math/control focused tests and conditional STOP
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-015 -p 'test_*.py' -v
+      - name: Calibrate using 72 REAL no-network source tests then freeze value of next test
+        run: |
+          python experiments/cartridge-ring-015/learn.py \
+            --out /tmp/ring015-frozen-policy.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring015-frozen-policy.json'))
+          assert r['schema']=='motif.ring015.frozen-observation-conditioned-test-policy.v1'
+          assert r['source_train_case_count']==12
+          assert r['source_dev_case_count']==6
+          assert r['actual_calibration_docker_test_invocations']==72
+          assert r['candidate_action_policies_tested']==36
+          assert r['model_likelihoods_derived_from_train_only']['cases']==12
+          assert r['source_open_world_meanings_retained']
+          assert r['real_source_tests_and_times_observed_not_simulated']
+          assert r['sealed_postfreeze_mutations_not_imported_during_calibration']
+          assert r['sealed_test_results_not_used_for_policy_selection']
+          assert r['outside_actions_executed']==0
+          assert r['authority']=='NONE'
+          print('Actual RING-013 code tests and posterior policy frozen before importing novel source challenges.')
+          PY
+      - name: Choose real source tests before observing results on 18 novel source copies
+        run: |
+          python experiments/cartridge-ring-015/trial.py \
+            --frozen /tmp/ring015-frozen-policy.json \
+            --out /tmp/ring015-real-followup-trial.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring015-real-followup-trial.json'))
+          assert r['schema']=='motif.ring015.real-conditional-second-test-trial.v1'
+          assert r['status']=='REAL_CONDITIONAL_FOLLOWUP_TESTS_EXECUTED_AND_MEASURED'
+          assert r['source_test_cases']==18
+          assert r['real_test_invocations_including_comparator_measurement']==72
+          assert r['source_only_and_immutable_fixture_copies']
+          assert r['decision_actions_selected_before_receiving_their_test_result']
+          assert r['all_baseline_results_measured_after_live_policy']
+          assert r['precomputed_test_matrix_not_exposed_to_live_planner']
+          assert r['source_method_test_signals_are_real_interpreter_outputs']
+          assert r['utility_numbers_are_author_values_not_verified_savings']
+          assert r['outside_effectful_actions_executed']==0
+          assert r['new_agent_tool_permissions_granted']==0
+          assert r['authority']=='NONE'
+          assert len(r['individual_code_and_test_receipts'])==18
+          assert r['method_scores']['SELECTED_LIVE']['cases']==18
+          assert r['method_scores']['ALWAYS_FULL']['cases']==18
+          assert r['method_scores']['TRIAGE_OPTIONAL_FOLLOWUP']['cases']==18
+          print('Model-chosen sources were executed BEFORE the complete baseline matrix.')
+          PY
+      - name: Reconcile chosen second tests against full real source-test matrix and strong baselines
+        run: |
+          python experiments/cartridge-ring-015/evidence_graph.py \
+            --frozen /tmp/ring015-frozen-policy.json \
+            --trial /tmp/ring015-real-followup-trial.json \
+            --out /tmp/ring015-source-evidence-graph.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring015-source-evidence-graph.json'))
+          assert r['schema']=='motif.ring015.real-conditional-investigation-evidence.v1'
+          assert len(r['hyperedges'])==2
+          assert r['second_test_traces_reconciled_to_real_receipts']
+          assert r['strong_single_full_control_measured']
+          assert r['full_data_source_asymmetric_visibility_preserved']
+          assert not r['novel_general_software_repair_proven']
+          assert r['new_external_tool_permissions']==0
+          assert r['external_effects_executed']==0
+          assert r['authority']=='NONE'
+          print('Action sequence, measured costs, wrong STOPs and false alarms reconciled against exact source receipts.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring015-real-conditional-second-tests
+          path: |
+            /tmp/ring015-frozen-policy.json
+            /tmp/ring015-real-followup-trial.json
+            /tmp/ring015-source-evidence-graph.json
+          retention-days: 30
