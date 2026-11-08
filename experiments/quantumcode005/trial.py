@@ -24,6 +24,7 @@ from foreign_worlds import (
     normalize_native, oracle, topology,
 )
 import networkx as nx
+from classical_control import train_control, external_control_accuracy
 
 TASKS = ("alternate_path", "triangle", "square")
 STATUS = "FROZEN_MODEL_FOREIGN_GRAPH_EVALUATION_ONLY"
@@ -163,6 +164,21 @@ def run():
     findings = {
         task: foreign_evaluation(task,models[task],external) for task in TASKS
     }
+    # Separately coded NetworkX synthesis over identical TRAIN/VALIDATE rows,
+    # same hypothesis grammar and same enumerated-candidate budget.
+    # This does NOT equalize CPU cost or prove a performance advantage.
+    controls = {}
+    for task in TASKS:
+        tr,va,_ = fixtures(task)
+        classical = train_control(tr,va)
+        external_score = external_control_accuracy(classical,task,external)
+        controls[task] = {
+            "status":classical["status"],
+            "program":classical["program"],
+            "candidates_tested":classical["tested"],
+            "foreign":external_score,
+            "matches_MOTIF_program":classical["program"] == frozen[task]["program"],
+        }
     unexpressible = unsupported_certificate(paired_isolation_unsupported())
     return {
         "experiment":"MOTIF-QC-005",
@@ -173,11 +189,13 @@ def run():
         "frozen_models":frozen,
         "foreign_performance":findings,
         "unsupported_expressivity":unexpressible,
+        "matched_grammar_classical_learner":controls,
         "directional_graphs": "HOLD_UNSUPPORTED_DOMAIN",
         "weighted_graph_semantics": "HOLD_UNSUPPORTED_DOMAIN",
         "baseline":"independent NetworkX connectivity/neighbor/path oracle",
         "baseline_receives_semantic_task_name":True,
-        "equal_budget_learning_baseline_exists":False,
+        "equal_sample_and_AST_budget_classical_learner":True,
+        "equal_cpu_or_wallclock_budget":False,
         "task_labels_are_provided_to_evaluator":True,
         "external_actions":0,
         "quantum_execution":False,
