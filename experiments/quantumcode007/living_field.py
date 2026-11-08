@@ -410,6 +410,78 @@ def reenter(path: Path,claim: ClaimedWitness | None):
     return Reentry(path,claim)
 
 
+
+@dataclass(frozen=True)
+class Contradiction:
+    """An attributable *reported* deviation, never independent verification.
+
+    A witness about an action may report that the predicted resource arrived,
+    did not arrive, or took a different form. The model must record the
+    disagreement without silently rewriting either prediction or history.
+    """
+    predicted_path_receipt: str
+    source_parent_receipt: str
+    action_id: str
+    expected_state_receipt: str
+    reported_state_receipt: str
+    source_ref: str
+    status: str = "REPORTED_OUTCOME_UNVERIFIED"
+
+    @property
+    def disagrees(self):
+        return self.expected_state_receipt != self.reported_state_receipt
+
+    def seal(self):
+        return digest(self.__dict__)
+
+
+def receive_feedback(path: Path, reported: World, source_ref: str,
+                     source_parent_receipt: str):
+    """Receive a report, do not execute an action or assume ground truth."""
+    if (path.status != STATUS or not path.action_ids or not source_ref
+        or source_parent_receipt != path.parent_receipt
+        or not isinstance(reported,World)):
+        raise ValueError("Feedback needs source, history and typed reported state")
+    return Contradiction(path.receipt(),path.parent_receipt,
+                         path.action_ids[-1],path.state.receipt(),
+                         reported.receipt(),source_ref)
+
+
+def accrue_from_feedback(field: MeaningField, prior_meaning_id: str,
+                         feedback: Contradiction, new_id: str,
+                         proposition: str, time: int,
+                         need_tags: frozenset[str],
+                         action_tags: frozenset[str]):
+    """Attach a cautious new hypothesis. Never promote a report into a fact."""
+    existing={m.id:m for m in field.meanings}
+    if (prior_meaning_id not in existing or not feedback.source_ref
+        or not feedback.predicted_path_receipt or feedback.status !=
+        "REPORTED_OUTCOME_UNVERIFIED"):
+        raise ValueError("Feedback cannot create unsupported historical knowledge")
+    source=existing[prior_meaning_id]
+    new_meaning=Meaning(new_id,source.carrier,proposition,need_tags,
+                        action_tags,feedback.seal(),"HYPOTHESIS",time)
+    expanded=field.add(new_meaning)
+    expanded=expanded.relate(MeaningEdge(prior_meaning_id,new_id,
+                         "REINTERPRETS",feedback.seal(),time))
+    return expanded
+
+
+def diagnose_report(path: Path, feedback: Contradiction):
+    """A discrepancy is a *reason to revise*, not proof of causal mechanism."""
+    if (feedback.predicted_path_receipt != path.receipt() or
+        feedback.expected_state_receipt != path.state.receipt() or
+        feedback.action_id != path.action_ids[-1]):
+        raise ValueError("Counterexample receipt belongs to another proposal")
+    return {
+        "status":"HOLD_MODEL_REVIEW" if feedback.disagrees else
+                 "AGREEMENT_REPORTED_NOT_VERIFIED",
+        "action_id":feedback.action_id,
+        "feedback_receipt":feedback.seal(),
+        "reported_as_fact":False,
+        "prediction_preserved":path.receipt(),
+    }
+
 def action_inventory():
     """Hypothetical mechanisms. Does not claim any service exists or accepts."""
     return (
