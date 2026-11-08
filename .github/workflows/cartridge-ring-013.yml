@@ -1,0 +1,105 @@
+name: MOTIF Ring 013 / value of knowing and doing next
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-013-value-of-next-move
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-013/**'
+      - '.github/workflows/cartridge-ring-013.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  epistemic-action-frontier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Contract tests for reversible local progress and no-interest STOP
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-013 -p 'test_*.py' -v
+      - name: Select and FREEZE intrinsic information and affordance value policy
+        run: |
+          python experiments/cartridge-ring-013/freeze.py \
+            --out /tmp/motif-ring013-frozen.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/motif-ring013-frozen.json'))
+          assert p['schema']=='motif.ring013.frozen-next-move-research-policy.v1'
+          assert p['source_train_cases']==24
+          assert p['source_dev_cases']==24
+          assert p['candidate_policies_executed']==24
+          assert p['future_unknown_test_module_imported_during_selection'] is False
+          assert p['heldout_outcomes_influenced_action_valuation'] is False
+          assert p['only_internal_simulated_experimentation_autonomous']
+          assert p['automatic_unauthorized_effects']==0
+          assert p['new_real_world_agent_authority']=='NONE'
+          print('Value-of-action / value-of-information hypothesis frozen before novel outcomes.')
+          PY
+      - name: Actually execute bounded internal simulator actions on unseen cases
+        run: |
+          python experiments/cartridge-ring-013/trial.py \
+            --frozen /tmp/motif-ring013-frozen.json \
+            --out /tmp/motif-ring013-action-trial.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-ring013-action-trial.json'))
+          assert r['schema']=='motif.ring013.postfreeze-action-vs-ambiguity-trial.v1'
+          assert r['status']=='REAL_SAFE_SIMULATOR_EXECUTED_WITH_AMBIGUITY_AWARE_ACTION_SEARCH'
+          assert len(r['test_packets'])==3
+          assert sum(p['case_count'] for p in r['test_packets'])==60
+          assert r['value_function_includes_information_future_options_cost_risk']
+          assert r['retains_ambiguity_instead_of_forcing_decision_truth']
+          assert r['safe_simulated_action_can_run_when_expected_benefit_positive']
+          assert r['stops_when_no_allowed_safe_action_has_positive_estimated_value']
+          assert r['source_test_outcomes_author_constructed_not_real_user_preference']
+          assert r['external_effectful_option_never_reaches_executor']
+          assert r['external_actions_executed']==0
+          assert r['new_real_world_tools_installed']==0
+          assert r['authority']=='NONE'
+          for pack in r['test_packets']:
+              assert pack['trial_uses_author_hidden_viability_only_in_simulator']
+              assert pack['novel_templates_not_used_in_selection']
+              assert pack['no_external_actions_or_user_questions_executed']
+              assert len(pack['case_witnesses'])==pack['case_count']
+          print('Source-native RING-012 uncertainty and safe multi-step simulated actions compared against STOP, GREEDY, ASK, and SMASH controls.')
+          PY
+      - name: Reconcile all case-level value results with non-authoritative evidence hypergraph
+        run: |
+          python experiments/cartridge-ring-013/evidence_graph.py \
+            --frozen /tmp/motif-ring013-frozen.json \
+            --trial /tmp/motif-ring013-action-trial.json \
+            --out /tmp/motif-ring013-option-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/motif-ring013-option-hypergraph.json'))
+          assert g['schema']=='motif.ring013.option-value-evidence-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['hyperedges'][1]['total_cases']==60
+          assert g['positive_action_value_can_proceed_without_ambiguity_resolution']
+          assert g['interest_alone_can_be_outweighed_by_time_and_risk']
+          assert g['no_action_without_authorized_internal_permission']
+          assert g['truthful_negative_results_preserved']
+          assert not g['real_world_autonomous_execution_demonstrated']
+          assert g['new_external_tool_permissions']==0
+          assert g['external_actions_executed'] is False
+          assert g['authority']=='NONE'
+          print('Source receipt hypergraph preserves value, uncertainty, safe progress and bad decisions.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring013-value-of-next-action
+          path: |
+            /tmp/motif-ring013-frozen.json
+            /tmp/motif-ring013-action-trial.json
+            /tmp/motif-ring013-option-hypergraph.json
+          retention-days: 30
