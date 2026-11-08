@@ -178,6 +178,12 @@ def test(policy):
                     for x in case["admissible_graphs"]],
                 "model_source_claims":lattice_output["source_methods"],
                 "retained_source_disagreement":lattice_output["source_disagreements"],
+                "source_conditional_invariants":lattice_output.get(
+                    "conditional_invariants_within_modeled_worlds",{}),
+                "optional_discriminator":lattice_output.get(
+                    "optional_discriminator_question_kind"),
+                "ambiguity_does_not_force_an_interruption":not lattice_output.get(
+                    "auto_interrupt_user_for_ambiguity",False),
                 "open_world_always":lattice_output[
                     "other_unmodeled_readings_remain_possible"],
                 "author_meanings_do_not_authenticate_real_events":True,
