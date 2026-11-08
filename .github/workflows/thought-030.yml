@@ -1,0 +1,108 @@
+name: THOUGHT-030 evidence-routed browsing + optional pidgin experiment
+on:
+  push:
+    paths:
+      - 'experiments/thought-030/**'
+      - '.github/workflows/thought-030.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-030/**'
+      - '.github/workflows/thought-030.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-router-and-pidgin-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New navigation/negotiated-vocabulary tests and synthetic HTTP fixture
+        working-directory: experiments/thought-030
+        run: python -m unittest -v test_router.py test_pidgin_http.py
+      - name: Preserve predecessor 029 portal regression
+        working-directory: experiments/thought-029
+        run: python -m unittest -v test_portal.py test_transport.py
+      - name: Compare three offline scripted arms (NOT a real LLM)
+        working-directory: experiments/thought-030
+        run: python experiment.py --backend offline --steps 6 --tasks food_safe,food_recalled_elsewhere --output offline-results.json
+      - name: Independent finite oracle checks, optional word use and no installation
+        working-directory: experiments/thought-030
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          assert not r['actual_llm_inference'] and r['model_calls']==0
+          for task,arms in r['tasks'].items():
+              assert set(arms)=={'legacy','routed','routed_optional_pidgin'}
+              for label,x in arms.items():
+                  assert x['status']=='REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED', (task,label,x['status'])
+                  assert x['frozen']['correct']==64 and not x['installed']
+              assert arms['routed_optional_pidgin']['pidgin_used']
+              assert not arms['routed']['pidgin_used']
+          assert r['indexed_graphs']>=2 and r['indexed_artifacts']>=70
+          print('OFFLINE scripted-only',{'artifacts':r['indexed_artifacts'],'graphs':r['indexed_graphs']})
+          PY
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-030-scripted-protocol-and-navigation-tests
+          path: experiments/thought-030/offline-results.json
+          if-no-files-found: ignore
+  genuine-llm-comparison:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama on disposable research runner (un-pinned research dependency)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start local inference and provision Qwen2.5 3B
+        run: |
+          (ollama serve >"$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 55); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Run same real model with and without evidence route and optional pidgin
+        working-directory: experiments/thought-030
+        run: |
+          python experiment.py --backend ollama --model qwen2.5:3b --steps 6 \
+            --tasks food_recalled_elsewhere --output real-llm-results.json
+      - name: Inspect actual generations and record optional non-use without claiming success
+        working-directory: experiments/thought-030
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('real-llm-results.json'))
+          assert r['actual_llm_inference'] and r['model_calls']>=3
+          assert len(r['real_model_receipts'])==r['model_calls']
+          for c in r['real_model_receipts']:
+              assert c['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP'
+          assert not r['installed'] and r['external_authority']=='NONE'
+          row=r['tasks']['food_recalled_elsewhere']
+          for arm,x in row.items():
+              assert x['actual_model_call_count']>=1 and not x['installed']
+              print(arm,{'status':x['status'], 'generations':x['actual_model_call_count'],
+                         'reads':x.get('read_only_tool_calls'),
+                         'pidgin_offered':x.get('pidgin_offered'),
+                         'terms':x.get('pidgin_lexicon',{}).get('tokens_coined'),
+                         'uses':x.get('pidgin_lexicon',{}).get('token_uses'),
+                         'frozen':x['frozen']['correct'] if x.get('frozen') else None})
+          PY
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-030-real-qwen-evidence-and-pidgin-comparison
+          path: experiments/thought-030/real-llm-results.json
+          if-no-files-found: ignore
