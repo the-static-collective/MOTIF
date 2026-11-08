@@ -137,6 +137,22 @@ class ProvenanceProbeTests(unittest.TestCase):
         with self.assertRaises(ValueError):collapse_forwarded((SourceClaim('r','a','s','blue'),
                                                                 SourceClaim('r','b','t','blue')))
 
+    def test_real_decoder_integrity_adapter_preserves_hold_and_declarations(self):
+        sys.path.insert(0,str(ROOT/'decoderintegrity001'))
+        from decoderintegrity import audit_pairs
+        from provenanceprobe import ingest_decoder_witness_pairs
+        sample=audit_pairs('test',12,missing_every=3)
+        witness_only=tuple(pair for _episode,pair in sample)
+        prior=repr(witness_only)
+        belief=ingest_decoder_witness_pairs(witness_only)
+        self.assertEqual(belief.pair_count,8)
+        self.assertEqual(belief.held_count,4)
+        self.assertEqual(belief.anchor_count,0)
+        self.assertEqual(repr(witness_only),prior)
+        self.assertEqual(sum(r['status']=='HOLD_MISSING_AUDIT' for r in belief.receipts),4)
+        self.assertEqual(belief.classification()['identifiability'],'NO_ANCHOR_SYMMETRY')
+        self.assertFalse(belief.classification()['verified_independence'])
+
     def test_no_unattested_anchor_admission(self):
         with self.assertRaises(ValueError):Observation('id','amber','blue',anchor='amber')
         with self.assertRaises(ValueError):Observation('id','amber','blue',fixture_anchor_attested=True)
