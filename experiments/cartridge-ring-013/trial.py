@@ -194,8 +194,7 @@ def main():
             "external_effectful_actions":report["external_actions_executed"],
             "receipt_sha256":report["receipt_sha256"],
         },sort_keys=True))
-    except (HOLD,value.ValueError if hasattr(value,"ValueError") else ValueError,
-            ValueError) as exc:
+    except (HOLD,ValueError) as exc:
         print(json.dumps({"status":"HOLD","reason":str(exc)}))
         raise SystemExit(2)
 
