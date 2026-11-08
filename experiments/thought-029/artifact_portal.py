@@ -145,6 +145,48 @@ class ArtifactPortal:
                 for g in _pairs(parsed):
                     gid=name+'#'+g['pointer']
                     self._graphs[gid]={'id':gid,'artifact_id':name,**g,'truth_status':SOURCE_LABEL}
+        self._derive_proof_lineage_graph()
+
+    def _derive_proof_lineage_graph(self):
+        '''Turn claimed proof ancestry into an explicitly *unverified* graph.'''
+        nodes={};edges=[]
+        def visit(value,source,location='',depth=0):
+            if depth>35:return
+            if type(value) is dict:
+                child=value.get('proof_digest')
+                if type(child) is str and re.fullmatch('[a-fA-F0-9]{64}',child):
+                    nodes[child]={'id':child,'label':'declared proof '+child[:12],
+                                  'kind':'CLAIMED_PROOF','origin_artifact':source,
+                                  'pointer':location,'claim_not_authentication':True}
+                    for parent in value.get('parent_proof_digests',[]):
+                        if type(parent) is not str or not re.fullmatch('[a-fA-F0-9]{64}',parent):continue
+                        nodes.setdefault(parent,{'id':parent,'label':'referenced proof '+parent[:12],
+                                        'kind':'PARENT_PROOF_REFERENCE_NOT_VERIFIED'})
+                        edges.append({'source':child,'target':parent,
+                                     'relation':'CLAIMED_PARENT_PROOF', 'origin':source,
+                                     'status':'DECLARED_UNVERIFIED_LINEAGE', 'observed':False})
+                for k,v in value.items():
+                    if isinstance(v,(dict,list)):visit(v,source,location+pointer(k),depth+1)
+            elif type(value) is list:
+                for i,v in enumerate(value):
+                    if isinstance(v,(dict,list)):visit(v,source,location+pointer(i),depth+1)
+        for meta,_,obj in list(self._items.values()):
+            if obj is not None:visit(obj,meta['id'])
+        if not nodes:return
+        rel={'nodes':[nodes[k] for k in sorted(nodes)],
+             'edges':sorted(edges,key=lambda e:(e['source'],e['target'],e['origin'])),
+             'status':'DECLARED_LINEAGE_ONLY_NOT_PROOF',
+             'derivation':'SOURCE_OWNED_INDEX_FROM_REPOSITORY_JSON'}
+        content=compact(rel);id_='derived/claimed-proof-lineage.json'
+        meta={'id':id_,'kind':'derived_claimed_proof_graph','sha256':sha(content.encode()),
+              'bytes':len(content),'format':'.json',
+              'access':'READ_ONLY_DERIVED_VIEW',
+              'truth_status':'UNVERIFIED_DIGEST_LINEAGE_NOT_MATHEMATICAL_PROOF'}
+        self._items[id_]=(meta,content,rel)
+        self._graphs[id_+'#']={'id':id_+'#','artifact_id':id_,'pointer':'',
+              'kind':'typed_graph','node_key':'nodes','edge_key':'edges',
+              'node_count':len(rel['nodes']),'edge_count':len(rel['edges']),
+              'truth_status':meta['truth_status']}
 
     def _page(self,items,cursor=0,limit=10):
         if type(cursor) is not int or cursor<0 or type(limit) is not int or not 1<=limit<=MAX_PAGE:
@@ -159,8 +201,14 @@ class ArtifactPortal:
         for meta,_,_ in self._items.values():counts[meta['kind']]=counts.get(meta['kind'],0)+1
         graph_kinds={}
         for g in self._graphs.values():graph_kinds[g['kind']]=graph_kinds.get(g['kind'],0)+1
+        exemplars=[]
+        for kind in sorted(counts):
+            ids=[m['id'] for m,_,_ in self._items.values() if m['kind']==kind]
+            exemplars.extend(ids[:2])
         return {'artifacts':len(self._items),'graphs':len(self._graphs),
                 'kinds':counts,'graph_kinds':graph_kinds,
+                'example_artifact_ids':exemplars[:25],
+                'example_graph_ids':list(self._graphs)[:5],
                 'read_only_tools':['catalog','search','graphs','read','neighbors'],
                 'pagination':'Every result page has next_cursor; no global arbitrary graph-count cap',
                 'provenance':'Untrusted public source and expressly provided runtime snapshots',

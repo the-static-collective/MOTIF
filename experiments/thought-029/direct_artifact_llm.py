@@ -34,6 +34,8 @@ class DirectArtifactLLM(DirectLocalLLM):
             'Tool request JSON: {"action":"search","term":"difference"} or '
             '{"action":"graphs"} or {"action":"read","artifact_id":"EXACT_INDEXED_PATH"} or '
             '{"action":"neighbors","graph_id":"GRAPH_ID","node_id":"EXACT_NODE_ID"}. '
+            'If a tool refuses an unknown artifact ID, use catalog or search to obtain an exact indexed ID. '
+            'Do not retry an invented path. Never guess repository names. '
             'Do not request files outside the catalog. The final JSON object has exactly: '
             '{"action":"final","bindings":{"current":"FIELD_ID","event":"OTHER_FIELD_ID"},'
             '"relation":"DIFFERENCE","evidence_ids":["ACTUALLY_SEEN_ARTIFACT_PATH"],'

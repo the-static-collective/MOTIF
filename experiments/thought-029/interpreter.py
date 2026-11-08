@@ -83,7 +83,17 @@ def trial(task,portal,model,*,max_steps=5,max_dev=4):
             if action['action'] not in ('catalog','search','graphs','read','neighbors'):
                 raise InterpretationError('model action not read-only')
             params={k:v for k,v in action.items() if k in ('artifact_id','pointer','term','kind','graph_id','node_id','cursor','limit')}
-            packet=portal.query({'tool':action['action'],**params})
+            try:
+                packet=portal.query({'tool':action['action'],**params})
+            except PortalError as exc:
+                # Model can recover from a refused hallucinated path, without
+                # accessing it and without exceeding its original call budget.
+                safe_request={'tool':action['action'],**{k:str(v)[:160] for k,v in params.items()}}
+                transcript.append({'stage':'TOOL_REFUSED','request':safe_request,
+                                   'error':str(exc)[:100],
+                                   'recovery':'Use catalog or search for an EXACT indexed identifier; no file opened',
+                                   'material_is_untrusted':True})
+                continue
             observed|=_traverse_ids(packet)
             # Source IDs of all graph listings are exposed to the model, not held back.
             for item in packet.get('items',[]):

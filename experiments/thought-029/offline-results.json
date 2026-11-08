@@ -10,17 +10,17 @@
     "neighbors"
   ],
   "backend": "offline",
-  "digest": "657e8cb6d4390009ba886d9dc82adb00dd827994c9e393d2623829c4c23d59c7",
+  "digest": "fbe37598f68f70c5703286d9dfc8ae0d9315cc647734f75c91c6e7ad1a462ede",
   "external_authority": "NONE",
   "external_project_accounts_not_automatically_connected": true,
   "installed": false,
   "model_tag": null,
   "real_local_ollama_model_generations": 0,
   "real_model_execution_verified": false,
-  "repository_artifact_count": 82,
+  "repository_artifact_count": 83,
   "schema": "motif.thought029.tool-guided-abstraction-experiment.v1",
   "source_scope": "EXPLICIT_CHECKOUT_ONLY",
-  "symbolic_graph_count": 12,
+  "symbolic_graph_count": 13,
   "text_only_model_cannot_see_opaque_media_pixels": true,
   "trials": {
     "food_recalled_elsewhere": {
@@ -58,13 +58,13 @@
         "total": 64
       },
       "graph_coordinates_not_proof": true,
-      "indexed_symbolic_graph_count": 12,
+      "indexed_symbolic_graph_count": 13,
       "installed": false,
       "model_did_not_receive_truth_policy": true,
       "model_generated_python_executed": false,
       "proposer_action_requests": 3,
       "read_only_tool_calls": 2,
-      "report_digest": "02e0b17c43bff42791cc15121eb88c95db8cd75f85ff8bd19e066418264cae08",
+      "report_digest": "450eb277ab13c44931ae25830add784cfbe5194d298c3b7330e1b1fbb8271561",
       "schema": "motif.thought029.artifact-guided-interpretation.v1",
       "selected_expression": {
         "bindings": {
@@ -85,7 +85,7 @@
         "rationale": "Source-owned compiler of two separately proposed typed stages",
         "schema": "motif.thought025.abstraction-proposal.v1"
       },
-      "source_artifact_count": 82,
+      "source_artifact_count": 83,
       "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
       "task": "food_recalled_elsewhere",
       "transcript": [
@@ -192,7 +192,7 @@
             "next_cursor": 10,
             "offset": 0,
             "response_only_paginated": true,
-            "total": 12
+            "total": 13
           },
           "stage": "READ_ONLY_TOOL"
         },
@@ -323,13 +323,13 @@
         "total": 64
       },
       "graph_coordinates_not_proof": true,
-      "indexed_symbolic_graph_count": 12,
+      "indexed_symbolic_graph_count": 13,
       "installed": false,
       "model_did_not_receive_truth_policy": true,
       "model_generated_python_executed": false,
       "proposer_action_requests": 3,
       "read_only_tool_calls": 2,
-      "report_digest": "30662b7195dc09e3d6f801f640e313653dd2b2dc6c9bd408e1c5978c68b11d32",
+      "report_digest": "0e9613b1ff4200d7473755168f7f3063a9b2a63ced7ec2a903abc6364b287937",
       "schema": "motif.thought029.artifact-guided-interpretation.v1",
       "selected_expression": {
         "bindings": {
@@ -350,7 +350,7 @@
         "rationale": "Source-owned compiler of two separately proposed typed stages",
         "schema": "motif.thought025.abstraction-proposal.v1"
       },
-      "source_artifact_count": 82,
+      "source_artifact_count": 83,
       "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
       "task": "food_safe",
       "transcript": [
@@ -457,7 +457,7 @@
             "next_cursor": 10,
             "offset": 0,
             "response_only_paginated": true,
-            "total": 12
+            "total": 13
           },
           "stage": "READ_ONLY_TOOL"
         },
@@ -588,13 +588,13 @@
         "total": 64
       },
       "graph_coordinates_not_proof": true,
-      "indexed_symbolic_graph_count": 12,
+      "indexed_symbolic_graph_count": 13,
       "installed": false,
       "model_did_not_receive_truth_policy": true,
       "model_generated_python_executed": false,
       "proposer_action_requests": 3,
       "read_only_tool_calls": 2,
-      "report_digest": "58a0257d68773c3f218a1fdeecb9865c4be2bdbf24d8a1aaf492f4dfdc2b924f",
+      "report_digest": "3a52ab2160510bd3cd335cca582d83a0b6cff91231de5a470147688a5c6cd504",
       "schema": "motif.thought029.artifact-guided-interpretation.v1",
       "selected_expression": {
         "bindings": {
@@ -615,7 +615,7 @@
         "rationale": "Source-owned compiler of two separately proposed typed stages",
         "schema": "motif.thought025.abstraction-proposal.v1"
       },
-      "source_artifact_count": 82,
+      "source_artifact_count": 83,
       "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
       "task": "volunteer_eligible",
       "transcript": [
@@ -722,7 +722,7 @@
             "next_cursor": 10,
             "offset": 0,
             "response_only_paginated": true,
-            "total": 12
+            "total": 13
           },
           "stage": "READ_ONLY_TOOL"
         },
@@ -820,6 +820,7 @@
     }
   },
   "typed_artifact_types": [
+    "derived_claimed_proof_graph",
     "evaluation_receipt",
     "geometry_or_thought_space",
     "proof_or_evidence",

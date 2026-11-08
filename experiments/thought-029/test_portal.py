@@ -41,6 +41,17 @@ class PortalTests(unittest.TestCase):
         self.assertIn('origin',json.dumps(r))
         self.assertFalse(r['geometry_is_not_evidence'] is False)
 
+    def test_claimed_proof_dependency_graph_exposes_ancestry_not_truth(self):
+        p=sample_portal()
+        g=[v for v in p.graphs(limit=30)['items'] if 'claimed-proof-lineage.json' in v['id']]
+        self.assertEqual(len(g),1)
+        self.assertGreaterEqual(g[0]['edge_count'],2)
+        self.assertIn('UNVERIFIED',g[0]['truth_status'])
+        items=p.read('derived/claimed-proof-lineage.json',pointer_path='/nodes',limit=1)
+        self.assertGreaterEqual(items['total'],3)
+        status=p.read('derived/claimed-proof-lineage.json',pointer_path='/status')
+        self.assertIn('NOT_PROOF',str(status['items']))
+
     def test_recursive_ast_is_a_graph_and_exposes_arguments(self):
         p=sample_portal();g=[x for x in p.graphs(limit=30)['items'] if x['kind']=='symbolic_AST' and x['edge_count']>0][0]
         r=p.neighbors(g['id'],'/',limit=10)
@@ -124,6 +135,19 @@ class PortalTests(unittest.TestCase):
         out=trial(task,p,FakeAgent([{'action':'search','term':'difference'},final(task,evidence=['files-with-no-proof.json'])]))
         self.assertEqual(out['status'],'HOLD_INVALID_MODEL_OR_ARTIFACT_ACTION')
         self.assertIn('citation',out['failed_reason'].lower())
+
+    def test_model_can_recover_from_refused_nonexistent_path(self):
+        p=sample_portal();task=BY_KEY['food_recalled_elsewhere']
+        source='experiments/thought-027/reuse.py'
+        model=FakeAgent([{'action':'read','artifact_id':'ghost/outside.json'},
+                         {'action':'read','artifact_id':source},
+                         final(task,reverse=True,evidence=[source])])
+        out=trial(task,p,model,max_steps=4)
+        self.assertEqual(out['status'],'REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED')
+        self.assertEqual(out['frozen']['correct'],64)
+        self.assertEqual(out['read_only_tool_calls'],1)
+        self.assertEqual(out['transcript'][0]['stage'],'TOOL_REFUSED')
+        self.assertEqual(out['actual_model_call_count'],3)
 
     def test_a_wrong_retrieved_candidate_stays_hold(self):
         p=sample_portal();task=BY_KEY['food_recalled_elsewhere']

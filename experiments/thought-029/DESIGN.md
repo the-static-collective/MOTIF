@@ -49,3 +49,21 @@ python run.py --backend ollama --model qwen2.5:3b --steps 4 \
 ## Suggested next boundary
 
 Add **owner-approved external corpus adapters** (Free Graph, GRAFT, geometry repos, prior project artifacts), complete graph projection APIs, and a larger blind benchmark with human-judged grounding, against a call/token-matched baseline. Keep all source IDs, observation status, uncertainty and authority scope in the retrieval context. Avoid content flooding: fetch only evidence that changes the decision.
+
+## First actual Qwen experiment and interface repair
+
+The first successful *execution* of the direct-Qwen job (Actions #42435483658)
+completed one real model generation, indexing **338** repository artifacts and
+**64** symbolic graph/AST views. The model attempted a `read` with an identifier
+that did **not** exist in the approved index. The portal correctly refused it,
+but the initial interpreter implementation stopped immediately and produced
+`HOLD_INVALID_MODEL_OR_ARTIFACT_ACTION` with **zero** successful retrievals.
+This was **not** verified graph-aided language reasoning.
+
+The next revision now gives the model exact example IDs from the actual
+catalog, and lets the model correct a refused read within the same bounded
+iteration budget while preserving a refusal record. It still never opens an
+unauthorized path. It also adds an index-only graph for **claimed proof lineage**,
+with all parent relationships marked *unverified*, not automatically certified.
+Do not claim that Qwen used either improvement until a later actual model run
+and its receipts are inspected.
