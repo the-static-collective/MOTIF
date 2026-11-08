@@ -1,0 +1,27 @@
+name: MOTIF QC-010 traction loop -- adaptation under uncertainty
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode010/**'
+      - '.github/workflows/quantum-code-010.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode010/**'
+      - '.github/workflows/quantum-code-010.yml'
+permissions:
+  contents: read
+jobs:
+  live-traction-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Evaluate adaptive decisions, safety uncertainty, and failed probes
+        working-directory: experiments/quantumcode010
+        run: python -m unittest -v test_traction.py
+      - name: Reproduce annotated conditional design and failure report
+        working-directory: experiments/quantumcode010
+        run: python traction.py
