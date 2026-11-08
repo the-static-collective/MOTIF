@@ -21,7 +21,13 @@ jobs:
           python-version: '3.11'
       - name: Run no-route epistemic and safety tests
         working-directory: experiments/quantumcode008
-        run: python -m unittest -v test_recover.py
+        run: python -m unittest -v test_recover.py test_practice.py test_qc007_bridge.py
       - name: Produce source-pinned navigation and safe fallback report
         working-directory: experiments/quantumcode008
         run: python recover.py
+      - name: Reproduce contextual fasting distinction (no calories)
+        working-directory: experiments/quantumcode008
+        run: python practice.py
+      - name: Replay QC-007 no-route specimen through capability recovery
+        working-directory: experiments/quantumcode008
+        run: python qc007_bridge.py
