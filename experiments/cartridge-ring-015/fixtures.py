@@ -11,12 +11,16 @@ are not imported by training / policy selection.
 """
 from __future__ import annotations
 from pathlib import Path
-import sys
+from importlib.util import spec_from_file_location,module_from_spec
 HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE.parent/"cartridge-ring-014"))
-import fixtures as base
+base_spec=spec_from_file_location(
+    "ring014_reviewed_source_fixtures",
+    HERE.parent/"cartridge-ring-014"/"fixtures.py")
+base=module_from_spec(base_spec)
+base_spec.loader.exec_module(base)
 
 SOURCE=base.SOURCE
+root_for_source=base.root_for_source
 PATCHES={
     **base.PATCHES,
     "benign_math":(
