@@ -9,6 +9,7 @@ from foreign_worlds import (
     UnsupportedDomain, hosts, normalize_native, topology, oracle,
     expected_graph, count_external, native_signature,
 )
+from classical_control import train_control, nx_rel, effect_mapping
 from trial import (
     TASKS, STATUS, freeze_models, foreign_evaluation,
     paired_isolation_unsupported, unsupported_certificate, run,
@@ -204,11 +205,45 @@ class ForeignWorldChecks(unittest.TestCase):
         with self.assertRaises(ValueError):
             query(Expr("EVAL_STRING"),graph,chosen)
 
+    def test_matched_data_classical_program_search_matches_frozen_learner(self):
+        for task in TASKS:
+            train, valid, _ = fixtures(task)
+            classical=train_control(train,valid)
+            ours=self.models[task]
+            self.assertEqual(classical["status"],"CLASSICAL_VALIDATED",task)
+            self.assertEqual(classical["program"],ours.proposal.program.code(),task)
+            self.assertEqual(classical["tested"],ours.proposal.examined,task)
+
+    def test_separately_interpreted_classical_learner_ties_on_all_foreign_edges(self):
+        baseline=self.report["matched_grammar_classical_learner"]
+        for task in TASKS:
+            result=baseline[task]
+            self.assertEqual(result["status"],"CLASSICAL_VALIDATED")
+            self.assertTrue(result["matches_MOTIF_program"])
+            self.assertEqual(result["foreign"]["correct"],
+                             result["foreign"]["total"])
+            self.assertEqual(result["foreign"]["total"],
+                             self.report["foreign_performance"][task]["edges"])
+
+    def test_classical_control_is_independent_evaluator_not_our_query(self):
+        world=topology(self.foreign[0][1])
+        for task in TASKS:
+            expr=self.models[task].proposal.program
+            for pair in list(world.edges)[:12]:
+                self.assertEqual(nx_rel(expr,world,pair),query(expr,world,pair))
+
+    def test_cross_split_refused_by_independent_classical_learner(self):
+        train, valid, _=fixtures("triangle")
+        corrupted=(replace(valid[0],evidence_id=train[0].evidence_id),)+valid[1:]
+        with self.assertRaises(ValueError):
+            train_control(train,corrupted)
+
     def test_detailed_failure_and_fairness_provenance_preserved(self):
         x=self.report
         self.assertEqual(x["status"],STATUS)
         self.assertTrue(x["baseline_receives_semantic_task_name"])
-        self.assertFalse(x["equal_budget_learning_baseline_exists"])
+        self.assertTrue(x["equal_sample_and_AST_budget_classical_learner"])
+        self.assertFalse(x["equal_cpu_or_wallclock_budget"])
         self.assertFalse(x["production_installation"])
         self.assertFalse(x["quantum_execution"])
         self.assertEqual(x["external_actions"],0)
