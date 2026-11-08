@@ -1,0 +1,59 @@
+name: THOUGHT-028 proof-carrying active composition
+on:
+  push:
+    paths:
+      - 'experiments/thought-028/**'
+      - '.github/workflows/thought-028.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-028/**'
+      - '.github/workflows/thought-028.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof-weave-and-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check proof scoping, adversarial integrity and active composition
+        working-directory: experiments/thought-028
+        run: python -m unittest -v test_weave.py
+      - name: Independently reproduce memory and negative controls
+        working-directory: experiments/thought-028
+        run: python memory_benchmark.py
+      - name: Verify audit score, source origin, HOLDs, persistent proof store
+        working-directory: experiments/thought-028
+        run: |
+          python - <<'PY'
+          import json
+          o=json.load(open('offline-results.json'))
+          assert o['model_generations']==0 and not o['installed']
+          assert o['licensed_operators']==['difference','union']
+          assert o['composition_candidate_semantics']==8
+          assert o['initial_direct_attempt']['status']=='HOLD_FROZEN_COUNTEREXAMPLE_NO_POST_AUDIT_REPAIR'
+          assert o['initial_direct_attempt']['frozen']['correct']==27
+          for key in ('new_compositional_attempt','retained_task_transfer','reversed_role_transfer'):
+              r=o[key]
+              assert r['status']=='REVIEW_SCOPED_CANDIDATE_NOT_INSTALLED'
+              assert r['frozen']['correct']==r['trusted_runtime']['correct']==64
+              assert r['development_queries']>=2
+          assert o['retained_task_transfer']['selected_origin']=='RETRIEVED_PROOF'
+          assert o['non_boolean_hold']['development_queries']==0
+          assert o['threshold_outside_licensed_grammar']
+          assert o['serialized_store_reverified']
+          assert o['serialized_proof_cards']==3
+          print('THOUGHT-028 synthetic evidence-chain checks passed; no LLM calls')
+          PY
+      - name: Parent source-owner proof regression
+        working-directory: experiments/thought-027
+        run: python -m unittest -v test_proof_memory.py
+      - name: Preserve source-owned synthetic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-028-proof-carrying-active-composition
+          path: experiments/thought-028/offline-results.json
