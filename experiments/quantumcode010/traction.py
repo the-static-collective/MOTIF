@@ -370,16 +370,9 @@ def repair_candidates():
 
 
 def oven_scene():
-    # Synthetic echo of an anonymized lived-experience narrative.
-    # Nothing is imported from the user's account into this repository.
+    # A synthetic schematic echo of practical material reuse, not a record
+    # of any identified person's circumstances or real-world site.
     return (Situation()
-        .observe("conventional_oven_usable",NO,"fixture:contamination")
-        .observe("materials_present",YES,"fixture:available_salvage")
-        .observe("site_use_permitted",YES,"fixture:permission")
-        .observe("masonry_heat_safety_unknown",YES,"fixture:risk_unknown")
-        .observe("metal_coating_unverified",YES,"fixture:risk_unknown")
-        .observe("fire_location_unsafe",UNKNOWN,"fixture:unobserved") if False else
-        Situation()
         .observe("conventional_oven_usable",NO,"fixture:contamination")
         .observe("materials_present",YES,"fixture:available_salvage")
         .observe("site_use_permitted",YES,"fixture:permission")
