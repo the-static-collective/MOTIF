@@ -3,6 +3,9 @@ from dataclasses import replace
 import unittest
 
 import networkx as nx
+from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1] / 'quantumcode005'))
 
 from remix import (
     SYMBOL, WHOLE, LOCAL, STATUS, MAX_COST, Expression, Lexicon,
