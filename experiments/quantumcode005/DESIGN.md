@@ -64,7 +64,7 @@ See the dedicated Actions workflow output for per-source breakdown and candidate
 - **754/754** four-cycle classifications and outputs match.
 - **2,262/2,262** total edge-level predictions; no unsupported graph question was silently answered.
 - **555/555** exhaustively enumerated bounded ASTs fail to distinguish the deliberate isolated-component pair. No rule is admitted; status **HOLD_UNEXPRESSIBLE_IN_DECLARED_DSL**.
-- **Independent classical learner** receives equal samples and AST grammar; verify its exact program and external results from the green run before making a stronger matched-search claim.
+- **Independent NetworkX classical learner:** searched exactly **4 / 16 / 310** ASTs for alternate path / triangle / square using the same samples and grammar, chose the **same three expressions**, and predicted **754/754 per task** on the foreign test graphs. This is a **tie**, not a performance improvement. Hypotheses/examples and candidate counts match, but CPU budgets do not.
 - Run verified unit tests and check all job steps, not simply the Actions badge.
 
 ## Crucial limits
