@@ -274,20 +274,25 @@ def test_seed(orientation: Orientation, stage: Path, manifest: dict) -> dict:
                    "sys.exit(0 if r.wasSuccessful() and r.testsRun==4 else 1)")
         verified = subprocess.run([sys.executable,"-I","-B","-c",harness,str(stage.resolve())],
                                   cwd=stage,capture_output=True,text=True,timeout=8,check=False)
+        # The child receives the PARENT'S actual AST inspection, not a
+        # fabricated complete inventory of declared requirements.
+        observed_names = [f.component for f in orientation.observed if not f.missing]
+        expected_action = "COUNT_VERIFIED_NAMES" if len(observed_names) == len(INTERFACES) else "COUNT_MISSING"
+        expected_count = len(INTERFACES) if expected_action == "COUNT_VERIFIED_NAMES" else len(INTERFACES)-len(observed_names)
         observed = subprocess.run([sys.executable,"-I","-B",str(source_path),
-                                   json.dumps([component for component, _, _ in INTERFACES])],
+                                   json.dumps(observed_names)],
                                   cwd=stage,capture_output=True,text=True,timeout=8,check=False)
         child = json.loads(observed.stdout) if observed.returncode == 0 else None
         contract = (verified.returncode == 0 and observed.returncode == 0 and child is not None
-                    and child.get("action_executed") == "COUNT_VERIFIED_NAMES"
-                    and child.get("result",{}).get("count") == len(INTERFACES)
+                    and child.get("action_executed") == expected_action
+                    and child.get("result",{}).get("count") == expected_count
                     and child.get("external_actions") == 0
                     and child.get("can_modify_own_code") is False)
         return {"status": "F_LOCAL_TEMPLATE_TESTED" if contract else "HOLD_CHILD_TEST_FAILURE",
                 "tests_passed": bool(contract), "test_cases": 4 if verified.returncode == 0 else None,
                 "child_output": child if contract else None, "external_actions": 0,
                 "test_run_exit": verified.returncode, "child_run_exit": observed.returncode,
-                "note": "full interface inventory is SPEC data, not independently verified child imports"}
+                "note": "child receives parent's AST-confirmed component names; no independent interface execution"}
     except (subprocess.TimeoutExpired, ValueError, OSError, json.JSONDecodeError):
         return {"status": "HOLD_CHILD_TEST_FAILURE", "tests_passed": False,
                 "child_output": None, "external_actions": 0}
