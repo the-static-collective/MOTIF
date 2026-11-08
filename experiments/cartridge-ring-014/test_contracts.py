@@ -29,6 +29,7 @@ class ActualSandboxSourceContracts(unittest.TestCase):
             ("test-syntax",("invalid_import",)),
             ("test-stop",("stop_when_negative",)),
             ("test-posterior",("posterior_signal",)),
+            ("test-budget",("budget_accounting",)),
             ("test-danger",("forbidden_ranking",)),
         )
         cls.cases=fixtures.make(cls.root,cls.repo,cls.specs)
@@ -78,15 +79,23 @@ class ActualSandboxSourceContracts(unittest.TestCase):
         self.assertIn("Unproductive",output["observed_test_failure"])
         self.assertTrue(output["isolation_controls"]["docker_network_disabled"])
 
-    def test_posterior_math_bug_escapes_smoke_but_fails_deep(self):
-        shallow=runner.observe(
+    def test_posterior_bug_detected_from_actual_subsequent_bellman_search(self):
+        # The inherited Bellman simulator uses posterior updates during
+        # its lookahead, so even the shallow test correctly catches this.
+        result=runner.observe(
             self.root,"test-posterior","SMOKE",self.repo)
+        self.assertFalse(result["actual_source_tests_passed"])
+        self.assertIn("probability",result["observed_test_failure"].lower())
+
+    def test_budget_regression_escapes_shallow_but_fails_deep(self):
+        shallow=runner.observe(
+            self.root,"test-budget","SMOKE",self.repo)
         deep=runner.observe(
-            self.root,"test-posterior","DEEP",self.repo)
+            self.root,"test-budget","DEEP",self.repo)
         self.assertTrue(shallow["actual_source_tests_passed"],
                         shallow["observed_test_failure"])
         self.assertFalse(deep["actual_source_tests_passed"])
-        self.assertIn("posterior",deep["observed_test_failure"].lower())
+        self.assertIn("budget",deep["observed_test_failure"].lower())
 
     def test_mutated_permission_gate_fails_smoke_not_effectful_work(self):
         output=runner.observe(
