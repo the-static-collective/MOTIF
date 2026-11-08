@@ -1,0 +1,106 @@
+name: THOUGHT-029 symbolic graph and artifact-aware LLM
+on:
+  push:
+    paths:
+      - 'experiments/thought-029/**'
+      - '.github/workflows/thought-029.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-029/**'
+      - '.github/workflows/thought-029.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  artifact-portal-and-independent-evaluator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test read-only graph portal, evidence and fail-closed model actions
+        working-directory: experiments/thought-029
+        run: python -m unittest -v test_portal.py test_transport.py
+      - name: Reproduce source-only fixture, never a real LLM test
+        working-directory: experiments/thought-029
+        run: python run.py --backend offline --output offline-results.json
+      - name: Ensure graph and proof sources are indexed but not automatically authoritative
+        working-directory: experiments/thought-029
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          assert r['real_local_ollama_model_generations']==0
+          assert not r['real_model_execution_verified']
+          assert r['symbolic_graph_count']>=2
+          assert r['repository_artifact_count']>=60
+          assert not r['installed'] and r['external_authority']=='NONE'
+          assert all(x['frozen']['correct']==64 for x in r['trials'].values())
+          print({'artifacts':r['repository_artifact_count'],
+                 'indexed_graphs':r['symbolic_graph_count'],
+                 'types':r['typed_artifact_types']})
+          PY
+      - name: Preserve independently replayable fixture receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-029-offline-artifact-portal
+          path: experiments/thought-029/offline-results.json
+  direct-qwen-artifact-browsing:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Ollama in disposable RESEARCH runner (un-pinned installer risk)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start real model, with no external LLM provider and no secrets
+        run: |
+          (ollama serve >"$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 55); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Let model inspect repository artifacts and propose a mathematical interpretation
+        working-directory: experiments/thought-029
+        run: |
+          python run.py --backend ollama --model qwen2.5:3b --steps 4 \
+            --tasks food_recalled_elsewhere --output live-results.json
+      - name: Confirm genuine model calls; preserve HOLD outcomes honestly
+        working-directory: experiments/thought-029
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('live-results.json'))
+          assert r['real_model_execution_verified']
+          assert r['real_local_ollama_model_generations']>=1
+          assert r['repository_artifact_count']>=60
+          assert r['symbolic_graph_count']>=2
+          assert not r['installed'] and r['external_authority']=='NONE'
+          t=r['trials']['food_recalled_elsewhere']
+          assert t['actual_model_call_count']>=1
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['actual_inference_completed']
+                     for x in t['actual_model_receipts'])
+          assert not t['installed'] and t['artifact_text_is_not_instruction']
+          print({'model_calls':r['real_local_ollama_model_generations'],
+                 'artifact_count':r['repository_artifact_count'],
+                 'graph_count':r['symbolic_graph_count'],
+                 'artifact_queries':t['read_only_tool_calls'],
+                 'trial_status':t['status'],
+                 'frozen_correct':t['frozen']['correct'] if t['frozen'] else None})
+          PY
+      - name: Preserve actual model receipts even when inference yields HOLD
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-029-direct-qwen-artifact-interpretation
+          path: experiments/thought-029/live-results.json
+          if-no-files-found: ignore
