@@ -80,6 +80,28 @@ class AmbiguityNativeTests(unittest.TestCase):
             "method_agreement_is_independent_corroboration") is False
                             for x in contradictions))
 
+    def test_can_reason_about_invariants_without_forcing_one_reading(self):
+        # The carrier and some semantic properties can be stable across
+        # competing models; only source-CONDITIONAL conclusions are allowed.
+        case=next(x for x in self.public["cases"] if x["author_tag"]=="AMBIGUOUS")
+        result=lattice.combine(case["text"],case["observed_event"],
+                               case["carrier"],self.source,self.policy)
+        self.assertGreater(len(result["supported_worlds"]),1)
+        self.assertTrue(result["invariants_are_not_authenticated_world_facts"])
+        self.assertFalse(result["auto_interrupt_user_for_ambiguity"])
+        self.assertFalse(result["root_action_authorized"])
+        self.assertTrue(result["other_unmodeled_readings_remain_possible"])
+        stable=result["conditional_invariants_within_modeled_worlds"]
+        if "ROOT_FORCE" in stable:
+            self.assertTrue(all(lattice.corpus.graph_map(g)[
+                ("ROOT","FORCE")]==stable["ROOT_FORCE"]
+                for g in result["supported_worlds"]))
+        self.assertIn(result["optional_discriminator_question_kind"],
+                      (None,"WHO_IF_ANY_REQUESTED_THIS_EVENT",
+                       "WHICH_SCOPE_OWNS_THE_EVENT",
+                       "IS_THIS_DIRECT_SPEECH_OR_REPORTED_SPEECH",
+                       "DOES_NEGATION_APPLY_TO_THIS_EVENT"))
+
     def test_ungrounded_cryptic_text_is_unresolved_not_false_graph(self):
         unbound=[x for x in self.public["cases"] if x["author_tag"]=="UNBOUND"]
         self.assertEqual(len(unbound),12)
