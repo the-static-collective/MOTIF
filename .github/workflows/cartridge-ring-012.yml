@@ -1,0 +1,100 @@
+name: MOTIF Ring 012 / ambiguity-native perspective lattice
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-012-ambiguity-native-perspective-lattice
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-012/**'
+      - '.github/workflows/cartridge-ring-012.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ambiguity-as-default:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Retain RING-011 epistemic carrier and source graph contracts
+        run: python -m unittest discover -s experiments/cartridge-ring-011 -p 'test_*.py' -v
+      - name: RING-012 data-only ambiguity and source-method disagreement tests
+        run: python -m unittest discover -s experiments/cartridge-ring-012 -p 'test_*.py' -v
+      - name: Freeze uncertainty calibration on older train/dev only
+        run: |
+          python experiments/cartridge-ring-012/calibration.py \
+            --out /tmp/ring012-frozen-policy.json
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/ring012-frozen-policy.json'))
+          assert p['schema']=='motif.ring012.calibrated-open-lattice.v1'
+          assert p['calibration_candidates_executed']==32
+          assert p['open_world_always'] and p['all_method_claims_correlated']
+          assert not p['novel_world_module_imported_during_selection']
+          assert not p['test_meanings_consulted_to_select_policy']
+          assert p['outside_effects_forbidden']
+          assert p['authority']=='NONE'
+          print('Precommitted evidence-scaled ambiguity program frozen before novel world labels.')
+          PY
+      - name: Compare perspective lattices against three single models, method union, maximal uncertainty, and HOLD
+        run: |
+          python experiments/cartridge-ring-012/benchmark.py \
+            --policy /tmp/ring012-frozen-policy.json \
+            --out /tmp/ring012-postfreeze.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/ring012-postfreeze.json'))
+          assert r['schema']=='motif.ring012.postfreeze-ambiguity-native-trial.v1'
+          assert r['status']=='MULTI_READING_OPEN_WORLD_LATTICE_TESTED_POST_FREEZE'
+          assert len(r['test_packets'])==2
+          assert sum(x['cases'] for x in r['test_packets'])==120
+          assert r['meaning_is_set_valued_and_not_forced_to_one']
+          assert r['all_interpretations_remain_open_world']
+          assert r['witnessed_source_methods_share_correlated_training']
+          assert r['authored_semantic_ambiguity_not_real_world_interpretation']
+          assert r['no_generated_language_hypothesis_can_authorize_an_action']
+          assert r['new_executable_methods_installed']==0
+          assert r['external_actions_executed'] is False
+          assert r['authority']=='NONE'
+          for packet in r['test_packets']:
+              assert packet['author_tag_distribution']=={'UNIQUE':24,'AMBIGUOUS':24,'UNBOUND':12}
+              assert packet['labels_read_only_after_policy_frozen']
+              assert all(w['open_world_always'] for w in packet['case_witnesses'])
+          print('Set-valued interpretation, residual uncertainty, and every case-level discrepancy retained.')
+          PY
+      - name: Audit source-level alternative readings and cost of broad interpretation
+        run: |
+          python experiments/cartridge-ring-012/evidence_graph.py \
+            --policy /tmp/ring012-frozen-policy.json \
+            --trial /tmp/ring012-postfreeze.json \
+            --out /tmp/ring012-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/ring012-hypergraph.json'))
+          assert g['schema']=='motif.ring012.measured-ambiguity-evidence-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['hyperedges'][1]['total_test_cases']==120
+          assert g['open_world_other_always_preserved']
+          assert g['correlated_source_agreement_does_not_establish_truth']
+          assert not g['independent_real_world_language_competence_demonstrated']
+          assert g['automatic_new_cartridge_admissions']==0
+          assert g['external_action_executed'] is False
+          assert g['authority']=='NONE'
+          print('Evidence preserves unresolved and contradictory perspectives, errors, and nonauthority.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring012-ambiguity-native-evidence
+          path: |
+            /tmp/ring012-frozen-policy.json
+            /tmp/ring012-postfreeze.json
+            /tmp/ring012-hypergraph.json
+          retention-days: 30
