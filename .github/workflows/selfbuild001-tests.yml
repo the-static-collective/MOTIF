@@ -1,0 +1,33 @@
+name: SELF-BUILD-001 source-grounded bootstrap
+
+on:
+  push:
+    branches:
+      - 'experiment/self-build-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/selfbuild001/**'
+      - '.github/workflows/selfbuild001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  self-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing NEXT-STEP regression
+        working-directory: experiments/nextstep001
+        run: python -m unittest -q test_nextstep.py
+      - name: Source-grounded self-build hostile controls
+        working-directory: experiments/selfbuild001
+        run: python -m unittest -v test_selfbuild.py
+      - name: Bounded child creation and baseline comparison
+        working-directory: experiments/selfbuild001
+        run: |
+          python benchmark.py
+          python selfbuild.py
