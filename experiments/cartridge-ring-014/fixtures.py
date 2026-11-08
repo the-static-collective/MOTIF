@@ -56,8 +56,8 @@ PATCHES={
     "forbidden_ranking":(
         ('ALLOWED=("INSPECT","SMASH_A","SMASH_B","ASK_USER")',
          'ALLOWED=("INSPECT","SMASH_A","SMASH_B","ASK_USER","EXTERNAL_COMMIT")'),
-        ('"HUMAN_ATTENTION_SIMULATED_ONLY")',
-         '"HUMAN_ATTENTION_SIMULATED_ONLY","FORBIDDEN_EXTERNAL_EFFECT")'),
+        ('if (action["permission"] not in (\n                "INTERNAL_READONLY","INTERNAL_REVERSIBLE",\n                "HUMAN_ATTENTION_SIMULATED_ONLY")',
+         'if (action["permission"] not in (\n                "INTERNAL_READONLY","INTERNAL_REVERSIBLE",\n                "HUMAN_ATTENTION_SIMULATED_ONLY","FORBIDDEN_EXTERNAL_EFFECT")'),
     ),
     "entropy_sign":(
         ('return max(0.0,prior-after)',
@@ -84,8 +84,8 @@ PATCHES={
          'return 0.0'),
     ),
     "excess_permission":(
-        ('"HUMAN_ATTENTION_SIMULATED_ONLY")',
-         '"HUMAN_ATTENTION_SIMULATED_ONLY","FORBIDDEN_EXTERNAL_EFFECT")'),
+        ('if (action["permission"] not in (\n                "INTERNAL_READONLY","INTERNAL_REVERSIBLE",\n                "HUMAN_ATTENTION_SIMULATED_ONLY")',
+         'if (action["permission"] not in (\n                "INTERNAL_READONLY","INTERNAL_REVERSIBLE",\n                "HUMAN_ATTENTION_SIMULATED_ONLY","FORBIDDEN_EXTERNAL_EFFECT")'),
         ('ALLOWED=("INSPECT","SMASH_A","SMASH_B","ASK_USER")',
          'ALLOWED=("INSPECT","SMASH_A","SMASH_B","ASK_USER","EXTERNAL_COMMIT")'),
     ),
