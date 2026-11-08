@@ -1,0 +1,30 @@
+name: MOTIF QC-009 street-sense offline-first fieldcraft
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode009/**'
+      - '.github/workflows/quantum-code-009.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode009/**'
+      - '.github/workflows/quantum-code-009.yml'
+permissions:
+  contents: read
+jobs:
+  resilient-action-field:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test offline and survival field reasoning
+        working-directory: experiments/quantumcode009
+        run: python -m unittest -v test_street_sense.py test_field_atlas.py
+      - name: Reproduce eight scenario and network-cut reports
+        working-directory: experiments/quantumcode009
+        run: python street_sense.py
+      - name: Replay offline atlas outages and freshness decay
+        working-directory: experiments/quantumcode009
+        run: python field_atlas.py
