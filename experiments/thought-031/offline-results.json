@@ -1,0 +1,680 @@
+{
+  "backend": "offline",
+  "external_authority": "NONE",
+  "installed": false,
+  "model": null,
+  "model_call_budget_equal_between_plain_and_optional_pidgin": true,
+  "model_receipts": [],
+  "model_tokens_not_equalized": true,
+  "no_model_written_program_executed": true,
+  "not_a_blind_language_benchmark": true,
+  "real_llm_generations": 0,
+  "real_llm_inference": false,
+  "research_calls_per_arm": 2,
+  "reserved_final_calls_per_arm": 1,
+  "schema": "motif.thought031.proof-guided-evidence-relay.v1",
+  "source_artifact_count": 93,
+  "source_graph_count": 7,
+  "tasks": {
+    "food_recalled_elsewhere": {
+      "optional_pidgin": {
+        "actual_model_call_count": 3,
+        "actually_read_artifact_ids": [
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-023/grammar.py",
+          "experiments/thought-027/proof_memory.py",
+          "experiments/thought-028/weave.py"
+        ],
+        "candidate": {
+          "bindings": {
+            "current": "register_g",
+            "event": "register_f"
+          },
+          "expression": {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          },
+          "rationale": "Source-owned compiler of two separately proposed typed stages",
+          "schema": "motif.thought025.abstraction-proposal.v1"
+        },
+        "development": {
+          "correct": 4,
+          "first_failed": null,
+          "total": 4
+        },
+        "evaluator_and_model_held_separate": true,
+        "external_authority": "NONE",
+        "failure": null,
+        "final_inference_reserved": true,
+        "fixed_template": {
+          "correct": 64,
+          "model_written_python": false,
+          "total": 64,
+          "trusted_template": true
+        },
+        "frozen": {
+          "correct": 64,
+          "first_counterexample": null,
+          "total": 64
+        },
+        "installed": false,
+        "model_not_supplied_evaluator_answer": true,
+        "model_receipts": [
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "FINAL",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          }
+        ],
+        "model_research_refusals": 0,
+        "pidgin_effectiveness": {
+          "definition_bytes": 152,
+          "equivalent_plain_request_bytes": 78,
+          "net_bytes_saved_including_definitions": -168,
+          "spoken_bytes": 94,
+          "success_is_not_short_message_length_alone": true,
+          "token_costs_not_equivalent_to_bytes": true
+        },
+        "pidgin_lexicon": {
+          "all_means_typed_read_only_operations": true,
+          "optional": true,
+          "refusals": 0,
+          "spoken": [
+            {
+              "backtranslated_request": {
+                "artifact_id": "experiments/thought-023/grammar.py",
+                "limit": 4,
+                "tool": "read"
+              },
+              "symbol": "vasha",
+              "values": {
+                "artifact": "experiments/thought-023/grammar.py"
+              }
+            }
+          ],
+          "terms": {
+            "vasha": {
+              "gloss": "inspect the selected mathematical artifact",
+              "slot_types": [
+                "artifact"
+              ],
+              "status": "MODEL_PROPOSED_UNVERIFIED_CONVENTION",
+              "symbol": "vasha",
+              "template": {
+                "artifact_id": "$artifact",
+                "limit": 4,
+                "tool": "read"
+              },
+              "uses": 1
+            }
+          },
+          "token_uses": 1,
+          "tokens_coined": 1
+        },
+        "pidgin_offered": true,
+        "pidgin_was_used": true,
+        "receipt_digest": "8444e1413a45101cbe76bd013dbf382360b390284c54de4fe0f26dde9d7ab433",
+        "research_calls_requested": 2,
+        "research_trace": [
+          {
+            "stage": "PIDGIN_DEFINED",
+            "symbol": "vasha",
+            "typed_slots": [
+              "artifact"
+            ]
+          },
+          {
+            "origin": "MODEL_PIDGIN_WITH_AUDITABLE_BACKTRANSLATION",
+            "request": {
+              "artifact_id": "experiments/thought-023/grammar.py",
+              "limit": 4,
+              "tool": "read"
+            },
+            "result_excerpt": {
+              "artifact": {
+                "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+                "bytes": 8698,
+                "format": ".py",
+                "id": "experiments/thought-023/grammar.py",
+                "kind": "source_code_as_data",
+                "sha256": "dc688342e7f608f2c6fdffbb5bfd563a0d7093ac092c835e5d4b1ae33bdd6a7f",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              "content_kind": "text_lines",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "\"\"\"MOTIF-023: finite source-owned grammar laboratory; all LLM output is data."
+                },
+                {
+                  "index": 1,
+                  "value": ""
+                },
+                {
+                  "index": 2,
+                  "value": "No dynamic Python source from the model, code execution or automatic grammar"
+                },
+                {
+                  "index": 3,
+                  "value": "installation. Closed, independently checkable set algebra over three colors."
+                }
+              ],
+              "model_access_is_read_only": true,
+              "next_cursor": 4,
+              "offset": 0,
+              "pointer": "",
+              "response_only_paginated": true,
+              "total": 166
+            },
+            "source": "experiments/thought-023/grammar.py",
+            "stage": "MODEL_DIRECTED_READ_ONLY_TOOL",
+            "tool_contents_are_untrusted": true
+          }
+        ],
+        "schema": "motif.thought031.protected-final-evidence-relay.v1",
+        "source_artifacts_untrusted_and_unmodified": true,
+        "source_owned_prefetch_count": 3,
+        "source_owned_prefetch_references": [
+          "experiments/thought-027/proof_memory.py",
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-028/weave.py"
+        ],
+        "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+        "task": "food_recalled_elsewhere"
+      },
+      "plain": {
+        "actual_model_call_count": 3,
+        "actually_read_artifact_ids": [
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-023/grammar.py",
+          "experiments/thought-027/proof_memory.py",
+          "experiments/thought-028/weave.py"
+        ],
+        "candidate": {
+          "bindings": {
+            "current": "register_g",
+            "event": "register_f"
+          },
+          "expression": {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          },
+          "rationale": "Source-owned compiler of two separately proposed typed stages",
+          "schema": "motif.thought025.abstraction-proposal.v1"
+        },
+        "development": {
+          "correct": 4,
+          "first_failed": null,
+          "total": 4
+        },
+        "evaluator_and_model_held_separate": true,
+        "external_authority": "NONE",
+        "failure": null,
+        "final_inference_reserved": true,
+        "fixed_template": {
+          "correct": 64,
+          "model_written_python": false,
+          "total": 64,
+          "trusted_template": true
+        },
+        "frozen": {
+          "correct": 64,
+          "first_counterexample": null,
+          "total": 64
+        },
+        "installed": false,
+        "model_not_supplied_evaluator_answer": true,
+        "model_receipts": [
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "FINAL",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          }
+        ],
+        "model_research_refusals": 0,
+        "pidgin_effectiveness": {
+          "definition_bytes": 0,
+          "equivalent_plain_request_bytes": 0,
+          "net_bytes_saved_including_definitions": 0,
+          "spoken_bytes": 0,
+          "success_is_not_short_message_length_alone": true,
+          "token_costs_not_equivalent_to_bytes": true
+        },
+        "pidgin_lexicon": {
+          "all_means_typed_read_only_operations": true,
+          "optional": false,
+          "refusals": 0,
+          "spoken": [],
+          "terms": {},
+          "token_uses": 0,
+          "tokens_coined": 0
+        },
+        "pidgin_offered": false,
+        "pidgin_was_used": false,
+        "receipt_digest": "b33c2ed56cf6142aafe2c6d6072ae39218f365d6314ad08f604e42df376d74c2",
+        "research_calls_requested": 2,
+        "research_trace": [
+          {
+            "origin": "DIRECT_CANONICAL_TOOL",
+            "request": {
+              "artifact_id": "experiments/thought-023/grammar.py",
+              "limit": 4,
+              "tool": "read"
+            },
+            "result_excerpt": {
+              "artifact": {
+                "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+                "bytes": 8698,
+                "format": ".py",
+                "id": "experiments/thought-023/grammar.py",
+                "kind": "source_code_as_data",
+                "sha256": "dc688342e7f608f2c6fdffbb5bfd563a0d7093ac092c835e5d4b1ae33bdd6a7f",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              "content_kind": "text_lines",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "\"\"\"MOTIF-023: finite source-owned grammar laboratory; all LLM output is data."
+                },
+                {
+                  "index": 1,
+                  "value": ""
+                },
+                {
+                  "index": 2,
+                  "value": "No dynamic Python source from the model, code execution or automatic grammar"
+                },
+                {
+                  "index": 3,
+                  "value": "installation. Closed, independently checkable set algebra over three colors."
+                }
+              ],
+              "model_access_is_read_only": true,
+              "next_cursor": 4,
+              "offset": 0,
+              "pointer": "",
+              "response_only_paginated": true,
+              "total": 166
+            },
+            "source": "experiments/thought-023/grammar.py",
+            "stage": "MODEL_DIRECTED_READ_ONLY_TOOL",
+            "tool_contents_are_untrusted": true
+          },
+          {
+            "model_declined_additional_retrieval": true,
+            "stage": "SKIP"
+          }
+        ],
+        "schema": "motif.thought031.protected-final-evidence-relay.v1",
+        "source_artifacts_untrusted_and_unmodified": true,
+        "source_owned_prefetch_count": 3,
+        "source_owned_prefetch_references": [
+          "experiments/thought-027/proof_memory.py",
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-028/weave.py"
+        ],
+        "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+        "task": "food_recalled_elsewhere"
+      }
+    },
+    "food_safe": {
+      "optional_pidgin": {
+        "actual_model_call_count": 3,
+        "actually_read_artifact_ids": [
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-023/grammar.py",
+          "experiments/thought-027/proof_memory.py",
+          "experiments/thought-028/weave.py"
+        ],
+        "candidate": {
+          "bindings": {
+            "current": "register_f",
+            "event": "register_g"
+          },
+          "expression": {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          },
+          "rationale": "Source-owned compiler of two separately proposed typed stages",
+          "schema": "motif.thought025.abstraction-proposal.v1"
+        },
+        "development": {
+          "correct": 4,
+          "first_failed": null,
+          "total": 4
+        },
+        "evaluator_and_model_held_separate": true,
+        "external_authority": "NONE",
+        "failure": null,
+        "final_inference_reserved": true,
+        "fixed_template": {
+          "correct": 64,
+          "model_written_python": false,
+          "total": 64,
+          "trusted_template": true
+        },
+        "frozen": {
+          "correct": 64,
+          "first_counterexample": null,
+          "total": 64
+        },
+        "installed": false,
+        "model_not_supplied_evaluator_answer": true,
+        "model_receipts": [
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "FINAL",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          }
+        ],
+        "model_research_refusals": 0,
+        "pidgin_effectiveness": {
+          "definition_bytes": 152,
+          "equivalent_plain_request_bytes": 78,
+          "net_bytes_saved_including_definitions": -168,
+          "spoken_bytes": 94,
+          "success_is_not_short_message_length_alone": true,
+          "token_costs_not_equivalent_to_bytes": true
+        },
+        "pidgin_lexicon": {
+          "all_means_typed_read_only_operations": true,
+          "optional": true,
+          "refusals": 0,
+          "spoken": [
+            {
+              "backtranslated_request": {
+                "artifact_id": "experiments/thought-023/grammar.py",
+                "limit": 4,
+                "tool": "read"
+              },
+              "symbol": "vasha",
+              "values": {
+                "artifact": "experiments/thought-023/grammar.py"
+              }
+            }
+          ],
+          "terms": {
+            "vasha": {
+              "gloss": "inspect the selected mathematical artifact",
+              "slot_types": [
+                "artifact"
+              ],
+              "status": "MODEL_PROPOSED_UNVERIFIED_CONVENTION",
+              "symbol": "vasha",
+              "template": {
+                "artifact_id": "$artifact",
+                "limit": 4,
+                "tool": "read"
+              },
+              "uses": 1
+            }
+          },
+          "token_uses": 1,
+          "tokens_coined": 1
+        },
+        "pidgin_offered": true,
+        "pidgin_was_used": true,
+        "receipt_digest": "728c757ccaf1efb4d9ced4b953bcd6f1f199d08ed28c1ca7662b2a83e188d03e",
+        "research_calls_requested": 2,
+        "research_trace": [
+          {
+            "stage": "PIDGIN_DEFINED",
+            "symbol": "vasha",
+            "typed_slots": [
+              "artifact"
+            ]
+          },
+          {
+            "origin": "MODEL_PIDGIN_WITH_AUDITABLE_BACKTRANSLATION",
+            "request": {
+              "artifact_id": "experiments/thought-023/grammar.py",
+              "limit": 4,
+              "tool": "read"
+            },
+            "result_excerpt": {
+              "artifact": {
+                "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+                "bytes": 8698,
+                "format": ".py",
+                "id": "experiments/thought-023/grammar.py",
+                "kind": "source_code_as_data",
+                "sha256": "dc688342e7f608f2c6fdffbb5bfd563a0d7093ac092c835e5d4b1ae33bdd6a7f",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              "content_kind": "text_lines",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "\"\"\"MOTIF-023: finite source-owned grammar laboratory; all LLM output is data."
+                },
+                {
+                  "index": 1,
+                  "value": ""
+                },
+                {
+                  "index": 2,
+                  "value": "No dynamic Python source from the model, code execution or automatic grammar"
+                },
+                {
+                  "index": 3,
+                  "value": "installation. Closed, independently checkable set algebra over three colors."
+                }
+              ],
+              "model_access_is_read_only": true,
+              "next_cursor": 4,
+              "offset": 0,
+              "pointer": "",
+              "response_only_paginated": true,
+              "total": 166
+            },
+            "source": "experiments/thought-023/grammar.py",
+            "stage": "MODEL_DIRECTED_READ_ONLY_TOOL",
+            "tool_contents_are_untrusted": true
+          }
+        ],
+        "schema": "motif.thought031.protected-final-evidence-relay.v1",
+        "source_artifacts_untrusted_and_unmodified": true,
+        "source_owned_prefetch_count": 3,
+        "source_owned_prefetch_references": [
+          "experiments/thought-027/proof_memory.py",
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-028/weave.py"
+        ],
+        "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+        "task": "food_safe"
+      },
+      "plain": {
+        "actual_model_call_count": 3,
+        "actually_read_artifact_ids": [
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-023/grammar.py",
+          "experiments/thought-027/proof_memory.py",
+          "experiments/thought-028/weave.py"
+        ],
+        "candidate": {
+          "bindings": {
+            "current": "register_f",
+            "event": "register_g"
+          },
+          "expression": {
+            "args": [
+              {
+                "ref": "state.on"
+              },
+              {
+                "ref": "arrival.toggles"
+              }
+            ],
+            "op": "difference"
+          },
+          "rationale": "Source-owned compiler of two separately proposed typed stages",
+          "schema": "motif.thought025.abstraction-proposal.v1"
+        },
+        "development": {
+          "correct": 4,
+          "first_failed": null,
+          "total": 4
+        },
+        "evaluator_and_model_held_separate": true,
+        "external_authority": "NONE",
+        "failure": null,
+        "final_inference_reserved": true,
+        "fixed_template": {
+          "correct": 64,
+          "model_written_python": false,
+          "total": 64,
+          "trusted_template": true
+        },
+        "frozen": {
+          "correct": 64,
+          "first_counterexample": null,
+          "total": 64
+        },
+        "installed": false,
+        "model_not_supplied_evaluator_answer": true,
+        "model_receipts": [
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "RESEARCH",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          },
+          {
+            "phase": "FINAL",
+            "source": "SCRIPTED_FIXTURE_NOT_MODEL"
+          }
+        ],
+        "model_research_refusals": 0,
+        "pidgin_effectiveness": {
+          "definition_bytes": 0,
+          "equivalent_plain_request_bytes": 0,
+          "net_bytes_saved_including_definitions": 0,
+          "spoken_bytes": 0,
+          "success_is_not_short_message_length_alone": true,
+          "token_costs_not_equivalent_to_bytes": true
+        },
+        "pidgin_lexicon": {
+          "all_means_typed_read_only_operations": true,
+          "optional": false,
+          "refusals": 0,
+          "spoken": [],
+          "terms": {},
+          "token_uses": 0,
+          "tokens_coined": 0
+        },
+        "pidgin_offered": false,
+        "pidgin_was_used": false,
+        "receipt_digest": "a2fc2bf31087b709e02c0777a2e6ba622bc5333e80292d324d4685e2ee282fe2",
+        "research_calls_requested": 2,
+        "research_trace": [
+          {
+            "origin": "DIRECT_CANONICAL_TOOL",
+            "request": {
+              "artifact_id": "experiments/thought-023/grammar.py",
+              "limit": 4,
+              "tool": "read"
+            },
+            "result_excerpt": {
+              "artifact": {
+                "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+                "bytes": 8698,
+                "format": ".py",
+                "id": "experiments/thought-023/grammar.py",
+                "kind": "source_code_as_data",
+                "sha256": "dc688342e7f608f2c6fdffbb5bfd563a0d7093ac092c835e5d4b1ae33bdd6a7f",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              "content_kind": "text_lines",
+              "items": [
+                {
+                  "index": 0,
+                  "value": "\"\"\"MOTIF-023: finite source-owned grammar laboratory; all LLM output is data."
+                },
+                {
+                  "index": 1,
+                  "value": ""
+                },
+                {
+                  "index": 2,
+                  "value": "No dynamic Python source from the model, code execution or automatic grammar"
+                },
+                {
+                  "index": 3,
+                  "value": "installation. Closed, independently checkable set algebra over three colors."
+                }
+              ],
+              "model_access_is_read_only": true,
+              "next_cursor": 4,
+              "offset": 0,
+              "pointer": "",
+              "response_only_paginated": true,
+              "total": 166
+            },
+            "source": "experiments/thought-023/grammar.py",
+            "stage": "MODEL_DIRECTED_READ_ONLY_TOOL",
+            "tool_contents_are_untrusted": true
+          },
+          {
+            "model_declined_additional_retrieval": true,
+            "stage": "SKIP"
+          }
+        ],
+        "schema": "motif.thought031.protected-final-evidence-relay.v1",
+        "source_artifacts_untrusted_and_unmodified": true,
+        "source_owned_prefetch_count": 3,
+        "source_owned_prefetch_references": [
+          "experiments/thought-027/proof_memory.py",
+          "experiments/geometry-005/thought-source.json",
+          "experiments/thought-028/weave.py"
+        ],
+        "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+        "task": "food_safe"
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+name: THOUGHT-031 source-owned evidence relay plus optional parameterized pidgin
+on:
+  push:
+    paths:
+      - 'experiments/thought-031/**'
+      - '.github/workflows/thought-031.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-031/**'
+      - '.github/workflows/thought-031.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-relay-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New source-owned evidence relay and parameterized pidgin contract tests
+        working-directory: experiments/thought-031
+        run: python -m unittest -v test_relay.py test_relay_http.py
+      - name: Parent source-owned artifact portal and optional pidgin tests
+        working-directory: experiments/thought-030
+        run: python -m unittest -v test_router.py test_pidgin_http.py
+      - name: Scripted source-only protocol benchmark (NOT an LLM)
+        working-directory: experiments/thought-031
+        run: python relay_run.py --backend offline --output offline-results.json
+      - name: Require test fixture disclosure and HOLD controls
+        working-directory: experiments/thought-031
+        run: |
+          python - <<'PY'
+          import json
+          o=json.load(open('offline-results.json'))
+          assert not o['real_llm_inference'] and o['real_llm_generations']==0
+          assert o['not_a_blind_language_benchmark'] and not o['installed']
+          for key,arms in o['tasks'].items():
+              for name,trial in arms.items():
+                  assert trial['frozen']['correct']==64
+                  assert trial['fixed_template']['correct']==64
+                  assert trial['actual_model_call_count']==3
+                  assert not trial['installed']
+              assert arms['optional_pidgin']['pidgin_was_used']
+              assert arms['plain']['pidgin_was_used'] is False
+          print('scripted offline mechanisms correct; not evidence of emergent LLM language')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thought-031-scripted-not-llm-contract-results
+          path: experiments/thought-031/offline-results.json
+  real-qwen-evidence-relay:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install unpinned Ollama in disposable research runner only
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Launch actual loopback local generative model
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 50); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Run same real Qwen with pidgin disabled and optional under final-slot reservation
+        working-directory: experiments/thought-031
+        run: |
+          python relay_run.py --backend ollama --model qwen2.5:3b \
+            --tasks food_safe,food_recalled_elsewhere --research-steps 2 \
+            --output real-results.json
+      - name: Verify genuine inferences, preserve negative results and honest optional language
+        working-directory: experiments/thought-031
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('real-results.json'))
+          assert r['real_llm_inference'] and r['real_llm_generations']>=4
+          assert len(r['model_receipts'])==r['real_llm_generations']
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['http_generation_completed'] for x in r['model_receipts'])
+          assert not r['installed'] and r['external_authority']=='NONE'
+          for task,arms in r['tasks'].items():
+              for name,item in arms.items():
+                  assert item['actual_model_call_count']<=3
+                  assert item['final_inference_reserved']
+                  assert not item['installed']
+                  print(task,name,{'status':item['status'],
+                      'calls':item['actual_model_call_count'],
+                      'words':item['pidgin_lexicon']['tokens_coined'],
+                      'uses':item['pidgin_lexicon']['token_uses'],
+                      'frozen':item['frozen']['correct'] if item['frozen'] else None})
+          PY
+      - name: Preserve actual model outputs and negative/HOLD outcomes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-031-real-qwen-evidence-relay-pidgin-trial
+          path: experiments/thought-031/real-results.json
+          if-no-files-found: ignore
