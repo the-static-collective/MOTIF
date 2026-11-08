@@ -1,0 +1,30 @@
+name: MOTIF QC-007 living meaning field and nonterminal action network
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode007/**'
+      - '.github/workflows/quantum-code-007.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode007/**'
+      - '.github/workflows/quantum-code-007.yml'
+permissions:
+  contents: read
+jobs:
+  living-meaning-and-action-field:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run adversarial meanings, food security horizons and nonterminal planning tests
+        working-directory: experiments/quantumcode007
+        run: python -m unittest -v test_living_field.py test_domain_kernel.py
+      - name: Generate deterministic synthetic action-network benchmark
+        working-directory: experiments/quantumcode007
+        run: python living_field.py
+      - name: Reproduce second cross-domain action network benchmark
+        working-directory: experiments/quantumcode007
+        run: python domain_kernel.py
