@@ -9,7 +9,7 @@ from living_field import (
     MeaningField, Path, STATUS, World, action_inventory, aperture, digest,
     dominates, fixture_field, frontier, meets_need, plan, possible_actions,
     reenter, report, run_case, scenario, vector, receive_feedback,
-    accrue_from_feedback, diagnose_report,
+    accrue_from_feedback, diagnose_report, single_step_food_baseline,
 )
 
 
@@ -127,6 +127,23 @@ class LivingFieldChecks(unittest.TestCase):
         empty=aperture(self.field,c,())
         self.assertFalse(empty.meanings)
         self.assertEqual(len(empty.unused_meanings),6)
+
+    def test_one_step_food_baseline_works_acute_but_cannot_create_continuity(self):
+        immediate_world,immediate_context=scenario("acute")
+        ongoing_world,ongoing_context=scenario("persistent")
+        now=single_step_food_baseline(immediate_world,immediate_context,self.inventory)
+        ongoing=single_step_food_baseline(ongoing_world,ongoing_context,self.inventory)
+        self.assertEqual(now["selected"],"community_table")
+        self.assertTrue(now["meets_need"])
+        self.assertFalse(ongoing["meets_need"])
+        self.assertEqual(ongoing["modelled_future_days"],0)
+        self.assertGreater(len(self.results["persistent"].viable_paths),0)
+
+    def test_one_step_baseline_is_labeled_not_a_strong_comparator(self):
+        cases=report()["cases"]
+        self.assertIn("one_step_baseline",cases["acute"])
+        self.assertIn("one_step_baseline",cases["persistent"])
+        self.assertFalse(cases["persistent"]["one_step_baseline"]["meets_need"])
 
     def test_acute_and_persistent_are_distinct_goal_conditions(self):
         _,acute=scenario("acute")
