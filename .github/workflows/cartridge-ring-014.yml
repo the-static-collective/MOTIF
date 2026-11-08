@@ -1,0 +1,100 @@
+name: MOTIF Ring 014 / real no-network source-test action frontier
+
+on:
+  push:
+    branches:
+      - experiment/cartridge-ring-014-real-sandbox-tool-frontier
+  pull_request:
+    paths:
+      - 'experiments/cartridge-ring-014/**'
+      - '.github/workflows/cartridge-ring-014.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measured-source-owned-next-action:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Provision official Python container image on the HOST, before isolation
+        run: |
+          docker pull python:3.11-slim
+          docker image inspect python:3.11-slim --format '{{.Id}}'
+      - name: RING-014 source isolation and value-adapter contracts
+        run: |
+          python -m unittest discover -s experiments/cartridge-ring-014 -p 'test_*.py' -v
+      - name: Actually execute precommit calibration source-owned AST, smoke and deep tests
+        run: |
+          python experiments/cartridge-ring-014/learn.py \
+            --out /tmp/ring014-frozen.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/ring014-frozen.json'))
+          assert x['schema']=='motif.ring014.precommitted-real-test-action-policy.v1'
+          assert x['source_train_cases']==10 and x['source_dev_cases']==4
+          assert x['source_test_invocations_for_calibration']==42
+          assert x['candidate_action_value_settings_executed']==12
+          assert x['source_test_outcomes_measured_by_real_python_not_simulated']
+          assert x['heldout_code_fixtures_imported_during_selection'] is False
+          assert x['heldout_docker_outcomes_seen_during_selection'] is False
+          assert x['source_actual_tests_runner_preflight']['image_id'].startswith('sha256:')
+          assert x['outside_permissions']=='NONE'
+          print('Source measurements, real Docker runtime costs and policy froze before postfreeze tests.')
+          PY
+      - name: Dynamically execute approved real local tests and measure baselines on unseen source copies
+        run: |
+          python experiments/cartridge-ring-014/trial.py \
+            --frozen /tmp/ring014-frozen.json \
+            --out /tmp/ring014-postfreeze.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/ring014-postfreeze.json'))
+          assert x['schema']=='motif.ring014.actual-source-action-frontier-trial.v1'
+          assert x['test_case_count']==12
+          assert x['selection_before_test_result_observed'] is True
+          assert x['baseline_replays_use_actual_isolated_test_observations'] is True
+          assert x['source_013_value_function_executes_next_action']
+          assert x['source_012_open_world_ambiguity_preserved']
+          assert x['real_work_measured_as_reviewed_Python_tests_not_authored_payoff']
+          assert x['private_how_to_live_or_other_user_data_not_used']
+          assert x['automatic_external_effects_executed']==0
+          assert x['authority']=='NONE'
+          assert len(x['real_source_test_case_receipts'])==12
+          assert x['method_scores']['FRONTIER']['cases']==12
+          print('Every measurement came from executing reviewed source-owned Python methods in read-only network-disabled Docker.')
+          PY
+      - name: Reconcile source-bound real-world test evidence and preserve misses/costs
+        run: |
+          python experiments/cartridge-ring-014/evidence_graph.py \
+            --frozen /tmp/ring014-frozen.json \
+            --trial /tmp/ring014-postfreeze.json \
+            --out /tmp/ring014-evidence-graph.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/ring014-evidence-graph.json'))
+          assert x['schema']=='motif.ring014.measured-safe-tool-frontier-hypergraph.v1'
+          assert len(x['hyperedges'])==2
+          assert x['real_source_test_execution_demonstrated']
+          assert not x['unreviewed_real_world_tool_use_demonstrated']
+          assert x['new_external_authority']==0
+          assert x['outside_actions_executed']==0
+          assert x['authority']=='NONE'
+          print('Real source test outcomes, costs, source method lineage and failures reconciled.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-ring014-measured-reversible-real-tests
+          path: |
+            /tmp/ring014-frozen.json
+            /tmp/ring014-postfreeze.json
+            /tmp/ring014-evidence-graph.json
+          retention-days: 30
