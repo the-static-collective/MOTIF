@@ -1,0 +1,832 @@
+{
+  "all_model_origin_claims_unverified": true,
+  "allowed_runtime_snapshots_require_source_owner_approval": true,
+  "artifact_data_not_granted_authority": true,
+  "available_tools": [
+    "catalog",
+    "search",
+    "graphs",
+    "read",
+    "neighbors"
+  ],
+  "backend": "offline",
+  "digest": "fbe37598f68f70c5703286d9dfc8ae0d9315cc647734f75c91c6e7ad1a462ede",
+  "external_authority": "NONE",
+  "external_project_accounts_not_automatically_connected": true,
+  "installed": false,
+  "model_tag": null,
+  "real_local_ollama_model_generations": 0,
+  "real_model_execution_verified": false,
+  "repository_artifact_count": 83,
+  "schema": "motif.thought029.tool-guided-abstraction-experiment.v1",
+  "source_scope": "EXPLICIT_CHECKOUT_ONLY",
+  "symbolic_graph_count": 13,
+  "text_only_model_cannot_see_opaque_media_pixels": true,
+  "trials": {
+    "food_recalled_elsewhere": {
+      "actual_model_call_count": 3,
+      "actual_model_receipts": [
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        }
+      ],
+      "artifact_text_is_not_instruction": true,
+      "artifacts_do_not_automatically_certify_claims": true,
+      "development": {
+        "first_failure": null,
+        "passed": 4,
+        "total": 4
+      },
+      "evaluator_owns_task_ground_truth": true,
+      "external_authority": "NONE",
+      "failed_reason": null,
+      "fixed_template_executable": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "graph_coordinates_not_proof": true,
+      "indexed_symbolic_graph_count": 13,
+      "installed": false,
+      "model_did_not_receive_truth_policy": true,
+      "model_generated_python_executed": false,
+      "proposer_action_requests": 3,
+      "read_only_tool_calls": 2,
+      "report_digest": "450eb277ab13c44931ae25830add784cfbe5194d298c3b7330e1b1fbb8271561",
+      "schema": "motif.thought029.artifact-guided-interpretation.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "register_g",
+          "event": "register_f"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "source_artifact_count": 83,
+      "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+      "task": "food_recalled_elsewhere",
+      "transcript": [
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "tool": "graphs"
+          },
+          "result": {
+            "items": [
+              {
+                "artifact_id": "experiments/geometry-005/thought-source.json",
+                "edge_count": 11,
+                "edge_key": "edges",
+                "id": "experiments/geometry-005/thought-source.json#",
+                "kind": "typed_graph",
+                "node_count": 12,
+                "node_key": "nodes",
+                "pointer": "",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/derived_card/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/initial_direct_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/new_compositional_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/retained_task_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/reversed_role_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/store/derived_cards/0/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/0/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/1/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-029/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/trials/food_recalled_elsewhere/selected_expression/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              }
+            ],
+            "next_cursor": 10,
+            "offset": 0,
+            "response_only_paginated": true,
+            "total": 13
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "artifact_id": "experiments/thought-027/reuse.py",
+            "tool": "read"
+          },
+          "result": {
+            "artifact": {
+              "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+              "bytes": 9591,
+              "format": ".py",
+              "id": "experiments/thought-027/reuse.py",
+              "kind": "source_code_as_data",
+              "sha256": "18a4f69f1c9805a56b62df31f76cbd4de0fa5adefcb52958eb2d6e2e81a68096",
+              "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+            },
+            "content_kind": "text_lines",
+            "items": [
+              {
+                "index": 0,
+                "value": "\"\"\"Evidence-assisted reuse of previously verified MOTIF reasoning fragments."
+              },
+              {
+                "index": 1,
+                "value": ""
+              },
+              {
+                "index": 2,
+                "value": "Not a language-understanding benchmark: a NEW target's development oracle is"
+              },
+              {
+                "index": 3,
+                "value": "explicitly consulted. Each old card merely proposes a *candidate* mathematical"
+              },
+              {
+                "index": 4,
+                "value": "function. Successful transfer must be independently reverified on the new task."
+              },
+              {
+                "index": 5,
+                "value": "\"\"\""
+              },
+              {
+                "index": 6,
+                "value": "from __future__ import annotations"
+              },
+              {
+                "index": 7,
+                "value": "from collections import Counter"
+              },
+              {
+                "index": 8,
+                "value": "from copy import deepcopy"
+              },
+              {
+                "index": 9,
+                "value": "import sys"
+              }
+            ],
+            "model_access_is_read_only": true,
+            "next_cursor": 10,
+            "offset": 0,
+            "pointer": "",
+            "response_only_paginated": true,
+            "total": 183
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "citation_count": 1,
+          "proposal_digest": "5fc81f4758039d36095aff79e667f200d859bf92c5f4e6cd82e89a39ea175c6b",
+          "stage": "FINAL_CANDIDATE",
+          "status": "TYPED_NOT_YET_VERIFIED"
+        }
+      ],
+      "visited_artifact_ids": [
+        "experiments/geometry-005/thought-source.json",
+        "experiments/geometry-005/thought-source.json#",
+        "experiments/thought-027/reuse.py",
+        "experiments/thought-028/offline-results.json",
+        "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+        "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+        "experiments/thought-029/offline-results.json",
+        "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression"
+      ]
+    },
+    "food_safe": {
+      "actual_model_call_count": 3,
+      "actual_model_receipts": [
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        }
+      ],
+      "artifact_text_is_not_instruction": true,
+      "artifacts_do_not_automatically_certify_claims": true,
+      "development": {
+        "first_failure": null,
+        "passed": 4,
+        "total": 4
+      },
+      "evaluator_owns_task_ground_truth": true,
+      "external_authority": "NONE",
+      "failed_reason": null,
+      "fixed_template_executable": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "graph_coordinates_not_proof": true,
+      "indexed_symbolic_graph_count": 13,
+      "installed": false,
+      "model_did_not_receive_truth_policy": true,
+      "model_generated_python_executed": false,
+      "proposer_action_requests": 3,
+      "read_only_tool_calls": 2,
+      "report_digest": "0e9613b1ff4200d7473755168f7f3063a9b2a63ced7ec2a903abc6364b287937",
+      "schema": "motif.thought029.artifact-guided-interpretation.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "register_f",
+          "event": "register_g"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "source_artifact_count": 83,
+      "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+      "task": "food_safe",
+      "transcript": [
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "tool": "graphs"
+          },
+          "result": {
+            "items": [
+              {
+                "artifact_id": "experiments/geometry-005/thought-source.json",
+                "edge_count": 11,
+                "edge_key": "edges",
+                "id": "experiments/geometry-005/thought-source.json#",
+                "kind": "typed_graph",
+                "node_count": 12,
+                "node_key": "nodes",
+                "pointer": "",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/derived_card/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/initial_direct_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/new_compositional_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/retained_task_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/reversed_role_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/store/derived_cards/0/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/0/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/1/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-029/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/trials/food_recalled_elsewhere/selected_expression/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              }
+            ],
+            "next_cursor": 10,
+            "offset": 0,
+            "response_only_paginated": true,
+            "total": 13
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "artifact_id": "experiments/thought-027/reuse.py",
+            "tool": "read"
+          },
+          "result": {
+            "artifact": {
+              "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+              "bytes": 9591,
+              "format": ".py",
+              "id": "experiments/thought-027/reuse.py",
+              "kind": "source_code_as_data",
+              "sha256": "18a4f69f1c9805a56b62df31f76cbd4de0fa5adefcb52958eb2d6e2e81a68096",
+              "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+            },
+            "content_kind": "text_lines",
+            "items": [
+              {
+                "index": 0,
+                "value": "\"\"\"Evidence-assisted reuse of previously verified MOTIF reasoning fragments."
+              },
+              {
+                "index": 1,
+                "value": ""
+              },
+              {
+                "index": 2,
+                "value": "Not a language-understanding benchmark: a NEW target's development oracle is"
+              },
+              {
+                "index": 3,
+                "value": "explicitly consulted. Each old card merely proposes a *candidate* mathematical"
+              },
+              {
+                "index": 4,
+                "value": "function. Successful transfer must be independently reverified on the new task."
+              },
+              {
+                "index": 5,
+                "value": "\"\"\""
+              },
+              {
+                "index": 6,
+                "value": "from __future__ import annotations"
+              },
+              {
+                "index": 7,
+                "value": "from collections import Counter"
+              },
+              {
+                "index": 8,
+                "value": "from copy import deepcopy"
+              },
+              {
+                "index": 9,
+                "value": "import sys"
+              }
+            ],
+            "model_access_is_read_only": true,
+            "next_cursor": 10,
+            "offset": 0,
+            "pointer": "",
+            "response_only_paginated": true,
+            "total": 183
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "citation_count": 1,
+          "proposal_digest": "5356386b51faf1a99316db62ccf6d803e91c5c13b20b043374f978c6014c752d",
+          "stage": "FINAL_CANDIDATE",
+          "status": "TYPED_NOT_YET_VERIFIED"
+        }
+      ],
+      "visited_artifact_ids": [
+        "experiments/geometry-005/thought-source.json",
+        "experiments/geometry-005/thought-source.json#",
+        "experiments/thought-027/reuse.py",
+        "experiments/thought-028/offline-results.json",
+        "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+        "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+        "experiments/thought-029/offline-results.json",
+        "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression"
+      ]
+    },
+    "volunteer_eligible": {
+      "actual_model_call_count": 3,
+      "actual_model_receipts": [
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        },
+        {
+          "not_a_generating_model": true
+        }
+      ],
+      "artifact_text_is_not_instruction": true,
+      "artifacts_do_not_automatically_certify_claims": true,
+      "development": {
+        "first_failure": null,
+        "passed": 4,
+        "total": 4
+      },
+      "evaluator_owns_task_ground_truth": true,
+      "external_authority": "NONE",
+      "failed_reason": null,
+      "fixed_template_executable": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "graph_coordinates_not_proof": true,
+      "indexed_symbolic_graph_count": 13,
+      "installed": false,
+      "model_did_not_receive_truth_policy": true,
+      "model_generated_python_executed": false,
+      "proposer_action_requests": 3,
+      "read_only_tool_calls": 2,
+      "report_digest": "3a52ab2160510bd3cd335cca582d83a0b6cff91231de5a470147688a5c6cd504",
+      "schema": "motif.thought029.artifact-guided-interpretation.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "stream_a",
+          "event": "stream_b"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "intersection"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "source_artifact_count": 83,
+      "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+      "task": "volunteer_eligible",
+      "transcript": [
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "tool": "graphs"
+          },
+          "result": {
+            "items": [
+              {
+                "artifact_id": "experiments/geometry-005/thought-source.json",
+                "edge_count": 11,
+                "edge_key": "edges",
+                "id": "experiments/geometry-005/thought-source.json#",
+                "kind": "typed_graph",
+                "node_count": 12,
+                "node_key": "nodes",
+                "pointer": "",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/derived_card/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/initial_direct_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/new_compositional_attempt/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/retained_task_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/reversed_role_transfer/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 6,
+                "id": "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+                "kind": "symbolic_AST",
+                "node_count": 7,
+                "pointer": "/store/derived_cards/0/proposal/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/0/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-028/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/store/source_cards/1/typed_expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              },
+              {
+                "artifact_id": "experiments/thought-029/offline-results.json",
+                "edge_count": 2,
+                "id": "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression",
+                "kind": "symbolic_AST",
+                "node_count": 3,
+                "pointer": "/trials/food_recalled_elsewhere/selected_expression/expression",
+                "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+              }
+            ],
+            "next_cursor": 10,
+            "offset": 0,
+            "response_only_paginated": true,
+            "total": 13
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "material_is_untrusted": true,
+          "request": {
+            "artifact_id": "experiments/thought-027/reuse.py",
+            "tool": "read"
+          },
+          "result": {
+            "artifact": {
+              "access": "READ_ONLY_REVIEWED_REPOSITORY_SCOPE",
+              "bytes": 9591,
+              "format": ".py",
+              "id": "experiments/thought-027/reuse.py",
+              "kind": "source_code_as_data",
+              "sha256": "18a4f69f1c9805a56b62df31f76cbd4de0fa5adefcb52958eb2d6e2e81a68096",
+              "truth_status": "REPOSITORY_CONTENT_NOT_INDEPENDENT_TRUTH"
+            },
+            "content_kind": "text_lines",
+            "items": [
+              {
+                "index": 0,
+                "value": "\"\"\"Evidence-assisted reuse of previously verified MOTIF reasoning fragments."
+              },
+              {
+                "index": 1,
+                "value": ""
+              },
+              {
+                "index": 2,
+                "value": "Not a language-understanding benchmark: a NEW target's development oracle is"
+              },
+              {
+                "index": 3,
+                "value": "explicitly consulted. Each old card merely proposes a *candidate* mathematical"
+              },
+              {
+                "index": 4,
+                "value": "function. Successful transfer must be independently reverified on the new task."
+              },
+              {
+                "index": 5,
+                "value": "\"\"\""
+              },
+              {
+                "index": 6,
+                "value": "from __future__ import annotations"
+              },
+              {
+                "index": 7,
+                "value": "from collections import Counter"
+              },
+              {
+                "index": 8,
+                "value": "from copy import deepcopy"
+              },
+              {
+                "index": 9,
+                "value": "import sys"
+              }
+            ],
+            "model_access_is_read_only": true,
+            "next_cursor": 10,
+            "offset": 0,
+            "pointer": "",
+            "response_only_paginated": true,
+            "total": 183
+          },
+          "stage": "READ_ONLY_TOOL"
+        },
+        {
+          "citation_count": 1,
+          "proposal_digest": "90a907de326ea95322d72430a501da5f035223c63c2c0e249f267824b85aa70a",
+          "stage": "FINAL_CANDIDATE",
+          "status": "TYPED_NOT_YET_VERIFIED"
+        }
+      ],
+      "visited_artifact_ids": [
+        "experiments/geometry-005/thought-source.json",
+        "experiments/geometry-005/thought-source.json#",
+        "experiments/thought-027/reuse.py",
+        "experiments/thought-028/offline-results.json",
+        "experiments/thought-028/offline-results.json#/derived_card/proposal/expression",
+        "experiments/thought-028/offline-results.json#/initial_direct_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/new_compositional_attempt/proposal/expression",
+        "experiments/thought-028/offline-results.json#/retained_task_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/reversed_role_transfer/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/derived_cards/0/proposal/expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/0/typed_expression",
+        "experiments/thought-028/offline-results.json#/store/source_cards/1/typed_expression",
+        "experiments/thought-029/offline-results.json",
+        "experiments/thought-029/offline-results.json#/trials/food_recalled_elsewhere/selected_expression/expression"
+      ]
+    }
+  },
+  "typed_artifact_types": [
+    "derived_claimed_proof_graph",
+    "evaluation_receipt",
+    "geometry_or_thought_space",
+    "proof_or_evidence",
+    "research_document",
+    "source_code_as_data",
+    "workflow"
+  ],
+  "unbounded_pagination_reachable": true
+}
