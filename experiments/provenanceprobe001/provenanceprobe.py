@@ -183,6 +183,29 @@ class Belief:
                 'verified_independence': False}
 
 
+
+def ingest_decoder_witness_pairs(pairs: Iterable) -> Belief:
+    """Read-only adaptation of DECODER-INTEGRITY-001's WitnessPair surface.
+
+    Missing audit and asserted same-root pairs are held, never converted to
+    fictitious agreement. The adapter does NOT receive Episode or hidden label.
+    """
+    belief = Belief()
+    for row in pairs:
+        if row.event_key in belief.seen:
+            raise ValueError('duplicate decoder event')
+        if row.audit is None:
+            belief = Belief(belief.log_weights, belief.seen | {row.event_key},
+                            belief.pair_count, belief.anchor_count,
+                            belief.held_count + 1,
+                            belief.receipts + ({'event': row.event_key,
+                                                'status': 'HOLD_MISSING_AUDIT'},))
+            continue
+        belief = belief.ingest(Observation(row.event_key, row.primary, row.audit,
+                                          row.primary_origin, row.audit_origin))
+    return belief
+
+
 def uncertainty(p: dict[str, float]) -> float:
     return -sum(v * log2(v) for v in p.values() if v > 0)
 
