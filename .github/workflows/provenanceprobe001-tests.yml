@@ -1,0 +1,34 @@
+name: PROVENANCE-PROBE-001 independent witness tests
+
+on:
+  push:
+    branches:
+      - 'experiment/provenance-probe-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/provenanceprobe001/**'
+      - 'experiments/fir001/**'
+      - 'experiments/mathal001/**'
+      - '.github/workflows/provenanceprobe001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  provenance-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Mathematical prerequisites
+        run: |
+          (cd experiments/fir001 && python -m unittest -v test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -v test_mathal.py)
+      - name: Correlated-witness refusal and active inquiry
+        working-directory: experiments/provenanceprobe001
+        run: |
+          python -m unittest -v test_provenanceprobe.py
+          python provenanceprobe.py
+          python benchmark.py
