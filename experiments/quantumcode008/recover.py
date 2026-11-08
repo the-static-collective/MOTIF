@@ -22,7 +22,7 @@ AS_OF = "2026-11-07"
 CAPABILITIES = frozenset({
     "has_food", "has_phone", "has_internet", "motor_transport",
     "can_walk", "safe_to_walk", "safe_public_destination_known",
-    "someone_nearby", "medical_red_flags", "has_water",
+    "someone_nearby", "safe_person_to_approach", "medical_red_flags", "has_water",
 })
 YES, NO, UNKNOWN = "YES", "NO", "UNKNOWN"
 VALUES = (YES,NO,UNKNOWN)
@@ -219,6 +219,9 @@ def route_status(route:Route,situation:Situation,sources):
             unknown.append(key)
         elif actual != wanted:
             blocked.append(key)
+    if (route.channel=="ON_FOOT" and situation.at("medical_red_flags")==YES
+        and "medical_red_flags" not in blocked):
+        blocked.append("medical_red_flags")
     verdict="BLOCKED" if blocked else "CONDITIONAL" if unknown else "POSSIBLE_REFERRAL"
     return RouteStatus(route.id,verdict,tuple(blocked),tuple(unknown),
                        tuple(pins[k] for k in route.source_ids))
@@ -291,6 +294,12 @@ def bridge_library():
             "No person is presumed to be present, willing or safe.",
             2,1,0),
         Bridge(
+            "assess_person_safety","safe_person_to_approach","INQUIRY",
+            ("If a person is nearby, can you safely approach and ask them "
+             "without risking harm?",),
+            "Proximity is not consent or personal safety; do not assume help.",
+            1,1,0),
+        Bridge(
             "seek_safe_shared_contact","has_phone","CAPABILITY",
             ("If a safe person or staffed location is confirmed, ask "
              "whether a phone call for food referral is possible.",),
@@ -327,7 +336,8 @@ def question_text(predicate):
         "can_walk":"Can the person physically walk safely for a short distance?",
         "safe_to_walk":"Is walking actually safe given health, weather, terrain and local conditions?",
         "safe_public_destination_known":"Is an accessible, staffed public or community location definitely known?",
-        "someone_nearby":"Is a safely approachable person nearby?",
+        "someone_nearby":"Is any person nearby?",
+        "safe_person_to_approach":"If someone is nearby, are they safe to approach?",
         "has_phone":"Has a usable phone or borrowed call become available?",
         "has_internet":"Is an accessible internet connection currently available?",
         "has_food":"Is there safe food available right now?",
@@ -362,7 +372,7 @@ def questions_from_routes(situation, assessed, bridges):
         relevant.add("has_water")
     result=[]
     for key in relevant:
-        risk=0 if key in ("medical_red_flags","safe_to_walk","has_water") else 1
+        risk=0 if key in ("medical_red_flags","safe_to_walk","has_water","safe_person_to_approach") else 1
         effort=1 if key in ("medical_red_flags","can_walk","someone_nearby","has_water") else 2
         result.append(Question(key,question_text(key),
                                tuple(sorted(blockers[key])),effort,risk))
