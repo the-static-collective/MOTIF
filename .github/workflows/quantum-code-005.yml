@@ -1,0 +1,29 @@
+name: MOTIF QC-005 foreign graph generalization and impossibility checks
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode005/**'
+      - '.github/workflows/quantum-code-005.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode005/**'
+      - '.github/workflows/quantum-code-005.yml'
+permissions:
+  contents: read
+jobs:
+  frozen-motif-vs-networkx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned independently maintained graph library
+        run: python -m pip install --disable-pip-version-check networkx==3.6.1
+      - name: Run foreign-world and negative-control unit tests
+        working-directory: experiments/quantumcode005
+        run: python -m unittest -v test_trial.py
+      - name: Produce frozen-model foreign graph benchmark with HOLD certificate
+        working-directory: experiments/quantumcode005
+        run: python trial.py
