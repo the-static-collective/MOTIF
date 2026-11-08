@@ -174,6 +174,8 @@ class SelfBuildTests(unittest.TestCase):
         self.assertIn('NEXT-STEP-001.advance',r['orientation']['missing_interfaces'])
         self.assertEqual(r['status'],'F_LOCAL_CHILD_VERIFIED')
         self.assertEqual(r['steps'][1]['result']['status'],'I_TEMPLATE_INSTANCE_NOT_TESTED')
+        self.assertEqual(r['steps'][2]['result']['child_output']['action_executed'],'COUNT_MISSING')
+        self.assertEqual(r['steps'][2]['result']['child_output']['result']['names'], ['NEXT-STEP-001'])
 
     def test_generated_source_imports_are_only_stdlib(self):
         o=scan(self.source);stage_seed(o,self.stage)
