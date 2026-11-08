@@ -57,6 +57,34 @@ class ValueOfActionTests(unittest.TestCase):
         self.assertEqual(measured["internal_smash_count"],0)
         self.assertEqual(measured["action_count"],0)
 
+    def test_information_probe_is_worth_doing_for_conditional_followup(self):
+        # Without learning, the risky trial has NEGATIVE expected value.
+        # A cheap diagnostic can create positive expected value of trying
+        # that same reversible test ONLY if its signal is favorable.
+        p,h=synthetic()
+        p["proposed_prior"]={
+            "USEFUL":0.49,"UNHELPFUL":0.49,"SURPRISE":0.02}
+        p["actions"]["SMASH_A"]["rewards"]={
+            "USEFUL":10.0,"UNHELPFUL":-11.0,"SURPRISE":0.0}
+        p["actions"]["SMASH_A"]["affordances"]={
+            w:0 for w in scenario.WORLDS}
+        p["actions"]["SMASH_B"]["rewards"]={
+            w:0.0 for w in scenario.WORLDS}
+        p["actions"]["SMASH_B"]["affordances"]={
+            w:0 for w in scenario.WORLDS}
+        self.assertLess(
+            value.immediate(p["actions"]["SMASH_A"],
+                            p["proposed_prior"],GOOD_PARAMS),0)
+        self.assertEqual(value.choose(
+            p,p["proposed_prior"],GOOD_PARAMS,strategy="GREEDY")["action"],
+            "STOP")
+        thoughtful=value.choose(p,p["proposed_prior"],GOOD_PARAMS)
+        self.assertEqual(thoughtful["action"],"INSPECT")
+        self.assertGreater(thoughtful["expected_net"],0)
+        simulated=value.simulate(p,h,MINI_SOURCE,GOOD_PARAMS)
+        self.assertEqual(simulated["steps"][0]["action"],"INSPECT")
+        self.assertTrue(simulated["no_real_effects"])
+
     def test_effectful_actions_forbidden_even_if_apparent_gain_is_enormous(self):
         p,h=synthetic()
         self.assertEqual(p["actions"]["EXTERNAL_COMMIT"]["permission"],
