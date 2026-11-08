@@ -67,6 +67,7 @@ class Sources:
             "word_bayes":benchmark.Bayes(rows,mode="WORD").parse,
             "bigram_bayes":benchmark.Bayes(rows,mode="BIGRAM").parse,
         }
+        self._cache={}
         self.train_sha256=train["receipt_sha256"]
         self.program_sha256=program["receipt_sha256"]
         # Learn only the original corpus vocabulary, not future labels.
@@ -78,6 +79,9 @@ class Sources:
         self.lexicon=tuple(sorted(lex))
 
     def infer(self,utterance,event,carrier):
+        key=digest({"text":utterance,"event":event,"carrier":carrier})
+        if key in self._cache:
+            return self._cache[key]
         if carrier not in corpus.CARRIERS:
             raise HOLD("Unapproved source carrier")
         raw={}
@@ -103,6 +107,7 @@ class Sources:
                 "method_result_sha256":digest(result),
                 "method_could_not_establish_graph":hypothesis is None,
             }
+        self._cache[key]=raw
         return raw
 
 
