@@ -1,0 +1,39 @@
+name: NEXT-STEP-001 bounded autonomous follow-through
+
+on:
+  push:
+    branches:
+      - 'experiment/next-step-001-20261107'
+  pull_request:
+    paths:
+      - 'experiments/nextstep001/**'
+      - 'experiments/witnesschain001/**'
+      - '.github/workflows/nextstep001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  next-step:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Full stacked mathematics and witness regressions
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/selfmirror001 && python -m unittest -q test_selfmirror.py)
+          (cd experiments/contextgate001 && python -m unittest -q test_contextgate.py)
+          (cd experiments/decoderintegrity001 && python -m unittest -q test_decoderintegrity.py)
+          (cd experiments/provenanceprobe001 && python -m unittest -q test_provenanceprobe.py)
+          (cd experiments/witnesschain001 && python -m unittest -q test_witnesschain.py)
+      - name: Questions automatically executed and verified
+        working-directory: experiments/nextstep001
+        run: |
+          python -m unittest -v test_nextstep.py
+          python nextstep.py
+          python benchmark.py
