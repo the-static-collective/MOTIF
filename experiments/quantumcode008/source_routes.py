@@ -65,7 +65,7 @@ def catalogued_public_mechanisms():
             "A staffed destination and services are not assumed."),
         MechanismSpec(
             "ask_nearby_person_for_help",("usagov_emergency_food",),
-            "PERSON",(("someone_nearby",YES),),ROUTING,
+            "PERSON",(("someone_nearby",YES),("safe_person_to_approach",YES)),ROUTING,
             "Ask a safely approachable person for help reaching resources; "
             "no person or food supply is presumed."),
         MechanismSpec(
