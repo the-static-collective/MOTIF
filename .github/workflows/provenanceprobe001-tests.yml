@@ -9,6 +9,7 @@ on:
       - 'experiments/provenanceprobe001/**'
       - 'experiments/fir001/**'
       - 'experiments/mathal001/**'
+      - 'experiments/decoderintegrity001/**'
       - '.github/workflows/provenanceprobe001-tests.yml'
 
 permissions:
@@ -26,6 +27,7 @@ jobs:
         run: |
           (cd experiments/fir001 && python -m unittest -v test_fir.py)
           (cd experiments/mathal001 && python -m unittest -v test_mathal.py)
+          (cd experiments/decoderintegrity001 && python -m unittest -v test_decoderintegrity.py)
       - name: Correlated-witness refusal and active inquiry
         working-directory: experiments/provenanceprobe001
         run: |
