@@ -1,6 +1,7 @@
 {
   "composition_candidate_semantics": 8,
   "derived_card": {
+    "construction_kind": "LICENSED_COMPOSITION",
     "external_authority": "NONE",
     "function_sha256": "4e30225eeeb7eb5fc1a633d6f85541fc4171a69d69b8e195ca11d0bed15d0525",
     "independent_evaluation": {
@@ -14,7 +15,7 @@
       "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
       "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
     ],
-    "proof_digest": "a4d9d77e768261d6e76156526c0321c440f075969583db93a1fa1d869291202e",
+    "proof_digest": "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385",
     "proposal": {
       "bindings": {
         "current": "state_sheet",
@@ -243,7 +244,7 @@
     "status": "HOLD_SOURCE_OWNER_NONBOOLEAN_OR_AMBIGUOUS",
     "task": "ternary_unknown"
   },
-  "receipt_digest": "83bf82b9e3de50326613216ccc3b7b436ce3d2538e47258f1c107e35074764e3",
+  "receipt_digest": "1349e46693c887888d5cd63085528434075d5f26d8e659778edfaf4d51e5585e",
   "retained_task_transfer": {
     "automatic_install_disabled": true,
     "candidate_choice_did_not_use_target_frozen_truth": true,
@@ -315,12 +316,12 @@
       "rationale": "Scoped evidence candidate; new meaning remains unverified",
       "schema": "motif.thought025.abstraction-proposal.v1"
     },
-    "receipt_digest": "eed0c7b239ce795e722d57c4ab07a5ac98f74a1acfb469244f47a19294ecb38b",
+    "receipt_digest": "0da998c1beb3fc0850976046879426f95a7915354718abfd20802d91f5e3db4d",
     "remaining_after_development": 1,
     "schema": "motif.thought028.proof-weave.v1",
     "selected_origin": "RETRIEVED_PROOF",
     "source_proof_digests": [
-      "a4d9d77e768261d6e76156526c0321c440f075969583db93a1fa1d869291202e"
+      "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385"
     ],
     "status": "REVIEW_SCOPED_CANDIDATE_NOT_INSTALLED",
     "task": "toggle_equipment",
@@ -411,6 +412,7 @@
     "contains_nonboolean_world_model": false,
     "derived_cards": [
       {
+        "construction_kind": "LICENSED_COMPOSITION",
         "external_authority": "NONE",
         "function_sha256": "4e30225eeeb7eb5fc1a633d6f85541fc4171a69d69b8e195ca11d0bed15d0525",
         "independent_evaluation": {
@@ -424,7 +426,7 @@
           "b49310b3a8d1002d18ba533c4ed597b5f7b061bc5a2d42dcc63cd1915789b9e8",
           "edbdafab5369e8ae79ea554633ecadda5b816bdebc021bb414ac85e94648acd7"
         ],
-        "proof_digest": "a4d9d77e768261d6e76156526c0321c440f075969583db93a1fa1d869291202e",
+        "proof_digest": "46a27759212393b521b4d7189013ecbf66d1fdf4f6f67141e312d7b18b5f1385",
         "proposal": {
           "bindings": {
             "current": "state_sheet",
@@ -476,7 +478,7 @@
     ],
     "external_authority": "NONE",
     "installed": false,
-    "integrity_digest": "0136a2617dce3faba0a5eaa99204b5777478566e59192f8fa94d51365392878d",
+    "integrity_digest": "b1580bf9f6cd0cd19750ebbdc21b0347a3569b88b7f186adc745f9ab9604aee9",
     "model_provenance_authenticated": false,
     "schema": "motif.thought028.operator-owned-evidence-store.v1",
     "source_cards": [

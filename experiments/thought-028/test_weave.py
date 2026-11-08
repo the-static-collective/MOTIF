@@ -123,6 +123,18 @@ class WeaveTests(unittest.TestCase):
         st.derived={tamper['proof_digest']:tamper}
         with self.assertRaises(ProofError):st.verify_all()
 
+    def test_correct_output_with_forged_lineage_is_rejected(self):
+        st=seeds()
+        card=st.add_derived(BY_KEY['cancel_or_add'],
+                             investigate(BY_KEY['cancel_or_add'],st,mode='compose'))
+        manipulated=copy.deepcopy(card)
+        union_only=next(k for k,v in st.sources.items() if v['relation']=='UNION')
+        manipulated['parent_proof_digests']=[union_only]
+        manipulated['proof_digest']=digest({k:v for k,v in manipulated.items() if k!='proof_digest'})
+        st.derived={manipulated['proof_digest']:manipulated}
+        with self.assertRaisesRegex(ProofError,'parent operations'):
+            st.verify_all()
+
     def test_missing_parent_certificate_refused(self):
         st=seeds()
         card=st.add_derived(BY_KEY['cancel_or_add'],

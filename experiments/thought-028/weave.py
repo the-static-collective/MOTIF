@@ -186,6 +186,24 @@ class EvidenceStore:
         p = validate_proposal(task, card['proposal'])
         if digest(p) != card['proposal_digest']:
             raise ProofError('proposal contents changed')
+        # A hash proving an output works is NOT proof that its advertised
+        # parent knowledge actually contributed. Reconstruct lineage from
+        # source-owned operators and refuse irrelevant/forged parent claims.
+        kind = card.get('construction_kind')
+        ops, refs = uses(p['expression'])
+        if kind == 'LICENSED_COMPOSITION':
+            supported = {self.sources[i]['relation'] for i in parents if i in self.sources}
+            needed = ({'UNION'} if 'union' in ops else set()) | (                     {'DIFFERENCE'} if 'difference' in ops else set()) | (                     {'COMPLEMENT'} if 'universe' in refs else set())
+            if not needed or supported != needed or len(parents) != len(needed):
+                raise ProofError('composition parent operations do not justify expression')
+        elif kind == 'SOURCE_PROOF_KERNEL':
+            if len(parents) != 1 or parents[0] not in self.sources or                     self.sources[parents[0]]['typed_expression'] != p['expression']:
+                raise ProofError('source kernel attribution contradicted')
+        elif kind == 'RETRIEVED_PROOF':
+            if len(parents) != 1 or parents[0] not in self.derived or                     self.derived[parents[0]]['proposal']['expression'] != p['expression']:
+                raise ProofError('retrieved derivation parent does not match')
+        else:
+            raise ProofError('unknown candidate lineage type')
         source = check_truth(task, p)
         if source != card['independent_evaluation'] or source['correct'] != 64:
             raise ProofError('independent target disagrees')
@@ -213,6 +231,7 @@ class EvidenceStore:
                 'proposal': p, 'proposal_digest': digest(p),
                 'function_sha256':digest(expression_signature(p['expression'])),
                 'parent_proof_digests':support,
+                'construction_kind':successful_run['selected_origin'],
                 'independent_evaluation':full, 'trusted_template_evaluation':runtime,
                 'status':'VERIFIED_ONLY_FOR_THIS_SYNTHETIC_TASK',
                 'source_task_meaning_not_transferred_as_truth':True,
