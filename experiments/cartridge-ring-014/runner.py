@@ -136,8 +136,15 @@ def preflight(repo_root):
                           capture_output=True,text=True,timeout=15)
     if result.returncode!=0:
         raise SandboxError("Pinned Docker image tag not yet provisioned")
+    details=json.loads(result.stdout)
+    if not isinstance(details,list) or len(details)!=1:
+        raise SandboxError("Docker image identity unavailable")
+    image_id=details[0].get("Id")
+    if not isinstance(image_id,str) or not image_id.startswith("sha256:"):
+        raise SandboxError("Container image SHA256 was not obtained")
     root=fixtures.root_for_source(repo_root)
     return {
+        "image_id":image_id,
         "source_files":{
             name:sha256((root/name).read_bytes()).hexdigest()
             for name in fixtures.SOURCE
