@@ -599,6 +599,32 @@ def scenario(name):
     raise ValueError("Unknown synthetic scenario")
 
 
+
+def single_step_food_baseline(world: World, context: ActionField,
+                              inventory: tuple[Action,...]):
+    """Intentionally weak near-term myopic comparison, NOT an optimal planner.
+
+    It asks only which *immediately permitted single action* maximizes the
+    model's meal-unit count. This is a control for horizon differences,
+    not evidence that classical optimization or planning is inadequate.
+    """
+    feasible=[]
+    for action in possible_actions(world,inventory,(),context):
+        if action.minutes<=context.deadline_minutes and action.spend<=context.budget_limit:
+            result=action.transition(world)
+            if result is not None:
+                feasible.append((action,result))
+    if not feasible:
+        return {"selected":None,"meets_need":False}
+    selection=sorted(feasible,key=lambda x:(
+        -x[1].meals_today,x[0].minutes,x[0].id))[0]
+    action,result=selection
+    pseudo=Path((action.id,),result,action.minutes,action.spend,action.risk,"GENESIS")
+    return {"selected":action.id,
+            "modelled_meal_units":result.meals_today,
+            "modelled_future_days":result.recurring_days,
+            "meets_need":meets_need(pseudo,context)}
+
 def run_case(name):
     world,context=scenario(name)
     inventory=action_inventory()
@@ -616,6 +642,7 @@ def run_case(name):
                 "more_actions_available":dict(result.continuations).get(path.receipt(),())}
     return {
         "case":name,"status":result.status,
+        "one_step_baseline":single_step_food_baseline(world,context,inventory),
         "source_receipt":result.source_receipt,
         "carrier_receipt":field.receipt(),
         "meanings_preserved":len(field.meanings),
