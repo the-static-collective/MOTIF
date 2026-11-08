@@ -252,6 +252,49 @@ def aperture(field: MeaningField, context: ActionField,
                      tuple(m.id for m in field.meanings if m.id not in selected))
 
 
+
+@dataclass(frozen=True)
+class SemanticActionHypothesis:
+    """A meaning relation nominates something to *investigate*, not do."""
+    source_meanings: tuple[str,str]
+    relation: str
+    paired_affordances: tuple[str,...]
+    source_field_receipt: str
+    question: str
+    status: str = "HOLD_UNVERIFIED_ACTION_AFFORDANCE"
+
+    def receipt(self):
+        return digest(self.__dict__)
+
+
+def infer_action_hypotheses(field: MeaningField, view: FieldView):
+    """Cross two actively relevant meanings to nominate new action searches.
+
+    No predicted resource delta, eligibility, venue, food delivery, human
+    permission, or execution authority may be inferred from a mere symbol.
+    An explicit research question survives instead of a fabricated service.
+    """
+    if view.field_receipt != field.receipt():
+        raise ValueError("Stale action field cannot sponsor new propositions")
+    known={m.id:m for m in field.meanings}
+    active={m.meaning_id for m in view.meanings}
+    proposed=[]
+    for link in view.relations:
+        if link.source not in active or link.target not in active:
+            continue
+        if link.relationship not in ("POSSIBLE_ROUTE","CO_OCCURS","SUPPORTS"):
+            continue
+        left,right=known[link.source],known[link.target]
+        kinds=tuple(sorted(left.action_tags | right.action_tags))
+        if len(kinds)<2:
+            continue
+        proposed.append(SemanticActionHypothesis(
+            (left.id,right.id),link.relationship,kinds,field.receipt(),
+            "Can a sourced, safe and consented action join "
+            +left.phrase+" with "+right.phrase+
+            "? Verify real availability, access, cost and recurrence first."))
+    return tuple(proposed)
+
 @dataclass(frozen=True)
 class Path:
     """A hypothetical node in a finite action network, not a completed life."""
@@ -632,6 +675,7 @@ def run_case(name):
     field=fixture_field()
     active=aperture(field,context,available)
     result=plan(world,context,inventory)
+    proposed=infer_action_hypotheses(field,active)
     def description(path):
         return {"actions":path.action_ids,
                 "meal_units":path.state.meals_today,
@@ -649,6 +693,13 @@ def run_case(name):
         "active_meanings":tuple(x.meaning_id for x in active.meanings),
         "meaning_relations":tuple((x.source,x.relationship,x.target)
                                    for x in active.relations),
+        "action_hypotheses_to_check":tuple({
+            "sources":h.source_meanings,
+            "relation":h.relation,
+            "question":h.question,
+            "status":h.status,
+            "receipt":h.receipt(),
+        } for h in proposed),
         "plans_examined":result.nodes,
         "paths_meeting_synthetic_need":len(result.viable_paths),
         "nondominated_paths":len(result.pareto_paths),
