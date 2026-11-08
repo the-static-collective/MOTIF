@@ -72,8 +72,14 @@ def oracle_known_outcome(public,hidden,params):
 
 def run_frozen(frozen):
     verify_frozen(frozen)
-    # Only NOW import the source author-created novel task world.
-    import novel
+    # Only NOW load the selected experiment's challenge module. Inherited
+    # RING-011 also has a "novel.py"; never let Python path ordering select
+    # that entirely different hidden test distribution by accident.
+    from importlib.util import spec_from_file_location,module_from_spec
+    sealed_spec=spec_from_file_location(
+        "ring013_sealed_action_world",Path(__file__).resolve().parent/"novel.py")
+    novel=module_from_spec(sealed_spec)
+    sealed_spec.loader.exec_module(novel)
     sources,policy12=freeze.source_methods()
     if (policy12["receipt_sha256"]!=frozen[
             "source_ring012_lattice_policy_sha256"]
