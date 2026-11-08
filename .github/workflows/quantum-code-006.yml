@@ -1,0 +1,29 @@
+name: MOTIF QC-006 symbolic meaning remix and representation repair
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode006/**'
+      - '.github/workflows/quantum-code-006.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode006/**'
+      - '.github/workflows/quantum-code-006.yml'
+permissions:
+  contents: read
+jobs:
+  typed-semantic-remix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned independent graph-source package for foreign tests
+        run: python -m pip install --disable-pip-version-check networkx==3.6.1
+      - name: Test typed symbol remixes, false meanings and validation gates
+        working-directory: experiments/quantumcode006
+        run: python -m unittest -v test_remix.py
+      - name: Reproduce QC-006 representation-invention report
+        working-directory: experiments/quantumcode006
+        run: python remix.py
