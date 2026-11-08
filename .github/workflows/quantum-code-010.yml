@@ -21,7 +21,10 @@ jobs:
           python-version: '3.11'
       - name: Evaluate adaptive decisions, safety uncertainty, and failed probes
         working-directory: experiments/quantumcode010
-        run: python -m unittest -v test_traction.py
+        run: python -m unittest -v test_traction.py test_anthropology.py
       - name: Reproduce annotated conditional design and failure report
         working-directory: experiments/quantumcode010
         run: python traction.py
+      - name: Reproduce source-pinned historical analogies and contextual nontransfer
+        working-directory: experiments/quantumcode010
+        run: python anthropology.py
