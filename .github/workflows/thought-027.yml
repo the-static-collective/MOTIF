@@ -1,0 +1,60 @@
+name: THOUGHT-027 scoped proof-fragment memory and independent reuse
+on:
+  push:
+    paths:
+      - 'experiments/thought-027/**'
+      - '.github/workflows/thought-027.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-027/**'
+      - '.github/workflows/thought-027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scoped-proof-memory-and-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Proof provenance, stage identifiability, transfer and tamper tests
+        working-directory: experiments/thought-027
+        run: python -m unittest -v test_proof_memory.py
+      - name: Source-only benchmark (no LLM, no external effects)
+        working-directory: experiments/thought-027
+        run: python benchmark.py
+      - name: Verify successful reuse, frozen negative control and no-install
+        working-directory: experiments/thought-027
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          assert len(r['proof_cards'])==4
+          assert r['proposer']=='SCRIPTED_TEST_FIXTURE_NOT_GENERATIVE_LLM'
+          for k in ('reverse_outreach','food_recalled_elsewhere'):
+              assert r['reuse_trials'][k]['status']=='REVIEW_REUSE_CANDIDATE_NOT_INSTALLED'
+              assert r['reuse_trials'][k]['frozen']['correct']==64
+          bad=r['reuse_trials']['cancel_or_add']
+          assert bad['status']=='HOLD_FROZEN_COUNTEREXAMPLE' and bad['frozen']['correct']<64
+          assert r['reuse_trials']['unknown_beliefs']['status']=='HOLD_NON_BOOLEAN_OR_AMBIGUOUS'
+          assert r['composed_trial']['status']=='REVIEW_COMPOSED_CANDIDATE_NOT_INSTALLED'
+          assert r['composed_trial']['frozen']['correct']==64
+          assert r['number_real_llm_generations']==0 and not r['installed']
+          print('Source-owned evidence preserved; no LLM performance claim; review-only')
+          PY
+      - name: THOUGHT-026 regression — staged reasoning remains unchanged
+        working-directory: experiments/thought-026
+        run: python -m unittest -v test_stages.py
+      - name: THOUGHT-025 regression — compositional oracle unchanged
+        working-directory: experiments/thought-025
+        run: python -m unittest -v test_abstraction.py
+      - name: Save proof ledger experiment receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-027-scoped-proof-reuse-offline
+          path: experiments/thought-027/offline-results.json
+          if-no-files-found: ignore

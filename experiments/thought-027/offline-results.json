@@ -1,0 +1,558 @@
+{
+  "all_claims_limited_to_3_bit_author_designed_world": true,
+  "composed_trial": {
+    "derived_expression": {
+      "args": [
+        {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        {
+          "args": [
+            {
+              "ref": "arrival.toggles"
+            },
+            {
+              "ref": "state.on"
+            }
+          ],
+          "op": "difference"
+        }
+      ],
+      "op": "union"
+    },
+    "development": [
+      {
+        "actual": 6,
+        "inputs": {
+          "change_sheet": 5,
+          "state_sheet": 3
+        },
+        "predicted": 6
+      },
+      {
+        "actual": 2,
+        "inputs": {
+          "change_sheet": 3,
+          "state_sheet": 1
+        },
+        "predicted": 2
+      },
+      {
+        "actual": 7,
+        "inputs": {
+          "change_sheet": 0,
+          "state_sheet": 7
+        },
+        "predicted": 7
+      },
+      {
+        "actual": 7,
+        "inputs": {
+          "change_sheet": 7,
+          "state_sheet": 0
+        },
+        "predicted": 7
+      }
+    ],
+    "external_authority": "NONE",
+    "frozen": {
+      "correct": 64,
+      "first_counterexample": null,
+      "total": 64
+    },
+    "human_selected_binding_hypothesis": true,
+    "installed": false,
+    "oracle_queries": 4,
+    "receipt_digest": "550421a22994ae313920512f10f3f7353686fc5a342d7096b7180d484a795b93",
+    "schema": "motif.thought027.compositional-reuse.v1",
+    "source_owned_runtime": {
+      "correct": 64,
+      "model_written_python": false,
+      "total": 64,
+      "trusted_template": true
+    },
+    "source_proof_digests": [
+      "bcac039afd5c0bf2b2a3a43b406f44b401dd60c2d4d2939f4050c8d678696cbd",
+      "6ddbe967d6b11c97cea61238e6403b9f37c64d80b264f20b5e4f4437adb2fd37"
+    ],
+    "status": "REVIEW_COMPOSED_CANDIDATE_NOT_INSTALLED",
+    "task": "cancel_or_add",
+    "verified_component_does_not_certify_composition": true
+  },
+  "external_authority": "NONE",
+  "installed": false,
+  "new_task_meaning_inferred_without_oracle": false,
+  "number_real_llm_generations": 0,
+  "proof_cards": [
+    {
+      "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+      "external_authority": "NONE",
+      "full_domain_cases_passed": 64,
+      "function_sha256": "259e192ad817d4baf9340874c00f6fbfb1714eb33ccb5dc4922c7acf921eb593",
+      "identifiability": {
+        "binding_status": "SUPPORTED_ON_FINITE_WORLD",
+        "compatible_pair_count": 1,
+        "consistent_bindings": [
+          [
+            "register_f",
+            "register_g"
+          ]
+        ],
+        "consistent_relations": [
+          "DIFFERENCE"
+        ],
+        "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+        "language_meaning_independently_verified": false,
+        "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+      },
+      "individual_stage_correctness_not_assumed": true,
+      "installed": false,
+      "learned_meaning_from_human_language_proven": false,
+      "model_written_code_executed": false,
+      "oracle_function_sha256": "259e192ad817d4baf9340874c00f6fbfb1714eb33ccb5dc4922c7acf921eb593",
+      "origin_label_unverified": "SCRIPTED_STAGE_FIXTURE_NOT_A_LIVE_LLM",
+      "proof_digest": "bcac039afd5c0bf2b2a3a43b406f44b401dd60c2d4d2939f4050c8d678696cbd",
+      "relation": "DIFFERENCE",
+      "roles": {
+        "current": "register_f",
+        "event": "register_g"
+      },
+      "schema": "motif.thought027.proof-carrying-fragment.v1",
+      "source_owner_not_real_world_verification": true,
+      "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+      "task_key": "food_safe",
+      "task_spec_sha256": "6e046a61bc672445c9e0a4219f29def540089d1a62da260b1381ddfdd4767ef0",
+      "trusted_template_cases_passed": 64,
+      "typed_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "difference"
+      }
+    },
+    {
+      "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+      "external_authority": "NONE",
+      "full_domain_cases_passed": 64,
+      "function_sha256": "e47255127355d5b021b04cebd5d1e1574baff459e24e3d3c9ffc5a40e5781ae2",
+      "identifiability": {
+        "binding_status": "UNDERDETERMINED",
+        "compatible_pair_count": 2,
+        "consistent_bindings": [
+          [
+            "stream_a",
+            "stream_b"
+          ],
+          [
+            "stream_b",
+            "stream_a"
+          ]
+        ],
+        "consistent_relations": [
+          "INTERSECTION"
+        ],
+        "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+        "language_meaning_independently_verified": false,
+        "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+      },
+      "individual_stage_correctness_not_assumed": true,
+      "installed": false,
+      "learned_meaning_from_human_language_proven": false,
+      "model_written_code_executed": false,
+      "oracle_function_sha256": "e47255127355d5b021b04cebd5d1e1574baff459e24e3d3c9ffc5a40e5781ae2",
+      "origin_label_unverified": "SCRIPTED_STAGE_FIXTURE_NOT_A_LIVE_LLM",
+      "proof_digest": "1bb1fb406dc3e1d2ad0e2b39ee7e93959a248c1ef4c279a6a4996be25a4f3e1c",
+      "relation": "INTERSECTION",
+      "roles": {
+        "current": "stream_a",
+        "event": "stream_b"
+      },
+      "schema": "motif.thought027.proof-carrying-fragment.v1",
+      "source_owner_not_real_world_verification": true,
+      "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+      "task_key": "volunteer_eligible",
+      "task_spec_sha256": "6ac2227f3e77d7598abeb5eddcc88637b6643fac99d6393de6ba84a84e7b028e",
+      "trusted_template_cases_passed": 64,
+      "typed_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "intersection"
+      }
+    },
+    {
+      "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+      "external_authority": "NONE",
+      "full_domain_cases_passed": 64,
+      "function_sha256": "637b842bc419a08f65381e2958f548a2fb90a07f3acee8f01e8dd902bdf3efce",
+      "identifiability": {
+        "binding_status": "UNDERDETERMINED",
+        "compatible_pair_count": 2,
+        "consistent_bindings": [
+          [
+            "stream_a",
+            "stream_b"
+          ],
+          [
+            "stream_b",
+            "stream_a"
+          ]
+        ],
+        "consistent_relations": [
+          "UNION"
+        ],
+        "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+        "language_meaning_independently_verified": false,
+        "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+      },
+      "individual_stage_correctness_not_assumed": true,
+      "installed": false,
+      "learned_meaning_from_human_language_proven": false,
+      "model_written_code_executed": false,
+      "oracle_function_sha256": "637b842bc419a08f65381e2958f548a2fb90a07f3acee8f01e8dd902bdf3efce",
+      "origin_label_unverified": "SCRIPTED_STAGE_FIXTURE_NOT_A_LIVE_LLM",
+      "proof_digest": "6ddbe967d6b11c97cea61238e6403b9f37c64d80b264f20b5e4f4437adb2fd37",
+      "relation": "UNION",
+      "roles": {
+        "current": "stream_a",
+        "event": "stream_b"
+      },
+      "schema": "motif.thought027.proof-carrying-fragment.v1",
+      "source_owner_not_real_world_verification": true,
+      "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+      "task_key": "food_donations",
+      "task_spec_sha256": "3bc800deb6336ddcf527d1b631e45e874a5a0223c8a6ec18d8328697e49ddb51",
+      "trusted_template_cases_passed": 64,
+      "typed_expression": {
+        "args": [
+          {
+            "ref": "state.on"
+          },
+          {
+            "ref": "arrival.toggles"
+          }
+        ],
+        "op": "union"
+      }
+    },
+    {
+      "composite_status": "VERIFIED_FOR_THIS_FINITE_TASK",
+      "external_authority": "NONE",
+      "full_domain_cases_passed": 64,
+      "function_sha256": "a7ef05f12d017d251036eac4c74bbf2f38386e4d6105e7230cc73474a5615db4",
+      "identifiability": {
+        "binding_status": "SUPPORTED_ON_FINITE_WORLD",
+        "compatible_pair_count": 1,
+        "consistent_bindings": [
+          [
+            "stock_sheet",
+            "queue_sheet"
+          ]
+        ],
+        "consistent_relations": [
+          "COMPLEMENT"
+        ],
+        "evidence": "SOURCE_OWNER_64_CASE_INDEPENDENT_INTEGER_ORACLE",
+        "language_meaning_independently_verified": false,
+        "relation_status": "SUPPORTED_ON_FINITE_WORLD"
+      },
+      "individual_stage_correctness_not_assumed": true,
+      "installed": false,
+      "learned_meaning_from_human_language_proven": false,
+      "model_written_code_executed": false,
+      "oracle_function_sha256": "a7ef05f12d017d251036eac4c74bbf2f38386e4d6105e7230cc73474a5615db4",
+      "origin_label_unverified": "SCRIPTED_STAGE_FIXTURE_NOT_A_LIVE_LLM",
+      "proof_digest": "cf93c423c725d0584bb53ea6d2dfc352ac4662fdfb60719b2ed5efd7a1cb3a94",
+      "relation": "COMPLEMENT",
+      "roles": {
+        "current": "stock_sheet",
+        "event": "queue_sheet"
+      },
+      "schema": "motif.thought027.proof-carrying-fragment.v1",
+      "source_owner_not_real_world_verification": true,
+      "source_owner_semantic_scope": "AUTHOR_DESIGNED_CLOSED_WORLD_THREE_BIT_SETS",
+      "task_key": "not_on_shelf",
+      "task_spec_sha256": "9421e0d05f3fc89c4911e264a9716fa39c91c4771db90073c53b53823004b8fa",
+      "trusted_template_cases_passed": 64,
+      "typed_expression": {
+        "args": [
+          {
+            "ref": "universe"
+          },
+          {
+            "ref": "state.on"
+          }
+        ],
+        "op": "difference"
+      }
+    }
+  ],
+  "proposer": "SCRIPTED_TEST_FIXTURE_NOT_GENERATIVE_LLM",
+  "reuse_trials": {
+    "cancel_or_add": {
+      "development_receipts": [
+        {
+          "actual": 3,
+          "before": 6,
+          "inputs": {
+            "change_sheet": 2,
+            "state_sheet": 1
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        },
+        {
+          "actual": 0,
+          "before": 1,
+          "inputs": {
+            "change_sheet": 0,
+            "state_sheet": 0
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        }
+      ],
+      "external_authority": "NONE",
+      "fixed_template_execution": null,
+      "frozen": {
+        "correct": 27,
+        "first_counterexample": {
+          "actual": 1,
+          "expected": 0,
+          "inputs": {
+            "change_sheet": 1,
+            "state_sheet": 1
+          }
+        },
+        "total": 64
+      },
+      "installed": false,
+      "new_task_roles_inferred_from_language": false,
+      "no_model_code_executed": true,
+      "only_evaluator_gives_new_task_ground_truth": true,
+      "oracle_queries": 2,
+      "original_distinct_candidate_functions": 6,
+      "receipt_digest": "b7b84e22edbbde1777c5c6f3a2344aa940670d0bcb35fb48cf326dc90d0f9bf0",
+      "reused_fragments_rechecked_on_new_task": true,
+      "schema": "motif.thought027.evidence-assisted-transfer.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "state_sheet",
+          "event": "change_sheet"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "union"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "selected_relation": "UNION",
+      "source_card_count": 4,
+      "source_proof_digests": [
+        "6ddbe967d6b11c97cea61238e6403b9f37c64d80b264f20b5e4f4437adb2fd37",
+        "6ddbe967d6b11c97cea61238e6403b9f37c64d80b264f20b5e4f4437adb2fd37"
+      ],
+      "status": "HOLD_FROZEN_COUNTEREXAMPLE",
+      "task": "cancel_or_add"
+    },
+    "food_recalled_elsewhere": {
+      "development_receipts": [
+        {
+          "actual": 2,
+          "before": 6,
+          "inputs": {
+            "register_f": 1,
+            "register_g": 2
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        },
+        {
+          "actual": 0,
+          "before": 1,
+          "inputs": {
+            "register_f": 0,
+            "register_g": 0
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        }
+      ],
+      "external_authority": "NONE",
+      "fixed_template_execution": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "new_task_roles_inferred_from_language": false,
+      "no_model_code_executed": true,
+      "only_evaluator_gives_new_task_ground_truth": true,
+      "oracle_queries": 2,
+      "original_distinct_candidate_functions": 6,
+      "receipt_digest": "b936a8e527b8c896f9eaa8148fa0c077714484f7c6d98d0284b222daedc74e0a",
+      "reused_fragments_rechecked_on_new_task": true,
+      "schema": "motif.thought027.evidence-assisted-transfer.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "register_g",
+          "event": "register_f"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "selected_relation": "DIFFERENCE",
+      "source_card_count": 4,
+      "source_proof_digests": [
+        "bcac039afd5c0bf2b2a3a43b406f44b401dd60c2d4d2939f4050c8d678696cbd"
+      ],
+      "status": "REVIEW_REUSE_CANDIDATE_NOT_INSTALLED",
+      "task": "food_recalled_elsewhere"
+    },
+    "reverse_outreach": {
+      "development_receipts": [
+        {
+          "actual": 2,
+          "before": 6,
+          "inputs": {
+            "availability": 1,
+            "declines": 2
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        },
+        {
+          "actual": 0,
+          "before": 1,
+          "inputs": {
+            "availability": 0,
+            "declines": 0
+          },
+          "label": "DEV_ORACLE_NOT_LLM",
+          "surviving": 1
+        }
+      ],
+      "external_authority": "NONE",
+      "fixed_template_execution": {
+        "correct": 64,
+        "model_written_python": false,
+        "total": 64,
+        "trusted_template": true
+      },
+      "frozen": {
+        "correct": 64,
+        "first_counterexample": null,
+        "total": 64
+      },
+      "installed": false,
+      "new_task_roles_inferred_from_language": false,
+      "no_model_code_executed": true,
+      "only_evaluator_gives_new_task_ground_truth": true,
+      "oracle_queries": 2,
+      "original_distinct_candidate_functions": 6,
+      "receipt_digest": "134678cdb1ce81b111c5093d4e00442b622ecd14d8aa41445c02b06aebbf1f36",
+      "reused_fragments_rechecked_on_new_task": true,
+      "schema": "motif.thought027.evidence-assisted-transfer.v1",
+      "selected_expression": {
+        "bindings": {
+          "current": "declines",
+          "event": "availability"
+        },
+        "expression": {
+          "args": [
+            {
+              "ref": "state.on"
+            },
+            {
+              "ref": "arrival.toggles"
+            }
+          ],
+          "op": "difference"
+        },
+        "rationale": "Source-owned compiler of two separately proposed typed stages",
+        "schema": "motif.thought025.abstraction-proposal.v1"
+      },
+      "selected_relation": "DIFFERENCE",
+      "source_card_count": 4,
+      "source_proof_digests": [
+        "bcac039afd5c0bf2b2a3a43b406f44b401dd60c2d4d2939f4050c8d678696cbd"
+      ],
+      "status": "REVIEW_REUSE_CANDIDATE_NOT_INSTALLED",
+      "task": "reverse_outreach"
+    },
+    "unknown_beliefs": {
+      "installed": false,
+      "no_language_meaning_inferred": true,
+      "oracle_queries": 0,
+      "reason": "Source owner declined Boolean coercion",
+      "schema": "motif.thought027.evidence-assisted-transfer.v1",
+      "status": "HOLD_NON_BOOLEAN_OR_AMBIGUOUS",
+      "task": "unknown_beliefs"
+    }
+  },
+  "schema": "motif.thought027.offline-fragment-reuse.v1",
+  "source_tasks": [
+    "food_safe",
+    "volunteer_eligible",
+    "food_donations",
+    "not_on_shelf"
+  ],
+  "unverified_partial": {
+    "binding_hypothesis": {
+      "current": "register_g",
+      "event": "register_f"
+    },
+    "dev_failed": true,
+    "digest": "00314421bea369856f12bb3885ed4636438079a55bb3542c9393cc3a2cd746ab",
+    "eligible_for_reuse": false,
+    "installed": false,
+    "relation_hypothesis": "DIFFERENCE",
+    "schema": "motif.thought027.unverified-fragment.v1",
+    "source_trial_status": "HOLD_DEV_CONTRADICTION",
+    "status": "TYPED_HYPOTHESES_NOT_BEHAVIORALLY_CERTIFIED",
+    "task_key": "food_safe"
+  }
+}
