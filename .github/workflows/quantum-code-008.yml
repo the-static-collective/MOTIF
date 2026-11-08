@@ -1,0 +1,27 @@
+name: MOTIF QC-008 source-pinned affordance recovery
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode008/**'
+      - '.github/workflows/quantum-code-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode008/**'
+      - '.github/workflows/quantum-code-008.yml'
+permissions:
+  contents: read
+jobs:
+  no-route-is-not-no-action:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run no-route epistemic and safety tests
+        working-directory: experiments/quantumcode008
+        run: python -m unittest -v test_recover.py
+      - name: Produce source-pinned navigation and safe fallback report
+        working-directory: experiments/quantumcode008
+        run: python recover.py
