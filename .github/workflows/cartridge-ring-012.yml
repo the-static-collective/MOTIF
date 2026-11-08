@@ -70,10 +70,31 @@ jobs:
               assert all(w['open_world_always'] for w in packet['case_witnesses'])
           print('Set-valued interpretation, residual uncertainty, and every case-level discrepancy retained.')
           PY
+      - name: Audit source-level alternative readings and cost of broad interpretation
+        run: |
+          python experiments/cartridge-ring-012/evidence_graph.py \
+            --policy /tmp/ring012-frozen-policy.json \
+            --trial /tmp/ring012-postfreeze.json \
+            --out /tmp/ring012-hypergraph.json
+          python - <<'PY'
+          import json
+          g=json.load(open('/tmp/ring012-hypergraph.json'))
+          assert g['schema']=='motif.ring012.measured-ambiguity-evidence-hypergraph.v1'
+          assert len(g['hyperedges'])==2
+          assert g['hyperedges'][1]['total_test_cases']==120
+          assert g['open_world_other_always_preserved']
+          assert g['correlated_source_agreement_does_not_establish_truth']
+          assert not g['independent_real_world_language_competence_demonstrated']
+          assert g['automatic_new_cartridge_admissions']==0
+          assert g['external_action_executed'] is False
+          assert g['authority']=='NONE'
+          print('Evidence preserves unresolved and contradictory perspectives, errors, and nonauthority.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: motif-ring012-ambiguity-native-evidence
           path: |
             /tmp/ring012-frozen-policy.json
             /tmp/ring012-postfreeze.json
+            /tmp/ring012-hypergraph.json
           retention-days: 30
