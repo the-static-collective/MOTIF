@@ -1,9 +1,17 @@
 """RING-013: evidence safeguards for action utility under ordinary ambiguity."""
 from __future__ import annotations
 from copy import deepcopy
+from importlib.util import spec_from_file_location,module_from_spec
+from pathlib import Path
 import unittest
 
-import scenario,value,freeze,trial,evidence_graph
+import scenario,value,freeze,trial
+# RING-011 and RING-012 also declare an 'evidence_graph.py' module.
+# Bind this audit test to this ring's exact source file.
+graph_spec=spec_from_file_location(
+    "ring013_evidence_graph",Path(__file__).resolve().parent/"evidence_graph.py")
+evidence_graph=module_from_spec(graph_spec)
+graph_spec.loader.exec_module(evidence_graph)
 
 
 class EvidenceOfActionTests(unittest.TestCase):
