@@ -48,6 +48,12 @@ An unreadable, cryptic or source-unbound utterance yields `UNRESOLVED_SOURCE` wi
 
 No graph can authorize an action. `root_action_authorized = false` always, even when some candidate graph appears to describe an outer directive.
 
+### Useful conclusions without demanding that ambiguity disappear
+
+MOTIF also extracts **conditional invariants**: relations that agree across *all of the currently modeled candidate graphs*, while explicitly preserving the possibility of other, unmodeled readings. For example, it can represent that competing perspectives differ about *who* requested an action but agree on the **carrier** or another bounded property. These invariants are source-conditional, **not independently authenticated real-world facts**.
+
+If a consequential relationship varies across its candidate graphs, the system can attach an **optional discrimination question kind**: Who requested the event? Which scope owns it? Is the utterance direct or reported speech? Does negation attach to the event? This is an inspectable question identifier, **not** an autonomous request or a claim that the user must resolve ambiguity. `auto_interrupt_user_for_ambiguity = false` always.
+
 ## Calibration and training provenance
 
 `calibration.py` uses the **original RING-011 train and development data**, not the RING-012 challenge labels. The RING-011 source binder is reconstructed and checked against its exact training source. Word and bigram Bayes are trained on exactly the same source. RING-012 performs **32 finite uncertainty-policy calibration trials** that vary model-vote inclusion, source-text novelty sensitivity and whether disagreement causes wider interpretation sets.
@@ -127,6 +133,6 @@ GitHub Actions uploads three machine-readable evidence artifacts: the frozen par
 
 **Not established:** Independent discovery of the semantic ontology, a probabilistically calibrated uncertainty estimate on real language, coherent handling of every cryptic utterance, authenticated historical testimony, general natural-language understanding, or automatic invention of new fundamental mathematical operators. All source events are supplied, all labels are author-defined, and all three models share correlated training and errors.
 
-**Next critical experiment:** Treat an ambiguous meaning set as a *question-generating resource*. Given multiple viable interpretations, generate a minimal, answerable **clarifying observation or evidence request** that would distinguish them—without collapsing interpretations prematurely, treating creative text as an evidentiary record, or demanding unnecessary clarification when the ambiguity does not affect the user's objective.
+**Next critical experiment:** Evaluate the *value* of an optional discriminator with a separate source of evidence. Our current code can identify conditional invariants and suggest which typed relation would distinguish alternatives, but has **not** measured whether requesting that observation helps a human or costs more attention than it saves. The system should ask only when ambiguity materially changes the user's goal; it should otherwise proceed using jointly supported, source-qualified conclusions.
 
 **Ambiguity is now an explicit state of the machine, not a defect it has to erase.**
