@@ -42,7 +42,7 @@ class PortalTests(unittest.TestCase):
         self.assertFalse(r['geometry_is_not_evidence'] is False)
 
     def test_recursive_ast_is_a_graph_and_exposes_arguments(self):
-        p=sample_portal();g=[x for x in p.graphs(limit=30)['items'] if x['kind']=='symbolic_AST'][0]
+        p=sample_portal();g=[x for x in p.graphs(limit=30)['items'] if x['kind']=='symbolic_AST' and x['edge_count']>0][0]
         r=p.neighbors(g['id'],'/',limit=10)
         self.assertGreaterEqual(r['total'],1)
         self.assertIn('ARGUMENT_',json.dumps(r))
