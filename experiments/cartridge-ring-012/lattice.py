@@ -233,6 +233,35 @@ def combine(utterance,event,carrier,source,policy):
             possibilities["EVENT_POLARITY"],
         )
     ]
+    # A stable proposition is useful even when the utterance has competing
+    # meanings. Extract only properties shared by ALL bounded candidates.
+    # Such invariants hold *inside this generated model*, never as facts
+    # about the world: the OPEN_WORLD_OTHER possibility is always retained.
+    conditional_invariants={}
+    graph_rows=[corpus.graph_map(g) for g in worlds]
+    for rel in RELATIONS:
+        key=relation_key(rel)
+        seen={row[key] for row in graph_rows}
+        if len(seen)==1:
+            conditional_invariants[rel]=next(iter(seen))
+    owners={row[("EVENT","VOICE_OWNER")] for row in graph_rows}
+    if len(owners)==1:
+        conditional_invariants["VOICE_OWNER"]=next(iter(owners))
+    action_states={row[("EVENT","REQUESTED_BY_ROOT")] for row in graph_rows}
+    if len(action_states)==1:
+        conditional_invariants["ROOT_ACTION_IN_MODEL"]=next(iter(action_states))
+    # Minimal *optional* evidence discriminator: don't interrupt the user
+    # just because the ontology contains more than one possibility.
+    if len(action_states)>1:
+        separator="WHO_IF_ANY_REQUESTED_THIS_EVENT"
+    elif len(possibilities["EVENT_SCOPE"])>1:
+        separator="WHICH_SCOPE_OWNS_THE_EVENT"
+    elif len(possibilities["ROOT_FORCE"])>1:
+        separator="IS_THIS_DIRECT_SPEECH_OR_REPORTED_SPEECH"
+    elif len(possibilities["EVENT_POLARITY"])>1:
+        separator="DOES_NEGATION_APPLY_TO_THIS_EVENT"
+    else:
+        separator=None
     # Every graph is a source hypothesis, *not* an event claim or effectful
     # instruction. Even a set containing only one graph remains open-world.
     return {
@@ -247,6 +276,10 @@ def combine(utterance,event,carrier,source,policy):
         "carrier_truth_authenticated":False,
         "source_methods":predictions,
         "source_disagreements":disagreements,
+        "conditional_invariants_within_modeled_worlds":conditional_invariants,
+        "invariants_are_not_authenticated_world_facts":True,
+        "optional_discriminator_question_kind":separator,
+        "auto_interrupt_user_for_ambiguity":False,
         "novelty_fraction":round(novelty,4),
         "broadened_by_source_novelty_or_conflict":widen,
         "method_agreement_is_independent_corroboration":False,
