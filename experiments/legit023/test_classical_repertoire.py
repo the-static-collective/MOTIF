@@ -94,6 +94,35 @@ class ClassicalPortfolioTests(unittest.TestCase):
         self.assertEqual(result["order"], ("A", "B", "C"))
         self.assertFalse(result["heldout_influenced_selection"])
 
+    def test_exact_training_dp_matches_exhaustive_all_orders_in_both_cost_models(self):
+        from itertools import permutations
+        patterns = ((1, ()), (2, ()), (3, ()), (4, ()))
+        covered = {
+            patterns[0]: {0, 1, 2},
+            patterns[1]: {0, 3},
+            patterns[2]: {3, 4},
+            patterns[3]: {1, 4},
+        }
+        tasks = [SimpleNamespace(
+            graphs=((7, ("x", i)), (7, ("y", i))))
+            for i in range(5)]
+        def oracle(probe, graph):
+            return int(graph[1][0] == "y" and graph[1][1] in covered[probe])
+        def true_training_objective(order, model):
+            total = 0
+            for i in range(len(tasks)):
+                for probe in order:
+                    total += 1 if model == "unit" else 7 ** probe[0]
+                    if i in covered[probe]:
+                        break
+            return total
+        for model in ("unit", "assignments"):
+            plan = optimal_training_order(tasks, patterns, oracle, model=model)
+            brute = min(true_training_objective(order, model)
+                        for order in permutations(patterns))
+            self.assertEqual(plan["training_objective"], brute)
+            self.assertEqual(true_training_objective(plan["order"], model), brute)
+
     def test_method_registry_refuses_unconnected_solvers(self):
         live = {x["id"] for x in EXECUTABLE}
         self.assertIn("networkx_VF2pp", live)
