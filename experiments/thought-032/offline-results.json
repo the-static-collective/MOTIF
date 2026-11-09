@@ -1,0 +1,250 @@
+{
+  "actual_model_inference": false,
+  "arms": {
+    "baseline": {
+      "all_preexisting_graph_edges_are_untrusted_synthetic": true,
+      "authority": "NONE",
+      "backend_kind": "SCRIPTED_SOURCE_OWNER_FIXTURE_NOT_GENERATIVE_LLM",
+      "concept_book": {
+        "coined": 0,
+        "enabled": false,
+        "installed": false,
+        "schema": "motif.thought032.codebook-view.v1",
+        "terms": [],
+        "used_words": [],
+        "uses": 0
+      },
+      "concept_use_receipts": [],
+      "history": [],
+      "inference_calls": 3,
+      "installed": false,
+      "model_inference_receipts": [
+        {
+          "phase": "PREPARE",
+          "scripted": true
+        },
+        {
+          "phase": "APPLY",
+          "scripted": true
+        },
+        {
+          "phase": "APPLY",
+          "scripted": true
+        }
+      ],
+      "model_never_obtains_task_truth_policy": true,
+      "no_external_actions": true,
+      "pidgin_offered": false,
+      "result_digest": "9aa2a669ad623b5dd5fde0f83d2900c304dbc87721f36d83b723b5f2b94e069b",
+      "results": {
+        "food_recalled_elsewhere": {
+          "authority": "NONE",
+          "code_from_model_executed": false,
+          "cross_domain_meaning_preverified": false,
+          "declared_proof_citations": [
+            "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+          ],
+          "decoded_relation": "DIFFERENCE",
+          "dev_correct": 4,
+          "dev_total": 4,
+          "frozen_correct": 64,
+          "graph_structural_match": null,
+          "installed": false,
+          "model_word_used": false,
+          "seed_card_is_prior_scope_only": true,
+          "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+          "task": "food_recalled_elsewhere",
+          "trusted_executable_correct": 64,
+          "word": null
+        },
+        "reverse_outreach": {
+          "authority": "NONE",
+          "code_from_model_executed": false,
+          "cross_domain_meaning_preverified": false,
+          "declared_proof_citations": [
+            "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+          ],
+          "decoded_relation": "DIFFERENCE",
+          "dev_correct": 4,
+          "dev_total": 4,
+          "frozen_correct": 64,
+          "graph_structural_match": null,
+          "installed": false,
+          "model_word_used": false,
+          "seed_card_is_prior_scope_only": true,
+          "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+          "task": "reverse_outreach",
+          "trusted_executable_correct": 64,
+          "word": null
+        }
+      },
+      "schema": "motif.thought032.verified-concept-transfer.v1",
+      "source_owned_seed_digest": "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+    },
+    "optional_concept": {
+      "all_preexisting_graph_edges_are_untrusted_synthetic": true,
+      "authority": "NONE",
+      "backend_kind": "SCRIPTED_SOURCE_OWNER_FIXTURE_NOT_GENERATIVE_LLM",
+      "concept_book": {
+        "coined": 1,
+        "enabled": true,
+        "installed": false,
+        "schema": "motif.thought032.codebook-view.v1",
+        "terms": [
+          {
+            "authority": "NONE",
+            "card_sha256": "e68ff45049518663f5c1ca080108b7cf821ecefe2754a1648a8dbe3e36ab26c0",
+            "definition": {
+              "gloss": "Exclude a second finite category set from a primary one",
+              "graph_pattern": "DEPENDENCY_CHAIN",
+              "next_experiment": "DISCRIMINATING_DEV_QUERIES",
+              "proof_gate": "DEV_THEN_FROZEN_64",
+              "relation": "DIFFERENCE",
+              "uncertainty": "TRANSFER_REQUIRES_NEW_EVIDENCE",
+              "word": "yiblat"
+            },
+            "independently_verified_for_new_task": false,
+            "installed": false,
+            "model_word_meaning_real_world_proven": false,
+            "schema": "motif.thought032.concept-word.v1",
+            "semantic_signature_sha256": "259e192ad817d4baf9340874c00f6fbfb1714eb33ccb5dc4922c7acf921eb593",
+            "source_owned_operators_not_model_code": true,
+            "source_scope": "FINITE_3_BIT_BOOLEAN_MODEL_PLUS_TYPED_GRAPH_PATTERN"
+          }
+        ],
+        "used_words": [
+          "yiblat"
+        ],
+        "uses": 2
+      },
+      "concept_use_receipts": [
+        {
+          "expansion_hash": "e68ff45049518663f5c1ca080108b7cf821ecefe2754a1648a8dbe3e36ab26c0",
+          "meaning_status": "TYPED_CANDIDATE_NOT_TARGET_PROOF",
+          "word": "yiblat"
+        },
+        {
+          "expansion_hash": "e68ff45049518663f5c1ca080108b7cf821ecefe2754a1648a8dbe3e36ab26c0",
+          "meaning_status": "TYPED_CANDIDATE_NOT_TARGET_PROOF",
+          "word": "yiblat"
+        }
+      ],
+      "history": [],
+      "inference_calls": 3,
+      "installed": false,
+      "model_inference_receipts": [
+        {
+          "phase": "PREPARE",
+          "scripted": true
+        },
+        {
+          "phase": "APPLY",
+          "scripted": true
+        },
+        {
+          "phase": "APPLY",
+          "scripted": true
+        }
+      ],
+      "model_never_obtains_task_truth_policy": true,
+      "no_external_actions": true,
+      "pidgin_offered": true,
+      "result_digest": "0d94a9246b27baec99d33cce9db5ba42469f48d8b716ae3820618439a14b5251",
+      "results": {
+        "food_recalled_elsewhere": {
+          "authority": "NONE",
+          "code_from_model_executed": false,
+          "cross_domain_meaning_preverified": false,
+          "declared_proof_citations": [
+            "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+          ],
+          "decoded_relation": "DIFFERENCE",
+          "dev_correct": 4,
+          "dev_total": 4,
+          "frozen_correct": 64,
+          "graph_structural_match": {
+            "authority": "NONE",
+            "coordinates_as_evidence": false,
+            "matches": [
+              {
+                "edge_origins": [
+                  "synthetic_a",
+                  "synthetic_b"
+                ],
+                "nodes": [
+                  "food",
+                  "cold_storage",
+                  "power"
+                ]
+              }
+            ],
+            "pattern": "DEPENDENCY_CHAIN",
+            "source_edges_used": 6,
+            "status": "STRUCTURAL_CANDIDATES_NOT_NEW_EVIDENCE",
+            "total_found": 1
+          },
+          "installed": false,
+          "model_word_used": true,
+          "seed_card_is_prior_scope_only": true,
+          "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+          "task": "food_recalled_elsewhere",
+          "trusted_executable_correct": 64,
+          "word": "yiblat"
+        },
+        "reverse_outreach": {
+          "authority": "NONE",
+          "code_from_model_executed": false,
+          "cross_domain_meaning_preverified": false,
+          "declared_proof_citations": [
+            "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+          ],
+          "decoded_relation": "DIFFERENCE",
+          "dev_correct": 4,
+          "dev_total": 4,
+          "frozen_correct": 64,
+          "graph_structural_match": {
+            "authority": "NONE",
+            "coordinates_as_evidence": false,
+            "matches": [
+              {
+                "edge_origins": [
+                  "synthetic_a",
+                  "synthetic_b"
+                ],
+                "nodes": [
+                  "food",
+                  "cold_storage",
+                  "power"
+                ]
+              }
+            ],
+            "pattern": "DEPENDENCY_CHAIN",
+            "source_edges_used": 6,
+            "status": "STRUCTURAL_CANDIDATES_NOT_NEW_EVIDENCE",
+            "total_found": 1
+          },
+          "installed": false,
+          "model_word_used": true,
+          "seed_card_is_prior_scope_only": true,
+          "status": "REVIEW_SCOPED_INTERPRETATION_NOT_INSTALLED",
+          "task": "reverse_outreach",
+          "trusted_executable_correct": 64,
+          "word": "yiblat"
+        }
+      },
+      "schema": "motif.thought032.verified-concept-transfer.v1",
+      "source_owned_seed_digest": "19f2b2085d94ebd9807855edadd7d3797386e6d3a61655265a991e9730d1490d"
+    }
+  },
+  "automatically_installed": false,
+  "backend": "offline",
+  "digest": "2fde606404f9f489eb105812068fa664a964cad8549fe3bfc5c4452af6b3108e",
+  "external_authority": "NONE",
+  "matched_max_model_calls": true,
+  "matched_token_cost": false,
+  "real_model_calls": 0,
+  "receipts": [],
+  "schema": "motif.thought032.comparison.v1",
+  "scripted_fixture_is_not_generations": true,
+  "target_scenarios_independently_blind": false
+}

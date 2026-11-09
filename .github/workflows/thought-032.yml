@@ -1,0 +1,100 @@
+name: THOUGHT-032 optional model-coined conceptual pidgin across reasoning artifacts
+on:
+  push:
+    paths:
+      - 'experiments/thought-032/**'
+      - '.github/workflows/thought-032.yml'
+  pull_request:
+    paths:
+      - 'experiments/thought-032/**'
+      - '.github/workflows/thought-032.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof-scoped-concept-protocol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test codebook, graph semantics, source verification and stub transport
+        working-directory: experiments/thought-032
+        run: python -m unittest -v test_concept.py
+      - name: Scripted source-owned offline comparison (NOT an LLM)
+        working-directory: experiments/thought-032
+        run: python concept_run.py --backend offline --output offline-results.json
+      - name: Verify epistemic limits and independent finite cases
+        working-directory: experiments/thought-032
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('offline-results.json'))
+          assert not r['actual_model_inference'] and r['real_model_calls']==0
+          assert not r['automatically_installed']
+          assert r['arms']['optional_concept']['concept_book']['coined']==1
+          assert r['arms']['optional_concept']['concept_book']['uses']==2
+          for arm in r['arms'].values():
+              assert arm['inference_calls']==3
+              for task in arm['results'].values():
+                  assert task['frozen_correct']==64
+                  assert task['trusted_executable_correct']==64
+          print('source-only protocol works; no real LLM coining claimed')
+          PY
+      - name: Regression THOUGHT-031
+        working-directory: experiments/thought-031
+        run: python -m unittest -v test_relay.py test_relay_http.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thought-032-scripted-concept-protocol
+          path: experiments/thought-032/offline-results.json
+  direct-qwen-concept-language:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install unpinned Ollama in disposable research runner (not production)
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Start loopback inference and download actual Qwen model
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 55); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Compare two direct Qwen3B arms (canonical versus optionally coined concept word)
+        working-directory: experiments/thought-032
+        run: python concept_run.py --backend ollama --model qwen2.5:3b --output real-model-results.json
+      - name: Record actual model-generated words and bounded outcome, including no word
+        working-directory: experiments/thought-032
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('real-model-results.json'))
+          assert r['actual_model_inference'] and r['real_model_calls']>=2
+          assert all(x['transport']=='DIRECT_LOOPBACK_OLLAMA_HTTP' and x['http_generation_completed'] for x in r['receipts'])
+          assert not r['automatically_installed']
+          for name,arm in r['arms'].items():
+              assert arm['inference_calls']<=3 and not arm['installed']
+              print(name,{'calls':arm['inference_calls'], 'coined':arm['concept_book']['coined'],
+                  'uses':arm['concept_book']['uses'],
+                  'results':{k:{'status':v['status'],'frozen':v.get('frozen_correct')}
+                             for k,v in arm['results'].items()}})
+          PY
+      - name: Preserve raw LLM receipts including HOLD/declines
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thought-032-genuine-qwen-concept-word-results
+          path: experiments/thought-032/real-model-results.json
+          if-no-files-found: ignore
