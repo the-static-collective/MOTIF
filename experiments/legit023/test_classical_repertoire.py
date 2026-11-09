@@ -8,6 +8,7 @@ import unittest
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "legit022"))
+sys.path.insert(0, str(HERE.parent / "legit021"))
 from atlas import cohort
 from graph_inventor import grammar, reference_count
 from methods import (
@@ -37,7 +38,7 @@ class ClassicalPortfolioTests(unittest.TestCase):
                                          expected)
 
     def test_hom_not_monomorphism_or_injection(self):
-        # A two-leaf star has four homomorphisms to one edge: both
+        # A two-leaf star has two homomorphisms to one edge: both
         # leaves can map to the same target endpoint.
         star = (3, ((0, 1), (0, 2)))
         edge = (2, ((0, 1),))
