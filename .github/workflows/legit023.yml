@@ -1,0 +1,51 @@
+name: MOTIF LEGIT-023 Shoulders of Giants classical repertoire
+
+on:
+  push:
+    paths:
+      - "experiments/legit023/**"
+      - ".github/workflows/legit023.yml"
+  pull_request:
+    paths:
+      - "experiments/legit023/**"
+      - ".github/workflows/legit023.yml"
+
+jobs:
+  classical-repertoire-against-atlas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Load exact same pinned NetworkX Atlas dependency as LEGIT-022
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Verify exact homomorphisms, 1-WL limitations, VF2++, and training-only DP
+        run: |
+          python -m unittest discover -s experiments/legit023 -p 'test_*.py' -v
+      - name: Execute and archive matched external Atlas portfolio evidence
+        run: |
+          python experiments/legit023/shoulders.py --emit > /tmp/motif-legit023-shoulders.json
+          python -m json.tool /tmp/motif-legit023-shoulders.json >/dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/motif-legit023-shoulders.json"))
+          print("Status:", p["status"])
+          print("Direct VF2++:", p["task_A_direct_graph_nonisomorphism"]["VF2pp_nonisomorphic"])
+          print("Exact joint 1-WL:", p["task_A_direct_graph_nonisomorphism"]["joint_1WL_certifies_nonisomorphism"])
+          for name, row in p["task_B_find_separating_hom_source"]["cases_by_policy"].items():
+              print(name, "hom-witnesses", row["solved_hom_witness_cases"], "source-questions", row["total_source_questions"])
+          print("Policy hash:", p["freeze"]["sha256_frozen_before_heldout"])
+          PY
+      - name: Archive all raw source orders, probe counts, and explicit hold
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT023-SHOULDERS-OF-GIANTS-RESEARCH-HOLD
+          path: /tmp/motif-legit023-shoulders.json
+          if-no-files-found: warn
+          retention-days: 30
