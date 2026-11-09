@@ -1,0 +1,114 @@
+{
+  "schema": "motif.annotated-gameplay/v0",
+  "game": "LAST_OF_US_LIKE",
+  "provenance": "fictional and synthetic Q011 example (not actual game footage)",
+  "consent_for_derived_research": true,
+  "episodes": [
+    {
+      "episode_id": "fictional_action_1",
+      "game": "LAST_OF_US_LIKE",
+      "source": "SYNTHETIC_FIXTURE",
+      "source_ref": "synthetic:q011:1",
+      "rights": "SYNTHETIC",
+      "clip_start_seconds": 0,
+      "clip_end_seconds": 10,
+      "action": "craft_healing_item",
+      "before": {
+        "resources": [
+          [
+            "cloth",
+            1
+          ],
+          [
+            "alcohol",
+            1
+          ]
+        ],
+        "capabilities": [],
+        "hazards": [
+          "injured_character"
+        ],
+        "location": "SYNTHETIC_GAME_SCENE",
+        "clock_tick": 0
+      },
+      "after": {
+        "resources": [
+          [
+            "cloth",
+            0
+          ],
+          [
+            "alcohol",
+            0
+          ]
+        ],
+        "capabilities": [
+          "healing_item"
+        ],
+        "hazards": [
+          "injured_character"
+        ],
+        "location": "SYNTHETIC_GAME_SCENE",
+        "clock_tick": 1
+      },
+      "outcome": "SUCCESS",
+      "claimed_reason": "Mock game inventory conversion",
+      "certainty": "OBSERVED",
+      "tags": [
+        "SYNTHETIC_GAME"
+      ]
+    },
+    {
+      "episode_id": "fictional_action_2",
+      "game": "LAST_OF_US_LIKE",
+      "source": "SYNTHETIC_FIXTURE",
+      "source_ref": "synthetic:q011:2",
+      "rights": "SYNTHETIC",
+      "clip_start_seconds": 10,
+      "clip_end_seconds": 20,
+      "action": "use_healing_item",
+      "before": {
+        "resources": [
+          [
+            "cloth",
+            0
+          ],
+          [
+            "alcohol",
+            0
+          ]
+        ],
+        "capabilities": [
+          "healing_item"
+        ],
+        "hazards": [
+          "injured_character"
+        ],
+        "location": "SYNTHETIC_GAME_SCENE",
+        "clock_tick": 1
+      },
+      "after": {
+        "resources": [
+          [
+            "cloth",
+            0
+          ],
+          [
+            "alcohol",
+            0
+          ]
+        ],
+        "capabilities": [],
+        "hazards": [],
+        "location": "SYNTHETIC_GAME_SCENE",
+        "clock_tick": 2
+      },
+      "outcome": "SUCCESS",
+      "claimed_reason": "Mock game condition indicator changed",
+      "certainty": "OBSERVED",
+      "tags": [
+        "SYNTHETIC_GAME"
+      ]
+    }
+  ]
+}

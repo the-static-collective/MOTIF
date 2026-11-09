@@ -1,0 +1,30 @@
+name: MOTIF QC-011 survival game replay grammar
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode011/**'
+      - '.github/workflows/quantum-code-011.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode011/**'
+      - '.github/workflows/quantum-code-011.yml'
+permissions:
+  contents: read
+jobs:
+  gameplay-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate game-only replay, provenance, uncertainty and HOLD-only crossing
+        working-directory: experiments/quantumcode011
+        run: python -m unittest -v test_game_replay.py test_ingest.py
+      - name: Reproduce annotated replay-to-affordance fixtures
+        working-directory: experiments/quantumcode011
+        run: python game_replay.py
+      - name: Parse and preview held-only annotated gameplay JSON
+        working-directory: experiments/quantumcode011
+        run: python ingest.py example_annotation.json
