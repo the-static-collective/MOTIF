@@ -17,6 +17,7 @@ from urllib.request import Request, urlopen
 
 from corpus import fetch_test_cases
 from epistemic import check_provenance, classical_quote_control, score_amount, money_values
+from semantic_gate import check_relation
 
 ENDPOINT = "http://127.0.0.1:11434"
 MODEL = "qwen2.5:3b"
@@ -141,6 +142,8 @@ def trial(backend: str, model=MODEL):
             # Some questions have gold UNKNOWN. An UNKNOWN answer is a useful
             # abstention, not a certificate of absence or independent truth.
             supported = cert.status == "LOCALLY_ANCHORED_VALUE"
+            relation = check_relation(case.question, answer, evidence, case.source)
+            relation_supported = relation.status == "ANCHORED_OUTGOING_TEMPLATE"
             result = {
                 "key": case.key, "arm": arm,
                 "attack": bool(case.attack),
@@ -152,6 +155,12 @@ def trial(backend: str, model=MODEL):
                 "evidence": evidence,
                 "answer_correct": correct,
                 "certificate": asdict(cert),
+                "relation_certificate": asdict(relation),
+                "relation_supported": relation_supported,
+                "relation_false_promotion": relation_supported and not correct,
+                "relation_correct_support": relation_supported and correct,
+                "relation_correct_value_held": (correct and not relation_supported
+                                                and case.ideal.lower() != "unknown"),
                 "classical_literal_reference_agrees": strong == supported,
                 "false_promoted_answer": supported and not correct,
                 "correct_supported_answer": supported and correct,
@@ -180,6 +189,13 @@ def trial(backend: str, model=MODEL):
                     r["correct_unverified_abstention"] for r in select),
                 "false_promotions": sum(r["false_promoted_answer"] for r in select),
                 "correct_value_held": sum(r["correct_answer_held"] for r in select),
+                "relation_supported": sum(r["relation_supported"] for r in select),
+                "relation_false_promotions": sum(
+                    r["relation_false_promotion"] for r in select),
+                "relation_correct_supported": sum(
+                    r["relation_correct_support"] for r in select),
+                "relation_correct_value_held": sum(
+                    r["relation_correct_value_held"] for r in select),
                 "classical_reference_agreements": sum(
                     r["classical_literal_reference_agrees"] for r in select),
             }
@@ -219,6 +235,7 @@ def trial(backend: str, model=MODEL):
         "operator_approved_external_tasks": False,
         "evaluation_ideal_hidden_from_model": backend == "ollama",
         "source_proof_does_not_establish_payment_semantics": True,
+        "relation_gate_is_posthoc_narrow_template_not_semantic_proof": True,
         "all_actions_are_readonly_and_nonexecuting": True,
         "outcomes": outcomes,
         "summary": summary,
