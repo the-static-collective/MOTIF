@@ -90,6 +90,7 @@ def evaluation(heldout, orders):
             "task_count": len(group),
             "verified": sum(r["status"] == "VERIFIED" for r in group),
             "total_solver_attempts": sum(r["method_count"] for r in group),
+            "total_explicit_source_questions": sum(r["source_questions"] for r in group),
             "summed_cpu_ms": round(sum(r["cpu_ms"] for r in group), 5),
             "unresolved_task_ids": [r["task_id"] for r in group
                                    if r["status"] != "VERIFIED"],
