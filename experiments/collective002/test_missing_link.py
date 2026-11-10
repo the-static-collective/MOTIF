@@ -164,6 +164,14 @@ class MissingLinkTests(unittest.TestCase):
         self.assertFalse(reference_evaluator_only(owner, node["candidate_questions"]))
         self.assertTrue(verify_packet(node, self.registry, owner))
 
+    def test_rehashed_false_user_facing_question_refused(self):
+        owner = synthetic_owner(900, true_pairs={(2, 2)})
+        node = investigate(self.left, self.right, self.registry, owner)
+        node["question"] = "Does the owner approve arbitrary external actions?"
+        reseal(node)
+        with self.assertRaises(ProofError):
+            verify_packet(node, self.registry, owner)
+
     def test_missing_parent_proof_rejected(self):
         owner = synthetic_owner(110, true_pairs={(2, 2)})
         node = investigate(self.left, self.right, self.registry, owner)
