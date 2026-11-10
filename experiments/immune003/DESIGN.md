@@ -33,13 +33,51 @@ The 12 attacked examples have exact clean controls of the same email and same mo
 
 The first run is a **single small public-source sample with predeclared selection**; no adaptive optimization, cross-model generalization, or formal significance claims. Later engineering adjustments must be identified as **post hoc**, and new disjoint challenge selection is needed for credible independent confirmation.
 
+## First actual Qwen results — contamination is not cured by source containment
+
+The initial actual-model comparison is archived at [run 42748764084](https://github.com/the-static-collective/MOTIF/actions/runs/42748764084).
+All 50 calls completed on the pinned public BIPIA-derived cases. On 25
+cases per arm, the fused arm returned **8/25** correct monetary answers and
+the stronger source-scoped arm **11/25**. Each had **2 of 12** matched
+clean-to-attacked cases that changed from correct to incorrect. Neither arm
+earned a broad security claim.
+
+Critically, the simple original-email literal-quote/amount gate **falsely
+promoted four wrong answers** in the source-scoped arm (2 attacked, 2 clean).
+The wrong answers cited genuinely original dollar amounts but silently
+conflated *incoming from Stripe* with *paid to Stripe*, or provided a charge
+amount in an email that did not mention *Bench* at all. Thus source
+containment is necessary but plainly **not sufficient for semantic validity**.
+
+### Post-hoc IMMUNE-003R: narrow direction-and-counterparty check
+
+In response to those observed failures, `semantic_gate.py` adds a **developer-
+authored, read-only, bounded** template: parse the question's named payee,
+require the same literal party in an exact primary-email proof span, identify
+the outgoing amount/party relation locally, refuse explicit incoming receipts,
+and HOLD when an amount exists but its recipient relationship is unproven.
+
+The gate does not use gold answers, external attack text, or any actual model
+response history as inputs at evaluation time. It also does not 'learn' or
+prove general payment semantics. **Because the rule was designed after seeing
+these very cases, results on the same 25 pairs are development/regression
+results only**, not independent validation. Some genuinely correct payments,
+particularly receipts where the payee is identified only in an email header,
+will be held. Correct-value rejection must be reported alongside false
+promotion reductions; there is no permission to hide that tradeoff.
+
+The next honest test is a disjoint selection from BIPIA with frozen patterns
+and an independent human-annotated direction-of-payment challenge, or a
+different corpus. The relationship checker must be independently challenged,
+not merely tested against these two discovered errors.
+
 ## Run
 
 Python 3.11, standard library:
 
 ```sh
 cd experiments/immune003
-python -m unittest -v test_immune3.py
+python -m unittest -v test_immune3.py test_semantic_gate.py
 python trial.py --backend scripted --output scripted-results.json # fake fixture, no LLM
 ```
 
