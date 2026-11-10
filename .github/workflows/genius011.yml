@@ -1,0 +1,55 @@
+name: MOTIF GENIUS-011 unsuspected relation
+
+on:
+  push:
+    paths:
+      - "experiments/genius011/**"
+      - ".github/workflows/genius011.yml"
+  pull_request:
+    paths:
+      - "experiments/genius011/**"
+      - ".github/workflows/genius011.yml"
+
+jobs:
+  generate-test-prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test surprise-candidate generation, source boundaries, classical controls, counterexamples
+        run: python -m unittest discover -s experiments/genius011 -p 'test_*.py' -v
+      - name: Generate then test distinct unseen structural hypotheses
+        run: |
+          python experiments/genius011/benchmark.py > /tmp/motif-genius011.json
+          python -m json.tool /tmp/motif-genius011.json > /dev/null
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/motif-genius011.json"))
+          assert d["no_external_action"]
+          assert d["strong_classical_exact_graph_miner_and_fisher_same_outcomes"]
+          assert len(d["study_protocol_sha256_before_test_generation"])==64
+          assert "NEVER_EXPORT_PRIVATE_SYNTHETIC_CONTENT" not in json.dumps(d)
+          print("STATUS:",d["status"])
+          print("STUDY DESIGN SHA256:",d["study_protocol_sha256_before_test_generation"])
+          for name,r in d["future"].items():
+              print("REGIME:",name)
+              print(" CASES:",r["cases"])
+              print(" QUESTION CANDIDATES GENERATED:",r["generated_conjectures_evaluated"])
+              print(" SINGLE SYNTHESIZED BRIDGE:",r["single_supported_bridge_count"])
+              print(" SPURIOUS BRIDGES:",r["spurious_supported_bridge_count"])
+              print(" SOURCE-CORRECT RETROSPECTIVE LINKS:",r["three_way_retrospective_relation_count"])
+              print(" HOLD REASONS:",r["hold_reasons"])
+          PY
+      - name: Archive synthetic source/evidence receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS011-UNSUSPECTED-RELATION-RESEARCH-HOLD
+          path: /tmp/motif-genius011.json
+          retention-days: 30
+          if-no-files-found: warn
