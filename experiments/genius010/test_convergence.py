@@ -83,7 +83,7 @@ class TestThreeIndependentThreads(unittest.TestCase):
                          json.dumps(out))
         nonpublic_ids={x.evidence_id for x in raw if not x.shareable}
         receipt_text=json.dumps(out)
-        self.assertFalse(any(x in receipt_text for x in nonpublic_ids))
+        self.assertFalse(any(json.dumps(x) in receipt_text for x in nonpublic_ids))
         self.assertTrue(out["no_real_world_causal_claim"])
 
     def test_no_automatic_causal_certification_even_on_three_significant_tests(self):
