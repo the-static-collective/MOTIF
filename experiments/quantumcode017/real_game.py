@@ -54,7 +54,10 @@ def setup(env,name):
                 continue
             cell=(p[0]+dx,p[1]+dy)
             old,obj=env._world[cell]
-            if obj is not None:
+            # The player is itself a Crafter world object. Removing it
+            # disables player.update() and would make EVERY issued command a
+            # no-op; this defect was exposed by actual QC-017 game receipts.
+            if obj is not None and obj is not env._player:
                 env._world.remove(obj)
             env._world[cell]="grass"
             changed+=1
@@ -72,6 +75,8 @@ def setup(env,name):
     env._player.inventory["health"]=9
     env._player.inventory["energy"]=9
     env._player.inventory["wood"]=0
+    if env._player not in env._world.objects:
+        raise ValueError("Controlled fixture accidentally removed the player")
     return {
         "type":"EXPLICITLY_MODIFIED_CRAFTER_START",
         "scenario":name,
