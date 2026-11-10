@@ -81,6 +81,16 @@ class NestedCycleTests(unittest.TestCase):
                 alerts=[m.observe(x) for x in motif([1,2],rounds)]
                 self.assertEqual(len([a for a in alerts if a]),1)
 
+    def test_seven_repeated_cycles_are_counted_without_seven_alerts(self):
+        m=NestedMonitor()
+        alerts=[m.observe(s) for s in motif([1,2],7)]
+        self.assertEqual(len([x for x in alerts if x]),1)
+        self.assertIsNotNone(m.active_metacycle)
+        self.assertEqual(m.active_metacycle['primitive_motif_length'],2)
+        self.assertEqual(m.active_metacycle['repetitions'],7)
+        self.assertEqual(m.active_metacycle['total_cycle_units'],14)
+        self.assertEqual(m.active_metacycle['last_step'],28)
+
     def test_positive_information_gain_in_second_round_vetoes_metacycle(self):
         m=NestedMonitor()
         alerts=[m.observe(x) for x in motif([1,2],2,info_at=6)]
