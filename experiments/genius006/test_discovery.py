@@ -168,7 +168,8 @@ class TestIndependentFuture(unittest.TestCase):
             self.assertEqual(
                 set(arms),
                 {"ENTROPY", "DIVERSITY", "MYOPIC_GAIN", "AFFORDANCE_2",
-                 "EXACT_BELLMAN", "TRAINING_SELECTED"},
+                 "EXACT_BELLMAN", "TRAINING_SELECTED",
+                 "POSTHOC_GUARDED_RESEARCH_RECOMMENDATION"},
             )
             for arm in arms.values():
                 self.assertEqual(arm["evaluated"], 96)
@@ -192,6 +193,22 @@ class TestIndependentFuture(unittest.TestCase):
                 self.assertLessEqual(trace["candidates_after"],
                                      trace["candidates_before"])
                 self.assertTrue(trace["no_action_executed"])
+
+    def test_negative_deep_chain_is_not_promoted_over_classical(self):
+        deep = self.result["selection"]["DEEP_CHAIN"]
+        self.assertFalse(deep["candidate_within_005_of_exact_validation"])
+        self.assertEqual(deep["research_adoption_status"],
+                         "HOLD_NO_PROMOTION_FALLBACK_CLASSICAL")
+        self.assertEqual(deep["recommended_nonexecuting_method"],
+                         "EXACT_BELLMAN")
+        future = self.result["future"]["DEEP_CHAIN"]["evaluation"]
+        self.assertEqual(future["TRAINING_SELECTED"]["mean_verified_value"], 0.0)
+        self.assertGreater(future["EXACT_BELLMAN"]["mean_verified_value"], 0)
+        self.assertEqual(
+            future["POSTHOC_GUARDED_RESEARCH_RECOMMENDATION"]["mean_verified_value"],
+            future["EXACT_BELLMAN"]["mean_verified_value"])
+        self.assertTrue(
+            future["POSTHOC_GUARDED_RESEARCH_RECOMMENDATION"]["posthoc_guard_not_fresh_blind_test"])
 
     def test_no_broad_novelty_claim(self):
         self.assertTrue(any("No novel mathematics" in c for c in self.result["nonclaims"]))
