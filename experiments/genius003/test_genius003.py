@@ -12,7 +12,7 @@ from hidden_profile import Evidence, Member, evidence_pool, demo
 class TestCorrectablePerspectives(unittest.TestCase):
     def test_self_report_updates_only_after_explicit_share(self):
         m = FrequencyModel()
-        kept = Report("id1", "A", "safety", True, True, "synthetic:1")
+        kept = Report("id1", "A", "safety", True, True, "synthetic:1", "PRIVATE_THOUGHT")
         withheld = Report("id2", "A", "safety", False, False,
                           "PRIVATE_REF", "SECRET_NOT_PUBLIC")
         m.fit((kept, withheld))
