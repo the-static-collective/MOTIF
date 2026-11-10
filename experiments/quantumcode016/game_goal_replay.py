@@ -115,6 +115,7 @@ def play(seed,mode,outdir,horizon=19):
     outcome=None
     script=()
     episodes=[]
+    observed_novelty_by_step=[]
     b=snapshot(0,env._player.inventory,env._player.achievements,
                env._player.pos)
     for t in range(horizon):
@@ -129,6 +130,7 @@ def play(seed,mode,outdir,horizon=19):
         _,_,done,info=env.step(ACTS.index(action))
         new=game_state(t+1,env)
         novelty=observed.scan(env,actor)
+        observed_novelty_by_step.append(novelty)
         g=snapshot(t+1,info["inventory"],info["achievements"],
                    info["player_pos"])
         diff=set(g.capabilities)-set(b.capabilities)
@@ -203,6 +205,10 @@ def play(seed,mode,outdir,horizon=19):
         "intentionally_patched_starting_world":setup,
         "actual_game_steps":len(episodes),
         "meta_alert_count":len(nested.alerts),
+        "meta_primitive_loops":nested.primitives_seen,
+        "meta_visibility_resets":nested.resets_due_to_information,
+        "meta_recent_primitive_tokens":tuple(x.token[:12] for x in nested.primitives),
+        "observed_new_facts_by_step":tuple(observed_novelty_by_step),
         "first_meta_alert_step":first_alert,
         "detected_period":nested.alerts[0].primitive_motif_length
                           if nested.alerts else None,
