@@ -83,3 +83,12 @@ All generator families, datasets, thresholds, and expected concepts are engineer
 Potential next challenges: independent authored multivariate environments, truly voluntary external reports, pre-registered detector settings, calibration under non-IID outcomes, strong River/ADWIN and change-point baselines, explanation cost, and evaluating whether better drift evidence improves **verified joint problem solving** rather than just probability scores.
 
 **Core rule: uncertainty is not contradiction; contradiction is not necessarily change; change is not proof of an explanation.**
+
+
+## First measured results and optional evidence gate
+
+See [RESULTS.md](RESULTS.md) for the complete initial synthetic results: **exact Fisher/Bonferroni produced 1 false alarm among 72 stationary streams, versus 60/72 for a naïve gap alarm**, and detected 36/36 abrupt, 12/12 localized, and 35/36 gradual synthetic changes. It was usually *slower* than tuned CUSUM. Crucially, its simple post-alarm WINDOW8 forecast switch **did not outperform strong classical HEDGE in any shifted scenario**. Better diagnosis is not automatically better prediction.
+
+An added local-only module [evidence_gate.py](evidence_gate.py) packages the conditional evidence as a **proof-carrying preview proposal**, including source-owned reference IDs, a supporting 24-report window, exact p-value, corrected test threshold, declared sampling assumptions, and next research question. It returns explicit HOLD cases for duplicates, unshareable/foreign reference data, deficient monitoring and unverified sampling plans; it never authorizes automatic revision or any external action.
+
+The adapter and its adversarial tests were developed *after* the initial holdout inspection, so the original holdout cannot establish the adapter's independently predictive performance. No attestation boolean authenticates consent or independently establishes IID sampling.
