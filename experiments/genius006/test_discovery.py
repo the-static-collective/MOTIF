@@ -112,6 +112,22 @@ class TestGatedAffordance(unittest.TestCase):
         self.assertAlmostEqual(sum(all_rewards)/len(all_rewards), optimum)
         self.assertGreater(optimum, 0)
 
+    def test_four_step_delayed_value_defeats_shallow_horizon(self):
+        p = Planner(scenario("DEEP_CHAIN"))
+        self.assertEqual(p.task.budget, 4)
+        self.assertEqual(p.choose(p.root, (), 4, "AFFORDANCE_2")["question"], "a_noise_x")
+        self.assertEqual(p.choose(p.root, (), 4, "EXACT_BELLMAN")["question"], "z_confirm_b")
+        self.assertGreater(p.exact_value(p.root, (), 4), 0)
+        fully_true = World((1, 1, 1, 1, 0, 0))
+        deep = episode(p, fully_true, "EXACT_BELLMAN")
+        shallow = episode(p, fully_true, "AFFORDANCE_2")
+        self.assertEqual(deep["verified_capability_value"], 32)
+        self.assertEqual(shallow["verified_capability_value"], 0)
+        self.assertEqual(
+            [row["question"] for row in deep["trace"]],
+            ["z_confirm_b", "z_inspect_c", "z_verify_d", "z_final_a"],
+        )
+
     def test_different_goal_can_make_entropic_question_relevant(self):
         p = Planner(scenario("NOISE_USEFUL"))
         caps = [c.name for c in p.task.capabilities]
