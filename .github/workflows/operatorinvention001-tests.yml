@@ -1,0 +1,38 @@
+name: OPERATOR-INVENTION-001 executable operator synthesis
+
+on:
+  push:
+    branches:
+      - 'experiment/operator-invention-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/operatorinvention001/**'
+      - 'experiments/languagegrowth001/**'
+      - 'experiments/featurefrontier001/**'
+      - '.github/workflows/operatorinvention001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  operator-invention:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing graph contract regressions
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          # The new suite imports and executes the real upstream graph modules.
+          # Heavy upstream standalone suites are owned by their stacked PRs.
+      - name: Construct code from primitive loops and verify independently
+        working-directory: experiments/operatorinvention001
+        run: |
+          python -m unittest -v test_operatorinvention.py
+          python operatorinvention.py
+          python benchmark.py
