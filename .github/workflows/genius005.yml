@@ -1,0 +1,58 @@
+name: MOTIF GENIUS-005 evidence before revision
+
+on:
+  push:
+    paths:
+      - "experiments/genius005/**"
+      - ".github/workflows/genius005.yml"
+  pull_request:
+    paths:
+      - "experiments/genius005/**"
+      - ".github/workflows/genius005.yml"
+
+jobs:
+  exact-drift-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify exact test, source boundaries, drift, controls and future isolation
+        run: python -m unittest discover -s experiments/genius005 -p 'test_*.py' -v
+      - name: Execute frozen validation and heldout streams
+        run: |
+          python experiments/genius005/benchmark.py > /tmp/motif-genius005-evidence.json
+          python -m json.tool /tmp/motif-genius005-evidence.json >/dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-genius005-evidence.json"))
+          assert r["no_live_people_contacted"] and r["no_external_actions_taken"]
+          assert "PRIVATE_SIMULATOR_FIELD_MUST_NOT_EXPORT" not in json.dumps(r)
+          print("STATUS:",r["status"])
+          print("FROZEN SHA256:",r["config_frozen_sha256_before_holdout"])
+          print("VALIDATION SELECTED CUSUM:",r["precommitted_settings"]["selected_classical_cusum_threshold"])
+          for scenario,data in r["future_scenarios"].items():
+              print("SCENARIO:",scenario,
+                    "STREAMS:",data["streams"],
+                    "GRADED:",data["shared_forecasts_scored"],
+                    "WITHHELD:",data["withheld_excluded"])
+              for name,details in data["detection"].items():
+                  print(" DETECTOR:",name,
+                        "NULL FALSE ALARM RATE:",details["null_false_alarm_rate"],
+                        "FALSE ALARMS:",details["false_alarm_streams"],
+                        "DETECTION RATE:",details["detection_rate_on_changed"],
+                        "MEAN DELAY:",details["mean_detection_delay_rounds"])
+              print(" MEAN PREQUENTIAL BRIER:",data["forecast_brier"])
+          PY
+      - name: Retain synthetic public-only prediction and exact-test receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS005-EVIDENCE-BEFORE-REVISION-HOLD
+          path: /tmp/motif-genius005-evidence.json
+          retention-days: 30
+          if-no-files-found: warn
