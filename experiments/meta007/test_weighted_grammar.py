@@ -67,7 +67,7 @@ class WeightedProofGrammar(unittest.TestCase):
         search=self.packet["grammar_optimizer"]
         self.assertEqual(search["source_candidate_alphabet_sizes"],[2,12])
         self.assertEqual(search["exponent_grid"],{
-            "p_min":80,"p_max":160,"q":1000
+            "p_min":80,"p_max":180,"q":1000
         })
         self.assertEqual(len(search["all_alphabet_trials"]),11)
         self.assertEqual(
