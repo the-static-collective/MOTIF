@@ -1,0 +1,51 @@
+name: META-004 2-adic ghost boundary and nonlocal finite rank
+on:
+  push:
+    branches:
+      - experiment/meta-004-two-adic-ghost-nonlocal-rank
+  pull_request:
+    paths:
+      - 'experiments/meta004/**'
+      - '.github/workflows/meta004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ghost-boundary-and-closed-basin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test exact 2-adic ghost witnesses and nonlocal source-rank proofs
+        run: python -m unittest discover -s experiments/meta004 -p 'test_*.py' -v
+      - name: Regress META-003 signed arithmetic/parity frontier and rank falsifiers
+        run: python -m unittest discover -s experiments/meta003 -p 'test_*.py' -v
+      - name: Regress META-002 variable-horizon certificate controls
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Regress META-001 original genuinely open conjecture
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Create original-source mathematical proof packet
+        run: python experiments/meta004/two_adic_boundary.py > meta004-two-adic-nonlocal-evidence.json
+      - name: Independently replay all signed 2-adic and positive-basin proofs
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0,'experiments/meta004')
+          from two_adic_boundary import verify_packet,reenter
+          p=json.load(open('meta004-two-adic-nonlocal-evidence.json'))
+          assert verify_packet(p)
+          r=reenter(p)
+          assert r['new_investigative_source_questions']==0
+          assert r['collatz_global_proof'] is False
+          assert p['ghost_positive_boundary']['all_ones_intersection_with_positive_integers_is_empty']
+          assert p['genuine_nonlocal_closed_finite_ranking']['finite_basin_nodes']==800
+          print('Ghost/positive domains distinguished, finite nonlocal rank verified; Collatz OPEN')
+          PY
+      - name: Preserve complete exact mathematical research receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: META004-TWO-ADIC-GHOST-NONLOCAL-RANK-RESEARCH-HOLD
+          path: meta004-two-adic-nonlocal-evidence.json
