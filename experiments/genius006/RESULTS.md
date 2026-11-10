@@ -38,13 +38,15 @@ An adversarial test also enumerates every one of the 256 possible CHAIN worlds a
 
 ## Post-hoc policy safety response
 
-After discovering the DEEP_CHAIN failure, a **validation-only classical adoption gate** was implemented. It checks whether a limited candidate's mean verified value lies within 0.05 points of the exact Bellman result on the preselected validation cases. If not, it returns:
+After discovering the DEEP_CHAIN failure, a **classical adoption guard** was attempted. Its first version compared candidate and Bellman on the same small 40-case validation sample. **It failed its own adversarial test**: this particular rare four-step reward occurred in *zero* validation samples, so both the bad limited policy and the optimal classical policy scored 0. A sample-only gate could not detect the future blind spot.
+
+The guard was repaired to take advantage of a special property of this toy: **the complete 256-world hypothesis space is publicly enumerable**. It calculates the selected policy's *exact population expected value* over all 256 possible worlds, and independently compares it to the exact Bellman optimum over the same public prior (within 0.05 points). For DEEP_CHAIN the difference is 0 versus 2.0, so it returns:
 
 **HOLD_NO_PROMOTION_FALLBACK_CLASSICAL**
 
 and recommends exact Bellman instead of silently promoting the underperforming short-horizon planner.
 
-This safeguard was added **after inspecting the original future outcomes**. Even though its calculation uses validation-only observations, it is *post-hoc research repair*, not independently preregistered evidence of superior generalization. The unchanged original results remain above; no benchmark failure is erased.
+This safeguard was added **after inspecting the original future outcomes**. Its calculation uses a **perfect, small, engineer-authored public hypothesis model**, not sampled future outcomes. That can catch an unobserved rare combination *in this finite model*, but it does not establish the same safeguard works with unknown, misspecified or unbounded real-world state spaces. The repair is **post-hoc**, not independently preregistered evidence of superior generalization. The unchanged original results remain above; no benchmark failure is erased.
 
 The guarded action is a **nonexecuting research recommendation**, not a Trench deployment or automatic permission to act. The experimental method remains inspectable alongside the comparator it failed to beat.
 
