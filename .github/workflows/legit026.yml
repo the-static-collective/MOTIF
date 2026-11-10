@@ -1,0 +1,67 @@
+name: MOTIF LEGIT-026 method mirror and future-world validation
+
+on:
+  push:
+    paths:
+      - "experiments/legit026/**"
+      - ".github/workflows/legit026.yml"
+  pull_request:
+    paths:
+      - "experiments/legit026/**"
+      - ".github/workflows/legit026.yml"
+
+jobs:
+  method-mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Load pinned independent-origin graph corpus
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Exercise adversarial meta-policy and no-leakage test suite
+        run: |
+          python -m unittest discover -s experiments/legit026 -p 'test_*.py' -v
+      - name: Run new four-world leave-one-world-out research policy selection and freeze
+        run: |
+          python experiments/legit026/meta.py --emit > /tmp/motif-legit026-method-mirror.json
+          python -m json.tool /tmp/motif-legit026-method-mirror.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-legit026-method-mirror.json"))
+          t=r["training_and_meta_selection"]
+          c=t["crossvalidation_method_invention"]
+          print("STATUS:",r["status"])
+          print("TRAINING WORLD SIZES:",t["training_world_counts"])
+          print("SOURCE COUNT:",r["source_count"])
+          print("GENERATED META PROGRAMS:",c["candidate_count"])
+          print("PARENT:",c["parent_program"])
+          print("SELECTED:",c["best_training_crossvalidation_candidate"]["program"])
+          print("ADOPTED:",c["adopted_program"])
+          print("REWRITE PROMOTED:",c["proposed_rewrite_promoted_from_training_only"])
+          print("CV MEAN QUESTIONS PARENT:",c["parent_crossvalidation"]["leave_one_world_out_mean_questions"])
+          print("CV MEAN QUESTIONS SELECTED:",c["best_training_crossvalidation_candidate"]["leave_one_world_out_mean_questions"])
+          print("CLASSICAL TRAINING EXACT DP:",t["classical_exact_finite_training"]["exact_training_questions"])
+          print("FROZEN SHA256:",t["frozen_sha256_before_eval_world_loading"])
+          for world,arms in r["evaluation"].items():
+              print("WORLD:",world,
+                  "source:",r["future_graph_world_provenance"][world]["source"]
+                  if "source" in r["future_graph_world_provenance"][world] else "known Atlas regression")
+              for name, arm in arms.items():
+                  print(" ",name,"resolved",arm["resolved"],"/",arm["cases"],
+                        "questions",arm["questions"],
+                        "cpu+verification_ms",arm["cpu_ms_including_independent_verification"])
+          PY
+      - name: Archive complete training, CV, frozen strategy and every source-question receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT026-METHOD-MIRROR-RESEARCH-HOLD
+          path: /tmp/motif-legit026-method-mirror.json
+          if-no-files-found: warn
+          retention-days: 30
