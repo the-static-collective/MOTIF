@@ -233,11 +233,22 @@ def prepare_training():
     }
 
 
-def _exact_replay(domain,case,policy):
-    """Observe and verify only the actually asked question."""
+def _exact_replay(domain,case,policy,verified_cache=None):
+    """Observe only queried questions; verify against an independent oracle.
+
+    The optional cache is scoped to a single evaluated research world;
+    it stores exact reference observations by (domain, case ID, question)
+    when competing methods ask an IDENTICAL question on the same case.
+    The independent calculation still occurs at least once per
+    distinct evidence item, never by assuming a candidate result true.
+    """
+    cache={} if verified_cache is None else verified_cache
     def oracle(q):
         observed=legacy.observation(domain,case,q)
-        independently=legacy.independent_observation(domain,case,q)
+        key=(domain,case["id"],q)
+        if key not in cache:
+            cache[key]=legacy.independent_observation(domain,case,q)
+        independently=cache[key]
         if observed!=independently:
             raise worlds.HOLD("exact proposed witness disagrees with reference")
         return observed
@@ -258,6 +269,10 @@ def _exact_replay(domain,case,policy):
 def evaluate_world(domain,cases,programs):
     fitted,cv,detector=programs
     arms={}
+    # Strong source-to-source comparison: one independently computed exact
+    # reference receipt can be reused if another competing method asks
+    # precisely the SAME question on the SAME case.
+    exact_reference_receipts={}
     # Transparent baselines plus the shift-aware/robust selectors.
     for arm in (engine.CONVENTIONAL,"RAW_OBSERVATION_DIVERSITY",
                 "JOINT_SHANNON_ENTROPY","CONTEXTUAL_VALUE_OF_INFORMATION",
@@ -272,7 +287,8 @@ def evaluate_world(domain,cases,programs):
             else:
                 selected,distance,gate=select_method(cv,detector,domain,
                                                      case,arm)
-            outcome=_exact_replay(domain,case,fitted[selected])
+            outcome=_exact_replay(domain,case,fitted[selected],
+                                  exact_reference_receipts)
             rows.append({
                 **outcome, "selected_method":selected,
                 "input_shift_score":distance,
