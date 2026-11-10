@@ -3,7 +3,7 @@
   "source": "https://archive.org/details/crafter_human_dataset",
   "source_type": "USER_UPLOADED_PUBLIC_GAMEPLAY_DATASET",
   "source_archive_sha256": "7dc2589de4a246035f2fefb151bd8afac85d68d62c90311bc3afe9cca2b053e2",
-  "archive_size_bytes": 131954444,
+  "archive_size_bytes": 131969180,
   "episodes": 100,
   "actions_recorded": 61902,
   "transitions_paired": 61802,
