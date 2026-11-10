@@ -31,8 +31,12 @@ class Report:
 
 
 def public_only(reports: tuple[Report, ...]) -> tuple[Report, ...]:
-    """Projection boundary: withheld records cannot enter any estimator."""
-    return tuple(r for r in reports if r.shareable)
+    """Projection: remove withheld records AND strip all simulator-private notes."""
+    return tuple(
+        Report(case_id=r.case_id, target=r.target, topic=r.topic, yes=r.yes,
+               shareable=True, evidence_ref=r.evidence_ref, private_note="")
+        for r in reports if r.shareable
+    )
 
 
 @dataclass
