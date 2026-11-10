@@ -1,0 +1,78 @@
+name: COLLECTIVE-005 primitive birth from missing question language
+on:
+  push:
+    branches:
+      - experiment/collective-005-primitive-birth-atlas
+  pull_request:
+    paths:
+      - 'experiments/collective005/**'
+      - 'experiments/collective004/**'
+      - '.github/workflows/collective005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-owned-primitive-formation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout original National Treasure cases
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/national-treasure
+          ref: a6f1533537f88e837ba1560731d23645676a5b52
+          path: external/nt-cases
+          persist-credentials: false
+      - name: Checkout original National Treasure Question Box
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/national-treasure
+          ref: 28fbf9b10d003f7c577143550d17cc17f8109cb1
+          path: external/nt-question-box
+          persist-credentials: false
+      - name: Checkout independently originated Read-Wilson Atlas source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 375df67205fbae5788a9feb3b79a339ef4e423b4
+          path: external/motif-legit022
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install pinned historical Atlas source wrapper
+        run: python -m pip install networkx==3.4.2
+      - name: Run original National Treasure Question Box tests
+        working-directory: external/nt-question-box
+        run: node tools/question-box/test.mjs
+      - name: Run original Cicada structure source checks
+        working-directory: external/nt-cases
+        run: node --test cases/cicada-overfit/validate.test.mjs
+      - name: New independently originated train/frozen-heldout primitive growth
+        env:
+          NT_CASE_ROOT: external/nt-cases
+          NT_BOX_ROOT: external/nt-question-box
+          ATLAS_ROOT: external/motif-legit022
+        run: python -m unittest discover -s experiments/collective005 -p 'test_*.py' -v
+      - name: Inherited question-composition baseline regressions
+        env:
+          NT_CASE_ROOT: external/nt-cases
+          NT_BOX_ROOT: external/nt-question-box
+          ATLAS_ROOT: external/motif-legit022
+        run: python -m unittest discover -s experiments/collective004 -p 'test_*.py' -v
+      - name: Publish complete negative and positive evidence receipts
+        run: |
+          python experiments/collective005/atlas_trial.py \
+            --atlas-root external/motif-legit022 \
+            --case-root external/nt-cases \
+            --box-root external/nt-question-box \
+            > collective005-primitive-birth-evidence.json
+      - name: Upload auditable review-only source-provenance research
+        uses: actions/upload-artifact@v4
+        with:
+          name: COLLECTIVE005-PRIMITIVE-BIRTH-ATLAS-RESEARCH-HOLD
+          path: collective005-primitive-birth-evidence.json
