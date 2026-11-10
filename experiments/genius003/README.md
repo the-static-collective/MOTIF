@@ -72,7 +72,21 @@ python experiments/genius003/hidden_profile.py > /tmp/motif-genius003-pooling.js
 python -m json.tool /tmp/motif-genius003-perspectives.json >/dev/null
 ~~~
 
-Eleven tests cover withheld-data non-use, unknown-target HOLD, opt-in, frozen training digest, deliberate shift, correction, duplicate protections, hidden-profile majority reversal, conflicting weights, echo deduplication and source ownership. CI retains both synthetic JSON artifacts for inspection.
+Ten tests cover withheld-data non-use, unknown-target HOLD, opt-in, frozen training digest, deliberate shift, correction, duplicate protections, hidden-profile majority reversal, conflicting weights, echo deduplication and source ownership. CI retains both synthetic JSON artifacts for inspection.
+
+
+## Measured first prospective synthetic trial
+
+GitHub Actions run **42769603332** completed successfully on the original published trial (10 tests, reproducible fixed seed 30301). The selected training-only estimator was **TARGET_TOPIC**; frozen training hash **2dc02094bca145e371553f328568799d21579e7dd9933e7f159a6c2f3a8084f4**.
+
+| Heldout scenario | GLOBAL frozen Brier | TARGET_TOPIC frozen Brier | TARGET_TOPIC online Brier | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| Stable synthetic participants | 0.249297 | **0.156608** | **0.153710** | Personalized frequency estimates fit this engineer-authored stable data better than global guesses. |
+| Deliberately inverted preferences | **0.258143** | 0.543143 | 0.427749 | Personalization fails badly under shift; online corrections improve the score but do not rescue it to global performance. |
+
+Brier scores are lower-is-better. Each scenario includes **576 graded shared reports**, **104 withheld reports excluded**, and **40 unknown-visitor reports for which predictions are refused**. These are small deterministic simulations, not human-subject findings or estimates of real-world predictive accuracy. The shift failure is a key negative result, not a detail to suppress.
+
+**Next falsifier:** a conservative shift-aware abstention or fallback policy trained before a new future test, compared head-to-head with a strong continuously updated global estimator and TARGET_TOPIC. Evaluating that policy on these already inspected worlds would be exploratory, not a fresh blind test.
 
 ## What would genuinely move the frontier?
 
