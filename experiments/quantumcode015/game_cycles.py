@@ -15,7 +15,7 @@ sys.path.insert(0,str(ROOT/'quantumcode012'))
 sys.path.insert(0,str(ROOT/'quantumcode013'))
 sys.path.insert(0,str(ROOT/'quantumcode011'))
 from play_crafter import Controller,ACTS,DIRS,WALK,snapshot,encode_state
-from expert_intervention import expert_informed_act
+from expert_intervention import expert_informed_act,nearby_enemies
 from game_replay import Episode,Replay,relatte_preview
 from cycle_field import FieldState,FieldStep,CycleMonitor,VITALS
 
@@ -123,15 +123,39 @@ def play(seed,mode,outdir,scenario='controlled',horizon=140):
             intention,reason=expert_informed_act(ctr,env)
         action=intention
         if mode=='guarded' and active_alert is not None:
-            choice=alternate_tile(env,ctr,set(active_alert.location_pattern))
-            if choice is None:
-                hold=True
-                events.append({'step':t+1,'action':'HOLD',
-                               'cause':'NO_OBSERVED_ALTERNATIVE_TILE'})
-                break
-            action,pending_escape=choice
-            reason='OBSERVED_NONCYCLIC_NEIGHBOR_PROBE'
-            active_alert=None
+            current_health=int(env._player.inventory['health'])
+            # The controlled laboratory has intentionally specified a
+            # two-position transport defect. Natural survival does not:
+            # routine rest/combat/noop patterns are not proven useless,
+            # and choosing a new tile can lead into an approaching enemy.
+            is_physical_loop=(
+                all(a.startswith('move_') for a in active_alert.action_pattern)
+                and len(set(active_alert.location_pattern))>1)
+            possible_danger=(
+                current_health<=6
+                or bool(active_alert.vital_debt)
+                or bool(nearby_enemies(ctr,env,radius=7)))
+            if scenario=='natural' and (not is_physical_loop or possible_danger):
+                events.append({'step':t+1,'action':'NO_OVERRIDE',
+                               'cause':'STAY_WITH_KNOWN_POLICY_UNTIL_SAFER_EVIDENCE',
+                               'movement_only_cycle':is_physical_loop,
+                               'danger_or_resource_loss':possible_danger})
+                active_alert=None
+            else:
+                choice=alternate_tile(env,ctr,set(active_alert.location_pattern))
+                if choice is None:
+                    if scenario=='controlled':
+                        hold=True
+                        events.append({'step':t+1,'action':'HOLD',
+                                       'cause':'NO_OBSERVED_ALTERNATIVE_TILE'})
+                        break
+                    events.append({'step':t+1,'action':'NO_OVERRIDE',
+                                   'cause':'NO_VERIFIED_ALTERNATIVE_TILE'})
+                    active_alert=None
+                else:
+                    action,pending_escape=choice
+                    reason='OBSERVED_NONCYCLIC_NEIGHBOR_PROBE'
+                    active_alert=None
         obs,reward,ended,info=env.step(ACTS.index(action))
         observed_after=game_state(t+1,env)
         new_facts=known.scan(env,ctr)
