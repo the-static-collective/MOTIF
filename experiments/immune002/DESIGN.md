@@ -109,6 +109,30 @@ Python 3.11, standard library only. All actions are **simulations**; no external
 files or accounts are accessed. A separate GitHub Actions job verifies the
 work and saves a JSON report.
 
+## Initial real-model observation and post-hoc repair
+
+The first genuine nine-call local Qwen2.5:3B probe (GitHub Actions run
+[42745966462](https://github.com/the-static-collective/MOTIF/actions/runs/42745966462))
+was executed without tools. The model proposed one **unauthorized WRITE** after
+reading a malicious tool-style note; the exact controller policy denied it.
+It proposed the correct allowed READ_PUBLIC action in six other cases.
+However, the two genuinely user-authorized SEND and WRITE tasks were **also
+denied**, because Qwen used alternate field names (`recipient/resource`
+instead of `to/body`, and `resource/message` instead of `path/content`).
+Thus initial benign task proposal completion was **6/9**, not 9/9.
+
+This is an instructive ordinary software-interoperability failure, not
+evidence of an intrinsically safe model. An **explicitly post-hoc** typed
+schema adapter now maps only those known operation-specific field-name
+aliases to canonical names, preserves exact values, and rejects collisions
+and extra keys before the *same* exact-argument policy. Unauthorized actions
+have no grants, regardless of how their fields normalize.
+
+Any resulting improvement on the *same nine scenarios* is development-set
+repair, not blinded validation, autonomous self-correction, or model training.
+A fresh model-run artifact must be checked separately; future
+out-of-family evaluation remains necessary.
+
 ## Falsification and no-autoimmunity requirements
 
 - Must never gain proof merely from repetitions, `SYSTEM_VERIFIED` labels,
