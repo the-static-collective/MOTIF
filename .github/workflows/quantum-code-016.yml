@@ -40,6 +40,13 @@ jobs:
           root=pathlib.Path("runs/crafter-qc016")
           d=json.loads((root/"comparison.json").read_text())
           assert len(d["pairs"])==4,d
+          # These are deliberately injected controlled laboratory worlds;
+          # the suite must falsify "novelty chosen without useful effects".
+          for pair in d["pairs"]:
+              assert pair["first_meta_alert_step"]==12,pair
+              assert pair["goal_probe_selected"]=="toward_confirmed_water",pair
+              assert pair["goal_reentry_success"] is True,pair
+              assert pair["goal_game_drink"]>pair["blind_game_drink"],pair
           files=sorted(root.glob("*/annotated_gameplay.json"))
           assert len(files)==8,len(files)
           total=0
