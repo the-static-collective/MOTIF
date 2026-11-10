@@ -165,6 +165,14 @@ class ResearchEcologyTests(unittest.TestCase):
         self.assertTrue(outcomes["learned_training_only_priority"]["all_verified"])
         self.assertIn("multi-generation autonomous compounding",
                       report["criteria_for_future_ability_not_yet_measured"])
+        # Previous investigations: inherited MOTIF sources need 60 questions;
+        # the trained classical question-optimal source order needs 47.
+        # The numbers are independently checked full attempted-query receipts,
+        # not inferred only from the final successful graph source.
+        self.assertEqual(outcomes["fixed_classical_priority"]["by_family"]
+                         ["graph_hom_witness"]["total_explicit_source_questions"], 60)
+        self.assertEqual(outcomes["learned_training_only_priority"]["by_family"]
+                         ["graph_hom_witness"]["total_explicit_source_questions"], 47)
         for arm in outcomes.values():
             for row in arm["per_case"]:
                 self.assertEqual(row["status"],"VERIFIED")
