@@ -1,0 +1,33 @@
+name: COLLECTIVE-002 independent app-node experiment
+on:
+  push:
+    branches:
+      - experiment/collective-002-three-independent-tranchnodes
+  pull_request:
+    paths:
+      - 'experiments/collective002/**'
+      - '.github/workflows/collective002.yml'
+  workflow_dispatch:
+
+jobs:
+  three-process-falsification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Three-process tests and negative controls
+        run: python -m unittest discover -s experiments/collective002 -p 'test_*.py' -v
+      - name: Matched-evidence classical baseline benchmark
+        run: python experiments/collective002/benchmark.py > collective002-results.json
+      - name: Show scope-limited baseline result
+        run: cat collective002-results.json
+      - name: Upload reproducible synthetic research receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: COLLECTIVE002-THREE-PROCESS-RESEARCH-ONLY
+          path: collective002-results.json
