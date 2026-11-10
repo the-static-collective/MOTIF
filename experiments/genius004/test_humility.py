@@ -150,6 +150,23 @@ class TestFrozenValidation(unittest.TestCase):
             self.assertEqual(set(results), set(ARMS) | {"HUMILITY"})
             self.assertTrue(all(0 <= loss <= 1 for loss in results.values()))
 
+    def test_self_critique_gate_keeps_classical_method_when_unproven(self):
+        gate = self.report["promotion_gate"]
+        self.assertIn(gate["selected_classical_fallback"], ARMS)
+        self.assertEqual(gate["authority"], "NO_RUNTIME_PROMOTION_OR_EXTERNAL_ACTION")
+        self.assertEqual(
+            gate["provenance_caveat"],
+            "POSTHOC_GATE_INTRODUCED_AFTER_FIRST_HELDOUT_INSPECTION",
+        )
+        means = gate["validation_macro_mean_costed_brier"]
+        best = gate["selected_classical_fallback"]
+        self.assertEqual(means[best], min(means[a] for a in ARMS))
+        if not gate["candidate_beats_classical_on_validation"]:
+            self.assertEqual(gate["status"], "RESEARCH_ONLY_NO_PROMOTION")
+        else:
+            self.assertLess(means["HUMILITY"] + gate["minimum_required_macro_margin"],
+                            means[best])
+
     def test_heldout_receipts_and_frozen_policy_are_bounded(self):
         r = self.report
         self.assertIn(r["selected_policy"], [p.as_dict() for p in POLICIES])
