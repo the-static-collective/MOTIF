@@ -207,6 +207,77 @@ def verify_certificate(card):
     return True
 
 
+def fixed_horizon_diagonal_obstruction(max_k):
+    """Find the all-odd parity-class diagonal, then generalize algebraically.
+
+    For ANY k>=1, n=2**k*t-1 (n>1) has k odd accelerated steps:
+       T**j(n)=3**j * 2**(k-j) * t - 1, 0<=j<=k
+    so T**k(n)=3**k*t-1 > 2**k*t-1 = n.
+
+    This REFUTES a *fixed universal k-step descent strategy*, NOT Collatz.
+    The template and general induction argument are engineer-authored;
+    the script checks each tested k exactly, not a theorem-prover proof of
+    every k. The mathematical induction is recorded for human inspection.
+    """
+    if type(max_k) is not int or not 1<=max_k<=HARD_LIMIT:
+        raise HOLD("Unbounded diagonal proof exploration")
+    witnesses=[]
+    for k in range(1,max_k+1):
+        residue=(1<<k)-1
+        c=certificate(k,residue)
+        if (any(x["parity"]!="ODD" for x in c["branch_history"])
+            or c["symbolic_affine"]!={"a":3**k,"b":3**k-2**k,
+                                      "denominator":2**k}
+            or c["classification"]!="NO_STRICT_DESCENT_AT_THIS_FIXED_DEPTH_FOR_CLASS"):
+            raise HOLD("All-odd residue pattern did not recur")
+        # t=2 makes n>1 for every k, including k=1.
+        n=(1<<k)*2-1
+        out=n
+        intermediate=[]
+        for j in range(k+1):
+            predicted=(3**j)*(2**(k-j))*2-1
+            if out!=predicted:
+                raise HOLD("All-odd induction instance does not replay")
+            intermediate.append(out)
+            if j<k:
+                if out%2!=1:
+                    raise HOLD("Expected odd accelerated step")
+                out=reference_T(out)
+        if out<=n:
+            raise HOLD("Diagonal counterexample failed to grow")
+        witnesses.append({
+            "k":k,"residue":residue,"witness_n":n,
+            "exact_k_step_value":out,
+            "formula_for_any_t":"T**j(2**k*t-1) = 3**j*2**(k-j)*t-1, 0<=j<=k",
+            "tested_t":2,
+            "exact_intermediates":intermediate,
+            "base_residue_proof":c,
+        })
+    return {
+        "status":"REFUTED_FIXED_UNIFORM_K_STEP_DESCENT_FOR_EVERY_K",
+        "unbounded_mathematical_statement":
+            "For every k>=1 and t>=1 with n=2**k*t-1>1, "
+            "T**k(n)=3**k*t-1>n",
+        "mathematical_induction_argument":[
+            "At j=0 the expression equals n=2**k*t-1.",
+            "For j<k the factor 2**(k-j) is even, hence "
+            "3**j*2**(k-j)*t-1 is odd.",
+            "Applying T(odd)=(3*odd+1)/2 gives "
+            "3**(j+1)*2**(k-j-1)*t-1.",
+            "At j=k, 3**k*t-1 exceeds 2**k*t-1 for k>=1, t>=1.",
+        ],
+        "tested_finite_depths":len(witnesses),
+        "proof_instances":witnesses,
+        "not_a_counterexample_to_collatz":True,
+        "not_a_historically_novel_lemma":True,
+        "next_question":
+            "Since no common fixed-step strict-descent certificate can work, "
+            "what rigorously verified variable-time or well-founded invariant "
+            "could force all orbits to eventually fall below their starts?",
+        "unresolved_global_conjecture":True,
+    }
+
+
 class FiniteSourceOwner:
     """No independent authorship; local deterministic source-owner callback."""
     def __init__(self,revision=1):
@@ -334,6 +405,7 @@ def investigate_open_problem(*,max_k=9,finite_n=8192):
         or not card["uniform_for_every_n_gt_one_in_class"]):
         raise HOLD("The asserted local infinite-family lemma is not proven")
 
+    obstruction=fixed_horizon_diagonal_obstruction(max_k)
     owner=FiniteSourceOwner()
     receipts=[]
     for start in [1,3,5,7,27,97,871,6171,finite_n]:
@@ -382,13 +454,12 @@ def investigate_open_problem(*,max_k=9,finite_n=8192):
             "this_does_not_prove_collatz":True,
         },
         "all_depths_and_proof_cards":tree,
+        "auto_detected_fixed_horizon_proof_strategy_failure":obstruction,
         "finite_source_receipts":receipts,
         "finite_local_sweep":finite,
         "source_owner_contract":owner.contract(),
         "source_questions_asked":owner.questions,
-        "next_unanswered_question":"Can one find a finite, rigorously proved "
-           "descent certificate or an invariant for every remaining residue "
-           "class without assuming random independence of parity trajectories?",
+        "next_unanswered_question":obstruction["next_question"],
         "next_question_automatically_marked_unresolved":True,
         "why_open_problem_still_unanswered":[
             "Each finite k leaves classes with no fixed-depth descent proof",
