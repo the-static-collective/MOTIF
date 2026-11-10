@@ -122,6 +122,11 @@ class NestedMonitor:
     max_primitive_actions: int=7
     max_macro_period: int=7
     max_macro_repetitions: int=7
+    # Optional caller-owned reference state, used for re-aligning a stream
+    # after a genuine information update. Without it the agent cannot know
+    # whether it has resumed at the same primitive-loop boundary.
+    preferred_anchor: tuple | None=None
+    awaiting_anchor: bool=False
     pending: deque=field(default_factory=deque)
     primitives: deque=field(default_factory=deque)
     last_step: FieldStep | None=None
@@ -153,6 +158,15 @@ class NestedMonitor:
         if step.observed_new_facts is not None and step.observed_new_facts>0:
             self._reset_learning_window()
             self.resets_due_to_information+=1
+            self.awaiting_anchor=(
+                self.preferred_anchor is not None and
+                step.after.structural!=self.preferred_anchor)
+            return None
+        if self.awaiting_anchor:
+            if step.after.structural==self.preferred_anchor:
+                # Reacquired an observed, sourced anchor. Next step begins
+                # a fresh primitive; don't annex the return journey.
+                self.awaiting_anchor=False
             return None
         # Changes to capabilities/resources don't constitute a sealed cycle;
         # reopening from the *new* state is valuable, not failure.
