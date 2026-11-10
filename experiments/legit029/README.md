@@ -78,7 +78,7 @@ querying is the globally optimal way to solve these problems.
 Training-only inputs:
 - Four previously recognized LEGIT-028 graph training environments,
   plus two **new** eight-node graph environments with fixed
-  seeds 29001/29002.
+  seeds 29001/29002. Each graph sampler draws 3,000 labeled graphs.
 - Two original LEGIT-027 algebra/constraint training worlds, plus two
   additional moderate-shift polynomial/constraint worlds with
   seeds 29011/29012.
@@ -92,10 +92,10 @@ greedy. Selection is strictly training-only. We freeze a digest of
 all method plans and the input-novelty threshold before requesting
 new worlds.
 
-Future-only inputs:
-- Two new independently seeded graph sets 29003/29004, eight
+**Protocol revision recorded:** the initial CI attempt with 1,000 graph\nsamples per future seed could not assemble eight qualifying graph pairs\nfor one future seed and stopped **before evaluating any new question\npolicies**. The sampler was increased to 3,000 draws and the future\nseeds were changed to 29005/29006 before outcome evaluation. This\nrevision is transparent; it means the original proposed experiment was\nnot strictly preregistered unchanged.\n\nFuture-only inputs:
+- Two new independently seeded graph sets 29005/29006, eight
   old-probe-blind source pairs each.
-- Two graph complement sets using those same external targets:
+- Two graph complement sets using those same sampled graph targets:
   **dependent transformations**, NOT independently sourced results.
 - For each of the two non-graph domains, fresh mixed-regime seeds
   29013/29014, plus deliberately far-shifted regimes
