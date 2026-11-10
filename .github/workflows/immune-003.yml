@@ -24,7 +24,7 @@ jobs:
           python-version: "3.11"
       - name: Run source, quote, Dung grounded extension and classical falsifiers
         working-directory: experiments/immune003
-        run: python -m unittest -v test_immune3.py test_semantic_gate.py
+        run: python -m unittest -v test_immune3.py test_semantic_gate.py test_data_audit.py
       - name: Fetch original Microsoft BIPIA pinned datasets without running any external instructions
         working-directory: experiments/immune003
         run: |
@@ -35,6 +35,9 @@ jobs:
           assert provenance["clean_count"] == 13
           print({k:v for k,v in provenance.items() if k != "case_keys"})
           PY
+      - name: Audit public source-only ideal labels; do not silently trust the judge
+        working-directory: experiments/immune003
+        run: python data_audit.py > /tmp/immune003-label-audit.json
       - name: Scripted protocol only — NOT an LLM run
         working-directory: experiments/immune003
         run: python trial.py --backend scripted --output scripted-results.json
@@ -42,7 +45,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: immune-003-scripted-protocol
-          path: experiments/immune003/scripted-results.json
+          path: |
+            experiments/immune003/scripted-results.json
+            /tmp/immune003-label-audit.json
 
   genuine-qwen-bipia-derived:
     if: github.event_name != 'pull_request'
