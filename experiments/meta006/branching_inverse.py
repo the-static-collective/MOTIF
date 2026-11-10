@@ -427,7 +427,9 @@ def investigate():
             "FROM_SINGLE_ODD_PREFIX_INVERSE_TO_RECURSIVE_MOD9_STATE_PRESERVING_ODD_INVERSE_BLOCKS",
         "new_branching_program":{
             "seed":5,"seed_accelerated_steps_to_one":4,
-            "modular_state_to_minimal_e":BASE_EXPONENT_BY_MOD9,
+            "modular_state_to_minimal_e":{
+                str(k):v for k,v in sorted(BASE_EXPONENT_BY_MOD9.items())
+            },
             "human_authored_branch_choices":[0,1],
             "odd_inverse_formula":"B_e(y)=(2**(2e+1)*y-1)/3",
             "selected_e":"e0(y mod9)+3*choice",
