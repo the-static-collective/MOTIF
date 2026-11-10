@@ -46,7 +46,7 @@ def audit_survey(seed: int) -> dict:
             p=fisher_two_sided(sum(x.success for x in low),len(low),
                                sum(x.success for x in high),len(high))
             arms.append({"thread":thread,"observational_difference":round(gap,6),
-                         "observational_p_value":round(p,12),
+                         "observational_p_value":format(p, ".6e"),
                          "not_a_causal_or_randomized_conclusion":True})
         forbidden=analyze(q,data,purported_randomization_attested=True)
         assert forbidden["status"]=="HOLD_OBSERVATIONAL_DATA_NOT_AN_INTERVENTION"
