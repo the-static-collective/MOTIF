@@ -59,6 +59,7 @@ class Detectors:
     cusum_threshold: float = 6.0
     stream_id: str = ""
     history: list[bool] = field(default_factory=list)
+    seen_evidence_ids: set[str] = field(default_factory=set)
     alarms: dict[str, int] = field(default_factory=dict)
     traces: list[dict] = field(default_factory=list)
     pos: float = 0.0
@@ -75,6 +76,9 @@ class Detectors:
     def update(self, value: bool, evidence_id: str) -> dict:
         if type(value) is not bool or not evidence_id:
             raise ValueError("Only a source-attributed publicly shared boolean report")
+        if evidence_id in self.seen_evidence_ids:
+            raise ValueError("Replayed evidence identifier")
+        self.seen_evidence_ids.add(evidence_id)
         self.history.append(value)
         t = len(self.history)
         p0 = beta_rate(self.reference)
