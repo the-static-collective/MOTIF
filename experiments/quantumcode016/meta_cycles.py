@@ -77,6 +77,13 @@ def quality(steps):
     if any(s.observed_new_facts is not None and s.observed_new_facts>0
            for s in steps):
         return False
+    # Recovering health, energy or food is a meaningful observed gain even
+    # when a patrol returns to the same position and inventory.
+    if any(
+        any(s.after.vital_dict().get(k,0)>s.before.vital_dict().get(k,0)
+            for k in s.before.vital_dict().keys()|s.after.vital_dict().keys())
+        for s in steps):
+        return False
     return True
 
 
@@ -185,6 +192,11 @@ class NestedMonitor:
                 continue
             last=loops[-p:]
             motif=tuple(x.token for x in last)
+            # AAAAAA is one primitive repeatedly used, already within
+            # QC-015's remit; it isn't independent evidence of a multi-
+            # component *cycle of cycles*.
+            if len(set(motif))<2:
+                continue
             if len(set(x.anchor for x in last))!=1:
                 continue
             repeated=1
