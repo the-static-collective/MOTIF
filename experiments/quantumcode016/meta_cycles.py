@@ -134,6 +134,7 @@ class NestedMonitor:
     alerts: list[MetaAlert]=field(default_factory=list)
     primitives_seen: int=0
     resets_due_to_information: int=0
+    active_metacycle: dict | None=None
 
     def __post_init__(self):
         if not 2<=self.max_primitive_actions<=7:
@@ -149,6 +150,7 @@ class NestedMonitor:
         self.pending.clear()
         self.primitives.clear()
         self.emitted.clear()
+        self.active_metacycle=None
 
     def observe(self,step:FieldStep):
         if (self.last_step is not None and
@@ -239,6 +241,20 @@ class NestedMonitor:
             # boundaries as the trace advances one primitive at a time.
             phase_canonical=min(motif[i:]+motif[:i] for i in range(p))
             sig=seal((p,phase_canonical,status))
+            # Continue counting 2..7 repetitions of an already diagnosed
+            # motif without re-emitting the same alarm. This is important:
+            # observing the 7th recurrence does not mean 7 independent
+            # failures, nor does it justify seven interventions.
+            if (self.active_metacycle is None or
+                self.active_metacycle.get('signature')!=sig or
+                self.active_metacycle['repetitions']<=repeated):
+                self.active_metacycle={
+                    'signature':sig,'primitive_motif_length':p,
+                    'repetitions':repeated,
+                    'total_cycle_units':repeated*p,
+                    'last_step':sample[-1].end_step,
+                    'certainty':status,
+                }
             if sig in self.emitted:
                 continue
             found.append((p,repeated,status,sig,sample))
