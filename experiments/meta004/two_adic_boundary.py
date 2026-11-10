@@ -25,6 +25,8 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/"meta001"))
 from collatz_frontier import T, reference_T, HOLD, canonical, digest
+sys.path.insert(0,str(HERE.parent/"meta003"))
+from invariant_stress import first_class_descent, independent_first_class_descent
 
 SCHEMA="motif.meta004.two-adic-boundary-and-nonlocal-rank.v1"
 REFERENCE={
@@ -245,9 +247,29 @@ def ghost_branches():
         raise HOLD("Wrong exact negative 2-adic eleven-cycle")
     if result["noninteger_rational_four_fifths"]["periodic_program"]["periodic_x"]!={"num":4,"den":5}:
         raise HOLD("Wrong nonordinary rational 2-adic cycle")
+    # Cross-wire to genuine META-003 unresolved cylinders. For each of
+    # three negative periodic 2-adic states, EVERY tested finite K cylinder
+    # contains infinitely many positive lookalikes yet has no class-wide
+    # certified descent within K. This remains true only at the stated K.
+    overlaps=[]
+    for negative in (-1,-5,-17):
+        for k in (8,12,16):
+            residue=negative%(1<<k)
+            a=first_class_descent(k,residue)
+            b=independent_first_class_descent(k,residue)
+            if a is not None or b is not None:
+                raise HOLD("Negative ghost not in original bounded HOLD scope")
+            overlaps.append({
+                "two_adic_negative_integer":negative,
+                "k":k,"positive_integers_same_class_modulus":1<<k,
+                "residue":residue,
+                "inherited_META003_first_descent_status":"HOLD_WITHIN_K",
+                "no_positive_counterexample_proven":True,
+            })
     return {
         "schema":"motif.meta004.genuine-two-adic-versus-natural-integer-frontier.v1",
         "special_cases":result,
+        "crosscheck_against_original_META003_residue_HOLDs":overlaps,
         "all_ones_nested_cylinders":"n congruent 2**k-1 mod 2**k for every k",
         "all_ones_unique_intersection_in_two_adics":{"num":-1,"den":1},
         "all_ones_intersection_with_positive_integers_is_empty":True,
