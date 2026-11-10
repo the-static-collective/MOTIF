@@ -195,11 +195,19 @@ def native_question_box(box_root, record):
 def native_record(case):
     # Source locator is a claim-specific source, not proof that the case README
     # itself establishes an alleged artifact or historical transmission.
-    return {key: case[key] for key in (
+    record = {key: case[key] for key in (
         "clue", "claim", "provenance_class", "support_confidence",
         "source_locator", "source_families", "chronology",
         "counterevidence", "falsifier", "competing_explanations"
     )}
+    if record["source_locator"] and not case["source_object_missing_in_reality"]:
+        # This URL recovers the *research question's* source note only.
+        # It cannot license the historical/physical claim as witnessed.
+        record["source_locator"] = (
+            "https://github.com/the-static-collective/national-treasure/blob/"
+            + NT_CASES_COMMIT + "/" + case["path"]
+        )
+    return record
 
 
 def build_node(case_id, case_root, box_root):
@@ -227,6 +235,38 @@ def build_node(case_id, case_root, box_root):
         raise HOLD("Unknown native question aperture")
     if case["source_object_missing_in_reality"] and aperture != "source-object":
         raise HOLD("Synthetic artifact was promoted as a recovered object")
+    # Distinguish mathematical inquiry from generic historical chronology.
+    # This critic is a human-authored typed policy, NOT an LLM or learned
+    # semantic judge. Crucially it NEVER modifies the original NT receipt.
+    if case["id"] == "same-state-different-world" and aperture == "chronology":
+        critic = {
+            "status": "HOLD_NATIVE_CHRONOLOGY_NOT_SUFFICIENT_FOR_FORMAL_TASK",
+            "reason": "Chronology cannot distinguish two mathematical objects "
+                      "that have the same declared coarse observation.",
+            "suggested_next_question": "What minimum-cost extra observable "
+                                       "separates the constructed possible worlds?",
+            "suggestion_origin": "ENGINEER_AUTHORED_TYPED_FORMAL_TASK_POLICY",
+            "native_question_unchanged": True,
+        }
+    elif case["id"] == "numatherology" and aperture == "chronology":
+        critic = {
+            "status": "HOLD_MISSING_FORMAL_NUMBER_GRAMMAR_MODEL",
+            "reason": "A historical date does not establish a general numeric "
+                      "threshold law without a defined mathematical system.",
+            "suggested_next_question": "Which mathematical objects, invariant "
+                                       "and counterexample test make 4-to-5 "
+                                       "a falsifiable transition?",
+            "suggestion_origin": "ENGINEER_AUTHORED_TYPED_FORMAL_TASK_POLICY",
+            "native_question_unchanged": True,
+        }
+    else:
+        critic = {
+            "status": "NATIVE_APERTURE_PRESERVED",
+            "reason": "No bounded source-owned alternative independently tested.",
+            "suggested_next_question": receipt["question"],
+            "suggestion_origin": "ORIGINAL_NATIONAL_TREASURE_QUESTION_BOX",
+            "native_question_unchanged": True,
+        }
     node = {
         "schema": SCHEMA, "case_id": case["id"],
         "source_witness": source,
@@ -234,6 +274,7 @@ def build_node(case_id, case_root, box_root):
                                 "engine_git_blob": NT_ENGINE_BLOB},
         "original_question_receipt": receipt,
         "motif_recommended_action": APERTURE_ACTION[aperture],
+        "motif_task_relevance_critic": critic,
         "action_authorized_or_executed": False,
         "world_claim_verified": False,
         "knowledge_status": "SOURCE_TEXT_VERIFIED_QUESTION_UNRESOLVED",
