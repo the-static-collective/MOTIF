@@ -6,6 +6,7 @@ fence design. All world candidates and observations are engineer-authored.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from copy import deepcopy
 from hashlib import sha256
 from itertools import product
 import json
@@ -42,7 +43,7 @@ class SyntheticOwner:
     """Single simulated source. A hash is integrity, not authentic identity."""
 
     def __init__(self, panel_span=2, mesh_safe=False, permission=True):
-        if panel_span not in (1, 2) or type(mesh_safe) is not bool or type(permission) is not bool:
+        if type(panel_span) is not int or panel_span not in (1, 2) or type(mesh_safe) is not bool or type(permission) is not bool:
             raise ValueError("invalid controlled fixture")
         self.state = dict(panel_span=panel_span, mesh_safe=mesh_safe, permission=permission)
         self.clock = 0
@@ -53,7 +54,7 @@ class SyntheticOwner:
         if not values or any(k not in self.state for k in values):
             raise ValueError("unrecognized change")
         proposed = {**self.state, **values}
-        if proposed["panel_span"] not in (1, 2) or any(
+        if type(proposed["panel_span"]) is not int or proposed["panel_span"] not in (1, 2) or any(
             type(proposed[k]) is not bool for k in ("mesh_safe", "permission")
         ):
             raise ValueError("invalid change")
@@ -74,7 +75,7 @@ class SyntheticOwner:
                     value=self.state[key], time=self.clock, origin=self.origin,
                     scope="ENGINEER_AUTHORED_SYNTHETIC_WORLD")
         receipt = {**body, "sha256": digest(body)}
-        self._issued.append(receipt)
+        self._issued.append(deepcopy(receipt))
         return receipt
 
     def verify(self, receipt):
@@ -107,7 +108,7 @@ class Ledger:
     def append(self, kind, payload):
         if kind not in ("PENCIL_PROPOSAL", "INK_OBSERVATION", "PLAN_HOLD", "PLAN_PREVIEW"):
             raise ValueError("unreviewed evidence status")
-        body = dict(sequence=len(self.events), kind=kind, payload=payload,
+        body = dict(sequence=len(self.events), kind=kind, payload=deepcopy(payload),
                     prev=self.events[-1]["sha256"] if self.events else None)
         event = {**body, "sha256": digest(body)}
         self.events.append(event)
@@ -250,7 +251,7 @@ class Confluence:
             "source_origins": [self.owner.origin],  # NOT count of repeated reports
             "ink_count": sum(e["kind"] == "INK_OBSERVATION" for e in self.ledger.events),
             "pencil_count": sum(e["kind"] == "PENCIL_PROPOSAL" for e in self.ledger.events),
-            "proof_chain": list(self.ledger.events),
+            "proof_chain": deepcopy(self.ledger.events),
             "proof_chain_tip": self.ledger.events[-1]["sha256"],
             "limitations": ["synthetic source, not an independently authenticated witness",
                             "hashes prove integrity within this fixture, not worldly truth",
