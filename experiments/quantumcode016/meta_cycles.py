@@ -197,6 +197,11 @@ class NestedMonitor:
             # component *cycle of cycles*.
             if len(set(motif))<2:
                 continue
+            # Do not double-count a larger alias of a shorter fundamental
+            # period (ABAB is still AB, not a newly discovered 4-cycle).
+            if any(p%d==0 and motif==motif[:d]*(p//d)
+                   for d in range(2,p)):
+                continue
             if len(set(x.anchor for x in last))!=1:
                 continue
             repeated=1
