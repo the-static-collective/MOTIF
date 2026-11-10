@@ -123,10 +123,12 @@ def compose_readings(corpus: Corpus, disclosure_order: tuple[str, ...]) -> dict:
         raise ValueError("Disclosure order must contain each witness exactly once")
     witness_by_id = {w.witness_id: w for w in corpus.witnesses}
     seen: set[str] = set()
+    first_seen_at: dict[str, int] = {}
     activated: set[str] = set()
     snapshots = []
     for reveal_index, witness_id in enumerate(disclosure_order):
         seen.add(witness_id)
+        first_seen_at[witness_id] = reveal_index
         present = sorted((witness_by_id[i] for i in seen),
                          key=lambda w: (w.layer, w.witness_id))
         activated_now = []
@@ -142,6 +144,12 @@ def compose_readings(corpus: Corpus, disclosure_order: tuple[str, ...]) -> dict:
                     "interpretation": reading.new_interpretation,
                     "grounded_in_later_claim": reading.relevant_proposition,
                     "status": reading.certainty,
+                    "reader_reception_mode": (
+                        "RETROSPECTIVE_CALLBACK"
+                        if first_seen_at[reading.earlier_witness_id] <
+                           first_seen_at[reading.later_witness_id]
+                        else "ANTICIPATORY_CONTEXT"
+                    ),
                 })
         snapshots.append({
             "reveal_index": reveal_index,
@@ -158,8 +166,11 @@ def compose_readings(corpus: Corpus, disclosure_order: tuple[str, ...]) -> dict:
                             key=lambda w: (w.layer, w.witness_id))
         for rec in _literal_receipts(w)
     ]
+    # The source-owned interpretive RELATION is invariant. Its effect on
+    # the reader's experience is intentionally presentation-dependent.
     all_readings = sorted(
-        (r for snapshot in snapshots
+        ({k: v for k, v in r.items() if k != "reader_reception_mode"}
+         for snapshot in snapshots
          for r in snapshot["new_reader_reinterpretations"]),
         key=lambda r: r["reading_id"],
     )
@@ -320,12 +331,22 @@ def run() -> dict:
         }
         if len(source_ledger_signatures) != 1 or len(interpretation_signatures) != 1:
             raise AssertionError("Reordering disclosures changed source attribution")
+        reception_modes = [
+            rr["reader_reception_mode"]
+            for result in run_orders
+            for snapshot in result["snapshots"]
+            for rr in snapshot["new_reader_reinterpretations"]
+        ]
         control = naive_flatten(corpus)
         append_only = plain_append_only(corpus)
         report[corpus.corpus_id] = {
             "presentations_evaluated": len(run_orders),
             "source_record_invariant_under_reordering": True,
             "final_reader_reinterpretations_invariant": True,
+            "retrospective_callback_presentations": reception_modes.count(
+                "RETROSPECTIVE_CALLBACK"),
+            "anticipatory_context_presentations": reception_modes.count(
+                "ANTICIPATORY_CONTEXT"),
             "weak_flatten_false_attributions": control["false_attribution_count"],
             "strong_classical_append_only_false_attributions":
                 append_only["false_attribution_count"],
