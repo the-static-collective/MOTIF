@@ -72,9 +72,30 @@ def trial() -> dict:
                 CANDIDATES.index(arm),
             ),
         )
+        # POST-HOC CAUTION: this guard was introduced AFTER reviewing the
+        # first heldout DEEP_CHAIN counterexample. It is a conservative
+        # engineering response, not a prespecified generalization result.
+        exact_validation = run_policy(planner, validation, "EXACT_BELLMAN")
+        margin = 0.05
+        acceptable = (
+            scores[selected]["mean_verified_value"] >=
+            exact_validation["mean_verified_value"] - margin
+        )
         frozen[family] = {
             "selected_method": selected,
             "training_only_scores": scores,
+            "strong_exact_validation_score": exact_validation,
+            "candidate_within_005_of_exact_validation": acceptable,
+            "research_adoption_status": (
+                "RESEARCH_ONLY_NEEDS_EXTERNAL_REVIEW" if acceptable
+                else "HOLD_NO_PROMOTION_FALLBACK_CLASSICAL"
+            ),
+            "recommended_nonexecuting_method": (
+                selected if acceptable else "EXACT_BELLMAN"
+            ),
+            "posthoc_guard_provenance": (
+                "INTRODUCED_AFTER_FIRST_TEST_INSPECTION_NO_BLIND_CLAIM"
+            ),
             "selection_objective": "maximize mean verified downstream value - fixed complexity penalty",
         }
         baseline_value[family] = round(planner.exact_value(planner.root, (),
@@ -108,6 +129,12 @@ def trial() -> dict:
         selected_result = rows[selected]
         rows["TRAINING_SELECTED"] = dict(selected_result, policy=selected,
                                          selected_before_future=True)
+        conservative = frozen[family]["recommended_nonexecuting_method"]
+        rows["POSTHOC_GUARDED_RESEARCH_RECOMMENDATION"] = dict(
+            rows[conservative], policy=conservative,
+            posthoc_guard_not_fresh_blind_test=True,
+            no_method_promoted_or_deployed=True,
+        )
         futures[family] = {
             "evaluation": rows,
             "exact_uniform_prior_expected_value": baseline_value[family],
