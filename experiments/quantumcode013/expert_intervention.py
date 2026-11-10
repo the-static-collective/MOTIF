@@ -17,9 +17,9 @@ from pathlib import Path
 import sys
 
 import crafter
-from play_crafter import Controller,run,DIRS,WALK
-
 HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE.parent/"quantumcode012"))
+from play_crafter import Controller,run,DIRS,WALK
 DATA=json.loads((HERE/"observed_100_episodes.json").read_text())
 N=DATA["episodes"]
 HITS=DATA["achievements_in_episode"]
