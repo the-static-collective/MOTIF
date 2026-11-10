@@ -1,0 +1,1672 @@
+{
+  "budget": 40,
+  "datasets": [
+    "iris",
+    "wine"
+  ],
+  "experiment": "FIELD-006",
+  "limitations": [
+    "well-known archived datasets reused from prior experiments",
+    "overlapping repeated splits are correlated",
+    "predeclared new seeds are not independently blinded",
+    "proof checksum is not source identity authentication",
+    "falsifying a local prediction is not refuting a universal relation",
+    "classical and relational methods are authored, not autonomous invention",
+    "different committees incur different actual compute cost"
+  ],
+  "policies": [
+    "counterexample_relational",
+    "counterexample_raw",
+    "raw_margin",
+    "raw_committee",
+    "relation_frontier",
+    "geometry"
+  ],
+  "results": [
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 11,
+      "policy": "counterexample_raw",
+      "proof_sha256": "4e9e9dc2d2275d051d439f5e7bd6c4381e5d2ace45a8dd00918b7188cc46a154",
+      "query_ids_sha256": "1effa5a49228b23d84db6293c8a0ac31cf1e5e5d40c8eafbbc2bb236777b57f2",
+      "refutations": 29,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 9,
+      "policy": "counterexample_relational",
+      "proof_sha256": "1e8408e03e772396861f82ab528418190e8ccab031a93376fd3d28a577cfc172",
+      "query_ids_sha256": "c738a985627915095d169a68eefbeba68f16fd33675d536da8279f0de081965c",
+      "refutations": 23,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "84bd5220647f485d68ca65ab13d421b09fd70cdf630c306995b6ec2f1276e0bb",
+      "query_ids_sha256": "1c604fb37af9d691093b528b865ef60077cf925d98adfad9b9e3327d747d5500",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "c80e1043a54d143862f07ac80c3d951da947f14e54edc5b1e7c053a379aceb25",
+      "query_ids_sha256": "f9ff25c3d1b8383760687b7196ccf993e70a47205e0a59ce1d6b29fa6a29bc78",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "1f5721d51184f56c9482266fd10458887c030d9b84305daa9f3d5f14b39d15f9",
+      "query_ids_sha256": "52317c2fae62e5666df17604f73ec95d259bd9ddf1550d93fcf21910a492b260",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "bd0c40b5b416400ad1232017ab3f6f4e27e2d233cf09b8a0a994acef936d9762",
+      "query_ids_sha256": "070987a345503dfd922665617060666003abb3ee3f4d51320864813a36db2bbd",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 14,
+      "policy": "counterexample_raw",
+      "proof_sha256": "81aca4a9370f8175bbd8b5171d37405e71fe342c798124df0b8baa32f3f38a9a",
+      "query_ids_sha256": "c5d13e502c8ca4321b15165fa38805d6bd93191f1c753cc654aaffbc4290e937",
+      "refutations": 26,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 11,
+      "policy": "counterexample_relational",
+      "proof_sha256": "b5a106870638f0e224805ec8cccd7891265f42d71fe44230c2ee5cc2bb1a54e1",
+      "query_ids_sha256": "c93345af7c8e117bed707f5af6e35c5a9f7b9fa14c49ccdcdb578453e37d96d4",
+      "refutations": 26,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "4c88f08bb3fdc2afd1f4f0392915cb0a4f469b62b499b15c67598eb6122a2617",
+      "query_ids_sha256": "07640b261e93aba83abd363a69f6536c6ef6448d001ff4e5b46dd112ff19d9f5",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "26ef7f7ccf32e3c25cdc363173e67385f859ed8869ca45d4a89811f3e4030595",
+      "query_ids_sha256": "ca2311dc697c960d4dd125a44b6bc69f2cf6131e47c261895f98fc9121227b44",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "1568ccb74e506dc2c9a7f86e7935b8368e091ffd5fb62db279612afca8675e9f",
+      "query_ids_sha256": "3aa2fe3a20dd4641f1ada725400970b35bfc296fae348dab791da38858d44617",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "0c8c7723dfd64e0fe14ac51b3b2b7e6ba0a3906be1ffcc1ceaae00162236b18d",
+      "query_ids_sha256": "9183babfdf8f71aa448f767b2e4075b6c68eebabd7ab53c9a12174346d478cf8",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 19,
+      "policy": "counterexample_raw",
+      "proof_sha256": "278a76af21351284130d76d1cca9c23047c1dce4edf6643dc3f0e8317550e657",
+      "query_ids_sha256": "b5c61efafc02691e3b4f1f409fe977909919d9cb3e8c5b2d6aee1a5969bdeb69",
+      "refutations": 42,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 16,
+      "policy": "counterexample_relational",
+      "proof_sha256": "6f48e7574fa43bb40f2f2fe4a1a4a5d570c4ed5999e561668591958e87745551",
+      "query_ids_sha256": "1e50a956a9fe2ae2d5c1f0626ef23d59df628b1ebaba2b8f83e8ca315667e611",
+      "refutations": 44,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "b6d4800a719e6e1b867067a759dd5def6231b582a9f81e21ea8b13dc12aced0e",
+      "query_ids_sha256": "da119fc32b9dba6846c8e8a9ef049e4bcd6d3ea3f97226b1f3307f23f7550c8f",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "5e2bbba55cf9a3283190f4eaa6d7c4e8f2434e9bb3538534ddfecfff996b4c6f",
+      "query_ids_sha256": "d20865ba46069f458f88fe8fd7d18046f931430516f5df73292834b7dd173c5c",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "26625173f09f722bbacd00e83d3a47164a22bf6c333526630e11f245c420f08e",
+      "query_ids_sha256": "4b4fa1b00ea771064a88335855ff1e679cc69f58a29736012568ff5d81c2c65e",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "iris",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "c46701f463ba5ccedf20a9eb0ed36adc693fa39539a5a3d96150bbebda8c9196",
+      "query_ids_sha256": "9f241581ee38ef049c39d27ff0c95084a73d4d701e60274ced45f456e13b2d5b",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          },
+          "relational": {
+            "accuracy": 0.966667,
+            "correct": 29,
+            "total": 30
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 20,
+      "policy": "counterexample_raw",
+      "proof_sha256": "8f429e4dbca9ac7172ed1bafbefaf9ab63ef29998fc5dabafea6f06f7d504c23",
+      "query_ids_sha256": "8c4e974fd61aaebbc08285a15481571689e4c63804940e7af44f1305ac915a0f",
+      "refutations": 29,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 8,
+      "policy": "counterexample_relational",
+      "proof_sha256": "d8d45404c9cba4ff1519ee0b26b37540bfaa167b32e7d31b178bba1bb10e395d",
+      "query_ids_sha256": "4928d402ae1f61e56fc001fa1154a8a38f4f7c0b4d85d05c0d274a8112d841ba",
+      "refutations": 19,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "594c064bf8b81a9a814de9c0e2bc16d8ec2feee29ea1c9adaa723c762522492b",
+      "query_ids_sha256": "9dd63bcfebcb8426a9d56285e40199d2682565d95866127f1e545c005c487faa",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "a2ef7f9ed835a9b55780ee32335c3c7956e24418d29a98ad39d88545c9925c74",
+      "query_ids_sha256": "4955c323c3e148b0ca11533a787af0bdac6367d33b4464611cfe9e34671b9727",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "58269fbf9ba500cf3e99d452524a4b29b571a75954256a366c0d86f2d647b35a",
+      "query_ids_sha256": "74b8cc9a75d0d71608dd017e9c6c9323e112ce654f312622d2bbfb9659d3bf9b",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "e5896b0a903832c267d5b11df5253f88bede75c09cc2126fbcfd75333e6e11c3",
+      "query_ids_sha256": "9157dc457980a8d030e8a4a4537243f81a6f74fad9b48ec9754ebb2f29c94cd9",
+      "refutations": 0,
+      "seed": 157,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 20,
+      "policy": "counterexample_raw",
+      "proof_sha256": "7b885d3fe1a17b541e465f372d3257aaa7842b1a4d441594f204f2a9e25f6862",
+      "query_ids_sha256": "e10e7a9182b9e5e306ba335e3ae013fb24de1e2808779ca0c4063e5984d44b6a",
+      "refutations": 36,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 14,
+      "policy": "counterexample_relational",
+      "proof_sha256": "baa8dd2565164cbc7726a3f32c6750991762128c9f5877af210295fd8e810a4c",
+      "query_ids_sha256": "cc2ddd2bc3bc175d5b2831ac33c1c61528d0f7adb190cf7e9988717cc0cd38d2",
+      "refutations": 30,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "baaae98476418e732bb6e7ffbc0de265e4ed797e779f0b154875772fcf46eea3",
+      "query_ids_sha256": "2700d49bff52676d005f67a1d06b03cb96f03a9072040090c75ac668e3f564d7",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "954295ab83945564ac58523512fd0303a9adcfd3914ee3d35c45eb9db90abf19",
+      "query_ids_sha256": "543a4578591eb8b8d94c6658777783735c62139fd8cdcff3dad8c6d72de96b8d",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "ef95ff2d782f986f69607bf8ff728273fe118ae628f1e93ca6ae601495a7a4c8",
+      "query_ids_sha256": "c7d04816ff524273ca8b86635d2953fbf78d3bc6c2e17ba022d9437eaa4125e2",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "825c746cd7ccc9e481c88c4c19f8dda3f22b700c40b3a34220bcd4c4d537df5a",
+      "query_ids_sha256": "daaccbda60cab7cd330766a8f5b768a31079ed2bcc0515cdc6851029d823aec2",
+      "refutations": 0,
+      "seed": 163,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 21,
+      "policy": "counterexample_raw",
+      "proof_sha256": "e770bba45fc4793bd490a8435ad1b8ef47bb18190147b26e0c06f14b420fd8d3",
+      "query_ids_sha256": "52aad88f162a09a700886ce447b368d709a42f364547e30947654a455e231340",
+      "refutations": 30,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.891892,
+            "correct": 33,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 10,
+      "policy": "counterexample_relational",
+      "proof_sha256": "5137ad256a657e61072278721b2ef0c290b2da2c35dab336fcaae3061544eb22",
+      "query_ids_sha256": "5f5b550cb564a93d385d2f04a6927c05cdb16edabf70fbeabb085003dd0f089b",
+      "refutations": 17,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 28,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "geometry",
+      "proof_sha256": "cd96e2f1f3852fc9f75e9af84642a9eb93dff3e7f7fa75c458fe2886ee26dc16",
+      "query_ids_sha256": "8ee1beace6b12d972399ae03489e79d8d06267d5116609d8ce76a6fc53247b32",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_committee",
+      "proof_sha256": "82b697d8a78a999c490496a86153cd031135bfb4a09091e035d8047cd6362716",
+      "query_ids_sha256": "cd7a495911479af343a9b64bffd9fa70bc7a5b542ae219109badc50f64f69469",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "raw_margin",
+      "proof_sha256": "eb5a63e45463464fa7efc59005a666b385d8c327e49e76e731d4163b97b6f636",
+      "query_ids_sha256": "516e16e861ef6a930cfe13eeef4ee553fe3e8187dbe3dd5b7bfdb2fdabaf1f2e",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          }
+        }
+      }
+    },
+    {
+      "budget": 40,
+      "dataset": "wine",
+      "discriminating_queries": 0,
+      "policy": "relation_frontier",
+      "proof_sha256": "25f341e4d83aff5179a7a9e219f2ce79c785b359b4de440ae42d6c3ad19866df",
+      "query_ids_sha256": "c58c561101e34f939684ef5b88780363a730c9a31e39c2218c802561345590b8",
+      "refutations": 0,
+      "seed": 167,
+      "source_rev": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "surviving_local_alternatives": 0,
+      "test": {
+        "25": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "total": 37
+          }
+        },
+        "40": {
+          "raw": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "total": 37
+          },
+          "relational": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "total": 37
+          }
+        }
+      }
+    }
+  ],
+  "schema": "motif.field006.v1",
+  "seeds": [
+    157,
+    163,
+    167
+  ],
+  "sha256": "b297315f2bca34dfdf09068fb89f9b694b523ce4779e57f73fea056595541058",
+  "summary": {
+    "iris": {
+      "counterexample_raw": {
+        "25": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 83,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 84,
+            "total": 90
+          }
+        }
+      },
+      "counterexample_relational": {
+        "25": {
+          "raw": {
+            "correct": 83,
+            "total": 90
+          },
+          "relational": {
+            "correct": 84,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 85,
+            "total": 90
+          },
+          "relational": {
+            "correct": 86,
+            "total": 90
+          }
+        }
+      },
+      "geometry": {
+        "25": {
+          "raw": {
+            "correct": 85,
+            "total": 90
+          },
+          "relational": {
+            "correct": 83,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 85,
+            "total": 90
+          },
+          "relational": {
+            "correct": 85,
+            "total": 90
+          }
+        }
+      },
+      "raw_committee": {
+        "25": {
+          "raw": {
+            "correct": 85,
+            "total": 90
+          },
+          "relational": {
+            "correct": 86,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 85,
+            "total": 90
+          }
+        }
+      },
+      "raw_margin": {
+        "25": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 85,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 83,
+            "total": 90
+          },
+          "relational": {
+            "correct": 85,
+            "total": 90
+          }
+        }
+      },
+      "relation_frontier": {
+        "25": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 86,
+            "total": 90
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 84,
+            "total": 90
+          },
+          "relational": {
+            "correct": 85,
+            "total": 90
+          }
+        }
+      }
+    },
+    "wine": {
+      "counterexample_raw": {
+        "25": {
+          "raw": {
+            "correct": 109,
+            "total": 111
+          },
+          "relational": {
+            "correct": 105,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 107,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        }
+      },
+      "counterexample_relational": {
+        "25": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 109,
+            "total": 111
+          }
+        }
+      },
+      "geometry": {
+        "25": {
+          "raw": {
+            "correct": 107,
+            "total": 111
+          },
+          "relational": {
+            "correct": 107,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 109,
+            "total": 111
+          }
+        }
+      },
+      "raw_committee": {
+        "25": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 109,
+            "total": 111
+          }
+        }
+      },
+      "raw_margin": {
+        "25": {
+          "raw": {
+            "correct": 107,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        }
+      },
+      "relation_frontier": {
+        "25": {
+          "raw": {
+            "correct": 108,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        },
+        "40": {
+          "raw": {
+            "correct": 107,
+            "total": 111
+          },
+          "relational": {
+            "correct": 108,
+            "total": 111
+          }
+        }
+      }
+    }
+  }
+}
