@@ -74,6 +74,42 @@ published computations. No source authentication is implied by a citation.
    **Can every remaining residue class be assigned a finite descent
    certificate without incorrectly treating parity bits as random?**
 
+## A second discovery: why every fixed-step global descent attempt must fail
+
+The program systematically found an ALL-ODD parity residue among the
+remaining unsolved classes at **every tested depth**. That pattern admits a
+simple general algebraic induction, not merely a numerical observation:
+
+For any integer k>=1 and t>=1, write n=2**k*t-1. Then for 0<=j<=k,
+
+    T**j(n) = 3**j * 2**(k-j) * t - 1.
+
+For j<k the value is odd, so the induction legitimately applies the
+odd accelerated step. In particular:
+
+    T**k(n) = 3**k*t - 1 > 2**k*t - 1 = n.
+
+For every chosen common finite horizon k, there exist infinitely many
+starting values that are STRICTLY LARGER after exactly k accelerated steps.
+
+This is a rigorous elementary mathematical obstruction to a particular
+*proof strategy*: no universal claim that ALL n>1 decrease after the
+SAME fixed number k of accelerated steps can be correct.
+
+It is **not** a Collatz counterexample. Those values may, and for sampled
+ones do, decrease later. The statement is a known-style elementary
+arithmetic identity, not a claim of historic novelty.
+
+This obstruction changes the generated next research question:
+
+> Since no common fixed-step descent argument can work, what
+> **variable-time**, well-founded ranking certificate could force all
+> orbits eventually below their starts?
+
+That is a sharper unexplored path than simply increasing the same k
+forever. The trial explicitly records the failed global proof approach,
+the symbolic all-odd family and the next open aperture in its output.
+
 ## What this experiment calls 'primitive invention'
 
 The *new* measurement question is **universal descent in a residue class**.
