@@ -37,6 +37,10 @@ jobs:
           print("TRAIN-ONLY FREEZE:",p["training_and_freeze"]["combined_frozen_sha256"])
           for domain,methods in p["aggregate_results"].items():
               print("DOMAIN:",domain)
+              guard=p["training_and_freeze"]["domains"][domain]["crossvalidated_transfer_guard"]
+              print("  TRAIN-ONLY GUARD:",guard["adopted_method"],
+                    "transfer retained:",guard["transfer_retained"],
+                    "CV means:",guard["crossvalidated_mean_questions"])
               for name,result in methods.items():
                   print(" ",name,"solved",result["solved"],"/",result["cases"],
                         "questions",result["questions"],
