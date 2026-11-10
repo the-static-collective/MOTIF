@@ -98,11 +98,13 @@ class ApertureEscapeTests(unittest.TestCase):
         future=transfer_tasks(self.heldout)
         self.assertEqual(set(future),{"atlas_original_7",
                                      "atlas_complements_7",
-                                     "atlas_join_universal_8"})
+                                     "atlas_join_universal_8",
+                                     "seeded_random_8"})
         train_ids={ids for ids,_ in self.training}
         for label,cases in future.items():
-            self.assertEqual(len(cases),6)
-            self.assertFalse(train_ids & {ids for ids,_ in cases})
+            self.assertEqual(len(cases),8 if label=="seeded_random_8" else 6)
+            if label!="seeded_random_8":
+                self.assertFalse(train_ids & {ids for ids,_ in cases})
             self.assertTrue(all(g[0] == (8 if label.endswith("_8") else 7)
                                 for _,pair in cases for g in pair))
             self.assertTrue(all(_spectrum(pair[0],grammar()) ==
@@ -119,18 +121,20 @@ class ApertureEscapeTests(unittest.TestCase):
     def test_every_attempt_including_negative_probe_verified(self):
         archive=self.report["transferred_research"]
         self.assertEqual(set(archive),{
-            "atlas_original_7","atlas_complements_7","atlas_join_universal_8"})
+            "atlas_original_7","atlas_complements_7",
+            "atlas_join_universal_8","seeded_random_8"})
         for family,arms in archive.items():
             old=arms["NO_ADAPTATION_OLD_FOUR"]
+            expected=8 if family=="seeded_random_8" else 6
             self.assertEqual(old["resolved"],0)
-            self.assertEqual(old["cases"],6)
-            self.assertEqual(old["total_questions"],60)
+            self.assertEqual(old["cases"],expected)
+            self.assertEqual(old["total_questions"],10*expected)
             for method in ("CANONICAL_FIVE_CLASSICAL",
                            "STRONG_CLASSICAL_TRAINED_GREEDY",
                            "COMPOSED_LEAF_FIRST_TRAINED"):
                 arm=arms[method]
-                self.assertEqual(arm["resolved"],6,(family,method))
-                self.assertEqual(arm["cases"],6)
+                self.assertEqual(arm["resolved"],expected,(family,method))
+                self.assertEqual(arm["cases"],expected)
                 for task in arm["all_question_receipts"]:
                     self.assertTrue(task["resolved_by_hom_witness"])
                     self.assertEqual(len(task["all_attempted_question_receipts"]),
@@ -138,6 +142,18 @@ class ApertureEscapeTests(unittest.TestCase):
                     self.assertTrue(all(x["independent_enumerator_agrees"] for x
                                         in task["all_attempted_question_receipts"]))
                     self.assertTrue(task["all_attempted_question_receipts"][-1]["separates"])
+
+    def test_separately_seeded_future_population_is_not_atlas_derivative(self):
+        from new_population import independent_synthetic_eight
+        cases, origin=independent_synthetic_eight()
+        self.assertEqual(origin["draws"],1000)
+        self.assertEqual(origin["vertex_count"],8)
+        self.assertEqual(origin["random_seed"],25025)
+        self.assertEqual(len(cases),8)
+        self.assertTrue(origin["not_derived_from_seven_vertex_Atlas_pairs"])
+        self.assertTrue(origin["no_five_vertex_responses_used_for_challenge_selection"])
+        self.assertTrue(origin["not_independently_authored_or_externally_blinded"])
+        self.assertEqual(self.report["separate_eight_vertex_population"],origin)
 
     def test_source_cartridge_reused_without_retraining_after_transfer(self):
         chosen=self.plan["selected_training_cartridge"]
