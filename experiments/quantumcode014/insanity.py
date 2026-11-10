@@ -165,6 +165,7 @@ class StagnationGuard:
         if result.verdict==UNRESOLVED:
             self.ignored_unresolved+=1
             self.failed_counts[observation.action]=0
+            self.recent.append((observation.action,UNRESOLVED,result.observation_pin))
             return None
         name=observation.action
         if result.verdict==PROGRESS:
