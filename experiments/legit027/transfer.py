@@ -125,21 +125,77 @@ def train_plan(domain,training_rows):
     }
 
 
+
+def crossvalidated_transfer_gate(domain, by_seed):
+    """Choose transfer or classical fallback using *only training worlds*.
+
+    This is a safe domain-repair switch, NOT a new learned mathematical
+    algorithm. Leave-one-training-seed-out; no future question is consulted.
+    """
+    choices=("LEGIT026_GRAPH_SCORER_TRANSFERRED",
+             "TARGET_CLASSICAL_RESIDUAL_GREEDY")
+    scores={name:[] for name in choices}
+    for heldout_seed in TRAIN_SEEDS:
+        fit=[case for seed, cases in by_seed.items()
+             if seed!=heldout_seed for case in cases]
+        orders,_=train_plan(domain,observations(domain,fit))
+        check=observations(domain,by_seed[heldout_seed])
+        for name in choices:
+            order=orders[name]
+            counted=sum(next(i+1 for i,q in enumerate(order)
+                             if row["answers"][q][0]!=row["answers"][q][1])
+                        for row in check)
+            scores[name].append({
+                "left_out_training_seed":heldout_seed,
+                "cases":len(check),
+                "questions":counted,
+                "mean_questions_per_case":counted/len(check),
+            })
+    averages={name:sum(x["questions"] for x in rows)/sum(x["cases"]
+                  for x in rows) for name,rows in scores.items()}
+    # Conservative tie-break: DO NOT promote transfer on parity.
+    adopted=(choices[0] if averages[choices[0]]<averages[choices[1]]
+             else choices[1])
+    return {
+        "question":"Does the graph-derived observation-diversity score "
+                   "beat a target-trained conventional planner on a distinct "
+                   "training world?",
+        "out_of_training_world_receipts":scores,
+        "crossvalidated_mean_questions":averages,
+        "adopted_method":adopted,
+        "transfer_retained":adopted==choices[0],
+        "fallback_is_existing_classical_not_new_algorithm":True,
+        "never_select_using_future_seed_results":True,
+    }
+
+
 def prepare_training():
     graph_origin=prior_graph_rule()
     plans={}
     audit={"graph_rule":graph_origin,"domains":{}}
     for domain in DOMAINS:
         cases=[]
+        by_seed={}
         provenance=[]
         for seed in TRAIN_SEEDS:
             current,origin=world(domain,seed)
             cases.extend(current)
+            by_seed[seed]=current
             provenance.append(origin)
         orders,receipt=train_plan(domain,observations(domain,cases))
+        guard=crossvalidated_transfer_gate(domain,by_seed)
+        orders["TRAINING_CV_GUARDED_TRANSFER"]=orders[guard["adopted_method"]]
+        if set(orders["TRAINING_CV_GUARDED_TRANSFER"])!=set(questions(domain)):
+            raise Hold("guard corrupted question access")
+        frozen={name:[list(q) for q in order] for name,order in orders.items()}
+        receipt["frozen_orders"]=frozen
+        receipt["frozen_all_order_sha256"]=sha256(json.dumps(
+            frozen,sort_keys=True,separators=(",",":")).encode()).hexdigest()
         plans[domain]=orders
         audit["domains"][domain]={
-            "training_worlds":provenance, "frozen_selection":receipt}
+            "training_worlds":provenance,
+            "crossvalidated_transfer_guard":guard,
+            "frozen_selection":receipt}
     hash_input={domain:audit["domains"][domain]["frozen_selection"][
         "frozen_all_order_sha256"] for domain in DOMAINS}
     audit["combined_frozen_sha256"]=sha256(json.dumps(
@@ -240,6 +296,7 @@ def run():
             "Policy success defined by exact counterexample construction, not equivalence proof",
             "Human engineering, corpus design and verifier costs not included in CPU totals",
             "Only two future fixed seeds per domain; not statistically robust",
+            "CV guard is a conventional fallback selector, not autonomous creation of a method",
         ],
         "total_cpu_ms_including_training_and_evaluation":round(
             (process_time_ns()-start)/1e6,5),
