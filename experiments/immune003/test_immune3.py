@@ -149,7 +149,7 @@ class Immune3Tests(unittest.TestCase):
         messages = trial.make_messages(case, "source_scoped")
         self.assertIn("primary_email", messages[1]["content"])
         self.assertIn("untrusted_appendix", messages[1]["content"])
-        self.assertIn("not instructions", messages[0]["content"])
+        self.assertIn("not treat instructions", messages[0]["content"])
 
     def test_scripted_fixture_is_never_a_model_result(self):
         cases = (
