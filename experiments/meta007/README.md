@@ -1,205 +1,210 @@
-# META-007 — Break the frame: Optimize the *language of mathematical discovery*
+# META-007 — Break the frame: optimize MOTIF's mathematical question language
 
-**Status:** research DRAFT stacked on META-006 PR #265 and its unmerged
-predecessors. Collatz is still OPEN. No externally validated new mathematics.
+**Research-only stacked DRAFT** on META-006 #265, then #263, #259 and prior
+unmerged branches. Collatz remains an accepted unsolved mathematical problem.
 
-## User-approved task
+## Experiment and genuine representation change
 
-Instead of simply adding another example, make MOTIF analyze *the family of
-operations it uses to generate mathematical objects*. Can an optimizer
-design a stronger, proof-carrying inverse Collatz grammar, rigorously derive
-the resulting infinite-family coverage, and measure the gain against the
-previous real implementation and an equally informed classical solver?
+META-006 used 2 recursive odd inverse operations per node and certified
+a restricted infinite convergent family with
+|S∩[1,X]| = Ω(X^0.08760374...) using a uniform worst-case branch multiplier.
 
-## The actual representation change
+Instead of simply allowing more operations, META-007 asks:
 
-META-006 used a binary choice t=0 or1 at each inverse-tree node.
-It guaranteed two children at each depth d, but upper-bounded every
-branch by the SINGLE worst possible multiplier (8192/3), obtaining the
-relatively weak lower exponent
+> How many DISTINCT, SOURCE-VERIFIABLE positive-integer inverse words fit
+> within a bound on their actual construction cost?
 
-    alpha_old = ln(2)/ln(8192/3) ≈ 0.08760374.
+The resulting representation is a **weighted language of proof-carrying
+Collatz predecessor operations**, not a depth-only search tree.
 
-That mixes together two different questions:
+### Original executable inverse operator
 
-- how many mathematically VALID child operations exist?
-- how EXPENSIVE is each child, in increasing source-integer magnitude?
+For odd y>=5, y≡2 (mod3), the existing META-006 modular rule chooses
+e0(y mod9) from {2:1,5:2,8:3}. A new alphabet of K choices has
 
-**META-007 stops treating unlike branches as equivalent.**
-
-### Exact generalized branch grammar
-
-For any certified odd y>=5 congruent to 2 modulo 3, compute e0 from
-the exact y modulo 9:
-
-    y mod9 :    2   5   8
-    e0     :    1   2   3.
-
-For a branch symbol t∈{0,...,K-1} choose
-
-    e = e0 + 3*t,
+    t in {0,...,K-1}
+    e=e0+3*t
     B_t(y) = (2**(2e+1)*y-1)/3.
 
-The source checks EXACT divisibility and ordinary positive-integer
-closure, and requires
+The equation T(B_t(y))=2**(2e)*y, followed by 2e even halves, is
+checked against exact integer source arithmetic. Every node is an actual
+positive odd integer ≡2 mod3, allowing indefinite new branches.
+The inverse word is uniquely decoded from v2(T(child)) and its parent;
+finite ambiguity is NOT assumed away.
 
-    T(B_t(y))=2**(2e)*y.
+The strict well-founded rank is the old META-006 rank:
+R(5)=4, R(B_t(y))=R(y)+2e+1, and R(2**h*y)=h+R(y).
+Each true nonterminal Collatz transition drops the rank by exactly one.
+The complete domain also includes powers of two and terminal1.
 
-All generated children remain certified odd integers congruent 2 mod3
-and so can branch again indefinitely. Every binary/greater-arity
-code is reversibly decoded from v2(T(child)) and its smaller parent.
-All even intermediate states are admitted and rank = prior rank+2e+1,
-decreasing exactly by 1 on every real accelerated transition.
+## 1. Automatic proof-bound self-critique: the source divisor matters
 
-Now assign a **conservative individual growth cost**
+The first bound used in META-006 simply replaced the actual arithmetic
+factor with a power of two:
 
-    w_t = 7+6t.
+    B_t(y) < 2**(7+6t)*y.
 
-Because e0<=3, every macro child satisfies
+But that threw away the EXACT divisor 3 in the original source formula.
+The new experiment systematically derives the **smallest INTEGER
+growth-cost bound w_t** satisfying
 
-    B_t(y) < 2**w_t * y.
+    3*2**w_t > 2**(7+6t).
 
-This avoids the worst-single-branch bound that was needlessly applied
-to every cheap operation in META-006.
+This is decided by ordinary BIG-INTEGER inequalities, not logarithm
+estimation. The resulting cost is provably and optimally tighter:
 
-## The new question type: weighted combinatorial coding
+    w_t = 6+6t.
 
-Let C(L) be the number of DISTINCT inverse-branch words with total
-cost at most L. These are actual positive integers, not untrusted
-string proposals, because the inverse grammar is injective.
+The optimizer produces a source-bound *self-critique receipt* showing
+the original 7+6t cost, the newly minimal 6+6t cost, the exact
+inequalities certifying both minimality and safety, and the reason
+for the missed slack. All subsequent source-family proofs recompute
+the improved cost.
 
-An exact source-independent combinatorial recurrence is
+**This is not a mathematically novel observation.** It is a measured
+internal improvement to the program's evidence/measurement representation.
 
-    C(L)=1+sum_{t : w_t<=L} C(L-w_t),  L>=0,
+## 2. Exact weighted word counting instead of worst-case depth
+
+For a K-symbol inverse grammar, let C(L) be the number of distinct
+inverse-operation WORDS whose sum of weights w_t is at most L.
+
+The exact source-independent recurrence is
+
+    C(L)=1+sum_(t:w_t<=L) C(L-w_t),   for L>=0
     C(L<0)=0.
 
-The +1 is the empty word. Distinct words decode to distinct actual
-positive Collatz predecessors.
+The empty word accounts for +1. Injective inverse decoding proves each
+word denotes a DIFFERENT positive integer, not just a different string.
 
-Suppose for rational alpha=p/q,
+For rational α=p/q, if
 
-    sum_t 2**(-alpha*w_t) > 1.
+    Σ_t 2**(-α*w_t) > 1,
 
-Let W=max_t w_t. For 0<=L<W, the base bound
+and W=max_t w_t, then strong induction proves:
 
-    C(L)>=1>=2**(alpha*(L-W))
+    C(L) >= 2**(α*(L-W))  for EVERY L>=0.
 
-holds. For L>=W, substitution into the recurrence and induction
-using the stated supercritical weight sum proves
+Base: L<W implies C(L)>=1>=2^(α(L-W)).
+Inductive step: for L>=W each L-w_t>=0, and the recurrence bounds
+C(L) below by the previous statement times the verified sum (>1).
 
-    C(L)>=2**(alpha*(L-W)).
+Every word of cost ≤L represents n<5*2**L. Hence for sufficiently large X,
 
-Every cost-L inverse word encodes a positive integer n<5*2**L.
-For X sufficiently large, L=floor(log2(X/5)) therefore yields
+    |S∩[1,X]| = Ω(X**α).
 
-    |S∩[1,X]| = Omega(X**alpha).
+This is an **infinite-family mathematical guarantee**, not a fitted
+regression on enumerated integers.
 
-This is a mathematical theorem about the RESTRICTED explicit inverse
-family, not a conjectural fit to small enumeration.
+## 3. The optimizer actually chooses the improved grammar
 
-## The optimizer ACTUALLY runs
+The executable finite search considers ALL K=2,...,12 and a grid of
+rational exponents α=p/1000, 80<=p<=180.
 
-A finite search considers EVERY grammar size K from 2 through 12,
-and a prescribed rational exponent grid p/1000, 80<=p<=160.
-For each K, it binary-searches the largest mathematically certified p.
+Each candidate t's real irrational term 2**(-p*w_t/1000) is bracketed
+by rationals z/10**12 and (z+1)/10**12, with rigor certified using
+**pure integer power comparisons**:
 
-**Crucial:** the inequality is NOT trusted to floating-point estimates.
+    z**1000 * 2**(p*w_t) <= (10**12)**1000
+    (z+1)**1000 * 2**(p*w_t) > (10**12)**1000.
 
-Each candidate power 2**(-p*w/1000) is bracketed by rational integers
-z/10**12 and (z+1)/10**12. To certify the bracket, the Python engine
-checks both exact enormous-integer inequalities:
+The program proves each selected alphabet's weight sum >1 from
+integer lower bounds, and rejects its next p from integer upper bounds.
+Monotonicity in p makes binary search COMPLETE over this declared grid.
+An independent, high-precision classical closed-form geometric-sum
+method reproduces all selected candidate scores.
 
-    z**1000 * 2**(p*w) <= (10**12)**1000
-    (z+1)**1000 * 2**(p*w) > (10**12)**1000.
+### Selected result
 
-For the chosen K, SUM of the exact lower bounds exceeds 1.
-For the next greater p, the SUM of the exact upper bounds stays below 1.
-The optimizer and the classical independent high-precision geometric-sum
-checker agree on all grammar candidates.
+**K=8 possible inverse operations per node, α=166/1000=0.166.**
 
-**The winning constrained synthesis is K=11, p=154/1000.**
+K=9,10,11,12 attain the same maximal grid exponent but use more
+operation choices, so the predeclared tie break selects the smallest K.
 
-Not hand-picked: the exact source receipts preserve every binary-search
-decision and the first forbidden higher exponent for each K.
-A K=12 grammar also reaches 0.154 but uses more branch operations, so
-the predeclared tie-break chooses K=11.
+The optimized restricted family therefore satisfies
 
-The new **rigorously certified lower bound** is therefore
+    |S∩[1,X]| = Ω(X**0.166).
 
-    |S∩[1,X]| = Omega(X**0.154).
+This rigorously improves the exponent over META-006's more constrained
+0.08760374... lower bound by **about 1.895-fold**.
 
-Compare META-006's proved ~0.0876 exponent under its less expressive
-grammar/measurement. This is an approximately **1.76-fold increase in
-the guaranteed growth exponent**, NOT a 76% increase in all Collatz
-convergence or an improvement over known mathematical literature.
+It is NOT an improvement over all known Collatz mathematics.
+Krasikov and Lagarias (2003) proved a much larger bound ~X^0.84 for
+the FULL predecessor set of 1, using difference inequalities:
+https://doi.org/10.4064/aa109-3-4 .
+They remain a much stronger independent historical benchmark.
 
-The optimizer is optimal ONLY inside this restricted alphabet/cost/grid
-search—not over arbitrary inverse-tree algorithms or all Collatz methods.
+The 0.166 exponent is optimal only over the stated K and rational p
+grid, with THIS source-verified uniform cost grammar. It does not imply
+positive density, completeness or a global Collatz solution.
 
-## Finite independent-source experiments
+## 4. Real-world mathematical source checks
 
-MOTIF materializes every inverse code of lengths 0..3 in the selected
-11-branch grammar:
+The selected K=8 grammar generates ALL words through depth3:
 
-| Depth | Distinct, source-checked positive integers |
-| --- | ---: |
+| Depth | Different true positive Collatz predecessors |
+| ---: | ---: |
 | 0 | 1 |
-| 1 | 11 |
-| 2 | 121 |
-| 3 | 1,331 |
-| **Total** | **1,464** |
+| 1 | 8 |
+| 2 | 64 |
+| 3 | 512 |
+| **Total** | **585** |
 
-It calls the **actual META-006 binary decoder** on every constructed
-integer. Exactly **1,449** of these generated nodes are new relative to
-the previous binary grammar; 15 come from words containing only 0/1.
+Every generated integer is separately checked using direct forward
+Collatz simulation to 1, full inverse-code decoding, exact macro
+transitions, rank and weighted size bound.
 
-Every node is also independently checked against the actual accelerated
-Collatz forward trajectory and verifies its rank and real macro-path.
-The program rejects branch collision, unsupported integer, unjustified
-rank, or any off-domain 2-adic ghost.
+The **actual prior META-006 binary grammar decoder** recognizes
+only 15 of these nodes. The expanded language certifies **570 new
+nodes outside META-006's available operation alphabet**.
 
-## Scientific controls
+These 570 are genuinely new relative to the *previous restricted
+grammar*, not unverified historical mathematical discoveries. The
+arithmetic source is deterministic and local, not a live remote scientist.
 
-The 2003 Krasikov–Lagarias journal result already established a
-lower-bound exponent around 0.84 for the FULL predecessor set of 1.
-That is much stronger than our restricted family's ~0.154.
-Journal DOI: https://doi.org/10.4064/aa109-3-4 .
+The word-count recurrence is independently matched to exhaustive
+classical word enumeration at small cost budgets. All full future proofs
+carry original source version, exact inequality witnesses, rejected
+parameter attempts, positive-integer domain checks and global OPEN label.
 
-A separately implemented classical high-precision geometric-sum
-calculation, given the SAME branch-cost grammar and search grid,
-produces the SAME winning rational exponents. No performance or
-novelty advantage over classic combinatorial optimization is claimed.
+## 5. Scientific boundaries
 
-There is no general learned operator creation, LLM autonomous mathematical
-invention, verified new theorem, positive natural density, global Collatz
-proof, source-human authentication, or unrestricted formal verification.
+- The Collatz conjecture is still **OPEN**.
+- The proof is about one proper infinite subset of the natural numbers.
+- The grammar and optimizer's decision space are engineer-authored.
+- The algebraic induction has been written out and checked on finite
+  representatives, but has NOT been formalized in Lean/Coq or reviewed
+  externally as a new mathematical theorem.
+- Existing classical inversions and counting arguments are not novel.
+- Equal-information classical weighted-code optimization **ties** MOTIF.
+- The score does not prove a positive natural density or improve the
+  published X^.84 full-predecessor lower bound.
+- A SHA digest is not source authentication or authority to publish.
+- No service deployment, MCP installation or production merge.
 
-This experiment *does* demonstrate a meaningful machine-executed method
-evolution: from counting nodes by depth to counting them by verified
-individual construction costs, then designing a family of operations
-under an exact proof criterion.
+## Reproduction
 
-## Reproduce
-
-Python 3.11 standard library, GitHub Actions source pin is the branch:
+Python 3.11+ standard library:
 
     python -m unittest discover -s experiments/meta007 -p 'test_*.py' -v
     python experiments/meta007/weighted_grammar.py > meta007-weighted-proof.json
 
-Dedicated CI also reruns META-001 through META-006 regression suites,
-full source re-entry, original-history reference and packet upload.
+The dedicated workflow reruns inherited META-001 through META-006 source
+tests, generates full inspectable proof artifacts and re-enters the evidence
+without new external investigative questions.
 
-## Next genuine frontier
+## Next frontier
 
-The current certificate treats all source nodes as though they have the
-worst possible e0=3, even though their actual 9-residue states differ.
+The present cost grammar pessimistically assumes e0=3 for **every**
+source y, even though e0 depends on y modulo 9.
 
-The next change should replace one uniform cost list with a
-**multi-type finite-state source graph and a source-certified spectral
-growth inequality** that rigorously transports residue information
-through each inverse edge. That will require deeper mod-3^k state
-tracking, not merely adjusting the same coefficients. A strong
-classical weighted automaton or difference-inequality solver must be
-our fair comparator.
+A mathematically meaningful new primitive would transport deeper
+mod-3^k residue states through each inverse branch and build a
+**multitype, rigorously verified weighted transition operator**.
 
-Whether this helps beyond known Krasikov–Lagarias bounds is unproved.
+Then compute a spectral growth inequality with exact rational lower
+certificates, using the strongest available classical residue automaton
+and difference-inequality methods as controls.
+
+That is the next opportunity to improve the REPRESENTATION of the
+research process rather than simply spend more computation.
