@@ -72,7 +72,7 @@ failing. This is engineer-authored, selected, not externally blind.
 Challenge construction checks witness **existence**, but does not use
 future-case measurements to choose the rank order.
 
-Five complete, same-grammar question policies are compared:
+Six complete, same-grammar question policies are compared, including a training-validated guard:
 
 | Policy | Training uses target domain? | Rule |
 | --- | --- | --- |
@@ -81,10 +81,11 @@ Five complete, same-grammar question policies are compared:
 | `TARGET_CLASSICAL_RESIDUAL_GREEDY` | Yes | Recompute gain after removing solved training cases |
 | `TARGET_DOMAIN_HEURISTIC` | No | Predefined conventional first questions |
 | `CANONICAL_FIXED` | No | Full original question order |
+| `TRAINING_CV_GUARDED_TRANSFER` | Training-seed CV only | Retain transfer only if it beats target conventional residual-greedy on held-out-within-training problems; otherwise reuse classical method |
 | `NO_ESCAPE_OLD_TWO_QUESTIONS` | No | Intentionally weaker two-question baseline |
 
-Each of the first five has the same 35 (polynomial) or 36 (constraint)
-candidate questions and same independent oracle. All five have equal
+Each of the six full-grammar methods has the same 35 (polynomial) or 36 (constraint)
+candidate questions and same independent oracle. All six have equal
 expressive power and must resolve every fixture; poor query ordering
 is measured, not silently dismissed.
 
@@ -95,6 +96,71 @@ All candidate and negative observations are archived; independent
 verification is performed on every attempted observation. The
 predeclared future-world seed list is open, not a cryptographically
 blinded test.
+
+## Measured result — transfer fails against strong domain comparators
+
+**Original GREEN CI trial #42748075671:** 12 adversarial tests passed.
+The source graph-selected `COUNT_DIVERSITY` scorer was executed on
+two new non-graph goal contracts. It did *not* match the target-domain
+classical residual-greedy order on either future problem family:
+
+| Method | Polynomial nonidentity (32/32) | Integer-constraint countermodel (32/32) |
+| --- | ---: | ---: |
+| Fixed canonical complete questions | 483 | 435 |
+| Transferred graph `COUNT_DIVERSITY` score | **117** | **435** |
+| Target static classical gain | 70 | 255 |
+| Target residual classical greedy | **62** | **234** |
+| Prespecified target heuristic | 112 | 295 |
+| **Training-CV guarded selector** | **62** | **234** |
+| Old two-question limit | 0/32 solved | 0/32 solved |
+
+Numbers are **individual questions actually asked**, not CPU
+milliseconds. Each full-grammar method found 32 independently checked
+counterexamples in each domain. The old control abstained on every task.
+
+On modular polynomials, the transferred rule beat naive fixed ordering,
+but required **117 versus 62** questions for the strong classical
+planner. On Boolean constraint observations, the diversity score
+degenerates: it required **435**, identical to fixed canonical ordering,
+versus **234** for the target-trained classical method.
+
+### Automatic refusal of a weak transfer
+
+We added a conservative **training-only domain gate**: leave one of the
+two training-seed worlds out, fit each method on the other world, and
+compare its average source questions on the left-out world. Prefer
+the conventional classical method on a tie.
+
+| Training-world CV (avg questions per case) | Transferred graph scorer | Target classical residual greedy |
+| --- | ---: | ---: |
+| Polynomial modular nonidentity | 5.34375 | **2.96875** |
+| Integer constraint countermodels | 15.71875 | **15.28125** |
+
+**The gate rejected the transferred rule in both domains before future
+evaluation cases were opened.** It automatically reused an established
+classical planner, and matched that planner's 62 and 234 questions in
+the separately seeded future worlds.
+
+This is an informative *negative result* for cross-domain generalization
+of observation diversity and a verified demonstration of refusing a
+poorly supported transferred method. It is not algorithm invention:
+the fallback was an existing conventional method, and the train/eval
+world generators, candidate grammars and selection gate were written
+by the engineer.
+
+### Preserved negative-result cartridge
+
+`generated/transfer_failure_and_guard.json` records the source
+graph-frozen policy, exact source SHA-256, training-world CV scores,
+rejection decisions, future scored results and green CI evidence. A
+test verifies its training-derived fields against the executable
+research code, so the failed transfer is part of MOTIF's durable
+knowledge rather than a forgotten discarded experiment.
+
+The source CI run includes an artifact containing all attempted
+questions, positive and negative exact witnesses and all final
+training-frozen source orders. Final follow-on validation should be
+consulted for the added artifact-integrity test.
 
 ## What the result can and cannot mean
 
