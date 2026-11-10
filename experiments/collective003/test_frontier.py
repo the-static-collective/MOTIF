@@ -53,6 +53,26 @@ class SourceNativeFrontier(unittest.TestCase):
             self.assertFalse(n["world_claim_verified"])
             self.assertFalse(n["action_authorized_or_executed"])
 
+    def test_native_chronology_is_not_forced_onto_formal_mathematics(self):
+        for case in ("same-state-different-world", "numatherology"):
+            node = self.nodes[case]
+            self.assertEqual(node["original_question_receipt"]["aperture"]["id"],
+                             "chronology")
+            review = node["motif_task_relevance_critic"]
+            self.assertTrue(review["native_question_unchanged"])
+            self.assertIn("HOLD_", review["status"])
+            self.assertNotEqual(
+                review["suggested_next_question"],
+                node["original_question_receipt"]["question"])
+            self.assertIn("ENGINEER_AUTHORED", review["suggestion_origin"])
+
+    def test_recoverable_locator_is_real_pinned_research_file_not_history(self):
+        node = self.nodes["same-state-different-world"]
+        self.assertEqual(
+            node["original_question_receipt"]["evidence"]["source_locator"],
+            node["source_witness"]["locator"])
+        self.assertFalse(node["source_witness"]["historical_primary_source_authenticated"])
+
     def test_fictional_artifact_remains_unlocated_and_failed(self):
         n = self.nodes["time-artifact-that-wasnt-there"]
         q = n["original_question_receipt"]
