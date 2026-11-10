@@ -45,11 +45,27 @@ jobs:
               print("  PUBLIC EVIDENCE:",x["public_records_processed"])
               print("  WITHHELD EXCLUDED:",x["withheld_never_ingested"])
           PY
+      - name: Clearly labeled posthoc 40-seed robustness sweep
+        run: |
+          python experiments/genius010/stress.py > /tmp/motif-genius010-posthoc-stress.json
+          python -m json.tool /tmp/motif-genius010-posthoc-stress.json >/dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-genius010-posthoc-stress.json"))
+          assert r["status"]=="POSTHOC_EXPLORATORY_NOT_INDEPENDENT_BLIND"
+          assert r["no_external_action"]
+          print("POSTHOC STRESS:", r["experimental_worlds"], "engineered synthetic worlds")
+          for name, v in r["regimes"].items():
+              print(" STRESS REGIME:",name,"CONDITIONAL BRIDGES:",v["conditional_bridge_frequency"],
+                    "SOURCE HOLDS:",v["source_hold_codes"])
+          PY
       - name: Archive proof-carrying synthetic evidence and negative cases
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: MOTIF-GENIUS010-THREE-THREAD-RESEARCH-HOLD
-          path: /tmp/motif-genius010.json
+          path: |
+            /tmp/motif-genius010.json
+            /tmp/motif-genius010-posthoc-stress.json
           retention-days: 30
           if-no-files-found: warn
