@@ -1,0 +1,54 @@
+name: MOTIF GENIUS-009 two-clock weave
+
+on:
+  push:
+    paths:
+      - "experiments/genius009/**"
+      - ".github/workflows/genius009.yml"
+  pull_request:
+    paths:
+      - "experiments/genius009/**"
+      - ".github/workflows/genius009.yml"
+
+jobs:
+  double-time-reinterpretation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Adversarial source chronology and callback invariants
+        run: python -m unittest discover -s experiments/genius009 -p 'test_*.py' -v
+      - name: Run historical-text, fiction and laboratory dual-clock permutations
+        run: |
+          python experiments/genius009/two_clocks.py > /tmp/motif-genius009-two-clocks.json
+          python -m json.tool /tmp/motif-genius009-two-clocks.json >/dev/null
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/motif-genius009-two-clocks.json"))
+          assert d["no_external_action"]
+          assert d["textual_attribution_challenge"]["status"] == "HOLD_UNSUPPORTED_RETROJECTION"
+          assert d["positive_later_attribution"]["status"] == "EXPLICIT_SOURCE_ATTESTATION"
+          for name, row in d["worlds"].items():
+              print("DOMAIN:",name)
+              print("  READER ORDERS:",row["presentations_evaluated"])
+              print("  HISTORICAL SOURCE INVARIANT:",row["source_record_invariant_under_reordering"])
+              print("  NAIVE FLATTEN FALSE ATTRIBUTIONS:",row["weak_flatten_false_attributions"])
+              print("  APPEND-ONLY CLASSICAL FALSE ATTRIBUTIONS:",row["strong_classical_append_only_false_attributions"])
+              print("  TWO-CLOCK FALSE ATTRIBUTIONS:",row["two_clock_false_attributions"])
+          print("GENESIS MISATTRIBUTION:",d["textual_attribution_challenge"]["status"])
+          print("THREE-ENOCH WITNESS:",d["positive_later_attribution"]["status"])
+          print("RESEARCH STATUS:",d["status"])
+          PY
+      - name: Archive only curated synthetic interpretation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS009-TWO-CLOCK-RESEARCH-HOLD
+          path: /tmp/motif-genius009-two-clocks.json
+          retention-days: 30
+          if-no-files-found: warn
