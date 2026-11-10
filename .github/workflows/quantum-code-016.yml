@@ -1,0 +1,27 @@
+name: MOTIF QC-016 nested-cycle frontier and goal information dividend
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode016/**'
+      - '.github/workflows/quantum-code-016.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode016/**'
+      - '.github/workflows/quantum-code-016.yml'
+permissions:
+  contents: read
+jobs:
+  nested-oscillation-probes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test bounded nested loops and goal-relative probes
+        working-directory: experiments/quantumcode016
+        run: python -m unittest -v test_meta_cycles.py test_goal_probe.py
+      - name: Reproduce ordinal, source-pinned probe selection
+        working-directory: experiments/quantumcode016
+        run: python goal_probe.py
