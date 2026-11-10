@@ -1,0 +1,121 @@
+{
+  "experiment": "QC014_REAL_STALL_REPLAY_RECEIPT",
+  "originating_repo": "the-static-collective/MOTIF",
+  "originating_successful_action_run": 42743549945,
+  "originating_artifact_id": 13730685595,
+  "originating_artifact_zip_sha256": "c365be54210c07c1b90c1e5af135be57b1eae7214a47ce5852b1fa89a5521075",
+  "recorded_member": "2026-human_informed/annotated_gameplay.json",
+  "recorded_member_sha256": "89ad51579a41ec895c79293dd5f66afbe90be80a038c9f28a10d186e4936764f",
+  "actual_recorded_game_steps": 220,
+  "actual_make_wood_pickaxe_attempts": 161,
+  "actual_consecutive_craft_attempt_runs": [
+    {
+      "first_step": 17,
+      "last_step": 29,
+      "count": 13
+    },
+    {
+      "first_step": 31,
+      "last_step": 32,
+      "count": 2
+    },
+    {
+      "first_step": 37,
+      "last_step": 38,
+      "count": 2
+    },
+    {
+      "first_step": 41,
+      "last_step": 84,
+      "count": 44
+    },
+    {
+      "first_step": 90,
+      "last_step": 109,
+      "count": 20
+    },
+    {
+      "first_step": 111,
+      "last_step": 130,
+      "count": 20
+    },
+    {
+      "first_step": 132,
+      "last_step": 151,
+      "count": 20
+    },
+    {
+      "first_step": 153,
+      "last_step": 172,
+      "count": 20
+    },
+    {
+      "first_step": 174,
+      "last_step": 193,
+      "count": 20
+    }
+  ],
+  "first_three_unproductive_attempts": [
+    {
+      "game_step": 17,
+      "action": "make_wood_pickaxe",
+      "wood_before": 1,
+      "wood_after": 1,
+      "wood_pickaxe_before": 0,
+      "wood_pickaxe_after": 0,
+      "achievement_before": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "achievement_after": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "location_before": "GAME_TILE:35,40",
+      "location_after": "GAME_TILE:35,40"
+    },
+    {
+      "game_step": 18,
+      "action": "make_wood_pickaxe",
+      "wood_before": 1,
+      "wood_after": 1,
+      "wood_pickaxe_before": 0,
+      "wood_pickaxe_after": 0,
+      "achievement_before": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "achievement_after": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "location_before": "GAME_TILE:35,40",
+      "location_after": "GAME_TILE:35,40"
+    },
+    {
+      "game_step": 19,
+      "action": "make_wood_pickaxe",
+      "wood_before": 1,
+      "wood_after": 1,
+      "wood_pickaxe_before": 0,
+      "wood_pickaxe_after": 0,
+      "achievement_before": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "achievement_after": [
+        "achievement:collect_wood",
+        "achievement:place_table"
+      ],
+      "location_before": "GAME_TILE:35,40",
+      "location_after": "GAME_TILE:35,40"
+    }
+  ],
+  "QC014_detection_point_without_future_knowledge": 19,
+  "source_type": "DERIVED_FROM_REAL_PRIOR_GAME_ENGINE_TELEMETRY",
+  "inferred_reason_source": "ACTUAL_CRAFTER_ENGINE_RECIPE_REQUIRES_NEARBY_TABLE",
+  "fabricated_live_availability": false,
+  "real_human_survival_inferences": 0,
+  "authority": "GAME_ONLY",
+  "note": "This is a compact, researcher-extracted receipt. The original full game trace is preserved in the cited previous Actions artifact; this JSON alone cannot cryptographically authenticate that artifact."
+}
