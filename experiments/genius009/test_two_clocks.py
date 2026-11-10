@@ -21,13 +21,13 @@ class TestTwoClocks(unittest.TestCase):
         corpus = fixtures()[0]
         e = check_attribution(corpus, "Enoch-Metatron identification", "Genesis5", 0)
         self.assertEqual(e["status"], "HOLD_UNSUPPORTED_RETROJECTION")
-        self.assertIsNone(e["source_polairty"])
+        self.assertIsNone(e["source_polarity"])
         self.assertEqual(e["later_witnesses_with_explicit_affirmation"][0]["source"],
                          "3Enoch")
         late = check_attribution(corpus, "Enoch-Metatron identification",
                                  "3Enoch", 3)
         self.assertEqual(late["status"], "EXPLICIT_SOURCE_ATTESTATION")
-        self.assertEqual(late["source_polairty"], "AFFIRM")
+        self.assertEqual(late["source_polarity"], "AFFIRM")
         self.assertTrue(late["no_theological_or_historical_certification"])
 
     def test_what_source_says_never_depends_on_reveal_order(self):
