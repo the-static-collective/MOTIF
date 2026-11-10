@@ -1,0 +1,46 @@
+name: FIELD-005 relational question dividend (research HOLD)
+on:
+  push:
+    branches:
+      - 'experiment/field-005-*'
+  pull_request:
+    paths:
+      - 'experiments/field005/**'
+      - 'experiments/field004/**'
+      - 'experiments/field003/**'
+      - '.github/workflows/field005.yml'
+  workflow_dispatch:
+jobs:
+  replay-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [iris, wine]
+        seed: [137, 139, 149]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned historical benchmark dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Reproduce every local study invariant
+        if: matrix.dataset == 'iris' && matrix.seed == 137
+        run: python -m unittest discover -s experiments/field005 -p 'test_field005.py' -v
+      - name: Re-enter frozen original evidence and full study ledger
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+          MKL_NUM_THREADS: '1'
+          NUMEXPR_NUM_THREADS: '1'
+        run: >-
+          python experiments/field005/verify.py
+          --dataset ${{ matrix.dataset }} --seed ${{ matrix.seed }}
+          --out field005-${{ matrix.dataset }}-${{ matrix.seed }}-proof.json
+      - name: Preserve inspectable evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: FIELD005-${{ matrix.dataset }}-${{ matrix.seed }}-RESEARCH-HOLD
+          path: field005-${{ matrix.dataset }}-${{ matrix.seed }}-proof.json
