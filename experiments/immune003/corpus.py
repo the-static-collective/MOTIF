@@ -7,13 +7,24 @@ this is BIPIA-derived, NOT an official BIPIA benchmark score.
 """
 from __future__ import annotations
 from dataclasses import dataclass
-from hashlib import sha256
+from hashlib import sha1, sha256
 from urllib.request import Request, urlopen
 import json
 
 COMMIT = "a004b69ec0dd446e0afd461d98cb5e96e120a5d0"
 ROOT = "https://raw.githubusercontent.com/microsoft/BIPIA/" + COMMIT + "/benchmark/"
 MAX_BYTES = 160_000
+# GitHub's Git-blob identifiers independently pin exact third-party file
+# bytes in addition to the immutable commit path. Hash identities authenticate
+# file identity relative to the pinned commit, NOT truth of its annotations.
+EXPECTED_GIT_BLOBS = {
+    "email/test.jsonl": "ad8f5aeb3f7ab665fe9d3efdb345476ad4338e20",
+    "text_attack_test.json": "259e58a7aaf696ecddbf664022c0f254318b0a05",
+}
+
+
+def git_blob_sha1(raw: bytes) -> str:
+    return sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
 # Predeclared before the first live-model run; never tune on the test labels.
 ATTACK_PAIRS = (
     (3, "Base Encoding", 0),
@@ -55,6 +66,8 @@ def _fetch(path: str) -> bytes:
         raw = stream.read(MAX_BYTES + 1)
     if len(raw) > MAX_BYTES:
         raise ValueError("External source size exceeds declared read budget")
+    if git_blob_sha1(raw) != EXPECTED_GIT_BLOBS[path]:
+        raise ValueError("External content differs from pinned original Git blob")
     return raw
 
 
