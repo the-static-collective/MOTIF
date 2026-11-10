@@ -38,6 +38,13 @@ jobs:
           data=json.loads((root/"comparison.json").read_text())
           assert len(data["controlled_paired"])==4
           assert len(data["natural_paired"])==6
+          # The deliberately constructed two-tile trap must be broken using
+          # actual game actions and newly observed terrain, not a fake answer.
+          for pair in data["controlled_paired"]:
+              assert pair["baseline_unique_locations"]==2,pair
+              assert pair["guarded_unique_locations"]>=3,pair
+              assert pair["guarded_escape_step"] is not None,pair
+              assert pair["guarded_observed_terrain_facts"]>pair["baseline_observed_terrain_facts"],pair
           files=sorted(root.glob("*/annotated_gameplay.json"))
           assert len(files)==20,len(files)
           steps=0
