@@ -13,6 +13,7 @@ import hashlib
 import json
 import math
 import networkx as nx
+from grounding import BlanchLedger
 
 SCHEMA = 'motif.field008.blanch.v1'
 NETWORKX_VERSION = '3.6.1'
@@ -321,6 +322,8 @@ def run_case(graph_id, policy, budget=BUDGET, full_trace=False):
     assert owner.verify(root)
     live=choices_after(root,[],c)
     history=[]; received=[]; work=0; seen=set()
+    ledger=BlanchLedger() if policy=='blanch' else None
+    if ledger is not None: ledger.ink('root', root, owner)
     for step in range(budget):
         if len(live)<=1: break
         question = propose(policy, live, seen, c)
@@ -333,10 +336,34 @@ def run_case(graph_id, policy, budget=BUDGET, full_trace=False):
                     source_origin_count=1, model_ids_before=list(live))
         frozen['proposal_sha256']=sha(frozen)
         work+=question['conditional_model_probe_evaluations']
+        staged=[]
+        if ledger is not None:
+            for j, conditional in enumerate(frozen['blanched_branches']):
+                model_id=int(conditional['conditional_world'].split('-')[-1])
+                hypothesis_key=f'hyp_{step}_{j}'
+                prediction_key=f'prediction_{step}_{j}'
+                existing_evidence=['root']+[f'ink_{t}' for t in range(step)]
+                support=ledger.blanch(hypothesis_key,[existing_evidence])
+                ledger.claim(prediction_key,[[hypothesis_key]],claim_kind='LOCAL_PREDICTION')
+                staged.append((model_id,hypothesis_key,prediction_key,support))
         prior=live
         raw=owner.ask(question['question'])
         if not owner.verify(raw): raise RuntimeError('SOURCE_VERIFICATION_FAILED')
         received.append(raw); seen.add(question['question'])
+        local_branch_receipts=[]
+        if ledger is not None:
+            ledger.ink(f'ink_{step}',raw,owner)
+            for model_id,hypothesis_key,prediction_key,support in staged:
+                verdict=('OBSERVED_MATCH' if
+                         c.predictions[question['question']][model_id]==raw['answer']
+                         else 'REFUTED_LOCAL_PREDICTION')
+                ledger.resolve(prediction_key,verdict)
+                downstream=f'after_{prediction_key}'
+                child=ledger.blanch(downstream,[[prediction_key]])
+                local_branch_receipts.append(dict(world=f'atlas-model-{model_id}',
+                    grounding_before=support, local_prediction_verdict=verdict,
+                    downstream_epistemic_status=child['state'],
+                    source_origin_count=child['independent_origin_count']))
         live=choices_after(root,received,c)
         if graph_id not in live: raise RuntimeError('TRUE_GRAPH_RETRACTED')
         # Critically: conditional predictions are never source observations.
@@ -344,7 +371,8 @@ def run_case(graph_id, policy, budget=BUDGET, full_trace=False):
         record=dict(proposal=frozen,verified_source=raw,
                     retracted_conditional_worlds=list(falsified),
                     retained_alternative_worlds=list(live),
-                    verified_properties=resolved_targets(live,c))
+                    verified_properties=resolved_targets(live,c),
+                    blanched_lineage=local_branch_receipts)
         if full_trace: history.append(record)
         else: history.append(dict(proposal_sha256=frozen['proposal_sha256'],
                                   question=question['question'],depth=question['query_depth'],

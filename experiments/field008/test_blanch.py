@@ -70,6 +70,27 @@ class FieldEightTests(unittest.TestCase):
                                  step['verified_source']['source_query_sequence'])
                 pkt=step['proposal']; self.assertEqual(pkt['proposal_sha256'],b.sha({k:v for k,v in pkt.items() if k!='proposal_sha256'}))
 
+    def test_source_anchored_blanch_lineage_is_selectively_retracted(self):
+        actual=b.run_case(608,'blanch',full_trace=True)
+        self.assertEqual(len(actual['proof_steps']),4)
+        verdicts=[]
+        for step in actual['proof_steps']:
+            self.assertEqual(len(step['blanched_lineage']),4)
+            for branch in step['blanched_lineage']:
+                self.assertEqual(branch['grounding_before']['state'],'PENCIL_CONDITIONAL')
+                self.assertEqual(branch['grounding_before']['independent_origin_count'],1)
+                verdicts.append(branch['local_prediction_verdict'])
+                if branch['local_prediction_verdict']=='REFUTED_LOCAL_PREDICTION':
+                    self.assertEqual(branch['downstream_epistemic_status'],'HOLD_CONTRADICTED')
+                    self.assertEqual(branch['source_origin_count'],0)
+                else:
+                    self.assertEqual(branch['downstream_epistemic_status'],'PENCIL_CONDITIONAL')
+                    self.assertEqual(branch['source_origin_count'],1)
+        self.assertIn('REFUTED_LOCAL_PREDICTION',verdicts)
+        self.assertIn('OBSERVED_MATCH',verdicts)
+        self.assertEqual(actual['properties_resolved'],5)
+        self.assertFalse(actual['unique_identified'])
+
     def test_attribute_resolution_is_not_graph_identification(self):
         # Structural properties may all be determined while alternative
         # original graph structures legitimately survive.

@@ -14,7 +14,7 @@
 - **Starting INK fact:** The source-reported number of vertices and edges. This is one owner-origin record, **not two independent witnesses**. Possible worlds matching that record remain hypothetical; all distinguishable graph questions are pre-authored mathematical transformations.
 - **Conditional reasoning depth 1–5:** Edge presence (1); degree (2); mutual neighbors/triangle count (3); four-cycle count/connectivity (4); bridge count/articulation count (5). Each candidate answer is computed *conditionally* for each consistent model, then the chosen question is answered by a separate source-owner routine. These depths count symbolic derivation hops, **not automatically executed physical procedures**, and every allowed probe costs one source question in this synthetic benchmark. CPU work is not equal.
 - **Proof gates:** A query is proposed and sealed **before** the actual answer is requested; source replay independently recomputes answers with different algorithms where possible; results have corpus revision hashes and chronological source-query counters. Rehashed false source answers, stale revisions and unknown operations fail. Every hypothetical candidate remains PENCIL; matching an observation does not itself turn a model into an established fact.
-- **AND/OR truth maintenance:** `grounding.py` extends the original FIELD-006 `Lineage` implementation. Ancestry counts distinct source origins, **not repeated copies**; OR alternatives do not fuse into bogus combined evidence. A refuted local prediction loses only its dependent support routes. Even two origins do not establish a numeric probability.
+- **AND/OR truth maintenance:** `grounding.py` extends the original FIELD-006 `Lineage` implementation. Ancestry counts distinct source origins, **not repeated copies**; OR alternatives do not fuse into bogus combined evidence. A refuted local prediction loses only its dependent support routes. The main BLANCH run actually instantiates this FIELD-006 ledger for its sampled conditional branch witnesses at every query, admitting each new INK source receipt separately and maintaining the branch retraction states in the full evidence packet. Even two origins do not establish a numeric probability.
 
 ## Predeclared experiment and strong controls
 
@@ -72,7 +72,7 @@ cmp /tmp/field008-results.json experiments/field008/experiment-results.json
 python experiments/field008/demo.py > /tmp/field008-demo.json
 ```
 
-Local unit tests cover the independently recomputed source predictions over all 156 six-vertex graphs and 96 seven-vertex cases, source drift, forged-and-rehashed reports, source isolation, proposal-before-query ordering, selective retraction, independent-origin support counts, full-vs-shallow baselines and exact result reproduction. GitHub Actions runs these checks in the original stacked repository.
+The 11 local unit tests cover the independently recomputed source predictions over all 156 six-vertex graphs and 96 seven-vertex cases, source drift, forged-and-rehashed reports, source isolation, proposal-before-query ordering, selective retraction, independent-origin support counts, full-vs-shallow baselines and exact result reproduction. GitHub Actions runs these checks in the original stacked repository.
 
 ## What this confirms / what it does not
 

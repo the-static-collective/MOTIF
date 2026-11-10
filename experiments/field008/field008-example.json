@@ -7,10 +7,76 @@
   "max_executed_depth": 5,
   "n": 7,
   "original_source_root_sha256": "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e",
-  "packet_sha256": "2dcf21459517be5762ecb9581218e580ec8491e6ea855bc1dcf48b908386b7a9",
+  "packet_sha256": "178e1775c24fff7f037538ecc319fc003860a97bcdef90a6f832edd7cfe973f0",
   "policy": "blanch",
   "proof_steps": [
     {
+      "blanched_lineage": [
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_0_0",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-583"
+        },
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_0_1",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-584"
+        },
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_0_2",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-585"
+        },
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_0_3",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-586"
+        }
+      ],
       "proposal": {
         "blanched_branches": [
           {
@@ -433,6 +499,72 @@
       }
     },
     {
+      "blanched_lineage": [
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_1_0",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-594"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_1_1",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-598"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_1_2",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-599"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_1_3",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-600"
+        }
+      ],
       "proposal": {
         "blanched_branches": [
           {
@@ -613,6 +745,72 @@
       }
     },
     {
+      "blanched_lineage": [
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_2_0",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-594"
+        },
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_2_1",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-598"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_2_2",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-599"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_2_3",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-600"
+        }
+      ],
       "proposal": {
         "blanched_branches": [
           {
@@ -757,6 +955,72 @@
       }
     },
     {
+      "blanched_lineage": [
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_3_0",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-599"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_3_1",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-600"
+        },
+        {
+          "downstream_epistemic_status": "PENCIL_CONDITIONAL",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_3_2",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "OBSERVED_MATCH",
+          "source_origin_count": 1,
+          "world": "atlas-model-602"
+        },
+        {
+          "downstream_epistemic_status": "HOLD_CONTRADICTED",
+          "grounding_before": {
+            "best_route_origins": [
+              "one_atlas_corpus"
+            ],
+            "independent_origin_count": 1,
+            "key": "hyp_3_3",
+            "possible_support_routes": 1,
+            "source_authentication": "SIMULATED_OWNER_RECHECK_NOT_REAL_AUTHENTICATION",
+            "state": "PENCIL_CONDITIONAL"
+          },
+          "local_prediction_verdict": "REFUTED_LOCAL_PREDICTION",
+          "source_origin_count": 0,
+          "world": "atlas-model-605"
+        }
+      ],
       "proposal": {
         "blanched_branches": [
           {
