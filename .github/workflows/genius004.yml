@@ -36,6 +36,9 @@ jobs:
           print("STATUS:",r["status"])
           print("FROZEN POLICY:",r["selected_policy"])
           print("PLAN SHA256:",r["pre_future_policy_sha256"])
+          print("SELF CRITIQUE:",r["promotion_gate"]["status"])
+          print("STRONG CLASSICAL FALLBACK:",r["promotion_gate"]["selected_classical_fallback"])
+          print("VALIDATION MACRO COSTS:",r["promotion_gate"]["validation_macro_mean_costed_brier"])
           for world,methods in r["costed_brier_by_regime"].items():
               print("SCENARIO:",world)
               print("  COSTED BRIER:",methods)
