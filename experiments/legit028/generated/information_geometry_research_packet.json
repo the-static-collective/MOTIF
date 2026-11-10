@@ -1,0 +1,78 @@
+{
+  "experiment": "MOTIF-LEGIT-028",
+  "artifact_kind": "TRAINING_FROZEN_GOAL_INFORMATION_GEOMETRY_AND_NEGATIVE_SELECTION_EVIDENCE",
+  "status": "RESEARCH_HOLD_NO_GENERAL_INFORMATION_GEOMETRY_DISCOVERY",
+  "provenance": {
+    "source_green_ci_run": 42750210074,
+    "source_head_sha": "7862f1470954f6937baf569362b263066a1cb888",
+    "archived_full_result_artifact_id": 13733315775,
+    "archived_full_result_digest_sha256": "fc44730d7097027be9afab3845f9863778316375009545fa95d52f29866602a1",
+    "all_domain_training_policy_sha256": "e0031e34516b79768b9df15b006445225d18c95c0de85f16f9c3d9867e4ab06a",
+    "upstream_meta_policy": "LEGIT-027 and earlier 026",
+    "generated_cases_not_independently_blinded": true
+  },
+  "ontology": {
+    "observation_diversity": "number of distinct outputs on training cases",
+    "joint_shannon_entropy": "uncertainty in pair of outcomes, not utility itself",
+    "witness_entropy": "uncertainty in whether question distinguishes two objects",
+    "witness_probability": "estimated chance of exact non-equivalence witness",
+    "context_conditioning": "kernel similarity of prior failed questions using training-only empirical ranks",
+    "epistemic_vs_instrumental": "observable information variation is not necessarily evidence that solves a specified goal",
+    "conditional_voi_is_heuristic_not_optimal": true,
+    "independent_exact_verification_required": true,
+    "no_equivalence_from_finite_negative_probes": true
+  },
+  "training_router": {
+    "graph_hom_witness": {
+      "observed_alphabet": "EMPIRICALLY_MULTIVALUED",
+      "adopted": "RAW_OBSERVATION_DIVERSITY",
+      "cv_classical_greedy_mean": 1.375,
+      "cv_selected_mean": 1.21875
+    },
+    "polynomial_modular_witness": {
+      "observed_alphabet": "EMPIRICALLY_MULTIVALUED",
+      "adopted": "CONTEXTUAL_BAYES_WITNESS",
+      "cv_classical_greedy_mean": 2.96875,
+      "cv_selected_mean": 1.59375
+    },
+    "integer_constraint_countermodel": {
+      "observed_alphabet": "EMPIRICALLY_BINARY",
+      "adopted": "MARGINAL_WITNESS_PROBABILITY",
+      "cv_classical_greedy_mean": 15.28125,
+      "cv_selected_mean": 11.09375
+    }
+  },
+  "independently_verified_future": {
+    "graph_hom_witness": {
+      "cases": 16,
+      "conventional_greedy_questions": 19,
+      "routed_questions": 19,
+      "retrospective_best": "CLASSICAL_RESIDUAL_GREEDY",
+      "retrospective_best_questions": 19
+    },
+    "polynomial_modular_witness": {
+      "cases": 32,
+      "conventional_greedy_questions": 67,
+      "routed_questions": 70,
+      "retrospective_best": "JOINT_SHANNON_ENTROPY",
+      "retrospective_best_questions": 47
+    },
+    "integer_constraint_countermodel": {
+      "cases": 32,
+      "conventional_greedy_questions": 289,
+      "routed_questions": 293,
+      "retrospective_best": "CONTEXTUAL_VALUE_OF_INFORMATION",
+      "retrospective_best_questions": 267
+    },
+    "total_cases": 80,
+    "total_conventional_greedy_questions": 375,
+    "total_routed_questions": 382,
+    "router_regret_vs_classical": 7,
+    "all_full_methods_produced_valid_distinguishing_witness": true,
+    "all_old_unexpanded_grammar_cases_abstained": true
+  },
+  "decision": "NO_GENERAL_SUPERIORITY. The source policy can distinguish outcome geometry and pick an information score by training-only CV, but the CV-selected methods did not improve total heldout question efficiency over strong classical residual-greedy. Unselected retrospective winners MUST NOT be automatically promoted on these same future cases.",
+  "next_relevant_question": "Can additional independent training environments and a distribution-shift-aware gate forecast which information-value criterion will outperform classical witness-gain search on newly preregistered cases?",
+  "never_promote_retrospective_future_winner_without_new_frozen_challenge": true,
+  "not_merged_into_main": true
+}
