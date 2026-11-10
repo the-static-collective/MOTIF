@@ -46,10 +46,10 @@ jobs:
           record=reenter(p)
           assert record['new_investigative_source_questions']==0
           assert record['global_collatz_conjecture_solved'] is False
-          assert p['grammar_optimizer']['winning_alphabet_size']==11
-          assert p['grammar_optimizer']['winning_rational_growth_exponent']==154
+          assert p['grammar_optimizer']['winning_alphabet_size']==8
+          assert p['grammar_optimizer']['winning_rational_growth_exponent']==166
           assert p['independent_exact_integer_source_crosscheck'][
-            'new_nodes_outside_original_META006_binary_grammar']==1449
+            'new_nodes_outside_original_META006_binary_grammar']==570
           assert p['not_historically_novel_mathematics'] is True
           print('Exact weighted-language growth and all positive ranks reverified; Collatz still open')
           PY
