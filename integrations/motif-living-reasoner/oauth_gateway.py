@@ -56,7 +56,8 @@ class Settings:
         if (not sub or sub.isspace() or len(sub) > 256 or len(secret) < 32 or
                 any(c in sub for c in "\r\n")):
             raise ValueError("single-owner OAuth subject and internal 32+ character key required")
-        resource = resource.rstrip("/")\n        if urlsplit(resource).path not in ("", "/"):
+        resource = resource.rstrip("/")
+        if urlsplit(resource).path not in ("", "/"):
             raise ValueError("resource must be the HTTPS origin (do not include /mcp)")
         return cls(resource, issuer, jwks_url, sub, secret)
 
