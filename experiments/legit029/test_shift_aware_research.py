@@ -162,6 +162,38 @@ class ShiftAwareResearchTests(unittest.TestCase):
             "frozen_research_plan_sha256"],
             self.training["frozen_research_plan_sha256"])
         self.assertEqual(set(result["aggregate_results"]),set(worlds.DOMAINS))
+        packet=json.loads((HERE / "generated" /
+            "shift_guard_falsification_packet.json").read_text(encoding="utf-8"))
+        self.assertEqual(packet["experiment"],"MOTIF-LEGIT-029")
+        self.assertEqual(packet["audit"]["frozen_research_plan_sha256"],
+                         self.training["frozen_research_plan_sha256"])
+        self.assertTrue(packet["audit"]["protocol_not_preregistered_unchanged"])
+        self.assertEqual(packet["audit"]["revised_future_graph_seeds"],
+                         list(worlds.GRAPH_FUTURE))
+        source=packet["measured_exact_queries"]
+        matching={
+            "baseline_classical_greedy":engine.CONVENTIONAL,
+            "prior_mean_cv_router":"LEGIT028_SIMPLE_CV",
+            "empirical_worst_world_guard":"WORST_WORLD_REGRET_GUARD",
+            "metadata_shift_guard":"METADATA_SHIFT_GUARD",
+            "mean_cv_plus_metadata_shift":"SHIFT_GATED_SIMPLE_CV",
+            "raw_diversity":"RAW_OBSERVATION_DIVERSITY",
+            "joint_shannon_entropy":"JOINT_SHANNON_ENTROPY",
+            "contextual_information_value":"CONTEXTUAL_VALUE_OF_INFORMATION",
+        }
+        for domain,stats in result["aggregate_results"].items():
+            record=source[domain]
+            for key,arm in matching.items():
+                self.assertEqual(record[key],stats[arm]["questions"],
+                                 (domain,key))
+            self.assertEqual(record["input_novelty_refusals"],
+                             stats["METADATA_SHIFT_GUARD"]["shift_refusals"])
+        self.assertEqual(sum(v[engine.CONVENTIONAL]["questions"] for v in
+                             result["aggregate_results"].values()),
+                         source["baseline_classical_greedy"])
+        self.assertEqual(sum(v["WORST_WORLD_REGRET_GUARD"]["questions"]
+                             for v in result["aggregate_results"].values()),
+                         source["empirical_worst_world_guard"])
         self.assertIn("No exchangeability, independence or conformal risk guarantee",
                       result["limitations"])
         for domain,methods in result["aggregate_results"].items():
