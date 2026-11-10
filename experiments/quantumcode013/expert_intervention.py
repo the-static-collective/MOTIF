@@ -88,12 +88,12 @@ def pursue_object(actor,env,cls):
     return "do","acquire_living_food"
 
 
-def nearby_enemies(actor,env):
+def nearby_enemies(actor,env,radius=4):
     pos=actor.pos(env)
     hostiles=[]
-    for dx in range(-4,5):
-        for dy in range(-4,5):
-            if abs(dx)+abs(dy)>4:continue
+    for dx in range(-radius,radius+1):
+        for dy in range(-radius,radius+1):
+            if abs(dx)+abs(dy)>radius:continue
             p=(pos[0]+dx,pos[1]+dy)
             tile=actor.tile(env,p)
             if tile and isinstance(tile[1],(crafter.objects.Zombie,
@@ -140,8 +140,22 @@ def expert_informed_act(actor,env):
         hunt=pursue_object(actor,env,crafter.objects.Cow)
         if hunt:return hunt
     if inv["energy"]<=3 and inv["food"]>2 and inv["drink"]>2:
-        if not nearby_enemies(actor,env):
+        # Crafter's actual source applies severe damage during sleep when
+        # enemies strike: scan the same 7-tile exposed debug radius.
+        if not nearby_enemies(actor,env,radius=7):
             return "sleep","recover_game_energy"
+    # Reenter from failed affordance: the *original* controller repeatedly
+    # tried crafting a tool after the table had become inaccessible.
+    # Here the missing physical precondition, not another "make" command,
+    # becomes the next subgoal. This is a hand-coded field-correction rule.
+    if (inv["wood"]>=1 and env._player.achievements["place_table"]>0
+        and inv["wood_pickaxe"]==0):
+        near, _ = env._world.nearby(env._player.pos,1)
+        if "table" not in near:
+            back=actor.approach(env,"table")
+            if back:
+                return back[0],"restore_missing_table_precondition"
+            return actor.explore(env)[0],"search_for_lost_crafting_table"
     return ORIGINAL_ACT(actor,env)
 
 
