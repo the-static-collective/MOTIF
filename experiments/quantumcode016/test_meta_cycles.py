@@ -158,6 +158,28 @@ class NestedCycleTests(unittest.TestCase):
             m.observe(b)
         self.assertEqual(len(m.alerts),2)
 
+    def test_reanchor_after_new_information_avoids_false_phase(self):
+        start=state(0)
+        m=NestedMonitor(preferred_anchor=start.structural)
+        m.observe(FieldStep(start,"first_exploration",
+                            state(1,(1,0)),1,"fixture:first_seen"))
+        self.assertTrue(m.awaiting_anchor)
+        m.observe(FieldStep(state(1,(1,0)),"return_to_anchor",
+                            state(2),0,"fixture:return"))
+        self.assertFalse(m.awaiting_anchor)
+        results=[]
+        for x in motif([1,2],2):
+            q=FieldStep(
+                state(x.before.step+2,x.before.xy),
+                x.action,
+                state(x.after.step+2,x.after.xy),
+                x.observed_new_facts,"anchored:"+x.source_ref)
+            results.append(m.observe(q))
+        hits=[x for x in results if x]
+        self.assertEqual(len(hits),1)
+        self.assertEqual(hits[0].detected_step,10)
+        self.assertEqual(hits[0].primitive_motif_length,2)
+
     def test_audit_does_not_issue_external_actions(self):
         r=audit_qc015(motif([1,2],2))
         self.assertEqual(r['meta_alert_count'],1)
