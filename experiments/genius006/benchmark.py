@@ -76,16 +76,27 @@ def trial() -> dict:
         # first heldout DEEP_CHAIN counterexample. It is a conservative
         # engineering response, not a prespecified generalization result.
         exact_validation = run_policy(planner, validation, "EXACT_BELLMAN")
-        margin = 0.05
-        acceptable = (
-            scores[selected]["mean_verified_value"] >=
-            exact_validation["mean_verified_value"] - margin
+        # A small validation sample can entirely miss a rare multi-hop
+        # success (DEEP_CHAIN has only 1/16 positive worlds). Since this
+        # toy exposes a *complete* public finite hypothesis grammar, we
+        # can compute the population value BEFORE target-world sampling.
+        # This is a post-hoc exhaustive-model safeguard, NOT independent
+        # externally blinded empirical evidence or cheap runtime policy.
+        model_supported = run_policy(
+            planner, list(range(len(planner.worlds))), selected
+        )["mean_verified_value"]
+        exact_model = planner.exact_value(
+            planner.root, (), planner.task.budget
         )
+        margin = 0.05
+        acceptable = model_supported >= exact_model - margin
         frozen[family] = {
             "selected_method": selected,
             "training_only_scores": scores,
             "strong_exact_validation_score": exact_validation,
-            "candidate_within_005_of_exact_validation": acceptable,
+            "chosen_policy_exact_full_prior_value": round(model_supported, 6),
+            "strong_classical_exact_full_prior_value": round(exact_model, 6),
+            "candidate_within_005_of_exact_full_prior": acceptable,
             "research_adoption_status": (
                 "RESEARCH_ONLY_NEEDS_EXTERNAL_REVIEW" if acceptable
                 else "HOLD_NO_PROMOTION_FALLBACK_CLASSICAL"
@@ -94,7 +105,7 @@ def trial() -> dict:
                 selected if acceptable else "EXACT_BELLMAN"
             ),
             "posthoc_guard_provenance": (
-                "INTRODUCED_AFTER_FIRST_TEST_INSPECTION_NO_BLIND_CLAIM"
+                "POSTHOC_FULL_FINITE_MODEL_GUARD_AFTER_VALIDATION_MISSED_RARE_EVENT"
             ),
             "selection_objective": "maximize mean verified downstream value - fixed complexity penalty",
         }
