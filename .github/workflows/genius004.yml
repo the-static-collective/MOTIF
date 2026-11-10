@@ -1,0 +1,58 @@
+name: MOTIF GENIUS-004 humility aperture
+
+on:
+  push:
+    paths:
+      - "experiments/genius004/**"
+      - ".github/workflows/genius004.yml"
+  pull_request:
+    paths:
+      - "experiments/genius004/**"
+      - ".github/workflows/genius004.yml"
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test event-order, HOLD, refusal and source privacy
+        run: python -m unittest discover -s experiments/genius004 -p 'test_*.py' -v
+      - name: Freeze validation policy, evaluate new worlds and emit receipts
+        run: |
+          python experiments/genius004/humility.py > /tmp/motif-genius004-trial.json
+          python -m json.tool /tmp/motif-genius004-trial.json >/dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-genius004-trial.json"))
+          assert r["no_human_contact_no_external_action"]
+          assert len(r["pre_future_policy_sha256"]) == 64
+          assert "NEVER_EXPOSE_PRIVATE_SIMULATOR_NOTES" not in json.dumps(r)
+          print("STATUS:",r["status"])
+          print("FROZEN POLICY:",r["selected_policy"])
+          print("PLAN SHA256:",r["pre_future_policy_sha256"])
+          print("SELF CRITIQUE:",r["promotion_gate"]["status"])
+          print("STRONG CLASSICAL FALLBACK:",r["promotion_gate"]["selected_classical_fallback"])
+          print("VALIDATION MACRO COSTS:",r["promotion_gate"]["validation_macro_mean_costed_brier"])
+          for world,methods in r["costed_brier_by_regime"].items():
+              print("SCENARIO:",world)
+              print("  COSTED BRIER:",methods)
+              for seed,by_regime in r["holdouts"].items():
+                  m=by_regime[world]["method"]["HUMILITY"]
+                  print("  SEED",seed,"COVERAGE:",m["coverage"],
+                        "ACTIONS:",m["action_counts"],
+                        "FALSE ALARMS ON STABLE:",m["false_alarm_events_on_stable"])
+          PY
+      - name: Retain complete auditable synthetic receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS004-HUMILITY-RESEARCH-HOLD
+          path: /tmp/motif-genius004-trial.json
+          retention-days: 30
+          if-no-files-found: warn
