@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 from dataclasses import dataclass
 from urllib.parse import urlsplit
 from typing import Any
@@ -53,7 +52,7 @@ class Settings:
         jwks_url = _https_url(os.environ.get("MOTIF_OAUTH_JWKS_URL", ""), "JWKS URL")
         sub = os.environ.get("MOTIF_OAUTH_ALLOWED_SUB", "")
         secret = os.environ.get("MOTIF_MCP_API_KEY", "")
-        if (not sub or sub.isspace() or len(sub) > 256 or len(secret) < 32 or
+        if (not sub or sub.isspace() or len(sub) > 256 or len(secret) < 32 or not secret.isascii() or
                 any(c in sub for c in "\r\n")):
             raise ValueError("single-owner OAuth subject and internal 32+ character key required")
         resource = resource.rstrip("/")
