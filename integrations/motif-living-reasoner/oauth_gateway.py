@@ -35,7 +35,7 @@ def _https_url(value: str, label: str) -> str:
     if (parts.scheme != "https" or not parts.hostname or parts.username or
             parts.password or parts.fragment or not value or parts.query):
         raise ValueError(f"{label} must be an HTTPS URL without userinfo, query, or fragment")
-    return value.rstrip("/")
+    return value
 
 
 @dataclass(frozen=True)
@@ -56,7 +56,7 @@ class Settings:
         if (not sub or sub.isspace() or len(sub) > 256 or len(secret) < 32 or
                 any(c in sub for c in "\r\n")):
             raise ValueError("single-owner OAuth subject and internal 32+ character key required")
-        if urlsplit(resource).path not in ("", "/"):
+        resource = resource.rstrip("/")\n        if urlsplit(resource).path not in ("", "/"):
             raise ValueError("resource must be the HTTPS origin (do not include /mcp)")
         return cls(resource, issuer, jwks_url, sub, secret)
 
