@@ -129,6 +129,31 @@ class MethodMirrorTests(unittest.TestCase):
                 meta.evaluate_worlds(tiny,{"candidate":self.orders[
                     "METHOD_MIRROR_ADOPTED"]})
 
+    def test_durable_meta_cartridge_replays_without_heroic_claims(self):
+        packet=json.loads((HERE / "generated" /
+                           "selected_meta_cartridge.json").read_text())
+        self.assertEqual(packet["experiment"],"MOTIF-LEGIT-026")
+        self.assertTrue(packet["typed_rewrite"][
+            "adopted_only_after_training_world_crossvalidation"])
+        self.assertTrue(packet["typed_rewrite"][
+            "human_authored_search_grammar"])
+        self.assertEqual(packet["training"]["frozen_all_five_policies_sha256"],
+                         self.receipt["frozen_sha256_before_eval_world_loading"])
+        x=self.receipt["crossvalidation_method_invention"]
+        self.assertEqual(packet["typed_rewrite"]["selected_and_adopted_program"],
+                         list(x["adopted_program"]))
+        self.assertEqual(packet["training"][
+            "training_world_cv_mean_questions_parent"],
+                         x["parent_crossvalidation"]["leave_one_world_out_mean_questions"])
+        self.assertEqual(packet["training"][
+            "training_world_cv_mean_questions_adopted"],
+                         x["best_training_crossvalidation_candidate"][
+                             "leave_one_world_out_mean_questions"])
+        self.assertEqual(packet["training"][
+            "exact_classical_training_dp_min_total_queries"],
+                         self.receipt["classical_exact_finite_training"][
+                             "exact_training_questions"])
+
     def test_full_future_replay_is_checked_per_negative_and_positive_probe(self):
         report=meta.run()
         self.assertEqual(report["status"],meta.STATUS)
