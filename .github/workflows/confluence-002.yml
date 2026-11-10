@@ -1,0 +1,80 @@
+name: CONFLUENCE-002 Native Four-Method Weave
+on:
+  push:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence002/**'
+      - '.github/workflows/confluence-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence002/**'
+      - '.github/workflows/confluence-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-proof-weave:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout CONFLUENCE source
+        uses: actions/checkout@v4
+        with:
+          path: .
+      - name: Exact FIELD-008 source (not merged)
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 581ed7cbc289f65f42949dd332476eb672467a7c
+          path: sources/field008
+          persist-credentials: false
+      - name: Exact COLLECTIVE-001 source (not merged)
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 269006b559dbc73766888bcd11f5f294b8e6aa64
+          path: sources/collective001
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Confirm checkouts and their precise source versions
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0,'experiments/confluence002')
+          from native import source_pins
+          result = source_pins()
+          assert result['field008'] == '581ed7cbc289f65f42949dd332476eb672467a7c'
+          assert result['collective001'] == '269006b559dbc73766888bcd11f5f294b8e6aa64'
+          print('Imported exact source SHAs, no reimplemented proxies.')
+          PY
+      - name: Run CONFLUENCE-001 regressions
+        run: python -m unittest discover -s experiments/confluence001 -p 'test_*.py' -v
+      - name: Run CONFLUENCE-002 source/adversarial tests
+        run: python -m unittest discover -s experiments/confluence002 -p 'test_*.py' -v
+      - name: Run integrated four-world matched-classical audit
+        run: python experiments/confluence002/benchmark.py > confluence002-benchmark.json
+      - name: Hard audit assertions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('confluence002-benchmark.json').read_text())
+          assert x['cases'] == 4
+          assert x['cross_module_successes'] == 3
+          assert x['total_weighted_source_questions'] == x['exact_classical_optimum_cost']
+          assert x['external_actions'] == 0 and x['new_model_calls'] == 0
+          assert x['source_origins'] == 1
+          assert all(r['external_actions'] == 0 for r in x['rows'])
+          print(x['verdict'])
+          PY
+      - name: Preserve exact scored evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: confluence002-native-proof-audit
+          path: confluence002-benchmark.json
+          retention-days: 14
