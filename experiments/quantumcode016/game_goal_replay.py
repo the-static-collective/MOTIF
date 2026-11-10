@@ -107,7 +107,7 @@ def play(seed,mode,outdir,horizon=19):
     actor=Controller(seed)
     observed=LocalKnowledge()
     observed.scan(env,actor)
-    nested=NestedMonitor()
+    nested=NestedMonitor(preferred_anchor=game_state(0,env).structural)
     baseline_actions=()
     status="NO_POLICY_CHANGE"
     first_alert=None
