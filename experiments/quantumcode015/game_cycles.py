@@ -267,6 +267,8 @@ def experiment():
             'guarded_steps':after['game_steps'],
             'baseline_unique_locations':before['unique_locations'],
             'guarded_unique_locations':after['unique_locations'],
+            'baseline_observed_terrain_facts':before['new_terrain_observations'],
+            'guarded_observed_terrain_facts':after['new_terrain_observations'],
             'guarded_alert_step':after['first_alert_game_step'],
             'guarded_escape_step':after['first_escape_game_step'],
             'guarded_hold':after['entered_hold']})
