@@ -1,0 +1,32 @@
+name: FIELD-004 relational aperture vs classical baseline
+on:
+  push:
+    paths:
+      - 'experiments/field003/**'
+      - 'experiments/field004/**'
+      - '.github/workflows/field004.yml'
+  workflow_dispatch:
+
+jobs:
+  verify-sharded:
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [iris, wine]
+        mode: [active, random]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Test source integrity and no-leakage gates
+        run: cd experiments/field004 && python -m unittest -v test_field004.py
+      - name: Independently reexecute pinned case records and compare exact verdicts
+        run: cd experiments/field004 && python verify.py --dataset '${{ matrix.dataset }}' --mode '${{ matrix.mode }}' --out shard-proof.json
+      - name: Preserve full checked shard
+        uses: actions/upload-artifact@v4
+        with:
+          name: FIELD004-${{ matrix.dataset }}-${{ matrix.mode }}
+          path: experiments/field004/shard-proof.json
