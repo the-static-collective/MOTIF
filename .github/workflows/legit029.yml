@@ -1,0 +1,63 @@
+name: MOTIF LEGIT-029 shift-aware epistemic guard
+
+on:
+  push:
+    paths:
+      - "experiments/legit029/**"
+      - ".github/workflows/legit029.yml"
+  pull_request:
+    paths:
+      - "experiments/legit029/**"
+      - ".github/workflows/legit029.yml"
+
+jobs:
+  research-under-shift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pin external Atlas data and NetworkX exact implementation
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Adversarial tests for future-world leakage, OOD metadata and exact witnesses
+        run: |
+          python -m unittest discover -s experiments/legit029 -p 'test_*.py' -v
+      - name: Run frozen three-domain shift-aware research experiment
+        run: |
+          python experiments/legit029/meta_guard.py --emit > /tmp/motif-legit029-evidence.json
+          python -m json.tool /tmp/motif-legit029-evidence.json > /dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/motif-legit029-evidence.json"))
+          print("STATUS:",p["status"])
+          frozen=p["training_and_frozen_methods"]
+          print("FROZEN SHA256:",frozen["frozen_research_plan_sha256"])
+          for domain,arms in p["aggregate_results"].items():
+              cv=frozen["per_domain"][domain]["crossworld_policy_scores_and_decisions"]
+              print("DOMAIN:",domain)
+              print("  ENVIRONMENTS:",cv["train_world_count"])
+              print("  MEAN ROUTER:",cv["mean_cv_candidate_selected"])
+              print("  ROBUST WORST-WORLD ROUTER:",cv["robust_empirical_candidate_selected"])
+              print("  EMPIRICAL WORST-WORLD CV:",{
+                  name:round(row["worst_world_regret_vs_classical"],5)
+                  for name,row in cv["every_candidate_crossworld_performance"].items()})
+              for arm,details in arms.items():
+                  print(" ",arm,"solved",details["solved"],"/",
+                        details["cases"],"questions:",details["questions"],
+                        "metadata-shift refusals:",details["shift_refusals"])
+              print("  POSTHOC ONLY:",p[
+                  "posthoc_diagnosis_not_used_for_any_future_policy"][domain])
+          PY
+      - name: Retain complete training world CV and independently checked question receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT029-SHIFT-RESEARCH-HOLD
+          path: /tmp/motif-legit029-evidence.json
+          retention-days: 30
+          if-no-files-found: warn
