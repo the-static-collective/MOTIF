@@ -1,0 +1,63 @@
+name: MOTIF LEGIT-028 research information geometry
+
+on:
+  push:
+    paths:
+      - "experiments/legit028/**"
+      - ".github/workflows/legit028.yml"
+  pull_request:
+    paths:
+      - "experiments/legit028/**"
+      - ".github/workflows/legit028.yml"
+
+jobs:
+  information-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pin graph dependency and independently authored external Atlas
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Test entropy counterexample, strict future quarantine and exact independent oracles
+        run: |
+          python -m unittest discover -s experiments/legit028 -p 'test_*.py' -v
+      - name: Freeze information geometry policy and evaluate future worlds
+        run: |
+          python experiments/legit028/run_information_geometry.py --emit > /tmp/motif-legit028-evidence.json
+          python -m json.tool /tmp/motif-legit028-evidence.json >/dev/null
+          python - <<'PY'
+          import json
+          data=json.load(open("/tmp/motif-legit028-evidence.json"))
+          print("STATUS",data["status"])
+          plan=data["training_and_frozen_research_strategy"]
+          print("FROZEN POLICY",plan["frozen_all_domain_policy_sha256"])
+          for domain,result in data["aggregate_results"].items():
+              decision=plan["domains"][domain]["leave_one_training_world_out"]
+              geometry=plan["domains"][domain]["observational_morphology"]
+              print("DOMAIN",domain,
+                    "EMPIRICAL ALPHABET",geometry["kind"],
+                    "BEST INFORMATION POLICY",decision["best_candidate_geometry_method"],
+                    "ADOPTED",decision["adopted_method"],
+                    "GEOMETRY PROMOTED",decision["geometry_promoted"])
+              print("  TRAIN WORLD CV",{
+                  name:receipt["macro_world_mean_questions"]
+                  for name,receipt in decision["comparators"].items()})
+              for method,metrics in result.items():
+                  print(" ",method,"solved",metrics["solved"],"/",
+                        metrics["cases"],"questions",metrics["questions"],
+                        "CPU+exact verification ms",metrics["cpu_ms"])
+          PY
+      - name: Archive complete train/future question and verification transcripts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT028-INFORMATION-GEOMETRY-RESEARCH-HOLD
+          path: /tmp/motif-legit028-evidence.json
+          retention-days: 30
+          if-no-files-found: warn
