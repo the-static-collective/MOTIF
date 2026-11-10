@@ -1,0 +1,58 @@
+name: MOTIF LEGIT-025 aperture escape with classical graph controls
+
+on:
+  push:
+    paths:
+      - "experiments/legit025/**"
+      - ".github/workflows/legit025.yml"
+  pull_request:
+    paths:
+      - "experiments/legit025/**"
+      - ".github/workflows/legit025.yml"
+
+jobs:
+  identify-compose-verify-reuse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Load exact pinned external 1998 graph source
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2
+      - name: Run adversarial source, blindspot, method-composition and transfer tests
+        run: |
+          python -m unittest discover -s experiments/legit025 -p 'test_*.py' -v
+      - name: Reproduce frozen method orders and independent out-of-cohort results
+        run: |
+          python experiments/legit025/research.py --emit > /tmp/motif-legit025-research.json
+          python -m json.tool /tmp/motif-legit025-research.json > /dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/motif-legit025-research.json"))
+          print("Status:",p["status"])
+          print("External 7-node graphs inspected:",p["origin"]["seven_vertex_graphs_inspected"])
+          print("4-node aperture collisions:",p["origin"]["collisions_found_after_seeing_old_probe_answers"])
+          print("TRAIN:",p["origin"]["predeclared_training_pair_ids"])
+          print("HELDOUT:",p["origin"]["predeclared_heldout_pair_ids"])
+          print("Frozen source orders:",p["training_frozen_plan"]["frozen_source_orders"])
+          print("Chosen composition:",p["training_frozen_plan"]["selected_training_cartridge"])
+          for family, methods in p["transferred_research"].items():
+              print("FAMILY:",family)
+              for method, result in methods.items():
+                  print(" ",method,"resolved:",result["resolved"],"/",result["cases"],
+                        "questions:",result["total_questions"],
+                        "CPU+independent-check-ms:",result["cpu_ms_with_independent_per_question_check"])
+          PY
+      - name: Archive exact raw research and cartridge receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT025-APERTURE-ESCAPE-HOLD
+          path: /tmp/motif-legit025-research.json
+          retention-days: 30
+          if-no-files-found: warn
