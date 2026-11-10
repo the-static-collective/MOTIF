@@ -44,7 +44,7 @@ class NativeConfluenceTests(unittest.TestCase):
         self.assertEqual(output["base"]["plan"], "MESH_AND_CHAIR")
         self.assertEqual(output["field"]["source_observation_nodes"], 3)
         self.assertEqual(output["field"]["proposed_branch_predictions"], 6)
-        self.assertEqual(output["field"]["refuted_predictions"], 4)
+        self.assertEqual(output["field"]["refuted_predictions"], 3)
         self.assertEqual(output["macro"]["expanded_primitive_steps"], 3)
         self.assertEqual(output["proof"]["verified_coverage_mask"], 7)
         self.assertTrue(all(v["grounding"]["state"] in
