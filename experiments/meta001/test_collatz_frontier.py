@@ -10,7 +10,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from collatz_frontier import (
     HOLD, CLAIM, PRIMITIVES, T, C, reference_T, certificate,
     independent_classical_certificate, verify_certificate,
-    FiniteSourceOwner, investigate_open_problem, verify_packet, reenter,digest
+    FiniteSourceOwner, investigate_open_problem, verify_packet, reenter,digest,
+    fixed_horizon_diagonal_obstruction
 )
 
 
@@ -94,6 +95,40 @@ class OpenCollatzTests(unittest.TestCase):
                 self.assertEqual(c["symbolic_affine"],
                                  independent_classical_certificate(k,r))
                 self.assertTrue(verify_certificate(c))
+
+    def test_finds_all_odd_diagonal_and_refutes_every_fixed_k_descent_strategy(self):
+        evidence=self.packet["auto_detected_fixed_horizon_proof_strategy_failure"]
+        self.assertEqual(evidence["status"],
+            "REFUTED_FIXED_UNIFORM_K_STEP_DESCENT_FOR_EVERY_K")
+        self.assertEqual(evidence["tested_finite_depths"],8)
+        self.assertTrue(evidence["not_a_counterexample_to_collatz"])
+        self.assertTrue(evidence["unresolved_global_conjecture"])
+        self.assertIn("variable-time",evidence["next_question"])
+        self.assertEqual(self.packet["next_unanswered_question"],
+                         evidence["next_question"])
+        for row in evidence["proof_instances"]:
+            k=row["k"]
+            self.assertEqual(row["residue"],2**k-1)
+            self.assertEqual(row["witness_n"],2**(k+1)-1)
+            self.assertEqual(row["exact_k_step_value"],2*3**k-1)
+            self.assertGreater(row["exact_k_step_value"],row["witness_n"])
+            self.assertEqual(len(row["exact_intermediates"]),k+1)
+            self.assertTrue(verify_certificate(row["base_residue_proof"]))
+
+    def test_general_diagonal_induction_replays_up_to_limit(self):
+        check=fixed_horizon_diagonal_obstruction(12)
+        self.assertEqual(len(check["proof_instances"]),12)
+        self.assertEqual(len(check["mathematical_induction_argument"]),4)
+        self.assertTrue(check["not_a_historically_novel_lemma"])
+        for k in range(1,13):
+            for t in (1,2,3,11):
+                n=2**k*t-1
+                x=n
+                for j in range(k+1):
+                    self.assertEqual(x,3**j*2**(k-j)*t-1)
+                    if j<k:
+                        x=T(x)
+                self.assertGreater(x,n)
 
     def test_finite_observations_are_not_infinite_proof(self):
         finite=self.packet["finite_local_sweep"]
