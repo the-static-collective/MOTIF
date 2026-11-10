@@ -315,12 +315,16 @@ def _hom_witness(task, method):
     a, b = task["graphs"]
     _adj(a)
     _adj(b)
+    trace = []
     for source in _graph_orders()[method]:
         p, q = hom_count(source, a)["value"], hom_count(source, b)["value"]
+        trace.append({"source": source, "values": [p, q]})
         if p != q:
             return {"verdict": "SEPARATING_HOM_COUNT",
-                    "source": source, "values": [p, q]}
-    return {"verdict": "ABSTAIN", "reason": "No witness in bounded grammar"}
+                    "source": source, "values": [p, q],
+                    "questions": len(trace), "all_question_receipts": trace}
+    return {"verdict": "ABSTAIN", "reason": "No witness in bounded grammar",
+            "questions": len(trace), "all_question_receipts": trace}
 
 
 def execute(task, method):
@@ -420,11 +424,24 @@ def verify(task, method, output):
         a, b = task["graphs"]
         source = output["source"]
         counts = [reference_count(source, a), reference_count(source, b)]
+        receipts = output.get("all_question_receipts", [])
         if (output["verdict"] != "SEPARATING_HOM_COUNT" or
-                counts != output["values"] or counts[0] == counts[1]):
+                counts != output["values"] or counts[0] == counts[1] or
+                not isinstance(receipts, list) or
+                output.get("questions") != len(receipts) or not receipts or
+                receipts[-1]["source"] != source):
             raise Refuse("invalid independent homomorphism witness")
+        expected_prefix = _graph_orders()[method][:len(receipts)]
+        if [r["source"] for r in receipts] != list(expected_prefix):
+            raise Refuse("source-question order receipt was forged")
+        for i, row in enumerate(receipts):
+            expected = [reference_count(row["source"], a),
+                        reference_count(row["source"], b)]
+            if row["values"] != expected or (i < len(receipts)-1 and
+                                              expected[0] != expected[1]):
+                raise Refuse("false or skipped negative question receipt")
         return {"status": "VERIFIED",
-                "checked_by": "LEGIT021_independent_vertex_assignment_counter"}
+                "checked_by": "LEGIT021_independent_all_attempts_and_witness"}
     raise Refuse("unknown verification contract")
 
 
@@ -461,4 +478,7 @@ def execute_portfolio(task, ordering):
             "status": ("VERIFIED" if attempts and attempts[-1]["status"] ==
                        "VERIFIED" else "RESEARCH_HOLD"),
             "tried": attempts, "method_count": len(attempts),
+            "source_questions": sum(
+                x.get("certificate", {}).get("questions", 0)
+                for x in attempts),
             "cpu_ms": round(sum(x["cpu_ms"] for x in attempts), 5)}
