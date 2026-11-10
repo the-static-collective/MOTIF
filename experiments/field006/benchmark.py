@@ -17,6 +17,14 @@ def verify_group(dataset):
     actual=observed['results']
     key=lambda r:(r['dataset'],r['seed'],r['policy'])
     if sorted(expected,key=key)!=sorted(actual,key=key):
+        # Report a precise reproducibility failure; never silently accept drift.
+        for earlier,later in zip(sorted(expected,key=key),sorted(actual,key=key)):
+            if earlier!=later:
+                mismatched={field:{'expected':earlier.get(field),'replayed':later.get(field)}
+                            for field in sorted(set(earlier)|set(later)) if earlier.get(field)!=later.get(field)}
+                print(json.dumps({'status':'FAILED_REENTRY','dataset':dataset,
+                    'seed':earlier['seed'],'policy':earlier['policy'],
+                    'differences':mismatched},sort_keys=True),flush=True)
         raise ValueError('source query reentry or test score mismatch')
     if observed['summary'][dataset]!=recorded['summary'][dataset]:
         raise ValueError('audit summary mismatch')
