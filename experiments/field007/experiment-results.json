@@ -1,0 +1,2954 @@
+{
+  "cases": [
+    {
+      "acquired_row_ids_sha256": "4a69e70b8b75c3d74ea534c6af88c17715a0c6bad69448aee4db86d9b72782cd",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "e21e38703a3bc2a23636cb0fb872f7a41b10f12015b1d9f3d073bc401fd9326a",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.952381,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.97619,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.964286,
+              "correct": 69,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "0ba2bc29c8bf8ba32f54c7bf188e0d1dd072f012395f1420fd5b1e92333935f0",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.959524,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "a0c14c0b11ca9b2e72af93fc2e525e19310911a96f9e16a7d9877981b3efe8fc",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.964286,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.971429,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "6eaa90c83ae19a47fac4119c8869e04116ae19ecc72f00c0befd0c2a71cad763",
+      "local_refutations": 0,
+      "packet_sha256": "bad5c88ad0bed30a8dacb361b7c0cd60626ae48ce6e60f89e0209b548e126cca",
+      "policy": "random",
+      "prequery_chain_sha256": "4d5107ef7b3908efb59b4dcb5b45754bc56c8782d3ca6e5afd7bbfe57283b7fd",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "a0c14c0b11ca9b2e72af93fc2e525e19310911a96f9e16a7d9877981b3efe8fc",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "fb07d8e9a02146b36a826dee2dd0c1a648689964fd1f18aa8e0c3fb8ce01b89b",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "38c5b5e30b0665fb69f0ff5575d0dfa043ab198f70556a8ede16fdc2ee7e7a38",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.935714,
+              "correct": 67,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.935714,
+              "correct": 67,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "e77dabffc80ed7c39e89f9196352beac6dbefc4b2ae79e33c90e8f443b1a70e4",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.947619,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.959524,
+              "correct": 69,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "682ae159025e11cebf9aa83b3513306be8cbaa7a6b703312771be13862bbbf3f",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.952381,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "775ed7651c2d636140311a418a32fcc7ac0624f7fa1060663e3e039d7f2d4f9b",
+      "local_refutations": 0,
+      "packet_sha256": "46e6a2f04c6a4fffffa87605038975d7ccdc4923c10721c05c2a931ce382456c",
+      "policy": "geometry",
+      "prequery_chain_sha256": "0895926a5e1eae8f607be59addb80be3821ff5a341e38f60125998a08e929534",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "682ae159025e11cebf9aa83b3513306be8cbaa7a6b703312771be13862bbbf3f",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "f72594160fc614b193a3d6013abd1dd92c9ea676b969ea60d9c80cb6f1d67d9c",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "cc800e9782d6caec7a0c14364a684c81c03ab370965be47c16af8fa237fa450f",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.947619,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.933333,
+              "correct": 68,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.971429,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "a473ba968085446bf3872cffc678551d1e6df46b8a24f0185f6c31b9eff54391",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "3264b6e1000f53314dad497fcd83b2a385a45770097ed0472ad84623dea15299",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "d91631dcf2c79dfac119ac77162e2d117681aaaff9f8a1dd15218648b000222d",
+      "local_refutations": 9,
+      "packet_sha256": "4c88b7fd1c0caf9791eb6152183bb5387e9eb38685aa36af91c00a658cbd74b0",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "3b799b0243a3f5f805f47d821b887535ac1b5a5d0d9a2c49a6fe26b8be2c30b4",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "3264b6e1000f53314dad497fcd83b2a385a45770097ed0472ad84623dea15299",
+      "surviving_local_alternatives": 29
+    },
+    {
+      "acquired_row_ids_sha256": "7c41597f81b3e1a6b982c61d8f7712107fcf968f7607461b9a57c8b12a637d60",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "85e46e259265df790d5f03954944b812f7d67d6b62a76719ef16e5c032988210",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.959524,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.97619,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.97619,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "0a9ed20082e884378417984ca5ac30078224cbab357f5111ee7d2581d16e11a6",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.97619,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.983333,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "7bc6c6638566c9d6f4bf96c95e9a18e7dec0106a5fed1990c96aa283cd95a674",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "79ad662752a3129f879cf7a7193221a1af0d20ce0548f5aaa112c67f89a89276",
+      "local_refutations": 37,
+      "packet_sha256": "ff74f27ebc22d31e326db39b65719cc3a8f85bb53fbf44ae369bef86e6beb57e",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "2f4938292c211f44525753ec4b4399125ad5cc98a210f0b41253f8a79b683514",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "7bc6c6638566c9d6f4bf96c95e9a18e7dec0106a5fed1990c96aa283cd95a674",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "e4b913881e5650998ab7ebaa038e2c5c45e0a661f6453648d56002f697239dca",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "7a577f59fa42a5a5004bc6712fb28c987649296d2e78d37934b31b009525b4e0",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "932941d22faaaf89e0f3ceb32b03afa68fab134ef39e67280898539bd2fdd4dc",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.97619,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "6453902c33438a9acfde8c0af3b2746842b836e61a1f713e1b7eda2b832f941e",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.988095,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "0cf061bf3fc0964ac3a07a14f0b27aa4cfb64e7ac4eaedfa9f060ad68fe484c1",
+      "local_refutations": 86,
+      "packet_sha256": "1a113dd7f5e70c60f6254077cc5b4f2021383aaab0e98c136fd6fb1d1bfbd761",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "72660fb8e7079c9a24a3bb7b3344edfcc8bbbdb480f272f95c20ffbf7bc52758",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "6453902c33438a9acfde8c0af3b2746842b836e61a1f713e1b7eda2b832f941e",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "e639704034077fac4d74326da635a47586129b26db70764802e528e03dd3c998",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "00577513ef7b16d087c7b31a41649856f945a133f7ff9cda1894eac0d5dead08",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.961538,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.905594,
+              "correct": 65,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.844988,
+              "correct": 61,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "46de132cafb9ea37284d7def9bffd4ab8657331a19fc0132e1b3b09d4d6ff49a",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.961538,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.931235,
+              "correct": 67,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.916084,
+              "correct": 66,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "8cc7df61c8d6921b5a1003afc3b8da91475dad83d18ab7ba0069637388f77424",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.961538,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.931235,
+              "correct": 67,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.944056,
+              "correct": 68,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "aa3c0381b91c4c883a0366537ed90d22afc8f584d3190aabfe382f298d3ba022",
+      "local_refutations": 0,
+      "packet_sha256": "f31d1d7fae1002daa701896f730cdd0099c5122e5866fe0e25328d8f97fd5740",
+      "policy": "random",
+      "prequery_chain_sha256": "22becdda52f00a2031a6641df04c0ad11bb8f891163961756dd9b948b6389630",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "8cc7df61c8d6921b5a1003afc3b8da91475dad83d18ab7ba0069637388f77424",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "d7fe5627af592a4d993844aa420eff34470cde3c6767c7cb97527dca322f1d95",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "72b19161fbf2fe2c16dc5fa21bffa72934c151c1c2df73099a45da9f4bfd8ade",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.931235,
+              "correct": 67,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.931235,
+              "correct": 67,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "768c9c75e4687631d2479936cd04e348cf066cb12be39a83b0d7f19923377852",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.941725,
+              "correct": 68,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "45bb5576193f307183f438f37a023968da263be3c87030246c6d879f4be730a6",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.984848,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.954545,
+              "correct": 69,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.956876,
+              "correct": 69,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "82d7457b2323e123715ba7021985ef53f36e1b96c15237f0ca87307fbd740b44",
+      "local_refutations": 0,
+      "packet_sha256": "591fd46102e8f37c2648a5b70247c582d92b58599779e1831f22d379ce41be69",
+      "policy": "geometry",
+      "prequery_chain_sha256": "209b6ea66c281f3b443abb14b7aac0bb0ceb8e757384b28017e28cdbbaf99872",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "45bb5576193f307183f438f37a023968da263be3c87030246c6d879f4be730a6",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "fd9f5ed19469c30952f37e28ed4354cd1980c6cb027c87b5d6f38d0fc65a658b",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "2e2a3a5aab3725ff7066bc48926239a4b4302b3a0e376ddd6443c741ac833998",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.959207,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.875291,
+              "correct": 63,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.837995,
+              "correct": 61,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d61379085dd400eb34d41cf869372c5d5c4c3247b5483d5ed58ef1f9c1f342e4",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.987179,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972028,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "ce35b46d09645a4365cf3bfeb675786e7a3215c64d596eb7a54eee3e465331f5",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.984848,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "6bc820e8a79aaf1452b30b0d783cce31a148dd3740a4f01c242569f685c2a3b3",
+      "local_refutations": 10,
+      "packet_sha256": "c1dc70d26c2b55b818e83196fd62141d98217fa57e2efcfdebb1aadafd11af56",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "3509fee40cef3d12938b56fa668478527289e7835468e896c5f827ce2817c150",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "ce35b46d09645a4365cf3bfeb675786e7a3215c64d596eb7a54eee3e465331f5",
+      "surviving_local_alternatives": 28
+    },
+    {
+      "acquired_row_ids_sha256": "e02dcebfbb67159609c72235859e367f681aa2d34199d3af5911a6247804fa08",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "828e22c8728115ec49611b674702ef3858cf06bd49f5ec0033bc6d23d2c7903b",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.972028,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.918415,
+              "correct": 66,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.956876,
+              "correct": 69,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "39b45bf53fceb2a8e98af435cd3ba66264327972e8a202677849bcf78ad5fc6e",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "e54431443bf751839b045c0b67017a65d0f62f9b701cce3b1e4b94fc089de3c9",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "81c94e82474864b2c6e2eba58a4eb7c2ad852b9d21eb74920531180f934fa89b",
+      "local_refutations": 40,
+      "packet_sha256": "682d5dd8070fa03d7e293cf6def5f82f35519284303618645a3cc14bd5e9a117",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "3e465273698c8d34a3d4bb2d3dce910259e30822eec87ad43042015000147ba1",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "e54431443bf751839b045c0b67017a65d0f62f9b701cce3b1e4b94fc089de3c9",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "6b04cc282c5a5aa011097076e6ef0cc736a95ceb29d99277e781617076fb9871",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "21e2088f56db7e53302b40fa4200894f2528dd8d267f412505ac02d0c90201bf",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.89627,
+              "correct": 65,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.926573,
+              "correct": 67,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "9f51da3402709154b87c9f7fa26ff719f070b5612c68d5fa7f2ec09d6dd77d96",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.939394,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.944056,
+              "correct": 68,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "16413c7ab6be92f2dd782b0c4802dc5c10164b1539791f0e698a429f010f9caf",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.987179,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.969697,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "28d2a346f27c48d92ddd521138246b75fdd3d4cd2fbd93ff0a98ce02bb389d4c",
+      "local_refutations": 95,
+      "packet_sha256": "5e3485da92ef64ac4096284d532ff85601972e429df27ce2f4618df1271d9e3f",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "921f3a99e2ea92fe5412c7bd125379169f1c74356aec7be4644f14389aa18b0c",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "16413c7ab6be92f2dd782b0c4802dc5c10164b1539791f0e698a429f010f9caf",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "758751fa93579e4555c4e73079e1c297f2063498275343c8ae771d16e1311d43",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "238cb073009069ff85d084f5145a3d25fb8abd273936d4c06ee3dcf622712b63",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.958333,
+              "correct": 69,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "e0523e6a06cc969b6655c9bc4bf4dffcfe30be7794960c0f1c6eb7834193233b",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.944444,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "1748638242b9674d64309c12c8dc18aac8749cc2d121f709c2fe838dfea644c1",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "306fab992fe2841f6d3e687ede3f7e1e7d88de895c2ea179e54083420d2016be",
+      "local_refutations": 0,
+      "packet_sha256": "6c5939af4d65d5bc15a3a5123cd46644994441773c18aaf1ccc85fa1f0d1f624",
+      "policy": "random",
+      "prequery_chain_sha256": "01ff54418d7ba304fdf448256b5fbb4a3f472f99f88ea323121217897afd82b6",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "1748638242b9674d64309c12c8dc18aac8749cc2d121f709c2fe838dfea644c1",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "2873b60c1b1e8f2002d25151d66c411f59742d7cebcaf828327a2bbfb8442348",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "472e2b37ddc84fc7ad6e77d0deedbe5b8f538b79e187a5f6f88ba6e62f194a8a",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.958333,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "509ff364805e4c0a10c9f8e9a78a69bd4d7ec3774bedb8cfed05f5deaa4105f5",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.944444,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "0be10709453aeb12a60ee22ed3777f7f0992fdbbd1d04cde21e5aad948af713c",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "2cc7916099c89823a08a0bd0e95fa456fc5efb0d81f74ccf171e747cb3aa91f0",
+      "local_refutations": 0,
+      "packet_sha256": "24c194c93666e88757b4d71b872c2e475c036786fd04ebcf507d0639c2be478b",
+      "policy": "geometry",
+      "prequery_chain_sha256": "869819a116a62b246b38d5887bf60eb9fbab57927dc256bdf5a42a92c834e078",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "0be10709453aeb12a60ee22ed3777f7f0992fdbbd1d04cde21e5aad948af713c",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "c40f12c4e7e33148659813a826808f7ad7ef7f9f6c0f4e71b44b9d46ae675c07",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "897ad6df28278686c70d791b074da2d12201500bc0db2fa4b57006a1fa03f9eb",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.958333,
+              "correct": 69,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.958333,
+              "correct": 69,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.958333,
+              "correct": 69,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "20a589ac9888f05363012eaa0a7b62f5553f2784fe298b0ad684c2e5f2ca130c",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "1271b9d0320c1c7bdbfcc34afa1002bef316e66de59f4fc8fca4b1dbb10f3f84",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "e5ec8f066be06cb4c089e5d507d5d4ee47f324ad777f5c0aebd2169af3b24b04",
+      "local_refutations": 11,
+      "packet_sha256": "41175ae07835cb8c796c06b119001050c1a67583655ab00d205288ab939d0089",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "a6d30b4b95ac9fd71ba3369436e44321b5747466a10b9a0e83702cf9ab4236e4",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "1271b9d0320c1c7bdbfcc34afa1002bef316e66de59f4fc8fca4b1dbb10f3f84",
+      "surviving_local_alternatives": 27
+    },
+    {
+      "acquired_row_ids_sha256": "a50f8819dcee49a1a4d3757bf87f9ab6f4474333f1147571a6fcfd90e410bb45",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "482b421f60e3a2f3060c60950a9b896f6c1441c33f30c2a3257a5fadacb79a38",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.944444,
+              "correct": 68,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "a694dad8a912abcf9163be19428b8710555f9244db3ce445461a5e4ecbb2b517",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "a4502e265897a6d1fd98adf7ea4e2b84af1bebf4f0141640c89e59b1087a9445",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "df2ba74216c444101e5d0a166354b41fd7817fea0bfd63b255143c7c5e552bb5",
+      "local_refutations": 42,
+      "packet_sha256": "a4265b7ef9d2752e4d68e4ba72c09c5b63a4b8ac7815f7b26de034e0dc485c9c",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "d5ca351c6464683abd9d2ba505abb3ed539451a9af8a7fce8f1af5455ca37d65",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "a4502e265897a6d1fd98adf7ea4e2b84af1bebf4f0141640c89e59b1087a9445",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "9cda9fe9c030af8e95e8aa092b17db698ebd3eeb52dc500d2121a7d3a6cc9ecb",
+      "archive_revision": "41ea7cf6db2effc93950bc713ba9451755ed1787e71a9bd29032198c86a451e9",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "f7a6225b761fff82b5d800c87ff5c9b4271dc8a55d826b178ed9a057c4b25c52",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.916667,
+              "correct": 66,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.944444,
+              "correct": 68,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "e242251df034f674c319bcc243f160e7200ca47f7c1ad4eb7fa2293567a15dee",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.972222,
+              "correct": 70,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            }
+          }
+        },
+        {
+          "evidence_sha256": "646e696403c42da2102062c0fcf12d29d34dcfb859f8cc3c1c3511016553aa29",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.986111,
+              "correct": 71,
+              "n": 72
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 1.0,
+              "correct": 72,
+              "n": 72
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "82c0126ba124b6e6b8e649d49324a5f2704656cc4c12c66dd72f2f62aab42bd2",
+      "local_refutations": 95,
+      "packet_sha256": "422bff8f70eabd354b9e1402c3a60b4d7cecdef89f98b66a4c39da46361d61e6",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "4b2b84f681845c7b8254da9a6f603514137782856522494fff78b3ce942ace7b",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "digits_3_8",
+      "source_receipt_chain_sha256": "646e696403c42da2102062c0fcf12d29d34dcfb859f8cc3c1c3511016553aa29",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "1756f7e4e5696ad30338da15297a4ecbabbc05b2e38a615922cb2f5c2401e120",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "cc46761f6d3f82a2f95444055a0ab8288e381db54a4d1e3b0670bb5dc9e7161c",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.901653,
+              "correct": 101,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.980601,
+              "correct": 113,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.947368,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d16d3fa18f8b5c4a63a81585a460d56ef36e8eeb5487c2d9359c4ba98568daa8",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.927969,
+              "correct": 105,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.953947,
+              "correct": 108,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.947368,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "7274698a288f51e0c2617fc01995ac5fb02f2f2de21fc83af2209ed7bdb2e197",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.92139,
+              "correct": 104,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.947368,
+              "correct": 107,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.947368,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "d0a63a1e0e82f4c071cedd34b959bc79fa000a0d6e83fda0bea031c2d4141ac4",
+      "local_refutations": 0,
+      "packet_sha256": "22e22795c6cbe04acb226ec336bc676ecf26481f1b5c1952e2350943d068a8f2",
+      "policy": "random",
+      "prequery_chain_sha256": "3ea9228572a00c91ee4f2268db068ef12d6ddf0e1acb56e44f2dc97b39df343c",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "7274698a288f51e0c2617fc01995ac5fb02f2f2de21fc83af2209ed7bdb2e197",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "70377dd3fd7ce035b148620a239810a087b869265556bd0721c90d376df0455f",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "29621805b8ae6e5240fd0825c727c8357d7c4e89a9db8b1f9f0ae5bacd242937",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.828947,
+              "correct": 89,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.960526,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.914474,
+              "correct": 102,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "972af4918b6b1cf0a6f329cb33e9a51084e3d73c2504a2c6f5f6a46c0e40617b",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.816127,
+              "correct": 88,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.953947,
+              "correct": 108,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.907895,
+              "correct": 101,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "57a55d909f054e69a63cc67d9c90f79f20dacd31b005bc32a80d1b7d7818631f",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.881916,
+              "correct": 98,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.980263,
+              "correct": 112,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.973684,
+              "correct": 111,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "287aa293a704d59fc56dab858b15ceaada03095aa82b12440d444926c7d7dff5",
+      "local_refutations": 0,
+      "packet_sha256": "a6edeec00a244b2ed703bf85fb9065efdcd0e3d7f8bd9eea7f74c4ce3aa4f718",
+      "policy": "geometry",
+      "prequery_chain_sha256": "c42348bfc7ec591d3ba9f80b81a71e4d34a488a0c2a28087691524698f8cc8f9",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "57a55d909f054e69a63cc67d9c90f79f20dacd31b005bc32a80d1b7d7818631f",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "d865d778b0491cba665589e6146cb0f9c4fc12d7fe047c8a7b45d4ff9cfd3e22",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "b4844f5694e4e103f4a5e8bbb0c0cd6dce7dc48e78010618fe458bd304d6646e",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.935223,
+              "correct": 108,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.929318,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.980601,
+              "correct": 113,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "3d057c48cf724124c1aa172956bcb4fadd195a09a6295223dd64ea99f59dc40a",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.935223,
+              "correct": 108,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.974022,
+              "correct": 112,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.980601,
+              "correct": 113,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d82ccdd87988673f4c5ba18f28740cd1c1db49c0861258d87e8d740c9fb41b87",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.954622,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.987179,
+              "correct": 114,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.980601,
+              "correct": 113,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "5c2d0573fa3b2f0afb33b120f780a54c6f496eaa639514bc187c4e41fa11557e",
+      "local_refutations": 23,
+      "packet_sha256": "335adc5e32eae8268d4d9d8d7dad45629fab0406639b1876e662d043f869e68c",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "9960400207417b336ad2d13a92916881d798f5e231d58c631a0d2e2ad9102e90",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "d82ccdd87988673f4c5ba18f28740cd1c1db49c0861258d87e8d740c9fb41b87",
+      "surviving_local_alternatives": 15
+    },
+    {
+      "acquired_row_ids_sha256": "a98f33bb34fe4669cb9305046c917a78a76182ac15db07945b6da16da585c465",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "61426594acd8b955a8797b2f096a03e1d4168612da127970a448af2db26918f4",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.934548,
+              "correct": 106,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.947368,
+              "correct": 107,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.940789,
+              "correct": 106,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "383403238146d5da523df1a28dba217aa5f1a4464c58eba67fa380d59de00f79",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.915486,
+              "correct": 105,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.973684,
+              "correct": 111,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.954622,
+              "correct": 110,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "c93a52a4ccf1485516f3be3225aa096a3db00da4f99ff22d3944ac170aa7fb26",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.96778,
+              "correct": 112,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.980601,
+              "correct": 113,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.95496,
+              "correct": 111,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "f54602b6dd883bbb9ab344685c0a1cb60d724203ef4e71eebaf4640f09f7c6fd",
+      "local_refutations": 55,
+      "packet_sha256": "43d1558dc34d1633eb0033bb1fa9ab5e8c24e42e66c5e0a6bcebe3bf3e47d475",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "c20500f5b5cb41ff8857effe5aa31855f9ff8263003835b4c7cc0eef4218d9e2",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "c93a52a4ccf1485516f3be3225aa096a3db00da4f99ff22d3944ac170aa7fb26",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "5d69b29892834486ab22d502947010f7ad9c9e454ede9a917df26110e067bbd1",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "dec802c56f392de0559f6c7187d01b9604a192ec38f7bcbce939e86d83c2a99b",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.882928,
+              "correct": 101,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.942139,
+              "correct": 110,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.961201,
+              "correct": 111,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "4831cfce37462bbd898bc9e3fbeddced1cf34aee83154fc1af7ed21275a44a45",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.928644,
+              "correct": 107,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.934211,
+              "correct": 105,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.980263,
+              "correct": 112,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "1620e2d58b2f8c2a3670c88c5df9a5aa9811fa23450ad8a261ad934da3d68148",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.941802,
+              "correct": 109,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.980263,
+              "correct": 112,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.993421,
+              "correct": 114,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "2a788373cb83fa9c1d09f6e381d7f51c38a11a0e41c10af78142290c853c7a2b",
+      "local_refutations": 108,
+      "packet_sha256": "7c4df973920103619d326d985fbb8282a4a0af29e8ed6b2379d6e8121ea907e0",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "468e4dee26a18e026dd2d670d4f47fa5e388f1a11911f21767fc58080b3e49bd",
+      "query_budget": 50,
+      "seed": 211,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "1620e2d58b2f8c2a3670c88c5df9a5aa9811fa23450ad8a261ad934da3d68148",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "737bab3d7345e5ad51fc5211c323423c120a10a8d46bc94a9bcaf59f8e5690b0",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "d2ca39e1bdab22b9150954119b21151051153a49224a6871e1434701b8617895",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.906648,
+              "correct": 104,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.853977,
+              "correct": 99,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.910595,
+              "correct": 105,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "1a89a03e47b7888262368066643e33867d3df426dfb00f7c0f0b67137a4f4fb4",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.88813,
+              "correct": 102,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.930176,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d64d04bdcdd9bb9628d9a3d4504ecc487ad567ac33c8491fa12a61cd71992ed8",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.889192,
+              "correct": 102,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.929114,
+              "correct": 107,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.956891,
+              "correct": 110,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "2c61a3d672b6dcc63bc9c12e94075da2f6a86f30d9259d1f7d86386691d3a860",
+      "local_refutations": 0,
+      "packet_sha256": "e5acf5ecf56a4c90e0cdf169f3ac71a9c808ec8bc3ae2f5d19225029aa588383",
+      "policy": "random",
+      "prequery_chain_sha256": "3e505f8a298ff25422bf28aa543ef03590be8deaf5f460c4a976b48718fa852c",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "d64d04bdcdd9bb9628d9a3d4504ecc487ad567ac33c8491fa12a61cd71992ed8",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "63505a57ab5854323eb8354b0c379ed4bc35e42e59eb2c70d8de3a7dbc061951",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "5114d0f65a502193d0e2083f50fcafdbec6578fce828860dd8d335956e5a5824",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.899514,
+              "correct": 103,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.900273,
+              "correct": 104,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.910595,
+              "correct": 105,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "c344db40e35cb5a420f044d47774af4762abd0addf260acd1571b8e7e1613450",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.921979,
+              "correct": 106,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.891014,
+              "correct": 103,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.909532,
+              "correct": 105,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "4e6f04c99c6aeb600642d12f32593e48b1554fdeac17a8a3a5dfbeee42bf023e",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.891318,
+              "correct": 102,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "2a3137a0aa74bf67c8038bb62f6623673c62d1c31ebe37f582b2dd3b4ec425c0",
+      "local_refutations": 0,
+      "packet_sha256": "5805a791f91f183c6f9ab461c6668e884dcf862f0129e1a15ca3c0375d3c240d",
+      "policy": "geometry",
+      "prequery_chain_sha256": "80c36613fcb5c6c784abb79e5a95f517c5fca4f4c57044a8ba908f8738625027",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "4e6f04c99c6aeb600642d12f32593e48b1554fdeac17a8a3a5dfbeee42bf023e",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "8079d55d5798020f51810444685e75fdc5e97d3a4cd907013d92b28cc9360db3",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "4e07484244b6359fe51b4bf7ef16aabb3c69a4a1d60b406ebcf6fb7b2b195973",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.929114,
+              "correct": 107,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.884183,
+              "correct": 101,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.939435,
+              "correct": 108,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "8c127b2d7b7b3c12bb2cf393a240626115c2184ee04841caec94d458c551314c",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.953704,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.947632,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.965088,
+              "correct": 111,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d868f890d60a8daea0e26677a0ba0c1f6f791f07807e2ce451ad709374edb1fe",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.954766,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.956891,
+              "correct": 110,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.948695,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "d78636e57302da89d9034efbaf1fe463f0af3375e9789664259427f8cb20d896",
+      "local_refutations": 16,
+      "packet_sha256": "5640e91568ae234c87f82de0bdc1d023c43743c5f84a0fbece47d39884418066",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "1806c9f3ac5c4486071bfa01c66eaffdffe20511ea2e9b4005cb5fa567b8db81",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "d868f890d60a8daea0e26677a0ba0c1f6f791f07807e2ce451ad709374edb1fe",
+      "surviving_local_alternatives": 22
+    },
+    {
+      "acquired_row_ids_sha256": "b197d178bc29aefbb48ead646686d7a384bb376ffc9d04efefa573074f2cb123",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "e3df2129c909937194da3693d1cacc2117a2d99d6fbfb505cd39139d8dd6ddcf",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.930176,
+              "correct": 107,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.880692,
+              "correct": 102,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.918792,
+              "correct": 106,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "61c4bcc0b0b901f9e689fc04c084c6645325b368f07d540263813c95737d48a4",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.954766,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.965088,
+              "correct": 111,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "d7c3cf77fba74276986e28b8ce6f524958b79c922133e6be74445602d6a58eb0",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.956891,
+              "correct": 110,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "b774ba199bdd7699d59449310fc48848573b5fa5d31d2498e493b8fb45ecd5f1",
+      "local_refutations": 51,
+      "packet_sha256": "2b76182bb857250229a4c79eb1281013ea15a5cb8992736ad5b2ccd11b91b911",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "4ab93304e27f6d06d694647878ab40f2e06184b8ff31e73803b05206cc762f09",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "d7c3cf77fba74276986e28b8ce6f524958b79c922133e6be74445602d6a58eb0",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "52420d2b0bea3db703c5d8e7718de14a2ca4017ab6038d18c487422ad4278a1c",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "755d6c2ed7772331d650b09b4f726ef0df53fb8451a9c9fb5ff56c6036fbfccf",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.939435,
+              "correct": 108,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.853977,
+              "correct": 99,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.930176,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "6aecd4c183e15f027f4cd495d0aaf2e7963a35ecc8231c593f718ebfae4f4317",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.953704,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.882817,
+              "correct": 102,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.930176,
+              "correct": 107,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "dbc5642e43717a3da188922f3be4bd80bdba643232d4acca1283b97eb0d65401",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.962963,
+              "correct": 111,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.955829,
+              "correct": 110,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.94657,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "00c2782e50409d9d42a65290f69a3778a7db3ee8733ce4c0cab31593569217c3",
+      "local_refutations": 104,
+      "packet_sha256": "330eac08406bff4467d36da88c3f7403469fa0bba5076d9816605ba30ea09570",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "bacf94a9d7e4db1f5f2e75cd1037d2bef17ce7e55130274511f4f3c72409b017",
+      "query_budget": 50,
+      "seed": 223,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "dbc5642e43717a3da188922f3be4bd80bdba643232d4acca1283b97eb0d65401",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "432bdbf0a5a676a3d6aa4f96162d2a4e3c269fbf53e89eee02f6e65bac49f973",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "3c5fb118a6c58d4fdbdbc903f55c920ef2a81ab76d77576c990b2b1d75b74fd7",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.904615,
+              "correct": 105,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.9,
+              "correct": 105,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.91,
+              "correct": 106,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "bf62d64aa217660e343a0e091c42361969def0d0d4fb1e6e5ae1542ce12ea5a2",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.86,
+              "correct": 101,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.94,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.91,
+              "correct": 106,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "36f58ef9de342483bb56cc23ed4f49cabdf090a82edfadf89ac13276673ba5db",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.91,
+              "correct": 106,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.94,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.94,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "50c8a5aec879df914939097c969ef576f6a459ad6126084c606daa353dd80b8c",
+      "local_refutations": 0,
+      "packet_sha256": "4d7ca2ab7b4afee643b6c3af6017d66af8ef6281d767d707a377c9b22da5332e",
+      "policy": "random",
+      "prequery_chain_sha256": "c8120b5a953a46c27eb4a40ceebb4612bb397c83a66cf80560ce048359279da7",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "36f58ef9de342483bb56cc23ed4f49cabdf090a82edfadf89ac13276673ba5db",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "b4ece52f170cc0206d2d6d51f8637d0628d58dbbcc9a36324730d9d82a667994",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "0b024704893a63ea88354eb4113077c33cf3f5ecfd02c1cc1ffab8f7b524d528",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.928462,
+              "correct": 106,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.904615,
+              "correct": 105,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.903846,
+              "correct": 104,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "c3e47e4f55021e5dbfce7b902d69059a8640e919579db0723c20f3517f42b236",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.954615,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.94,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.96,
+              "correct": 111,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "51951b8e6a6b9f134644c01811b145a61aaab83edba903c71b8782e2b8157975",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.949231,
+              "correct": 109,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.962308,
+              "correct": 111,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.972308,
+              "correct": 112,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 9,
+      "lineage_sha256": "65eac309d05d1e045126557c4ecca6e507e53cf5da03aeb53e3e72cd9f735abb",
+      "local_refutations": 0,
+      "packet_sha256": "817d15eebf53513d1606e620fd5162ca5c00b2648cc5d1e4c92678f70ead9a61",
+      "policy": "geometry",
+      "prequery_chain_sha256": "0f8434af367c74075e75d63f31644d7ecca199e0e590190c64356985087602d5",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "51951b8e6a6b9f134644c01811b145a61aaab83edba903c71b8782e2b8157975",
+      "surviving_local_alternatives": 0
+    },
+    {
+      "acquired_row_ids_sha256": "a36548657556e0f5eb096825069e380d4e535bb21c9b6d778fe05df3c470f823",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "269973f1ed8af746ed66901be66832244c662f64e371921576644c00ecf57fc7",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.97,
+              "correct": 112,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.882308,
+              "correct": 103,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.91,
+              "correct": 106,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "da2d970279864fc9925b3fd88ca70c257e2c636f69aeddc7c666ca8a53f5328d",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.962308,
+              "correct": 111,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.96,
+              "correct": 111,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.942308,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "ec120ffd068b3c7a57ef99468ee94c02aa7459e7f7a01eeab0f945ab66451c59",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.924615,
+              "correct": 107,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.98,
+              "correct": 113,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.95,
+              "correct": 110,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "45eb72ba4e1b08bccd0ce08ce1e5502d774475cc58d9958983560b6dd64f81f6",
+      "local_refutations": 19,
+      "packet_sha256": "7cdd80600b07b2c1ca98467912ebc65a2c0f7abddff812657adf04f08edb87e1",
+      "policy": "raw_margin",
+      "prequery_chain_sha256": "94562640903654d9528630e4a95f6d536ae63c1dc3e457b48ab0f84f55d72133",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "ec120ffd068b3c7a57ef99468ee94c02aa7459e7f7a01eeab0f945ab66451c59",
+      "surviving_local_alternatives": 19
+    },
+    {
+      "acquired_row_ids_sha256": "1bea90d417d9abe1bd8216c881f810aaca11c5d0a8c78be930deca4dd444ad74",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "e6b9ef0f08c64c047cf77d5b6e4b8ee890a2b1b868a368d622b1353b647c42f8",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.909231,
+              "correct": 105,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.949231,
+              "correct": 109,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.974615,
+              "correct": 112,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "2a917a3e32919e3aa97e0fc94a4dac2a9f6eb97f63d5ca66b0a7be914f68b30a",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.972308,
+              "correct": 112,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.95,
+              "correct": 110,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.97,
+              "correct": 112,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "fb7a0dbb4f87530d76877b8f5eb159ab746db01ae5ac1bf302bb6df3b61b9855",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.964615,
+              "correct": 111,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.99,
+              "correct": 114,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.99,
+              "correct": 114,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 48,
+      "lineage_sha256": "387d24790447fb07de645a7506db692035ed4d50439cfceb0b70e1d47595e607",
+      "local_refutations": 51,
+      "packet_sha256": "2a57943026e860e2ae3cda2f3dc52a60f4ba9e2be0797f599e1aa08824172c92",
+      "policy": "raw_committee",
+      "prequery_chain_sha256": "ae74c0911609a365afcd68b9a38a43b1656731b8f1b7bcca8f983a7872d98f9e",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "fb7a0dbb4f87530d76877b8f5eb159ab746db01ae5ac1bf302bb6df3b61b9855",
+      "surviving_local_alternatives": 38
+    },
+    {
+      "acquired_row_ids_sha256": "770dc926f24e4330c62dd6f7c21e5c92dbc7e181ff6b5c9b2db7c1653e3b097f",
+      "archive_revision": "25e2eb7b7a8745b1bde5ba18bc4969983d2e2f403291ecd5bde4a29ef30c3859",
+      "bootstrap_oneclass_overflow": 0,
+      "checkpoints": [
+        {
+          "evidence_sha256": "07a238c5367f1f9963a4c48853425ea9bac55cf6b74c260763bf88b0622b49ce",
+          "labels": 20,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.939231,
+              "correct": 108,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.966923,
+              "correct": 111,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.97,
+              "correct": 112,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "c6ed069724ad22c57c28039bc235cb6619930c56a67f696ee1329826bc476e50",
+          "labels": 35,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.952308,
+              "correct": 110,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.941538,
+              "correct": 108,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.99,
+              "correct": 114,
+              "n": 115
+            }
+          }
+        },
+        {
+          "evidence_sha256": "80a53fbc03763fb182a6856c141b363b8e4192a7aa2f9388cd3519c0fb5a1eef",
+          "labels": 50,
+          "models": {
+            "raw_forest": {
+              "balanced_accuracy": 0.98,
+              "correct": 113,
+              "n": 115
+            },
+            "raw_rbf": {
+              "balanced_accuracy": 0.982308,
+              "correct": 113,
+              "n": 115
+            },
+            "signed_relation_rbf": {
+              "balanced_accuracy": 0.944615,
+              "correct": 109,
+              "n": 115
+            }
+          }
+        }
+      ],
+      "committee_model_fits": 87,
+      "lineage_sha256": "63f397e536bf7531396bf56949f8bba33c3c543a6408553d1c81b7b0bff79389",
+      "local_refutations": 116,
+      "packet_sha256": "2b0939c01952cf7a05927a34e2ac636610535831cc8b3561cbdb7b75e0bd3e54",
+      "policy": "counterexample_relational",
+      "prequery_chain_sha256": "faae010575da56dc9637b4d08aacece3fd067d47d0810743767b7c1454f728ba",
+      "query_budget": 50,
+      "seed": 227,
+      "source": "breast_cancer",
+      "source_receipt_chain_sha256": "80a53fbc03763fb182a6856c141b363b8e4192a7aa2f9388cd3519c0fb5a1eef",
+      "surviving_local_alternatives": 38
+    }
+  ],
+  "preregistered_protocol_commit": "dff01503ddd57492e49f29f7d1277fc10c2ad383",
+  "primary_verdict": {
+    "mean_domain_gap": -0.00383,
+    "per_domain": {
+      "breast_cancer": {
+        "balanced_accuracy_gap": -0.003031,
+        "best_classical": 0.975831,
+        "best_classical_policy": "raw_committee",
+        "motif": 0.9728
+      },
+      "digits_3_8": {
+        "balanced_accuracy_gap": -0.00463,
+        "best_classical": 0.989899,
+        "best_classical_policy": "raw_margin",
+        "motif": 0.985269
+      }
+    },
+    "predeclared_primary_success": false,
+    "warning": "Repeated historical holdouts, not blinded independent patient/handwriting units"
+  },
+  "readme": "Every case can be reproduced offline from original source in repo; time excluded from content digests. Historical sources, not source-owner blind test.",
+  "schema": "motif.field007.compact.v1",
+  "scoring_bug_note": "Initial local evaluation incorrectly omitted pool-fitted StandardScaler on heldout feature vectors (all SVC balanced accuracies 0.5). Fixed evaluation transform, reran all 30 cases without changing predeclared policies. Prior invalid run discarded but documented in README.",
+  "sha256": "7b11471e24bf68608c59e593c169e29276bae8832656e5bff4bbfc7731855627",
+  "summary": {
+    "breast_cancer": {
+      "counterexample_relational": {
+        "cases": 3,
+        "fits": 261,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.920531,
+          "correct_total": 317,
+          "predictions_total": 345
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.944885,
+          "correct_total": 327,
+          "predictions_total": 345
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.961588,
+          "correct_total": 333,
+          "predictions_total": 345
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.921013,
+          "correct_total": 320,
+          "predictions_total": 345
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.919522,
+          "correct_total": 315,
+          "predictions_total": 345
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.9728,
+          "correct_total": 335,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.953792,
+          "correct_total": 330,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.966813,
+          "correct_total": 333,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.961535,
+          "correct_total": 332,
+          "predictions_total": 345
+        }
+      },
+      "geometry": {
+        "cases": 3,
+        "fits": 27,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.885641,
+          "correct_total": 298,
+          "predictions_total": 345
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.897574,
+          "correct_total": 304,
+          "predictions_total": 345
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.907488,
+          "correct_total": 309,
+          "predictions_total": 345
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.921805,
+          "correct_total": 318,
+          "predictions_total": 345
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.92832,
+          "correct_total": 320,
+          "predictions_total": 345
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.963047,
+          "correct_total": 332,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.909638,
+          "correct_total": 311,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.925809,
+          "correct_total": 317,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.964187,
+          "correct_total": 332,
+          "predictions_total": 345
+        }
+      },
+      "random": {
+        "cases": 3,
+        "fits": 27,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.904305,
+          "correct_total": 310,
+          "predictions_total": 345
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.892033,
+          "correct_total": 308,
+          "predictions_total": 345
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.906861,
+          "correct_total": 312,
+          "predictions_total": 345
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.911526,
+          "correct_total": 317,
+          "predictions_total": 345
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.946839,
+          "correct_total": 326,
+          "predictions_total": 345
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.938827,
+          "correct_total": 323,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.922654,
+          "correct_total": 318,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.929181,
+          "correct_total": 320,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.948086,
+          "correct_total": 326,
+          "predictions_total": 345
+        }
+      },
+      "raw_committee": {
+        "cases": 3,
+        "fits": 144,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.924652,
+          "correct_total": 318,
+          "predictions_total": 345
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.94752,
+          "correct_total": 327,
+          "predictions_total": 345
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.959655,
+          "correct_total": 332,
+          "predictions_total": 345
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.925764,
+          "correct_total": 318,
+          "predictions_total": 345
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.962924,
+          "correct_total": 332,
+          "predictions_total": 345
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.975831,
+          "correct_total": 337,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.944732,
+          "correct_total": 324,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.957064,
+          "correct_total": 331,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.963843,
+          "correct_total": 334,
+          "predictions_total": 345
+        }
+      },
+      "raw_margin": {
+        "cases": 3,
+        "fits": 144,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.944779,
+          "correct_total": 327,
+          "predictions_total": 345
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.950412,
+          "correct_total": 329,
+          "predictions_total": 345
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.944668,
+          "correct_total": 327,
+          "predictions_total": 345
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.898603,
+          "correct_total": 313,
+          "predictions_total": 345
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.960551,
+          "correct_total": 332,
+          "predictions_total": 345
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.97469,
+          "correct_total": 337,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.943345,
+          "correct_total": 327,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.962666,
+          "correct_total": 333,
+          "predictions_total": 345
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.959765,
+          "correct_total": 332,
+          "predictions_total": 345
+        }
+      }
+    },
+    "digits_3_8": {
+      "counterexample_relational": {
+        "cases": 3,
+        "fits": 261,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.962121,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.962602,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.991758,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.946905,
+          "correct_total": 205,
+          "predictions_total": 216
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.98064,
+          "correct_total": 212,
+          "predictions_total": 216
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.985269,
+          "correct_total": 213,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.970895,
+          "correct_total": 210,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.976722,
+          "correct_total": 211,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        }
+      },
+      "geometry": {
+        "cases": 3,
+        "fits": 27,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.964682,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.964021,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.974447,
+          "correct_total": 210,
+          "predictions_total": 216
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.96848,
+          "correct_total": 209,
+          "predictions_total": 216
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.981301,
+          "correct_total": 212,
+          "predictions_total": 216
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.98088,
+          "correct_total": 212,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.95102,
+          "correct_total": 205,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.957824,
+          "correct_total": 207,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.981657,
+          "correct_total": 212,
+          "predictions_total": 216
+        }
+      },
+      "random": {
+        "cases": 3,
+        "fits": 27,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.962047,
+          "correct_total": 207,
+          "predictions_total": 216
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.955169,
+          "correct_total": 206,
+          "predictions_total": 216
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.970645,
+          "correct_total": 209,
+          "predictions_total": 216
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.946706,
+          "correct_total": 204,
+          "predictions_total": 216
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.972449,
+          "correct_total": 210,
+          "predictions_total": 216
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.977078,
+          "correct_total": 211,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.927165,
+          "correct_total": 200,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.962769,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.971828,
+          "correct_total": 210,
+          "predictions_total": 216
+        }
+      },
+      "raw_committee": {
+        "cases": 3,
+        "fits": 144,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.958665,
+          "correct_total": 207,
+          "predictions_total": 216
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.982804,
+          "correct_total": 212,
+          "predictions_total": 216
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 1.0,
+          "correct_total": 216,
+          "predictions_total": 216
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.964868,
+          "correct_total": 208,
+          "predictions_total": 216
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.968429,
+          "correct_total": 209,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.984343,
+          "correct_total": 213,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        }
+      },
+      "raw_margin": {
+        "cases": 3,
+        "fits": 144,
+        "raw_forest_q20": {
+          "balanced_accuracy_mean": 0.955053,
+          "correct_total": 206,
+          "predictions_total": 216
+        },
+        "raw_forest_q35": {
+          "balanced_accuracy_mean": 0.991758,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "raw_forest_q50": {
+          "balanced_accuracy_mean": 0.991402,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "raw_rbf_q20": {
+          "balanced_accuracy_mean": 0.922319,
+          "correct_total": 200,
+          "predictions_total": 216
+        },
+        "raw_rbf_q35": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "raw_rbf_q50": {
+          "balanced_accuracy_mean": 0.989899,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q20": {
+          "balanced_accuracy_mean": 0.922586,
+          "correct_total": 200,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q35": {
+          "balanced_accuracy_mean": 0.990676,
+          "correct_total": 214,
+          "predictions_total": 216
+        },
+        "signed_relation_rbf_q50": {
+          "balanced_accuracy_mean": 0.994949,
+          "correct_total": 215,
+          "predictions_total": 216
+        }
+      }
+    }
+  }
+}
