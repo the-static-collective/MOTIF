@@ -1,0 +1,33 @@
+name: MOTIF IMMUNE-001 epistemic virology
+
+on:
+  push:
+    paths:
+      - "experiments/immune001/**"
+      - ".github/workflows/immune-001.yml"
+  pull_request:
+    paths:
+      - "experiments/immune001/**"
+      - ".github/workflows/immune-001.yml"
+
+jobs:
+  epistemic-virology:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run adversarial and anti-autoimmunity tests
+        working-directory: experiments/immune001
+        run: python -m unittest -v test_immune.py
+      - name: Reproduce finite challenge and classical controls
+        working-directory: experiments/immune001
+        run: |
+          python benchmark.py > /tmp/immune-001-results.json
+          cat /tmp/immune-001-results.json
+      - name: Archive inspectable benchmark
+        uses: actions/upload-artifact@v4
+        with:
+          name: immune-001-benchmark
+          path: /tmp/immune-001-results.json
