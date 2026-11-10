@@ -215,7 +215,11 @@ class NestedMonitor:
             findings_known=all(x.witnessed_new_facts is not None for x in sample)
             status=('CONFIRMED_NO_NEW_SCENE_FACTS_META_CYCLE'
                     if findings_known else 'SUSPECTED_META_CYCLE_VIEW_UNKNOWN')
-            sig=seal((p,motif,status))
+            # A-B and B-A are phases of the same repeating meta-orbit.
+            # A sliding detector must not spam new alerts on alternate
+            # boundaries as the trace advances one primitive at a time.
+            phase_canonical=min(motif[i:]+motif[:i] for i in range(p))
+            sig=seal((p,phase_canonical,status))
             if sig in self.emitted:
                 continue
             found.append((p,repeated,status,sig,sample))
