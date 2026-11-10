@@ -28,10 +28,10 @@ Earlier work distinguished Watchers in 1 Enoch, authorized ascent/teaching in 2 
 - Luke 10: https://www.biblegateway.com/passage/?search=Luke%2010%3A25-37&version=NKJV
 - Oppenheimer historical lab role: https://home.nps.gov/people/manhattan-project-scientists-j-robert-oppenheimer.htm
 - Nolan on structural screenwriting: https://johnaugust.com/2024/scriptnotes-episode-622-the-one-with-christopher-nolan-transcript
-- Povenmire and Marsh interview: https://www.disneyplus.com/explore/articles/phineas-and-ferb-season-5-creator-interview-and-characters-guide
+- Povenmire and Marsh interview: https://d23.com/icons-of-disney-storytelling-dan-povenmire/
 - Acaster's own Repertoire map: https://www.jamesacaster.com/repertoire/
 - Simmons and inclusion: https://www.klcc.org/npr-obituaries/2024-07-14/beloved-fitness-personality-richard-simmons-has-died
-- Jackson's reported composition process: https://www.mjworld.net/news/2014/04/06/the-incredible-way-michael-wrote-music/
+- Jackson's reported composition process: https://mjultimatearchive.github.io/MJUA/1990s/1994/February/February_14%2C_1994_-__Dangerous__Deposition.html
 - Cornell's documented rhythmic craft: https://www.musicradar.com/news/classic-interview-soundgardens-chris-cornell-and-kim-thayil-talk-guitar
 - Tesla primary patent: https://patents.google.com/patent/US455067A/en
 - Bacon scholarly background: https://plato.stanford.edu/entries/francis-bacon/
