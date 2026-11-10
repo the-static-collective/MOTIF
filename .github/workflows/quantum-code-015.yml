@@ -1,0 +1,59 @@
+name: MOTIF QC-015 oscillation frontier -- real game cycle recovery
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode015/**'
+      - '.github/workflows/quantum-code-015.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode015/**'
+      - '.github/workflows/quantum-code-015.yml'
+permissions:
+  contents: read
+jobs:
+  cycles-and-real-game:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test pure cycle detection and archived human-inspired game examples
+        working-directory: experiments/quantumcode015
+        run: python -m unittest -v test_cycle_field.py test_archived_cycles.py
+      - name: Install independently authored survival game Crafter 1.8.3
+        run: python -m pip install 'crafter==1.8.3' pillow
+      - name: Execute 8 controlled and 12 ordinary real game episodes
+        env:
+          QC015_OUTPUT_DIR: runs/crafter-qc015
+        run: python experiments/quantumcode015/game_cycles.py
+      - name: Validate every actual engine trace with original QC-011 parser
+        run: |
+          python - <<'PY'
+          import json,pathlib,sys
+          sys.path.insert(0,"experiments/quantumcode011")
+          from ingest import read_bundle
+          root=pathlib.Path("runs/crafter-qc015")
+          data=json.loads((root/"comparison.json").read_text())
+          assert len(data["controlled_paired"])==4
+          assert len(data["natural_paired"])==6
+          files=sorted(root.glob("*/annotated_gameplay.json"))
+          assert len(files)==20,len(files)
+          steps=0
+          for file in files:
+              replay=read_bundle(file)
+              assert len(replay.episodes)>0
+              assert all(e.source=="GAME_TELEMETRY" for e in replay.episodes)
+              steps+=len(replay.episodes)
+          assert steps==data["game_action_count"],(steps,data["game_action_count"])
+          print("QC015_VERIFIED_ACTUAL_GAME_STEPS="+str(steps))
+          PY
+      - name: Archive complete action traces and corrected observed-world results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qc015-real-game-oscillation-evidence
+          path: runs/crafter-qc015/
+          if-no-files-found: warn
+          retention-days: 30
