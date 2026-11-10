@@ -1,0 +1,38 @@
+name: INVENTION-DIAGNOSIS-001 bounded self-repair triage
+
+on:
+  push:
+    branches:
+      - 'experiment/invention-diagnosis-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/inventiondiagnosis001/**'
+      - 'experiments/controlflow001/**'
+      - 'experiments/operatorinvention001/**'
+      - '.github/workflows/inventiondiagnosis001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnosis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Real prior experiment regression contracts
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/operatorinvention001 && python -m unittest -q test_operatorinvention.py)
+          (cd experiments/controlflow001 && python -m unittest -q test_controlflow.py)
+      - name: Diagnose before proposing an invention
+        working-directory: experiments/inventiondiagnosis001
+        run: |
+          python -m unittest -v test_diagnosis.py
+          python diagnosis.py
+          python benchmark.py
