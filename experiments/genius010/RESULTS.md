@@ -60,7 +60,7 @@ When exactly one candidate has a valid **synthetic conditional** three-thread in
 
 `parcel observation` ← `same later interpretation`
 
-All three pre-existing statements remain unchanged; the later interpretation is marked `INTERPRETATION_NOT_TESTIMONY`. If two candidate explanations pass, if a third thread disagrees, or if the source roots are repeated, the software refuses to manufacture narrative convergence.
+All three pre-existing statements remain unchanged; the later interpretation is marked `INTERPRETATION_NOT_TESTIMONY`. A subsequent implementation refinement attached SHA-256 fingerprints to the actual public source receipt IDs for each earlier strand and to the intervention IDs supporting the later bridge. These fingerprints do **not** authenticate the generator or a real source. If two candidate explanations pass, if a third thread disagrees, or if the source roots are repeated, the software refuses to manufacture narrative convergence.
 
 This supports a limited **anti-forced-coincidence interface**. It does **not** measure comedy quality, demonstrate a real causal unifier, or prove that Povenmire/Acaster-style craft transfers to science. It tests whether source protection and a classical significance gate can precede the creation of a narrative bridge.
 
