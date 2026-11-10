@@ -52,6 +52,12 @@ class TestTwoClocks(unittest.TestCase):
                          ["reading_id"], "later_enochic_association")
         self.assertEqual(reverse["snapshots"][-1]["new_reader_reinterpretations"][0]
                          ["reading_id"], "later_enochic_association")
+        self.assertEqual(
+            forward["snapshots"][-1]["new_reader_reinterpretations"][0]
+            ["reader_reception_mode"], "RETROSPECTIVE_CALLBACK")
+        self.assertEqual(
+            reverse["snapshots"][-1]["new_reader_reinterpretations"][0]
+            ["reader_reception_mode"], "ANTICIPATORY_CONTEXT")
         # A distinct mixed order activates a callback in the *middle*,
         # even though final source ledger never changes.
         mixed = compose_readings(corpus, ("Genesis5", "3Enoch", "1Enoch"))
@@ -156,6 +162,8 @@ class TestTwoClocks(unittest.TestCase):
             self.assertEqual(row["presentations_evaluated"], 6)
             self.assertTrue(row["source_record_invariant_under_reordering"])
             self.assertTrue(row["final_reader_reinterpretations_invariant"])
+            self.assertEqual(row["retrospective_callback_presentations"], 3)
+            self.assertEqual(row["anticipatory_context_presentations"], 3)
             self.assertEqual(row["weak_flatten_false_attributions"], 1)
             self.assertEqual(row["strong_classical_append_only_false_attributions"], 0)
             self.assertEqual(row["two_clock_false_attributions"], 0)
