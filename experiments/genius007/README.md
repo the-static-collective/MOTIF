@@ -56,7 +56,7 @@ The question string was **not on the source question menu**. A new task may rena
 
 All hypothetical answers are evaluated through finite partitions **without reading the actual world** until after the next question has been chosen.
 
-Candidate expressions are regenerated/filtered as evidence narrows the consistent worlds. Source and cost constraints are checked on every actual measurement.
+Candidate expressions are generated from the public goal grammar and then adaptively filtered as evidence narrows the consistent worlds. Source and cost constraints are checked on every actual measurement.
 
 ### Strong comparisons — never hide the full oracle
 
