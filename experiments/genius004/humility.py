@@ -364,7 +364,53 @@ def run() -> dict:
         round(x["worst_validation_cost"], 9),
         POLICIES.index(x["policy"]),
     ))["policy"]
+    # Posthoc safeguard introduced after inspecting the *first* heldout
+    # evidence: a novel controller must earn adoption against strong
+    # conventional alternatives on validation-only evidence. The gate
+    # is NOT an independent/blind improvement claim. The research arm
+    # stays visible even when unfit for promotion.
+    validation_comparisons = [
+        (regime, evaluate(train, future, selected, regime)["method"])
+        for _, regime, train, future in validation_worlds
+    ]
+    all_arms = ARMS + ("HUMILITY",)
+    val_macro = {
+        arm: round(sum(m[arm]["mean_costed_brier"]
+                       for _, m in validation_comparisons)
+                   / len(validation_comparisons), 6)
+        for arm in all_arms
+    }
+    val_per_regime = {
+        regime: {
+            arm: round(sum(m[arm]["mean_costed_brier"]
+                           for r, m in validation_comparisons if r == regime)
+                       / sum(r == regime for r, _ in validation_comparisons), 6)
+            for arm in all_arms
+        } for regime in regimes
+    }
+    classical_winner = min(ARMS, key=lambda arm: (val_macro[arm], ARMS.index(arm)))
+    minimum_macro_improvement = 0.005
+    permitted_worst_regime_regret = 0.005
+    method_supported = (
+        val_macro["HUMILITY"] + minimum_macro_improvement < val_macro[classical_winner]
+        and all(val_per_regime[regime]["HUMILITY"] <=
+                val_per_regime[regime][classical_winner] + permitted_worst_regime_regret
+                for regime in regimes)
+    )
+    promotion_gate = {
+        "status": "RESEARCH_ONLY_NO_PROMOTION" if not method_supported
+                  else "CANDIDATE_FOR_MORE_INDEPENDENT_REVIEW_NOT_DEPLOYMENT",
+        "selected_classical_fallback": classical_winner,
+        "candidate_beats_classical_on_validation": method_supported,
+        "validation_macro_mean_costed_brier": val_macro,
+        "validation_per_regime_mean_costed_brier": val_per_regime,
+        "minimum_required_macro_margin": minimum_macro_improvement,
+        "maximum_allowed_per_regime_regret": permitted_worst_regime_regret,
+        "authority": "NO_RUNTIME_PROMOTION_OR_EXTERNAL_ACTION",
+        "provenance_caveat": "POSTHOC_GATE_INTRODUCED_AFTER_FIRST_HELDOUT_INSPECTION",
+    }
     freeze = {
+        "promotion_gate": promotion_gate,
         "policy": selected.as_dict(),
         "validation_seeds": val_seeds,
         "future_seeds": future_seeds,
@@ -395,6 +441,7 @@ def run() -> dict:
         "experiment": "MOTIF-GENIUS-004",
         "authorship": "ALL_GENERATORS_AND_ACTION_GRAMMARS_ENGINEER_AUTHORED",
         "selected_policy": selected.as_dict(),
+        "promotion_gate": promotion_gate,
         "validation_world_count": len(validation_worlds),
         "validation_scores": [{
             "policy": x["policy"].as_dict(),
