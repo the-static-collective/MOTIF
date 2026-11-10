@@ -1,0 +1,99 @@
+name: CONFLUENCE-003 Unfamiliar Independent Worlds
+on:
+  push:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence002/**'
+      - 'experiments/confluence003/**'
+      - '.github/workflows/confluence-003.yml'
+  pull_request:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence002/**'
+      - 'experiments/confluence003/**'
+      - '.github/workflows/confluence-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  published-world-transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout MOTIF research branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout third-party authored benchmark at exact SHA
+        uses: actions/checkout@v4
+        with:
+          repository: ovunctuzel/GridWorldPathfinding
+          ref: ffa02393942e649d4da82d5647d3159e7a7dd572
+          path: sources/gridbenchmark
+          persist-credentials: false
+      - name: Checkout native FIELD-008 + FIELD-006 mechanisms at exact SHA
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 581ed7cbc289f65f42949dd332476eb672467a7c
+          path: sources/field008
+          persist-credentials: false
+      - name: Checkout native COLLECTIVE-001 + THOUGHT-025/028 mechanisms at exact SHA
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 269006b559dbc73766888bcd11f5f294b8e6aa64
+          path: sources/collective001
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify all three repository SHAs and external benchmark blobs
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, 'experiments/confluence003')
+          from source import verified_root
+          from cross import source_pins
+          assert verified_root() == 'ffa02393942e649d4da82d5647d3159e7a7dd572'
+          source_pins()
+          print('Pinned all three sources; raw external .map and .scen blobs match.')
+          PY
+      - name: Original coherent-field regression suite
+        run: python -m unittest discover -s experiments/confluence001 -p 'test_*.py' -v
+      - name: Original four-native-method regression suite
+        run: python -m unittest discover -s experiments/confluence002 -p 'test_*.py' -v
+      - name: New independent-source adversarial suite
+        run: python -m unittest discover -s experiments/confluence003 -p 'test_*.py' -v
+      - name: Frozen two-domain external benchmark + four native ablations
+        run: python experiments/confluence003/trial.py > confluence003-external-audit.json
+      - name: Hard independently published optimum and classical controls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('confluence003-external-audit.json').read_text())
+          assert x['cohort_size']==16
+          assert x['each_domain']=={'tiny':8,'dragonage':8}
+          assert x['independently_published_lengths_matched']==16
+          assert x['competitive_classical_astar_and_dijkstra_same_cost']==16
+          assert x['native_003_executed']==16
+          assert x['native_collective_exact_scoped_proof_reentered']==16
+          assert x['reentry_new_development_questions']==0
+          assert x['full_vs_classical_route_cost_delta']==0
+          assert all(v==0 for v in x['full_vs_each_native_ablation_route_cost_delta'].values())
+          assert x['source_git_revision']=='ffa02393942e649d4da82d5647d3159e7a7dd572'
+          assert x['external_actions']==0 and x['model_calls']==0
+          assert x['status']=='NATIVE_INTEROP_ON_THIRD_PARTY_MAPS_NO_ALGORITHMIC_PATHFINDING_GAIN'
+          print('External published map costs verified. No classical planning gain.')
+          print('Controlled shifts:',x['controlled_injected_changes'],
+                'replanned successes:',x['shifted_routes_reached'])
+          PY
+      - name: Publish source-pinned complete evidence digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: confluence003-external-world-audit
+          path: confluence003-external-audit.json
+          retention-days: 21
