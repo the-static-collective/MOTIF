@@ -31,6 +31,8 @@ from answer_weave import verify_answer
 SCHEMA = "motif.collective002.missing-link-proof.v1"
 OBS_SCHEMA = "motif.collective002.source-observation.v1"
 RELATION = "FINITE_CROSS_MATCH"
+QUESTION = ("Does at least one proven left member have an owner-confirmed "
+            "cross-match with a proven right member?")
 ITEMS = tuple(range(3))
 ALL_PAIRS = tuple((a, b) for a in ITEMS for b in ITEMS)
 ALL_KEYS = {f"{a}:{b}" for a, b in ALL_PAIRS}
@@ -256,8 +258,7 @@ def _finish(left_packet, right_packet, registry, contract, questions, receipts,
     status, witness = _decision(questions, receipts, contract)
     result = {
         "schema": SCHEMA, "task": "FIND_FINITE_CROSS_MATCH",
-        "question": "Does at least one proven left member have an owner-confirmed "
-                    "cross-match with a proven right member?",
+        "question": QUESTION,
         "left_proof_node": deepcopy(left_packet),
         "right_proof_node": deepcopy(right_packet),
         "relation_owner_contract": deepcopy(contract),
@@ -323,6 +324,7 @@ def verify_packet(packet, registry, owner):
     }):
         raise ProofError("Payload structure or checksum changed")
     if (packet["task"] != "FIND_FINITE_CROSS_MATCH"
+            or packet["question"] != QUESTION
             or packet["relation_owner_contract"] != owner.contract()
             or packet["unresolved"] != OPEN
             or packet["source_identity_authenticated"] is not False
