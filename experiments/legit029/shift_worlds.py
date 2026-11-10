@@ -32,6 +32,7 @@ WORLD_SIZE_GRAPH=8
 WORLD_SIZE_MATH=16
 DRAW_COUNT=3000
 
+@lru_cache(maxsize=8)
 def _graph_sample(seed):
     rng=Random(seed)
     buckets=defaultdict(list)
