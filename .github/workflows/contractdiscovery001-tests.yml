@@ -1,0 +1,36 @@
+name: CONTRACT-DISCOVERY-001 executable inferred relationships
+
+on:
+  push:
+    branches:
+      - 'experiment/contract-discovery-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/contractdiscovery001/**'
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+      - '.github/workflows/contractdiscovery001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: FIR-001 and NUNUMATHAL regression prerequisites
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+      - name: Execute discovery, independent contract tests, and hostile controls
+        working-directory: experiments/contractdiscovery001
+        run: |
+          python -m unittest -v test_contractdiscovery.py
+          python contractdiscovery.py
+          python benchmark.py
