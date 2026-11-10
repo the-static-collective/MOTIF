@@ -303,6 +303,74 @@ def verify_lte_induction_examples(jmax=7,tmax=5):
     return records
 
 
+def sparse_family_upper_bound(X):
+    """Proof that the EXPLICIT INFINITE family has natural density ZERO.
+
+    For each admissible odd core n_i with m odd >=3, i<=1+v3(m),
+    3**i <= 3*m, hence n_i+1 >= 2**m/(3*m).
+    For every integer m>=4, m<=2**(m/2) (elementary induction
+    from m=4,5, advancing by 2), so n_i+1 >= 2**(m/2)/3.
+    If n_i<=X, m <= 2*log2(3*(X+1)).
+    The small m=1,3 also satisfy the loose integer bound M below.
+
+    Let H=floor(log2(X)), M=2*bit_length(3*(X+1)),
+    J=1+floor(log3(M)). Every member <=X is either one of
+    H+1 powers of two or described by at most M choices of m,
+    J choices of the inverse-odd index i, and H+1 even lifts h.
+    So the cardinality is at most (H+1)*(1+M*J), i.e.,
+    O((log X)**2 * loglog X) = o(X). That's a symbolic
+    DENSITY-ZERO result, not merely observed sparsity in samples.
+
+    This explicit family cannot solve all-n Collatz by density or
+    infinitude alone. Classic constructions, not historically new.
+    """
+    if type(X) is not int or X < 2:
+        raise HOLD("Positive finite density-bound parameter required")
+    H=X.bit_length()-1
+    M=2*(3*(X+1)).bit_length()
+    J=1
+    threshold=M
+    while threshold>=3:
+        threshold//=3
+        J+=1
+    upper=(H+1)*(1+M*J)
+    return {
+        "X":X,
+        "H_floor_log2_X":H,
+        "M_upper_bound_on_power_of_two_core_exponent":M,
+        "J_upper_bound_on_odd_inverse_depth":J,
+        "symbolic_max_family_members_below_X":upper,
+        "rigorous_asymptotic":"O(log(X)**2*loglog(X)) = o(X)",
+        "natural_density_of_this_explicit_family":0,
+        "asserts_natural_density_of_full_Collatz_basin":False,
+        "proof_uses_3_adic_depth_and_elementary_exponential_growth":True,
+    }
+
+
+def enumerate_bounded_family(X):
+    """Independent complete INTEGER enumeration for a small finite X."""
+    if type(X) is not int or not 2<=X<=20000:
+        raise HOLD("Finite family coverage sweep out of budget")
+    observed=[]
+    for n in range(1,X+1):
+        if recognize(n)["status"].startswith("CERTIFIED_"):
+            observed.append(n)
+    upper=sparse_family_upper_bound(X)
+    if len(observed)>upper["symbolic_max_family_members_below_X"]:
+        raise HOLD("Bounded enumeration violated symbolic density bound")
+    if 7 in observed:
+        raise HOLD("Wrongly admitted convergent 7 to explicit restricted grammar")
+    return {
+        "X":X,
+        "members_of_explicit_inverse_family_below_X":len(observed),
+        "fraction_of_positive_starts_observed":f"{len(observed)}/{X}",
+        "mathematical_upper_bound":upper,
+        "all_members_from_separate_forward_recognizer":True,
+        "observed_nonmembers_not_declared_nonconvergent":True,
+        "examples":observed[:35],
+    }
+
+
 def inverse_tree_fair_baseline(max_depth=13):
     """Predeclared classical inverse-tree baseline, not claimed as novelty."""
     if type(max_depth) is not int or not 1<=max_depth<=15:
@@ -353,6 +421,7 @@ def investigate():
     if known7_rank<=0:
         raise HOLD("Seven reference orbit did not converge")
     classical=inverse_tree_fair_baseline()
+    density=[enumerate_bounded_family(X) for X in (64,512,4096,16384)]
     output={
         "schema":SCHEMA,
         "question":"Can MOTIF provide a non-circular, infinitely parametrized, "
@@ -423,6 +492,12 @@ def investigate():
             "nonmembership_does_not_imply_divergence":True,
         },
         "classical_inverse_tree_baseline":classical,
+        "new_finite_parameter_family_density_obstruction":density,
+        "full_density_zero_proof_scope":"ONLY_THIS_RESTRICTED_EXPLICIT_FAMILY",
+        "new_question_from_density_limitation":"Which independent, rigorously "
+            "described infinite inverse families could improve quantitative "
+            "coverage beyond a known density-zero subfamily, while retaining "
+            "exact natural-integer admission and proof-carrying rank?",
         "next_unresolved_mathematical_question":
             "Can this proof-carrying inverse-family grammar establish "
             "a transition-closed infinite family with a quantitatively "
