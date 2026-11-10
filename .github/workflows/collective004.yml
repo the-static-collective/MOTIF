@@ -31,12 +31,21 @@ jobs:
           ref: 28fbf9b10d003f7c577143550d17cc17f8109cb1
           path: external/nt-question-box
           persist-credentials: false
+      - name: Checkout original LEGIT-022 Atlas loader and source split
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 375df67205fbae5788a9feb3b79a339ef4e423b4
+          path: external/motif-legit022
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install pinned Atlas corpus distribution
+        run: python -m pip install networkx==3.4.2
       - name: Original question engine's own tests
         working-directory: external/nt-question-box
         run: node tools/question-box/test.mjs
@@ -47,6 +56,7 @@ jobs:
         env:
           NT_CASE_ROOT: external/nt-cases
           NT_BOX_ROOT: external/nt-question-box
+          ATLAS_ROOT: external/motif-legit022
         run: python -m unittest discover -s experiments/collective004 -p 'test_*.py' -v
       - name: Inherited proof carrying question regression checks
         env:
@@ -59,8 +69,13 @@ jobs:
             --case-root external/nt-cases \
             --box-root external/nt-question-box \
             > collective004-question-language-evidence.json
-      - name: Archive inspectable old/new question evidence
+      - name: Execute external independent-origin Atlas heldout research
+        run: |
+          python experiments/collective004/external_atlas.py             --atlas-root external/motif-legit022             > collective004-atlas-heldout-research.json
+      - name: Archive inspectable old/new question and Atlas evidence
         uses: actions/upload-artifact@v4
         with:
           name: COLLECTIVE004-QUESTION-GRAMMAR-RESEARCH-HOLD
-          path: collective004-question-language-evidence.json
+          path: |
+            collective004-question-language-evidence.json
+            collective004-atlas-heldout-research.json
