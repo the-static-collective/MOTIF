@@ -151,6 +151,71 @@ Adversarial tests cover:
 All failed candidate policies, withheld new worlds and exact
 per-question evidence remain archived for review.
 
+## Measured result — robust comparison helped; naive OOD refusal harmed
+
+The first **successful** pinned CI execution (run `42753183756`) passed
+all eleven tests and archived per-question exact evidence.
+
+The intended eight qualifying graph pairs could not be assembled from
+1,000 graphs in the initial attempt. As explicitly recorded above, the
+protocol was revised **before any future outcome evaluation** to draw
+3,000 graphs and use new graph future seeds 29005/29006. This design
+revision limits confirmatory interpretation.
+
+Training selected:
+- **Graphs:** mean-CV chose conditional witness probability; worst-
+  world gate *rejected* all novel policies and retained classical
+  residual greedy.
+- **Constraints:** both selected conditional information-value proxy.
+- **Polynomials:** both selected conditional witness probability.
+
+All complete programs produced valid independently checked
+counterexamples on every future task.
+
+| Strategy | Graph (32 cases) | Constraint (64 cases) | Polynomial (64 cases) | **All queries** |
+| --- | ---: | ---: | ---: | ---: |
+| Classical residual-greedy | 52 | 805 | 111 | **968** |
+| Original mean-CV router | 45 | **705** | 113 | **863** |
+| Worst-world empirical regret guard | 52 | **705** | 113 | **870** |
+| Metadata-shift gate on worst-world rule | 52 | 799 | 113 | **964** |
+| Mean-CV plus metadata-shift gate | 45 | 799 | 113 | **957** |
+| Raw observation diversity | **40** | 1068 | 189 | **1297** |
+| Joint Shannon entropy | 42 | 884 | 152 | 1078 |
+| Conditional information-value method | 49 | **705** | **111** | **865** |
+
+The **empirical worst-world guard** used 98 fewer questions than
+classical greedy overall (968→870, a **10.1% reduction**) on this
+small, engineer-generated suite, but it did **not** defeat the
+original mean-CV router (863). Both were inferior to classical on
+polynomial questions by 2 queries (113 vs 111).
+
+**The metadata-only OOD detector actually made things worse.**
+It refused the advanced policy on **34 of 64** constraint cases,
+often routing from the more useful conditional method back to
+classical greedy. On constraints its question cost rose from
+**705 to 799**, despite the existence of an empirically better
+research method in that regime. It also flagged one graph case
+where the robust selector had already chosen classical. It flagged
+**zero polynomial cases**, even though the selected method was
+two queries worse than classical there.
+
+The feature-distance threshold therefore did **not** reliably
+predict whether refusing the advanced method would help. Detecting
+input novelty is not the same as detecting **method failure risk**.
+This is a concrete falsification of the naive assumption that
+more conservative OOD refusal necessarily yields better research
+efficiency.
+
+We do not reinterpret the result as a formal bound on worst-world
+risk. The regulator is a fixed heuristic built for deliberately
+shifted synthetic tasks. All future-performance comparisons are
+posthoc measurements, not new training data.
+
+The program now records a precise next research question:
+**Can a detector calibrated against *method regret*, not merely
+input novelty, recognize harmful shifts with independently
+administered future research cases?**
+
 ## Interpretation
 
 A method does not become safe merely because an average CV metric
