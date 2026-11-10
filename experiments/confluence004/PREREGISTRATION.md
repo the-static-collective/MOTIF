@@ -33,8 +33,10 @@ remain inspectable lineage to outside source, but the corridor restriction
 and subsequent interventions are authored synthetic overlay rules.
 
 Every world begins with gate (3,4) closed. "No route" is rigorously true in
-the initially declared walk-only graph; it is not a truth about the original
-map or the expanded world.
+the initially declared straight-corridor, walk-only graph. DETOUR then adds
+a separately declared synthetic 2-to-4 bypass to the expanded walk graph,
+which ordinary walking-only pathfinding can discover. None of these claims
+apply to the full, original published map.
 
 ## Variants per projected corridor (6 × 4 = 24)
 
