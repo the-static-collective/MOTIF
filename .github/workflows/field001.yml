@@ -1,0 +1,32 @@
+name: FIELD-001 one-fact possibility field
+on:
+  push:
+    paths:
+      - 'experiments/field001/**'
+      - '.github/workflows/field001.yml'
+  pull_request:
+    paths:
+      - 'experiments/field001/**'
+      - '.github/workflows/field001.yml'
+  workflow_dispatch:
+jobs:
+  field001:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install networkx==3.6.1
+      - run: python -m unittest discover -s experiments/field001 -p 'test_field.py' -v
+      - run: |
+          python experiments/field001/field.py > /tmp/field001-check.json
+          python -c "import json; assert json.load(open('/tmp/field001-check.json')) == json.load(open('experiments/field001/experiment-results.json'))"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FIELD001-FROZEN-HYPOTHESES-AND-FALSIFIERS
+          path: |
+            experiments/field001/README.md
+            experiments/field001/experiment-results.json

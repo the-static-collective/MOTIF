@@ -1,0 +1,802 @@
+{
+  "cached_source_queries": 176,
+  "dataset_sha256": "adc9e7ae293fa51a4a1a253503bd298c508c97b3929565a7a5e0377c8cde5dc3",
+  "depth": 3,
+  "distinct_atlas_graph_types": 27,
+  "example_chain": [
+    {
+      "atlas_id": 26,
+      "edge": [
+        1,
+        2
+      ],
+      "edit": "REMOVE",
+      "from_state": 657,
+      "generation": 1,
+      "receipt_sha256": "da75c2a4a159241b76a7547ff92d6e614b5681b2d478ca1ed6c2b627abaea66c",
+      "to_state": 641
+    },
+    {
+      "atlas_id": 22,
+      "edge": [
+        2,
+        3
+      ],
+      "edit": "REMOVE",
+      "from_state": 641,
+      "generation": 2,
+      "receipt_sha256": "d242b819f5fcd195265bd66e0dabc192216b65876f157c17ed96a39e0a9909ec",
+      "to_state": 513
+    },
+    {
+      "atlas_id": 20,
+      "edge": [
+        3,
+        4
+      ],
+      "edit": "REMOVE",
+      "from_state": 513,
+      "generation": 3,
+      "receipt_sha256": "db72b59a453279336994c4bc3b41b32addc0cb57dc6085edd89421bbef1e6651",
+      "to_state": 1
+    }
+  ],
+  "experiment": "FIELD-001",
+  "facts_by_generation": {
+    "0": 1,
+    "1": 10,
+    "2": 45,
+    "3": 120
+  },
+  "facts_total_including_seed": 176,
+  "heldout_atlas_graphs": 156,
+  "heldout_relation_cases": 2340,
+  "hypothesis_grammar": {
+    "conditions": [
+      "all",
+      "parent_tree",
+      "parent_connected",
+      "parent_forest"
+    ],
+    "targets": [
+      "delta_components",
+      "delta_cycle_rank",
+      "post_tree",
+      "post_connected"
+    ]
+  },
+  "limitations": [
+    "all graph edits, hypothesis conditions and targets are human-authored",
+    "finite 5-vertex source; 6-vertex holdout from the same historical graph corpus",
+    "Atlas package is not a live independent human referee",
+    "finite agreement does not establish a universal theorem",
+    "query reductions reflect classical memoization, not novel learning",
+    "no autonomous invention, new mathematics, or proven compounding intelligence"
+  ],
+  "naive_source_queries": 561,
+  "networkx_version": "3.6.1",
+  "new_facts_observed": 175,
+  "proposed_ideas_distinct_including_seed": 176,
+  "query_reduction": 0.686275,
+  "relation_paths": 560,
+  "seed": {
+    "atlas_id": 31,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "mask": 657,
+    "receipt_sha256": "22a8a7817cfff11384d95715165cd4bfee558cabf83960812ba6fb599a54b462"
+  },
+  "source": "Read & Wilson, An Atlas of Graphs (1998); NetworkX graph_atlas_g",
+  "stage1": {
+    "finite_supported": 16,
+    "frozen_sha256": "ce597782a2c1de9fd4e4eb7521a31557ed427d3151dbe825e49f7a099b2daf55",
+    "hypotheses": [
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": -1,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 334,
+        "holdout_support": 1170,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "REFUTED",
+        "target": "delta_components",
+        "train_support": 6
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": 0,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 334,
+        "holdout_support": 1170,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "REFUTED",
+        "target": "delta_cycle_rank",
+        "train_support": 6
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            0,
+            4
+          ],
+          "observed": true,
+          "operation": "ADD",
+          "source_atlas_id": 64
+        },
+        "holdout_failures": 40,
+        "holdout_support": 1170,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_tree",
+        "train_support": 6
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": false,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 261,
+        "holdout_support": 1170,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "REFUTED",
+        "target": "post_connected",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": {
+          "context": "parent_forest",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": -1,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 135,
+        "holdout_support": 229,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "REFUTED",
+        "target": "delta_components",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": {
+          "context": "parent_forest",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": 0,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 135,
+        "holdout_support": 229,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "REFUTED",
+        "target": "delta_cycle_rank",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": {
+          "context": "parent_forest",
+          "edit_edge": [
+            0,
+            4
+          ],
+          "observed": true,
+          "operation": "ADD",
+          "source_atlas_id": 64
+        },
+        "holdout_failures": 40,
+        "holdout_support": 229,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_tree",
+        "train_support": 6
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": {
+          "context": "parent_forest",
+          "edit_edge": [
+            0,
+            1
+          ],
+          "observed": false,
+          "operation": "ADD",
+          "source_atlas_id": 53
+        },
+        "holdout_failures": 129,
+        "holdout_support": 229,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "REFUTED",
+        "target": "post_connected",
+        "train_support": 6
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            1,
+            2
+          ],
+          "observed": 0,
+          "operation": "REMOVE",
+          "source_atlas_id": 57
+        },
+        "holdout_failures": 1006,
+        "holdout_support": 1170,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "REFUTED",
+        "target": "delta_components",
+        "train_support": 4
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            1,
+            2
+          ],
+          "observed": -1,
+          "operation": "REMOVE",
+          "source_atlas_id": 57
+        },
+        "holdout_failures": 1006,
+        "holdout_support": 1170,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "REFUTED",
+        "target": "delta_cycle_rank",
+        "train_support": 4
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": true,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 48,
+        "holdout_support": 1170,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_tree",
+        "train_support": 4
+      },
+      {
+        "condition": "all",
+        "counterexample": {
+          "context": "all",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": true,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 847,
+        "holdout_support": 1170,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_connected",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": {
+          "context": "parent_connected",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": 0,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 847,
+        "holdout_support": 951,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "REFUTED",
+        "target": "delta_components",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": {
+          "context": "parent_connected",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": -1,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 847,
+        "holdout_support": 951,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "REFUTED",
+        "target": "delta_cycle_rank",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": {
+          "context": "parent_connected",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": true,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 48,
+        "holdout_support": 951,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_tree",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": {
+          "context": "parent_connected",
+          "edit_edge": [
+            3,
+            4
+          ],
+          "observed": true,
+          "operation": "REMOVE",
+          "source_atlas_id": 92
+        },
+        "holdout_failures": 847,
+        "holdout_support": 951,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "REFUTED",
+        "target": "post_connected",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 4
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 4
+      }
+    ],
+    "hypotheses_mined": 32,
+    "refuted": 16,
+    "train_relations": 10
+  },
+  "stage3": {
+    "finite_supported": 16,
+    "frozen_sha256": "ef7149811a61a9aed21f300c99478e41c9f27968d4a1ebcb0cb81b410a43a4e6",
+    "hypotheses": [
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 102
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 102
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 102
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 60,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 102
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 192
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 192
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 192
+      },
+      {
+        "condition": "parent_connected",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 729,
+        "operation": "ADD",
+        "predicted": true,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 192
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 68
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 68
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 68
+      },
+      {
+        "condition": "parent_tree",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 30,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 68
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": 1,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_components",
+        "train_support": 92
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": 0,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "delta_cycle_rank",
+        "train_support": 92
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_tree",
+        "train_support": 92
+      },
+      {
+        "condition": "parent_forest",
+        "counterexample": null,
+        "holdout_failures": 0,
+        "holdout_support": 71,
+        "operation": "REMOVE",
+        "predicted": false,
+        "status": "FINITE_HOLDOUT_SUPPORTED",
+        "target": "post_connected",
+        "train_support": 92
+      }
+    ],
+    "hypotheses_mined": 16,
+    "refuted": 0,
+    "train_relations": 560
+  },
+  "strong_classical_baseline": {
+    "equal_to_field": true,
+    "method": "Independent exhaustive Hamming-ball count, with identical labeled-state memoization",
+    "query_count_with_same_cache": 176,
+    "reachable_labeled_states": 176
+  }
+}
