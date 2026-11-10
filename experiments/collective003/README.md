@@ -53,6 +53,27 @@ has NO answer or conclusion field. Our wrapper preserves that distinction.
   HUMAN-DEFINED feature operations. A distinct adjacency-based enumerator
   cross-checks all four outputs. Not arbitrary question grammar invention.
 
+## A real method mismatch surfaced by the native run
+
+Four native case receipts initially choose chronology because it is the first
+unfilled generic aperture. But for *Same State, Different World*, chronological
+research is not the discriminator between two **mathematically defined**
+possible worlds; likewise, for *NuMatherology*, a historical date does not
+establish a cross-domain numerical mechanism.
+
+MOTIF now records an **explicit typed task-relevance objection** to the
+original selection and proposes the next formal question instead. It keeps
+the ORIGINAL Question Box receipt byte-for-byte unchanged, so corrections do
+not rewrite its source owner. This objection is **engineer-coded for two
+named cases**; it is not an independently learned semantic insight. For the
+graph case, the proposed measurement is then genuinely executed and
+independently enumerated. For NuMatherology the specific formal system
+remains undeclared, so the alternative is HOLD pending a falsifiable model.
+
+The recoverable case source locators now point to immutable actual GitHub
+research-note files. That recovers what National Treasure wrote, **not** an
+external historical witness proving the mystery.
+
 ## The bridge into MOTIF
 
 Each investigation produces a review-only typed question node:
