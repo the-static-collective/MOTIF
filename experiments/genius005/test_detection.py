@@ -45,6 +45,14 @@ class TestExactMonitoring(unittest.TestCase):
         # before the declared 40, so correctly labeled as early/false.
         self.assertTrue(observed["EXACT"]["false_alarm"])
 
+    def test_repeated_evidence_ref_does_not_amplify_statistical_support(self):
+        monitor = Detectors(tuple([True] * 40))
+        monitor.update(False, "same-receipt")
+        with self.assertRaises(ValueError):
+            monitor.update(False, "same-receipt")
+        self.assertEqual(len(monitor.history), 1)
+        self.assertNotIn("EXACT", monitor.alarms)
+
     def test_stable_stream_is_not_guaranteed_zero_alarms(self):
         # A false-alarm budget is a probabilistic statement, not a promise
         # that any particular finite IID sequence cannot trigger.
