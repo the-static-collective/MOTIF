@@ -41,6 +41,15 @@ jobs:
           assert all(x["bfs_status"]=="HOLD_NO_WITNESSED_GOAL_ACCESS"
                      for x in result["pairs"]
                      if x["scenario"]=="hidden_resource")
+          # Regression against the first actual execution defect: all 48
+          # visible-resource plans used to fail when the test fixture
+          # accidentally deleted the player from the game world.
+          for pair in result["pairs"]:
+              if pair["scenario"]!="hidden_resource":
+                  assert pair["bfs_succeeded"],pair
+              if pair["scenario"]=="surprise_wall":
+                  assert pair["bfs_replanned_after_changed_map"],pair
+          assert result["BFS_goal_successes"]==24,result
           actual=0
           paths=sorted(root.glob("*/annotated_gameplay.json"))
           for file in paths:
