@@ -1,0 +1,48 @@
+name: META-003 stateful nonlinear Collatz ranking and 2-adic falsifiers
+on:
+  push:
+    branches:
+      - experiment/meta-003-stateful-ranking-cegis
+  pull_request:
+    paths:
+      - 'experiments/meta003/**'
+      - '.github/workflows/meta003.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  nonlinear-rank-cegis-2adic-frontier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test new nonlinear rank falsifiers and stateful infinite-class proofs
+        run: python -m unittest discover -s experiments/meta003 -p 'test_*.py' -v
+      - name: Regress META-002 variable-time known math certificates
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Regress META-001 original genuinely open problem
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Execute exact nonlinear CEGIS and new 2-adic question frontier
+        run: python experiments/meta003/invariant_stress.py > meta003-stateful-ranking-evidence.json
+      - name: Independently replay audit packet and refuse false closure
+        run: |
+          python - <<'PY'
+          import sys,json
+          sys.path.insert(0,'experiments/meta003')
+          from invariant_stress import verify_packet,reenter
+          packet=json.load(open('meta003-stateful-ranking-evidence.json'))
+          assert verify_packet(packet)
+          reread=reenter(packet)
+          assert reread['new_investigative_source_questions']==0
+          assert reread['global_collatz_conjecture_solved'] is False
+          assert packet['stateful_two_adic_question_frontier']['remaining_uncertified_descendant_classes']==2114
+          print('All source arithmetic and model refusals reverified; global conjecture OPEN')
+          PY
+      - name: Preserve exact math, false starts, source receipts and HOLDs
+        uses: actions/upload-artifact@v4
+        with:
+          name: META003-NONLINEAR-RANK-STATEFUL-FRONTIER-RESEARCH-HOLD
+          path: meta003-stateful-ranking-evidence.json
