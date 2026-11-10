@@ -22,4 +22,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: Run finite receipts, negative controls and abstention tests
-        run: python -m unittest discover -s experiments/genius001 -p 'test_genius.py' -v
+        run: python -m unittest discover -s experiments/genius001 -p 'test_*.py' -v
