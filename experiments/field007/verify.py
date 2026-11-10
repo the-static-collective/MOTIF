@@ -16,5 +16,10 @@ if __name__=='__main__':
   raise SystemExit('CORRUPT_EVIDENCE_LEDGER')
  stored=next(x for x in ledger['cases'] if (x['source'],x['seed'],x['policy'])==(args.task,args.seed,args.policy))
  current=compact_packet(run(args.task,args.seed,args.policy))
- if stored!=current:raise SystemExit('REENTRY_MISMATCH')
+ if stored!=current:
+  for k in sorted(set(stored)|set(current)):
+   if stored.get(k)!=current.get(k):
+    a=stored.get(k);b=current.get(k)
+    print('MISMATCH_FIELD',k,'stored',str(a)[:2400],'computed',str(b)[:2400])
+  raise SystemExit('REENTRY_MISMATCH')
  print('FIELD007_REENTRY_OK',args.task,args.seed,args.policy,stored['packet_sha256'])
