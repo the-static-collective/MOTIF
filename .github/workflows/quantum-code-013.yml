@@ -1,0 +1,31 @@
+name: MOTIF QC-013 human expert dataset interpreter
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode013/**'
+      - '.github/workflows/quantum-code-013.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode013/**'
+      - '.github/workflows/quantum-code-013.yml'
+permissions:
+  contents: read
+jobs:
+  human-trace-parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install local research dependencies
+        run: python -m pip install 'numpy>=1.24,<3'
+      - name: Test NPZ ingestion, temporal integrity, provenance and QC-011 compatibility
+        working-directory: experiments/quantumcode013
+        run: python -m unittest -v test_human_dataset.py
+      - name: Confirm actual uploaded dataset is not checked into source
+        run: |
+          test ! -f experiments/quantumcode013/dataset.zip
+          test ! -d experiments/quantumcode013/dataset
+          echo 'Human source archive stays with the user; CI uses synthetic parser fixtures only.'
