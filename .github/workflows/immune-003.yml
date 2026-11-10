@@ -24,7 +24,7 @@ jobs:
           python-version: "3.11"
       - name: Run source, quote, Dung grounded extension and classical falsifiers
         working-directory: experiments/immune003
-        run: python -m unittest -v test_immune3.py
+        run: python -m unittest -v test_immune3.py test_semantic_gate.py
       - name: Fetch original Microsoft BIPIA pinned datasets without running any external instructions
         working-directory: experiments/immune003
         run: |
