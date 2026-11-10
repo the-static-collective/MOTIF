@@ -1,0 +1,62 @@
+name: META-006 branching infinite Collatz rank and polynomial growth
+on:
+  push:
+    branches:
+      - experiment/meta-006-branching-infinite-rank
+  pull_request:
+    paths:
+      - 'experiments/meta006/**'
+      - '.github/workflows/meta006.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  modular-branch-rank-and-real-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute actual inverse branch proofs, negative admission controls and fair baseline
+        run: python -m unittest discover -s experiments/meta006 -p 'test_*.py' -v
+      - name: Regress source-owned META-005 infinite-family ranks
+        run: python -m unittest discover -s experiments/meta005 -p 'test_*.py' -v
+      - name: Regress 2-adic boundary META-004
+        run: python -m unittest discover -s experiments/meta004 -p 'test_*.py' -v
+      - name: Regress nonlinear rank META-003
+        run: python -m unittest discover -s experiments/meta003 -p 'test_*.py' -v
+      - name: Regress variable stopping-time META-002
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Regress original open Collatz META-001
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Emit inspectable ranked branching tree and coverage proof
+        run: python experiments/meta006/branching_inverse.py > meta006-branching-inverse-evidence.json
+      - name: Re-enter and recheck COMPLETE exact research packet
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0, 'experiments/meta006')
+          from branching_inverse import verify_packet,reenter
+          with open('meta006-branching-inverse-evidence.json') as f:
+              packet=json.load(f)
+          assert verify_packet(packet)
+          recovered=reenter(packet)
+          assert recovered['new_external_investigative_questions']==0
+          assert recovered['original_global_collatz_conjecture_solved'] is False
+          assert [row['provable_union_exact_members'] for row in
+                  packet['exact_increased_coverage_against_prior_research']] == [
+                    19,42,73,103]
+          assert packet['general_mathematical_growth_certificate'][
+            'neither_natural_density_nor_full_collatz_conjecture_proven'
+          ]
+          print('Ranked infinite branching tree source-replayed; stronger coverage; Collatz OPEN')
+          PY
+      - name: Archive actual finite and symbolic proof receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: META006-BRANCHING-RANK-POLYNOMIAL-COVERAGE-RESEARCH-HOLD
+          path: meta006-branching-inverse-evidence.json
