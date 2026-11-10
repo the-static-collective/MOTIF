@@ -1,0 +1,71 @@
+name: MOTIF GENIUS-010 independent-thread convergence
+
+on:
+  push:
+    paths:
+      - "experiments/genius010/**"
+      - ".github/workflows/genius010.yml"
+  pull_request:
+    paths:
+      - "experiments/genius010/**"
+      - ".github/workflows/genius010.yml"
+
+jobs:
+  independent-convergence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test causal/observational contrast, provenance and no-fake-callback
+        run: python -m unittest discover -s experiments/genius010 -p 'test_*.py' -v
+      - name: Precommitted 7-regime heldout convergence challenge
+        run: |
+          python experiments/genius010/benchmark.py > /tmp/motif-genius010.json
+          python -m json.tool /tmp/motif-genius010.json >/dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-genius010.json"))
+          assert r["no_external_action"]
+          assert r["strong_classical_baseline_statistically_identical"]
+          print("STATUS:",r["status"])
+          print("FROZEN DESIGN:",r["design_frozen_before_holdout_sha256"])
+          for name,x in r["holdout_summary"].items():
+              print("SCENARIO:",name)
+              print("  CASES:",x["evaluated_cases"])
+              print("  CONDITIONAL BRIDGES:",x["conditional_candidate_frequency"])
+              print("  ECHO / AUTH HOLDS:",x["source_or_attestation_hold_reasons"])
+              print("  BRIDGED CASES:",x["any_conditional_bridge_cases"])
+              print("  LEXICAL DECOY CHOSEN:",x["lexical_baseline_blue_ribbon_cases"])
+              print("  RETROSPECTIVE CALLBACKS:",x["source_owned_reinterpretation_count"])
+              print("  PUBLIC EVIDENCE:",x["public_records_processed"])
+              print("  WITHHELD EXCLUDED:",x["withheld_never_ingested"])
+          PY
+      - name: Clearly labeled posthoc 40-seed robustness sweep
+        run: |
+          python experiments/genius010/stress.py > /tmp/motif-genius010-posthoc-stress.json
+          python -m json.tool /tmp/motif-genius010-posthoc-stress.json >/dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open("/tmp/motif-genius010-posthoc-stress.json"))
+          assert r["status"]=="POSTHOC_EXPLORATORY_NOT_INDEPENDENT_BLIND"
+          assert r["no_external_action"]
+          print("POSTHOC STRESS:", r["experimental_worlds"], "engineered synthetic worlds")
+          for name, v in r["regimes"].items():
+              print(" STRESS REGIME:",name,"CONDITIONAL BRIDGES:",v["conditional_bridge_frequency"],
+                    "SOURCE HOLDS:",v["source_hold_codes"])
+          PY
+      - name: Archive proof-carrying synthetic evidence and negative cases
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS010-THREE-THREAD-RESEARCH-HOLD
+          path: |
+            /tmp/motif-genius010.json
+            /tmp/motif-genius010-posthoc-stress.json
+          retention-days: 30
+          if-no-files-found: warn
