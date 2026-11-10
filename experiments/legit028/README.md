@@ -129,6 +129,74 @@ python experiments/legit028/run_information_geometry.py --emit > /tmp/motif-legi
 The pinned GitHub Actions run archives the full report as
 `MOTIF-LEGIT028-INFORMATION-GEOMETRY-RESEARCH-HOLD`.
 
+## Measured results — information geometry is task dependent
+
+**First green experiment (CI run `42750210074`): 12 tests passed.**
+The second revision adds retrospective regret diagnostics but does not
+change training selection or the mathematical hypotheses.
+
+The training-only selector adopted different strategies:
+
+| Domain | Training observation alphabet | CV-selected question-value theory |
+| --- | --- | --- |
+| Graph-homomorphism witness | Many exact counts | Raw observation diversity |
+| Polynomial modular counterexample | Variable finite residues | Failure-conditioned estimated witness probability |
+| Integer constraint countermodel | Boolean | Marginal probability of an exact witness |
+
+The outcome is **mixed, not a general win**. Across separate, fixed
+engineer-generated future worlds:
+
+| Full question strategy | Graph (16 cases) | Polynomial (32 cases) | Boolean constraints (32 cases) |
+| --- | ---: | ---: | ---: |
+| Canonical fixed | 47 | 458 | 377 |
+| Classical residual greedy | **19** | **67** | **289** |
+| Raw observation diversity | **19** | 51 | 377 |
+| Joint Shannon entropy | 33 | **47** | 280 |
+| Bernoulli witness entropy | 43 | 66 | 293 |
+| Marginal witness probability | 21 | 81 | 293 |
+| Contextual witness-probability estimator | 21 | 70 | 279 |
+| Contextual information-value heuristic proxy | 21 | 91 | **267** |
+| **Training-CV selected router** | **19** | **70** | **293** |
+| Old insufficient grammar | 0/16 solved | 0/32 solved | 0/32 solved |
+
+Counts are the **number of actual source questions asked**; each
+complete method found a mathematically verified witness for every case.
+
+On the graph cases the selected raw-diversity method **matched** the
+strong conventional planner with 19 questions. On polynomial tasks the
+selected contextual posterior took **70 vs the conventional 67**, while
+*unselected, evaluated only after freeze* joint entropy took 47.
+On Boolean constraints, selected marginal witness probability took
+**293 vs classical 289**, while *unselected, evaluated only after
+freeze* conditional information-value proxy took 267.
+
+**Across all 80 new cases, the CV-selected router took 382 questions,
+while conventional residual greedy took 375.** It was **seven questions
+worse**, not better. This is an observed small-sample *method-selection
+generalization failure*, even though its CV score on each domain was
+better. Selection based on only two math training worlds can overfit
+the synthetic generator and does not identify an unconditionally
+superior mathematical information theory.
+
+The experiment's posthoc diagnostic now records the observed
+per-domain question regret, strongest future candidate and the
+resulting **next relevant research question**: whether genuinely
+distinct training environments and a distribution-shift-aware guard
+can predict when to trust a new information-value criterion.
+
+**The posthoc winner is never promoted into this evaluation.** That
+would leak the future results. It is retained as a *hypothesis for a
+later preregistered experiment*, not retroactively claimed as an
+adaptation success.
+
+The key mathematical lesson is not simply to maximize entropy.
+It is to separate **descriptive observation variety** from
+**instrumental value toward a verifiable objective**, while
+recognizing that even a value-aligned training metric can generalize
+poorly. Posterior heuristics also have nonzero computational overhead,
+so fewer questions need not mean lower total compute or engineering
+cost.
+
 ## Boundaries of the claim
 
 Even a successful heldout result would demonstrate only an
