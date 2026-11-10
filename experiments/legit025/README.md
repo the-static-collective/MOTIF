@@ -54,10 +54,18 @@ any heldout 5-node source answer.
 - Complements of those six heldout pairs.
 - New eight-node graphs obtained by adding a universal vertex to
   each heldout Atlas graph.
+- A separately sampled, fixed-seed population of 1,000 labeled
+  Erdős–Rényi eight-node random graphs, filtered only by matching complete
+  old (<=4 source) observation vectors and verified non-isomorphism.
+  Eight candidate collision pairs form an additional heldout challenge
+  that does NOT descend from the Atlas examples.
 
-The last two groups are **synthetic dependent transformations** of the
-same external carriers; they are not separately sourced independent
-future datasets. Check that the old 4-node grammar remains insufficient
+The complement and universal-join groups are **synthetic dependent
+transformations** of the same external carriers. The random eight-node
+group is sampled from a **distinct engineer-generated** population; it is
+not independently authored or externally blind. It is deliberately
+conditioned on known limitations of the old method, and no five-node
+probe outcomes may be read during selection. Check that the old 4-node grammar remains insufficient
 and that candidate five-node probes really distinguish the targets.
 Both positive and negative answers to every attempted source-question
 must agree with LEGIT-021's separate exhaustive vertex-assignment
