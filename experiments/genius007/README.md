@@ -118,3 +118,7 @@ CI archives complete synthetic task, policy, cost and proof packets, including g
 **Next objective:** independent authors must supply a real test-instrument capability description and an unfamiliar goal. MOTIF should invent candidate *typed* experiments that a separate evaluator can actually execute, verify the evidence transport and compare to a well-engineered classical planner under identical tool, question and compute budgets. The highest-value original research problem remains inventing **new causal intermediate variables and legitimate measurement methods**, not merely composing known ones.
 
 **Invariant:** a speculative question can be proposed freely; a measurement requires a supported instrument; a capability claim requires a proof carrying actual evidence.
+
+## Executed result
+
+[RESULTS.md](RESULTS.md) contains the frozen 14-test CI evidence, seven-family table, positive composition dividends, two no-benefit instrument controls, and honest same-action-space exact Bellman comparisons. In the first synthetic trial, the validation-selected heuristic matched the classical full Bellman value on all seven *engineer-authored* families; this is **not** evidence of outperforming classical inference or generalizing to independently authored problems.
