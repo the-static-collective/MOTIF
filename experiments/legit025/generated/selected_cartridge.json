@@ -1,0 +1,89 @@
+{
+  "experiment": "MOTIF-LEGIT-025",
+  "artifact_kind": "TRAINING_FROZEN_REUSABLE_MATHEMATICAL_QUESTION",
+  "created_from_green_ci": {
+    "run_id": 42743967688,
+    "source_head_sha": "8c84afba6ebff3060c89850bd8ae08b182017582",
+    "archived_raw_artifact_id": 13731095414,
+    "archived_raw_sha256": "af20f0177b2538af5db7dae24e17a031d24e84a1a699b98421a1abf84ee4e927"
+  },
+  "independent_carrier_source": {
+    "name": "Read/Wilson 1998 Graph Atlas via NetworkX 3.4.2",
+    "atlas_dat_sha256": "73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d",
+    "training_atlas_pairs": [
+      [
+        341,
+        344
+      ],
+      [
+        405,
+        411
+      ],
+      [
+        536,
+        544
+      ],
+      [
+        657,
+        658
+      ]
+    ]
+  },
+  "status": "RESEARCH_HOLD_NOT_AUTONOMOUS_MATH_INVENTION",
+  "next_question": "Can a one-vertex extension of a previously known four-vertex source distinguish these graphs?",
+  "existing_source": {
+    "vertices": 4,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ]
+  },
+  "operator": {
+    "name": "ADD_VERTEX_WITH_NEIGHBORS",
+    "added_vertex": 4,
+    "neighbors": [
+      1
+    ],
+    "arity": 1
+  },
+  "generated_source": {
+    "vertices": 5,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ]
+    ]
+  },
+  "matches_classical_atlas_source_id": 30,
+  "training_separated_all_four_cases": true,
+  "selected_training_probes_sha256": "15e05c2977fdc36a0322f5c9f1d950918ad96bea361774791d44650bc2b39c4d",
+  "trained_first_probe_atlas_id": 30,
+  "candidate_search_contains_all_connected_five_node_sources": true,
+  "previous_legacy_grammar_already_included_five_node_sources": true,
+  "freeze_before_heldout_five_probe_results": true,
+  "no_runtime_auto_promotion": true,
+  "limitations": "Compositional reactivation of known five-vertex source questions; not historically novel mathematics. External seven-node carriers, engineer-selected blind-spots; separately sampled eight-node synthetic transfer is engineer-authored."
+}
