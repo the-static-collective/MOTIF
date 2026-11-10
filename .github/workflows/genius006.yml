@@ -1,0 +1,57 @@
+name: MOTIF GENIUS-006 discovery dividend
+
+on:
+  push:
+    paths:
+      - "experiments/genius006/**"
+      - ".github/workflows/genius006.yml"
+  pull_request:
+    paths:
+      - "experiments/genius006/**"
+      - ".github/workflows/genius006.yml"
+
+jobs:
+  bounded-discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test prospective questions, downstream certificates and classical comparators
+        run: |
+          python -m unittest discover -s experiments/genius006 -p 'test_*.py' -v
+      - name: Run validation-frozen multi-domain inquiry trial
+        run: |
+          python experiments/genius006/benchmark.py > /tmp/motif-genius006-discovery.json
+          python -m json.tool /tmp/motif-genius006-discovery.json >/dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/motif-genius006-discovery.json"))
+          assert p["no_external_action"]
+          assert len(p["frozen_sha256_before_test_sampling"])==64
+          print("STATUS:",p["status"])
+          print("POLICY FREEZE:",p["frozen_sha256_before_test_sampling"])
+          for family, row in p["future"].items():
+              print("TASK FAMILY:",family)
+              print("  VAL SELECTED:",p["selection"][family]["selected_method"])
+              print("  TRUE EXPECTED FINITE OPTIMUM:",row["exact_uniform_prior_expected_value"])
+              print("  DP MEMO STATES:",row["exact_dp_memo_states"])
+              for arm, metrics in row["evaluation"].items():
+                  print("  ",arm,"verified value:",metrics["mean_verified_value"],
+                        "certificates:",metrics["mean_verified_capability_count"],
+                        "questions:",metrics["mean_questions"],
+                        "false certificates:",metrics["false_certificates"])
+              print("  OBSERVED DP-SELECTED REGRET:",row["measured_sample_regret_vs_exact"])
+          PY
+      - name: Preserve source/proof-carrying synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS006-DISCOVERY-DIVIDEND-RESEARCH-HOLD
+          path: /tmp/motif-genius006-discovery.json
+          retention-days: 30
+          if-no-files-found: warn
