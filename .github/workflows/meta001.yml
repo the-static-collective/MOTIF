@@ -1,0 +1,43 @@
+name: META-001 real open Collatz conjecture question and proof discipline
+on:
+  push:
+    branches:
+      - experiment/meta-001-open-collatz-primitive-inquiry
+  pull_request:
+    paths:
+      - 'experiments/meta001/**'
+      - '.github/workflows/meta001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  open-mathematics-research-hold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact arithmetic and adversarial global-claim rejection tests
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Run the actual open Collatz question inquiry
+        run: python experiments/meta001/collatz_frontier.py > meta001-collatz-evidence.json
+      - name: Independently replay saved evidence packet
+        run: |
+          python - <<'PY'
+          import json, sys
+          sys.path.insert(0, 'experiments/meta001')
+          from collatz_frontier import verify_packet
+          with open('meta001-collatz-evidence.json', encoding='utf8') as f:
+              packet=json.load(f)
+          assert verify_packet(packet)
+          assert packet['research_status']=='OPEN_PROBLEM_GLOBAL_ANSWER_NOT_ESTABLISHED'
+          assert packet['automatic_admission'] is False
+          print('Source-owned proof packet independently regenerated; global conjecture remains OPEN')
+          PY
+      - name: Archive complete source-bound question, negative and positive evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: META001-COLLATZ-OPEN-QUESTION-RESEARCH-HOLD
+          path: meta001-collatz-evidence.json
