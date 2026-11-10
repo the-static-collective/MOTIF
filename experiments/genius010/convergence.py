@@ -129,8 +129,11 @@ def generate(seed: int, regime: str) -> tuple[Observation, ...]:
                         p = .5 + effect*(int(x)-.5)
                     y = rng.random() < p
                     # Prefixes distinguish separate source events in ordinary
-                    # trials. ECHO_SOURCE makes three asserted "independent"
-                    # threads share source roots (one repeated original event).
+                    # trials. ECHO_SOURCE deliberately reuses *origin labels*
+                    # across alleged independent threads: without authentic
+                    # custody one cannot establish distinct original sources.
+                    # The fixture models a provenance collision, not proof
+                    # that the underlying outcomes are actual duplicate events.
                     origin_thread = ("REPLAYED_SINGLE_EVENT"
                                      if regime == "ECHO_SOURCE"
                                      and hypothesis == "hinge_timing"
@@ -284,6 +287,11 @@ def rank_convergences(public_rows: tuple[Observation, ...],
     }
 
 
+def _evidence_digest(refs) -> str:
+    """Stable audit fingerprint; a checksum is NOT source authentication."""
+    return sha256(json.dumps(sorted(refs), sort_keys=True).encode()).hexdigest()
+
+
 def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
                                  verdict: dict) -> dict:
     """Use the actual GENIUS-009 interface for each of the three threads.
@@ -295,7 +303,9 @@ def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
     initial = tuple(
         Witness(thread, i, "EMPIRICAL_INSTRUMENT",
                 (Assertion(f"{thread} recorded a distinct unexplained anomaly"),),
-                f"synthetic://three-thread/{thread}")
+                f"synthetic://three-thread/{thread}/sha256/" +
+                _evidence_digest(x.evidence_id for x in public_rows
+                                 if x.thread == thread))
         for i, thread in enumerate(THREADS)
     )
     accepted = verdict["conditional_candidates"]
@@ -303,10 +313,17 @@ def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
         corpus = Corpus("no-unambiguous-bridge-two-clock", initial, ())
     else:
         bridge = accepted[0]
+        candidate = next(x for x in verdict["candidates"]
+                         if x["hypothesis"] == bridge)
+        confirming_refs = [
+            ref for part in candidate["interventional_replicates"]
+            for ref in part["evidence_refs"]
+        ]
         bridge_source = Witness(
             "later_bridge_audit", 3, "EMPIRICAL_INSTRUMENT",
             (Assertion(f"statistical intervention convergence for {bridge}"),),
-            "synthetic://three-thread/later-audit",
+            "synthetic://three-thread/later-audit/sha256/" +
+            _evidence_digest(confirming_refs),
         )
         readings = tuple(
             Reading(
@@ -328,6 +345,12 @@ def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
         "status": ("RESEARCH_ONLY_SOURCE_OWNED_REINTERPRETATION"
                    if len(accepted)==1 else "HOLD_NO_UNAMBIGUOUS_BRIDGE"),
         "earlier_source_assertions": original,
+        "source_evidence_fingerprints": {
+            w.witness_id: w.evidence_ref for w in initial},
+        "later_audit_source_pointer": (
+            next((w.evidence_ref for w in corpus.witnesses
+                  if w.witness_id == "later_bridge_audit"), None)),
+        "fingerprints_are_not_authenticated_signatures": True,
         "original_witness_count": len(initial),
         "source_order": result["source_order"],
         "reveal_order": result["disclosure_order"],
