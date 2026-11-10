@@ -1,0 +1,46 @@
+name: FIELD-007 independent historical source transfer (HOLD)
+on:
+  push:
+    branches:
+      - experiment/field-007-independent-source-transfer-20261110
+  pull_request:
+    paths:
+      - 'experiments/field007/**'
+      - '.github/workflows/field007.yml'
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install 'numpy==2.3.5' 'scipy==1.17.0' 'scikit-learn==1.8.0'
+      - run: python -m unittest discover -s experiments/field007 -p 'test_field007.py' -v
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+          MKL_NUM_THREADS: '1'
+  reproducibility:
+    needs: tests
+    strategy:
+      matrix:
+        task: [digits_3_8, breast_cancer]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install 'numpy==2.3.5' 'scipy==1.17.0' 'scikit-learn==1.8.0'
+      - run: |
+          for seed in 211 223 227; do
+            for policy in random geometry raw_margin raw_committee counterexample_relational; do
+              python experiments/field007/verify.py --task ${{ matrix.task }} --seed "$seed" --policy "$policy"
+            done
+          done
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+          MKL_NUM_THREADS: '1'
