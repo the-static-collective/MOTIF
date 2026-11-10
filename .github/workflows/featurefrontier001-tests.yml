@@ -1,0 +1,41 @@
+name: FEATURE-FRONTIER-001 graph feature composition
+
+on:
+  push:
+    branches:
+      - 'experiment/feature-frontier-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/featurefrontier001/**'
+      - 'experiments/contractfrontier002/**'
+      - 'experiments/contractdiscovery001/**'
+      - 'experiments/mathal001/**'
+      - 'experiments/fir001/**'
+      - '.github/workflows/featurefrontier001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  feature-frontier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Upstream graph and epistemic regressions
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/contractdiscovery001 && python -m unittest -q test_contractdiscovery.py)
+          (cd experiments/contractfrontier002 && python -m unittest -q test_contractfrontier.py)
+      - name: Newly synthesized relational features and hostile controls
+        working-directory: experiments/featurefrontier001
+        run: |
+          python -m unittest -v test_featurefrontier.py
+          python featurefrontier.py
+          python benchmark.py
