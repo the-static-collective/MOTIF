@@ -61,3 +61,45 @@ These are **engineer-authored educational fixtures**, not independently authored
 5. **True improvement criterion:** hold-out accuracy and verification cost across previously unseen domains, plus independent audits. A successful historical analogy alone does not demonstrate learned meta-reasoning.
 
 **Frontier question:** can source-grounded discovery operations, rather than historical hero narratives, increase MOTIF's rate of *independently verified* insights outside their training domains?
+
+
+## R/R extension — Rasputin × Mister Rogers: social intelligence is not identical to moral intelligence
+
+Two **historical prompts**, not reconstructed personalities and not proven moral opposites:
+
+- **Grigori Rasputin**: access to authority through an intensely trusted personal connection, coupled with enduring public reputation, rumor, fear, and disputed narratives. Historical records support proximity to Alexandra and spiritual consolation, but **do not establish that every rumor or manipulation allegation was true**. The analysis question is how vulnerability, exclusive access, perceived care, authority, and outsiders' impressions interact. Background: Smithsonian Magazine, *What Really Happened During the Murder of Rasputin?* https://www.smithsonianmag.com/history/what-really-happened-during-murder-rasputin-russia-mad-monk-180961572/ ; historical reassessment: Orlando Figes, *A Very Close Friend of the Family* https://www.nybooks.com/articles/2016/12/08/rasputin-close-friend-family/
+- **Fred Rogers**: outwardly simple, exceptionally deliberate attention to children's feelings, self-regulation, autonomy and trust, with an observable instance of persuasive communication in his 1969 Senate testimony. The evidence is primary recording/transcript, not an inference that his motives can be read mechanically. Primary transcript: https://current.org/1969/05/i-give-an-expression-of-care-every-day-to-each-child/ ; archives: https://www.fredrogersinstitute.org/archive ; institutional values: https://www.fredrogersinstitute.org/about-the-fred-rogers-institute
+
+### Hypothesis / distinguishing variable
+
+**Social effectiveness** = can an actor attune to another person's needs and change a relationship or outcome?
+
+That question is distinct from **longitudinal agency** = can the other person still disagree, check claims, draw on relationships beyond the actor, or leave without inappropriate penalty? Both relief and a narrowing of agency can occur in the same relationship. Neither the person's charisma nor a favorable immediate reaction establishes benefit.
+
+The paired aperture is a **test for observable dependence and autonomy, not a classifier of good versus evil, diagnostic tool, persuasion playbook or predictive social-science model.** Historical evidence can support observations; it cannot justify invented mental states. The simulation below is explicitly modern and fictional, not a claim that Rasputin or Rogers performed the listed actions.
+
+### Executable slice
+
+`social.py` defines `SocialObservation` with optional and source-bound observations; no evidence is treated as UNKNOWN rather than defaulting to a virtue or vice. The assessment returns:
+
+- Reported immediate comfort, as a **separate channel**.
+- Positive indicators of agency: acknowledged need, permission to disagree and refuse, independent verification, other support permitted.
+- Possible concentration/dependency indicators: exclusivity demands, inability to refuse without penalty, discouraging external checks.
+- An explicit provisional status and next useful question, plus evidence still missing.
+- A chronological inspection in which later problematic episodes cannot be masked by earlier kindness.
+
+The **adversarial synthetic pair** has *the same immediate comfort* in both scenarios. A relief-only predictor labels both SAFE; the evidence lens marks autonomy-supporting cues in one and dependency/control risk worth investigating in the other. Another case with only comfort returns HOLD. A trajectory test reports a late risk rather than averaging it away.
+
+The dependency-risk flag is a request to investigate **observable behavior**, not an assertion of harmful intention or a verdict about real people. No behavioral measurement scales have been validated. The benchmark is engineer-authored and deliberately minimal.
+
+Run both the original and R/R tests:
+
+```sh
+python -m unittest discover -s experiments/genius001 -p 'test_*.py' -v
+```
+
+### Next frontier
+
+Model **relational transformation graphs** over time, with explicit **needs → response → perceived safety → options → trust/dependence** edges, separating witnesses and hearsay. Compare against strong social-science baselines such as autonomy-supportive communication, attachment research, coercive control frameworks, epistemic trust and social network dynamics; do not treat any one figure as a verified model of a psychological construct.
+
+A falsifiable research question: **Can MOTIF identify when influence expands the other party's independent options versus when influence concentrates choices, on externally authored, ethically reviewed scenarios, without learning to reward manipulation or inventing motives?**
