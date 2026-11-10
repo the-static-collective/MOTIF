@@ -196,7 +196,10 @@ class TestIndependentFuture(unittest.TestCase):
 
     def test_negative_deep_chain_is_not_promoted_over_classical(self):
         deep = self.result["selection"]["DEEP_CHAIN"]
-        self.assertFalse(deep["candidate_within_005_of_exact_validation"])
+        self.assertFalse(deep["candidate_within_005_of_exact_full_prior"])
+        self.assertEqual(deep["strong_exact_validation_score"]["mean_verified_value"], 0.0)
+        self.assertGreater(deep["strong_classical_exact_full_prior_value"], 0)
+        self.assertEqual(deep["chosen_policy_exact_full_prior_value"], 0.0)
         self.assertEqual(deep["research_adoption_status"],
                          "HOLD_NO_PROMOTION_FALLBACK_CLASSICAL")
         self.assertEqual(deep["recommended_nonexecuting_method"],
