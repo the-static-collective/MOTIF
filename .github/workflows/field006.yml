@@ -1,0 +1,44 @@
+name: FIELD-006 source-reentry and counterexample truth maintenance
+on:
+  push:
+    branches:
+      - experiment/field-006-counterexample-proof-20261110
+  workflow_dispatch:
+jobs:
+  audit:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dataset: iris
+          - dataset: wine
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned scientific dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Run adversarial truth-maintenance tests
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: python -m unittest discover -s experiments/field006 -p 'test_field006.py' -v
+      - name: Replay archived-owner observations, all seeds and policies
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: python experiments/field006/benchmark.py --dataset ${{ matrix.dataset }} --out FIELD006-${{ matrix.dataset }}-audit.json
+      - name: Generate inspectable one-case evidence and model-prediction receipts
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: python experiments/field006/verify.py --dataset ${{ matrix.dataset }} --seed 157 --policy counterexample_relational --save FIELD006-${{ matrix.dataset }}-full-proof.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FIELD006-${{ matrix.dataset }}-RESEARCH-HOLD
+          path: |
+            FIELD006-${{ matrix.dataset }}-audit.json
+            FIELD006-${{ matrix.dataset }}-full-proof.json
