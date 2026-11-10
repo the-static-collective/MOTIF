@@ -91,6 +91,20 @@ We also ran the *same* QC-013 human-informed game heuristic with and without the
 | 3199 | **215** (health 0) | 213 (health 0) | Similar failure |
 | 8765 | 208 (health 0) | 208 (health 0) | No meaningful difference |
 
+**Repeated-run falsifier:** A subsequent independent successful workflow at
+[run #42747596435](https://github.com/the-static-collective/MOTIF/actions/runs/42747596435)
+with the same code and nominal seeds again reproduced **all four controlled
+6-step recoveries**, but logged **1,789** game steps and *different*
+ordinary-game outcomes (1042 baseline 220, guarded 195; 2026 baseline 202,
+guarded 193; 3199 baseline 213, guarded 206; 8765 both 208). The
+**1,816** steps and natural-world comparison table above are therefore
+specifically pinned to **run #42747058048**, not advertised as deterministic
+seed-controlled predictions. This variability is material: the game's runtime
+is not currently isolated sufficiently to supply reproducible same-seed
+counterfactual trajectories across independent runs. A fair experiment needs
+more seeds, explicit simulator stochasticity control, multiple repeats and
+out-of-sample evaluation.
+
 **Mixed results.** A failure guard alone is not a general survival policy. It can help with specific blocked actions and still make a worse decision in another situation. The seed 2026 regression is a required next investigation, not something to hide.
 
 All comparisons remain small and exploratory, with the game's stochastic updates and no independent policy-training setup. A 220-step cap does not imply permanent survival.
