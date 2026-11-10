@@ -17,7 +17,7 @@ Two validation tasks per family were evaluated first. The selected method and co
 | MIXED_POLARITY | 0.000 | 0.000 | 0.000 | **3.000** | **3.000** | **3.000** |
 | MULTIGOAL | 0.000 | 3.625 | 0.000 | **4.833** | **4.833** | **4.833** |
 | NO_PAIR | 0.000 | **2.417** | 0.000 | 0.000 | **2.417** | **2.417** |
-| EXPENSIVE_PAIR | 0.000 | **2.333** | 0.000 | 0.000 | 0.000 | **2.333** | **2.333** |
+| EXPENSIVE_PAIR | 0.000 | **2.333** | 0.000 | 0.000 | **2.333** | **2.333** |
 | DISTRACTOR | 0.000 | 0.000 | 0.000 | **2.083** | **2.083** | **2.083** |
 
 The table is **not** an experiment showing MOTIF beating optimal classical planning. FOUNDRY_OPTIMAL is a conventional exact Bellman planner with the SAME generated sensor action space as the foundry strategies; it was matched by one or more generated heuristic policies in all seven hand-designed toy families.
