@@ -1,0 +1,60 @@
+name: META-007 weighted inverse grammar optimizer with exact growth certificates
+on:
+  push:
+    branches:
+      - experiment/meta-007-weighted-branch-grammar-optimizer
+  pull_request:
+    paths:
+      - 'experiments/meta007/**'
+      - '.github/workflows/meta007.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-combinatorial-weighted-grammar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate and test source-owned weighted inverse grammar optimizer
+        run: python -m unittest discover -s experiments/meta007 -p 'test_*.py' -v
+      - name: Regression source-owned META-006 branching-rank grammar
+        run: python -m unittest discover -s experiments/meta006 -p 'test_*.py' -v
+      - name: Regression META-005 symbolic infinite positive domain
+        run: python -m unittest discover -s experiments/meta005 -p 'test_*.py' -v
+      - name: Regression META-004 2-adic ghosts
+        run: python -m unittest discover -s experiments/meta004 -p 'test_*.py' -v
+      - name: Regression META-003 nonlinear rank obstruction
+        run: python -m unittest discover -s experiments/meta003 -p 'test_*.py' -v
+      - name: Regression META-002 variable horizon
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Regression META-001 actual open Collatz question
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Emit exact source-proof grammar and novel word receipts
+        run: python experiments/meta007/weighted_grammar.py > meta007-weighted-proof.json
+      - name: Reenter complete rank and rational-integer proof without guessing new result
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0,'experiments/meta007')
+          from weighted_grammar import verify_packet,reenter
+          p=json.load(open('meta007-weighted-proof.json'))
+          assert verify_packet(p)
+          record=reenter(p)
+          assert record['new_investigative_source_questions']==0
+          assert record['global_collatz_conjecture_solved'] is False
+          assert p['grammar_optimizer']['winning_alphabet_size']==8
+          assert p['grammar_optimizer']['winning_rational_growth_exponent']==166
+          assert p['independent_exact_integer_source_crosscheck'][
+            'new_nodes_outside_original_META006_binary_grammar']==570
+          assert p['not_historically_novel_mathematics'] is True
+          print('Exact weighted-language growth and all positive ranks reverified; Collatz still open')
+          PY
+      - name: Preserve inspectable exact inequalities and negative attempts
+        uses: actions/upload-artifact@v4
+        with:
+          name: META007-WEIGHTED-GRAMMAR-EXACT-GROWTH-RESEARCH-HOLD
+          path: meta007-weighted-proof.json
