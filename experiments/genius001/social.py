@@ -52,8 +52,8 @@ def assess_social_observation(event: SocialObservation) -> dict:
         ("refusal_without_penalty", event.refusal_without_penalty, True, "can refuse without penalty"),
         ("independent_verification_supported", event.independent_verification_supported, True, "independent checks welcomed"),
         ("outside_support_supported", event.outside_support_supported, True, "other relationships preserved"),
-        ("exclusive_loyalty_requested", event.exclusive_loyalty_requested, False, "exclusive loyalty demanded"),
-        ("authority_claim_unverified", event.authority_claim_unverified, False, "claim to authority not independently checked"),
+        ("exclusive_loyalty_requested", event.exclusive_loyalty_requested, False, "exclusive loyalty not demanded"),
+        ("authority_claim_unverified", event.authority_claim_unverified, False, "authority claim independently checked"),
     ]
     strong_concentration = False
     for field, value, agency_when, explanation in cues:
@@ -62,8 +62,8 @@ def assess_social_observation(event: SocialObservation) -> dict:
         elif value is agency_when:
             agency.append(explanation)
         else:
-            concentration.append(explanation if field in ("exclusive_loyalty_requested", "authority_claim_unverified")
-                                 else "absence of: " + explanation)
+            concentration.append({"exclusive_loyalty_requested": "exclusive loyalty demanded",
+                                  "authority_claim_unverified": "authority claim not independently checked"}.get(field, "absence of: " + explanation))
             if field in ("refusal_without_penalty", "exclusive_loyalty_requested"):
                 strong_concentration = True
 
