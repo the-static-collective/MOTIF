@@ -1,0 +1,95 @@
+{
+  "experiment": "QC-013",
+  "source": "https://archive.org/details/crafter_human_dataset",
+  "source_type": "USER_UPLOADED_PUBLIC_GAMEPLAY_DATASET",
+  "source_archive_sha256": "7dc2589de4a246035f2fefb151bd8afac85d68d62c90311bc3afe9cca2b053e2",
+  "archive_size_bytes": 131969180,
+  "episodes": 100,
+  "actions_recorded": 61902,
+  "transitions_paired": 61802,
+  "median_episode_actions": 441,
+  "shortest_episode_actions": 162,
+  "longest_episode_actions": 3143,
+  "endpoint_health_zero_episodes": 100,
+  "endpoint_food_zero_episodes": 37,
+  "endpoint_drink_zero_episodes": 17,
+  "endpoint_energy_zero_episodes": 12,
+  "achievements_in_episode": {
+    "collect_wood": 100,
+    "place_table": 100,
+    "make_wood_pickaxe": 100,
+    "collect_stone": 100,
+    "collect_drink": 92,
+    "place_stone": 90,
+    "eat_cow": 89,
+    "collect_coal": 86,
+    "defeat_zombie": 84,
+    "make_stone_pickaxe": 78,
+    "make_stone_sword": 78,
+    "collect_iron": 53,
+    "place_furnace": 32,
+    "collect_diamond": 12
+  },
+  "first_achievement_median_action": {
+    "collect_wood": 14,
+    "place_table": 65,
+    "make_wood_pickaxe": 69,
+    "collect_stone": 91,
+    "make_stone_pickaxe": 110,
+    "collect_drink": 124,
+    "eat_cow": 100,
+    "defeat_zombie": 191,
+    "place_furnace": 397
+  },
+  "observed_order": {
+    "wood_before_table": "100/100",
+    "table_before_wood_pickaxe": "100/100",
+    "wood_pickaxe_before_stone": "100/100",
+    "stone_before_stone_pickaxe": "78/78"
+  },
+  "baseline_self_play_QC012": {
+    "runs": 3,
+    "actual_game_steps": 572,
+    "heuristic_achievements_per_run": [
+      6,
+      6
+    ],
+    "random_control_achievements": 3,
+    "comparison_is_matched": false
+  },
+  "episode_split_model_test": {
+    "train_episodes": 80,
+    "heldout_episodes": 20,
+    "train_steps": 50280,
+    "heldout_steps": 11522,
+    "extra_trees_next_action_accuracy": 0.5543308453393508,
+    "extra_trees_macro_f1": 0.1578202027541888,
+    "repeated_previous_action_accuracy": 0.5928658219059191,
+    "most_common_noop_accuracy": 0.3854365561534456,
+    "action_switch_subtest_heldout_steps": 4691,
+    "action_switch_extra_trees_accuracy": 0.3683649541675549,
+    "action_switch_majority_accuracy": 0.22681730974205927,
+    "behavioral_clone_outperforms_previous_action": false
+  },
+  "achievement_precedence_holdout": {
+    "train_episodes": 80,
+    "heldout_episodes": 20,
+    "predeclared_achievement_types": 10,
+    "threshold_min_coobservations": 30,
+    "threshold_order_fraction": 0.95,
+    "candidate_edges": 19,
+    "matched_heldout_pairs": 314,
+    "ordered_heldout_pairs": 312,
+    "heldout_fraction": 0.9936305732484076,
+    "units_not_independent": true,
+    "causality_not_proven": true
+  },
+  "interpretation": {
+    "game_only": true,
+    "source_evidence_kind": "REAL_GAMEPLAY_NOT_SAFETY_GUIDANCE",
+    "participant_independence_unverified": true,
+    "archive_not_published_in_repo": true,
+    "public_claims_are_aggregated": true,
+    "actual_motif_policy_learning_demonstrated": false
+  }
+}
