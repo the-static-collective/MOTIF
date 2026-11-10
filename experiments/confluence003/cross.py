@@ -10,6 +10,13 @@ from itertools import count
 from importlib import import_module
 import json
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+for p in (ROOT / "experiments" / "confluence002",
+          ROOT / "experiments" / "confluence001"):
+    if str(p) not in sys.path:
+        sys.path.insert(0, str(p))
 
 from native import native_modules, source_pins  # source pins enforced here
 from adapter003 import original_motif003
