@@ -26,7 +26,7 @@ This is **epistemic routing**, not a simulation of genius or human minds.
 | ASK | Prediction unknown or equivocal **and explicit synthetic opt-in** | Return an optional clarifying question; send nothing |
 | HOLD | Insufficient history and no opt-in | Refuse to invent another's belief |
 
-These are **machine decisions about its own forecasts**, NOT judgments about human motivation or worth. REFRA ME is a prewritten model switch, not an autonomously invented ontology. RELEASE is forecast abstention, not removal of evidence. Consent to a draft or disclosure is not consent to external action.
+These are **machine decisions about its own forecasts**, NOT judgments about human motivation or worth. REFRAME is a prewritten model switch, not an autonomously invented ontology. RELEASE is forecast abstention, not removal of evidence. Consent to a draft or disclosure is not consent to external action.
 
 ## Benchmarked against strong classical controls
 
@@ -81,3 +81,7 @@ CI retains all synthetic event-level receipts: forecast (or HOLD), public self-r
 5. Investigate whether reframing can propose and verify a *new context representation* instead of merely choosing a prewritten classifier, again matched against conventional methods.
 
 **Frontier:** can MOTIF recognize when acquired understanding is becoming an obstacle and select a better epistemic action *before* observing the next answer, without pretending to know someone else's mind?
+
+## First measured result and disposition
+
+See [RESULTS.md](RESULTS.md) for the executed five-regime benchmark, archived original freeze hash, strong classical scores, false alarm burden, and the **negative result**: the first HUMILITY controller lost to at least one standard algorithm in **every** future regime. A documented **post-hoc** self-critique guard now refuses graduation of an uncompetitive method, while leaving that method available in the research comparison. This guard was introduced *after* inspecting those first results; it is not a new independently blind discovery.
