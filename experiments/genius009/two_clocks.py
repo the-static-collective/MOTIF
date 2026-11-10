@@ -208,7 +208,7 @@ def check_attribution(corpus: Corpus, proposition: str,
         "source": claimed_source,
         "source_layer": w.layer,
         "proposition": proposition,
-        "source_polairty": own_claim.polarity if own_claim else None,
+        "source_polarity": own_claim.polarity if own_claim else None,
         "source_evidence_ref": w.evidence_ref,
         "later_witnesses_with_explicit_affirmation": [
             {"source": other.witness_id, "layer": other.layer,
