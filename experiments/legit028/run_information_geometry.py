@@ -247,6 +247,39 @@ def run():
                 "cpu_ms":round(sum(x["cpu_ms_with_per_question_exact_verification"]
                                    for x in rows),5),
             }
+    # POST-HOC only: these measurements exist AFTER all strategies have
+    # been frozen. They are counterexamples and future-experiment prompts,
+    # NEVER a selector that feeds back into this evaluation.
+    diagnosis = {}
+    for domain, methods in totals.items():
+        routed = methods["GEOMETRY_CV_GUARDED_ROUTER"]
+        incumbent = methods[engine.CONVENTIONAL]
+        eligible = {k:v for k,v in methods.items()
+                    if k not in ("NO_EXPANSION_OLD_QUESTIONS",
+                                 "GEOMETRY_CV_GUARDED_ROUTER")}
+        retrospective = min(eligible,key=lambda k:(eligible[k]["questions"],k))
+        regret = routed["questions"]-incumbent["questions"]
+        selected = training["domains"][domain][
+            "leave_one_training_world_out"]
+        diagnosis[domain] = {
+            "goal": "verified exact distinguishing witness",
+            "empirical_outcome_geometry":training["domains"][domain][
+                "observational_morphology"]["kind"],
+            "training_only_adopted_method":selected["adopted_method"],
+            "observed_future_questions_adopted":routed["questions"],
+            "observed_future_questions_classical_greedy":incumbent["questions"],
+            "future_regret_in_questions_vs_classical":regret,
+            "cv_selected_method_failed_to_beat_classical_in_future":
+                selected["geometry_promoted"] and regret>0,
+            "retrospectively_best_experimental_method":retrospective,
+            "retrospective_best_questions":eligible[retrospective]["questions"],
+            "posthoc_best_method_not_promoted_to_current_evaluation":True,
+            "next_research_question":(
+                "Can repeated independent training environments and a "
+                "distribution-shift-aware guard predict when this "
+                "information criterion will lose to strong classical "
+                "witness-gain search on truly future examples?"),
+        }
     return {
         "experiment":"MOTIF-LEGIT-028",
         "title":"INFORMATION GEOMETRY — ENTROPY IS NOT RESEARCH UTILITY",
@@ -260,6 +293,10 @@ def run():
         "future_world_provenance":origin,
         "new_world_evidence":results,
         "aggregate_results":totals,
+        "posthoc_research_diagnosis_not_used_for_selection": diagnosis,
+        "aggregate_routed_vs_classical_query_difference":sum(
+            x["future_regret_in_questions_vs_classical"]
+            for x in diagnosis.values()),
         "limitations":[
             "Mathematical questions, priors, metric choices and routing algorithm engineer-designed",
             "All challenge worlds selected for existing old-probe failures",
