@@ -1,0 +1,35 @@
+name: FIELD-008 blanching frontier research HOLD
+on:
+  push:
+    paths:
+      - 'experiments/field008/**'
+      - '.github/workflows/field008.yml'
+  pull_request:
+    paths:
+      - 'experiments/field008/**'
+      - '.github/workflows/field008.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install 'networkx==3.6.1'
+      - run: python -m unittest discover -s experiments/field008 -p 'test_blanch.py' -v
+      - run: |
+          python experiments/field008/blanch.py > /tmp/field008-results.json
+          cmp /tmp/field008-results.json experiments/field008/experiment-results.json
+          python experiments/field008/demo.py > /tmp/field008-example.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: field008-evidence-research-hold
+          path: |
+            /tmp/field008-results.json
+            /tmp/field008-example.json
+          if-no-files-found: ignore

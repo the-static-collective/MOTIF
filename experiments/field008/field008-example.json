@@ -1,0 +1,902 @@
+{
+  "authority": "RESEARCH_HOLD_NO_REAL_WORLD_AUTHORITY",
+  "conditional_probe_evaluations": 10667,
+  "corpus_sha256": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+  "extra_queries": 4,
+  "initial_candidate_count": 148,
+  "max_executed_depth": 5,
+  "n": 7,
+  "original_source_root_sha256": "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e",
+  "packet_sha256": "2dcf21459517be5762ecb9581218e580ec8491e6ea855bc1dcf48b908386b7a9",
+  "policy": "blanch",
+  "proof_steps": [
+    {
+      "proposal": {
+        "blanched_branches": [
+          {
+            "conditional_prediction": 15,
+            "conditional_world": "atlas-model-583",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate shared neighbors",
+              "compose length-four closures",
+              "deduplicate cycles",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 9,
+            "conditional_world": "atlas-model-584",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate shared neighbors",
+              "compose length-four closures",
+              "deduplicate cycles",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 9,
+            "conditional_world": "atlas-model-585",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate shared neighbors",
+              "compose length-four closures",
+              "deduplicate cycles",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 8,
+            "conditional_world": "atlas-model-586",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate shared neighbors",
+              "compose length-four closures",
+              "deduplicate cycles",
+              "count"
+            ]
+          }
+        ],
+        "candidate_count": 148,
+        "conditional_model_probe_evaluations": 7992,
+        "considered_probe_count": 54,
+        "expected_resolved_target_units": 291,
+        "indistinguishable_pairs": 8922,
+        "ink_source_receipt_digests": [
+          "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e"
+        ],
+        "model_ids_before": [
+          583,
+          584,
+          585,
+          586,
+          587,
+          588,
+          589,
+          590,
+          591,
+          592,
+          593,
+          594,
+          595,
+          596,
+          597,
+          598,
+          599,
+          600,
+          601,
+          602,
+          603,
+          604,
+          605,
+          606,
+          607,
+          608,
+          609,
+          610,
+          611,
+          612,
+          613,
+          614,
+          615,
+          616,
+          617,
+          618,
+          619,
+          620,
+          621,
+          622,
+          623,
+          624,
+          625,
+          626,
+          627,
+          628,
+          629,
+          630,
+          631,
+          632,
+          633,
+          634,
+          635,
+          636,
+          637,
+          638,
+          639,
+          640,
+          641,
+          642,
+          643,
+          644,
+          645,
+          646,
+          647,
+          648,
+          649,
+          650,
+          651,
+          652,
+          653,
+          654,
+          655,
+          656,
+          657,
+          658,
+          659,
+          660,
+          661,
+          662,
+          663,
+          664,
+          665,
+          666,
+          667,
+          668,
+          669,
+          670,
+          671,
+          672,
+          673,
+          674,
+          675,
+          676,
+          677,
+          678,
+          679,
+          680,
+          681,
+          682,
+          683,
+          684,
+          685,
+          686,
+          687,
+          688,
+          689,
+          690,
+          691,
+          692,
+          693,
+          694,
+          695,
+          696,
+          697,
+          698,
+          699,
+          700,
+          701,
+          702,
+          703,
+          704,
+          705,
+          706,
+          707,
+          708,
+          709,
+          710,
+          711,
+          712,
+          713,
+          714,
+          715,
+          716,
+          717,
+          718,
+          719,
+          720,
+          721,
+          722,
+          723,
+          724,
+          725,
+          726,
+          727,
+          728,
+          729,
+          730
+        ],
+        "outcome_partition_sizes": {
+          "1": 4,
+          "10": 1,
+          "15": 1,
+          "2": 19,
+          "3": 44,
+          "4": 25,
+          "5": 31,
+          "6": 10,
+          "7": 5,
+          "8": 3,
+          "9": 5
+        },
+        "policy": "blanch",
+        "proposal_sha256": "e218cb508f983aa24afe754fc358b9d9ab61cd89a2b1a96d54a93973b7290325",
+        "query_depth": 4,
+        "question": "four_cycles",
+        "schema": "motif.field008.blanch.v1",
+        "score": [
+          291,
+          8922,
+          -4
+        ],
+        "source_origin_count": 1,
+        "source_query_count_before": 0,
+        "status": "PROPOSED_BEFORE_SOURCE_QUERY",
+        "step": 0
+      },
+      "retained_alternative_worlds": [
+        594,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        625,
+        629,
+        635,
+        636,
+        641,
+        645,
+        651,
+        654,
+        655,
+        656,
+        659,
+        660,
+        661,
+        664,
+        700,
+        720,
+        730
+      ],
+      "retracted_conditional_worlds": [
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        595,
+        596,
+        597,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        621,
+        622,
+        623,
+        624,
+        626,
+        627,
+        628,
+        630,
+        631,
+        632,
+        633,
+        634,
+        637,
+        638,
+        639,
+        640,
+        642,
+        643,
+        644,
+        646,
+        647,
+        648,
+        649,
+        650,
+        652,
+        653,
+        657,
+        658,
+        662,
+        663,
+        665,
+        666,
+        667,
+        668,
+        669,
+        670,
+        671,
+        672,
+        673,
+        674,
+        675,
+        676,
+        677,
+        678,
+        679,
+        680,
+        681,
+        682,
+        683,
+        684,
+        685,
+        686,
+        687,
+        688,
+        689,
+        690,
+        691,
+        692,
+        693,
+        694,
+        695,
+        696,
+        697,
+        698,
+        699,
+        701,
+        702,
+        703,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        710,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        721,
+        722,
+        723,
+        724,
+        725,
+        726,
+        727,
+        728,
+        729
+      ],
+      "verified_properties": {
+        "articulations": false,
+        "bridges": false,
+        "connected": false,
+        "four_cycles": true,
+        "triangles": false
+      },
+      "verified_source": {
+        "answer": 5,
+        "kind": "SOURCE_OBSERVATION",
+        "probe": "four_cycles",
+        "provenance_origin": "one_atlas_corpus",
+        "schema": "motif.field008.blanch.v1",
+        "sha256": "693b56b2a6c9154efd3e30f577db62c46d4287e141a1731b09bdc3fe41655298",
+        "source": "Read-Wilson-Atlas-1998-via-NetworkX-3.6.1",
+        "source_query_sequence": 1,
+        "source_revision": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+        "status": "INK"
+      }
+    },
+    {
+      "proposal": {
+        "blanched_branches": [
+          {
+            "conditional_prediction": 5,
+            "conditional_world": "atlas-model-594",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate triples",
+              "compose adjacency",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 5,
+            "conditional_world": "atlas-model-598",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate triples",
+              "compose adjacency",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 5,
+            "conditional_world": "atlas-model-599",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate triples",
+              "compose adjacency",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 5,
+            "conditional_world": "atlas-model-600",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate triples",
+              "compose adjacency",
+              "count"
+            ]
+          }
+        ],
+        "candidate_count": 31,
+        "conditional_model_probe_evaluations": 1643,
+        "considered_probe_count": 53,
+        "expected_resolved_target_units": 112,
+        "indistinguishable_pairs": 361,
+        "ink_source_receipt_digests": [
+          "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e",
+          "693b56b2a6c9154efd3e30f577db62c46d4287e141a1731b09bdc3fe41655298"
+        ],
+        "model_ids_before": [
+          594,
+          598,
+          599,
+          600,
+          601,
+          602,
+          603,
+          604,
+          605,
+          606,
+          607,
+          608,
+          609,
+          610,
+          625,
+          629,
+          635,
+          636,
+          641,
+          645,
+          651,
+          654,
+          655,
+          656,
+          659,
+          660,
+          661,
+          664,
+          700,
+          720,
+          730
+        ],
+        "outcome_partition_sizes": {
+          "0": 1,
+          "1": 2,
+          "2": 5,
+          "3": 4,
+          "4": 7,
+          "5": 12
+        },
+        "policy": "blanch",
+        "proposal_sha256": "e837546a6510193387f89216e4d295a7e09eb1d210bddfdf4c4382cbff355b6c",
+        "query_depth": 3,
+        "question": "triangles",
+        "schema": "motif.field008.blanch.v1",
+        "score": [
+          112,
+          361,
+          -3
+        ],
+        "source_origin_count": 1,
+        "source_query_count_before": 1,
+        "status": "PROPOSED_BEFORE_SOURCE_QUERY",
+        "step": 1
+      },
+      "retained_alternative_worlds": [
+        594,
+        598,
+        599,
+        600,
+        601,
+        602,
+        605,
+        608,
+        610,
+        625,
+        636,
+        659
+      ],
+      "retracted_conditional_worlds": [
+        603,
+        604,
+        606,
+        607,
+        609,
+        629,
+        635,
+        641,
+        645,
+        651,
+        654,
+        655,
+        656,
+        660,
+        661,
+        664,
+        700,
+        720,
+        730
+      ],
+      "verified_properties": {
+        "articulations": false,
+        "bridges": false,
+        "connected": false,
+        "four_cycles": true,
+        "triangles": true
+      },
+      "verified_source": {
+        "answer": 5,
+        "kind": "SOURCE_OBSERVATION",
+        "probe": "triangles",
+        "provenance_origin": "one_atlas_corpus",
+        "schema": "motif.field008.blanch.v1",
+        "sha256": "7e4d4cdbfc5869be0747cb95258c3f95bab18d23d20d74f4ba7c739a50394190",
+        "source": "Read-Wilson-Atlas-1998-via-NetworkX-3.6.1",
+        "source_query_sequence": 2,
+        "source_revision": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+        "status": "INK"
+      }
+    },
+    {
+      "proposal": {
+        "blanched_branches": [
+          {
+            "conditional_prediction": 0,
+            "conditional_world": "atlas-model-594",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate vertices",
+              "remove one conditionally",
+              "recount components",
+              "sum cut vertices"
+            ]
+          },
+          {
+            "conditional_prediction": 1,
+            "conditional_world": "atlas-model-598",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate vertices",
+              "remove one conditionally",
+              "recount components",
+              "sum cut vertices"
+            ]
+          },
+          {
+            "conditional_prediction": 2,
+            "conditional_world": "atlas-model-599",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate vertices",
+              "remove one conditionally",
+              "recount components",
+              "sum cut vertices"
+            ]
+          },
+          {
+            "conditional_prediction": 2,
+            "conditional_world": "atlas-model-600",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "enumerate vertices",
+              "remove one conditionally",
+              "recount components",
+              "sum cut vertices"
+            ]
+          }
+        ],
+        "candidate_count": 12,
+        "conditional_model_probe_evaluations": 624,
+        "considered_probe_count": 52,
+        "expected_resolved_target_units": 60,
+        "indistinguishable_pairs": 35,
+        "ink_source_receipt_digests": [
+          "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e",
+          "693b56b2a6c9154efd3e30f577db62c46d4287e141a1731b09bdc3fe41655298",
+          "7e4d4cdbfc5869be0747cb95258c3f95bab18d23d20d74f4ba7c739a50394190"
+        ],
+        "model_ids_before": [
+          594,
+          598,
+          599,
+          600,
+          601,
+          602,
+          605,
+          608,
+          610,
+          625,
+          636,
+          659
+        ],
+        "outcome_partition_sizes": {
+          "0": 1,
+          "1": 3,
+          "2": 8
+        },
+        "policy": "blanch",
+        "proposal_sha256": "236a4f8b2dc9c6b559f210d150260210573d215c01c1dd46eeb2493eaff94f2f",
+        "query_depth": 5,
+        "question": "articulations",
+        "schema": "motif.field008.blanch.v1",
+        "score": [
+          60,
+          35,
+          -5
+        ],
+        "source_origin_count": 1,
+        "source_query_count_before": 2,
+        "status": "PROPOSED_BEFORE_SOURCE_QUERY",
+        "step": 2
+      },
+      "retained_alternative_worlds": [
+        599,
+        600,
+        602,
+        605,
+        608,
+        625,
+        636,
+        659
+      ],
+      "retracted_conditional_worlds": [
+        594,
+        598,
+        601,
+        610
+      ],
+      "verified_properties": {
+        "articulations": true,
+        "bridges": true,
+        "connected": true,
+        "four_cycles": true,
+        "triangles": true
+      },
+      "verified_source": {
+        "answer": 2,
+        "kind": "SOURCE_OBSERVATION",
+        "probe": "articulations",
+        "provenance_origin": "one_atlas_corpus",
+        "schema": "motif.field008.blanch.v1",
+        "sha256": "d9fb8ae67d4331280654315656f895aa819bbfee3a0366fdd244e1e840ed9634",
+        "source": "Read-Wilson-Atlas-1998-via-NetworkX-3.6.1",
+        "source_query_sequence": 3,
+        "source_revision": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+        "status": "INK"
+      }
+    },
+    {
+      "proposal": {
+        "blanched_branches": [
+          {
+            "conditional_prediction": 3,
+            "conditional_world": "atlas-model-599",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "collect incident edges",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 4,
+            "conditional_world": "atlas-model-600",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "collect incident edges",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 4,
+            "conditional_world": "atlas-model-602",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "collect incident edges",
+              "count"
+            ]
+          },
+          {
+            "conditional_prediction": 3,
+            "conditional_world": "atlas-model-605",
+            "source_root_origins": [
+              "one_atlas_corpus"
+            ],
+            "status": "PENCIL_BLANCHED_NOT_FACT",
+            "trace": [
+              "condition-on-graph",
+              "collect incident edges",
+              "count"
+            ]
+          }
+        ],
+        "candidate_count": 8,
+        "conditional_model_probe_evaluations": 408,
+        "considered_probe_count": 51,
+        "expected_resolved_target_units": 40,
+        "indistinguishable_pairs": 16,
+        "ink_source_receipt_digests": [
+          "8dd0b8a068d6855abf0e57cc9894f6ea97ac8fa0d3ef2d65e3e9d191b059468e",
+          "693b56b2a6c9154efd3e30f577db62c46d4287e141a1731b09bdc3fe41655298",
+          "7e4d4cdbfc5869be0747cb95258c3f95bab18d23d20d74f4ba7c739a50394190",
+          "d9fb8ae67d4331280654315656f895aa819bbfee3a0366fdd244e1e840ed9634"
+        ],
+        "model_ids_before": [
+          599,
+          600,
+          602,
+          605,
+          608,
+          625,
+          636,
+          659
+        ],
+        "outcome_partition_sizes": {
+          "3": 4,
+          "4": 4
+        },
+        "policy": "blanch",
+        "proposal_sha256": "a0be4c0f0f2a6b49baac1af026734b885b5e255ed6b1461b1448e2c4e55750ad",
+        "query_depth": 2,
+        "question": "degree:0",
+        "schema": "motif.field008.blanch.v1",
+        "score": [
+          40,
+          16,
+          -2
+        ],
+        "source_origin_count": 1,
+        "source_query_count_before": 3,
+        "status": "PROPOSED_BEFORE_SOURCE_QUERY",
+        "step": 3
+      },
+      "retained_alternative_worlds": [
+        600,
+        602,
+        608,
+        636
+      ],
+      "retracted_conditional_worlds": [
+        599,
+        605,
+        625,
+        659
+      ],
+      "verified_properties": {
+        "articulations": true,
+        "bridges": true,
+        "connected": true,
+        "four_cycles": true,
+        "triangles": true
+      },
+      "verified_source": {
+        "answer": 4,
+        "kind": "SOURCE_OBSERVATION",
+        "probe": "degree:0",
+        "provenance_origin": "one_atlas_corpus",
+        "schema": "motif.field008.blanch.v1",
+        "sha256": "f92a1cf7fee60ec89496073d4fe3dfd131ada44b3147f3bd76526df08f995be7",
+        "source": "Read-Wilson-Atlas-1998-via-NetworkX-3.6.1",
+        "source_query_sequence": 4,
+        "source_revision": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+        "status": "INK"
+      }
+    }
+  ],
+  "properties_resolved": 5,
+  "remaining_models": 4,
+  "resolved_property_names": [
+    "connected",
+    "triangles",
+    "four_cycles",
+    "bridges",
+    "articulations"
+  ],
+  "schema": "motif.field008.blanch.v1",
+  "source_scope": "Read-Wilson-Atlas-1998-via-NetworkX-3.6.1",
+  "total_conditional_branches_retracted": 144,
+  "unique_identified": false,
+  "world_id_for_evaluator_only": 608
+}

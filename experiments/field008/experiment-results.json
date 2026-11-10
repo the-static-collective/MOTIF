@@ -1,0 +1,119 @@
+{
+  "corpus_sha256": "17f940be3d89a623bc291e0e3eb64b108987cd68a2c4f0a82b98b3294153bad9",
+  "experiment": "FIELD-008",
+  "primary_strict_beats_classical_6": false,
+  "proof_digest": "b1b4aa5252a10a0d05c437348ba88e19a9d0db74a410fbb7c6b1db05431bd9c5",
+  "protocol": "experiments/field008/PREREGISTRATION.md",
+  "schema": "motif.field008.blanch.v1",
+  "seven_vertex_transfer_strict_beats_classical": false,
+  "summary": [
+    {
+      "cases": 156,
+      "deepest_executed": 1,
+      "n": 6,
+      "policy": "near",
+      "total_conditional_probe_evaluations": 72200,
+      "total_extra_source_queries": 563,
+      "total_resolved_attributes": 713,
+      "unique": 103
+    },
+    {
+      "cases": 156,
+      "deepest_executed": 5,
+      "n": 6,
+      "policy": "entropy",
+      "total_conditional_probe_evaluations": 143982,
+      "total_extra_source_queries": 344,
+      "total_resolved_attributes": 780,
+      "unique": 156
+    },
+    {
+      "cases": 156,
+      "deepest_executed": 5,
+      "n": 6,
+      "policy": "gini",
+      "total_conditional_probe_evaluations": 142402,
+      "total_extra_source_queries": 344,
+      "total_resolved_attributes": 780,
+      "unique": 156
+    },
+    {
+      "cases": 156,
+      "deepest_executed": 5,
+      "n": 6,
+      "policy": "blanch",
+      "total_conditional_probe_evaluations": 148829,
+      "total_extra_source_queries": 370,
+      "total_resolved_attributes": 780,
+      "unique": 154
+    },
+    {
+      "cases": 156,
+      "deepest_executed": 5,
+      "n": 6,
+      "policy": "value_control",
+      "total_conditional_probe_evaluations": 148829,
+      "total_extra_source_queries": 370,
+      "total_resolved_attributes": 780,
+      "unique": 154
+    },
+    {
+      "cases": 96,
+      "deepest_executed": 1,
+      "n": 7,
+      "policy": "near",
+      "total_conditional_probe_evaluations": 398109,
+      "total_extra_source_queries": 377,
+      "total_resolved_attributes": 138,
+      "unique": 6
+    },
+    {
+      "cases": 96,
+      "deepest_executed": 5,
+      "n": 7,
+      "policy": "entropy",
+      "total_conditional_probe_evaluations": 689385,
+      "total_extra_source_queries": 294,
+      "total_resolved_attributes": 471,
+      "unique": 84
+    },
+    {
+      "cases": 96,
+      "deepest_executed": 5,
+      "n": 7,
+      "policy": "gini",
+      "total_conditional_probe_evaluations": 684630,
+      "total_extra_source_queries": 294,
+      "total_resolved_attributes": 473,
+      "unique": 87
+    },
+    {
+      "cases": 96,
+      "deepest_executed": 5,
+      "n": 7,
+      "policy": "blanch",
+      "total_conditional_probe_evaluations": 695518,
+      "total_extra_source_queries": 300,
+      "total_resolved_attributes": 480,
+      "unique": 79
+    },
+    {
+      "cases": 96,
+      "deepest_executed": 5,
+      "n": 7,
+      "policy": "value_control",
+      "total_conditional_probe_evaluations": 695518,
+      "total_extra_source_queries": 300,
+      "total_resolved_attributes": 480,
+      "unique": 79
+    }
+  ],
+  "warnings": [
+    "all Atlas candidate model structures available; target is simulated source-owned index",
+    "one Atlas corpus provenance origin, not independent witness corroboration",
+    "all source queries same nominal unit cost; computation unequal",
+    "multi-hop conditional expansion is authored classical search, not original mathematics",
+    "classical exhaustive baselines see the same entire probe menu",
+    "research HOLD; no deployment or real-world action"
+  ]
+}
