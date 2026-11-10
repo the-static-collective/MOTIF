@@ -142,6 +142,14 @@ class TestThreeIndependentThreads(unittest.TestCase):
         self.assertTrue(all(c["status"]=="INTERPRETATION_NOT_TESTIMONY"
                             for c in packet["retrospective_callbacks"]))
         self.assertTrue(packet["no_original_record_edited"])
+        self.assertEqual(len(packet["source_evidence_fingerprints"]), 3)
+        self.assertTrue(all(
+            ref.startswith("synthetic://three-thread/")
+            and "/sha256/" in ref
+            for ref in packet["source_evidence_fingerprints"].values()))
+        self.assertIn("/sha256/", packet["later_audit_source_pointer"])
+        self.assertTrue(packet["fingerprints_are_not_authenticated_signatures"])
+
 
     def test_competing_bridges_hold_instead_of_choosing_pretty_story(self):
         shared=public_projection(generate(101031, "CONVERGENCE"))
