@@ -293,6 +293,11 @@ def transfer_tasks(heldout):
     result["atlas_join_universal_8"] = tuple(
         (ids, tuple(universal_join(g) for g in graphs))
         for ids, graphs in heldout)
+    # A NEW graph population: independently sampled 8-node random graphs,
+    # not derived from the 7-node Atlas cohort. The source generator itself
+    # remains engineer-authored and nonblind; selected using OLD probes only.
+    from new_population import independent_synthetic_eight
+    result["seeded_random_8"] = independent_synthetic_eight()[0]
     # Confirm the OLD tool remains insufficient on these future problems.
     for family, cases in result.items():
         for ids, graphs in cases:
@@ -343,6 +348,8 @@ def _trial():
     if sha256(frozen).hexdigest() != plan["policies_frozen_sha256"]:
         raise HOLD("source plan changed after freeze")
     branches = transfer_tasks(heldout)
+    from new_population import independent_synthetic_eight
+    future_carriers, future_provenance = independent_synthetic_eight()
     old4 = grammar()
     outcomes = {}
     for family, cases in branches.items():
@@ -362,6 +369,7 @@ def _trial():
         "origin": origin,
         "training_pairs": len(train),
         "heldout_original_pairs": len(heldout),
+        "separate_eight_vertex_population": future_provenance,
         "generation": {
             "rule": "ADD_NEW_VERTEX_TO_ANY_NONEMPTY_NEIGHBOR_SUBSET",
             "generated_unlabeled_connected_5_patterns": 21,
@@ -371,10 +379,11 @@ def _trial():
         "training_frozen_plan": plan,
         "transferred_research": outcomes,
         "limitations": [
-            "Original external Atlas graphs only; graph pairs engineer-selected",
+            "Seven-node graphs external, eight-node sampled graph family engineer-generated",
             "Task selection intentionally conditioned on old-probe failure",
             "All generated fifth-vertex source types are established graph theory",
             "Heldout complement and universal-join cases are dependent transformations",
+            "New random eight-node cases are separately sampled but engineer-generated, not independent authorship",
             "Existing LEGIT-021 grammar already supported connected graphs to five",
             "No new formal mathematical theorem or historical novelty",
             "Only one constructed probe-selection episode; not autonomous compounding",
