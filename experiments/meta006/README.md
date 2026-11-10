@@ -168,6 +168,31 @@ grammar or a stronger combinatorial coding argument with a quantitatively
 better exponent, using equal-budget classical baselines and genuinely
 independent historical results?
 
+## Published mathematical context and comparison ceiling
+
+The polynomial lower bound obtained here, exponent ≈0.0876, is only a
+**relative improvement over META-005's highly restricted family**. It
+is NOT close to the best known results for the entire predecessor set
+of 1. Krasikov and Lagarias proved in *Acta Arithmetica* 109 (2003),
+237–258, that for all sufficiently large X, **at least X^0.84 positive
+integers ≤X reach 1** (more generally the predecessor count of any
+fixed positive a not divisible by 3). DOI:
+https://doi.org/10.4064/aa109-3-4
+Official journal page:
+https://www.impan.pl/en/publishing-house/journals-and-series/acta-arithmetica/all/109/33/81918/bounds-for-the-3x-1-problem-using-difference-inequalities
+
+That established theorem is MUCH stronger numerically than this
+elementary binary subtree bound, but applies to the full convergent
+basin rather than our explicit reversible-word subfamily. Therefore
+neither a new world-record exponent nor new published mathematics is
+claimed here. The value of the experiment is source-checkable
+generation of a richer INFINITE proof-carrying family, strict closed
+rank and a valid comparative asymptotic certificate.
+
+A genuinely competitive next experiment would reconstruct published
+difference-inequality bounds and a strong classic inverse-tree
+baseline before testing any new weighted branch grammar.
+
 ## Reproduce
 
 Stacked draft on META-005 #263 / META-004 #259, no merge.
