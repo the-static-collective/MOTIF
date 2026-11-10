@@ -4,9 +4,9 @@ import copy
 import json
 import unittest
 
-from confluence import Confluence, SyntheticOwner, WORLDS
 from native import (coherent_trial, native_modules, source_pins,
                     native_lineage, native_macro, native_proof, FieldOwnerView)
+from confluence import Confluence, SyntheticOwner, WORLDS
 
 
 class NativeConfluenceTests(unittest.TestCase):
