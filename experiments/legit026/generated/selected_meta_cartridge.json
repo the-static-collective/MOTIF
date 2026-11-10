@@ -1,0 +1,92 @@
+{
+  "experiment": "MOTIF-LEGIT-026",
+  "artifact_kind": "TRAINING_CROSSVALIDATED_META_QUESTION_POLICY",
+  "status": "RESEARCH_HOLD_NO_GENERAL_AUTONOMOUS_SELF_IMPROVEMENT",
+  "source": {
+    "github_actions_green_run_id": 42746241643,
+    "green_run_head_sha": "e5969df7c3c76b3462627b47621188638cc8556c",
+    "full_raw_artifact_id": 13730469218,
+    "full_raw_artifact_sha256": "0a15227d00e5c1337df1ab38d3f2d686a85dd4456299caf8cfeb647cbcedaf12",
+    "original_atlas_source": "Read-Wilson Graph Atlas 1998 via pinned NetworkX 3.4.2",
+    "old_meta_parent": "MOTIF-LEGIT-025"
+  },
+  "typed_rewrite": {
+    "bounded_candidate_program_count": 24,
+    "component_names": [
+      "operator_gate",
+      "question_priority_scorer",
+      "update_rule"
+    ],
+    "parent_program": [
+      "LEAF_FIRST",
+      "GAIN_ALL",
+      "STATIC"
+    ],
+    "selected_and_adopted_program": [
+      "LEAF_FIRST",
+      "COUNT_DIVERSITY",
+      "STATIC"
+    ],
+    "mutation": [
+      {
+        "component": "question_priority_scorer",
+        "from": "GAIN_ALL",
+        "to": "COUNT_DIVERSITY"
+      }
+    ],
+    "human_authored_search_grammar": true,
+    "not_unrestricted_code_generation": true,
+    "adopted_only_after_training_world_crossvalidation": true
+  },
+  "training": {
+    "training_world_sizes": {
+      "atlas_old_training": 4,
+      "prior_025_random_8": 8,
+      "research_train_seed_26001": 8,
+      "research_train_seed_26002": 8
+    },
+    "training_world_cv_mean_questions_parent": 1.25,
+    "training_world_cv_mean_questions_adopted": 1.21875,
+    "complexity_penalty_per_edit": 0.02,
+    "parent_score_including_penalty": 1.25,
+    "adopted_score_including_penalty": 1.23875,
+    "exact_classical_training_dp_min_total_queries": 31,
+    "frozen_all_five_policies_sha256": "ba8a947652ff39559278e6d339923e4abed408434b7d6894db62f8f3bb9550e1",
+    "future_seeds_not_consulted_during_training": [
+      26003,
+      26004
+    ]
+  },
+  "future_results": {
+    "future_seed_26003": {
+      "cases": 8,
+      "original_025_frozen_queries": 18,
+      "canonical_queries": 24,
+      "strong_classical_greedy_queries": 10,
+      "classical_training_optimal_dp_queries": 10,
+      "method_mirror_queries": 10,
+      "all_methods_solved": 8
+    },
+    "future_seed_26004": {
+      "cases": 8,
+      "original_025_frozen_queries": 14,
+      "canonical_queries": 24,
+      "strong_classical_greedy_queries": 9,
+      "classical_training_optimal_dp_queries": 9,
+      "method_mirror_queries": 9,
+      "all_methods_solved": 8
+    },
+    "previously_seen_atlas_regression": {
+      "cases": 6,
+      "original_025_frozen_queries": 6,
+      "canonical_queries": 12,
+      "strong_classical_greedy_queries": 6,
+      "classical_training_optimal_dp_queries": 6,
+      "method_mirror_queries": 6,
+      "all_methods_solved": 6
+    }
+  },
+  "interpretation": "The self-edit improved future source-question efficiency relative to the previously frozen MOTIF-025 strategy on these two engineer-generated future graph-worlds, but MATCHED both trained classical comparators; it does not demonstrate algorithm invention, superiority to classical mathematics, generality, or recursive self-improvement.",
+  "not_promoted_into_main": true,
+  "no_automatic_repository_mutation": true
+}
