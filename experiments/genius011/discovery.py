@@ -79,6 +79,7 @@ class Trial:
     origin_root: str
     shareable: bool = True
     private_note: str = ""
+    measurement_kind: str = "SIMULATED_RANDOMIZED"
 
 
 @dataclass(frozen=True)
@@ -254,7 +255,8 @@ def simulate_test(world: SimulatorWorld, question: Candidate
 
 def public_trials(rows: tuple[Trial, ...]) -> tuple[Trial, ...]:
     return tuple(Trial(x.signature, x.thread, x.treated, x.success,
-                       x.evidence_id, x.origin_root, True, "")
+                       x.evidence_id, x.origin_root, True, "",
+                       x.measurement_kind)
                  for x in rows if x.shareable)
 
 
@@ -267,6 +269,10 @@ def analyze(question: Candidate, trials: tuple[Trial, ...],
                 "no_external_action": True}
     if any(not x.shareable or x.private_note for x in trials):
         raise ValueError("Unshared/private test results cannot be analyzed")
+    if any(x.measurement_kind != "SIMULATED_RANDOMIZED" for x in trials):
+        return {"signature": question.signature,
+                "status": "HOLD_OBSERVATIONAL_DATA_NOT_AN_INTERVENTION",
+                "no_external_action": True}
     if any(x.signature != question.signature or x.thread not in THREADS
            or not x.evidence_id or not x.origin_root
            or type(x.treated) is not bool or type(x.success) is not bool
