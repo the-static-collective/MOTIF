@@ -1,0 +1,65 @@
+name: COLLECTIVE-003 National Treasure native frontier
+on:
+  push:
+    branches:
+      - experiment/collective-003-national-treasure-questions
+  pull_request:
+    paths:
+      - 'experiments/collective003/**'
+      - '.github/workflows/collective003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-pinned-high-weirdness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout MOTIF research stack
+        uses: actions/checkout@v4
+      - name: Checkout original National Treasure source cases
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/national-treasure
+          ref: a6f1533537f88e837ba1560731d23645676a5b52
+          path: external/nt-cases
+          persist-credentials: false
+      - name: Checkout original unmerged National Treasure Question Box
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/national-treasure
+          ref: 28fbf9b10d003f7c577143550d17cc17f8109cb1
+          path: external/nt-question-box
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Test the ORIGINAL source-owned Question Box
+        working-directory: external/nt-question-box
+        run: node tools/question-box/test.mjs
+      - name: Test ORIGINAL Cicada synthetic corpus validator
+        working-directory: external/nt-cases
+        run: node --test cases/cicada-overfit/validate.test.mjs
+      - name: Source-pinned MOTIF question re-entry and falsifiers
+        env:
+          NT_CASE_ROOT: external/nt-cases
+          NT_BOX_ROOT: external/nt-question-box
+        run: python -m unittest discover -s experiments/collective003 -p 'test_*.py' -v
+      - name: Source-pinned prior collective proof-reentry regressions
+        run: python -m unittest discover -s experiments/collective002 -p 'test_*.py' -v
+      - name: Emit full evidence-bearing question receipts
+        run: |
+          python experiments/collective003/national_treasure_frontier.py \
+            --case-root external/nt-cases \
+            --box-root external/nt-question-box \
+            > collective003-national-treasure-research.json
+      - name: Upload research-only original-source receipt packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: COLLECTIVE003-NATIONAL-TREASURE-PROOF-QUESTIONS-HOLD
+          path: collective003-national-treasure-research.json
