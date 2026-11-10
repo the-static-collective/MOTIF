@@ -1,0 +1,49 @@
+name: META-002 variable-time Collatz ranking and falsifiers
+on:
+  push:
+    branches:
+      - experiment/meta-002-variable-horizon-ranking-falsifiers
+  pull_request:
+    paths:
+      - 'experiments/meta002/**'
+      - 'experiments/meta001/**'
+      - '.github/workflows/meta002.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  partial-infinite-rank-with-honest-holds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test new ranking proposals, independent classical control and negative cases
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Run and regress META-001 actual open-conjecture analysis
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Create complete K9 proof-carrying variable-rank packet
+        run: python experiments/meta002/variable_horizon.py --k 9 > meta002-variable-horizon-evidence.json
+      - name: Source-independent re-entry and no authority overclaim check
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0,'experiments/meta002')
+          from variable_horizon import verify_packet,reenter
+          p=json.load(open('meta002-variable-horizon-evidence.json'))
+          assert verify_packet(p)
+          out=reenter(p)
+          assert out['new_discovery_questions']==0
+          assert not out['collatz_globally_solved']
+          assert p['main_level']['honest_uncertified_classes']==38
+          assert p['main_level']['adaptive_variable_time_certified_infinite_classes']==474
+          assert p['main_level']['classical_independent_adaptive_certified_classes']==474
+          print('Symbolic class proofs and finite source receipts replayed; 38 classes still HOLD')
+          PY
+      - name: Upload complete inspectable rank evidence and HOLDS
+        uses: actions/upload-artifact@v4
+        with:
+          name: META002-VARIABLE-TIME-RANKING-RESEARCH-HOLD
+          path: meta002-variable-horizon-evidence.json
