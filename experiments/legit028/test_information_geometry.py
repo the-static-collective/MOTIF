@@ -159,6 +159,18 @@ class InformationGeometryTests(unittest.TestCase):
         self.assertEqual(result["status"],e.STATUS)
         self.assertEqual(len(result["future_world_provenance"]),3)
         self.assertEqual(set(result["aggregate_results"]),set(w.DOMAINS))
+        hindsight=result["posthoc_research_diagnosis_not_used_for_selection"]
+        self.assertEqual(set(hindsight),set(w.DOMAINS))
+        self.assertEqual(sum(x["future_regret_in_questions_vs_classical"]
+                             for x in hindsight.values()),
+                         result["aggregate_routed_vs_classical_query_difference"])
+        self.assertTrue(all(x["posthoc_best_method_not_promoted_to_current_evaluation"]
+                            for x in hindsight.values()))
+        for domain,diag in hindsight.items():
+            self.assertEqual(diag["training_only_adopted_method"],
+                self.training["domains"][domain]["leave_one_training_world_out"]
+                ["adopted_method"])
+            self.assertIn("next_research_question",diag)
         for domain,rows in result["aggregate_results"].items():
             baseline=rows["NO_EXPANSION_OLD_QUESTIONS"]
             self.assertEqual(baseline["solved"],0)
