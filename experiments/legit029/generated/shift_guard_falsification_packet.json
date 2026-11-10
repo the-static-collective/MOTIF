@@ -1,0 +1,94 @@
+{
+  "experiment": "MOTIF-LEGIT-029",
+  "title": "SHIFT-AWARE RESEARCH GATE — VERIFIED MIXED RESULT",
+  "artifact_kind": "TRAINING_FROZEN_EMPIRICAL_RISK_AND_NEGATIVE_OOD_DISCOVERY_PACKET",
+  "status": "RESEARCH_HOLD_NO_STATISTICALLY_VALID_SHIFT_GUARANTEE",
+  "audit": {
+    "source_successful_actions_run": 42753183756,
+    "source_commit_sha": "2bfdb1997fee5f35eaeaa63d25674913197c8d0b",
+    "raw_transcripts_artifact_id": 13734611407,
+    "raw_transcripts_zip_sha256": "8a4175b8b6927af118e475d2fa4dc51be201a017026533e59b4ca0e14e6f61aa",
+    "frozen_research_plan_sha256": "977b1a9a9bf56dfa900aba12b80fc7a48bc3b1323f8055ff6be96e102184411a",
+    "initial_underfilled_sampler_failed_before_future_scoring": true,
+    "revised_graph_draws_from_1000_to_3000": true,
+    "revised_future_graph_seeds": [
+      29005,
+      29006
+    ],
+    "remaining_math_future_seeds": [
+      29013,
+      29014,
+      29015,
+      29016
+    ],
+    "protocol_not_preregistered_unchanged": true
+  },
+  "measured_exact_queries": {
+    "graph_hom_witness": {
+      "cases": 32,
+      "baseline_classical_greedy": 52,
+      "prior_mean_cv_router": 45,
+      "empirical_worst_world_guard": 52,
+      "metadata_shift_guard": 52,
+      "mean_cv_plus_metadata_shift": 45,
+      "raw_diversity": 40,
+      "joint_shannon_entropy": 42,
+      "contextual_information_value": 49,
+      "input_novelty_refusals": 1,
+      "robust_selected": "CLASSICAL_RESIDUAL_GREEDY"
+    },
+    "integer_constraint_countermodel": {
+      "cases": 64,
+      "baseline_classical_greedy": 805,
+      "prior_mean_cv_router": 705,
+      "empirical_worst_world_guard": 705,
+      "metadata_shift_guard": 799,
+      "mean_cv_plus_metadata_shift": 799,
+      "raw_diversity": 1068,
+      "joint_shannon_entropy": 884,
+      "contextual_information_value": 705,
+      "input_novelty_refusals": 34,
+      "robust_selected": "CONTEXTUAL_VALUE_OF_INFORMATION"
+    },
+    "polynomial_modular_witness": {
+      "cases": 64,
+      "baseline_classical_greedy": 111,
+      "prior_mean_cv_router": 113,
+      "empirical_worst_world_guard": 113,
+      "metadata_shift_guard": 113,
+      "mean_cv_plus_metadata_shift": 113,
+      "raw_diversity": 189,
+      "joint_shannon_entropy": 152,
+      "contextual_information_value": 111,
+      "input_novelty_refusals": 0,
+      "robust_selected": "CONTEXTUAL_BAYES_WITNESS"
+    },
+    "total_cases": 160,
+    "baseline_classical_greedy": 968,
+    "prior_mean_cv_router": 863,
+    "empirical_worst_world_guard": 870,
+    "metadata_shift_guard": 964,
+    "mean_cv_plus_metadata_shift": 957,
+    "raw_diversity": 1297,
+    "joint_shannon_entropy": 1078,
+    "contextual_information_value": 865,
+    "note": "All complete methods solved all tasks using independently checked exact witnesses. Graph complement cases are dependent and no domain/world is externally blind."
+  },
+  "epistemic_findings": {
+    "total_empirical_worst_guard_query_savings_vs_classical": 98,
+    "total_empirical_worst_guard_query_savings_fraction": 0.1012396694,
+    "worst_world_rule_lost_to_mean_cv_on_this_future_suite": true,
+    "polynomial_guard_did_not_detect_two_query_regret": true,
+    "metadata_shift_detector_refused_34_constraint_cases": true,
+    "metadata_shift_detector_increased_constraint_questions_from_705_to_799": true,
+    "input_novelty_is_not_equivalent_to_method_regret_risk": true,
+    "worst_world_empirical_guard_is_not_formal_DRO_or_CRC_guarantee": true,
+    "not_statistically_representative": true,
+    "no_independent_blind_administration": true,
+    "new_mathematical_algorithm_invented": false,
+    "recursive_improvement_demonstrated": false
+  },
+  "next_relevant_question": "Can a calibration method fitted on independent domain-level task families predict positive method-specific regret, rather than merely detecting novelty in the input representation?",
+  "future_research_hypotheses_are_not_promoted_into_current_test": true,
+  "commit_to_main": false
+}
