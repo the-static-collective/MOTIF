@@ -1,0 +1,51 @@
+name: MOTIF GENIUS-008 strange genius atlas
+
+on:
+  push:
+    paths:
+      - "experiments/genius008/**"
+      - ".github/workflows/genius008.yml"
+  pull_request:
+    paths:
+      - "experiments/genius008/**"
+      - ".github/workflows/genius008.yml"
+
+jobs:
+  cross-domain-proof-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run counterexamples, source ownership and boundary checks
+        run: python -m unittest discover -s experiments/genius008 -p 'test_*.py' -v
+      - name: Archive four source-grounded synthetic crossing receipts
+        run: |
+          python experiments/genius008/crossings.py > /tmp/motif-genius008-crossings.json
+          python -m json.tool /tmp/motif-genius008-crossings.json >/dev/null
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/motif-genius008-crossings.json"))
+          assert d["enoch_bacon_aquinas"]["status"] == "HOLD_NO_EARLY_EXPLICIT_WITNESS"
+          assert d["povenmire_acaster_nolan_shakespeare"]["status"] == "CONSISTENT_SYNTHETIC_BRAID"
+          assert d["tesla_cornell_jackson"]["full_realignment_beats"] == 20
+          assert d["jesus_simmons_oppenheimer"]["candidate"] == "small_accessible_table"
+          assert d["no_external_action"]
+          print("ENOOCH TEXTUAL ATTRIBUTION:", d["enoch_bacon_aquinas"]["status"])
+          print("STORY ARCHITECTURE:", d["povenmire_acaster_nolan_shakespeare"]["status"])
+          print("SYNTHETIC POLYMETER REALIGNMENT:", d["tesla_cornell_jackson"]["full_realignment_beats"])
+          print("CONSENT-FIRST DRAFT:", d["jesus_simmons_oppenheimer"]["candidate"])
+          print("STATUS:", d["status"])
+          PY
+      - name: Retain inspectable source-bound synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS008-STRANGE-ATLAS-RESEARCH-HOLD
+          path: /tmp/motif-genius008-crossings.json
+          retention-days: 30
+          if-no-files-found: warn
