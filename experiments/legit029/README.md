@@ -92,7 +92,15 @@ greedy. Selection is strictly training-only. We freeze a digest of
 all method plans and the input-novelty threshold before requesting
 new worlds.
 
-**Protocol revision recorded:** the initial CI attempt with 1,000 graph\nsamples per future seed could not assemble eight qualifying graph pairs\nfor one future seed and stopped **before evaluating any new question\npolicies**. The sampler was increased to 3,000 draws and the future\nseeds were changed to 29005/29006 before outcome evaluation. This\nrevision is transparent; it means the original proposed experiment was\nnot strictly preregistered unchanged.\n\nFuture-only inputs:
+**Protocol revision recorded:** the initial CI attempt with 1,000 graph
+samples per future seed could not assemble eight qualifying graph pairs
+for one future seed and stopped **before evaluating any held-out question
+policies**. The sampler was increased to 3,000 draws and the future
+seeds were changed to 29005/29006 before future-world outcome evaluation. This
+revision is transparent; it means the original proposed experiment was
+not strictly preregistered unchanged.
+
+Future-only inputs:
 - Two new independently seeded graph sets 29005/29006, eight
   old-probe-blind source pairs each.
 - Two graph complement sets using those same sampled graph targets:
