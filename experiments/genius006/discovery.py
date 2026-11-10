@@ -284,7 +284,10 @@ def independent_verify(world: World, caps: tuple[Capability, ...]) -> dict:
 def episode(planner: Planner, world: World, policy: str) -> dict:
     """Reveal only explicitly asked answers, verify certificates separately."""
     if world not in planner.worlds:
-        raise ValueError("Target is outside the declared model; HOLD instead of guessing")
+        return {"task": planner.task.name, "policy": policy,
+                "status": "HOLD_OUTSIDE_DECLARED_MODEL",
+                "verified_capability_count": 0, "verified_capability_value": 0,
+                "trace": [], "no_real_world_action": True}
     belief = planner.root
     asked: tuple[str, ...] = ()
     trace = []
