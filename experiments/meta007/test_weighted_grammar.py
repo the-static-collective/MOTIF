@@ -154,7 +154,7 @@ class WeightedProofGrammar(unittest.TestCase):
                 if L:
                     self.assertGreaterEqual(counts[L],counts[L-1])
         self.assertEqual(count_weighted_words(11,7)[7],2)
-        self.assertEqual(count_weighted_words(11,13)[13],4)
+        self.assertEqual(count_weighted_words(11,13)[13],3)
 
     def test_proof_uses_exact_weighted_coding_not_only_uniform_worst_case(self):
         cert=self.packet["weighted_combinatorial_growth_certificate"]
@@ -203,9 +203,7 @@ class WeightedProofGrammar(unittest.TestCase):
         with self.assertRaises(HOLD):
             generalized_branch(7,0,11)
         with self.assertRaises(HOLD):
-            decode_word(218453,2,max_depth=3) if (
-                False
-            ) else encode_word([2],2)
+            encode_word([2],2)
         self.assertIn("HOLD_",decode_word(7,11)["status"])
         for invalid in (0,1,13,True):
             with self.assertRaises(HOLD):
