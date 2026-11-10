@@ -128,7 +128,7 @@ work and saves a JSON report.
 
 ## What this does NOT establish
 
-There is no live language model, adaptive inoculation, adversarial training,
+There is no deployed agent or real tool execution. There is an optional,\nsmall real Qwen2.5:3B model-mediated probe using **engineer-authored** tasks.\nThere is no adaptive inoculation, adversarial training,
 source authentication, semantic fact-checking of arbitrary prose, real
 cryptographic capabilities, protection against an attacker who controls the
 runtime, human-study validation, or independent generalization. The check
