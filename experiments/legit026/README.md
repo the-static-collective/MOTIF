@@ -106,6 +106,62 @@ negative one, is independently recalculated using the exhaustive
 vertex-assignment oracle from LEGIT-021. We record all questions,
 per-case traces, successes/holds, and CPU including verification costs.
 
+### Measured result: first verified meta-policy rewrite
+
+From the original 24 engine-authored policy programs, leave-one-training-
+world-out validation selected a **one-component edit**:
+
+`LEAF_FIRST + GAIN_ALL + STATIC`
+→ **`LEAF_FIRST + COUNT_DIVERSITY + STATIC`**.
+
+That changes how MOTIF judges the usefulness of a proposed mathematical
+question: instead of prioritizing how many already-labeled training
+pairs it separates, it prioritizes how many distinct exact count values
+it reveals among training graphs. The source construction rules and
+eligible source graphs remain unchanged.
+
+The CV mean fell from **1.25 to 1.21875 questions/case** over the four
+training-world folds. The predeclared 0.02 per-edit complexity penalty
+still permits promotion (1.25 vs 1.23875). This is a tiny gain, not
+reliable proof of a broad improvement.
+
+**New preselected eight-vertex worlds (not Atlas derivatives):**
+
+| Method | 26003 (8 pairs) | 26004 (8 pairs) | Combined |
+| --- | ---: | ---: | ---: |
+| Frozen LEGIT-025 method | 18 | 14 | 32 |
+| Canonical classical enumeration | 24 | 24 | 48 |
+| Strong trained classical greedy | 10 | 9 | 19 |
+| Exact finite train-optimal classical DP | 10 | 9 | 19 |
+| **LEGIT-026 question-policy rewrite** | **10** | **9** | **19** |
+
+Every method solved all 16 tasks with independently checked exact
+homomorphism-count witnesses. The new meta-policy required **13 fewer
+queries than the previous MOTIF strategy (32→19)**, but **did not beat
+either strong classical comparator**. That is the correct scientific
+boundary. CPU measurements are very small and affected by verification
+overhead; don't interpret this table as a general speed benchmark.
+
+The six previously inspected Atlas holdout pairs are regression cases
+only. All strong trained policies and both MOTIF policies solved them
+with six questions.
+
+**Durable artifact:** `generated/selected_meta_cartridge.json` records
+the precise edit, its training-world selection, frozen SHA-256 of all
+five method orders, previous/future measurements, source CI run and
+full raw artifact digest. An automated test recomputes and checks its
+contents against actual training.
+
+**Verification:** 9 original adversarial tests, plus cartridge-replay
+test in final revision. Green parent run was GitHub Actions
+`42746241643`; refer to the final branch run for the extra test.
+
+**Important naming distinction:** the abstract CV "parent program" uses
+a typed leaf-first policy with a global training score for all probes.
+The **actual** legacy strategy from LEGIT-025 is independently loaded as
+`PRIOR_025_FROZEN` and benchmarked separately. These are not identical
+ordering programs, and their results must not be conflated.
+
 ### Interpretation rules
 
 A verified result can establish that a frozen policy learned from
