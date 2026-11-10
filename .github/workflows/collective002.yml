@@ -1,0 +1,39 @@
+name: COLLECTIVE-002 missing-link question invention
+on:
+  push:
+    branches:
+      - experiment/collective-002-missing-link-question-invention
+  pull_request:
+    paths:
+      - 'experiments/collective002/**'
+      - 'experiments/collective001/**'
+      - 'experiments/thought-027/**'
+      - 'experiments/thought-028/**'
+      - '.github/workflows/collective002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-source-provenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New independent observation and missing-link falsifiers
+        run: python -m unittest discover -s experiments/collective002 -p 'test_*.py' -v
+      - name: Inherited proof-carrying answer checks
+        run: python -m unittest discover -s experiments/collective001 -p 'test_*.py' -v
+      - name: Inherited active proof composition checks
+        run: python -m unittest discover -s experiments/thought-028 -p 'test_weave.py' -v
+      - name: Execute matched-information question policy benchmark
+        run: python experiments/collective002/benchmark.py > collective002-research.json
+      - name: Archive full synthetic evidence and cross-source receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: COLLECTIVE002-MISSING-LINK-RESEARCH-HOLD
+          path: collective002-research.json
