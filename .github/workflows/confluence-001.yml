@@ -1,0 +1,49 @@
+name: CONFLUENCE-001 Coherent Field
+on:
+  push:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/003/**'
+      - '.github/workflows/confluence-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/003/**'
+      - '.github/workflows/confluence-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-carrying-synthetic-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assert original MOTIF-003 and CONFLUENCE unit contracts
+        run: python -m unittest discover -s experiments/confluence001 -p 'test_*.py' -v
+      - name: Finite strong-classical comparison
+        run: python experiments/confluence001/benchmark.py > confluence001-benchmark.json
+      - name: Verify benchmark declares no novelty or external action
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result=json.loads(Path('confluence001-benchmark.json').read_text())
+          assert result['external_actions'] == 0
+          assert result['cases'] == 4
+          assert result['weighted_question_cost'] == result['exact_classical_best_weighted_cost']
+          assert result['verdict'].startswith('TIES_EXACT_CLASSICAL')
+          assert result['synthetically_actionable_cases'] == 3
+          print('Synthetic integrated controller ties exact classical finite baseline.')
+          PY
+      - name: Archive bounded source/query and outcome evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: confluence001-audit
+          path: confluence001-benchmark.json
+          retention-days: 14
