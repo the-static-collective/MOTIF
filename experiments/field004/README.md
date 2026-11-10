@@ -46,7 +46,7 @@ On the audit, the selected-estimator-without-relations ablation **ties** relatio
 
 ## Reproduction
 
-Python 3.11; local versions: NumPy 2.3.5, SciPy 1.17.0, scikit-learn 1.8.0. All inherited FIELD-003 CSV files must remain source-hash pinned.
+Python **3.13** for exact-reentry verification; local versions: NumPy 2.3.5, SciPy 1.17.0, scikit-learn 1.8.0. An initial 3.11 CI job reported a differing computed frozen model packet despite matching dataset/source tests, so cross-Python-version byte-for-byte model-selection reproduction is **not established**; use the pinned CI interpreter while investigating that difference. All inherited FIELD-003 CSV files must remain source-hash pinned.
 
 ```sh
 python -m pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
