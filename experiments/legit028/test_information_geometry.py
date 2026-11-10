@@ -154,6 +154,27 @@ class InformationGeometryTests(unittest.TestCase):
             self.assertTrue(any(w.is_witness(w.observation(
                 domain,case,q)) for q in w.candidate_questions(domain)))
 
+    def test_committed_information_geometry_packet_matches_training_policy(self):
+        packet=json.loads((HERE / "generated" /
+            "information_geometry_research_packet.json").read_text())
+        self.assertEqual(packet["experiment"],"MOTIF-LEGIT-028")
+        self.assertEqual(packet["provenance"][
+            "all_domain_training_policy_sha256"],
+            self.training["frozen_all_domain_policy_sha256"])
+        for domain in w.DOMAINS:
+            selected=self.training["domains"][domain][
+                "leave_one_training_world_out"]
+            saved=packet["training_router"][domain]
+            self.assertEqual(saved["adopted"],selected["adopted_method"])
+            self.assertEqual(saved["observed_alphabet"],self.training[
+                "domains"][domain]["observational_morphology"]["kind"])
+            self.assertEqual(saved["cv_selected_mean"],selected["comparators"][
+                selected["adopted_method"]]["macro_world_mean_questions"])
+        self.assertEqual(packet["independently_verified_future"][
+            "router_regret_vs_classical"],7)
+        self.assertTrue(packet[
+            "never_promote_retrospective_future_winner_without_new_frozen_challenge"])
+
     def test_run_independent_future_worlds_and_per_question_receipts(self):
         result=e.run()
         self.assertEqual(result["status"],e.STATUS)
