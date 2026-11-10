@@ -178,7 +178,33 @@ def _candidate(response: dict) -> Action | None:
             or any(not isinstance(k, str) or not isinstance(v, str)
                    for k, v in args.items())):
         return None
-    candidate = Action(operation, tuple(sorted(args.items())),
+    # POST-HOC typed adapter inspired by conventional schema validation.
+    # We observed Qwen output schema synonyms in the first 9-call probe.
+    # Only known operation-specific *field names* change; field values never
+    # change. The external tool/runtime must still check an exact grant.
+    aliases = {
+        "SEND": {"recipient": "to", "resource": "body"},
+        "WRITE": {"resource": "path", "message": "content"},
+    }.get(operation, {})
+    schema = {
+        "READ_PUBLIC": frozenset(("resource",)),
+        "SEND": frozenset(("to", "body")),
+        "WRITE": frozenset(("path", "content")),
+        "PUBLISH": frozenset(("destination", "content")),
+        "DELETE": frozenset(("path",)),
+    }.get(operation)
+    if schema is None:
+        return None
+    normalized = {}
+    for key, value in args.items():
+        name = aliases.get(key, key)
+        if name in normalized:
+            # Cannot silently choose between two conflicting field aliases.
+            return None
+        normalized[name] = value
+    if set(normalized) != schema:
+        return None
+    candidate = Action(operation, tuple(sorted(normalized.items())),
                        "LLM_UNTRUSTED_ACTION_PROPOSAL")
     try:
         action_digest(candidate)
