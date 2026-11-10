@@ -101,6 +101,23 @@ class CrossDomainTests(unittest.TestCase):
         self.assertEqual(orders,self.orders)
         self.assertTrue(receipt["future_world_function_not_called"])
 
+    def test_training_only_transfer_guard_can_refuse_graph_derived_rule(self):
+        for domain in tasks.DOMAINS:
+            note=self.training["domains"][domain]["crossvalidated_transfer_guard"]
+            vals=note["crossvalidated_mean_questions"]
+            graph="LEGIT026_GRAPH_SCORER_TRANSFERRED"
+            conventional="TARGET_CLASSICAL_RESIDUAL_GREEDY"
+            expected=(graph if vals[graph]<vals[conventional] else conventional)
+            self.assertEqual(note["adopted_method"],expected)
+            self.assertEqual(note["transfer_retained"],expected==graph)
+            self.assertTrue(note["never_select_using_future_seed_results"])
+            self.assertTrue(note["fallback_is_existing_classical_not_new_algorithm"])
+            self.assertEqual(self.orders[domain]["TRAINING_CV_GUARDED_TRANSFER"],
+                             self.orders[domain][expected])
+            self.assertEqual({r["left_out_training_seed"] for rows in
+                note["out_of_training_world_receipts"].values() for r in rows},
+                set(tasks.TRAIN_SEEDS))
+
     def test_forged_modular_witness_cannot_be_verified(self):
         cases,_=tasks.world(tasks.DOMAINS[0],tasks.TRAIN_SEEDS[0])
         with patch("transfer.observe",return_value=(0,1)):
