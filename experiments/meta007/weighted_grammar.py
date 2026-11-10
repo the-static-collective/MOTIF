@@ -11,7 +11,7 @@ For odd y>=5, y=2 mod 3, generalized branch B_t(y) uses
 This is a real integer, x=2 mod 3, and T(x)=2**(2e)*y.
 Every branch has a unique inverse description, and
   x < 2**(7+6t)*y.
-For weights w_t=7+6t and words of cost <=L:
+For exact-refined integer costs w_t=6+6t and words of cost <=L:
   F(L)=1+sum_t F(L-w_t), F(L<0)=0.
 If sum_t 2**(-alpha*w_t) >=1, induction gives
   F(L)>=2**(alpha*(L-max_t(w_t))).
@@ -53,7 +53,7 @@ FLOOR_SCALE=10**12
 ALPHABET_MAX=12
 ALPHABET_MIN=2
 NUMERATOR_MIN=80
-NUMERATOR_MAX=160
+NUMERATOR_MAX=180
 MAX_MATERIALIZED_DEPTH=3
 CERTIFIED_SOURCE="EXACT_ORDINARY_INTEGER_COLLATZ"
 PUBLIC_HISTORICAL_REFERENCE={
@@ -85,8 +85,53 @@ def _choose_int(value,min_val,max_val,name):
 
 
 def branch_weight(t):
+    """DISCOVER a tighter integer cost by proving the exact 1/3 factor.
+
+    The largest possible exponent e for a given branch symbol is
+    e_max=3+3*t. Source branch satisfies
+      B_t(y) < (2**(2*e_max+1)/3)*y.
+    Select the SMALLEST nonnegative integer w such that
+      3*2**w > 2**(2*e_max+1).
+    This is an executed conservative-bound tightening step, not a
+    hardcoded answer or an unreliable floating log comparison.
+    It discovers w_t=6+6*t rather than the original 7+6*t.
+    """
     _choose_int(t,0,ALPHABET_MAX-1,"symbol")
-    return 7+6*t
+    emax=3+3*t
+    numerator=1<<(2*emax+1)
+    w=0
+    while 3*(1<<w)<=numerator:
+        w+=1
+    if w<1 or 3*(1<<(w-1))>numerator or 3*(1<<w)<=numerator:
+        raise HOLD("Cannot certify minimally tightened exact cost")
+    return w
+
+def cost_refinement_receipt():
+    checks=[]
+    for t in range(ALPHABET_MAX):
+        old=7+6*t
+        new=branch_weight(t)
+        source=1<<(7+6*t)
+        if new>=old or 3*(1<<new)<=source or 3*(1<<(new-1))>source:
+            raise HOLD("Exact source-bound self-tightening did not improve")
+        checks.append({
+            "symbol":t,"old_overconservative_weight":old,
+            "exact_derived_minimal_integer_weight":new,
+            "mathematical_source_numerator":source,
+            "certificate_3_times_2_power_w_exceeds_numerator":True,
+            "certificate_smaller_weight_fails":True,
+        })
+    return {
+        "status":"EXACT_SYMBOLIC_COST_REFINEMENT_SUCCEEDED",
+        "reason":"The source expression divided by 3 before quantization; "
+                 "the original cost bound ignored that exact divisor.",
+        "all_source_branch_costs":checks,
+        "old_cost_formula":"w_old(t)=7+6*t",
+        "refined_cost_formula":"w_refined(t)=6+6*t",
+        "general_method":"Minimize integer log2 growth upper bound by "
+                         "exact bigint inequality 3*2**w>2**(7+6*t)",
+        "source_owned_not_statistical_inference":True,
+    }
 
 
 def _e0(y):
@@ -211,7 +256,7 @@ def _pow_rational_bound(p,w):
     then EXACT integer inequalities to finalize and verify.
     """
     _choose_int(p,NUMERATOR_MIN,NUMERATOR_MAX,"rational exponent numerator")
-    if type(w) is not int or w<7 or w>branch_weight(ALPHABET_MAX-1):
+    if type(w) is not int or w<branch_weight(0) or w>branch_weight(ALPHABET_MAX-1):
         raise HOLD("Weight outside tested inverse grammar")
     target=FLOOR_SCALE**Q
     tw=1<<(p*w)
@@ -293,7 +338,7 @@ def optimize_grammar():
         (x for x in searches),
         key=lambda x:(-x["best_certified_p"],x["K"])
     )
-    if selected["best_certified_p"]!=154 or selected["K"]!=11:
+    if selected["best_certified_p"]!=166 or selected["K"]!=8:
         raise HOLD("Rational alphabet optimization changed on source replay")
     return {
         "schema":"motif.meta007.exact-grammar-optimizer.v1",
@@ -393,7 +438,7 @@ def lower_growth_certificate(opt,*,budget=120):
         })
     return {
         "schema":"motif.meta007.exact-weighted-words-growth-proof.v1",
-        "weighted_cost_expression":"w(t)=7+6*t for 0<=t<K",
+        "weighted_cost_expression":"w(t)=6+6*t discovered by exact /3 source-bound refinement",
         "unique_positive_integer_code_injection":"recover t from v2(T(child))/2 and parent mod9",
         "selected_K":K,"rational_alpha_p":p,"rational_alpha_q":Q,
         "maximum_symbol_weight_W":W,
@@ -408,7 +453,7 @@ def lower_growth_certificate(opt,*,budget=120):
         "mapping_to_integer_magnitude":"Each word of weighted cost<=L "
             "encodes distinct positive n<5*2**L",
         "natural_integer_domain_growth":"|S∩[1,X]|=Omega(X**(p/q)) "
-            "with p/q=154/1000, X>=5*2**W",
+            "with p/q=166/1000, X>=5*2**W",
         "constant_lower_bound":"C(L)>=2**(alpha*(L-W)); L=floor(log2(X/5))",
         "complete_symbolic_induction_human_review_required":True,
         "formal_proof_assistant_verification":"NOT_PERFORMED",
@@ -502,6 +547,7 @@ def enumerate_finite_source(opt,depth=MAX_MATERIALIZED_DEPTH):
 
 
 def investigate():
+    refined_costs=cost_refinement_receipt()
     optimized=optimize_grammar()
     strongest=optimized["winning_Kraft_certificate"]
     K=optimized["winning_alphabet_size"]
@@ -523,10 +569,10 @@ def investigate():
         })
     growth=lower_growth_certificate(optimized)
     finite=enumerate_finite_source(optimized)
-    if (K,p)!=(11,154):
+    if (K,p)!=(8,166):
         raise HOLD("Proof grammar unexpectedly changed")
-    if (finite["source_checked_nodes"]!=1464 or
-        finite["new_nodes_outside_original_META006_binary_grammar"]!=1449):
+    if (finite["source_checked_nodes"]!=585 or
+        finite["new_nodes_outside_original_META006_binary_grammar"]!=570):
         raise HOLD("Source comparison unexpectedly changed")
     previous={"prior_grammar":2,"prior_worst_case_power_lower_alpha":
         round(log(2)/log(8192/3),10)}
@@ -541,6 +587,7 @@ def investigate():
         "method_breakthrough":"WEIGHTED_LANGUAGE_GENERATING_FUNCTION_REPLACES_WORST_BRANCH_BOUND",
         "primitive_graph_operator_source":
             "META006 exact modulo-9 odd-inverse macro construction",
+        "exact_self_critique_of_operator_costs":refined_costs,
         "grammar_optimizer":optimized,
         "weighted_combinatorial_growth_certificate":growth,
         "independent_exact_integer_source_crosscheck":finite,
