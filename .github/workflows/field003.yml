@@ -1,0 +1,34 @@
+name: FIELD-003 real measurements, composed hypotheses, classical controls
+on:
+  push:
+    branches: [experiment/field-003-real-data-aperture-20261110]
+  pull_request:
+    paths:
+      - 'experiments/field003/**'
+      - '.github/workflows/field003.yml'
+  workflow_dispatch:
+jobs:
+  frozen-external-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m unittest -v test_field003.py
+        working-directory: experiments/field003
+      - name: Reproduce the exact measurement packets and scores
+        run: |
+          python field003.py > "$RUNNER_TEMP/field003-run.json"
+          cmp experiment-results.json "$RUNNER_TEMP/field003-run.json"
+        working-directory: experiments/field003
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: FIELD003-REAL-DATA-RESEARCH-HOLD
+          path: |
+            experiments/field003/README.md
+            experiments/field003/experiment-results.json
+          retention-days: 30

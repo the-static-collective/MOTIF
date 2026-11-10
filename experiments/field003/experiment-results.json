@@ -1,0 +1,2068 @@
+{
+  "evidence_scope": "fixed, retrospectively collected UCI biology and chemistry; offline sealed labels; NO physical interventions",
+  "experiment": "FIELD-003",
+  "limitations": [
+    "Class is observed in the historical source, not a newly discovered physical fact",
+    "Rules are predictive decision trees, not discovered causal laws",
+    "Methods and threshold heuristics are human-authored classical algorithms",
+    "Public, old benchmark datasets have potential prior exposure and selection bias",
+    "No method was autonomously invented outside authored operator grammar",
+    "A checksum detects drift but does not authenticate primary source authors"
+  ],
+  "per_case": [
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 2,
+          "false_positive": 0,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 2,
+          "false_positive": 0,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= 0.80475",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z3 <= 0.8423",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= 0.8633",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3+z2 <= 1.6568",
+          "then": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z3+z2 <= 1.3349",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composition_tree_depth": 2,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.8423",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": [
+          "z3+z2"
+        ]
+      },
+      "packet_sha256": "11722837752379d0e02720f0bf2054cd429377f37d93c23cfeffbec016fe3851",
+      "query_budget": 60,
+      "seed": 11,
+      "trigger": {
+        "at_source_queries": 32,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 2,
+          "false_positive": 0,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.933333,
+              "correct": 28,
+              "false_negative": 1,
+              "false_positive": 1,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.933333,
+          "correct": 28,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.933333,
+            "correct": 28,
+            "false_negative": 1,
+            "false_positive": 1,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= 0.8633",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z2 <= 0.68765",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z2 <= 0.68765",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z2 <= 0.68765",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "a61b18a5ad5da12312868340cd9bf3fce2efe557be339931e0701b1b173011df",
+      "query_budget": 60,
+      "seed": 11,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z1 <= 0.47489",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "ddc943b30ff677ab2b81c3e9eb3e52d34506f70c938d3a9abc7e831422fbbad4",
+      "query_budget": 60,
+      "seed": 23,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.9,
+          "correct": 27,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z3 <= 0.74222",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.47341",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "41874df98aba3565975882863b256ee8573fae2b00fd819cbe82ce3706391191",
+      "query_budget": 60,
+      "seed": 23,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 1,
+          "false_positive": 3,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 2,
+          "false_positive": 2,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 2,
+          "false_positive": 2,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.9,
+              "correct": 27,
+              "false_negative": 1,
+              "false_positive": 2,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.866667,
+              "correct": 26,
+              "false_negative": 2,
+              "false_positive": 2,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.866667,
+              "correct": 26,
+              "false_negative": 2,
+              "false_positive": 2,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.866667,
+          "correct": 26,
+          "false_negative": 2,
+          "false_positive": 2,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.9,
+            "correct": 27,
+            "false_negative": 1,
+            "false_positive": 2,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.866667,
+            "correct": 26,
+            "false_negative": 2,
+            "false_positive": 2,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.866667,
+            "correct": 26,
+            "false_negative": 2,
+            "false_positive": 2,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.58505",
+          "then": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z2 <= 0.60247",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.58505",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.58505",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "921d9f5b84746c8b3521af6324bea89c9129990dd456be4bbb78d82653a68f1b",
+      "query_budget": 60,
+      "seed": 37,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 1.0,
+          "correct": 30,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 1.0,
+          "correct": 30,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 1.0,
+          "correct": 30,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "iris",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.833333,
+          "correct": 25,
+          "false_negative": 2,
+          "false_positive": 3,
+          "total": 30
+        },
+        "composed": {
+          "accuracy": 0.833333,
+          "correct": 25,
+          "false_negative": 2,
+          "false_positive": 3,
+          "total": 30
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.866667,
+              "correct": 26,
+              "false_negative": 2,
+              "false_positive": 2,
+              "total": 30
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.866667,
+              "correct": 26,
+              "false_negative": 2,
+              "false_positive": 2,
+              "total": 30
+            }
+          },
+          {
+            "queries": 60,
+            "test": {
+              "accuracy": 0.833333,
+              "correct": 25,
+              "false_negative": 2,
+              "false_positive": 3,
+              "total": 30
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.833333,
+          "correct": 25,
+          "false_negative": 2,
+          "false_positive": 3,
+          "total": 30
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.866667,
+            "correct": 26,
+            "false_negative": 2,
+            "false_positive": 2,
+            "total": 30
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.866667,
+            "correct": 26,
+            "false_negative": 2,
+            "false_positive": 2,
+            "total": 30
+          }
+        },
+        {
+          "queries": 60,
+          "test": {
+            "accuracy": 0.833333,
+            "correct": 25,
+            "false_negative": 2,
+            "false_positive": 3,
+            "total": 30
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.52084",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.52084",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z3 <= 0.52084",
+          "then": {
+            "predict": 0
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "6925a3240f2778fa91c78175bd2e433e42f306da25e1f887d49cde09266b08ad",
+      "query_budget": 60,
+      "seed": 37,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        },
+        "tune_composed": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        },
+        "tune_stump": {
+          "accuracy": 0.966667,
+          "correct": 29,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 30
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 1.0,
+          "correct": 37,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 1.0,
+          "correct": 37,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.891892,
+              "correct": 33,
+              "false_negative": 4,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.945946,
+              "correct": 35,
+              "false_negative": 1,
+              "false_positive": 1,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 1.0,
+              "correct": 37,
+              "false_negative": 0,
+              "false_positive": 0,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.891892,
+            "correct": 33,
+            "false_negative": 4,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "false_negative": 1,
+            "false_positive": 1,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "false_negative": 0,
+            "false_positive": 0,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z10 <= -1.3791",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z6 <= -0.79051",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z9 <= -0.56706",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6+z10 <= -1.3899",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= -0.55884",
+            "then": {
+              "predict": 1
+            }
+          }
+        },
+        "composition_tree_depth": 2,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.79051",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": [
+          "z6+z10"
+        ]
+      },
+      "packet_sha256": "151b819865b0aa13856400116bd04b5c1545018611a0ec0e01784e0e3299d850",
+      "query_budget": 75,
+      "seed": 11,
+      "trigger": {
+        "at_source_queries": 38,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.971429,
+          "correct": 34,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 1.0,
+          "correct": 35,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.914286,
+          "correct": 32,
+          "false_negative": 3,
+          "false_positive": 0,
+          "total": 35
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.945946,
+          "correct": 35,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 1.0,
+          "correct": 37,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.918919,
+              "correct": 34,
+              "false_negative": 1,
+              "false_positive": 2,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.945946,
+              "correct": 35,
+              "false_negative": 2,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 1.0,
+              "correct": 37,
+              "false_negative": 0,
+              "false_positive": 0,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 0,
+          "false_positive": 1,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "false_negative": 1,
+            "false_positive": 2,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "false_negative": 2,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "false_negative": 0,
+            "false_positive": 0,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z9 <= 0.93105",
+            "then": {
+              "predict": 0
+            }
+          },
+          "if": "z6 <= -0.80074",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z1 <= -0.5178",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6+z10 <= -1.4079",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= -0.45653",
+            "then": {
+              "predict": 1
+            }
+          }
+        },
+        "composition_tree_depth": 2,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.80074",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": [
+          "z6+z10"
+        ]
+      },
+      "packet_sha256": "2e27792dbac6a3da873b75aa719dd1f2515712f88833cbd11f1293e5489fb594",
+      "query_budget": 75,
+      "seed": 11,
+      "trigger": {
+        "at_source_queries": 58,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.914286,
+          "correct": 32,
+          "false_negative": 3,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 1.0,
+          "correct": 35,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.914286,
+          "correct": 32,
+          "false_negative": 3,
+          "false_positive": 0,
+          "total": 35
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.810811,
+              "correct": 30,
+              "false_negative": 4,
+              "false_positive": 3,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.972973,
+              "correct": 36,
+              "false_negative": 1,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 0.972973,
+              "correct": 36,
+              "false_negative": 1,
+              "false_positive": 0,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.945946,
+          "correct": 35,
+          "false_negative": 2,
+          "false_positive": 0,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.810811,
+            "correct": 30,
+            "false_negative": 4,
+            "false_positive": 3,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "false_negative": 1,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "false_negative": 1,
+            "false_positive": 0,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z6 <= -1.2153",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z11 <= -0.79382",
+          "then": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z10 <= -0.29255",
+            "then": {
+              "predict": 1
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6-z9 <= -0.86108",
+          "then": {
+            "predict": 1
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z11 <= -0.79382",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": [
+          "z6-z9"
+        ]
+      },
+      "packet_sha256": "e84beb79d715251d52fc51d18c2d85852091382fb4fb04716b150c9f36837f52",
+      "query_budget": 75,
+      "seed": 23,
+      "trigger": {
+        "at_source_queries": 35,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 1.0,
+          "correct": 35,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 0.971429,
+          "correct": 34,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.914286,
+          "correct": 32,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 35
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 1.0,
+          "correct": 37,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.972973,
+              "correct": 36,
+              "false_negative": 1,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.810811,
+              "correct": 30,
+              "false_negative": 4,
+              "false_positive": 3,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 0.972973,
+              "correct": 36,
+              "false_negative": 1,
+              "false_positive": 0,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.945946,
+          "correct": 35,
+          "false_negative": 2,
+          "false_positive": 0,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "false_negative": 1,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.810811,
+            "correct": 30,
+            "false_negative": 4,
+            "false_positive": 3,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "false_negative": 1,
+            "false_positive": 0,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z6 <= -0.86782",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z11 <= -0.79382",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z1 <= -0.69672",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 1
+          },
+          "if": "z9-z6 <= 0.86108",
+          "then": {
+            "predict": 0
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z11 <= -0.79382",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": [
+          "z9-z6"
+        ]
+      },
+      "packet_sha256": "a62a1e8e97952da7cca7291761ef2604238bc0fd1b569c37780619b005ec2c5f",
+      "query_budget": 75,
+      "seed": 23,
+      "trigger": {
+        "at_source_queries": 48,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.971429,
+          "correct": 34,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 0.971429,
+          "correct": 34,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.914286,
+          "correct": 32,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 35
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.972973,
+          "correct": 36,
+          "false_negative": 1,
+          "false_positive": 0,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 1.0,
+          "correct": 37,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.945946,
+              "correct": 35,
+              "false_negative": 0,
+              "false_positive": 2,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.972973,
+              "correct": 36,
+              "false_negative": 1,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 1.0,
+              "correct": 37,
+              "false_negative": 0,
+              "false_positive": 0,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.918919,
+          "correct": 34,
+          "false_negative": 3,
+          "false_positive": 0,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.945946,
+            "correct": 35,
+            "false_negative": 0,
+            "false_positive": 2,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.972973,
+            "correct": 36,
+            "false_negative": 1,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 1.0,
+            "correct": 37,
+            "false_negative": 0,
+            "false_positive": 0,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "active",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "else": {
+              "predict": 0
+            },
+            "if": "z10 <= -0.95906",
+            "then": {
+              "predict": 1
+            }
+          },
+          "if": "z6 <= -0.70582",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z9 <= -0.61917",
+            "then": {
+              "predict": 0
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6+z10 <= -1.1914",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z2 <= -0.54034",
+            "then": {
+              "predict": 1
+            }
+          }
+        },
+        "composition_tree_depth": 2,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.70582",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": [
+          "z6+z10"
+        ]
+      },
+      "packet_sha256": "95f9889289a28e8796f8bab7ad0ed2508b882f2fc814ca28a9733dc6a4c96211",
+      "query_budget": 75,
+      "seed": 37,
+      "trigger": {
+        "at_source_queries": 32,
+        "status": "PROPOSED_COMPOSITION_NOT_FACT",
+        "stump_training_errors": 3
+      },
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 1.0,
+          "correct": 35,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 1.0,
+          "correct": 35,
+          "false_negative": 0,
+          "false_positive": 0,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.942857,
+          "correct": 33,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 35
+        }
+      }
+    },
+    {
+      "dataset": "wine",
+      "heldout": {
+        "classical_depth3": {
+          "accuracy": 0.918919,
+          "correct": 34,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 37
+        },
+        "composed": {
+          "accuracy": 0.918919,
+          "correct": 34,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 37
+        },
+        "learning_curve": [
+          {
+            "queries": 20,
+            "test": {
+              "accuracy": 0.918919,
+              "correct": 34,
+              "false_negative": 3,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 40,
+            "test": {
+              "accuracy": 0.918919,
+              "correct": 34,
+              "false_negative": 3,
+              "false_positive": 0,
+              "total": 37
+            }
+          },
+          {
+            "queries": 75,
+            "test": {
+              "accuracy": 0.918919,
+              "correct": 34,
+              "false_negative": 2,
+              "false_positive": 1,
+              "total": 37
+            }
+          }
+        ],
+        "stump": {
+          "accuracy": 0.918919,
+          "correct": 34,
+          "false_negative": 2,
+          "false_positive": 1,
+          "total": 37
+        }
+      },
+      "learning_curve": [
+        {
+          "queries": 20,
+          "test": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "false_negative": 3,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 40,
+          "test": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "false_negative": 3,
+            "false_positive": 0,
+            "total": 37
+          }
+        },
+        {
+          "queries": 75,
+          "test": {
+            "accuracy": 0.918919,
+            "correct": 34,
+            "false_negative": 2,
+            "false_positive": 1,
+            "total": 37
+          }
+        }
+      ],
+      "mode": "random",
+      "model": {
+        "classical_depth3": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.64826",
+          "then": {
+            "else": {
+              "predict": 1
+            },
+            "if": "z0 <= -0.55646",
+            "then": {
+              "predict": 1
+            }
+          }
+        },
+        "composed": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.64826",
+          "then": {
+            "predict": 1
+          }
+        },
+        "composition_tree_depth": 1,
+        "stump": {
+          "else": {
+            "predict": 0
+          },
+          "if": "z6 <= -0.64826",
+          "then": {
+            "predict": 1
+          }
+        },
+        "synthesized_operators": []
+      },
+      "packet_sha256": "7576711f1e5667b6120f8ea5be8b94d2fbca949b164ef308455764451240d31d",
+      "query_budget": 75,
+      "seed": 37,
+      "trigger": null,
+      "tuning": {
+        "tune_classical_depth3": {
+          "accuracy": 0.942857,
+          "correct": 33,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 35
+        },
+        "tune_composed": {
+          "accuracy": 0.942857,
+          "correct": 33,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 35
+        },
+        "tune_stump": {
+          "accuracy": 0.942857,
+          "correct": 33,
+          "false_negative": 1,
+          "false_positive": 1,
+          "total": 35
+        }
+      }
+    }
+  ],
+  "protocol": "motif.field003.v1",
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "source_files": {
+    "iris": {
+      "cols": 4,
+      "file": "iris.csv",
+      "rows": 150,
+      "sha256": "f13ffa8fdd56fd8e6c8d16d4081a3fbd3114bcd0aae4256c43205169cd9d1449",
+      "source": "https://archive.ics.uci.edu/dataset/53/iris"
+    },
+    "wine": {
+      "cols": 13,
+      "file": "wine_data.csv",
+      "rows": 178,
+      "sha256": "10e8a802908b34f86e5da8ce962f3c806694bc98450a18f61851af59f324bede",
+      "source": "https://archive.ics.uci.edu/dataset/109/wine"
+    }
+  },
+  "summary": {
+    "iris": {
+      "active": {
+        "grammar_triggered": 1,
+        "nontrivial_composed_tree": 1,
+        "scores": {
+          "classical_depth3": {
+            "correct": 82,
+            "total": 90
+          },
+          "composed": {
+            "correct": 81,
+            "total": 90
+          },
+          "stump": {
+            "correct": 81,
+            "total": 90
+          }
+        },
+        "selected_generated_features": 1
+      },
+      "random": {
+        "grammar_triggered": 0,
+        "nontrivial_composed_tree": 0,
+        "scores": {
+          "classical_depth3": {
+            "correct": 80,
+            "total": 90
+          },
+          "composed": {
+            "correct": 80,
+            "total": 90
+          },
+          "stump": {
+            "correct": 80,
+            "total": 90
+          }
+        },
+        "selected_generated_features": 0
+      }
+    },
+    "wine": {
+      "active": {
+        "grammar_triggered": 3,
+        "nontrivial_composed_tree": 2,
+        "scores": {
+          "classical_depth3": {
+            "correct": 109,
+            "total": 111
+          },
+          "composed": {
+            "correct": 110,
+            "total": 111
+          },
+          "stump": {
+            "correct": 105,
+            "total": 111
+          }
+        },
+        "selected_generated_features": 3
+      },
+      "random": {
+        "grammar_triggered": 2,
+        "nontrivial_composed_tree": 1,
+        "scores": {
+          "classical_depth3": {
+            "correct": 106,
+            "total": 111
+          },
+          "composed": {
+            "correct": 107,
+            "total": 111
+          },
+          "stump": {
+            "correct": 105,
+            "total": 111
+          }
+        },
+        "selected_generated_features": 2
+      }
+    }
+  }
+}
