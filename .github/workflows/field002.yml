@@ -1,0 +1,39 @@
+name: FIELD-002 bounded grammar repair (research hold)
+on:
+  push:
+    paths:
+      - 'experiments/field002/**'
+      - '.github/workflows/field002.yml'
+  pull_request:
+    paths:
+      - 'experiments/field002/**'
+      - '.github/workflows/field002.yml'
+  workflow_dispatch:
+jobs:
+  finite-grammar-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify finite grammar repair and evidence receipts
+        run: python -m unittest discover -s experiments/field002 -p 'test_field002.py' -v
+      - name: Reproduce exact frozen benchmark
+        run: |
+          python experiments/field002/field002.py > /tmp/field002-reproduced.json
+          python - <<'PY'
+          import json
+          a = json.load(open('/tmp/field002-reproduced.json'))
+          b = json.load(open('experiments/field002/experiment-results.json'))
+          assert a == b, 'Frozen FIELD-002 results changed'
+          print('FIELD-002 finite research results reproduced exactly')
+          PY
+      - name: Preserve exact result
+        uses: actions/upload-artifact@v4
+        with:
+          name: FIELD-002-RESEARCH-HOLD
+          path: /tmp/field002-reproduced.json
+          retention-days: 30
