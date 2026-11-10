@@ -34,7 +34,7 @@ Question results become verified facts within the declared model. Capabilities r
 
 A certification is permission to claim a **synthetic model fact**, not authorization for physical execution.
 
-Five engineer-authored task families supply distinct objectives: CHAIN, PARALLEL, NOISE_USEFUL, SPARSE and MIXED. A three-question budget applies. In NOISE_USEFUL, noise fields genuinely enable a capability so the entropy strategy receives a fair favorable case.
+Six engineer-authored task families supply distinct objectives: CHAIN, DEEP_CHAIN, PARALLEL, NOISE_USEFUL, SPARSE and MIXED. A three-question budget normally applies; DEEP_CHAIN has four questions available in its budget and a deliberately delayed four-step capability reward. In NOISE_USEFUL, noise fields genuinely enable a capability so the entropy strategy receives a fair favorable case.
 
 ## Equal question grammar, strong classical controls
 
@@ -88,3 +88,16 @@ The GitHub Actions workflow runs adversarial gates/proof tests and preserves the
 Introduce new **candidate question generation**, not merely choosing among engineer-defined questions; produce proof-carrying provenance for how a relationship produced a proposed experiment; independently test whether the invented probe changes downstream certifiable possibilities. Transfer across truly external tasks and compare with well-tuned classical optimizers under equal time and evidence budgets.
 
 **Governing principle:** a valuable discovery changes what can be *justifiably* done next. A certificate is a bounded claim supported by evidence, never a substitute for reality.
+
+
+## Measured discovery dividend and deep-chain counterexample
+
+See [RESULTS.md](RESULTS.md), including the original heldout freeze and the subsequent explicitly **post-hoc** self-critique gate.
+
+The first five three-question families showed that AFFORDANCE_2 (or a simple greedy method when immediate facts suffice) matched exact full-horizon Bellman value on the 96 selected target worlds. In CHAIN and SPARSE, entropy and answer-diversity scored **zero** under the three-question limit because they pursued high-entropy observations without completing useful prerequisites. In NOISE_USEFUL the high-entropy questions were themselves useful and all methods tied.
+
+Crucially, **DEEP_CHAIN falsified generalizing this result**: all four limited planners obtained zero downstream value; full exact classical four-step Bellman obtained **2.0** mean verified value (a capability worth 32 in 6.25% of future worlds). Two-step lookahead cannot see the four-step delayed reward. The first training selector chose ENTROPY on a zero-value tie, so it should not be promoted.
+
+After viewing this counterexample, a conservative guard was added: if the selected limited planner fails to match validation-only exact Bellman within 0.05 reward, return HOLD_NO_PROMOTION_FALLBACK_CLASSICAL. The gate is **not** an independently prospective new discovery because it was authored after inspecting the first results. Its purpose is to refuse a false general capability claim and preserve the superior classical fallback.
+
+Even when bounded lookahead matches exact DP, it does **not** beat or improve the classical Bellman optimum; it merely sometimes approximates it with less search on this toy family. Search computation is not matched to wall-clock benchmarks yet.
