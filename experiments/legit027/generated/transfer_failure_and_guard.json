@@ -1,0 +1,79 @@
+{
+  "experiment": "MOTIF-LEGIT-027",
+  "artifact_kind": "TRAINING_FROZEN_DOMAIN_AWARE_TRANSFER_REJECTION",
+  "status": "RESEARCH_HOLD_CROSS_DOMAIN_GENERALIZATION_NOT_ESTABLISHED",
+  "graph_source": {
+    "provenance": "LEGIT-026 committed crossvalidated meta-cartridge",
+    "graph_method": [
+      "LEAF_FIRST",
+      "COUNT_DIVERSITY",
+      "STATIC"
+    ],
+    "transferred_component_only": "COUNT_DIVERSITY and STATIC",
+    "graph_only_gate_not_transferred": true,
+    "original_graph_frozen_sha256": "ba8a947652ff39559278e6d339923e4abed408434b7d6894db62f8f3bb9550e1",
+    "not_zero_shot_question_order": true
+  },
+  "verified_ci": {
+    "run_id": 42748075671,
+    "head_sha": "6bac624770a30aa1b43736dab42678d9e3bb958d",
+    "raw_result_artifact_id": 13732137112,
+    "raw_result_artifact_sha256": "9d85b765f9dd5c7ee4be0c353c94df64a139f93516068df9b183c2b15d67ada2",
+    "tests_passed": 12
+  },
+  "protocol": {
+    "training_seeds": [
+      27011,
+      27012
+    ],
+    "future_seeds": [
+      27013,
+      27014
+    ],
+    "training_cases_per_domain": 32,
+    "future_cases_per_domain": 32,
+    "task_generators": "ENGINEER_AUTHORED_NOT_EXTERNALLY_BLINDED",
+    "tasks_selected_for_old_question_failure_and_valid_witness": true,
+    "target_domain_training_observations_used_to_sort_questions": true,
+    "ranked_orders_frozen_before_future_case_access": true,
+    "both_exact_counterexample_task_types_independently_verified": true,
+    "combined_frozen_policy_sha256": "7440fe54c51a50183768b45119ff7870b7e916e3666d40036bb11afdb1b230f9"
+  },
+  "domain_meta_results": {
+    "polynomial_modular_witness": {
+      "training_out_of_world_average_queries": {
+        "graph_count_diversity": 5.34375,
+        "target_classical_residual_greedy": 2.96875
+      },
+      "training_guard_adopted": "TARGET_CLASSICAL_RESIDUAL_GREEDY",
+      "future_results": {
+        "cases": 32,
+        "graph_transferred_queries": 117,
+        "target_classical_residual_greedy_queries": 62,
+        "guarded_queries": 62,
+        "fixed_canonical_queries": 483,
+        "old_two_question_witness_count": 0,
+        "all_full_methods_proved_nonidentity": 32
+      }
+    },
+    "integer_constraint_countermodel": {
+      "training_out_of_world_average_queries": {
+        "graph_count_diversity": 15.71875,
+        "target_classical_residual_greedy": 15.28125
+      },
+      "training_guard_adopted": "TARGET_CLASSICAL_RESIDUAL_GREEDY",
+      "future_results": {
+        "cases": 32,
+        "graph_transferred_queries": 435,
+        "target_classical_residual_greedy_queries": 234,
+        "guarded_queries": 234,
+        "fixed_canonical_queries": 435,
+        "old_two_question_witness_count": 0,
+        "all_full_methods_found_countermodel": 32
+      }
+    }
+  },
+  "conclusion": "The graph-selected observation-diversity scoring rule did NOT generalize competitively against stronger domain-trained classical question selection in either of two engineer-generated mathematics families. A leave-one-training-world-out domain guard rejected the transfer *before* future evaluation and routed to the existing classical greedy method. This is verified failure detection, NOT invention of a new general research algorithm.",
+  "not_promoted_to_main": true,
+  "not_general_recursive_self_improvement": true
+}
