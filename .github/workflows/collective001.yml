@@ -1,0 +1,35 @@
+name: COLLECTIVE-001 proof-carrying answer weave
+on:
+  push:
+    branches:
+      - experiment/collective-001-proof-carrying-answer-weave
+  pull_request:
+    paths:
+      - 'experiments/collective001/**'
+      - 'experiments/thought-027/**'
+      - 'experiments/thought-028/**'
+      - '.github/workflows/collective001.yml'
+  workflow_dispatch:
+
+jobs:
+  source-owned-reentry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run proof-carrying re-entry and refusal cases
+        run: python -m unittest discover -s experiments/collective001 -p "test_*.py" -v
+      - name: Revalidate original THOUGHT-028 source experiment
+        run: python -m unittest discover -s experiments/thought-028 -p "test_weave.py" -v
+      - name: Produce full inspectable synthetic evidence packet
+        run: python experiments/collective001/demo.py > collective001-proof-answer.json
+      - name: Upload publicly reviewable research-only output
+        uses: actions/upload-artifact@v4
+        with:
+          name: COLLECTIVE001-PROOF-CARRYING-ANSWER-RESEARCH-HOLD
+          path: collective001-proof-answer.json
