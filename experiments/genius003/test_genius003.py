@@ -16,6 +16,7 @@ class TestCorrectablePerspectives(unittest.TestCase):
         withheld = Report("id2", "A", "safety", False, False,
                           "PRIVATE_REF", "SECRET_NOT_PUBLIC")
         m.fit((kept, withheld))
+        self.assertEqual(public_only((kept, withheld))[0].private_note, "")
         self.assertEqual(m.count("A", "safety"), 1)
         self.assertAlmostEqual(m.predict("A", "safety", "target_topic"), 2/3)
         self.assertFalse(m.update(withheld))
