@@ -45,11 +45,28 @@ jobs:
               print(" SOURCE-CORRECT RETROSPECTIVE LINKS:",r["three_way_retrospective_relation_count"])
               print(" HOLD REASONS:",r["hold_reasons"])
           PY
+      - name: Explicitly posthoc correlation-versus-intervention falsifier
+        run: |
+          python experiments/genius011/controls.py > /tmp/motif-genius011-posthoc-confounding.json
+          python -m json.tool /tmp/motif-genius011-posthoc-confounding.json >/dev/null
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/motif-genius011-posthoc-confounding.json"))
+          assert d["status"]=="POSTHOC_OBSERVATIONAL_CONFOUNDING_NOT_INDEPENDENT_BLIND"
+          assert d["no_external_action"]
+          for v in d["candidate_checks"]:
+              assert v["intervention_gate_status"]=="HOLD_OBSERVATIONAL_DATA_NOT_AN_INTERVENTION"
+              print("SYNTHESIZED MOTIF:",v["generated_signature"])
+              print(" OBSERVATIONAL CORRELATIONS:",v["survey_results"])
+              print(" REFUSAL:",v["intervention_gate_status"])
+          PY
       - name: Archive synthetic source/evidence receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: MOTIF-GENIUS011-UNSUSPECTED-RELATION-RESEARCH-HOLD
-          path: /tmp/motif-genius011.json
+          path: |
+            /tmp/motif-genius011.json
+            /tmp/motif-genius011-posthoc-confounding.json
           retention-days: 30
           if-no-files-found: warn
