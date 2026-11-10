@@ -270,8 +270,9 @@ def rank_convergences(public_rows: tuple[Observation, ...],
         if r["status"] == "CONDITIONAL_THREE_THREAD_CONVERGENCE"
     ]
     return {
-        "status": ("SYNTHETIC_CONDITIONAL_CONVERGENCE_CANDIDATE"
-                   if confirmed else "HOLD_NO_DEFENSIBLE_THREE_THREAD_BRIDGE"),
+        "status": ("HOLD_MULTIPLE_COMPETING_BRIDGES" if len(confirmed)>1
+                   else "SYNTHETIC_CONDITIONAL_CONVERGENCE_CANDIDATE"
+                   if len(confirmed)==1 else "HOLD_NO_DEFENSIBLE_THREE_THREAD_BRIDGE"),
         "conditional_candidates": confirmed,
         "candidates": results,
         "lexical_only_baseline": max(
@@ -298,8 +299,8 @@ def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
         for i, thread in enumerate(THREADS)
     )
     accepted = verdict["conditional_candidates"]
-    if not accepted:
-        corpus = Corpus("no-bridge-two-clock", initial, ())
+    if len(accepted)!=1:
+        corpus = Corpus("no-unambiguous-bridge-two-clock", initial, ())
     else:
         bridge = accepted[0]
         bridge_source = Witness(
@@ -324,7 +325,8 @@ def two_clock_convergence_packet(public_rows: tuple[Observation, ...],
         for thread in THREADS for w in initial if w.witness_id == thread
     }
     return {
-        "status": "RESEARCH_ONLY_SOURCE_OWNED_REINTERPRETATION",
+        "status": ("RESEARCH_ONLY_SOURCE_OWNED_REINTERPRETATION"
+                   if len(accepted)==1 else "HOLD_NO_UNAMBIGUOUS_BRIDGE"),
         "earlier_source_assertions": original,
         "original_witness_count": len(initial),
         "source_order": result["source_order"],
