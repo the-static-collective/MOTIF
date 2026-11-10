@@ -34,7 +34,7 @@ versus
 
     3 Enoch → 1 Enoch → Genesis
 
-The meaning-shift edge can become available at a different reader moment. But the recorded source ownership never changes. That's how a retrospective callback can be useful without retroactively rewriting evidence.
+The meaning-shift edge can become available at a different reader moment. **Its reader effect changes direction:** Genesis-first creates a genuine RETROSPECTIVE_CALLBACK, whereas 3-Enoch-first supplies ANTICIPATORY_CONTEXT for Genesis. Across six orderings, each situation occurs three times. **The source-owned meaning edge and literal historical record do not change.** That's how a retrospective callback can be useful without retroactively rewriting evidence.
 
 ## Beyond Enoch
 
@@ -48,7 +48,7 @@ The same code operates over two *other* hand-authored domains:
 
 `two_clocks.py` models distinct typed **Witness**, **Assertion**, **Reading**, and **Corpus** records. It validates that later interpretations cite a later actual source with an explicit proposition, refuse unauthorized cross-lane transfers, and preserve original source attribution. `compose_readings` takes any sequence in which a reader encounters those witnesses and exposes reinterpretations only once both ends have been disclosed. `check_attribution` answers a falsifiable source question and returns an objection/reply receipt if a later claim is incorrectly projected onto an earlier source.
 
-**Counterfactual stress:** for each of the three domains, enumerate all 3! = **six** disclosure permutations. The expected source-claim ledger must remain invariant even when the timing of interpretation updates changes. This yields **18 source-order trials**.
+**Counterfactual stress:** for each of the three domains, enumerate all 3! = **six** disclosure permutations. The expected source-claim ledger and final source-bound interpretation relation must remain invariant even when the timing and direction of reader interpretation changes. Exactly **three of six** disclosure permutations per corpus produce a retrospective callback and three provide anticipatory context. This yields **18 source-order trials**.
 
 **Controls:**
 
