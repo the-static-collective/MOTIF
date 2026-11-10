@@ -1,0 +1,41 @@
+name: LANGUAGE-GROWTH-001 finite mathematical operator repair
+
+on:
+  push:
+    branches:
+      - 'experiment/language-growth-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/languagegrowth001/**'
+      - 'experiments/featurefrontier001/**'
+      - 'experiments/contractfrontier002/**'
+      - 'experiments/contractdiscovery001/**'
+      - 'experiments/mathal001/**'
+      - '.github/workflows/languagegrowth001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  language-growth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Core and prior mathematical interface regression
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/contractdiscovery001 && python -m unittest -q test_contractdiscovery.py)
+          (cd experiments/contractfrontier002 && python -m unittest -q test_contractfrontier.py)
+          (cd experiments/featurefrontier001 && python -m unittest -q test_featurefrontier.py)
+      - name: Operator repairs, counterexamples, children, strong controls
+        working-directory: experiments/languagegrowth001
+        run: |
+          python -m unittest -v test_languagegrowth.py
+          python languagegrowth.py
+          python benchmark.py
