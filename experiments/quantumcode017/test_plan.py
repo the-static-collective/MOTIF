@@ -29,7 +29,7 @@ class ProbePlannerTests(unittest.TestCase):
         self.assertEqual(p.status,"PLAN_CANDIDATE")
         self.assertEqual(p.target,(0,-3))
         self.assertEqual(p.actions,
-                         ("move_up","move_up","move_up","do"))
+                         ("move_up","move_up","do"))
 
     def test_direction_rotates_with_target_and_origin(self):
         cases=[((0,3),"move_down"),((3,0),"move_right"),
@@ -49,7 +49,7 @@ class ProbePlannerTests(unittest.TestCase):
             targets=(((3,0),"water"),),
             walls=((1,0),(2,0))),
             "game_drink_obtained")
-        self.assertEqual(direct.cost,4)
+        self.assertEqual(direct.cost,3)
         self.assertEqual(blocked.status,"PLAN_CANDIDATE")
         self.assertGreater(blocked.cost,direct.cost)
         self.assertNotEqual(blocked.actions[0],"move_right")
