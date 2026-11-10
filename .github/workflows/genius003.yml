@@ -1,0 +1,64 @@
+name: MOTIF GENIUS-003 correctable perspective trial
+
+on:
+  push:
+    paths:
+      - "experiments/genius003/**"
+      - ".github/workflows/genius003.yml"
+  pull_request:
+    paths:
+      - "experiments/genius003/**"
+      - ".github/workflows/genius003.yml"
+
+jobs:
+  prospective-social-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Frozen leakage, correction, source and hidden-profile falsifiers
+        run: python -m unittest discover -s experiments/genius003 -p 'test_*.py' -v
+      - name: Execute after-freeze futures and generate bounded receipts
+        run: |
+          python experiments/genius003/perspective_learning.py --emit > /tmp/genius003-perspective.json
+          python experiments/genius003/hidden_profile.py > /tmp/genius003-hidden-profile.json
+          python -m json.tool /tmp/genius003-perspective.json > /dev/null
+          python - <<'PY'
+          import json
+          p = json.load(open("/tmp/genius003-perspective.json"))
+          h = json.load(open("/tmp/genius003-hidden-profile.json"))
+          assert p["no_live_people_contacted"] and p["no_external_action_taken"]
+          assert h["simple_majority_local_preference"] == "A"
+          assert h["conditional_candidate"] == "B"
+          assert "PRIVATE_SIMULATOR_STATE_DO_NOT_EXPORT" not in json.dumps(p)
+          assert "PRIVATE_SENSITIVE_001" not in json.dumps(h)
+          print("TRAIN-ONLY POLICY:", p["selected_train_only_policy"])
+          print("FROZEN SHA256:", p["frozen_training_digest"])
+          for regime in ("stable", "shift"):
+              row=p[regime]
+              print("WORLD:", regime)
+              print("  FROZEN BRIER:", {
+                  name:metrics["brier"]
+                  for name,metrics in row["fixed_comparators"]["arms"].items()
+              })
+              print("  ONLINE SELECTED:", row["online_selected"])
+              print("  UNKNOWN REFUSALS:",
+                    row["fixed_comparators"]["unknown_target_or_topic_abstentions"])
+          print("HIDDEN PROFILE MAJORITY:", h["simple_majority_local_preference"])
+          print("POOLED CONDITIONAL ANSWER:", h["conditional_candidate"])
+          PY
+      - name: Retain complete synthetic evidence / corrections
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS003-PROSPECTIVE-RESEARCH-HOLD
+          path: |
+            /tmp/genius003-perspective.json
+            /tmp/genius003-hidden-profile.json
+          retention-days: 30
+          if-no-files-found: warn
