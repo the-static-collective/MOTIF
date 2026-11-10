@@ -362,7 +362,7 @@ def independent_classical_approximate_score(K,p):
         ctx.prec=75
         alpha=Decimal(p)/Decimal(Q)
         two=Decimal(2)
-        base=two**(-Decimal(7)*alpha)
+        base=two**(-Decimal(branch_weight(0))*alpha)
         ratio=two**(-Decimal(6)*alpha)
         geometric=base*(Decimal(1)-ratio**K)/(Decimal(1)-ratio)
         return geometric>1,format(geometric,".20f")
