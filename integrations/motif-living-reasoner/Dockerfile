@@ -1,5 +1,5 @@
-# Deploy from the MOTIF repo's integrations/motif-living-reasoner directory.
-# Build input: the byte-pinned v0.3 artifact already reviewed in PR #160.
+# MOTIF v0.3 fixed-source HTTP server + fail-closed OAuth 2.1 resource gateway.
+# Use one replica and durable /data; do not attach a Docker socket.
 FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -12,14 +12,15 @@ RUN python -c 'import hashlib,pathlib; p=pathlib.Path("/tmp/release-v0.3.zip"); 
   && rm -rf /opt/motif-release /tmp/release-v0.3.zip \
   && test -f /app/mcp_server/server.py \
   && test -f /app/requirements.txt
+COPY oauth_gateway.py /app/oauth_gateway.py
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gosu ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
   && pip install --no-cache-dir -r /app/requirements.txt \
+  && pip install --no-cache-dir 'PyJWT[crypto]==2.13.0' \
   && useradd -r -u 10001 -s /usr/sbin/nologin motif \
   && mkdir -p /data \
   && chmod 0700 /data
-# Railway mounts volumes as root; drop privileges after fixing the mount.
 COPY ./start-railway.sh /usr/local/bin/start-motif
 RUN chmod 0755 /usr/local/bin/start-motif
 EXPOSE 8000
