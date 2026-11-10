@@ -1,0 +1,56 @@
+name: MOTIF LEGIT-024 verified mathematical research ecology
+
+on:
+  push:
+    paths:
+      - "experiments/legit024/**"
+      - ".github/workflows/legit024.yml"
+  pull_request:
+    paths:
+      - "experiments/legit024/**"
+      - ".github/workflows/legit024.yml"
+
+jobs:
+  mathematical-research-ecology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned known solver implementations
+        run: |
+          python -m pip install --only-binary=:all: networkx==3.4.2 sympy==1.14.0 z3-solver==4.16.0.0 ortools==9.15.6755
+      - name: Adversarial tests and cross-engine acceptance
+        run: |
+          python -m unittest discover -s experiments/legit024 -p 'test_*.py' -v
+      - name: Train-only freeze and matched heldout research trial
+        run: |
+          python experiments/legit024/trial.py --emit > /tmp/motif-legit024-ecology.json
+          python -m json.tool /tmp/motif-legit024-ecology.json > /dev/null
+          python - <<'PY'
+          import json
+          data=json.load(open("/tmp/motif-legit024-ecology.json"))
+          print("Status:",data["status"])
+          print("Training cases:",data["source_provenance"]["training_case_count"])
+          print("Heldout cases:",data["source_provenance"]["heldout_case_count"])
+          print("Frozen policy:",data["trained_selector"]["method_order_sha256"])
+          print("Frozen order:",json.dumps(data["trained_selector"]["frozen_method_order"],sort_keys=True))
+          for label,arm in data["matched_heldout_evaluations"].items():
+              print("\nARM",label,"all verified",arm["all_verified"])
+              for kind,summary in arm["by_family"].items():
+                  print(kind,"verified",summary["verified"],"of",summary["task_count"],
+                        "solver attempts",summary["total_solver_attempts"],
+                        "CPU (ms)",summary["summed_cpu_ms"])
+          PY
+      - name: Archive raw training, proof, policy and heldout receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT024-VERIFIED-MATH-ECOLOGY-RESEARCH-HOLD
+          path: /tmp/motif-legit024-ecology.json
+          retention-days: 30
+          if-no-files-found: warn
