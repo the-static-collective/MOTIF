@@ -1,0 +1,44 @@
+name: CONTROL-FLOW-GROWTH-001 recursive AST operator synthesis
+
+on:
+  push:
+    branches:
+      - 'experiment/control-flow-growth-001-20261109'
+  pull_request:
+    paths:
+      - 'experiments/controlflow001/**'
+      - 'experiments/operatorinvention001/**'
+      - 'experiments/languagegrowth001/**'
+      - 'experiments/featurefrontier001/**'
+      - '.github/workflows/controlflow001-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  control-flow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Stacked source-regression tests
+        shell: bash
+        run: |
+          set -eu
+          (cd experiments/fir001 && python -m unittest -q test_fir.py)
+          (cd experiments/mathal001 && python -m unittest -q test_mathal.py)
+          (cd experiments/contractdiscovery001 && python -m unittest -q test_contractdiscovery.py)
+          (cd experiments/contractfrontier002 && python -m unittest -q test_contractfrontier.py)
+          (cd experiments/featurefrontier001 && python -m unittest -q test_featurefrontier.py)
+          (cd experiments/languagegrowth001 && python -m unittest -q test_languagegrowth.py)
+          (cd experiments/operatorinvention001 && python -m unittest -q test_operatorinvention.py)
+      - name: Recursive syntax-tree generation, hostile controls and generated child
+        working-directory: experiments/controlflow001
+        shell: bash
+        run: |
+          set -eu
+          python -m unittest -v test_controlflow.py
+          python controlflow.py
+          python benchmark.py
