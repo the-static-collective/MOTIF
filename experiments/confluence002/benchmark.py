@@ -1,9 +1,15 @@
 """Exhaustive four-world source-preserving comparison, not independent science."""
 from __future__ import annotations
+from native import coherent_trial, ROOT
 from confluence import WORLDS, SyntheticOwner, digest
-from benchmark import exact_classical_cost
-from native import coherent_trial
+from importlib.util import module_from_spec, spec_from_file_location
 import json
+
+baseline_path = ROOT / "experiments" / "confluence001" / "benchmark.py"
+spec = spec_from_file_location("confluence001_classical_baseline", baseline_path)
+baseline = module_from_spec(spec)
+spec.loader.exec_module(baseline)
+exact_classical_cost = baseline.exact_classical_cost
 
 
 def run():
