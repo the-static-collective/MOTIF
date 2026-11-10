@@ -334,6 +334,7 @@ def investigate(original_nt_question_node, worlds, owner, *, extension=True):
         return {"status":result["status"],"reasoning_evidence":result,
                 "source_questions_asked":0,"external_authority":"NONE"}
     ast = result["selected_program"]
+    before_query_count = owner.questions_asked
     observation = owner.ask(ast)
     owner.recheck(observation)
     if observation["observed_boolean"] not in result["selected_signatures"]:
@@ -360,7 +361,7 @@ def investigate(original_nt_question_node, worlds, owner, *, extension=True):
         "remaining_possible_world_indices": survivors,
         "status": "SCOPED_SYNTHETIC_WORLD_IDENTIFIED",
         "question_grammar_enlargement_research_only": True,
-        "source_new_questions": owner.questions_asked,
+        "source_new_questions": owner.questions_asked - before_query_count,
         "original_NT_question_unanswered_in_external_world": True,
         "provenance_limits": list(OPEN),
         "automatic_admission": False,"installed": False,
@@ -374,7 +375,18 @@ def verify_packet(packet, original_nt_question_node, owner):
     """Reconstruct source text/question externally before calling this verifier."""
     if type(packet) is not dict or packet.get("schema") != SCHEMA:
         raise HOLD("Unrecognized evidence packet")
-    if packet.get("integrity_digest") != digest({
+    required = {
+        "schema", "source_question_node", "possible_worlds",
+        "old_language_readings", "old_language_nonidentifiable",
+        "invented_question", "source_owner_observation",
+        "remaining_possible_world_indices", "status",
+        "question_grammar_enlargement_research_only",
+        "source_new_questions",
+        "original_NT_question_unanswered_in_external_world",
+        "provenance_limits", "automatic_admission", "installed",
+        "external_authority", "integrity_digest",
+    }
+    if set(packet) != required or packet.get("integrity_digest") != digest({
         k:v for k,v in packet.items() if k!="integrity_digest"
     }):
         raise HOLD("Evidence packet altered")
@@ -386,7 +398,9 @@ def verify_packet(packet, original_nt_question_node, owner):
             or packet["external_authority"] != "NONE"
             or packet["old_language_nonidentifiable"] is not True
             or packet["question_grammar_enlargement_research_only"] is not True
-            or packet["status"] != "SCOPED_SYNTHETIC_WORLD_IDENTIFIED"):
+            or packet["status"] != "SCOPED_SYNTHETIC_WORLD_IDENTIFIED"
+            or type(packet["source_new_questions"]) is not int
+            or packet["source_new_questions"] != 1):
         raise HOLD("Authority, scope, or source question tampered")
     worlds = packet["possible_worlds"]
     fresh = find_missing_question(worlds)
