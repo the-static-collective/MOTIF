@@ -14,7 +14,7 @@ import random
 
 from discovery import POLICIES, Planner, episode, scenario
 
-FAMILIES = ("CHAIN", "PARALLEL", "NOISE_USEFUL", "SPARSE", "MIXED")
+FAMILIES = ("CHAIN", "DEEP_CHAIN", "PARALLEL", "NOISE_USEFUL", "SPARSE", "MIXED")
 VALIDATION_SEEDS = (60601, 60602)
 FUTURE_SEEDS = (60631, 60632, 60633)
 TRAIN_SAMPLES_PER_SEED = 20
@@ -84,7 +84,7 @@ def trial() -> dict:
     # sampling. It is NOT a cryptographic independent preregistration.
     freeze_packet = {
         "families": FAMILIES,
-        "budget": 3,
+        "budgets": {family: planners[family].task.budget for family in FAMILIES},
         "validation_seeds": VALIDATION_SEEDS,
         "future_seeds": FUTURE_SEEDS,
         "future_samples_per_seed": FUTURE_SAMPLES_PER_SEED,
