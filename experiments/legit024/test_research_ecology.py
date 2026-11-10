@@ -18,7 +18,13 @@ from portfolio import (
     try_method, verify, brute_isomorphic, execute_portfolio, NOT_INTEGRATED,
 )
 from fixtures import suite, A, C, M, P, X, sym_task, opt_task
-from trial import run, train_selector
+# LEGIT-022 and this directory both have trial.py. The older module is
+# intentionally imported by 023; load this experiment under a unique name.
+from importlib.util import spec_from_file_location, module_from_spec
+_spec=spec_from_file_location("legit024_ecology_trial", HERE / "trial.py")
+_module=module_from_spec(_spec)
+_spec.loader.exec_module(_module)
+run, train_selector = _module.run, _module.train_selector
 
 
 class ResearchEcologyTests(unittest.TestCase):
