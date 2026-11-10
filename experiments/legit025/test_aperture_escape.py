@@ -155,6 +155,29 @@ class ApertureEscapeTests(unittest.TestCase):
         self.assertTrue(origin["not_independently_authored_or_externally_blinded"])
         self.assertEqual(self.report["separate_eight_vertex_population"],origin)
 
+    def test_committed_cartridge_is_actual_training_selected_and_replayable(self):
+        packet=json.loads((HERE / "generated" / "selected_cartridge.json")
+                          .read_text(encoding="utf-8"))
+        chosen=self.plan["selected_training_cartridge"]
+        self.assertEqual(packet["experiment"],"MOTIF-LEGIT-025")
+        self.assertEqual(packet["matches_classical_atlas_source_id"],
+                         chosen["atlas_source_id"])
+        self.assertEqual(packet["selected_training_probes_sha256"],
+                         chosen["source_frozen_sha256"])
+        self.assertEqual(packet["generated_source"]["edges"],
+                         chosen["generated_source"]["edges"])
+        self.assertEqual(packet["existing_source"]["edges"],
+                         chosen["source_parent"]["edges"])
+        self.assertEqual(packet["operator"]["neighbors"],
+                         chosen["added_vertex_neighbors"])
+        self.assertEqual(packet["independent_carrier_source"]
+                         ["training_atlas_pairs"],
+                         [list(x) for x,_ in self.training])
+        self.assertTrue(packet["freeze_before_heldout_five_probe_results"])
+        self.assertTrue(packet["no_runtime_auto_promotion"])
+        self.assertTrue(packet[
+            "previous_legacy_grammar_already_included_five_node_sources"])
+
     def test_source_cartridge_reused_without_retraining_after_transfer(self):
         chosen=self.plan["selected_training_cartridge"]
         all_arms=self.report["transferred_research"]
