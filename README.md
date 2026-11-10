@@ -23,7 +23,7 @@ This is a research sandbox, **not** a pretrained LLM, a real-world causal model,
 
 - **[IMMUNE-001 — Epistemic Virology](experiments/immune001/DESIGN.md):** An isolated synthetic graph-integrity experiment with ancestry tracing, declared-origin de-duplication, local finite mathematical checks, targeted dependency review and anti-autoimmunity controls. In 480 engineer-authored held-out scenarios (same families, different seeds), it matched all expected statuses, had zero unsupported promotions and retained 80 checked true novelties. **The strong classical finite-check baseline tied 480/480 on binary promotion; no broad AI immunity claim.**
 
-### Run (Python 3.10+, standard library only)
+- **[IMMUNE-002 — Shoulders of Giants](experiments/immune002/DESIGN.md):** Reuse Doyle/de Kleer-inspired truth maintenance, alternative minimal support environments, exact polynomial checks, and a simulated source-to-sink reference monitor. On 480 synthetic reasoning fixtures, the algorithm matched an independent exhaustive environment baseline in **480/480**, preserving 40 alternative supports after revocation. On 320 simulated actions, an exact-parameter classical ACL **tied 320/320**, permitting all 120 benign cases and denying all 200 attack cases. No practical superiority over the strong controls is claimed. A separate opt-in Qwen3B action-proposal probe exists; it executes no real actions. **Stacked draft, not merged.**\n\n### Run (Python 3.10+, standard library only)
 
 ```sh
 cd experiments/001
