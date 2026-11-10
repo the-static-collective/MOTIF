@@ -14,6 +14,7 @@ from infinite_inverse_rank import (
     parameter, _compressed_member, successor, power_two_state,
     verify_power_two_edge, oracle_exact_rank, recognize,
     verify_lte_induction_examples, inverse_tree_fair_baseline,
+    sparse_family_upper_bound,enumerate_bounded_family,
     investigate, verify_packet, reenter, digest
 )
 
@@ -133,6 +134,43 @@ class InfiniteFamilyRankTests(unittest.TestCase):
         self.assertTrue(self.packet[
             "counterexample_to_false_family_completeness"][
                 "nonmembership_does_not_imply_divergence"])
+
+    def test_zero_density_is_rigorously_bounded_not_assumed_from_samples(self):
+        observed=self.packet["new_finite_parameter_family_density_obstruction"]
+        self.assertEqual([x["X"] for x in observed],[64,512,4096,16384])
+        self.assertEqual(self.packet["full_density_zero_proof_scope"],
+                         "ONLY_THIS_RESTRICTED_EXPLICIT_FAMILY")
+        for row in observed:
+            limit=row["mathematical_upper_bound"]
+            self.assertEqual(limit["X"],row["X"])
+            self.assertEqual(limit["natural_density_of_this_explicit_family"],0)
+            self.assertFalse(limit["asserts_natural_density_of_full_Collatz_basin"])
+            self.assertTrue(limit[
+                "proof_uses_3_adic_depth_and_elementary_exponential_growth"])
+            self.assertLessEqual(row["members_of_explicit_inverse_family_below_X"],
+                                 limit["symbolic_max_family_members_below_X"])
+            self.assertLess(row["members_of_explicit_inverse_family_below_X"],
+                            row["X"])
+            self.assertEqual(row,enumerate_bounded_family(row["X"]))
+
+    def test_parametric_density_upper_bound_independent_big_X(self):
+        for X in (2,3,10,10**3,10**6,10**12,10**30):
+            result=sparse_family_upper_bound(X)
+            H,M,J=(result[k] for k in (
+                "H_floor_log2_X",
+                "M_upper_bound_on_power_of_two_core_exponent",
+                "J_upper_bound_on_odd_inverse_depth"))
+            self.assertEqual(result["symbolic_max_family_members_below_X"],
+                             (H+1)*(1+M*J))
+            self.assertGreaterEqual(M,3)
+            self.assertGreaterEqual(J,1)
+        self.assertLess(sparse_family_upper_bound(10**30)[
+            "symbolic_max_family_members_below_X"],10**30)
+        for X in (0,1,-1,True):
+            with self.assertRaises(HOLD):
+                sparse_family_upper_bound(X)
+        with self.assertRaises(HOLD):
+            enumerate_bounded_family(20001)
 
     def test_classical_inverse_tree_baseline_is_precise_not_superiority(self):
         c=self.packet["classical_inverse_tree_baseline"]
