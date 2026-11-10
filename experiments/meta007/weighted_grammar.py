@@ -158,7 +158,7 @@ def generalized_branch(y,t,alphabet_size):
     if T(x)!=nxt or reference_T(x)!=nxt:
         raise HOLD("Independent exact reference rejects inverse source")
     weight=branch_weight(t)
-    if not (2*e+1<=weight and x<(1<<weight)*y):
+    if not (3*(1<<weight) > (1<<(2*e+1)) and x<(1<<weight)*y):
         raise HOLD("Variable-cost source growth bound invalid")
     return {
         "parent":y,"child":x,"t":t,"e":e,
