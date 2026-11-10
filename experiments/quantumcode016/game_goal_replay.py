@@ -208,6 +208,7 @@ def play(seed,mode,outdir,horizon=19):
         "meta_primitive_loops":nested.primitives_seen,
         "meta_visibility_resets":nested.resets_due_to_information,
         "meta_recent_primitive_tokens":tuple(x.token[:12] for x in nested.primitives),
+        "meta_recent_primitive_actions":tuple(x.actions for x in nested.primitives),
         "observed_new_facts_by_step":tuple(observed_novelty_by_step),
         "first_meta_alert_step":first_alert,
         "detected_period":nested.alerts[0].primitive_motif_length
