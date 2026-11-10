@@ -1,0 +1,52 @@
+name: MOTIF LEGIT-027 cross-domain method transfer
+
+on:
+  push:
+    paths:
+      - "experiments/legit027/**"
+      - ".github/workflows/legit027.yml"
+  pull_request:
+    paths:
+      - "experiments/legit027/**"
+      - ".github/workflows/legit027.yml"
+
+jobs:
+  graph-meta-rule-vs-algebra-and-constraints:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run adversarial tests including future-data quarantine
+        run: |
+          python -m unittest discover -s experiments/legit027 -p 'test_*.py' -v
+      - name: Freeze on training then evaluate two genuinely different question types
+        run: |
+          python experiments/legit027/transfer.py --emit > /tmp/motif-legit027-transfer.json
+          python -m json.tool /tmp/motif-legit027-transfer.json >/dev/null
+          python - <<'PY'
+          import json
+          p=json.load(open("/tmp/motif-legit027-transfer.json"))
+          print("STATUS:",p["status"])
+          print("SOURCE GRAPH META:",p["graph_origin"]["source_meta"])
+          print("TRANSFERRED:",p["graph_origin"]["transferred_rule"])
+          print("TRAIN-ONLY FREEZE:",p["training_and_freeze"]["combined_frozen_sha256"])
+          for domain,methods in p["aggregate_results"].items():
+              print("DOMAIN:",domain)
+              for name,result in methods.items():
+                  print(" ",name,"solved",result["solved"],"/",result["cases"],
+                        "questions",result["questions"],
+                        "CPU+verification ms",result["cpu_ms"])
+          PY
+      - name: Archive every target-world receipt and training-frozen policy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-LEGIT027-CROSS-DOMAIN-TRANSFER-RESEARCH-HOLD
+          path: /tmp/motif-legit027-transfer.json
+          retention-days: 30
+          if-no-files-found: warn
