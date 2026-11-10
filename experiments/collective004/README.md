@@ -79,6 +79,62 @@ This is **bounded compositional program synthesis from a human-authored
 primitive grammar**, not open-ended creativity, semantic understanding,
 historically novel mathematics, or an LLM's original invention.
 
+## Independently originated 1998 Graph Atlas pressure test
+
+We went beyond the developer-written six-vertex toy graphs, using the
+**original pinned LEGIT-022 carrier** for Read & Wilson's *An Atlas of Graphs*
+(1998), distributed through NetworkX **3.4.2**. Source data checksum:
+`73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d`.
+This Atlas and its 1,253 unlabeled graph types were authored independently
+of MOTIF, although the experiment and challenge selection were authored here.
+
+The original source-owned selection fixes **14 training / 28 held-out** pairs
+*before* any new question output is examined. Pairs are selected by matching
+degree multisets; all 28 heldout pairs are reported, including failures.
+
+The question program grammar is **frozen from the six-node experiment**.
+A previously unlisted edge/degree-pair existential question is synthesized
+from the same typed primitives for each ambiguous pair, independently checked
+through NetworkX and separate adjacency-matrix evaluation, and asked against
+a *synthetic observation owner* holding one public Atlas graph.
+
+### Executed, independently checkable heldout result
+
+| 28 external Atlas comparison pairs | Number |
+| --- | ---: |
+| Already distinguishable by old question menu | **16** |
+| **Indistinguishable by old menu** | **12** |
+| Previously unresolved, separated by expanded grammar | **10** |
+| Previously unresolved, STILL indistinguishable by expanded grammar | **2** |
+| Identical-information exhaustive classical search | **Same 10** |
+
+For the ten separable pairs, querying the simulated owner once for each
+possible realized world (20 source-owner calls total) correctly identifies
+20/20 cases. Source receipts are independently rechecked. For the two
+unresolved pairs, MOTIF produces HOLD and makes **zero** fabricated
+source-observation calls.
+
+Train comparison: 14 total; three old-menu collisions, two recovered by
+the new grammar and one remained HOLD.
+
+**Interpretation:** On these 12 old-menu-collision cases, the expanded
+question language extracts distinguishing information in 10 cases, whereas
+no combination of the declared old readings can. This is a concrete,
+bounded improvement in *expressive question capacity*, not a claim of
+general or historically new mathematics. A strong classical enumerator
+given exactly the same primitive grammar matches every successful result.
+
+The Atlas test split is publicly reconstructible, not externally blinded.
+The original 1998 graph data are independent-origin, but the source-owner
+callbacks are still synthetic, the question-grammar design is human-authored,
+and **the result does not establish live independent collective intelligence**.
+
+Reproduce with:
+
+    python -m pip install networkx==3.4.2
+    ATLAS_ROOT=external/motif-legit022       python -m unittest discover -s experiments/collective004 -p 'test_*.py' -v
+    python experiments/collective004/external_atlas.py       --atlas-root external/motif-legit022 > collective004-atlas-heldout-research.json
+
 ## Strong controls and falsifiers
 
 1. Disable new grammar: HOLD; no owner observations fabricated.
