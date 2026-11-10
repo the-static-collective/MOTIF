@@ -1,0 +1,53 @@
+name: META-005 explicit infinite Collatz inverse family and exact rank
+on:
+  push:
+    branches:
+      - experiment/meta-005-symbolic-infinite-rank-collatz
+  pull_request:
+    paths:
+      - 'experiments/meta005/**'
+      - '.github/workflows/meta005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  infinite-closed-positive-rank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test infinite symbolic construction, exact rank and non-completeness
+        run: python -m unittest discover -s experiments/meta005 -p 'test_*.py' -v
+      - name: Regression META-004 2-adic ghosts and finite nonlocal proof
+        run: python -m unittest discover -s experiments/meta004 -p 'test_*.py' -v
+      - name: Regression META-003 nonlinear rank CEGIS
+        run: python -m unittest discover -s experiments/meta003 -p 'test_*.py' -v
+      - name: Regression META-002 variable-time partial certificates
+        run: python -m unittest discover -s experiments/meta002 -p 'test_*.py' -v
+      - name: Regression META-001 genuine unknown Collatz
+        run: python -m unittest discover -s experiments/meta001 -p 'test_*.py' -v
+      - name: Construct exact positive-integer symbolic family receipt
+        run: python experiments/meta005/infinite_inverse_rank.py > meta005-infinite-rank-evidence.json
+      - name: Source replay and global overclaim rejection
+        run: |
+          python - <<'PY'
+          import json,sys
+          sys.path.insert(0,'experiments/meta005')
+          from infinite_inverse_rank import verify_packet,reenter
+          with open('meta005-infinite-rank-evidence.json') as f:
+              packet=json.load(f)
+          assert verify_packet(packet)
+          result=reenter(packet)
+          assert result['collatz_conjecture_globally_solved'] is False
+          assert result['new_external_investigative_questions']==0
+          assert packet['all_positive_integers_claimed_certified'] is False
+          print('Infinite inverse positive family exact rank reproduced; global Collatz OPEN')
+          PY
+      - name: Archive full proof-bearing inverse family and limits
+        uses: actions/upload-artifact@v4
+        with:
+          name: META005-EXPLICIT-INFINITE-RANK-RESEARCH-HOLD
+          path: meta005-infinite-rank-evidence.json
