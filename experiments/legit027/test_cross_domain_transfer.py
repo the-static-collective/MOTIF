@@ -132,6 +132,26 @@ class CrossDomainTests(unittest.TestCase):
                 transfer.replay(tasks.DOMAINS[1],cases[:1],
                                 {"forged":tasks.questions(tasks.DOMAINS[1])})
 
+    def test_committed_negative_transfer_artifact_matches_training_only_guard(self):
+        packet=json.loads((HERE / "generated" /
+            "transfer_failure_and_guard.json").read_text(encoding="utf-8"))
+        self.assertEqual(packet["experiment"],"MOTIF-LEGIT-027")
+        self.assertEqual(packet["protocol"]["combined_frozen_policy_sha256"],
+                         self.training["combined_frozen_sha256"])
+        self.assertTrue(packet["graph_source"]["graph_only_gate_not_transferred"])
+        self.assertTrue(packet["protocol"]["ranked_orders_frozen_before_future_case_access"])
+        for domain in tasks.DOMAINS:
+            guard=self.training["domains"][domain]["crossvalidated_transfer_guard"]
+            row=packet["domain_meta_results"][domain]
+            self.assertEqual(row["training_guard_adopted"],guard["adopted_method"])
+            self.assertFalse(guard["transfer_retained"])
+            self.assertEqual(row["training_out_of_world_average_queries"][
+                "graph_count_diversity"],guard[
+                "crossvalidated_mean_questions"]["LEGIT026_GRAPH_SCORER_TRANSFERRED"])
+            self.assertEqual(row["training_out_of_world_average_queries"][
+                "target_classical_residual_greedy"],guard[
+                "crossvalidated_mean_questions"]["TARGET_CLASSICAL_RESIDUAL_GREEDY"])
+
     def test_full_independent_future_receipts_and_honest_research_hold(self):
         result=transfer.run()
         self.assertEqual(result["status"],transfer.STATUS)
