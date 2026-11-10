@@ -1,0 +1,49 @@
+name: MOTIF GENIUS-002 perspective without erasure
+
+on:
+  push:
+    paths:
+      - "experiments/genius002/**"
+      - ".github/workflows/genius002.yml"
+  pull_request:
+    paths:
+      - "experiments/genius002/**"
+      - ".github/workflows/genius002.yml"
+
+jobs:
+  perspective-preservation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Falsification, privacy and consent behavior
+        run: |
+          python -m unittest discover -s experiments/genius002 -p 'test_*.py' -v
+      - name: Emit public-only demonstration receipt
+        run: |
+          python experiments/genius002/perspective.py > /tmp/motif-genius002-demo.json
+          python -m json.tool /tmp/motif-genius002-demo.json > /dev/null
+          python - <<'PY'
+          import json
+          d = json.load(open("/tmp/motif-genius002-demo.json"))
+          assert d["selected_option_id"] == "b_shared"
+          assert d["unsafe_first_majority_control"] == "a_rush"
+          assert d["no_external_action_taken"] is True
+          assert d["contested_claims"][0]["status"] == "CONTESTED_NOT_ADJUDICATED"
+          assert "DO_NOT_EXPORT_PRIVATE_CONTENT" not in json.dumps(d)
+          print("RESEARCH HOLD: group draft", d["selected_option_id"])
+          print("MAJORITY CONTROL:", d["unsafe_first_majority_control"])
+          print("DISAGREEMENTS RETAINED:", len(d["contested_claims"]))
+          print("EXTERNAL ACTIONS:", not d["no_external_action_taken"])
+          PY
+      - name: Archive public-only demonstration for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS002-PERSPECTIVE-RESEARCH-HOLD
+          path: /tmp/motif-genius002-demo.json
+          retention-days: 30
