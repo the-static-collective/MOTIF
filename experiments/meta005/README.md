@@ -119,6 +119,50 @@ power of two and infinitely many odd predecessors.
   Failing membership is an honest HOLD, not a declaration of
   nonconvergence.
 
+## A more important NEGATIVE result: this family has density zero
+
+We also asked whether our new infinite domain is **large enough** that
+coverage could conceivably imply the original global Collatz conjecture.
+
+We derived a quantitative bound for its counting function, independently
+checked against exhaustive small-integer membership enumeration.
+
+For any nontrivial odd inverse core
+
+    n_i+1 = 2**i*(2**m+1)/3**i,
+
+the allowed inverse depth i obeys i<=1+v3(m), hence 3**i<=3*m.
+Consequently n_i+1 > 2**m/(3*m). For all m>=4,
+m<=2**(m/2) (elementary induction), hence
+
+    n_i+1 > 2**(m/2)/3.
+
+If n_i<=X, this bounds the possible m by O(log X).
+For each m, the odd-inverse depth i has only O(loglog X)
+possibilities, and each power-of-two even lift h contributes at
+most O(log X) choices below X.
+
+Therefore
+
+    |S intersect [1,X]| = O((log X)**2 * loglog X) = o(X).
+
+**The explicit ranked family has natural density ZERO.**
+
+This is a correct negative result about the coverage *of this
+particular family*, not about the actual set of all convergent
+integers. The real Collatz conjecture remains open, and much stronger
+density results about converging trajectories are already known.
+
+The experiment saves the symbolic counting bound and independently
+enumerated small-X counts in the proof packet, with a new question:
+
+> What alternative inverse-construction grammar can produce
+> quantitatively larger, rigorously ranked infinite families
+> without assuming that all positive integers converge?
+
+This corrects a subtle temptation: **proving an infinite family is not
+the same as proving a substantial fraction of all integers.**
+
 ## Why this doesn't prove Collatz
 
 The Collatz conjecture asserts EVERY positive integer enters the
