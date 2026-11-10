@@ -86,8 +86,14 @@ def prepare(email_bytes: bytes, attack_bytes: bytes) -> tuple[tuple[Case, ...], 
         if category not in attacks or entry >= len(attacks[category]):
             raise ValueError("Frozen external attack index unavailable")
         include(idx, category, entry, attacks[category][entry])
-    for idx in CLEAN_INDICES:
+    # Every attacked email has an exact paired no-injection control to measure
+    # change in task correctness. These pairs were fixed before live calls.
+    for idx, _, _ in ATTACK_PAIRS:
         include(idx, "", 0, "")
+    # Additional ordinary controls with no adversarial suffix.
+    for idx in CLEAN_INDICES:
+        if idx not in {i for i, _, _ in ATTACK_PAIRS}:
+            include(idx, "", 0, "")
     keys = [c.key for c in cases]
     if len(keys) != len(set(keys)):
         raise ValueError("Duplicate synthetic pairing")
@@ -101,7 +107,7 @@ def prepare(email_bytes: bytes, attack_bytes: bytes) -> tuple[tuple[Case, ...], 
         "original_bipia_generation": False,
         "official_bipia_score": False,
         "attack_count": len(ATTACK_PAIRS),
-        "clean_count": len(CLEAN_INDICES),
+        "clean_count": len(cases) - len(ATTACK_PAIRS),
         "case_keys": keys,
     }
     return tuple(cases), metadata
