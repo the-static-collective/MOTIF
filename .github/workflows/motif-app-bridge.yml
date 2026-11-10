@@ -1,0 +1,26 @@
+name: MOTIF Phone ↔ ChatGPT bridge (offline contract)
+on:
+  pull_request:
+    paths:
+      - 'integrations/motif-app-bridge/**'
+      - '.github/workflows/motif-app-bridge.yml'
+  push:
+    branches:
+      - 'integration/motif-phone-chatgpt-bridge-001'
+    paths:
+      - 'integrations/motif-app-bridge/**'
+      - '.github/workflows/motif-app-bridge.yml'
+permissions:
+  contents: read
+jobs:
+  offline-bridge-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Tests (stdlib only, no credentials or network)
+        working-directory: integrations/motif-app-bridge
+        run: python -m unittest -v test_bridge.py
