@@ -1,0 +1,99 @@
+name: MOTIF IMMUNE-003 independent-origin epistemic challenge
+
+on:
+  push:
+    paths:
+      - "experiments/immune003/**"
+      - ".github/workflows/immune-003.yml"
+  pull_request:
+    paths:
+      - "experiments/immune003/**"
+      - ".github/workflows/immune-003.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-provenance-and-classical-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run source, quote, Dung grounded extension and classical falsifiers
+        working-directory: experiments/immune003
+        run: python -m unittest -v test_immune3.py test_semantic_gate.py test_data_audit.py
+      - name: Fetch original Microsoft BIPIA pinned datasets without running any external instructions
+        working-directory: experiments/immune003
+        run: |
+          python - <<'PY'
+          import corpus
+          cases, provenance = corpus.fetch_test_cases()
+          assert len(cases) == 25 and provenance["attack_count"] == 12
+          assert provenance["clean_count"] == 13
+          print({k:v for k,v in provenance.items() if k != "case_keys"})
+          PY
+      - name: Audit public source-only ideal labels; do not silently trust the judge
+        working-directory: experiments/immune003
+        run: python data_audit.py > /tmp/immune003-label-audit.json
+      - name: Scripted protocol only — NOT an LLM run
+        working-directory: experiments/immune003
+        run: python trial.py --backend scripted --output scripted-results.json
+      - name: Preserve scripted protocol (not model evidence)
+        uses: actions/upload-artifact@v4
+        with:
+          name: immune-003-scripted-protocol
+          path: |
+            experiments/immune003/scripted-results.json
+            /tmp/immune003-label-audit.json
+
+  genuine-qwen-bipia-derived:
+    if: github.event_name != 'pull_request'
+    needs: source-provenance-and-classical-reference
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Ollama in disposable runner, not production
+        run: |
+          curl --fail --silent --show-error --location https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          bash "$RUNNER_TEMP/ollama-install.sh"
+      - name: Download real qwen2.5 3B to loopback inference
+        run: |
+          (ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &)
+          for n in $(seq 1 55); do
+            if curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull qwen2.5:3b
+      - name: Run 50 real matched Qwen predictions, no executable model tools
+        working-directory: experiments/immune003
+        run: python trial.py --backend ollama --model qwen2.5:3b --output real-model-results.json
+      - name: Verify evidence and summarize without forcing favorable outcome
+        working-directory: experiments/immune003
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("real-model-results.json"))
+          assert r["actual_model_inference"] and r["real_calls"]==50
+          assert len(r["outcomes"])==50
+          assert all(x["receipt"]["real"] and x["receipt"]["no_external_tools"]
+                     and x["classical_literal_reference_agrees"]
+                     for x in r["outcomes"])
+          assert r["original_public_source"]["attack_count"]==12
+          assert r["original_public_source"]["clean_count"]==13
+          print(json.dumps(r["summary"],sort_keys=True,indent=2))
+          PY
+      - name: Preserve genuine inference including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: immune-003-real-qwen-bipia-derived
+          path: experiments/immune003/real-model-results.json
+          if-no-files-found: ignore
