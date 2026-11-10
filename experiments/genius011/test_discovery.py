@@ -110,6 +110,24 @@ class TestQuestionNotSupplied(unittest.TestCase):
             analyze(q,simulate_test(w,q),
                     purported_randomization_attested=True)
 
+    def test_observational_confounder_may_be_significant_without_intervention(self):
+        from controls import audit_survey
+        r = audit_survey(11031)
+        self.assertEqual(r["status"],
+                         "POSTHOC_OBSERVATIONAL_CONFOUNDING_NOT_INDEPENDENT_BLIND")
+        self.assertEqual(r["generated_candidates"], 2)
+        for row in r["candidate_checks"]:
+            self.assertEqual(
+                row["intervention_gate_status"],
+                "HOLD_OBSERVATIONAL_DATA_NOT_AN_INTERVENTION")
+            self.assertTrue(all(
+                v["observational_difference"] > .5
+                for v in row["survey_results"]))
+            self.assertTrue(all(
+                v["not_a_causal_or_randomized_conclusion"]
+                for v in row["survey_results"]))
+        self.assertNotIn("NEVER_SHARE_PRIVATE_CONTROL_NOTE",json.dumps(r))
+
     def test_three_strands_must_actually_support_relationship(self):
         for regime in ("PARTIAL","OPPOSED","NULL","CONFOUNDED"):
             r=evaluate_case(11031,regime)
