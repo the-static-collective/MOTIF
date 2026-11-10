@@ -1,0 +1,24 @@
+name: MOTIF QC-014 anti-stagnation recovery
+on:
+  push:
+    paths:
+      - 'experiments/quantumcode014/**'
+      - '.github/workflows/quantum-code-014.yml'
+  pull_request:
+    paths:
+      - 'experiments/quantumcode014/**'
+      - '.github/workflows/quantum-code-014.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-action-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run generic anti-stagnation tests
+        working-directory: experiments/quantumcode014
+        run: python -m unittest -v test_insanity.py
