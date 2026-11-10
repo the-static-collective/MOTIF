@@ -68,6 +68,22 @@ def scenario(name: str) -> Task:
         Question("survey_noise_x", "noise_x"),
         Question("survey_noise_y", "noise_y"),
     )
+    if name == "DEEP_CHAIN":
+        # Deliberately adversarial for two-step lookahead: the useful
+        # discovery requires FOUR conditional questions, with no partial
+        # capability rewards. An entropy/canonical tie can squander a slot
+        # on a high-entropy distraction.
+        questions = (
+            Question("a_noise_x", "noise_x"),
+            Question("b_noise_y", "noise_y"),
+            Question("z_confirm_b", "b"),
+            Question("z_inspect_c", "c", (("b", 1),)),
+            Question("z_verify_d", "d", (("b", 1), ("c", 1))),
+            Question("z_final_a", "a", (("b", 1), ("c", 1), ("d", 1))),
+        )
+        caps = (Capability("four_step_service",
+                           (("b", 1), ("c", 1), ("d", 1), ("a", 1)), 32),)
+        return Task(name=name, questions=questions, capabilities=caps, budget=4)
     if name == "CHAIN":
         caps = (
             Capability("foundational_a", (("a", 1),), 1),
