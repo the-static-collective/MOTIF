@@ -1,0 +1,57 @@
+name: MOTIF GENIUS-007 question foundry
+
+on:
+  push:
+    paths:
+      - "experiments/genius007/**"
+      - ".github/workflows/genius007.yml"
+  pull_request:
+    paths:
+      - "experiments/genius007/**"
+      - ".github/workflows/genius007.yml"
+
+jobs:
+  typed-question-synthesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Inspect typed source contracts, generated questions, proof checks, and exact baselines
+        run: |
+          python -m unittest discover -s experiments/genius007 -p 'test_*.py' -v
+      - name: Freeze and score unseen task vocabularies with full classical oracle
+        run: |
+          python experiments/genius007/benchmark.py > /tmp/motif-genius007-question-foundry.json
+          python -m json.tool /tmp/motif-genius007-question-foundry.json >/dev/null
+          python - <<'PY'
+          import json
+          r = json.load(open("/tmp/motif-genius007-question-foundry.json"))
+          assert r["no_external_action"]
+          assert len(r["selection_frozen_sha256_before_future_task_generation"]) == 64
+          print("STATUS:", r["status"])
+          print("FROZEN POLICY SHA256:", r["selection_frozen_sha256_before_future_task_generation"])
+          for family, data in r["test"].items():
+              print("FAMILY:", family)
+              print("  VALIDATION-SELECTED:", data["validation_selected"])
+              print("  SYNTHESIS DIVIDEND VS DIRECT-ONLY EXACT:", data["potential_composition_dividend_vs_direct_exact"])
+              print("  SELECTED GAP TO FULL-SPACE EXACT:", data["validation_selected_gap_to_strong_generated"])
+              print("  EXACT GENERATED ACTION-SPACE BASELINE:", data["strong_generated_action_space_baseline"])
+              print("  ALL METHODS:", data["measured_mean_verified_reward_by_arm"])
+              for task in data["task_receipts"]:
+                  assert task["arms"]["FOUNDRY_OPTIMAL"]["invalid_certificates"] == 0
+                  assert task["arms"]["FOUNDRY_OPTIMAL"]["evaluated_worlds"] == 32
+              print("  NUMBER OF NEW TASKS:", len(data["task_receipts"]))
+          PY
+      - name: Preserve all synthetic source/proof/value-of-inquiry receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MOTIF-GENIUS007-QUESTION-FOUNDRY-RESEARCH-HOLD
+          path: /tmp/motif-genius007-question-foundry.json
+          retention-days: 30
+          if-no-files-found: warn
