@@ -143,6 +143,15 @@ class TestThreeIndependentThreads(unittest.TestCase):
                             for c in packet["retrospective_callbacks"]))
         self.assertTrue(packet["no_original_record_edited"])
 
+    def test_competing_bridges_hold_instead_of_choosing_pretty_story(self):
+        shared=public_projection(generate(101031, "CONVERGENCE"))
+        proposed={"conditional_candidates": ["hinge_timing", "sunset_mark"]}
+        packet=two_clock_convergence_packet(shared, proposed)
+        self.assertEqual(packet["status"], "HOLD_NO_UNAMBIGUOUS_BRIDGE")
+        self.assertEqual(packet["retrospective_callbacks"], [])
+        self.assertEqual(packet["original_witness_count"], 3)
+        self.assertTrue(packet["no_original_record_edited"])
+
     def test_null_case_has_no_invented_callback(self):
         r=evaluate_world(101031,"NULL")
         self.assertEqual(r["verdict"]["conditional_candidates"],[])
