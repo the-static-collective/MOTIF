@@ -38,7 +38,6 @@ def task_for(seed: int, family: str) -> Task:
     suffix = f"{seed:x}{FAMILIES.index(family):x}"
     variables = tuple(f"{t}_{suffix}" for t in
                       ("cedar", "river", "copper", "bridge", "ash"))
-    rng.shuffle_names = None if False else None  # no effect on test data
     values = [rng.randint(0, 1) for _ in range(5)]
     def lit(i):
         return Literal(variables[i], values[i])
