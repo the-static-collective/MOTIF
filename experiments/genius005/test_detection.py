@@ -81,7 +81,7 @@ class TestExactMonitoring(unittest.TestCase):
         for i in indices:
             d.update(False, f"s:{i}")
         r0 = detection_summary(d, None, indices)
-        r1 = detection_summary(d, 35, indices)
+        r1 = detection_summary(d, 10, indices)
         self.assertEqual(d.alarms, d.alarms)
         self.assertNotEqual(r0["EXACT"]["true_detection"],
                             r1["EXACT"]["true_detection"])
