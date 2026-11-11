@@ -1,0 +1,83 @@
+name: VOID-005 reactive enemy, fallible witnesses and persistent memory
+on:
+  push:
+    paths:
+      - 'experiments/void005/**'
+      - '.github/workflows/void-005.yml'
+  pull_request:
+    paths:
+      - 'experiments/void005/**'
+      - '.github/workflows/void-005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-and-drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact stacked research source with frozen protocol ancestor
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Enforce preregistered policy, cohort and primary metric
+        run: |
+          git show fc2090b041d324b6a561077b52f05b5b86abe8d7:experiments/void005/PREREGISTRATION.md | cmp - experiments/void005/PREREGISTRATION.md
+          test -f experiments/003/affordance.py
+          test -f experiments/void004/waves.py
+      - name: Unit-test real MOTIF-003 import, hidden schedule, fraud and source revisions
+        run: python -m unittest discover -s experiments/void005 -p 'test_*.py' -v
+      - name: Development seeds — not part of confirmatory result
+        run: python experiments/void005/adversary.py --split development --full-receipts > void005-development.json
+      - name: Frozen 16-seed x 3-regime x 3-policy heldout experiment
+        run: python experiments/void005/adversary.py --split heldout --full-receipts > void005-heldout.json
+      - name: Validate independent source receipts and original frozen task population
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0,'experiments/void005')
+          from adversary import (DEV_SEEDS,TEST_SEEDS,REGIMES,POLICIES,
+                                 WAVES,MAX_ATTEMPTS,verified,seal)
+          for split,seeds in [('development',DEV_SEEDS),('heldout',TEST_SEEDS)]:
+              x=json.loads(pathlib.Path('void005-'+split+'.json').read_text())
+              assert x['split']==split
+              assert x['seal']==seal({k:v for k,v in x.items() if k!='seal'})
+              assert x['cases']==len(seeds)*len(REGIMES)*len(POLICIES)
+              assert x['llm_calls']==x['real_world_actions']==0
+              assert x['independently_authored_env'] is False
+              assert {(row['seed'],row['regime'],row['policy']) for row in x['rows']} == {
+                  (s,g,p) for s in seeds for g in REGIMES for p in POLICIES}
+              for row in x['rows']:
+                  assert row['restricted_attempts']==(row['cleared_at'] or MAX_ATTEMPTS+1)
+                  assert 1<=len(row['attempts'])<=MAX_ATTEMPTS
+                  for i,attempt in enumerate(row['attempts'],1):
+                      assert attempt['attempt']==i
+                      rr=attempt['verified_receipts']
+                      assert rr and all(verified(r) for r in rr)
+                      assert rr[0]['kind']=='RESET'
+                      assert not (attempt['relay'] and attempt['rechecked_with_sonar'])
+                      defenses=[r for r in rr if r['kind']=='DEFEND']
+                      assert len(defenses)==attempt['waves_held']+int(attempt['breached_at'] is not None)
+                      assert all(r['held'] for r in defenses[:-1])
+                      if attempt['breached_at'] is None:
+                          assert len(defenses)==WAVES and defenses[-1]['completed']
+                      else:
+                          assert not defenses[-1]['held']
+              print(split,json.dumps(x['summary'],sort_keys=True))
+          PY
+      - name: Archive every action, old belief and adversarial event — including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: void005-fallible-reactive-wave-survival
+          path: |
+            void005-development.json
+            void005-heldout.json
+          if-no-files-found: warn
+          retention-days: 30
