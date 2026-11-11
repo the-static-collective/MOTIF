@@ -1,0 +1,87 @@
+name: VOID-006 certified reflexes versus matched classical deliberation
+on:
+  push:
+    paths:
+      - 'experiments/void006/**'
+      - '.github/workflows/void-006.yml'
+  pull_request:
+    paths:
+      - 'experiments/void006/**'
+      - '.github/workflows/void-006.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reflex-chunks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify frozen protocol against historically committed source
+        run: |
+          git show 55afb93c38a9adc4cb142b8fd4444c1d02ff71e0:experiments/void006/PREREGISTRATION.md > /tmp/void006-original-protocol.md
+          cmp /tmp/void006-original-protocol.md experiments/void006/PREREGISTRATION.md
+          test -f experiments/003/affordance.py
+          test -f experiments/void005/adversary.py
+          test -f experiments/void004/waves.py
+      - name: Mechanism and source-authentication falsifiers
+        run: python -m unittest discover -s experiments/void006 -p 'test_*.py' -v
+      - name: Development-only run (not part of heldout score)
+        run: python experiments/void006/procedural.py --split development --full > void006-development.json
+      - name: Fresh 20-world 3-regime 4-arm confirmatory simulator test
+        run: python experiments/void006/procedural.py --split heldout --full > void006-heldout.json
+      - name: Audit action-level primitive execution, receipts, budgets and comparisons
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0, 'experiments/void006')
+          from procedural import TEST_SEEDS, DEV_SEEDS, REGIMES, POLICIES, seal, verified, MAX_ATTEMPTS, WAVES
+          for path,split,seeds in (
+              ('void006-development.json','development',DEV_SEEDS),
+              ('void006-heldout.json','heldout',TEST_SEEDS)):
+              d=json.loads(pathlib.Path(path).read_text())
+              assert d['seal']==seal({k:v for k,v in d.items() if k!='seal'})
+              assert d['split']==split and d['model_calls']==d['external_actions']==0
+              assert d['cases']==len(seeds)*len(REGIMES)*len(POLICIES)
+              assert len(d['paired'])==len(seeds)*len(REGIMES)
+              assert set((r['seed'],r['regime'],r['policy']) for r in d['rows'])=={
+                  (s,g,p) for s in seeds for g in REGIMES for p in POLICIES}
+              for r in d['rows']:
+                  assert r['seal']==seal({k:v for k,v in r.items() if k!='seal'})
+                  assert 1<=r['total_attempts']<=MAX_ATTEMPTS
+                  assert r['restricted_attempts']==(r['first_clear_attempt'] or MAX_ATTEMPTS+1)
+                  assert r['defenses']==r['deliberative_gate_lookups']+r['automatic_defenses']
+                  assert r['chunk_primitive_defenses']<=r['automatic_defenses']
+                  assert r['surprise_interruptions']<=r['reflex_invalidations']
+                  count=0
+                  for a in r['attempts']:
+                      assert a['attempt']>0 and a['held']<=WAVES
+                      for receipt in a['receipts']:
+                          assert verified(receipt)
+                      defends=[x for x in a['receipts'] if x['kind']=='DEFEND']
+                      count+=len(defends)
+                      assert len(defends)==a['held']+int(a['breached_wave'] is not None)
+                      assert a['cleared']==(a['held']==WAVES)
+                      if a['cleared']:
+                          assert defends[-1]['completed']
+                      else:
+                          assert defends[-1]['held'] is False
+                  assert r['defenses']==count
+              print(split, json.dumps(d['summary'],sort_keys=True))
+          PY
+      - name: Preserve audit and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: void006-reflex-chunks-sparse-drift-full-receipts
+          path: |
+            void006-development.json
+            void006-heldout.json
+          retention-days: 30
+          if-no-files-found: warn
