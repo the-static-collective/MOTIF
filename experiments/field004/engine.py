@@ -196,6 +196,7 @@ def make_strategies(inp: Input, ideas: tuple[Inference,...]) -> tuple[Strategy,.
 
 def probes(inp: Input, ideas: tuple[Inference,...], strategies:tuple[Strategy,...]) -> tuple[Probe,...]:
     ids = {s.id for s in strategies}
+    ordered_ids = tuple(sorted(ids))
     options = [
         Probe('target_meaning','Do marks/dotted lines designate the intended new boundary?',
               ('recompose_perimeter','short_boundary'),
@@ -203,7 +204,7 @@ def probes(inp: Input, ideas: tuple[Inference,...], strategies:tuple[Strategy,..
               bool(evidence_for(inp,'TARGET_ROUTE')),
               'Target geometry determines which solution is even relevant.'),
         Probe('traffic_exit','Could the current or proposed dog area connect to street/driveway through a gap?',
-              tuple(ids),
+              ordered_ids,
               'Trace each possible route without dogs; treat uncertain openings as not contained.',100,1,
               inp.critical_exit_closed_verified!='YES',
               'Critical exposure can invalidate all layouts irrespective of material savings.'),
@@ -223,7 +224,7 @@ def probes(inp: Input, ideas: tuple[Inference,...], strategies:tuple[Strategy,..
               inp.support_stability_verified!='YES',
               'Controls whether joint-support proposals are physically plausible.'),
         Probe('animal_gaps','Could a dog become trapped, entangled, escape under, or reach sharp edges?',
-              tuple(ids),
+              ordered_ids,
               'Measure dog/panel clearances and inspect materials before use.',100,2,
               inp.safe_pet_clearance_verified!='YES',
               'A visually clear boundary can still be dangerous or ineffective.'),
