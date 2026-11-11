@@ -33,7 +33,7 @@ jobs:
       - name: Mechanism and source-authentication falsifiers
         run: python -m unittest discover -s experiments/void006 -p 'test_*.py' -v
       - name: Development-only run (not part of heldout score)
-        run: python experiments/void006/procedural.py --split development > void006-development.json
+        run: python experiments/void006/procedural.py --split development --full > void006-development.json
       - name: Fresh 20-world 3-regime 4-arm confirmatory simulator test
         run: python experiments/void006/procedural.py --split heldout --full > void006-heldout.json
       - name: Audit action-level primitive execution, receipts, budgets and comparisons
