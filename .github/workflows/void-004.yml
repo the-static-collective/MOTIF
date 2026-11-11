@@ -1,0 +1,85 @@
+name: VOID-004 repeat-until-clear 24-wave fortress
+on:
+  push:
+    paths:
+      - 'experiments/void004/**'
+      - '.github/workflows/void-004.yml'
+  pull_request:
+    paths:
+      - 'experiments/void004/**'
+      - '.github/workflows/void-004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  wave-fortress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Freeze preregistration and verify original MOTIF-003 exists
+        run: |
+          echo 'aaa0c573fa9c7e64a251c4f0b6d2e9fe4b3126863cedd03f6cf1ccb5d17aae72  experiments/void004/PREREGISTRATION.md' | sha256sum -c -
+          test -f experiments/003/affordance.py
+      - name: Test privacy of hidden wave schedule, relay path, one-charge gate, and source receipts
+        run: python -m unittest discover -s experiments/void004 -p 'test_*.py' -v
+      - name: Run development fixtures separately (descriptive only)
+        run: python experiments/void004/waves.py --split development --full-receipts > void004-development.json
+      - name: Run frozen 24-seed repeat-until-clear study with full evidence
+        run: python experiments/void004/waves.py --split heldout --full-receipts > void004-heldout.json
+      - name: Independent audit of attempt counts and source-signed event integrity
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0, 'experiments/void004')
+          from waves import (DEV_SEEDS, TEST_SEEDS, POLICIES, WAVES,
+                             MAX_ATTEMPTS, PREP_STEPS, seal, verified)
+          for split, filename, seeds in (
+              ('development','void004-development.json',DEV_SEEDS),
+              ('heldout','void004-heldout.json',TEST_SEEDS)):
+              x=json.loads(pathlib.Path(filename).read_text())
+              assert x['seal']==seal({k:v for k,v in x.items() if k!='seal'})
+              assert x['split']==split and x['wave_count']==24
+              assert x['max_attempts']==14 and x['target_attempts']==10
+              assert x['source_is_independently_authored'] is False
+              assert x['real_world_actions']==x['llm_calls']==0
+              assert len(x['cases'])==len(seeds)*len(POLICIES)
+              assert {(r['seed'],r['policy']) for r in x['cases']}=={
+                  (s,p) for s in seeds for p in POLICIES}
+              for result in x['cases']:
+                  assert 1<=result['attempts_used']<=MAX_ATTEMPTS
+                  assert result['attempts_used']==len(result['attempts'])
+                  assert result['completed_by_14']==(result['completed_at'] is not None)
+                  assert result['restricted_attempts']==(result['completed_at'] or MAX_ATTEMPTS+1)
+                  for i, attempt in enumerate(result['attempts'],1):
+                      assert attempt['attempt']==i
+                      assert attempt['prep_steps']<=PREP_STEPS
+                      assert attempt['sonar_used'] in (0,1)
+                      assert not(attempt['relay'] and attempt['sonar_used'])
+                      assert all(verified(receipt) for receipt in attempt['receipts'])
+                      assert attempt['receipts'][0]['kind']=='RESET'
+                      defenses=[r for r in attempt['receipts'] if r['kind']=='DEFEND']
+                      assert len(defenses)==attempt['waves_survived']+int(attempt['first_breach_wave'] is not None)
+                      assert all(r['held'] for r in defenses[:-1])
+                      if attempt['completed']:
+                          assert attempt['waves_survived']==WAVES
+                          assert defenses[-1]['completed']
+                      else:
+                          assert defenses[-1]['held'] is False
+              print(split, json.dumps(x['policy_summaries'], sort_keys=True))
+          PY
+      - name: Archive complete source and outcome receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: void004-repeated-wave-survival-holdout-evidence
+          path: |
+            void004-development.json
+            void004-heldout.json
+          if-no-files-found: warn
+          retention-days: 30
