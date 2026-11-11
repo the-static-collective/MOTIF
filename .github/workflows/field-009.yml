@@ -1,0 +1,30 @@
+name: FIELD-009 ratios, geometric scale and HOLD regression checks
+on:
+  push:
+    paths:
+      - 'experiments/field009/**'
+      - '.github/workflows/field-009.yml'
+  pull_request:
+    paths:
+      - 'experiments/field009/**'
+      - '.github/workflows/field-009.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install planar geometry dependencies
+        working-directory: experiments/field009
+        run: python -m pip install -r requirements.txt
+      - name: Run source, perspective, and calibration tests
+        working-directory: experiments/field009
+        run: python -m unittest discover -v
+      - name: Run source-free conditional ratio demo
+        working-directory: experiments/field009
+        run: python demo.py
