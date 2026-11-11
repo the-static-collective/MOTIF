@@ -94,6 +94,18 @@ jobs:
           assert len(x['full_records']['followups'])==3
           print('POSTHOC_19003:',json.dumps(x['two_run_net'],sort_keys=True))
           PY
+      - name: Independent posthoc outcome audit of official Crafter achievements
+        run: |
+          python experiments/void003/achievement_audit.py
+          python - <<'PY'
+          import json
+          x=json.load(open('void003-achievement-correction-posthoc.json'))
+          assert x['classification']=='POSTHOC_OUTCOME_CORRECTION_NOT_FROZEN_PRIMARY'
+          assert x['second_run_timing']['heldout']['no_memory']['both_goals_seen_in_engine_achievements']==6
+          assert x['second_run_timing']['heldout']['motif_memory']['both_goals_seen_in_engine_achievements']==6
+          assert x['already_seen_19003']['motif_map_cells']==652
+          print('Posthoc first-goal timing:',json.dumps(x['second_run_timing']['heldout'],sort_keys=True))
+          PY
       - name: Archive all historical map packets and actual engine step receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -102,5 +114,6 @@ jobs:
           path: |
             void003-two-run-crafter-audit.json
             void003-posthoc-seed19003.json
+            void003-achievement-correction-posthoc.json
           if-no-files-found: warn
           retention-days: 30
