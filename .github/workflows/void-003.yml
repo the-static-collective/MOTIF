@@ -84,11 +84,11 @@ jobs:
           print('Actual executed virtual-game steps:',total)
           print('Heldout primary:',json.dumps(o['results']['heldout'],sort_keys=True))
           PY
-      - name: Archive all historical map packets and actual engine step receipts
+      - name: Separate posthoc previously seen wide-exploration seed (never part of heldout)\n        run: |\n          python experiments/void003/posthoc_19003.py\n          python - <<'PY'\n          import json\n          x=json.load(open('void003-posthoc-seed19003.json'))\n          assert x['seed']==19003 and x['not_confirmatory']\n          assert len(x['full_records']['followups'])==3\n          print('POSTHOC_19003:',json.dumps(x['two_run_net'],sort_keys=True))\n          PY\n      - name: Archive all historical map packets and actual engine step receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: void003-natural-crafter-two-reset-memory-audit
-          path: void003-two-run-crafter-audit.json
+          path: |\n            void003-two-run-crafter-audit.json\n            void003-posthoc-seed19003.json
           if-no-files-found: warn
           retention-days: 30
