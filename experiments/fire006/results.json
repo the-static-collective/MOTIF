@@ -1,0 +1,5987 @@
+{
+  "experiment": "FIRE-006",
+  "macro_primary": {
+    "equal3": 0.11373554,
+    "exp3": 0.10457355,
+    "fire006": 0.10586845,
+    "fire006_no_rollback": 0.10555305,
+    "fixed_share3": 0.10465487,
+    "proximal3": 0.10555678
+  },
+  "macro_raw_brier": {
+    "equal3": 0.11373554,
+    "exp3": 0.10407937,
+    "fire006": 0.10572685,
+    "fire006_no_rollback": 0.10540881,
+    "fixed_share3": 0.10406406,
+    "proximal3": 0.10493125
+  },
+  "regimes": {
+    "abrupt": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.023425401,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.4085373192310577,
+            0.3353656797111195,
+            0.2560970010578228
+          ],
+          "quoted_price": 0.00231709,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005761356,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4085373192310577,
+            0.3353656797111195,
+            0.2560970010578228
+          ],
+          "proposed": [
+            0.43900165475212904,
+            0.3472138501989278,
+            0.21378449504894304
+          ],
+          "quoted_price": 0.001269375,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 23,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00576479,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4085373192310577,
+            0.3353656797111195,
+            0.2560970010578228
+          ],
+          "proposed": [
+            0.4390254600493428,
+            0.34719758387779664,
+            0.21377695607286057
+          ],
+          "quoted_price": 0.001269601,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 24,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004359414,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4085373192310577,
+            0.3353656797111195,
+            0.2560970010578228
+          ],
+          "proposed": [
+            0.4344933076678715,
+            0.3463945714094585,
+            0.21911212092267007
+          ],
+          "quoted_price": 0.001109546,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 25,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.031959932,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.4085373192310577,
+            0.3353656797111195,
+            0.2560970010578228
+          ],
+          "proposed": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "quoted_price": 0.002933742,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 26,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.012558,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5227847125418839,
+            0.3830217576762868,
+            0.09419352978182927
+          ],
+          "quoted_price": 0.001923363,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 34,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010883741,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5162698678407163,
+            0.3854109184587381,
+            0.09831921370054574
+          ],
+          "quoted_price": 0.001799592,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 35,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010886643,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5162866956692077,
+            0.3854017094342335,
+            0.0983115948965587
+          ],
+          "quoted_price": 0.001799821,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 36,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00897345,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5345537254458692,
+            0.3514709916007237,
+            0.11397528295340713
+          ],
+          "quoted_price": 0.001488058,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 37,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008951808,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5344150805173072,
+            0.35166620284628686,
+            0.11391871663640604
+          ],
+          "quoted_price": 0.001483898,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 38,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008956727,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5344316906683093,
+            0.35165758609830194,
+            0.11391072323338879
+          ],
+          "quoted_price": 0.001484397,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 39,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.02715157,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.48495180305670793,
+            0.35674258270647924,
+            0.15830561423681283
+          ],
+          "proposed": [
+            0.5713994854947497,
+            0.3471706898683598,
+            0.08142982463689062
+          ],
+          "quoted_price": 0.00259343,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 40,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00549575,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5713994854947497,
+            0.3471706898683598,
+            0.08142982463689062
+          ],
+          "proposed": [
+            0.6140294597672352,
+            0.3261111626764053,
+            0.05985937755635947
+          ],
+          "quoted_price": 0.001278899,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 48,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004743536,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5713994854947497,
+            0.3471706898683598,
+            0.08142982463689062
+          ],
+          "proposed": [
+            0.6073721646828534,
+            0.3435386672908027,
+            0.049089168026343964
+          ],
+          "quoted_price": 0.00107918,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 49,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.040117415,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.5713994854947497,
+            0.3471706898683598,
+            0.08142982463689062
+          ],
+          "proposed": [
+            0.5269270230309584,
+            0.46144898465196216,
+            0.011623992317079394
+          ],
+          "quoted_price": 0.003428349,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 50,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.806293746,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.5269270230309584,
+            0.46144898465196216,
+            0.011623992317079394
+          ],
+          "proposed": [
+            0.07394382509211513,
+            0.8664235343350404,
+            0.05963264057284447
+          ],
+          "quoted_price": 0.013589496,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 58,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001108139,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.07394382509211513,
+            0.8664235343350404,
+            0.05963264057284447
+          ],
+          "proposed": [
+            0.07176728673877554,
+            0.8510366445628024,
+            0.07719606869842215
+          ],
+          "quoted_price": 0.000526903,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 66,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004299026,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.07394382509211513,
+            0.8664235343350404,
+            0.05963264057284447
+          ],
+          "proposed": [
+            0.07351402164197138,
+            0.8339956978780464,
+            0.09249028047998219
+          ],
+          "quoted_price": 0.000985729,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 67,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.01146825,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.07394382509211513,
+            0.8664235343350404,
+            0.05963264057284447
+          ],
+          "proposed": [
+            0.05267268147096509,
+            0.8278268566625903,
+            0.11950046186644468
+          ],
+          "quoted_price": 0.001796035,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 68,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.031016517,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.07394382509211513,
+            0.8664235343350404,
+            0.05963264057284447
+          ],
+          "proposed": [
+            0.03890097580283673,
+            0.8034338243587906,
+            0.15766519983837268
+          ],
+          "quoted_price": 0.002940977,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 69,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007957026,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.03890097580283673,
+            0.8034338243587906,
+            0.15766519983837268
+          ],
+          "proposed": [
+            0.006962861137360021,
+            0.7905967429698464,
+            0.20244039589279364
+          ],
+          "quoted_price": 0.001343256,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 77,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007983077,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.03890097580283673,
+            0.8034338243587906,
+            0.15766519983837268
+          ],
+          "proposed": [
+            0.006920444776037878,
+            0.7905764544089979,
+            0.2025031008149642
+          ],
+          "quoted_price": 0.001345137,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 78,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.041703619,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.03890097580283673,
+            0.8034338243587906,
+            0.15766519983837268
+          ],
+          "proposed": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "quoted_price": 0.001167029,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 79,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000381838,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7961872412034852,
+            0.20381275879651486
+          ],
+          "quoted_price": 0.00029191,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 87,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00022698,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7984155577668401,
+            0.20158444223315994
+          ],
+          "quoted_price": 0.000225061,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 88,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000515775,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7946087764032436,
+            0.2053912235967565
+          ],
+          "quoted_price": 0.000339264,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000842023,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7914678044406478,
+            0.20853219555935226
+          ],
+          "quoted_price": 0.000433493,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 90,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00084244,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.791464225373331,
+            0.2085357746266689
+          ],
+          "quoted_price": 0.000433601,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 91,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000802404,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.791811745317671,
+            0.20818825468232907
+          ],
+          "quoted_price": 0.000423175,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 92,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000822457,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7916365643849117,
+            0.2083634356150884
+          ],
+          "quoted_price": 0.00042843,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 93,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005443015,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.8059175772461391,
+            0.19408242275386092
+          ],
+          "proposed": [
+            0,
+            0.7691782867011988,
+            0.2308217132988012
+          ],
+          "quoted_price": 0.001102179,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 94,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          0.00565838,
+          0.01350059
+        ],
+        "mean": 0.00957949
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.0286959,
+            -0.02663562
+          ],
+          "mean": -0.02766576
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            0.00448573,
+            0.00584082
+          ],
+          "mean": 0.00516327
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            0.00055008,
+            0.00127252
+          ],
+          "mean": 0.0009113
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            0.00479726,
+            0.00622271
+          ],
+          "mean": 0.00550999
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            -0.00003065,
+            0.00145112
+          ],
+          "mean": 0.00071024
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00018109,
+          0.00208364
+        ],
+        "mean": 0.00095128
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          0.00052981,
+          0.00198893
+        ],
+        "mean": 0.00125937
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.09731574,
+          "coverage": 0.7468099,
+          "early_post48_brier": 0.2468339,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.11808222,
+          "log_loss": 0.33094261,
+          "overconfident_errors": 1,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.93079423,
+          "total_loss_with_price": 0.09731574
+        },
+        "exp3": {
+          "brier": 0.06400069,
+          "coverage": 0.93203125,
+          "early_post48_brier": 0.19114883,
+          "effective_hypotheses": 2.22426349,
+          "late_post48_brier": 0.04620908,
+          "log_loss": 0.2191207,
+          "overconfident_errors": 1.225,
+          "rejected_proposals": 0,
+          "revision_price": 0.00048602,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.93811397,
+          "total_loss_with_price": 0.06448671
+        },
+        "fire006": {
+          "brier": 0.06947147,
+          "coverage": 0.90084635,
+          "early_post48_brier": 0.22478642,
+          "effective_hypotheses": 2.53804828,
+          "late_post48_brier": 0.04594711,
+          "log_loss": 0.23660246,
+          "overconfident_errors": 1.14375,
+          "rejected_proposals": 44.26875,
+          "revision_price": 0.00017852,
+          "revisions": 4,
+          "rollback_count": 0.35,
+          "selective_accuracy": 0.93837484,
+          "total_loss_with_price": 0.06964999
+        },
+        "fire006_no_rollback": {
+          "brier": 0.06855339,
+          "coverage": 0.9061849,
+          "early_post48_brier": 0.22019483,
+          "effective_hypotheses": 2.52135394,
+          "late_post48_brier": 0.04602912,
+          "log_loss": 0.23398664,
+          "overconfident_errors": 1.1625,
+          "rejected_proposals": 44.36875,
+          "revision_price": 0.00018529,
+          "revisions": 4.60625,
+          "rollback_count": 0,
+          "selective_accuracy": 0.93857927,
+          "total_loss_with_price": 0.06873868
+        },
+        "fixed_share3": {
+          "brier": 0.0635725,
+          "coverage": 0.93027344,
+          "early_post48_brier": 0.1897473,
+          "effective_hypotheses": 2.35856179,
+          "late_post48_brier": 0.04559115,
+          "log_loss": 0.21963678,
+          "overconfident_errors": 1.19375,
+          "rejected_proposals": 0,
+          "revision_price": 0.0005675,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.93976267,
+          "total_loss_with_price": 0.06414
+        },
+        "proximal3": {
+          "brier": 0.06821209,
+          "coverage": 0.93164063,
+          "early_post48_brier": 0.21520694,
+          "effective_hypotheses": 1.97547778,
+          "late_post48_brier": 0.04499584,
+          "log_loss": 0.23418233,
+          "overconfident_errors": 1.4,
+          "rejected_proposals": 0,
+          "revision_price": 0.00072766,
+          "revisions": 70.49375,
+          "rollback_count": 0,
+          "selective_accuracy": 0.93248509,
+          "total_loss_with_price": 0.06893975
+        }
+      }
+    },
+    "compromised": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.093737409,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.29520308965331993,
+            0.20409714560968184,
+            0.5006997647369982
+          ],
+          "quoted_price": 0.005020993,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.035366423,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.29520308965331993,
+            0.20409714560968184,
+            0.5006997647369982
+          ],
+          "proposed": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "quoted_price": 0.002963656,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 23,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000061436,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.21247580242490602,
+            0.19155063059747654,
+            0.5959735669776175
+          ],
+          "quoted_price": 0.000126005,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 31,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000065213,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.21257816572484134,
+            0.191596416969101,
+            0.5958254173060576
+          ],
+          "quoted_price": 0.000129076,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 32,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00006342,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.21251689145650343,
+            0.19160975257099183,
+            0.5958733559725047
+          ],
+          "quoted_price": 0.000127237,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 33,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000062778,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.21249487391572067,
+            0.19161424340697264,
+            0.5958908826773067
+          ],
+          "quoted_price": 0.000126577,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 34,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000584508,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.22130241575484086,
+            0.18992479872047063,
+            0.5887727855246885
+          ],
+          "quoted_price": 0.000390803,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 35,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000629511,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.2217352509456217,
+            0.19000282681996408,
+            0.5882619222344143
+          ],
+          "quoted_price": 0.000403788,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 36,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002002013,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.23329718557022,
+            0.17454720132126497,
+            0.592155613108515
+          ],
+          "quoted_price": 0.000750646,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 37,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00799096,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.2589134399884579,
+            0.1592862705141949,
+            0.5818002894973473
+          ],
+          "quoted_price": 0.001519134,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 38,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008048696,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.25912950964415,
+            0.15931884892201545,
+            0.5815516414338346
+          ],
+          "quoted_price": 0.001525616,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 39,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005690995,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.24961945375912176,
+            0.16020954676996418,
+            0.590170999470914
+          ],
+          "quoted_price": 0.001240314,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 40,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005150265,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.2476179163584416,
+            0.16179485585479628,
+            0.5905872277867621
+          ],
+          "quoted_price": 0.001180268,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 41,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005088553,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.24723846486155612,
+            0.16166535392674822,
+            0.5910961812116957
+          ],
+          "quoted_price": 0.001168885,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 42,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002696031,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.22973383594495503,
+            0.16353599426925916,
+            0.6067301697857859
+          ],
+          "quoted_price": 0.000861002,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 43,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002249807,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.2200260084128069,
+            0.1650513686246312,
+            0.6149226229625618
+          ],
+          "quoted_price": 0.000815541,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 44,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002252367,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.2199620565729712,
+            0.16504212464209445,
+            0.6149958187849344
+          ],
+          "quoted_price": 0.000815818,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 45,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003993917,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.20172134178604662,
+            0.16456505756055106,
+            0.6337136006534023
+          ],
+          "quoted_price": 0.001026759,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 46,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010726225,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.15664336988071703,
+            0.19234694284056442,
+            0.6510096872787186
+          ],
+          "quoted_price": 0.001548968,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 47,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004767641,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.17751757110717428,
+            0.18586605899181366,
+            0.636616369901012
+          ],
+          "quoted_price": 0.001113842,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 48,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.024086818,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.20827564465782106,
+            0.19223606534539786,
+            0.5994882899967812
+          ],
+          "proposed": [
+            0.12151561238380705,
+            0.21740892681909268,
+            0.6610754607971002
+          ],
+          "quoted_price": 0.002602801,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 49,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004235612,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.12151561238380705,
+            0.21740892681909268,
+            0.6610754607971002
+          ],
+          "proposed": [
+            0.08864752862713147,
+            0.21838902936836915,
+            0.6929634420044994
+          ],
+          "quoted_price": 0.000986043,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 57,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.015628635,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.12151561238380705,
+            0.21740892681909268,
+            0.6610754607971002
+          ],
+          "proposed": [
+            0.050808154975694866,
+            0.24185748176120989,
+            0.7073343632630952
+          ],
+          "quoted_price": 0.002121224,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 58,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002548676,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.050808154975694866,
+            0.24185748176120989,
+            0.7073343632630952
+          ],
+          "proposed": [
+            0.07760775695511639,
+            0.23806534663165768,
+            0.6843268964132259
+          ],
+          "quoted_price": 0.000803988,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 66,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.017648115,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.050808154975694866,
+            0.24185748176120989,
+            0.7073343632630952
+          ],
+          "proposed": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "quoted_price": 0.001524245,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 67,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003578414,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0.03364835649559072,
+            0.2658216525369839,
+            0.7005299909674254
+          ],
+          "quoted_price": 0.001009451,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 75,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000070605,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.2722388109506292,
+            0.7277611890493708
+          ],
+          "quoted_price": 0.000125501,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 76,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000073659,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.2721492919529272,
+            0.7278507080470727
+          ],
+          "quoted_price": 0.000128187,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 77,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000075962,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.27208301439369514,
+            0.7279169856063049
+          ],
+          "quoted_price": 0.000130175,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 78,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000798712,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.26235137550938875,
+            0.7376486244906113
+          ],
+          "quoted_price": 0.000422124,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 79,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002645702,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.2508128442418246,
+            0.7491871557581754
+          ],
+          "quoted_price": 0.00076828,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 80,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002813,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.2500155878490464,
+            0.7499844121509536
+          ],
+          "quoted_price": 0.000792198,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 81,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003002441,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.2491408826123111,
+            0.7508591173876888
+          ],
+          "quoted_price": 0.000818439,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 82,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003025066,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.24903829177433345,
+            0.7509617082256667
+          ],
+          "quoted_price": 0.000821517,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 83,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003642339,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.24637406367732417,
+            0.7536259363226759
+          ],
+          "quoted_price": 0.000901444,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 84,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002947575,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.24939068882893445,
+            0.7506093111710657
+          ],
+          "quoted_price": 0.000810945,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 85,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002953293,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.24936448531646532,
+            0.7506355146835347
+          ],
+          "quoted_price": 0.000811731,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 86,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006659886,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.23578916087498997,
+            0.7642108391250101
+          ],
+          "quoted_price": 0.001218991,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 87,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006659654,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.23578987082631847,
+            0.7642101291736816
+          ],
+          "quoted_price": 0.001218969,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 88,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.009100038,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.27642218056282736,
+            0.7235778194371726
+          ],
+          "proposed": [
+            0,
+            0.22892517512413532,
+            0.7710748248758648
+          ],
+          "quoted_price": 0.00142491,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00004854,
+          0.0023782
+        ],
+        "mean": 0.00116483
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.00107877,
+            -0.00025533
+          ],
+          "mean": -0.00066705
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            -0.00040249,
+            0.00050782
+          ],
+          "mean": 0.00005267
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            -0.00001684,
+            0.00021425
+          ],
+          "mean": 0.00009871
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            -0.0004635,
+            0.0003311
+          ],
+          "mean": -0.0000662
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            -0.00034274,
+            0.00071046
+          ],
+          "mean": 0.00018386
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00081613,
+          0.00189591
+        ],
+        "mean": 0.00053989
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          0.0001281,
+          0.00114126
+        ],
+        "mean": 0.00063468
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.17605788,
+          "coverage": 0.93561198,
+          "early_post48_brier": 0.17813887,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.17150758,
+          "log_loss": 0.6177723,
+          "overconfident_errors": 7.4,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.79128909,
+          "total_loss_with_price": 0.17605788
+        },
+        "exp3": {
+          "brier": 0.1748807,
+          "coverage": 0.93893229,
+          "early_post48_brier": 0.17714369,
+          "effective_hypotheses": 2.11450188,
+          "late_post48_brier": 0.16934919,
+          "log_loss": 0.6158113,
+          "overconfident_errors": 7.275,
+          "rejected_proposals": 0,
+          "revision_price": 0.00045746,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.79090025,
+          "total_loss_with_price": 0.17533816
+        },
+        "fire006": {
+          "brier": 0.17524053,
+          "coverage": 0.93645833,
+          "early_post48_brier": 0.17760447,
+          "effective_hypotheses": 2.63113185,
+          "late_post48_brier": 0.16994208,
+          "log_loss": 0.61623019,
+          "overconfident_errors": 7.31875,
+          "rejected_proposals": 43.0375,
+          "revision_price": 0.0001503,
+          "revisions": 4.1875,
+          "rollback_count": 0.33125,
+          "selective_accuracy": 0.79167832,
+          "total_loss_with_price": 0.17539082
+        },
+        "fire006_no_rollback": {
+          "brier": 0.17514013,
+          "coverage": 0.93626302,
+          "early_post48_brier": 0.17747338,
+          "effective_hypotheses": 2.60299285,
+          "late_post48_brier": 0.16976548,
+          "log_loss": 0.61585086,
+          "overconfident_errors": 7.30625,
+          "rejected_proposals": 44.1625,
+          "revision_price": 0.00015199,
+          "revisions": 4.65625,
+          "rollback_count": 0,
+          "selective_accuracy": 0.79176895,
+          "total_loss_with_price": 0.17529212
+        },
+        "fixed_share3": {
+          "brier": 0.1748553,
+          "coverage": 0.93860677,
+          "early_post48_brier": 0.17701183,
+          "effective_hypotheses": 2.50078978,
+          "late_post48_brier": 0.16914036,
+          "log_loss": 0.61350431,
+          "overconfident_errors": 7.2625,
+          "rejected_proposals": 0,
+          "revision_price": 0.00060172,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.79070574,
+          "total_loss_with_price": 0.17545702
+        },
+        "proximal3": {
+          "brier": 0.17460585,
+          "coverage": 0.93945313,
+          "early_post48_brier": 0.17643963,
+          "effective_hypotheses": 1.79433798,
+          "late_post48_brier": 0.16940219,
+          "log_loss": 0.61758018,
+          "overconfident_errors": 7.35625,
+          "rejected_proposals": 0,
+          "revision_price": 0.00060111,
+          "revisions": 64.90625,
+          "rollback_count": 0,
+          "selective_accuracy": 0.79053806,
+          "total_loss_with_price": 0.17520696
+        }
+      }
+    },
+    "copied": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.006245123,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3552662844367301,
+            0.28790640700860337,
+            0.35682730855466643
+          ],
+          "quoted_price": 0.001362808,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007717724,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35058434240091,
+            0.2835955950210939,
+            0.36582006257799604
+          ],
+          "quoted_price": 0.001492132,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 16,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007843856,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3500937462625218,
+            0.2833117889930989,
+            0.3665944647443793
+          ],
+          "quoted_price": 0.001500646,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 17,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006711521,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.37640121331095305,
+            0.2952696462513694,
+            0.3283291404376776
+          ],
+          "quoted_price": 0.001292036,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 18,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006376451,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3750413605879794,
+            0.2958485215102372,
+            0.32911011790178346
+          ],
+          "quoted_price": 0.001251241,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 19,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008287189,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.38414848563904325,
+            0.29702952870498783,
+            0.3188219856559689
+          ],
+          "quoted_price": 0.001524455,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 20,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008979633,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3864309438281671,
+            0.29617261540583445,
+            0.3173964407659985
+          ],
+          "quoted_price": 0.001592928,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 21,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005962234,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3515325680815341,
+            0.2891669831832843,
+            0.3593004487351815
+          ],
+          "quoted_price": 0.001324991,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 22,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005988055,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35140755091050735,
+            0.2890900150372576,
+            0.359502434052235
+          ],
+          "quoted_price": 0.0013273,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 23,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004072366,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.36866112024322245,
+            0.3070612320979401,
+            0.3242776476588375
+          ],
+          "quoted_price": 0.001059834,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 24,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003933818,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.36803974899414615,
+            0.3074732866958661,
+            0.3244869643099878
+          ],
+          "quoted_price": 0.001041192,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 25,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004294864,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3683537974040228,
+            0.30376584607290374,
+            0.32788035652307346
+          ],
+          "quoted_price": 0.001050614,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 26,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.025659578,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "quoted_price": 0.002730463,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 27,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003143063,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.4427369967286825,
+            0.31394740406847566,
+            0.24331559920284185
+          ],
+          "quoted_price": 0.000963902,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 35,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001819372,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.43788067452777485,
+            0.311158218184134,
+            0.2509611072880911
+          ],
+          "quoted_price": 0.000734537,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 36,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001572978,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.43530153736656735,
+            0.31205496755946194,
+            0.2526434950739707
+          ],
+          "quoted_price": 0.000684065,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 37,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001565523,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.43523775490940075,
+            0.312063620359032,
+            0.2526986247315673
+          ],
+          "quoted_price": 0.000682412,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 38,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001525173,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.43652974566501407,
+            0.31045597171497824,
+            0.2530142826200077
+          ],
+          "quoted_price": 0.000672942,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 39,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001932026,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.44052563611424816,
+            0.308938528378537,
+            0.25053583550721487
+          ],
+          "quoted_price": 0.000747295,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 40,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001973495,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.4407712266120955,
+            0.3089425708198858,
+            0.25028620256801876
+          ],
+          "quoted_price": 0.000754784,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 41,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004935852,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.4501138813036522,
+            0.31427817980215667,
+            0.23560793889419113
+          ],
+          "quoted_price": 0.001195132,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 42,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007675959,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.45611815183949084,
+            0.31819125923065533,
+            0.22569058892985389
+          ],
+          "quoted_price": 0.001492653,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 43,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007744521,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.4562835998755155,
+            0.3182427224243542,
+            0.22547367770013024
+          ],
+          "quoted_price": 0.00149916,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 44,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007644712,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.45576025269091347,
+            0.31850593412285566,
+            0.22573381318623087
+          ],
+          "quoted_price": 0.001491356,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 45,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.009026255,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.45935516750981475,
+            0.3190347806245284,
+            0.22161005186565685
+          ],
+          "quoted_price": 0.001615069,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 46,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.012863903,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.46743301383817415,
+            0.32107962564921666,
+            0.21148736051260925
+          ],
+          "quoted_price": 0.001918749,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 47,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.015161669,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.4243487667865547,
+            0.3002055561718565,
+            0.2754456770415887
+          ],
+          "proposed": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "quoted_price": 0.002083891,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 48,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001252095,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.48759330389921324,
+            0.32493113979487775,
+            0.18747555630590895
+          ],
+          "quoted_price": 0.000555212,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 56,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001227106,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4874071779967723,
+            0.32494579205071805,
+            0.18764702995250968
+          ],
+          "quoted_price": 0.000550068,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 57,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000168162,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4784484134459518,
+            0.3197689788593686,
+            0.20178260769467965
+          ],
+          "quoted_price": 0.000223073,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 58,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000165659,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.47692182202883987,
+            0.31619322886400963,
+            0.20688494910715047
+          ],
+          "quoted_price": 0.000204345,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 59,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000163719,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.47676547613450254,
+            0.3161581940904314,
+            0.2070763297750661
+          ],
+          "quoted_price": 0.000205396,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 60,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000163691,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.47670580358103687,
+            0.31612489853387027,
+            0.20716929788509292
+          ],
+          "quoted_price": 0.000206395,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 61,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000209582,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4763571086443182,
+            0.3148074416258811,
+            0.20883544972980078
+          ],
+          "quoted_price": 0.000245918,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 62,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000562249,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4683418216971662,
+            0.3127627280027698,
+            0.21889545030006408
+          ],
+          "quoted_price": 0.000387384,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 63,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000229263,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.47343229338840787,
+            0.31455359173684405,
+            0.21201411487474817
+          ],
+          "quoted_price": 0.000253534,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 64,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000210569,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4746862332116262,
+            0.31468171467339534,
+            0.21063205211497854
+          ],
+          "quoted_price": 0.00024969,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 65,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000280476,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4789753119741129,
+            0.31433583233624196,
+            0.20668885568964518
+          ],
+          "quoted_price": 0.000260067,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 66,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00137124,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4561062357625987,
+            0.3172945283894674,
+            0.2265992358479339
+          ],
+          "quoted_price": 0.000618498,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 67,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001404081,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.45592899284134686,
+            0.3172263507537432,
+            0.22684465640490986
+          ],
+          "quoted_price": 0.000625861,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 68,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002382496,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.45561523016815164,
+            0.3103860110984211,
+            0.23399875873342726
+          ],
+          "quoted_price": 0.000840484,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 69,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.0024854,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4543992674677495,
+            0.31108483328307,
+            0.23451589924918048
+          ],
+          "quoted_price": 0.000855998,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 70,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00051619,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.47429727980496783,
+            0.3104144948191615,
+            0.21528822537587067
+          ],
+          "quoted_price": 0.000377707,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 71,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00163358,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4928575942204717,
+            0.3189406752017104,
+            0.18820173057781786
+          ],
+          "quoted_price": 0.000655349,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 72,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001193959,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4900320882875409,
+            0.31846133335879506,
+            0.19150657835366397
+          ],
+          "quoted_price": 0.000570583,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 73,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001195162,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.49004193803457674,
+            0.31845813361742475,
+            0.19149992834799853
+          ],
+          "quoted_price": 0.000570879,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 74,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001570436,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4921408062727784,
+            0.3198231320939307,
+            0.18803606163329095
+          ],
+          "quoted_price": 0.000633845,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 75,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001380811,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4907768125497898,
+            0.32014604420496984,
+            0.18907714324524044
+          ],
+          "quoted_price": 0.000592925,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 76,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006175531,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4443211137230415,
+            0.30477193878931697,
+            0.25090694748764153
+          ],
+          "quoted_price": 0.001347729,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 77,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006098677,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.44454219982692994,
+            0.3048239261004239,
+            0.2506338740726462
+          ],
+          "quoted_price": 0.001339537,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 78,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006065849,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.44462291057720843,
+            0.3048622918792822,
+            0.25051479754350936
+          ],
+          "quoted_price": 0.001335965,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 79,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008130116,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.43955851544284746,
+            0.3030361041398862,
+            0.2574053804172664
+          ],
+          "quoted_price": 0.001542682,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 80,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007733221,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4412690727387617,
+            0.3024610599220122,
+            0.25626986733922613
+          ],
+          "quoted_price": 0.001508617,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 81,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007732826,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.44126882885546154,
+            0.3024627201209272,
+            0.25626845102361134
+          ],
+          "quoted_price": 0.001508575,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 82,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007732083,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.44127072642065496,
+            0.3024631772423233,
+            0.25626609633702174
+          ],
+          "quoted_price": 0.001508504,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 83,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008966589,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.43741890443568604,
+            0.30268962399835436,
+            0.2598914715659596
+          ],
+          "quoted_price": 0.001617265,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 84,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007063563,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4376031133405755,
+            0.3094666804030129,
+            0.2529302062564117
+          ],
+          "quoted_price": 0.001408427,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 85,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001499825,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.46600415450292826,
+            0.30671846542664055,
+            0.22727738007043122
+          ],
+          "quoted_price": 0.000638842,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 86,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005232019,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4456046007521459,
+            0.3071889674825534,
+            0.24720643176530072
+          ],
+          "quoted_price": 0.001236714,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 87,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002210674,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.456256676385937,
+            0.3107610544413942,
+            0.2329822691726687
+          ],
+          "quoted_price": 0.000809989,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 88,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001456878,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.46034227330363503,
+            0.31172838170219574,
+            0.22792934499416925
+          ],
+          "quoted_price": 0.000658401,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001422336,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.46048389752607427,
+            0.31184869482678274,
+            0.22766740764714308
+          ],
+          "quoted_price": 0.000650543,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 90,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001891428,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.4584761522927812,
+            0.31053151175182786,
+            0.23099233595539095
+          ],
+          "quoted_price": 0.000750291,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 91,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001651797,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.45959635434408347,
+            0.31105133905581467,
+            0.22935230660010192
+          ],
+          "quoted_price": 0.00070109,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 92,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007958298,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.5117502663423766,
+            0.3296298972424989,
+            0.15861983641512448
+          ],
+          "quoted_price": 0.001420884,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 93,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007894874,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.47101264259527126,
+            0.3230047231154934,
+            0.2059826342892354
+          ],
+          "proposed": [
+            0.5115875172450749,
+            0.3296034225051284,
+            0.15880906024979674
+          ],
+          "quoted_price": 0.001415207,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 94,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00087577,
+          0.00084143
+        ],
+        "mean": -0.00001717
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.00034327,
+            0.00002478
+          ],
+          "mean": -0.00015925
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            -0.00118137,
+            -0.00058245
+          ],
+          "mean": -0.00088191
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            -0.00014187,
+            -0.00002986
+          ],
+          "mean": -0.00008586
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            -0.0012988,
+            -0.00087375
+          ],
+          "mean": -0.00108627
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            -0.00107045,
+            -0.00036274
+          ],
+          "mean": -0.0007166
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.001267,
+          0.00041374
+        ],
+        "mean": -0.00042663
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00056815,
+          0.00009825
+        ],
+        "mean": -0.00023495
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.11959939,
+          "coverage": 0.9078776,
+          "early_post48_brier": 0.11929323,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.1194087,
+          "log_loss": 0.38431452,
+          "overconfident_errors": 1.38125,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.86109529,
+          "total_loss_with_price": 0.11959939
+        },
+        "exp3": {
+          "brier": 0.11979065,
+          "coverage": 0.94095052,
+          "early_post48_brier": 0.11869972,
+          "effective_hypotheses": 2.31213129,
+          "late_post48_brier": 0.11916264,
+          "log_loss": 0.3852941,
+          "overconfident_errors": 1.4,
+          "rejected_proposals": 0,
+          "revision_price": 0.00053139,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.85585446,
+          "total_loss_with_price": 0.12032205
+        },
+        "fire006": {
+          "brier": 0.11933891,
+          "coverage": 0.92473958,
+          "early_post48_brier": 0.11880057,
+          "effective_hypotheses": 2.75054699,
+          "late_post48_brier": 0.11903877,
+          "log_loss": 0.38369354,
+          "overconfident_errors": 1.3875,
+          "rejected_proposals": 49.925,
+          "revision_price": 0.00010123,
+          "revisions": 3.44375,
+          "rollback_count": 0.23125,
+          "selective_accuracy": 0.85873529,
+          "total_loss_with_price": 0.11944014
+        },
+        "fire006_no_rollback": {
+          "brier": 0.11942273,
+          "coverage": 0.92376302,
+          "early_post48_brier": 0.11891839,
+          "effective_hypotheses": 2.74994728,
+          "late_post48_brier": 0.11923815,
+          "log_loss": 0.38387813,
+          "overconfident_errors": 1.38125,
+          "rejected_proposals": 50.21875,
+          "revision_price": 0.00010327,
+          "revisions": 3.84375,
+          "rollback_count": 0,
+          "selective_accuracy": 0.85882131,
+          "total_loss_with_price": 0.119526
+        },
+        "fixed_share3": {
+          "brier": 0.11990847,
+          "coverage": 0.93079427,
+          "early_post48_brier": 0.11910636,
+          "effective_hypotheses": 2.6629382,
+          "late_post48_brier": 0.1195321,
+          "log_loss": 0.38522515,
+          "overconfident_errors": 1.39375,
+          "rejected_proposals": 0,
+          "revision_price": 0.00061795,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.85750718,
+          "total_loss_with_price": 0.12052642
+        },
+        "proximal3": {
+          "brier": 0.11957386,
+          "coverage": 0.93704427,
+          "early_post48_brier": 0.11881774,
+          "effective_hypotheses": 1.7906276,
+          "late_post48_brier": 0.1194654,
+          "log_loss": 0.38459631,
+          "overconfident_errors": 1.4,
+          "rejected_proposals": 0,
+          "revision_price": 0.00058288,
+          "revisions": 65.6,
+          "rollback_count": 0,
+          "selective_accuracy": 0.8570848,
+          "total_loss_with_price": 0.12015674
+        }
+      }
+    },
+    "gradual": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.001010523,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3378976361563867,
+            0.3157256510149261,
+            0.3463767128286872
+          ],
+          "quoted_price": 0.00052823,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001135341,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.33707593855374907,
+            0.31500217913950446,
+            0.34792188230674653
+          ],
+          "quoted_price": 0.000549935,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 16,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.023626414,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.2731246481685959,
+            0.3073778719605443,
+            0.41949747987085984
+          ],
+          "quoted_price": 0.002584924,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 17,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.015820301,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.2731246481685959,
+            0.3073778719605443,
+            0.41949747987085984
+          ],
+          "proposed": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "quoted_price": 0.001975122,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 25,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.032876149,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "proposed": [
+            0.11461531423283175,
+            0.32350486428656844,
+            0.5618798214805998
+          ],
+          "quoted_price": 0.002988693,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 33,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0,
+          "operation": "ROLLBACK",
+          "previous": [
+            0.11461531423283175,
+            0.32350486428656844,
+            0.5618798214805998
+          ],
+          "proposed": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "quoted_price": 0.002988693,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 41,
+          "subsequent_verified_regret": 0.005322465,
+          "verification_count": 8
+        },
+        {
+          "expected_eight_step_gain": 0.064515871,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "proposed": [
+            0.3586535384005336,
+            0.24691324081544136,
+            0.39443322078402504
+          ],
+          "quoted_price": 0.004332454,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 49,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0,
+          "operation": "ROLLBACK",
+          "previous": [
+            0.3586535384005336,
+            0.24691324081544136,
+            0.39443322078402504
+          ],
+          "proposed": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "quoted_price": 0.004332454,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 57,
+          "subsequent_verified_regret": 0.009091207,
+          "verification_count": 8
+        },
+        {
+          "expected_eight_step_gain": 0.081521914,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.21423839919662177,
+            0.30042672009690496,
+            0.4853348807064733
+          ],
+          "proposed": [
+            0.051629501348556366,
+            0.36690527513973226,
+            0.5814652235117114
+          ],
+          "quoted_price": 0.004878267,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 65,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.036219373,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.051629501348556366,
+            0.36690527513973226,
+            0.5814652235117114
+          ],
+          "proposed": [
+            0,
+            0.3432052818020468,
+            0.6567947181979532
+          ],
+          "quoted_price": 0.002259885,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 73,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.020131303,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0,
+            0.3432052818020468,
+            0.6567947181979532
+          ],
+          "proposed": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "quoted_price": 0.002119424,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 81,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00495667,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.23750344354701264,
+            0.7624965564529873
+          ],
+          "quoted_price": 0.001051631,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00554075,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.23549582031881244,
+            0.7645041796811876
+          ],
+          "quoted_price": 0.00111186,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 90,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005664761,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.2350833009229141,
+            0.7649166990770859
+          ],
+          "quoted_price": 0.001124235,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 91,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001832389,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.2512448458928562,
+            0.7487551541071439
+          ],
+          "quoted_price": 0.000639389,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 92,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000945412,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.25724888753932623,
+            0.7427511124606737
+          ],
+          "quoted_price": 0.000459268,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 93,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000979675,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0,
+            0.2725578156380646,
+            0.7274421843619354
+          ],
+          "proposed": [
+            0,
+            0.2569738792722645,
+            0.7430261207277356
+          ],
+          "quoted_price": 0.000467518,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 94,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00995457,
+          -0.00477349
+        ],
+        "mean": -0.00736403
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.01951103,
+            -0.01726257
+          ],
+          "mean": -0.0183868
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            0.00343795,
+            0.00472657
+          ],
+          "mean": 0.00408226
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            0.00047586,
+            0.00142551
+          ],
+          "mean": 0.00095069
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            0.00348347,
+            0.0048737
+          ],
+          "mean": 0.00417858
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            0.0017866,
+            0.00339088
+          ],
+          "mean": 0.00258874
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          0.00429365,
+          0.00782388
+        ],
+        "mean": 0.00605876
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          0.00230152,
+          0.00387203
+        ],
+        "mean": 0.00308677
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.14467777,
+          "coverage": 0.73326823,
+          "early_post48_brier": 0.25217106,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.16129727,
+          "log_loss": 0.44756569,
+          "overconfident_errors": 1.3125,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.85985939,
+          "total_loss_with_price": 0.14467777
+        },
+        "exp3": {
+          "brier": 0.12148485,
+          "coverage": 0.84140625,
+          "early_post48_brier": 0.25532852,
+          "effective_hypotheses": 2.26251679,
+          "late_post48_brier": 0.07043115,
+          "log_loss": 0.38522136,
+          "overconfident_errors": 1.56875,
+          "rejected_proposals": 0,
+          "revision_price": 0.00072387,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.87575102,
+          "total_loss_with_price": 0.12220872
+        },
+        "fire006": {
+          "brier": 0.12604682,
+          "coverage": 0.82141927,
+          "early_post48_brier": 0.2551694,
+          "effective_hypotheses": 2.60925033,
+          "late_post48_brier": 0.07527233,
+          "log_loss": 0.39546045,
+          "overconfident_errors": 1.4,
+          "rejected_proposals": 30.0625,
+          "revision_price": 0.00024416,
+          "revisions": 5.36875,
+          "rollback_count": 0.775,
+          "selective_accuracy": 0.87313824,
+          "total_loss_with_price": 0.12629098
+        },
+        "fire006_no_rollback": {
+          "brier": 0.12509886,
+          "coverage": 0.82363281,
+          "early_post48_brier": 0.25502535,
+          "effective_hypotheses": 2.57275937,
+          "late_post48_brier": 0.0737648,
+          "log_loss": 0.39283762,
+          "overconfident_errors": 1.4,
+          "rejected_proposals": 30.79375,
+          "revision_price": 0.00024142,
+          "revisions": 6.25,
+          "rollback_count": 0,
+          "selective_accuracy": 0.87384471,
+          "total_loss_with_price": 0.12534029
+        },
+        "fixed_share3": {
+          "brier": 0.12129044,
+          "coverage": 0.83802083,
+          "early_post48_brier": 0.25356135,
+          "effective_hypotheses": 2.39353396,
+          "late_post48_brier": 0.07200527,
+          "log_loss": 0.38442391,
+          "overconfident_errors": 1.5,
+          "rejected_proposals": 0,
+          "revision_price": 0.00082195,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.87651967,
+          "total_loss_with_price": 0.12211239
+        },
+        "proximal3": {
+          "brier": 0.12296004,
+          "coverage": 0.85104167,
+          "early_post48_brier": 0.26253343,
+          "effective_hypotheses": 1.88594756,
+          "late_post48_brier": 0.06921357,
+          "log_loss": 0.39290538,
+          "overconfident_errors": 1.78125,
+          "rejected_proposals": 0,
+          "revision_price": 0.00074219,
+          "revisions": 60.75625,
+          "rollback_count": 0,
+          "selective_accuracy": 0.87176719,
+          "total_loss_with_price": 0.12370224
+        }
+      }
+    },
+    "steady": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.011691851,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3704730471021191,
+            0.357962840100673,
+            0.2715641127972079
+          ],
+          "quoted_price": 0.001853077,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.01118335,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3697530509925016,
+            0.3573096476782293,
+            0.272937301329269
+          ],
+          "quoted_price": 0.001811881,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 16,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010759184,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.36899300404727436,
+            0.3569218048170614,
+            0.27408519113566426
+          ],
+          "quoted_price": 0.001777444,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 17,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010749116,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3689728687015839,
+            0.3569147169055657,
+            0.27411241439285045
+          ],
+          "quoted_price": 0.001776628,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 18,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.011638698,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.37368928389077566,
+            0.3539705678050191,
+            0.2723401483042053
+          ],
+          "quoted_price": 0.001829796,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 19,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.011636964,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.373677289414893,
+            0.35398018570409384,
+            0.2723425248810132
+          ],
+          "quoted_price": 0.001829724,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 20,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.011354942,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3731154145962091,
+            0.3538148019614705,
+            0.2730697834423204
+          ],
+          "quoted_price": 0.001807906,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 21,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010934387,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.37186933095043556,
+            0.35405036869745776,
+            0.2740803003521068
+          ],
+          "quoted_price": 0.001777591,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 22,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010712987,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.37088406492317777,
+            0.354559134748133,
+            0.2745568003286892
+          ],
+          "quoted_price": 0.001763296,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 23,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.009714288,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3672554497780029,
+            0.35570274639457466,
+            0.2770418038274225
+          ],
+          "quoted_price": 0.001688746,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 24,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001643415,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34465929333600076,
+            0.34531467425901197,
+            0.3100260324049872
+          ],
+          "quoted_price": 0.000699219,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 25,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000048677,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.32932215023902195,
+            0.33532459770144907,
+            0.335353252059529
+          ],
+          "quoted_price": 0.000120335,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 26,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00012766,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.328942011436353,
+            0.33138399033077326,
+            0.33967399823287386
+          ],
+          "quoted_price": 0.00019022,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 27,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000240639,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3244152356707811,
+            0.3378176625909294,
+            0.33776710173828955
+          ],
+          "quoted_price": 0.000267543,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 28,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000240838,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.32441155628237095,
+            0.337766570021877,
+            0.3378218736957522
+          ],
+          "quoted_price": 0.000267653,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 29,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000247663,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.32428601559463943,
+            0.3378813702510414,
+            0.33783261415431926
+          ],
+          "quoted_price": 0.00027142,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 30,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000259926,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.32406549755440645,
+            0.33786235683769633,
+            0.3380721456078973
+          ],
+          "quoted_price": 0.000278035,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 31,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000581319,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3196251270554261,
+            0.33840618146958956,
+            0.3419686914749844
+          ],
+          "quoted_price": 0.000411246,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 32,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001067339,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3150031640825098,
+            0.3389455058567034,
+            0.3460513300607868
+          ],
+          "quoted_price": 0.000549905,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 33,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001658531,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35652685890989594,
+            0.3245262015232912,
+            0.31894693956681286
+          ],
+          "quoted_price": 0.000695806,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 34,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001561352,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.33460278900173135,
+            0.352341016876112,
+            0.31305619412215663
+          ],
+          "quoted_price": 0.000608314,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 35,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006441814,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3559871186018089,
+            0.3568287700727153,
+            0.2871841113254758
+          ],
+          "quoted_price": 0.001384477,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 36,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006345682,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3559713456982733,
+            0.35650026758540787,
+            0.28752838671631875
+          ],
+          "quoted_price": 0.001374148,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 37,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006347478,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3559748487359004,
+            0.35650325269299443,
+            0.28752189857110527
+          ],
+          "quoted_price": 0.001374343,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 38,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.007464601,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3617633016784351,
+            0.3544032757706282,
+            0.28383342255093663
+          ],
+          "quoted_price": 0.001484997,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 39,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.013045273,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3743997449425008,
+            0.3571938093902303,
+            0.26840644566726884
+          ],
+          "quoted_price": 0.001947807,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 40,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.013130221,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.37452324425157124,
+            0.35728340652052415,
+            0.26819334922790466
+          ],
+          "quoted_price": 0.0019542,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 41,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000745457,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3436705022666772,
+            0.338401558578062,
+            0.31792793915526074
+          ],
+          "quoted_price": 0.000462162,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 42,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00106548,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3474152563456925,
+            0.33704447777167107,
+            0.31554026588263645
+          ],
+          "quoted_price": 0.000533792,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 43,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001136507,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3477907263491992,
+            0.33729366201432803,
+            0.31491561163647275
+          ],
+          "quoted_price": 0.000552532,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 44,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001102946,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.347215026079263,
+            0.3377548341294324,
+            0.31503013979130456
+          ],
+          "quoted_price": 0.000549096,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 45,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002406948,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35034476874881837,
+            0.3443237399070608,
+            0.30533149134412085
+          ],
+          "quoted_price": 0.000840055,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 46,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008931963,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3798818769550324,
+            0.33437474909523923,
+            0.2857433739497283
+          ],
+          "quoted_price": 0.001427699,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 47,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.010720821,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.38454860213550396,
+            0.33404863894175624,
+            0.28140275892273975
+          ],
+          "quoted_price": 0.001557917,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 48,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.012627702,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.38924393837859045,
+            0.3334617357707325,
+            0.2772943258506771
+          ],
+          "quoted_price": 0.00168117,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 49,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002708673,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34870592347313345,
+            0.3478895450495022,
+            0.30340453147736435
+          ],
+          "quoted_price": 0.000897864,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 50,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004305302,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3705507341371743,
+            0.3201235460068561,
+            0.3093257198559696
+          ],
+          "quoted_price": 0.001116522,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 51,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001146494,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34935703729734213,
+            0.31574729386499323,
+            0.3348956688376647
+          ],
+          "quoted_price": 0.000527581,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 52,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001125079,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34919122845035816,
+            0.31590073240236133,
+            0.3349080391472805
+          ],
+          "quoted_price": 0.000522978,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 53,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001125112,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3491875342921748,
+            0.3158975383360325,
+            0.33491492737179274
+          ],
+          "quoted_price": 0.000523074,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 54,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000732371,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3433790319636754,
+            0.3180214409337296,
+            0.33859952710259505
+          ],
+          "quoted_price": 0.000459357,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 55,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001434887,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.33416745140730625,
+            0.3140687534585675,
+            0.3517637951341263
+          ],
+          "quoted_price": 0.000577937,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 56,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.015197321,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3093524561135917,
+            0.2875475278461599,
+            0.4031000160402484
+          ],
+          "quoted_price": 0.002093,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 57,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005506912,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3093524561135917,
+            0.2875475278461599,
+            0.4031000160402484
+          ],
+          "proposed": [
+            0.30616261792364935,
+            0.2522875409950845,
+            0.4415498410812661
+          ],
+          "quoted_price": 0.001153495,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 65,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.022957041,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3093524561135917,
+            0.2875475278461599,
+            0.4031000160402484
+          ],
+          "proposed": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "quoted_price": 0.00260439,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 66,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003099717,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "proposed": [
+            0.304433111678334,
+            0.2243259376097409,
+            0.4712409507119252
+          ],
+          "quoted_price": 0.000955826,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 74,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003451823,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "proposed": [
+            0.30601110883248217,
+            0.22499036566305014,
+            0.46899852550446774
+          ],
+          "quoted_price": 0.001003166,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 75,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003451082,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "proposed": [
+            0.3060050365375986,
+            0.22500782172813288,
+            0.4689871417342686
+          ],
+          "quoted_price": 0.001002984,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 76,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004113904,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "proposed": [
+            0.30884469895571326,
+            0.2251848520860282,
+            0.4659704489582587
+          ],
+          "quoted_price": 0.001088173,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 77,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.016468576,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.2725722507685094,
+            0.23751473051118724,
+            0.48991301872030346
+          ],
+          "proposed": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "quoted_price": 0.002047105,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 78,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002799158,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.36145627853126855,
+            0.23072990051944353,
+            0.40781382094928786
+          ],
+          "quoted_price": 0.000911548,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 86,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003544949,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.36523120101543255,
+            0.23220154009878816,
+            0.4025672588857794
+          ],
+          "quoted_price": 0.001024796,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 87,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003811124,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.36639201975488156,
+            0.23270419774528606,
+            0.4009037824998324
+          ],
+          "quoted_price": 0.00105962,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 88,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002531623,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.3595830926426621,
+            0.22874257206091378,
+            0.4116743352964242
+          ],
+          "quoted_price": 0.000855352,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003096738,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.3628804917558296,
+            0.22833190146865862,
+            0.40878760677551185
+          ],
+          "quoted_price": 0.000954274,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 90,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00285185,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.3614617971319864,
+            0.22824690821491833,
+            0.4102912946530952
+          ],
+          "quoted_price": 0.000911714,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 91,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002855342,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.3614805564401965,
+            0.22823614145662832,
+            0.4102833021031752
+          ],
+          "quoted_price": 0.000912276,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 92,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002811256,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.36117129341603976,
+            0.22800482207163364,
+            0.41082388451232665
+          ],
+          "quoted_price": 0.000902998,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 93,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001071892,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3310713434924243,
+            0.24725248005819608,
+            0.4216761764493796
+          ],
+          "proposed": [
+            0.34700521412374175,
+            0.23060806081306187,
+            0.42238672506319647
+          ],
+          "quoted_price": 0.000499333,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 94,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00040742,
+          0.00109097
+        ],
+        "mean": 0.00034178
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.00040037,
+            -0.00006491
+          ],
+          "mean": -0.00023264
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            -0.00041831,
+            0.0000396
+          ],
+          "mean": -0.00018936
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            -0.00003306,
+            0.00002124
+          ],
+          "mean": -0.00000591
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            -0.00063613,
+            -0.00030933
+          ],
+          "mean": -0.00047273
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            -0.00069105,
+            -0.00009583
+          ],
+          "mean": -0.00039344
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.0013172,
+          0.00022427
+        ],
+        "mean": -0.00054647
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00022269,
+          0.00033239
+        ],
+        "mean": 0.00005485
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.06562934,
+          "coverage": 0.94147135,
+          "early_post48_brier": 0.06665924,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.06409305,
+          "log_loss": 0.21985499,
+          "overconfident_errors": 0.79375,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.92930311,
+          "total_loss_with_price": 0.06562934
+        },
+        "exp3": {
+          "brier": 0.06525197,
+          "coverage": 0.96341146,
+          "early_post48_brier": 0.06576255,
+          "effective_hypotheses": 2.38947525,
+          "late_post48_brier": 0.06381733,
+          "log_loss": 0.21838577,
+          "overconfident_errors": 0.81875,
+          "rejected_proposals": 0,
+          "revision_price": 0.00033409,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.92630222,
+          "total_loss_with_price": 0.06558605
+        },
+        "fire006": {
+          "brier": 0.06532356,
+          "coverage": 0.95195313,
+          "early_post48_brier": 0.06597144,
+          "effective_hypotheses": 2.79015293,
+          "late_post48_brier": 0.06388728,
+          "log_loss": 0.21884813,
+          "overconfident_errors": 0.80625,
+          "rejected_proposals": 56.89375,
+          "revision_price": 0.00007313,
+          "revisions": 2.74375,
+          "rollback_count": 0.06875,
+          "selective_accuracy": 0.92775948,
+          "total_loss_with_price": 0.06539669
+        },
+        "fire006_no_rollback": {
+          "brier": 0.06532487,
+          "coverage": 0.95188802,
+          "early_post48_brier": 0.06594918,
+          "effective_hypotheses": 2.78973155,
+          "late_post48_brier": 0.06390639,
+          "log_loss": 0.21883504,
+          "overconfident_errors": 0.80625,
+          "rejected_proposals": 56.90625,
+          "revision_price": 0.00007774,
+          "revisions": 3,
+          "rollback_count": 0,
+          "selective_accuracy": 0.92775659,
+          "total_loss_with_price": 0.0654026
+        },
+        "fixed_share3": {
+          "brier": 0.06545079,
+          "coverage": 0.95735677,
+          "early_post48_brier": 0.06617559,
+          "effective_hypotheses": 2.70898042,
+          "late_post48_brier": 0.06408635,
+          "log_loss": 0.21898975,
+          "overconfident_errors": 0.8125,
+          "rejected_proposals": 0,
+          "revision_price": 0.00041863,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.92687131,
+          "total_loss_with_price": 0.06586942
+        },
+        "proximal3": {
+          "brier": 0.06526871,
+          "coverage": 0.96282552,
+          "early_post48_brier": 0.06562966,
+          "effective_hypotheses": 1.83986053,
+          "late_post48_brier": 0.06443375,
+          "log_loss": 0.21834283,
+          "overconfident_errors": 0.8125,
+          "rejected_proposals": 0,
+          "revision_price": 0.00052142,
+          "revisions": 68.95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.92591614,
+          "total_loss_with_price": 0.06579013
+        }
+      }
+    },
+    "transient": {
+      "first_world_revision_receipts": [
+        {
+          "expected_eight_step_gain": 0.004608757,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3619095413183531,
+            0.3420920907227603,
+            0.2959983679588867
+          ],
+          "quoted_price": 0.001120049,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 15,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002751546,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35689810974680825,
+            0.33786954944538905,
+            0.30523234080780276
+          ],
+          "quoted_price": 0.00084303,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 16,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002734933,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3568621488715817,
+            0.33779989597645593,
+            0.3053379551519624
+          ],
+          "quoted_price": 0.000839861,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 17,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001931363,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35245009617682405,
+            0.3380976817027681,
+            0.3094522221204078
+          ],
+          "quoted_price": 0.000716433,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 18,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001313031,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3492620763551858,
+            0.33700910539944684,
+            0.31372881824536736
+          ],
+          "quoted_price": 0.000588135,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 19,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000235807,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3394402690202481,
+            0.33580537914709024,
+            0.32475435183266166
+          ],
+          "quoted_price": 0.000257369,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 20,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.011252763,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3870006547376731,
+            0.3316260668187839,
+            0.28137327844354304
+          ],
+          "quoted_price": 0.00161002,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 21,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.011203892,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.38680193962800136,
+            0.3318016887527009,
+            0.2813963716192977
+          ],
+          "quoted_price": 0.001604058,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 22,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002729853,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35339752423611853,
+            0.34266793518179767,
+            0.30393454058208386
+          ],
+          "quoted_price": 0.000881964,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 23,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002525812,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35218842419482477,
+            0.3428727608988532,
+            0.3049388149063221
+          ],
+          "quoted_price": 0.000851836,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 24,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001365249,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34189846311119265,
+            0.34588843749472914,
+            0.3122130993940782
+          ],
+          "quoted_price": 0.000633607,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 25,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001355462,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34212042609096666,
+            0.34561888338515073,
+            0.31226069052388267
+          ],
+          "quoted_price": 0.000632179,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 26,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.001354733,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3421174562252205,
+            0.3456161141843243,
+            0.31226642959045525
+          ],
+          "quoted_price": 0.000632007,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 27,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002107193,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3452106181632162,
+            0.3478079033100873,
+            0.3069814785266965
+          ],
+          "quoted_price": 0.000790556,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 28,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002895338,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3461576009113022,
+            0.35130547891311054,
+            0.3025369201755872
+          ],
+          "quoted_price": 0.000923892,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 29,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003016962,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3470329697138678,
+            0.3511278896179456,
+            0.30183914066818657
+          ],
+          "quoted_price": 0.000944826,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 30,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004274821,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34630459514569384,
+            0.3574069587222102,
+            0.29628844613209604
+          ],
+          "quoted_price": 0.001111347,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 31,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004095186,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3458438657786686,
+            0.3570464819047277,
+            0.2971096523166038
+          ],
+          "quoted_price": 0.00108671,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 32,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004085002,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34584119902653443,
+            0.35700648408047975,
+            0.29715231689298593
+          ],
+          "quoted_price": 0.00108543,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 33,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00402734,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3456382645539959,
+            0.35693154089286183,
+            0.29743019455314235
+          ],
+          "quoted_price": 0.001077094,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 34,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004009843,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3456280091058206,
+            0.35686682737353614,
+            0.2975051635206433
+          ],
+          "quoted_price": 0.001074845,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 35,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00419122,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34325390815419654,
+            0.3594451399925526,
+            0.2973009518532508
+          ],
+          "quoted_price": 0.001080971,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 36,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005625668,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.349275326167761,
+            0.3600672167400538,
+            0.29065745709218516
+          ],
+          "quoted_price": 0.001280276,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 37,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008275372,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3519819315858517,
+            0.3663345164623538,
+            0.28168355195179445
+          ],
+          "quoted_price": 0.001549493,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 38,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008658204,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.365412801048997,
+            0.35437965811645455,
+            0.2802075408345484
+          ],
+          "quoted_price": 0.001593774,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 39,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00876368,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3656178995070987,
+            0.3544958910864591,
+            0.27988620940644215
+          ],
+          "quoted_price": 0.001603414,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 40,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.003588731,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.35587545034787216,
+            0.34461540265739943,
+            0.29950914699472836
+          ],
+          "quoted_price": 0.001014726,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 41,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000400373,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34362314117071713,
+            0.33264429271877965,
+            0.3237325661105032
+          ],
+          "quoted_price": 0.000308694,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 42,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005277897,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.2925724326708225,
+            0.3457836965977592,
+            0.36164387073141835
+          ],
+          "quoted_price": 0.001222827,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 43,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005327733,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.2932566121510947,
+            0.34256704009025873,
+            0.36417634775864655
+          ],
+          "quoted_price": 0.001202302,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 44,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006143429,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.2917955887176603,
+            0.3389492907465805,
+            0.3692551205357592
+          ],
+          "quoted_price": 0.001246132,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 45,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.006619412,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.2903335811418487,
+            0.3388672977615631,
+            0.37079912109658825
+          ],
+          "quoted_price": 0.001289993,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 46,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.00076651,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3488105983135461,
+            0.3223561626649274,
+            0.32883323902152645
+          ],
+          "quoted_price": 0.000464318,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 47,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000900648,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34891988679215774,
+            0.31912329154573266,
+            0.33195682166210955
+          ],
+          "quoted_price": 0.000467597,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 48,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.000234804,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.34101779561925055,
+            0.3257568238795897,
+            0.33322538050115985
+          ],
+          "quoted_price": 0.000230534,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 49,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002980906,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.3629694255549936,
+            0.30952785899223456,
+            0.3275027154527718
+          ],
+          "quoted_price": 0.000889083,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 50,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.020511865,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "proposed": [
+            0.40401407924471233,
+            0.2613590877745991,
+            0.3346268329806887
+          ],
+          "quoted_price": 0.002159227,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 51,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.065147886,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.40401407924471233,
+            0.2613590877745991,
+            0.3346268329806887
+          ],
+          "proposed": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "quoted_price": 0.00440407,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 59,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008118731,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "proposed": [
+            0.6020759155508059,
+            0.16852076361712962,
+            0.22940332083206452
+          ],
+          "quoted_price": 0.001537785,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 67,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004466147,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "proposed": [
+            0.5884011524907551,
+            0.1757466061874177,
+            0.2358522413218273
+          ],
+          "quoted_price": 0.001127542,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 68,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008759771,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "proposed": [
+            0.6002438044252397,
+            0.18134058279325185,
+            0.21841561278150842
+          ],
+          "quoted_price": 0.001482822,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 69,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.008623014,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "proposed": [
+            0.5998071328774095,
+            0.18151264580999432,
+            0.21868022131259626
+          ],
+          "quoted_price": 0.001469722,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 70,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.018956999,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.5508164105823511,
+            0.18760984095960004,
+            0.26157374845804887
+          ],
+          "proposed": [
+            0.6203238137600662,
+            0.18571121907327476,
+            0.193964967166659
+          ],
+          "quoted_price": 0.002085222,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 71,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.013722567,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6203238137600662,
+            0.18571121907327476,
+            0.193964967166659
+          ],
+          "proposed": [
+            0.6736653308403068,
+            0.1946824778501416,
+            0.13165219130955172
+          ],
+          "quoted_price": 0.001869383,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 79,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.02242286,
+          "operation": "TRIAL_REVISION",
+          "previous": [
+            0.6203238137600662,
+            0.18571121907327476,
+            0.193964967166659
+          ],
+          "proposed": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "quoted_price": 0.002425613,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 80,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005064752,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.7141122542391157,
+            0.2127295332651313,
+            0.07315821249575304
+          ],
+          "quoted_price": 0.00119859,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 88,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005063349,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.714108822803762,
+            0.21272730565350045,
+            0.07316387154273765
+          ],
+          "quoted_price": 0.00119842,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 89,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.005057684,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.714100971479318,
+            0.2127105532841252,
+            0.07318847523655675
+          ],
+          "quoted_price": 0.001197682,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 90,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004906518,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.7137274642609018,
+            0.21246955074777865,
+            0.0738029849913196
+          ],
+          "quoted_price": 0.001179247,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 91,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.004905977,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.7137261579204778,
+            0.21246862652680323,
+            0.0738052155527189
+          ],
+          "quoted_price": 0.00117918,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 92,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.002509776,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.7055039334539532,
+            0.20962401718680312,
+            0.08487204935924356
+          ],
+          "quoted_price": 0.000847175,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 93,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        },
+        {
+          "expected_eight_step_gain": 0.0013118,
+          "operation": "PRESERVE_PENCIL",
+          "previous": [
+            0.6864529991026747,
+            0.20043579318534652,
+            0.11311120771197876
+          ],
+          "proposed": [
+            0.7005417461509104,
+            0.20667394949476503,
+            0.0927843043543247
+          ],
+          "quoted_price": 0.000609807,
+          "status": "PENCIL_METHOD_REVISION",
+          "step": 94,
+          "subsequent_verified_regret": null,
+          "verification_count": 16
+        }
+      ],
+      "paired_early_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00109829,
+          0.00109488
+        ],
+        "mean": -0.0000017
+      },
+      "paired_fire006_minus": {
+        "equal3": {
+          "approx_95pct_interval": [
+            -0.00029957,
+            0.00011741
+          ],
+          "mean": -0.00009108
+        },
+        "exp3": {
+          "approx_95pct_interval": [
+            -0.00072397,
+            -0.00019114
+          ],
+          "mean": -0.00045755
+        },
+        "fire006_no_rollback": {
+          "approx_95pct_interval": [
+            -0.00000934,
+            0.00005619
+          ],
+          "mean": 0.00002343
+        },
+        "fixed_share3": {
+          "approx_95pct_interval": [
+            -0.00096933,
+            -0.00059451
+          ],
+          "mean": -0.00078192
+        },
+        "proximal3": {
+          "approx_95pct_interval": [
+            -0.00083967,
+            -0.00016595
+          ],
+          "mean": -0.00050281
+        }
+      },
+      "paired_late_post48_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00130162,
+          0.00075084
+        ],
+        "mean": -0.00027539
+      },
+      "paired_raw_brier_fire006_minus_proximal": {
+        "approx_95pct_interval": [
+          -0.00034247,
+          0.00028819
+        ],
+        "mean": -0.00002714
+      },
+      "policy_means": {
+        "equal3": {
+          "brier": 0.07913315,
+          "coverage": 0.93027344,
+          "early_post48_brier": 0.17269516,
+          "effective_hypotheses": 3,
+          "late_post48_brier": 0.05899915,
+          "log_loss": 0.28934802,
+          "overconfident_errors": 2.15625,
+          "rejected_proposals": 0,
+          "revision_price": 0,
+          "revisions": 0,
+          "rollback_count": 0,
+          "selective_accuracy": 0.91947312,
+          "total_loss_with_price": 0.07913315
+        },
+        "exp3": {
+          "brier": 0.07906735,
+          "coverage": 0.95807292,
+          "early_post48_brier": 0.17506327,
+          "effective_hypotheses": 2.32462548,
+          "late_post48_brier": 0.05719096,
+          "log_loss": 0.2914903,
+          "overconfident_errors": 2.24375,
+          "rejected_proposals": 0,
+          "revision_price": 0.00043228,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.9130174,
+          "total_loss_with_price": 0.07949962
+        },
+        "fire006": {
+          "brier": 0.07893982,
+          "coverage": 0.9422526,
+          "early_post48_brier": 0.17352598,
+          "effective_hypotheses": 2.76946946,
+          "late_post48_brier": 0.05815031,
+          "log_loss": 0.29004243,
+          "overconfident_errors": 2.2125,
+          "rejected_proposals": 49.86875,
+          "revision_price": 0.00010225,
+          "revisions": 3.425,
+          "rollback_count": 0.25,
+          "selective_accuracy": 0.91651457,
+          "total_loss_with_price": 0.07904207
+        },
+        "fire006_no_rollback": {
+          "brier": 0.07891288,
+          "coverage": 0.94264323,
+          "early_post48_brier": 0.17343788,
+          "effective_hypotheses": 2.76308842,
+          "late_post48_brier": 0.05804075,
+          "log_loss": 0.29001443,
+          "overconfident_errors": 2.20625,
+          "rejected_proposals": 50.4375,
+          "revision_price": 0.00010577,
+          "revisions": 3.81875,
+          "rollback_count": 0,
+          "selective_accuracy": 0.91656942,
+          "total_loss_with_price": 0.07901864
+        },
+        "fixed_share3": {
+          "brier": 0.07930689,
+          "coverage": 0.94772135,
+          "early_post48_brier": 0.17514371,
+          "effective_hypotheses": 2.65026415,
+          "late_post48_brier": 0.05821387,
+          "log_loss": 0.29080329,
+          "overconfident_errors": 2.19375,
+          "rejected_proposals": 0,
+          "revision_price": 0.0005171,
+          "revisions": 95,
+          "rollback_count": 0,
+          "selective_accuracy": 0.91498136,
+          "total_loss_with_price": 0.07982399
+        },
+        "proximal3": {
+          "brier": 0.07896696,
+          "coverage": 0.95794271,
+          "early_post48_brier": 0.17352769,
+          "effective_hypotheses": 1.87794536,
+          "late_post48_brier": 0.0584257,
+          "log_loss": 0.29682276,
+          "overconfident_errors": 2.325,
+          "rejected_proposals": 0,
+          "revision_price": 0.00057792,
+          "revisions": 69.2875,
+          "rollback_count": 0,
+          "selective_accuracy": 0.91412104,
+          "total_loss_with_price": 0.07954488
+        }
+      }
+    }
+  },
+  "scope": "synthetic research only",
+  "steps_per_world": 96,
+  "test_seeds": [
+    106000,
+    106159
+  ],
+  "worlds_per_regime": 160
+}

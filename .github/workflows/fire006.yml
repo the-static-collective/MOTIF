@@ -1,0 +1,58 @@
+name: FIRE-006 Price of Revision
+on:
+  push:
+    paths:
+      - 'experiments/fire006/**'
+      - 'experiments/fire005/**'
+      - 'experiments/fire004/**'
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire006.yml'
+  pull_request:
+    paths:
+      - 'experiments/fire006/**'
+      - 'experiments/fire005/**'
+      - 'experiments/fire004/**'
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire006.yml'
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run all FIRE-001 to FIRE-006 tests
+        run: |
+          python -m unittest discover -s experiments/fire001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire004 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire006 -p 'test_*.py' -v
+      - name: Run new-seed 960-world price-of-revision benchmark
+        run: |
+          python experiments/fire006/benchmark.py > /tmp/fire006.json
+          echo '__FIRE006_RESULT_START__'
+          cat /tmp/fire006.json
+          echo '__FIRE006_RESULT_END__'
+      - name: Reproduce frozen FIRE-006 result exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          actual=json.loads(Path('/tmp/fire006.json').read_text())
+          frozen=json.loads(Path('experiments/fire006/results.json').read_text())
+          assert actual == frozen, 'FIRE-006 benchmark differs from committed receipts'
+          print('FIRE-006 exact reproducibility confirmed')
+          PY
+      - name: Preserve raw evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fire006-revision-receipts
+          path: /tmp/fire006.json
