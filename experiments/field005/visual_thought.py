@@ -163,7 +163,8 @@ def svg_sketch(scene:Scene, proposals:tuple[Proposal,...]) -> str:
             w=(o.bbox[2]-o.bbox[0])*580;h=(o.bbox[3]-o.bbox[1])*432
             inferred=False
         border="#b36b33" if o.origin=="MODEL_TENTATIVE" else "#3d6757"
-        bits.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="none" stroke="{border}" stroke-width="2" {"stroke-dasharray=\"4 4\"" if inferred else ""}/>')
+        dash_attr = 'stroke-dasharray="4 4"' if inferred else ''
+        bits.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="none" stroke="{border}" stroke-width="2" {dash_attr}/>')
         bits.append(f'<text x="{x:.1f}" y="{y-5:.1f}" font-family="sans-serif" font-size="11">{escape(o.label[:25])}</text>')
     for i,p in enumerate(proposals[:14]):
         bits.append(f'<text x="634" y="{98+i*23}" font-family="monospace" font-size="10">{escape(p.operation[:25])}</text>')
