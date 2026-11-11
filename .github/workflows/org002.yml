@@ -1,0 +1,33 @@
+name: ORG-002 institutional impasse research
+on:
+  push:
+    paths:
+      - 'experiments/org001/**'
+      - 'experiments/org002/**'
+      - '.github/workflows/org002.yml'
+  pull_request:
+    paths:
+      - 'experiments/org001/**'
+      - 'experiments/org002/**'
+      - '.github/workflows/org002.yml'
+jobs:
+  local-resilience-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test inherited ORG-001 path analysis
+        working-directory: experiments/org001
+        run: python -m unittest -v test_flow.py
+      - name: Test ORG-002 institutional shocks, intent evidence and safety boundaries
+        working-directory: experiments/org002
+        run: python -m unittest -v test_resilience.py test_history.py
+      - name: Reproduce conditional-only shock schedule
+        working-directory: experiments/org002
+        run: |
+          python history.py historical-funding-gaps.json > /tmp/house-history.json
+          python -c "import json; x=json.load(open('/tmp/house-history.json')); assert x['funding_gap_rows']==23 and x['intent_assessments']==0; print('House 23 rows, no intent inference: PASS')"
+          python resilience.py fictional-case.json > /tmp/org002.json
+          python -c "import json; x=json.load(open('/tmp/org002.json')); s=x['shock_scenarios'][0]; assert x['baseline_forecast_days']==9 and s['disrupted_forecast_days']==30; assert s['alternative_routes'][0]['disposition'].startswith('HOLD_') and x['return_receipt']['no_outside_action']; print('ORG-002 conditional HOLD and arithmetic: PASS')"
