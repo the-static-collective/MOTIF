@@ -1,0 +1,30 @@
+name: FIELD-008 two-eye visual critique offline checks
+on:
+  push:
+    paths:
+      - 'experiments/field008/**'
+      - '.github/workflows/field-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/field008/**'
+      - '.github/workflows/field-008.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline vision requirements
+        working-directory: experiments/field008
+        run: python -m pip install -r requirements.txt
+      - name: Run critic, local-model contract, and second-look tests
+        working-directory: experiments/field008
+        run: python -m unittest discover -v
+      - name: Run synthetic negative controls
+        working-directory: experiments/field008
+        run: python benchmark.py
