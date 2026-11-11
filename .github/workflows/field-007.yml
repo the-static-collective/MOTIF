@@ -1,0 +1,30 @@
+name: FIELD-007 sketch pixels and cross-view HOLD checks
+on:
+  push:
+    paths:
+      - 'experiments/field007/**'
+      - '.github/workflows/field-007.yml'
+  pull_request:
+    paths:
+      - 'experiments/field007/**'
+      - '.github/workflows/field-007.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install computer-vision dependencies
+        working-directory: experiments/field007
+        run: python -m pip install -r requirements.txt
+      - name: Run source and safety regressions
+        working-directory: experiments/field007
+        run: python -m unittest discover -v
+      - name: Run non-blind synthetic benchmark and rotated controls
+        working-directory: experiments/field007
+        run: python benchmark.py
