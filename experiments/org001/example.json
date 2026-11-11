@@ -1,0 +1,21 @@
+{
+  "world_id": "FICTIONAL_BASEMENT_SUPPER",
+  "as_of": "2026-11-11",
+  "outcome": "A voluntary church-basement meal actually served, with safeguarding and food handled properly",
+  "targets": ["meal_served"],
+  "stale_after_days": 7,
+  "steps": [
+    {"id": "space", "status": "done", "owner": "fixture_venue_contact", "remaining_days": 0, "blocker": "unknown", "depends_on": [], "evidence_refs": ["synthetic:venue-confirmation"]},
+    {"id": "budget", "status": "waiting", "owner": "fixture_budget_steward", "remaining_days": 6, "observed_wait_days": 4, "touch_days": 0.2, "last_verified": "2026-11-09", "blocker": "approval", "depends_on": ["space"]},
+    {"id": "food", "status": "todo", "owner": "fixture_cook", "remaining_days": 2, "touch_days": 1, "last_verified": "2026-11-10", "blocker": "resource", "depends_on": ["budget"]},
+    {"id": "volunteers", "status": "active", "owner": "fixture_coordinator", "remaining_days": 4, "touch_days": 1, "last_verified": "2026-11-10", "blocker": "coordination", "depends_on": ["space"]},
+    {"id": "safeguarding", "status": "waiting", "owner": "fixture_authorized_steward", "remaining_days": 3, "touch_days": 1, "last_verified": "2026-11-10", "blocker": "care", "non_negotiable_gate": true, "depends_on": ["space"]},
+    {"id": "meal_served", "status": "todo", "owner": "fixture_team", "remaining_days": 1, "touch_days": 1, "last_verified": "2026-11-10", "blocker": "coordination", "depends_on": ["food", "volunteers", "safeguarding"]}
+  ],
+  "interventions": [
+    {"id": "ask_budget_for_specific_yes_no", "hypothesis": "A precise decision and deadline might reduce budget wait from 6 to 2 days, if steward voluntarily responds", "authority": "external", "action": "Draft a one-page budget decision request; invite yes/no/alternate amount and a reply date; do not presume consent", "risk": "Low if respectful, but response is not guaranteed", "verification_test": "Dated budget steward reply", "changes": [{"step_id": "budget", "new_remaining_days": 2}]},
+    {"id": "recruit_extra_volunteers", "hypothesis": "Recruitment might cut volunteer coordination from 4 to 1 day", "authority": "self", "action": "Prepare an opt-in volunteer invitation; send only after separate approval", "risk": "Consent and workload remain open", "verification_test": "Volunteer commitment recorded", "changes": [{"step_id": "volunteers", "new_remaining_days": 1}]},
+    {"id": "coupled_budget_food_and_volunteers", "hypothesis": "Decision, permitted food sourcing, and voluntary recruitment might jointly reduce distinct waits", "authority": "external", "action": "Request budget ruling, prepare a no-commitment food option, and draft a separate volunteer invitation", "risk": "No unapproved spending or food handling", "verification_test": "Budget approval and sourced-food confirmations", "changes": [{"step_id": "budget", "new_remaining_days": 2}, {"step_id": "food", "new_remaining_days": 1}, {"step_id": "volunteers", "new_remaining_days": 1}]},
+    {"id": "expedite_safeguarding_without_bypass", "hypothesis": "Authorized reviewer might complete safeguarding review in 2 days", "authority": "external", "action": "Ask the responsible reviewer whether earlier review is possible; never waive the check", "risk": "Must preserve safety review", "verification_test": "Documented completed review", "changes": [{"step_id": "safeguarding", "new_remaining_days": 2}]}
+  ]
+}
