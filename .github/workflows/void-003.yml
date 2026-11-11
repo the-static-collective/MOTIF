@@ -1,0 +1,119 @@
+name: VOID-003 two-run evidence memory in natural Crafter
+on:
+  push:
+    paths:
+      - 'experiments/void003/**'
+      - '.github/workflows/void-003.yml'
+  pull_request:
+    paths:
+      - 'experiments/void003/**'
+      - '.github/workflows/void-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  two-reset-scout-and-reentry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout stacked VOID research source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout independent actual-game adapter at immutable original version
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 7e35ab7157755c83c6353e939a2ae1b018d70667
+          path: sources/qc017
+          persist-credentials: false
+      - name: Refuse missing or drifted source dependencies
+        run: |
+          test "$(git -C sources/qc017 rev-parse HEAD)" = "7e35ab7157755c83c6353e939a2ae1b018d70667"
+          test -f experiments/003/affordance.py
+          test -f experiments/void002/frontier.py
+          test -f sources/qc017/experiments/quantumcode017/plan.py
+          test -f sources/qc017/experiments/quantumcode012/play_crafter.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test map-memory evidence, reset identity, and stale-observation holds
+        run: python -m unittest discover -s experiments/void003 -p 'test_*.py' -v
+      - name: Install independently authored Crafter engine (no paid inference)
+        run: python -m pip install 'crafter==1.8.3' pillow
+      - name: Execute 50 game episodes across 10 two-run cases
+        run: python experiments/void003/two_run.py
+      - name: Verify both-run outcomes and source provenance
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0,'experiments/void003')
+          from memory import seal
+          from two_run import SCOUTS,FOLLOWUPS,TEST_SEEDS,DEV_SEEDS,MAX_ACTIONS,SOURCE_PIN
+          f=pathlib.Path('void003-two-run-crafter-audit.json')
+          o=json.loads(f.read_text())
+          assert o['source_dependency_sha']==SOURCE_PIN
+          assert o['case_count']==10 and o['episode_count']==50
+          assert o['model_calls']==o['paid_services']==o['real_world_actions']==0
+          assert o['seal']==seal({k:v for k,v in o.items() if k!='seal'})
+          assert set(x['seed'] for x in o['cases'])==set(TEST_SEEDS+DEV_SEEDS)
+          assert o['results']['heldout']['episodes']==6
+          total=0
+          for case in o['cases']:
+              assert set(case['scouts'])==set(SCOUTS)
+              assert set(case['followups'])==set(FOLLOWUPS)
+              for scout in case['scouts'].values():
+                  mem=scout['map_memory_packet']
+                  assert mem['seed']==case['seed'] and mem['seal']==seal({k:v for k,v in mem.items() if k!='seal'})
+              for stage in (case['scouts'],case['followups']):
+                  for run in stage.values():
+                      assert run['seal']==seal({k:v for k,v in run.items() if k!='seal'})
+                      assert 0<=run['actions']<=MAX_ACTIONS
+                      assert run['actions']==len(run['action_receipts'])
+                      assert run['real_world_actions']==0 and not run['game_world_modified_by_researcher']
+                      assert run['goal_count']==sum(run['verified_goals'].values())
+                      for a in run['action_receipts']:
+                          assert a['seal']==seal({k:v for k,v in a.items() if k!='seal'})
+                      for goal,done in run['verified_goals'].items():
+                          if done:
+                              assert any(a['goal']==goal and a['verified_goal_outcome']!='GOAL_NOT_YET_WITNESSED' for a in run['action_receipts'])
+                      total+=run['actions']
+          assert total==o['total_game_steps']
+          print('Actual executed virtual-game steps:',total)
+          print('Heldout primary:',json.dumps(o['results']['heldout'],sort_keys=True))
+          PY
+      - name: Separate posthoc previously seen wide-exploration seed (never part of heldout)
+        run: |
+          python experiments/void003/posthoc_19003.py
+          python - <<'PY'
+          import json
+          x=json.load(open('void003-posthoc-seed19003.json'))
+          assert x['seed']==19003 and x['not_confirmatory']
+          assert len(x['full_records']['followups'])==3
+          print('POSTHOC_19003:',json.dumps(x['two_run_net'],sort_keys=True))
+          PY
+      - name: Independent posthoc outcome audit of official Crafter achievements
+        run: |
+          python experiments/void003/achievement_audit.py
+          python - <<'PY'
+          import json
+          x=json.load(open('void003-achievement-correction-posthoc.json'))
+          assert x['classification']=='POSTHOC_OUTCOME_CORRECTION_NOT_FROZEN_PRIMARY'
+          assert x['second_run_timing']['heldout']['no_memory']['both_goals_seen_in_engine_achievements']==6
+          assert x['second_run_timing']['heldout']['motif_memory']['both_goals_seen_in_engine_achievements']==6
+          assert x['already_seen_19003']['motif_map_cells']==652
+          print('Posthoc first-goal timing:',json.dumps(x['second_run_timing']['heldout'],sort_keys=True))
+          PY
+      - name: Archive all historical map packets and actual engine step receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: void003-natural-crafter-two-reset-memory-audit
+          path: |
+            void003-two-run-crafter-audit.json
+            void003-posthoc-seed19003.json
+            void003-achievement-correction-posthoc.json
+          if-no-files-found: warn
+          retention-days: 30

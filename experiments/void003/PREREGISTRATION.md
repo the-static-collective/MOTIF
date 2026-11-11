@@ -1,0 +1,26 @@
+# VOID-003 — Two runs, one memory: frozen protocol BEFORE live results
+
+**DRAFT / RESEARCH HOLD.** This experiment is meant to answer the question raised after VOID-002: *if MOTIF spends a first opportunity exploring more locations, does a second opportunity benefit from what it saw?* The observed VOID-002 example of 652 vs 580 inspected positions is an illustration, not a proven mean gain and **not** a fresh heldout case. Previously scored VOID-002 seeds are ineligible for a confirmatory result here.
+
+## Frozen design, 2026-11-11
+
+- Independently authored source: unmodified Crafter 1.8.3 game engine, identical single `seed` at each **separately reset** scout and follow-up episode, 64×64 world, native seven-Manhattan-radius privileged tile sensor, action budget of 70 per episode. `env.reset()` is an actual reset: **resources and player status do NOT carry between episodes**; only explicit map knowledge is transferred. Do not conflate this with persistent play in one game world.
+- Inherited native methods: original MOTIF-003 through VOID-001; VOID-002 frontier policy and strong classical two-ply control; QC-017 observed-target BFS, source sensor, and before/after goal verifier source-pinned to `7e35ab7157755c83c6353e939a2ae1b018d70667`. No paid models or new datasets silently introduced.
+- **Scout stage:** one original VOID-002 MOTIF-003 episode, one original VOID-002 classical two-ply episode per seed, recording every actual sensor reading's coordinate/material/occupancy and observed goals. Same task priority wood then drink; no engine mutation. Map memory is an authentic **historical observation**, not current truth. This is an observation-transfer study, **not** yet an optimal two-round joint planning policy or learning of unknown mechanics.
+- **Follow-up stage:** one reset with no memory; one reset with a memory packet from MOTIF scouting; one reset with a memory packet from classical scouting, all operated by the **same** classical two-ply follow-up controller and identical observed-target BFS. Memory can (a) avoid re-searching previously scanned coordinates or (b) suggest a route toward an historically observed resource; a remembered first step must be independently verified against the *current* sensor, and all offscreen resources remain conditional until reobserved. Packet must match source seed and exact initial reset fingerprint. This permits measurement of memory value **independent of the identity of the second-run controller**.
+- Equal two-run game-action ceilings and similar data storage for both scout policies. A separate no-memory follow-up is evaluated once per seed (its shared result is used as both no-memory ablations; no repeated pseudo-independent controls).
+- **Existing development seeds**, previously inspected: 1042, 2026, 3199, 8765. Descriptive only.
+- **Fresh test seeds**, chosen before code execution and never included in VOID-002 results: **27011, 27013, 27017, 27019, 27023, 27029**. Seed generation and game environments are public and experimenter-designated, not independently blind. Do not tune a method on these results and then call the same six seeds unseen.
+
+## Outcome and comparison, fixed in advance
+
+- Each game stage can independently witness up to two goals: actual increase in wood, then actual increase in drink. Syntactic action completion, source hash, hypothetical target, or position exposure do **not** count.
+- **Primary**: heldout six-seed *second-run* mean of `verified_goals - .1 * ((scout_actions + followup_actions)/140) - .05 * ((scout_no_effect + followup_no_effect)/140)`, for **MOTIF-memory** versus **classical-memory**, **MOTIF-memory** versus its no-memory ablation, and **classical-memory** versus its no-memory ablation. The same frozen scoring formula is applied to all arms. A tie or loss is a finding.
+- **Secondary**: second-run goals and steps, total two-run goals, first-run map coverage and **unique/non-overlapping** coordinates, counts of historical resource cells found, offscreen waypoint use and waypoint failures, memory fingerprint mismatches, no-op actions and game termination. A large coordinate count alone is not utility.
+- A stronger established classical controller with equal memory and the same budgets is an essential competitor. This study's lookahead is only two moves, not global POMDP/SLAM/MCTS optimality. No computational-time parity claim.
+- Verification requires fresh simulator `env.step` receipts with actual inventory differences. `source` content hashed with SHA-256 is local integrity, not authenticated human provenance. Any initial fingerprint mismatch is a **hard failure** of source transfer, not silently treated as a successful use of memory.
+- No private data, external actions, service credentials, production permission or real survival inference. Never claim human-world agency from Crafter.
+
+## Explicit next question
+
+If map retention helps, independently investigate how a controller should optimize **when to learn versus accomplish a goal**, with an equal-capability classical multi-episode value-of-information baseline. If it does not, investigate *task-relevant information* and memory maintenance cost; do not automatically add larger memory or call the mechanism an advantage.
