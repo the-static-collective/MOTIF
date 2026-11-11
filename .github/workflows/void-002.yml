@@ -1,0 +1,90 @@
+name: VOID-002 real Crafter natural-world frontier
+on:
+  push:
+    paths:
+      - 'experiments/void002/**'
+      - 'experiments/void001/sources.json'
+      - '.github/workflows/void-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/void002/**'
+      - 'experiments/void001/sources.json'
+      - '.github/workflows/void-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  natural-crafter-holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout VOID-002 and inherited MOTIF-003 / VOID-001
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout original working QC-017 Crafter adapter at exact source commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 7e35ab7157755c83c6353e939a2ae1b018d70667
+          path: sources/qc017
+          persist-credentials: false
+      - name: Verify pinned owner source code
+        run: |
+          test "$(git -C sources/qc017 rev-parse HEAD)" = "7e35ab7157755c83c6353e939a2ae1b018d70667"
+          test -f sources/qc017/experiments/quantumcode017/plan.py
+          test -f sources/qc017/experiments/quantumcode012/play_crafter.py
+          test -f experiments/003/affordance.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test pure frontier policy and actual native MOTIF-003 invocation
+        run: python -m unittest discover -s experiments/void002 -p 'test_*.py' -v
+      - name: Install original independent Crafter engine
+        run: python -m pip install 'crafter==1.8.3' pillow
+      - name: Run 30 natural unedited game episodes with matched observation and action budgets
+        run: python experiments/void002/crafter_trial.py
+      - name: Independently check outcome receipts, integrity and frozen cohort
+        run: |
+          python - <<'PY'
+          import importlib.util, json, pathlib, sys
+          p=pathlib.Path("void002-crafter-audit.json")
+          x=json.loads(p.read_text())
+          sys.path.insert(0,"experiments/void002")
+          from crafter_trial import DEV_SEEDS,HOLDOUT_SEEDS,POLICIES,seal,MAX_ACTIONS
+          assert x["episode_count"]==len(DEV_SEEDS+HOLDOUT_SEEDS)*len(POLICIES)==30
+          assert x["model_calls"]==0 and x["paid_services"]==0
+          assert len(x["rows"])==30
+          assert x["source_dependency_sha"]=="7e35ab7157755c83c6353e939a2ae1b018d70667"
+          assert all(r["real_world_actions"]==0 and
+                     r["no_engine_world_mutations_by_research_runner"] and
+                     r["privileged_radius_seven_source_sensor"]
+                     for r in x["rows"])
+          assert all(0<=r["game_actions"]<=MAX_ACTIONS and
+                     r["game_actions"]==len(r["action_receipts"])
+                     for r in x["rows"])
+          assert all(r["sha256"]==seal({k:v for k,v in r.items() if k!="sha256"})
+                     for r in x["rows"])
+          assert all(a["sha256"]==seal({k:v for k,v in a.items() if k!="sha256"})
+                     for r in x["rows"] for a in r["action_receipts"])
+          assert all(r["total_goal_count"]==sum(r["goals_witnessed"].values())
+                     for r in x["rows"])
+          assert all(any(a["verified_goal_outcome"]!="GOAL_NOT_YET_WITNESSED"
+                          and a["goal"]==g
+                          for a in r["action_receipts"])
+                     for r in x["rows"]
+                     for g,v in r["goals_witnessed"].items() if v)
+          assert x["sha256"]==seal({k:v for k,v in x.items() if k!="sha256"})
+          print("Actual Crafter actions:",x["actions_witnessed"])
+          print("HELDOUT results:",json.dumps(x["heldout"],sort_keys=True))
+          PY
+      - name: Preserve complete source-observation/action/outcome audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: void002-real-crafter-natural-world-evidence
+          path: void002-crafter-audit.json
+          if-no-files-found: warn
+          retention-days: 30
