@@ -175,7 +175,9 @@ def admission(state:AppState, budget_left:int):
         return {"action":"hold","why":"USER_IS_ACTIVE"}
     if budget_left<=0:
         return {"action":"hold","why":"DAILY_BUDGET_EXHAUSTED"}
-    if state.power_willingness in {"conserve","critical"}:\n        return {"action":"hold","why":"GHOT_POWER_PRESSURE"}\n    if state.thermal_c is None or state.thermal_c>=75:
+    if state.power_willingness in {"conserve","critical"}:
+        return {"action":"hold","why":"GHOT_POWER_PRESSURE"}
+    if state.thermal_c is None or state.thermal_c>=75:
         return {"action":"hold","why":"THERMAL_UNKNOWN_OR_HIGH"}
     if state.cpu_pressure>.60:
         return {"action":"hold","why":"CPU_PRESSURE_HIGH"}
