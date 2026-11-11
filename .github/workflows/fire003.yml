@@ -1,0 +1,38 @@
+name: FIRE-003 epistemic smoke detector
+on:
+  push:
+    paths:
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire003.yml'
+  pull_request:
+    paths:
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire003.yml'
+jobs:
+  verify-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run FIRE-001, FIRE-002, FIRE-003 tests
+        run: |
+          python -m unittest discover -s experiments/fire001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire003 -p 'test_*.py' -v
+      - name: Run five-regime held-out benchmark
+        run: |
+          python experiments/fire003/benchmark.py > /tmp/fire003.json
+          echo '__FIRE003_RESULT_START__'
+          cat /tmp/fire003.json
+          echo '__FIRE003_RESULT_END__'
+      - name: Save evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fire003-research-results
+          path: /tmp/fire003.json
