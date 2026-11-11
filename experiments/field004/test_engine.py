@@ -1,6 +1,9 @@
 import json
 from pathlib import Path
 import unittest
+import os
+import subprocess
+import sys
 from dataclasses import replace
 from engine import Input, Observation, load_packet, infer, run
 
@@ -64,8 +67,13 @@ class AutonomousReframeTests(unittest.TestCase):
     def test_dont_republish_raw_photos(self):
         self.assertNotIn('data:image',json.dumps(run(self.case)))
 
-    def test_reproducible_receipt(self):
-        self.assertEqual(run(self.case)['receipt_sha256'],run(self.case)['receipt_sha256'])
+    def test_reproducible_receipt_across_hash_seeds(self):
+        command = [sys.executable, str(FIXTURE.parents[1] / 'run.py'),
+                   '--packet', str(FIXTURE)]
+        outputs = [subprocess.check_output(command, env=dict(os.environ, PYTHONHASHSEED=seed))
+                   for seed in ('1', '2', '3')]
+        self.assertEqual(outputs[0], outputs[1])
+        self.assertEqual(outputs[0], outputs[2])
 
     def test_untrusted_unknown_field_rejected(self):
         raw=json.loads(FIXTURE.read_text()); raw['invented_payload']='A'
