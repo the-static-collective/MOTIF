@@ -57,8 +57,7 @@ class World:
             return Attestation("UNVERIFIABLE")
         if self.regime == "compromised":
             # Intentionally compromised auditor; identical copies appear unique.
-            return Attestation("VERIFIED", tuple(r.claim_id for r in reports),
-                               issuer="compromised-synthetic-auditor")
+            return Attestation("VERIFIED", tuple(r.claim_id for r in reports))
         return Attestation("VERIFIED", self.origins[key][:len(reports)])
 
     def verify(self, key: str, predicted: bool) -> dict:
