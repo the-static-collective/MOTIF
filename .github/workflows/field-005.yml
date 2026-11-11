@@ -1,0 +1,27 @@
+name: FIELD-005 visual thought offline checks
+on:
+  push:
+    paths:
+      - "experiments/field005/**"
+      - ".github/workflows/field-005.yml"
+  pull_request:
+    paths:
+      - "experiments/field005/**"
+      - ".github/workflows/field-005.yml"
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run offline tests
+        working-directory: experiments/field005
+        run: python -m unittest discover -v
+      - name: Generate reproducible synthetic diagrams
+        working-directory: experiments/field005
+        run: python benchmark.py
