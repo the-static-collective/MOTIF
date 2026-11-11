@@ -22,6 +22,19 @@ Institutions sometimes fail to deliver promptly because of resource shortage, le
 
 **Observed impacts, not moral verdicts:** GAO documents delayed grants and contracts, interrupted services and higher management costs in earlier CR/shutdown episodes. CBO estimated $18B in delayed discretionary spending during the 2018–19 shutdown and that about $3B of real GDP would not be recovered (2019 dollars). These estimates concern distinct historical periods and should not be casually transported to 2026 or to a local volunteer event. [GAO-18-368T](https://www.gao.gov/products/gao-18-368t); [CBO 2019 summary](https://www.cbo.gov/publication/54943).
 
+### Historical reference set: all 23 U.S. House-listed funding gaps since FY1977
+
+In addition to the four close-read examples above, [historical-funding-gaps.json](historical-funding-gaps.json) transcribes **all 23 rows** in the House Historian's published funding-gap table for gaps lasting at least one full day, from September 1976 to April 2026. The dataset includes each reported fiscal year, last-funded date, restoration date, reported duration, partial/full scope and **whether shutdown procedures were followed**. Its local audit is:
+
+    python history.py historical-funding-gaps.json
+    python -m unittest -v test_history.py
+
+The distinction matters: **13 rows say shutdown procedures followed; 10 say they did not.** Treating every funding gap as a shutdown would create false evidence of organizational paralysis. The historical table also contains **5 full and 18 partial** funding-gap rows. Source: [House Historian, July 21, 2026](https://history.house.gov/Institution/Shutdown/Government-Shutdowns/).
+
+**Unresolved count differences are part of the evidence, not silently fixed:** the House table prints **43** for the 2025 government-wide gap and **76** for the February–April 2026 DHS gap, while CRS counts **42 full days** and **75 full days**, respectively. The original House-reported figures and separate CRS figures are retained, each attributed. Definitions/start-date conventions may differ, especially the first day of the DHS-specific lapse; the source packet does not claim to have reconciled them. The 2013 and 2018–19 records match at 16 and 34 full days.
+
+This table does **not** encode the cause of each gap, intent, actors' politics, data on real service disruptions, exceptions, or a new/current gap not present in the July 2026 source. Additional evidence must be attached before reasoning about those particulars.
+
 ### Reusable failure mechanisms (NOT rankings of public officials or organizations)
 
 1. **Veto-point coupling:** One resource or lawful authority is contingent on a separate contested proposition.
