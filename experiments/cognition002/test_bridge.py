@@ -49,6 +49,14 @@ class CrossroadsTests(unittest.TestCase):
         self.assertEqual([r.public() for r in book.rows],before)
         self.assertFalse(any(r.get("canon",False) for r in packet["records"]))
 
+    def test_understory_contact_times_are_valid_utc_hour(self):
+        from datetime import datetime
+        rows=understory_fixture(demo_book())["records"]
+        for r in rows:
+            parsed=datetime.fromisoformat(r["recorded_at"].replace("Z","+00:00"))
+            self.assertEqual(parsed.utcoffset().total_seconds(),0)
+        self.assertEqual(rows[1]["sensed_at"],"2026-11-10T10:00:00Z")
+
     def test_no_ignored_attention_inferred(self):
         records=understory_fixture(demo_book())["records"]
         self.assertFalse(any(r["family"]=="attention" for r in records))
