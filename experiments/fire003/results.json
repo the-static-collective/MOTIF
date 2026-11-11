@@ -1,0 +1,497 @@
+{
+  "budget": 32,
+  "experiment": "FIRE-003",
+  "regimes": {
+    "compromised": {
+      "fixed_exposure": {
+        "guarded": {
+          "brier": 0.178635,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.793333
+        },
+        "naive": {
+          "brier": 0.178635,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.793333
+        },
+        "oracle_roots": {
+          "brier": 0.113036,
+          "dependence_detected": 8,
+          "held": 0,
+          "overconfident_errors": 0.096667
+        }
+      },
+      "paired_guarded_minus_naive_brier": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_guarded_online_minus_naive_online_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_online_minus_frozen_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "task_outcomes": {
+        "guarded_frozen": {
+          "audit_steps": 4,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.433333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "guarded_online": {
+          "audit_steps": 4,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.33,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        },
+        "naive_frozen": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.433333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "naive_online": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.33,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        }
+      }
+    },
+    "copied": {
+      "fixed_exposure": {
+        "guarded": {
+          "brier": 0.113036,
+          "dependence_detected": 8,
+          "held": 0,
+          "overconfident_errors": 0.096667
+        },
+        "naive": {
+          "brier": 0.178635,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.793333
+        },
+        "oracle_roots": {
+          "brier": 0.113036,
+          "dependence_detected": 8,
+          "held": 0,
+          "overconfident_errors": 0.096667
+        }
+      },
+      "paired_guarded_minus_naive_brier": {
+        "approx_95pct_interval": [
+          -0.075474,
+          -0.055724
+        ],
+        "mean": -0.065599
+      },
+      "paired_guarded_online_minus_naive_online_net_value": {
+        "approx_95pct_interval": [
+          3.947654,
+          6.932346
+        ],
+        "mean": 5.44
+      },
+      "paired_online_minus_frozen_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "task_outcomes": {
+        "guarded_frozen": {
+          "audit_steps": 4,
+          "certified_count": 3.406667,
+          "certified_value": 29.56,
+          "confident_failures": 0.036667,
+          "dependence_alerts": 4,
+          "failed_verifications": 0.593333,
+          "holds": 0,
+          "net_value": 26.593333,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "guarded_online": {
+          "audit_steps": 4,
+          "certified_count": 3.406667,
+          "certified_value": 29.56,
+          "confident_failures": 0.016667,
+          "dependence_alerts": 4,
+          "failed_verifications": 0.593333,
+          "holds": 0,
+          "net_value": 26.593333,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        },
+        "naive_frozen": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.433333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "naive_online": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.33,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        }
+      }
+    },
+    "drift": {
+      "fixed_exposure": {
+        "guarded": {
+          "brier": 0.172925,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.59
+        },
+        "naive": {
+          "brier": 0.172925,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.59
+        },
+        "oracle_roots": {
+          "brier": 0.172925,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.59
+        }
+      },
+      "paired_guarded_minus_naive_brier": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_guarded_online_minus_naive_online_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_online_minus_frozen_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "task_outcomes": {
+        "guarded_frozen": {
+          "audit_steps": 4,
+          "certified_count": 3.466667,
+          "certified_value": 30.506667,
+          "confident_failures": 0.156667,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.533333,
+          "holds": 0,
+          "net_value": 27.84,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "guarded_online": {
+          "audit_steps": 4,
+          "certified_count": 3.466667,
+          "certified_value": 30.506667,
+          "confident_failures": 0.153333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.533333,
+          "holds": 0,
+          "net_value": 27.84,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        },
+        "naive_frozen": {
+          "audit_steps": 0,
+          "certified_count": 3.466667,
+          "certified_value": 30.506667,
+          "confident_failures": 0.156667,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.533333,
+          "holds": 0,
+          "net_value": 27.84,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "naive_online": {
+          "audit_steps": 0,
+          "certified_count": 3.466667,
+          "certified_value": 30.506667,
+          "confident_failures": 0.153333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.533333,
+          "holds": 0,
+          "net_value": 27.84,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        }
+      }
+    },
+    "independent": {
+      "fixed_exposure": {
+        "guarded": {
+          "brier": 0.077583,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.113333
+        },
+        "naive": {
+          "brier": 0.077583,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.113333
+        },
+        "oracle_roots": {
+          "brier": 0.077583,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.113333
+        }
+      },
+      "paired_guarded_minus_naive_brier": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_guarded_online_minus_naive_online_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "paired_online_minus_frozen_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "task_outcomes": {
+        "guarded_frozen": {
+          "audit_steps": 4,
+          "certified_count": 3.58,
+          "certified_value": 31.38,
+          "confident_failures": 0.053333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.42,
+          "holds": 0,
+          "net_value": 29.28,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "guarded_online": {
+          "audit_steps": 4,
+          "certified_count": 3.58,
+          "certified_value": 31.38,
+          "confident_failures": 0.05,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.42,
+          "holds": 0,
+          "net_value": 29.28,
+          "operations_spent": 32,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        },
+        "naive_frozen": {
+          "audit_steps": 0,
+          "certified_count": 3.58,
+          "certified_value": 31.38,
+          "confident_failures": 0.053333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.42,
+          "holds": 0,
+          "net_value": 29.28,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "naive_online": {
+          "audit_steps": 0,
+          "certified_count": 3.58,
+          "certified_value": 31.38,
+          "confident_failures": 0.05,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.42,
+          "holds": 0,
+          "net_value": 29.28,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        }
+      }
+    },
+    "unverifiable": {
+      "fixed_exposure": {
+        "guarded": {
+          "brier": 0.25,
+          "dependence_detected": 0,
+          "held": 8,
+          "overconfident_errors": 0
+        },
+        "naive": {
+          "brier": 0.178635,
+          "dependence_detected": 0,
+          "held": 0,
+          "overconfident_errors": 0.793333
+        },
+        "oracle_roots": {
+          "brier": 0.113036,
+          "dependence_detected": 8,
+          "held": 0,
+          "overconfident_errors": 0.096667
+        }
+      },
+      "paired_guarded_minus_naive_brier": {
+        "approx_95pct_interval": [
+          0.05826,
+          0.08447
+        ],
+        "mean": 0.071365
+      },
+      "paired_guarded_online_minus_naive_online_net_value": {
+        "approx_95pct_interval": [
+          -22.565451,
+          -19.741216
+        ],
+        "mean": -21.153333
+      },
+      "paired_online_minus_frozen_net_value": {
+        "approx_95pct_interval": [
+          0,
+          0
+        ],
+        "mean": 0
+      },
+      "task_outcomes": {
+        "guarded_frozen": {
+          "audit_steps": 4,
+          "certified_count": 0,
+          "certified_value": 0,
+          "confident_failures": 0,
+          "dependence_alerts": 0,
+          "failed_verifications": 0,
+          "holds": 4,
+          "net_value": 0,
+          "operations_spent": 24,
+          "unverifiable_alerts": 4,
+          "verified_learning_events": 0
+        },
+        "guarded_online": {
+          "audit_steps": 4,
+          "certified_count": 0,
+          "certified_value": 0,
+          "confident_failures": 0,
+          "dependence_alerts": 0,
+          "failed_verifications": 0,
+          "holds": 4,
+          "net_value": 0,
+          "operations_spent": 24,
+          "unverifiable_alerts": 4,
+          "verified_learning_events": 0
+        },
+        "naive_frozen": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.433333,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 0
+        },
+        "naive_online": {
+          "audit_steps": 0,
+          "certified_count": 3.036667,
+          "certified_value": 25.97,
+          "confident_failures": 0.33,
+          "dependence_alerts": 0,
+          "failed_verifications": 0.963333,
+          "holds": 0,
+          "net_value": 21.153333,
+          "operations_spent": 28,
+          "unverifiable_alerts": 0,
+          "verified_learning_events": 4
+        }
+      }
+    }
+  },
+  "scope": "engineer-authored synthetic source registry and truth",
+  "test_seeds": [
+    53000,
+    53299
+  ],
+  "worlds_per_regime": 300
+}
