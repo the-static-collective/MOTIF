@@ -1,0 +1,32 @@
+name: FIRE-001 cognitive combustion
+on:
+  push:
+    paths:
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire001.yml'
+      - 'experiments/003/affordance.py'
+  pull_request:
+    paths:
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire001.yml'
+      - 'experiments/003/affordance.py'
+jobs:
+  test-and-reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s experiments/fire001 -p 'test_*.py' -v
+      - run: python experiments/fire001/benchmark.py > /tmp/fire001.json
+      - name: Require byte-for-byte equivalent JSON evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected = json.loads(Path('experiments/fire001/results.json').read_text())
+          actual = json.loads(Path('/tmp/fire001.json').read_text())
+          assert expected == actual, 'FIRE-001 evidence drifted'
+          print(json.dumps(actual['test'], indent=2))
+          PY

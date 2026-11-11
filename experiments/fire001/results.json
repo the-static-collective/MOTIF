@@ -1,0 +1,102 @@
+{
+  "experiment": "FIRE-001",
+  "limits": "Fixed task grammar, known source counts, no real-world learning",
+  "paired_fire_minus_no_spark": {
+    "approx_95pct_interval": [
+      -0.3682,
+      0.2382
+    ],
+    "mean": -0.065
+  },
+  "paired_fire_minus_ratio": {
+    "approx_95pct_interval": [
+      -0.4755,
+      0.1055
+    ],
+    "mean": -0.185
+  },
+  "scope": "synthetic-only",
+  "selected_weight": 1.0,
+  "test": {
+    "fire": {
+      "correct_tasks": 3.375,
+      "false_attempts": 0.345,
+      "steps": 20.78,
+      "unlocked": 6.635,
+      "verified_value": 14.73
+    },
+    "fire_no_spark": {
+      "correct_tasks": 3.28,
+      "false_attempts": 0.34,
+      "steps": 20.565,
+      "unlocked": 6.255,
+      "verified_value": 14.795
+    },
+    "information": {
+      "correct_tasks": 3.18,
+      "false_attempts": 0.34,
+      "steps": 20.785,
+      "unlocked": 6.24,
+      "verified_value": 14.185
+    },
+    "ratio": {
+      "correct_tasks": 3.29,
+      "false_attempts": 0.335,
+      "steps": 20.615,
+      "unlocked": 6.26,
+      "verified_value": 14.915
+    },
+    "value": {
+      "correct_tasks": 3.275,
+      "false_attempts": 0.33,
+      "steps": 20.83,
+      "unlocked": 6.26,
+      "verified_value": 14.985
+    }
+  },
+  "test_seeds": [
+    32000,
+    32199
+  ],
+  "training": {
+    "0.0": {
+      "correct_tasks": 3.0,
+      "false_attempts": 0.625,
+      "steps": 20.2,
+      "unlocked": 6.1,
+      "verified_value": 13.125
+    },
+    "0.25": {
+      "correct_tasks": 2.95,
+      "false_attempts": 0.7,
+      "steps": 20.125,
+      "unlocked": 6.1,
+      "verified_value": 13.425
+    },
+    "0.5": {
+      "correct_tasks": 3.025,
+      "false_attempts": 0.6,
+      "steps": 19.9,
+      "unlocked": 6.275,
+      "verified_value": 13.5
+    },
+    "1.0": {
+      "correct_tasks": 3.125,
+      "false_attempts": 0.5,
+      "steps": 19.925,
+      "unlocked": 6.425,
+      "verified_value": 13.725
+    },
+    "2.0": {
+      "correct_tasks": 3.075,
+      "false_attempts": 0.55,
+      "steps": 20.0,
+      "unlocked": 6.425,
+      "verified_value": 13.425
+    }
+  },
+  "training_seeds": [
+    4100,
+    4139
+  ]
+}
