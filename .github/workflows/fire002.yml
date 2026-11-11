@@ -1,0 +1,37 @@
+name: FIRE-002 productive combustion
+on:
+  push:
+    paths:
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - 'experiments/003/affordance.py'
+      - '.github/workflows/fire002.yml'
+  pull_request:
+    paths:
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - 'experiments/003/affordance.py'
+      - '.github/workflows/fire002.yml'
+jobs:
+  exact-reproduction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: FIRE-001 and FIRE-002 safety tests
+        run: |
+          python -m unittest discover -s experiments/fire001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire002 -p 'test_*.py' -v
+      - name: Held-out 3-regime synthetic comparison
+        run: |
+          python experiments/fire002/benchmark.py > /tmp/fire002-results.json
+          echo '=== FIRE-002 EVIDENCE START ==='
+          cat /tmp/fire002-results.json
+          echo '=== FIRE-002 EVIDENCE END ==='
+      - name: Upload reproducible evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fire002-synthetic-benchmark
+          path: /tmp/fire002-results.json
