@@ -89,6 +89,19 @@ class PriceTests(unittest.TestCase):
         self.assertEqual(p.receipts[-1].verification_count, 8)
         self.assertGreater(p.receipts[-1].subsequent_verified_regret, .005)
 
+    def test_preserved_alternatives_leave_a_pencil_receipt(self):
+        policy = Portfolio("fire006")
+        w = make_world(95012, "steady")
+        for step in range(LOOKBACK):
+            c = w.view(step)
+            policy.forecast(step, (.51, .49, .50))
+            policy.update(c, VerifiedLabel(step, bool(step % 2)))
+        self.assertGreater(policy.held_proposals, 0)
+        self.assertEqual(policy.revisions, 0)
+        self.assertEqual(policy.receipts[0].operation, "PRESERVE_PENCIL")
+        self.assertEqual(policy.receipts[0].previous, UNIFORM)
+        self.assertEqual(policy.receipts[0].quoted_price > 0, True)
+
     def test_no_rollback_ablation_never_reverses(self):
         policy = Portfolio("fire006_no_rollback")
         w = make_world(95005, "steady")
