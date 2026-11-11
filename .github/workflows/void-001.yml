@@ -1,0 +1,72 @@
+name: VOID-001 Missing Middle Research Feed
+on:
+  push:
+    paths:
+      - 'experiments/void001/**'
+      - '.github/workflows/void-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/void001/**'
+      - '.github/workflows/void-001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-feed-and-mesh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ovunctuzel/GridWorldPathfinding
+          ref: ffa02393942e649d4da82d5647d3159e7a7dd572
+          path: sources/gridbenchmark
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 581ed7cbc289f65f42949dd332476eb672467a7c
+          path: sources/field008
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/MOTIF
+          ref: 269006b559dbc73766888bcd11f5f294b8e6aa64
+          path: sources/collective001
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run source catalog, epistemic and outcome falsifiers
+        run: python -m unittest discover -s experiments/void001 -p 'test_*.py' -v
+      - name: Run equal-budget synthetic comparison
+        run: python experiments/void001/mesh.py > void001-synthetic-audit.json
+      - name: Run original CONFLUENCE-003 native methods and verified outside maps
+        run: python experiments/void001/mesh.py --external > void001-external-audit.json
+      - name: Verify rigorous provenance and nonsuperiority boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('void001-synthetic-audit.json').read_text())
+          b=json.loads(Path('void001-external-audit.json').read_text())
+          assert a['cases_per_policy']==40 and len(a['rows'])==120
+          assert set(a['policy_metrics'])=={'exact_dp','entropy','motif_mesh'}
+          assert a['external_benchmark_cases_executed']==0
+          assert b['external_benchmark_cases_executed']==16
+          assert b['external_replay']['actual_planning_comparator_gain']==0
+          assert b['external_replay']['classical_astar_dijkstra_parity']==16
+          assert b['external_replay']['native_motif003_executed']==16
+          assert all(row['external_actions']==0 for row in a['rows'])
+          print('Research hold: valid synthetic comparative + separately tagged external evidence replay')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: void001-research-hold-evidence
+          path: |
+            void001-synthetic-audit.json
+            void001-external-audit.json
+          retention-days: 21
