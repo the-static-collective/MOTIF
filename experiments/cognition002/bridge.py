@@ -56,7 +56,7 @@ def understory_fixture(book):
     common = {"schema":"memento.understory-record/v0", "observer":OBSERVER}
     contacts=[]
     for n,r in enumerate(earlier,1):
-        when=_time(r.day,f"0{8+n}")
+        when=_time(r.day,f"{8+n:02d}")
         contacts.append({**common,"id":f"cognition002-contact-{n}",
                          "family":"contact","recorded_at":when,"sensed_at":when,
                          "occurrence_ref":f"synthetic:{r.rid}",
