@@ -1,0 +1,73 @@
+name: COGNITION-001 four-speed foreground contemplation with pinned GHoT policy
+on:
+  push:
+    paths:
+      - 'experiments/cognition001/**'
+      - '.github/workflows/cognition-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition001/**'
+      - '.github/workflows/cognition-001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  four-speed-foreground:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Checkout actual GHoT source-owner energy policy at an exact immutable commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate frozen protocol and actual GitHub owner source
+        run: |
+          git show 72abc824ba068b0adebe523f2d85cb11ba685b4a:experiments/cognition001/PREREGISTRATION.md > /tmp/cognition001-frozen.md
+          cmp /tmp/cognition001-frozen.md experiments/cognition001/PREREGISTRATION.md
+          test "$(git -C sources/ghot rev-parse HEAD)" = "9748a0772c4a13135421c4fa84a9991e0a51e05f"
+          test -f sources/ghot/ghot/energy_scheduler.py
+          test -f experiments/003/affordance.py
+      - name: Test reflex, deliberation, reflection, contemplation and GHOT hold rules
+        run: python -m unittest discover -s experiments/cognition001 -p 'test_*.py' -v
+      - name: Execute synthetic two-day foreground-only 4-speed demonstration
+        run: python experiments/cognition001/circuit.py > cognition001-demo.json
+      - name: Audit that contemplation is only a bounded hypothetical proposal
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('cognition001-demo.json'))
+          assert d['experiment']=='COGNITION-001'
+          assert d['executed_original_motif003']
+          assert d['ghot_revision']=='9748a0772c4a13135421c4fa84a9991e0a51e05f'
+          assert d['external_actions']==d['llm_calls']==0
+          assert not d['app_integration_deployed'] and d['no_os_daemon']
+          assert d['invisible_gate']['status']=='HOLD'
+          assert len(d['contemplation'])==3
+          for row in d['contemplation']:
+              assert row['status']=='PROPOSED_NOT_ADMITTED'
+              assert row['ghot_decision']=='run_here'
+              assert row['proposal']['status']=='PENCIL_UNTESTED'
+              assert row['proposal']['real_world_effects']==0
+              assert not row['proposal']['auto_revision_permitted']
+              assert len(set(row['proposal']['source_roots']))==2
+          assert d['optimization']['status']=='HOLD_FOR_OWNER_REVIEW'
+          print('Four-speed read-only demonstration verified (GHoT native policy executed).')
+          PY
+      - name: Archive reproducible hypothesis digest (not personal data)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition001-four-speed-local-hypothetical-demo
+          path: cognition001-demo.json
+          if-no-files-found: warn
+          retention-days: 30
