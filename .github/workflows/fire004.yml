@@ -1,0 +1,52 @@
+name: FIRE-004 witness of the flame
+on:
+  push:
+    paths:
+      - 'experiments/fire004/**'
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire004.yml'
+  pull_request:
+    paths:
+      - 'experiments/fire004/**'
+      - 'experiments/fire003/**'
+      - 'experiments/fire002/**'
+      - 'experiments/fire001/**'
+      - '.github/workflows/fire004.yml'
+jobs:
+  prequential-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test FIRE 001-004 firewall, provenance and change monitors
+        run: |
+          python -m unittest discover -s experiments/fire001 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire002 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire003 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/fire004 -p 'test_*.py' -v
+      - name: Run preregistered 1440-world trial
+        run: |
+          python experiments/fire004/benchmark.py > /tmp/fire004.json
+          echo "__FIRE004_RESULTS_START__"
+          cat /tmp/fire004.json
+          echo "__FIRE004_RESULTS_END__"
+      - name: Reproduce published result byte-independent JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          observed=json.loads(Path('/tmp/fire004.json').read_text())
+          expected=json.loads(Path('experiments/fire004/results.json').read_text())
+          assert observed == expected, 'FIRE-004 frozen research result drift'
+          print('FIRE-004 1440-world result match confirmed')
+          PY
+      - name: Upload detailed evaluation receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fire004-prequential-results
+          path: /tmp/fire004.json
