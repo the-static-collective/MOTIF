@@ -1,0 +1,258 @@
+{
+  "schema": "motif/org002-historical-funding-gaps-v0",
+  "source": "https://history.house.gov/Institution/Shutdown/Government-Shutdowns/",
+  "source_title": "U.S. House of Representatives History, Art & Archives — Funding Gaps and Shutdowns in the Federal Government",
+  "source_page_date": "2026-07-21",
+  "captured_as_of": "2026-11-11",
+  "coverage": "All 23 rows in the cited House table, funding gaps with at least one full day from 1976 through April 2026. Does NOT claim to cover shorter lapses, state governments, all historical disputes, or current availability.",
+  "date_semantics": "funding_ended and funding_restored retain the House table's own label; do not automatically calculate gaps from endpoints.",
+  "duration_semantics": "house_reported_days transcribed as printed, NOT harmonized with CRS full-day count (FY2026 2025 and DHS rows disagree).",
+  "known_count_disagreements": [
+    {
+      "id": "2026a",
+      "house_reported_days": 43,
+      "crs_full_days": 42,
+      "source": "https://www.everycrsreport.com/reports/RS20348.html",
+      "resolution": "PRESERVE_UNRESOLVED_SOURCE_DIFFERENCE"
+    },
+    {
+      "id": "2026c",
+      "house_reported_days": 76,
+      "crs_full_days": 75,
+      "source": "https://www.everycrsreport.com/reports/RS20348.html",
+      "resolution": "PRESERVE_UNRESOLVED_SOURCE_DIFFERENCE"
+    }
+  ],
+  "cases": [
+    {
+      "id": "1977a",
+      "fiscal_year": 1977,
+      "scope": "partial",
+      "funding_ended": "1976-09-30",
+      "house_reported_days": 10,
+      "funding_restored": "1976-10-11",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1978a",
+      "fiscal_year": 1978,
+      "scope": "partial",
+      "funding_ended": "1977-09-30",
+      "house_reported_days": 12,
+      "funding_restored": "1977-10-13",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1978b",
+      "fiscal_year": 1978,
+      "scope": "partial",
+      "funding_ended": "1977-10-31",
+      "house_reported_days": 8,
+      "funding_restored": "1977-11-09",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1978c",
+      "fiscal_year": 1978,
+      "scope": "partial",
+      "funding_ended": "1977-11-30",
+      "house_reported_days": 8,
+      "funding_restored": "1977-12-09",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1979a",
+      "fiscal_year": 1979,
+      "scope": "partial",
+      "funding_ended": "1978-09-30",
+      "house_reported_days": 17,
+      "funding_restored": "1978-10-18",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1980a",
+      "fiscal_year": 1980,
+      "scope": "partial",
+      "funding_ended": "1979-09-30",
+      "house_reported_days": 11,
+      "funding_restored": "1979-10-12",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1982a",
+      "fiscal_year": 1982,
+      "scope": "partial",
+      "funding_ended": "1981-11-20",
+      "house_reported_days": 2,
+      "funding_restored": "1981-11-23",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1983a",
+      "fiscal_year": 1983,
+      "scope": "partial",
+      "funding_ended": "1982-09-30",
+      "house_reported_days": 1,
+      "funding_restored": "1982-10-02",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1983b",
+      "fiscal_year": 1983,
+      "scope": "partial",
+      "funding_ended": "1982-12-17",
+      "house_reported_days": 3,
+      "funding_restored": "1982-12-21",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1984a",
+      "fiscal_year": 1984,
+      "scope": "partial",
+      "funding_ended": "1983-11-10",
+      "house_reported_days": 3,
+      "funding_restored": "1983-11-14",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1985a",
+      "fiscal_year": 1985,
+      "scope": "partial",
+      "funding_ended": "1984-09-30",
+      "house_reported_days": 2,
+      "funding_restored": "1984-10-03",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1985b",
+      "fiscal_year": 1985,
+      "scope": "partial",
+      "funding_ended": "1984-10-03",
+      "house_reported_days": 1,
+      "funding_restored": "1984-10-05",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1987a",
+      "fiscal_year": 1987,
+      "scope": "full",
+      "funding_ended": "1986-10-16",
+      "house_reported_days": 1,
+      "funding_restored": "1986-10-18",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1988a",
+      "fiscal_year": 1988,
+      "scope": "partial",
+      "funding_ended": "1987-12-18",
+      "house_reported_days": 1,
+      "funding_restored": "1987-12-20",
+      "shutdown_procedures_followed": false,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1990a",
+      "fiscal_year": 1990,
+      "scope": "full",
+      "funding_ended": "1990-10-05",
+      "house_reported_days": 3,
+      "funding_restored": "1990-10-09",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1996a",
+      "fiscal_year": 1996,
+      "scope": "partial",
+      "funding_ended": "1995-11-13",
+      "house_reported_days": 5,
+      "funding_restored": "1995-11-19",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "1996b",
+      "fiscal_year": 1996,
+      "scope": "partial",
+      "funding_ended": "1995-12-15",
+      "house_reported_days": 21,
+      "funding_restored": "1996-01-06",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2014a",
+      "fiscal_year": 2014,
+      "scope": "full",
+      "funding_ended": "2013-09-30",
+      "house_reported_days": 16,
+      "funding_restored": "2013-10-17",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2018a",
+      "fiscal_year": 2018,
+      "scope": "full",
+      "funding_ended": "2018-01-19",
+      "house_reported_days": 2,
+      "funding_restored": "2018-01-22",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2019a",
+      "fiscal_year": 2019,
+      "scope": "partial",
+      "funding_ended": "2018-12-21",
+      "house_reported_days": 34,
+      "funding_restored": "2019-01-25",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2026a",
+      "fiscal_year": 2026,
+      "scope": "full",
+      "funding_ended": "2025-09-30",
+      "house_reported_days": 43,
+      "funding_restored": "2025-11-12",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2026b",
+      "fiscal_year": 2026,
+      "scope": "partial",
+      "funding_ended": "2026-01-31",
+      "house_reported_days": 3,
+      "funding_restored": "2026-02-03",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    },
+    {
+      "id": "2026c",
+      "fiscal_year": 2026,
+      "scope": "partial",
+      "funding_ended": "2026-02-14",
+      "house_reported_days": 76,
+      "funding_restored": "2026-04-30",
+      "shutdown_procedures_followed": true,
+      "intent": "NOT_CLASSIFIED_FROM_CHRONOLOGY"
+    }
+  ]
+}
