@@ -41,6 +41,16 @@ jobs:
           echo '__FIRE006_RESULT_START__'
           cat /tmp/fire006.json
           echo '__FIRE006_RESULT_END__'
+      - name: Reproduce frozen FIRE-006 result exactly
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          actual=json.loads(Path('/tmp/fire006.json').read_text())
+          frozen=json.loads(Path('experiments/fire006/results.json').read_text())
+          assert actual == frozen, 'FIRE-006 benchmark differs from committed receipts'
+          print('FIRE-006 exact reproducibility confirmed')
+          PY
       - name: Preserve raw evidence
         uses: actions/upload-artifact@v4
         with:
