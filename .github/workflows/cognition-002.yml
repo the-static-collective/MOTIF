@@ -1,0 +1,80 @@
+name: COGNITION-002 Understory Free Graph associative subconscious public seam
+on:
+  push:
+    paths:
+      - 'experiments/cognition002/**'
+      - '.github/workflows/cognition-002.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition002/**'
+      - '.github/workflows/cognition-002.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-no-private-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: sources/free-graph
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assert native source pins and unchanged preregistration
+        run: |
+          git show c44f026d96713e410da2036f1f4cf37e6ea20e84:experiments/cognition002/PREREGISTRATION.md > /tmp/cognition002-original.md
+          cmp /tmp/cognition002-original.md experiments/cognition002/PREREGISTRATION.md
+          test "$(git -C sources/ghot rev-parse HEAD)" = "9748a0772c4a13135421c4fa84a9991e0a51e05f"
+          test "$(git -C sources/free-graph rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
+          test -f experiments/003/affordance.py
+          test -f sources/free-graph/scripts/fg_core.py
+      - name: Run source/cut/authority and resource-budget falsifiers
+        run: python -m unittest discover -s experiments/cognition002 -p 'test_*.py' -v
+      - name: Test genuine Free Graph contract and fail-closed owner boundary
+        run: python experiments/cognition002/bridge.py > cognition002-public-synthetic-demo.json
+      - name: Independently verify no private owner claim or graph promotion
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0,'sources/free-graph/scripts')
+          from fg_core import validate_packet
+          d=json.loads(pathlib.Path('cognition002-public-synthetic-demo.json').read_text())
+          assert d['status']=='RESEARCH_PROPOSAL_ONLY'
+          assert d['native_memento']['status']=='HOLD_NATIVE_MEMENTO_UNAVAILABLE'
+          assert not d['native_memento']['validated']
+          assert d['private_data_read'] is False
+          assert d['model_calls']==d['real_world_effects']==0
+          fg=d['free_graph']['graph']
+          assert validate_packet(fg)==[]
+          assert fg['task_world_cut']['status']=='unresolved'
+          assert len(fg['nodes'])==4 and len(fg['links'])==3
+          assert all(x['authority']=='none' and x['verb']=='connects'
+                     and x['status']=='unresolved' for x in fg['links'])
+          assert all(x['source_class']=='unresolved-receipt' for x in fg['sources'])
+          assert d['understory']['history_mutated'] is False
+          assert d['comparison']['successes_not_measured']
+          print('Authentic Free Graph acceptance; private owner explicit HOLD.')
+          PY
+      - name: Archive synthetic-only public evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition002-public-graph-and-private-hold-synthetic-receipts
+          path: cognition002-public-synthetic-demo.json
+          retention-days: 30
+          if-no-files-found: warn
