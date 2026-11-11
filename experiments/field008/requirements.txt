@@ -1,0 +1,3 @@
+# Inherited from FIELD-007; no server dependency for offline review
+numpy>=1.26,<3
+opencv-python-headless>=4.9,<5
