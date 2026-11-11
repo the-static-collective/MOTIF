@@ -311,7 +311,6 @@ def evaluate(seed: int, regime: str) -> dict:
         row.pop('answered_correct')
         row.pop('answered')
         row.pop('forecasts')
-        row.pop('alarms')
         output[name] = row
     output['fire004']['alerts'] = list(models['fire004'].alarm_steps)
     output['hedge']['alerts'] = list(models['hedge'].alarm_steps)
