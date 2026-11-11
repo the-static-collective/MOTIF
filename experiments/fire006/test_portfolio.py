@@ -94,8 +94,8 @@ class PriceTests(unittest.TestCase):
         w = make_world(95012, "steady")
         for step in range(LOOKBACK):
             c = w.view(step)
-            policy.forecast(step, (.54, .46, .50))
-            policy.update(c, VerifiedLabel(step, step % 4 == 0))
+            policy.forecast(step, (.505, .495, .500))
+            policy.update(c, VerifiedLabel(step, step < 7))
         self.assertGreater(policy.held_proposals, 0)
         self.assertEqual(policy.revisions, 0)
         self.assertEqual(policy.receipts[0].operation, "PRESERVE_PENCIL")
