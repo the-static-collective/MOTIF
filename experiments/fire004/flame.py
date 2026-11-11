@@ -277,7 +277,7 @@ def evaluate(seed: int, regime: str) -> dict:
     models = construct_models()
     store = {name: {'brier': 0., 'log_loss': 0., 'high_confidence_wrong': 0,
                     'answered': 0, 'answered_correct': 0,
-                    'forecasts': [], 'alarms': []} for name in (*POLICIES, 'oracle')}
+                    'forecasts': [], 'square_errors': []} for name in (*POLICIES, 'oracle')}
     for step in range(N_STEPS):
         case = w.view(step)
         predictions = {name: model.predict(case) for name, model in models.items()}
@@ -288,6 +288,7 @@ def evaluate(seed: int, regime: str) -> dict:
             row = store[name]
             p = clip(prob)
             row['brier'] += (p - actual) ** 2
+            row['square_errors'].append((p - actual) ** 2)
             row['log_loss'] -= log(p if actual else 1. - p)
             if max(p, 1. - p) >= .95 and (p >= .5) != receipt.actual:
                 row['high_confidence_wrong'] += 1
@@ -300,6 +301,9 @@ def evaluate(seed: int, regime: str) -> dict:
     output = {}
     for name, row in store.items():
         row['brier'] = round(row['brier'] / N_STEPS, 8)
+        row['early_post_shift_brier'] = round(sum(row['square_errors'][48:64]) / 16, 8)
+        row['late_post_shift_brier'] = round(sum(row['square_errors'][80:96]) / 16, 8)
+        row.pop('square_errors')
         row['log_loss'] = round(row['log_loss'] / N_STEPS, 8)
         row['coverage'] = round(row['answered'] / N_STEPS, 8)
         row['selective_accuracy'] = round(row['answered_correct'] / row['answered'], 8)                                     if row['answered'] else None
