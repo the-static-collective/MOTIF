@@ -1,0 +1,19 @@
+{
+  "status": "DEVELOPMENT_IDEAS_ONLY; NO_EXTERNAL_BENCHMARK_TASKS_COPIED",
+  "cards": [
+    {"id":"C01", "reference":"osworld2", "problem":"Constraint arrives mid-workflow; rerun checks before committing an outcome.", "test":"Changed rule after query 1, old observation cannot silently remain current."},
+    {"id":"C02", "reference":"osworld2", "problem":"Hidden state is needed to proceed.", "test":"Select a discriminating authorized query rather than invent a state."},
+    {"id":"C03", "reference":"traverse_failure", "problem":"First error goes unnoticed through a long run.", "test":"Retain chronological action+observation receipts and detect first disagreement."},
+    {"id":"C04", "reference":"traverse_failure", "problem":"A passing final output hides damaging intermediate action.", "test":"Score unintended effects independently from end state."},
+    {"id":"C05", "reference":"aide2", "problem":"Proposed policy rewrite overfits the development benchmark.", "test":"Frozen external holdouts and rolling back when verified utility declines."},
+    {"id":"C06", "reference":"g2_distrust_tax", "problem":"More supervision costs more than saved work.", "test":"Count human decisions, queries, retries, time and false successes."},
+    {"id":"C07", "reference":"tau2", "problem":"Counterpart changes the shared state while agent decides.", "test":"Independent source revision reopens stale hypotheses."},
+    {"id":"C08", "reference":"webarena", "problem":"Agent mistakes intended button press for observed completion.", "test":"Separate attempted action from verified external state change."},
+    {"id":"C09", "reference":"alfworld", "problem":"Task fails because prerequisite is absent.", "test":"Do not declare impossibility until an allowed enabling action is considered."},
+    {"id":"C10", "reference":"behavior1k", "problem":"Action sequence completes but physical outcome does not.", "test":"Outcome verifier must attest gain, not merely action syntax."},
+    {"id":"C11", "reference":"movingai", "problem":"Blocked planned route forces update.", "test":"Compare native evidence preservation with strong A* and Dijkstra controls."},
+    {"id":"C12", "reference":"crafter", "problem":"Repeated no-effect action appears productive.", "test":"Detect feedback-free cycles and query missing preconditions."},
+    {"id":"C13", "reference":"atlas", "problem":"Two worlds look identical under an insufficient probe vocabulary.", "test":"Generate candidate new questions; validate against independently computed properties."},
+    {"id":"C14", "reference":"traverse_failure", "problem":"False source provenance causes a wrong confident answer.", "test":"Reject altered receipts; do not equate hashing with real-world source authentication."}
+  ]
+}
