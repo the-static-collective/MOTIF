@@ -216,6 +216,13 @@ class Portfolio:
         if not condition:
             if tv(self.weights, proposal) > 1e-9:
                 self.held_proposals += 1
+                self.receipts.append(RevisionReceipt(
+                    step=case.step, operation="PRESERVE_PENCIL",
+                    previous=self.weights, proposed=tuple(proposal),
+                    expected_eight_step_gain=round(expected, 9),
+                    quoted_price=round(price, 9),
+                    verification_count=len(self.history)
+                ))
             return
         if (self.policy == "fire006" and
                 case.step + TRIAL_WINDOW >= N_STEPS):
