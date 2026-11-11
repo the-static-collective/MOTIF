@@ -15,8 +15,8 @@ class HouseHistoryTests(unittest.TestCase):
         self.assertEqual(result["procedures_followed_yes"], 13)
         self.assertEqual(result["procedures_followed_no"], 10)
         self.assertEqual(result["intent_assessments"], 0)
-        self.assertEqual(result["full_rows"], 4)
-        self.assertEqual(result["partial_rows"], 19)
+        self.assertEqual(result["full_rows"], 5)
+        self.assertEqual(result["partial_rows"], 18)
 
     def test_chronology_does_not_establish_intentions(self):
         d = copy.deepcopy(DATA)
