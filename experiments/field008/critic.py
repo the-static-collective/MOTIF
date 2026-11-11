@@ -153,6 +153,11 @@ def next_probe(reviews, candidates):
 
 
 def overlay(sketch,packet:dict,report:dict,out_file:str|Path):
+    """Keep source marks visible. Green = individual *ink boxes*, not fences.
+
+    Unsupported model traces appear as spaced candidate dashes, deliberately
+    never as a drawn continuous completed boundary. Image remains unwarped.
+    """
     if isinstance(sketch,(str,Path)):
         img=cv2.imread(str(sketch),cv2.IMREAD_COLOR)
         if img is None:raise ValueError('Image not found')
@@ -161,15 +166,36 @@ def overlay(sketch,packet:dict,report:dict,out_file:str|Path):
         if img.ndim==2:img=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
     H,W=img.shape[:2]
     byid={x['claim_id']:x for x in report['reviews']}
+    known={c.id:c for c in extract_dashes(sketch)}
+
+    def draw_questioned_dashes(a,b,col):
+        vx=b[0]-a[0];vy=b[1]-a[1]
+        length=max(1,math.hypot(vx,vy))
+        step=max(9,round(min(W,H)*.02))
+        dash=max(3,round(step*.45))
+        for j in range(0,int(length),step):
+            t=j/length;s=min(1,(j+dash)/length)
+            p1=(round(a[0]+vx*t),round(a[1]+vy*t))
+            p2=(round(a[0]+vx*s),round(a[1]+vy*s))
+            cv2.line(img,p1,p2,col,2,cv2.LINE_AA)
     for c in report['claims']:
         pts=[(round(p[0]*W),round(p[1]*H)) for p in c['points']]
         rv=byid[c['id']]['verdict']
-        color=(10,150,10) if rv=='INK_COMPATIBLE_INTENT_UNVERIFIED' else (0,40,230)
-        if c['kind']=='HYPOTHETICAL_ROUTE':color=(180,90,150)
-        if len(pts)>=2:
-            for a,b in zip(pts,pts[1:]):cv2.line(img,a,b,color,2,cv2.LINE_AA)
+        good=rv=='INK_COMPATIBLE_INTENT_UNVERIFIED'
+        color=(10,145,10) if good else (0,50,230)
+        if c['kind']=='HYPOTHETICAL_ROUTE':color=(160,90,170)
+        if good:
+            for candidate_id in byid[c['id']]['matched_dash_ids']:
+                candidate=known.get(candidate_id)
+                if candidate:
+                    for x,y,w,h in candidate.pixel_boxes:
+                        cv2.rectangle(img,(x-2,y-2),(x+w+2,y+h+2),color,2)
+        elif len(pts)>=2:
+            for a,b in zip(pts,pts[1:]):draw_questioned_dashes(a,b,color)
         if pts:
             cv2.circle(img,pts[0],7,color,2,cv2.LINE_AA)
-            cv2.putText(img,c['id'][:16],(max(1,pts[0][0]-20),max(16,pts[0][1]-12)),cv2.FONT_HERSHEY_SIMPLEX,.52,color,2,cv2.LINE_AA)
+            label=('INK? ' if good else 'CHECK? ')+c['id'][:15]
+            cv2.putText(img,label,(max(1,pts[0][0]-20),max(16,pts[0][1]-12)),
+                        cv2.FONT_HERSHEY_SIMPLEX,.50,color,2,cv2.LINE_AA)
     cv2.imwrite(str(out_file),img)
     return str(out_file)
