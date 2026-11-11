@@ -1,0 +1,26 @@
+name: ORG-001 organizational delay diagnostic
+on:
+  push:
+    paths:
+      - 'experiments/org001/**'
+      - '.github/workflows/org001.yml'
+  pull_request:
+    paths:
+      - 'experiments/org001/**'
+      - '.github/workflows/org001.yml'
+jobs:
+  local-boundaries-and-counterfactuals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run ORG-001 unit tests
+        working-directory: experiments/org001
+        run: python -m unittest -v test_flow.py
+      - name: Reproduce synthetic scenario and HOLD-only handoff
+        working-directory: experiments/org001
+        run: |
+          python flow.py example.json > /tmp/org001.json
+          python -c "import json; x=json.load(open('/tmp/org001.json')); assert x['model']['baseline']['forecast_days']==9; assert all(c['state']=='HOLD' for c in x['local_handoff_drafts']); print('ORG-001 synthetic reproduction and HOLD: PASS')"
