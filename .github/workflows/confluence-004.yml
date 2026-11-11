@@ -1,0 +1,76 @@
+name: CONFLUENCE-004 The Second Door
+on:
+  push:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence003/**'
+      - 'experiments/confluence004/**'
+      - '.github/workflows/confluence-004.yml'
+  pull_request:
+    paths:
+      - 'experiments/confluence001/**'
+      - 'experiments/confluence003/**'
+      - 'experiments/confluence004/**'
+      - '.github/workflows/confluence-004.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-scope-no-go-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout MOTIF including native 003
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch exactly pinned independent external map source
+        uses: actions/checkout@v4
+        with:
+          repository: ovunctuzel/GridWorldPathfinding
+          ref: ffa02393942e649d4da82d5647d3159e7a7dd572
+          path: sources/gridbenchmark
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify external source pin and frozen protocol exists
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          sys.path.insert(0,'experiments/confluence003')
+          from source import verified_root
+          assert verified_root() == 'ffa02393942e649d4da82d5647d3159e7a7dd572'
+          assert Path('experiments/confluence004/PREREGISTRATION.md').is_file()
+          print('Exact published source pinned; preregistration committed.')
+          PY
+      - name: Execute source, consent, hazard, finite-proof and budget falsifiers
+        run: python -m unittest discover -s experiments/confluence004 -p 'test_*.py' -v
+      - name: Score all 28 independent-source-derived synthetic gate variants
+        run: python experiments/confluence004/second_door.py > confluence004-audit.json
+      - name: Exact optimal classical match, lawful HOLD gates and real no-route certificate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('confluence004-audit.json').read_text())
+          assert x['cases']==28 and x['external_corridors']==4
+          assert x['authorized_simulated_goals']==12
+          assert x['scope_reopening_successes']==8
+          assert x['existing_alternate_routes']==4
+          assert x['source_confirmed_holds']==12
+          assert x['formally_scoped_no_route']==4
+          assert x['exact_classical_equal_cost_for_all_solutions']
+          assert x['external_actions']==0 and x['model_calls']==0
+          assert all(r['external_actions_executed']==0 for r in x['rows'])
+          print('All 28 task-scoped results certified. No classical superiority.')
+          PY
+      - name: Archive source-owned proof/route/hold receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: confluence004-second-door-audit
+          path: confluence004-audit.json
+          retention-days: 21
