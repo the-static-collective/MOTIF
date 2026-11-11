@@ -1,0 +1,25 @@
+{
+  "title":"Temporary workshop sorting zone (invented)",
+  "sketch_source":"paper",
+  "sources":[
+    {"id":"paper","kind":"SYNTHETIC","description":"Author-created two-zone paper sketch","private":false},
+    {"id":"photo-a","kind":"SYNTHETIC","description":"Invented image record: two portable racks","private":false},
+    {"id":"photo-b","kind":"SYNTHETIC","description":"Invented image record: wall and containers","private":false}
+  ],
+  "landmarks":[
+    {"id":"entry","label":"Entry","sketch_xy":[0.15,0.7],"evidence":["paper"]},
+    {"id":"shelf","label":"Existing shelf","sketch_xy":[0.73,0.23],"evidence":["paper","photo-a"]},
+    {"id":"wall","label":"Wall","sketch_xy":[0.83,0.6],"evidence":["paper","photo-b"]},
+    {"id":"rack","label":"Portable racks","sketch_xy":null,"evidence":["photo-a"],"status":"TENTATIVE"}
+  ],
+  "claims":[
+    {"id":"c1","source":"photo-a","text":"Two rack-like frames are present","linked_landmarks":["rack"],"status":"TENTATIVE"},
+    {"id":"c2","source":"photo-b","text":"Containers in a second view","linked_landmarks":[],"status":"TENTATIVE"}
+  ],
+  "traces":[
+    {"id":"old","source":"paper","kind":"CURRENT","points":[[0.2,0.4],[0.8,0.4]],"status":"TENTATIVE","note":"Authored sketch trace"},
+    {"id":"wanted","source":"paper","kind":"DESIRED","points":[[0.1,0.6],[0.8,0.6]],"status":"USER_STATED","note":"Authored desired arrangement"}
+  ],
+  "user_rules":[["Goal","Find a better boundary for sorting"],["Mobility","Rack mobility is not yet verified"]],
+  "unresolved":["Exact rack dimensions","Wall mounting permission"]
+}

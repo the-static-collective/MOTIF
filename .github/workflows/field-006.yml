@@ -1,0 +1,27 @@
+name: FIELD-006 source-registered visual evidence
+on:
+  push:
+    paths:
+      - "experiments/field006/**"
+      - ".github/workflows/field-006.yml"
+  pull_request:
+    paths:
+      - "experiments/field006/**"
+      - ".github/workflows/field-006.yml"
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run source-integrity and negative-control tests
+        working-directory: experiments/field006
+        run: python -m unittest discover -v
+      - name: Run authored benchmark (not blind VLM evaluation)
+        working-directory: experiments/field006
+        run: python benchmark.py
