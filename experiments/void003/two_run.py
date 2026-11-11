@@ -122,6 +122,8 @@ def game_episode(seed,scout_policy=None,followup_memory=None,stage="scout"):
              "before_target_resource":int(inv_before.get("wood" if "wood" in goal else "drink",0)),
              "after_target_resource":int(inv_after.get("wood" if "wood" in goal else "drink",0)),
              "verified_goal_outcome":witness,"changed_in_engine":changed,
+             "collect_drink_achievement_before":int(ach_before.get("collect_drink",0)),
+             "collect_drink_achievement_after":int(ach_after.get("collect_drink",0)),
              "game_reward":float(rew),"terminal":bool(done),
              "historical_hint_was_only_conditional":bool(memory_hint),
              "source_is_synthetic":False}
@@ -216,6 +218,12 @@ def benchmark():
             "model_calls":0,"paid_services":0,
             "source_code_untouched":True,"real_world_actions":0,
             "case_count":len(cases),"episode_count":5*len(cases),
+            "drink_achievement_without_inventory_gain":sum(
+                int(a["goal"]=="game_drink_obtained" and
+                    a["collect_drink_achievement_after"]>a["collect_drink_achievement_before"] and
+                    a["verified_goal_outcome"]=="GOAL_NOT_YET_WITNESSED")
+                for case in cases for part in ("scouts","followups")
+                for run in case[part].values() for a in run["action_receipts"]),
             "total_game_steps":sum(sum(r["actions"] for r in c["scouts"].values())+
                                     sum(r["actions"] for r in c["followups"].values()) for c in cases),
             "results":groups,"cases":cases,
