@@ -1,0 +1,69 @@
+{
+  "goal": "Make a low-cost, supervised visual boundary for dogs from materials already on site.",
+  "observations": [
+    {
+      "id": "s:0",
+      "kind": "GOAL_BOUNDARY",
+      "subject": "dog-zone boundary",
+      "status": "USER_REPORTED",
+      "source": "task:0",
+      "detail": "Wants an inexpensive boundary; not necessarily a permanent installed fence."
+    },
+    {
+      "id": "s:1",
+      "kind": "TARGET_ROUTE",
+      "subject": "dotted boundary lines",
+      "status": "SKETCH_LABELED",
+      "source": "sketch:0",
+      "detail": "Dotted marks appear on a rough site sketch; target interpretation is tentative until confirmed."
+    },
+    {
+      "id": "p:0",
+      "kind": "EXISTING_BARRIER",
+      "subject": "installed chain-link sections",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:0",
+      "detail": "Segments present, movement/continuity/anchoring unknown."
+    },
+    {
+      "id": "p:1",
+      "kind": "RIGID_PANEL",
+      "subject": "wire panels from discarded cages",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:1",
+      "detail": "Several rectangular pieces; exact widths and exposed wire ends unknown."
+    },
+    {
+      "id": "p:2",
+      "kind": "ANCHOR_CANDIDATE",
+      "subject": "large outdoor frame",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:2",
+      "detail": "Potential alignment aid; load capacity unknown."
+    },
+    {
+      "id": "p:3",
+      "kind": "STRUCTURE",
+      "subject": "buildings and existing posts",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:3",
+      "detail": "Visible endpoints are not automatically sound anchors."
+    },
+    {
+      "id": "p:4",
+      "kind": "FLEXIBLE_MESH",
+      "subject": "loose net material",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:4",
+      "detail": "Entanglement concern."
+    },
+    {
+      "id": "p:5",
+      "kind": "ACCESS_ROUTE",
+      "subject": "yard access and hard surface",
+      "status": "PHOTO_OBSERVED",
+      "source": "photo:5",
+      "detail": "Function of route and relationship to driveway unknown."
+    }
+  ]
+}
