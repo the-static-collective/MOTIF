@@ -1,0 +1,29 @@
+name: FIELD-004 autonomous reframe research checks
+
+on:
+  pull_request:
+    paths:
+      - "experiments/field004/**"
+      - ".github/workflows/field-004.yml"
+  push:
+    paths:
+      - "experiments/field004/**"
+      - ".github/workflows/field-004.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run all isolated tests (no paid inference)
+        working-directory: experiments/field004
+        run: python -m unittest discover -v
+      - name: Produce a source-grounded synthetic receipt
+        working-directory: experiments/field004
+        run: python run.py --packet fixtures/anonymous_visual_packet.json > /tmp/field004.json
