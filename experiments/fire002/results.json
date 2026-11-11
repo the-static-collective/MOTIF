@@ -1,0 +1,241 @@
+{
+  "experiment": "FIRE-002",
+  "regimes": {
+    "correlated": {
+      "paired_online_minus_classical_ratio": {
+        "approx_95pct_interval": [
+          -0.07644,
+          0.44644
+        ],
+        "difference": 0.185
+      },
+      "paired_online_minus_fire001": {
+        "approx_95pct_interval": [
+          0.18701,
+          0.68299
+        ],
+        "difference": 0.435
+      },
+      "paired_online_minus_frozen": {
+        "approx_95pct_interval": [
+          -0.22367,
+          -0.00633
+        ],
+        "difference": -0.115
+      },
+      "summaries": {
+        "fire001": {
+          "certified_questions": 2.895,
+          "failed_verifications": 0.79,
+          "learning_events": 0,
+          "questions_unlocked": 6.395,
+          "steps": 20.735,
+          "verified_value": 12.65
+        },
+        "information": {
+          "certified_questions": 2.81,
+          "failed_verifications": 0.745,
+          "learning_events": 0,
+          "questions_unlocked": 6.13,
+          "steps": 21.075,
+          "verified_value": 12.52
+        },
+        "productive_frozen": {
+          "certified_questions": 2.915,
+          "failed_verifications": 0.75,
+          "learning_events": 0,
+          "questions_unlocked": 6.28,
+          "steps": 20.805,
+          "verified_value": 13.2
+        },
+        "productive_online": {
+          "certified_questions": 2.895,
+          "failed_verifications": 0.755,
+          "learning_events": 3.65,
+          "questions_unlocked": 6.28,
+          "steps": 20.805,
+          "verified_value": 13.085
+        },
+        "ratio": {
+          "certified_questions": 2.855,
+          "failed_verifications": 0.76,
+          "learning_events": 0,
+          "questions_unlocked": 6.155,
+          "steps": 20.68,
+          "verified_value": 12.9
+        },
+        "value": {
+          "certified_questions": 2.82,
+          "failed_verifications": 0.77,
+          "learning_events": 0,
+          "questions_unlocked": 6.145,
+          "steps": 20.88,
+          "verified_value": 12.875
+        }
+      }
+    },
+    "drift": {
+      "paired_online_minus_classical_ratio": {
+        "approx_95pct_interval": [
+          -0.2944,
+          0.3144
+        ],
+        "difference": 0.01
+      },
+      "paired_online_minus_fire001": {
+        "approx_95pct_interval": [
+          0.03158,
+          0.51842
+        ],
+        "difference": 0.275
+      },
+      "paired_online_minus_frozen": {
+        "approx_95pct_interval": [
+          -0.05558,
+          0.05558
+        ],
+        "difference": 0
+      },
+      "summaries": {
+        "fire001": {
+          "certified_questions": 3.105,
+          "failed_verifications": 0.665,
+          "learning_events": 0,
+          "questions_unlocked": 6.82,
+          "steps": 21.055,
+          "verified_value": 13.525
+        },
+        "information": {
+          "certified_questions": 2.945,
+          "failed_verifications": 0.65,
+          "learning_events": 0,
+          "questions_unlocked": 6.46,
+          "steps": 21.36,
+          "verified_value": 13.25
+        },
+        "productive_frozen": {
+          "certified_questions": 3.02,
+          "failed_verifications": 0.705,
+          "learning_events": 0,
+          "questions_unlocked": 6.6,
+          "steps": 21.055,
+          "verified_value": 13.8
+        },
+        "productive_online": {
+          "certified_questions": 3.03,
+          "failed_verifications": 0.7,
+          "learning_events": 3.73,
+          "questions_unlocked": 6.605,
+          "steps": 21.06,
+          "verified_value": 13.8
+        },
+        "ratio": {
+          "certified_questions": 3.03,
+          "failed_verifications": 0.66,
+          "learning_events": 0,
+          "questions_unlocked": 6.49,
+          "steps": 21.035,
+          "verified_value": 13.79
+        },
+        "value": {
+          "certified_questions": 3.025,
+          "failed_verifications": 0.625,
+          "learning_events": 0,
+          "questions_unlocked": 6.485,
+          "steps": 21.175,
+          "verified_value": 13.905
+        }
+      }
+    },
+    "steady": {
+      "paired_online_minus_classical_ratio": {
+        "approx_95pct_interval": [
+          -0.17768,
+          0.29768
+        ],
+        "difference": 0.06
+      },
+      "paired_online_minus_fire001": {
+        "approx_95pct_interval": [
+          0.1209,
+          0.5891
+        ],
+        "difference": 0.355
+      },
+      "paired_online_minus_frozen": {
+        "approx_95pct_interval": [
+          -0.05391,
+          0.03391
+        ],
+        "difference": -0.01
+      },
+      "summaries": {
+        "fire001": {
+          "certified_questions": 3.38,
+          "failed_verifications": 0.365,
+          "learning_events": 0,
+          "questions_unlocked": 6.725,
+          "steps": 20.91,
+          "verified_value": 14.88
+        },
+        "information": {
+          "certified_questions": 3.22,
+          "failed_verifications": 0.36,
+          "learning_events": 0,
+          "questions_unlocked": 6.385,
+          "steps": 21.245,
+          "verified_value": 14.52
+        },
+        "productive_frozen": {
+          "certified_questions": 3.315,
+          "failed_verifications": 0.39,
+          "learning_events": 0,
+          "questions_unlocked": 6.52,
+          "steps": 20.935,
+          "verified_value": 15.245
+        },
+        "productive_online": {
+          "certified_questions": 3.32,
+          "failed_verifications": 0.39,
+          "learning_events": 3.71,
+          "questions_unlocked": 6.52,
+          "steps": 20.935,
+          "verified_value": 15.235
+        },
+        "ratio": {
+          "certified_questions": 3.32,
+          "failed_verifications": 0.35,
+          "learning_events": 0,
+          "questions_unlocked": 6.415,
+          "steps": 20.915,
+          "verified_value": 15.175
+        },
+        "value": {
+          "certified_questions": 3.29,
+          "failed_verifications": 0.34,
+          "learning_events": 0,
+          "questions_unlocked": 6.405,
+          "steps": 21.055,
+          "verified_value": 15.185
+        }
+      }
+    }
+  },
+  "scope": "synthetic only",
+  "selected_spark_weight": 1,
+  "test_seed_range": [
+    42000,
+    42199
+  ],
+  "train_seed_range": [
+    6100,
+    6179
+  ],
+  "training_score_by_weight": {
+    "0.0": 14.8375,
+    "0.5": 15.375,
+    "1.0": 15.4625,
+    "2.0": 15.125,
+    "4.0": 14.9
+  }
+}
