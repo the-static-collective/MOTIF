@@ -199,11 +199,12 @@ def evaluate(model,adapter,split):
         f=graph_features(tool=tool,permission=permission,action=action)
         logit=full(model,tokens,ctx,action,f,adapter)["logit"]
         results.append((int(logit>=0)==y,logit,y))
+    losses=[]
+    for _,v,y in results:
+        prob=sigmoid(v)
+        losses.append(-__import__('math').log(max(prob if y else 1-prob,1e-10)))
     return {"accuracy":sum(x[0] for x in results)/len(results),
-            "loss":sum((-__import__('math').log(max(sigmoid(v),1e-10))) if y==1
-                        else -__import__('math').log(max(1-sigmoid(v),1e-10)))
-                       for _,v,y in results)/len(results),
-            "n":len(results)}
+            "loss":sum(losses)/len(losses),"n":len(results)}
 
 def train(model,adapter,epochs=80,lr=.11):
     if epochs<1 or epochs>400:raise ValueError("BAD_EPOCHS")
