@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {valid,available,imagined,search,rank,compile,gate,ownerTest,field014Aperture,keyOf} from './loom.mjs';
+import {valid,available,imagined,search,rank,compile,gate,ownerTest,field014Aperture,keyOf,counterfactualImpact} from './loom.mjs';
 
 const field = () => ({
  schema:'motif.llm001.world.v0',id:'field014-fixture',
@@ -145,4 +145,17 @@ test('conditional reference is still not a construction permit',()=>{
  const a=field014Aperture({schema:'motif.field014.v1',events:[{type:'height'}],scale:{kind:'conditional_reference',meters_per_unit:1.2}});
  assert(a.measured_reference);assert(!a.physical_load_certified);
  assert.throws(()=>field014Aperture({schema:'fake',events:[],scale:{kind:'diagram_only'}}),/NOT_FIELD014/);
+});
+
+test('counterfactual impact is real two-step graph difference, not topical word count',()=>{
+ const w=field();
+ const diagram=w.evidence.find(e=>e.id==='sketch'),weight=w.evidence.find(e=>e.id==='strength');
+ assert(counterfactualImpact(w,diagram)>counterfactualImpact(w,weight));
+ assert.equal(counterfactualImpact(w,weight),0);
+ assert(compile(w).packet.witnesses.some(e=>e.counterfactual_action_impact>0));
+});
+test('tentative assumed information never silently becomes observed in counterfactual',()=>{
+ const w=field();w.evidence.push({id:'assumption',root:'author-guess',kind:'assumed',fact:'future_part'});
+ assert.doesNotThrow(()=>compile(w));
+ assert(!w.facts.includes('future_part'));
 });
