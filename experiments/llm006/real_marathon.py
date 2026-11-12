@@ -68,6 +68,7 @@ class RealSmolLMPolicy:
         if mode not in REAL_MODEL_POLICIES:raise ValueError("UNKNOWN_REAL_LLM_ARM")
         if model is None or tokenizer is None:raise ValueError("ACTUAL_PRETRAINED_WEIGHTS_REQUIRED")
         self.model=model;self.tokenizer=tokenizer;self.mode=mode
+        self.is_real_pretrained=True  # actual weights supplied from pinned load()
         self.forwards=0;self.tokens=0;self.seconds=0.;self.records=[]
         ids=[tokenizer.encode(str(i),add_special_tokens=False) for i in (0,1)]
         if any(len(x)!=1 for x in ids):raise ValueError("INVALID_PRETRAINED_DIGIT_TOKENS")
@@ -111,6 +112,8 @@ class RealSmolLMPolicy:
 
 def audit_real_marathon(marathon:Marathon,model_policy:RealSmolLMPolicy):
     """Independent integrity audit after running the same owner-gated chain."""
+    if model_policy.is_real_pretrained is not True or not marathon.summary()["real_llm"]:
+        raise ValueError("MISSING_ACTUAL_PRETRAINED_RECEIPT")
     record=marathon.public_record()
     events=record["global_events"]
     source_events=[e for e in events if e["kind"]=="odyssey_action"]
