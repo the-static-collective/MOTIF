@@ -166,6 +166,41 @@ class ReasonHypermap:
              favored,prior,rationale)
         self.active={"proposal":p,"test":test,"prediction":predicted_node,"policy":policy}
         return p
+    def propose_query(self,x,rationale="ordered-long-horizon-checkpoint"):
+        """Propose a particular public fixture input required by a downstream gate.
+
+        Different from choose_test(): the *workflow* determines which input
+        must be adjudicated. The policy still cannot see owner truth.
+        This proposal cannot be executed without resolve() and its source.
+        """
+        if self.active is not None:raise ValueError("ONE_OUTSTANDING_TEST")
+        if len(self.events)>=MAX_EVENTS:raise ValueError("EVENT_LIMIT")
+        if x not in INPUTS or x==self.initial_x or x in self.queries:
+            raise ValueError("INVALID_OR_REPEATED_QUERY")
+        if not isinstance(rationale,str) or not rationale or len(rationale)>100:
+            raise ValueError("BAD_RATIONALE")
+        favored=favorite(self.weights)
+        predicted=outputs(favored,x)
+        prior=self.state_id()
+        predicted_node=self._node("prediction",
+            f"PENCIL: H{favored} predicts {predicted} for {x}",
+            "proposed",[self._model_source],
+            {"world":self.seed,"x":list(x),"answer":predicted,
+             "favorite":favored,"not_verified":True})
+        test=self._node("test",f"Fictional ordered gate probe {x}",
+            "proposed",[self._model_source],
+            {"x":list(x),"policy":rationale})
+        self._edge("proposes-test",
+            [self.hypotheses[favored],predicted_node],[test],
+            [self._model_source],"proposed",
+            {"lens":"causal","not_an_action":True})
+        p=ProposedTest(numbered("hmp",{"step":len(self.events),
+            "state":prior,"x":x,"predicted":predicted,"policy":rationale}),
+            len(self.events),x,predicted,favored,prior,rationale)
+        self.active={"proposal":p,"test":test,"prediction":predicted_node,
+                     "policy":rationale}
+        return p
+
     def imagined_outcomes(self,proposal):
         if self.active is None or proposal!=self.active["proposal"]:
             raise ValueError("PROPOSAL_NOT_ACTIVE")
