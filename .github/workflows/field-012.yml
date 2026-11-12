@@ -1,0 +1,34 @@
+name: FIELD-012 material photo-to-board research checks
+on:
+  push:
+    paths:
+      - 'experiments/field010/**'
+      - 'experiments/field012/**'
+      - '.github/workflows/field-012.yml'
+  pull_request:
+    paths:
+      - 'experiments/field010/**'
+      - 'experiments/field012/**'
+      - '.github/workflows/field-012.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing FIELD-010 core regressions
+        working-directory: experiments/field010
+        run: node test_core.js
+      - name: Source-scoped materials and visual interaction regressions
+        working-directory: experiments/field012
+        run: |
+          node test_material.js
+          python -m unittest -v test_local_vlm.py

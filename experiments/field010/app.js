@@ -9,6 +9,8 @@
   let solverData = null, interfaceData = null, latest = 0;
   let sketchFile = null, sketchDigest = null, lastDraft = null, uploadVersion = 0;
   const AUTODRAFT = window.MOTIF011;
+  const MATERIAL = window.MOTIF012;
+  let activePhoto=null, photoRegion=null, regionStart=null, ghost=null, materialTicket=0;
   function dataDigest(bytes){
     if(typeof crypto!=='undefined'&&crypto.subtle)return crypto.subtle.digest('SHA-256',bytes).then(data=>Array.from(new Uint8Array(data),x=>x.toString(16).padStart(2,'0')).join(''));
     return Promise.resolve(AUTODRAFT.sha256Bytes(new Uint8Array(bytes)));
@@ -99,6 +101,14 @@
           'stroke-width':3,'data-id':i.id,'data-act':'endpoint','data-index':idx,'class':'endpoint'})));}
       }
     });
+    if(ghost){
+      const pts=ghost.points.map(ptPixels),isNode=ghost.kind==='support';
+      if(isNode){const [x,y]=pts[0];add(draft,newElt('circle',{cx:x,cy:y,r:19,fill:'#e5c77e', 'fill-opacity':'.12',stroke:'#e5c77e','stroke-width':4,'stroke-dasharray':'5 4'}));}
+      else {const [[x1,y1],[x2,y2]]=pts;
+        add(draft,newElt('line',{x1,y1,x2,y2,stroke:'#f3bd70','stroke-width':13,'stroke-opacity':'.78','stroke-dasharray':'12 7','pointer-events':'none'}));}
+      const [x,y]=pts[0];const gt=add(draft,newElt('text',{x:x+13,y:y-17,fill:'#ffe2a7','font-size':16,'paint-order':'stroke',stroke:'#132430','stroke-width':3}));
+      gt.textContent='WHAT IF? Unscaled candidate · no physical fit';
+    }
     if(pending){const [x,y]=ptPixels(pending);add(draft,newElt('circle',{cx:x,cy:y,r:8,fill:'#d7e57f'}));
       const text=add(draft,newElt('text',{x:x+15,y:y-12,fill:'#e9f8d7','font-size':17}));text.textContent='Choose second endpoint';}
   }
@@ -244,6 +254,7 @@
     byId('solverState').textContent=`v${v.version}`;
   }
   function actionHandler(toolName){
+    if(toolName==='photo-region'||toolName==='material-preview'){byId('objectPhotoCanvas').scrollIntoView({block:'center',behavior:'smooth'});notify('Tag a visible object in the photograph, or preview a material beside an intended route.');return;}
     if(toolName==='proportions'){byId('proportional').focus();byId('proportional').scrollIntoView({block:'center',behavior:'smooth'});return;}
     if(toolName==='measure'){
       const first=state.items.find(i=>i.points.length===2);
@@ -262,7 +273,7 @@
     else {host.textContent=state.proportional?'No independently entered measured span; geometry remains unscaled.':'Drawn proportions only. The sketch is not asserted to be at physical scale.';host.className='note warn';}
   }
   function render(){state=M.replay(project);if(selected && !state.items.some(i=>i.id===selected))selected=null;
-    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();renderDraftReview();updateSummary();}
+    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();renderDraftReview();renderMaterials();updateSummary();}
   const workers=[];
   function makeWorker(fn){
     const source=`const span=${M.span.toString()};const compute=${fn.toString()};onmessage=e=>{try{postMessage({version:e.data.version,value:compute(e.data.state)})}catch(err){postMessage({version:e.data.version,error:String(err)})}};`;
@@ -314,17 +325,146 @@
     }
     const reader=new FileReader();reader.onload=()=>{
       project.base.source='user_sketch';project.base.items=[];project.events=[];selected=null;seq=1;
-      project.base.sketch_name=file.name;sketchFile=file;sketchDigest=null;lastDraft=null;uploadVersion++;
+      project.base.sketch_name=file.name;sketchFile=file;sketchDigest=null;lastDraft=null;ghost=null;uploadVersion++;
       loadSketch(String(reader.result));state=M.replay(project);recompute();render();
       notify('Sketch loaded locally. Inspecting pixels and proposing editable tentative marks.');
       runAutoDraft();
     };reader.readAsDataURL(file);
   });
+  function photoCanvasPos(e){
+    const s=byId('objectPhotoCanvas'), pt=s.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+    const m=s.getScreenCTM();if(!m)return null;const xy=pt.matrixTransform(m.inverse());
+    const vb=s.viewBox.baseVal;return [Math.max(0,Math.min(1,xy.x/vb.width)),Math.max(0,Math.min(1,xy.y/vb.height))];
+  }
+  function regionBox(a,b){return [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[0],b[0]),Math.max(a[1],b[1])].map(round);}
+  function svgBox(elt,bbox){const vb=byId('objectPhotoCanvas').viewBox.baseVal;
+    elt.setAttribute('x',bbox[0]*vb.width);elt.setAttribute('y',bbox[1]*vb.height);
+    elt.setAttribute('width',(bbox[2]-bbox[0])*vb.width);elt.setAttribute('height',(bbox[3]-bbox[1])*vb.height);
+  }
+  async function selectPhoto(p){
+    const ticket=++materialTicket;activePhoto=p;photoRegion=null;regionStart=null;
+    if(!p.digest){try{p.digest=await shaDataURL(p.url);}catch(err){notify('Photo hash failed: '+err.message);return;}}
+    if(ticket!==materialTicket)return;
+    const im=new Image();im.src=p.url;
+    try{await im.decode();}catch(err){notify('Photo decoding failed.');return;}
+    if(ticket!==materialTicket)return;
+    p.id ||= 'photo-'+photos.indexOf(p);p.w=im.naturalWidth;p.h=im.naturalHeight;
+    byId('objectPhotoCanvas').setAttribute('viewBox',`0 0 ${p.w} ${p.h}`);
+    for(const a of ['x','y'])byId('objectPhotoImage').setAttribute(a,'0');
+    byId('objectPhotoImage').setAttribute('width',p.w);byId('objectPhotoImage').setAttribute('height',p.h);
+    byId('objectPhotoImage').setAttribute('href',p.url);
+    byId('photoViewer').src=p.url;byId('photoViewer').alt=p.name;
+    byId('photoNotice').textContent=`${p.name} — separate source. No automatic location on sketch.`;
+    byId('regionHint').textContent='Drag around an object directly on this photo. Bounds are PHOTO pixels, not yard coordinates.';
+    renderMaterials();
+  }
+  const photoBoard=byId('objectPhotoCanvas');
+  photoBoard.addEventListener('pointerdown',e=>{
+    if(!activePhoto?.digest)return;const pt=photoCanvasPos(e);if(!pt)return;
+    regionStart=pt;photoRegion=null;
+    photoBoard.setPointerCapture(e.pointerId);svgBox(byId('objectRegionDraft'),[pt[0],pt[1],pt[0],pt[1]]);e.preventDefault();
+  });
+  photoBoard.addEventListener('pointermove',e=>{
+    if(!regionStart)return;const pt=photoCanvasPos(e);if(pt)svgBox(byId('objectRegionDraft'),regionBox(regionStart,pt));
+  });
+  photoBoard.addEventListener('pointerup',e=>{
+    if(!regionStart)return;const pt=photoCanvasPos(e)||regionStart;
+    const box=regionBox(regionStart,pt);regionStart=null;
+    if(box[2]-box[0]<.025||box[3]-box[1]<.025){byId('regionHint').textContent='Select a larger region around a visible object.';photoRegion=null;return;}
+    photoRegion=box;svgBox(byId('objectRegionDraft'),box);
+    byId('regionHint').textContent=`Region selected (${Math.round((box[2]-box[0])*100)}% × ${Math.round((box[3]-box[1])*100)}% of this photo). Label or classify it; nothing placed on the yard.`;
+  });
+  photoBoard.addEventListener('pointercancel',()=>{regionStart=null;});
+  byId('addMaterialBtn').addEventListener('click',()=>{
+    if(!activePhoto?.digest||!photoRegion){notify('Select a photo and drag around one visible material first.');return;}
+    const role=byId('materialRole').value,label=byId('materialLabel').value.trim()||'Unidentified salvaged object';
+    const material={id:uid('material'),label,role,status:'tentative',mobility:'unknown',
+      source_frame:'photo_normalized',photo_id:activePhoto.id,photo_sha256:activePhoto.digest,bbox:photoRegion,
+      provenance:'HUMAN_REGION_TAG',registered_to_sketch:false,certified_safe:false,width:null};
+    try{MATERIAL.validateMaterial(material);}catch(err){notify('Object held: '+err.message);return;}
+    stamp({type:'material_add',material});photoRegion=null;svgBox(byId('objectRegionDraft'),[0,0,0,0]);
+  });
+  byId('materialImportBtn').addEventListener('click',()=>byId('materialImportFile').click());
+  byId('materialImportFile').addEventListener('change',async e=>{
+    const file=e.target.files?.[0];if(!file)return;
+    if(file.size>500000){notify('Model packet too large.');return;}
+    try{
+      const packet=JSON.parse(await file.text());
+      MATERIAL.validatePacket(packet,activePhoto?.id,activePhoto?.digest);
+      const existing=new Set(state.materials.map(m=>m.id));let n=0;
+      for(const m of packet.items){if(existing.has(m.id))continue;stamp({type:'material_add',material:m});n++;}
+      notify(`${n} tentative imported photo objects. They are unverified hypotheses, not yard placements.`);
+    }catch(err){notify('Vision candidates held: '+err.message);}
+  });
+  function renderPhotoRegions(){const host=byId('objectPhotoRegions');host.replaceChildren();
+    if(!activePhoto?.digest)return;
+    const vb=photoBoard.viewBox.baseVal;
+    state.materials.filter(m=>m.photo_sha256===activePhoto.digest&&m.photo_id===activePhoto.id).forEach(m=>{
+      const rect=add(host,newElt('rect',{x:m.bbox[0]*vb.width,y:m.bbox[1]*vb.height,
+        width:(m.bbox[2]-m.bbox[0])*vb.width,height:(m.bbox[3]-m.bbox[1])*vb.height,fill:'none',
+        stroke:m.status==='user_rejected'?'#d17c7a':m.status==='user_confirmed'?'#83e1ae':'#e7d687',
+        'stroke-width':Math.max(2,vb.width/280),'stroke-dasharray':m.status==='tentative'?'6 4':''}));
+      const t=add(host,newElt('text',{x:m.bbox[0]*vb.width,y:Math.max(17,m.bbox[1]*vb.height-5),
+        fill:'#edf2bf','font-size':Math.max(12,vb.width/70),'paint-order':'stroke',stroke:'#18303b','stroke-width':3}));
+      t.textContent=m.label.slice(0,30);
+    });
+  }
+  function previewMaterial(m,target){
+    try {ghost=MATERIAL.ghostPlacement(m,target);draw();notify('Hypothetical unscaled overlay. Click Place to record it as a tentative board object.');}
+    catch(err){notify(err.message);}
+  }
+  function placeMaterial(m,target){
+    try{
+      ghost=MATERIAL.ghostPlacement(m,target);
+      const item=MATERIAL.materialToBoardItem(ghost,m,uid('object'));
+      stamp({type:'add',item});selected=item.id;ghost=null;render();
+    }catch(err){notify('Candidate placement held: '+err.message);}
+  }
+  function renderMaterials(){
+    const host=byId('materials');if(!host)return;host.replaceChildren();
+    byId('materialCount').textContent=`${state.materials.length} objects`;
+    renderPhotoRegions();
+    const routes=state.items.filter(i=>i.kind==='desired'&&i.status!=='user_rejected');
+    const interactions=MATERIAL.nextInteractions(state.materials,state);
+    if(interactions.length){const node=tile('Next useful photo interaction',interactions[0].title,'Automatic option from uncertainty, not a proven information-gain optimum.');host.append(node);}
+    state.materials.forEach(m=>{
+      const card=tile(m.label,`${m.role.replaceAll('_',' ')} · ${m.mobility} · ${m.status}`,
+        `${m.provenance} / ${m.photo_id} · photo box only (not a yard position)`);
+      const s=dom('select',{class:'mini'});
+      for(const role of MATERIAL.ROLES){const o=dom('option',{value:role},role.replaceAll('_',' '));s.append(o);}
+      s.value=m.role;s.addEventListener('change',()=>stamp({type:'material_set',target:m.id,prop:'role',value:s.value}));card.append(s);
+      const actions=dom('div',{class:'row'});
+      for(const [name,prop,val] of [
+        ['Confirm description','status','user_confirmed'],['Reject','status','user_rejected'],
+        ['Movable','mobility','movable'],['Fixed','mobility','fixed']]){
+        const b=dom('button',{type:'button',class:'mini'},name);b.addEventListener('click',()=>stamp({type:'material_set',target:m.id,prop,value:val}));actions.append(b);
+      }
+      card.append(actions);
+      const input=dom('input',{type:'number',min:'.01',max:'1000',step:'.25',placeholder:'Width (optional)' });
+      input.value=m.width?.value||'';
+      const units=dom('select');for(const unit of ['ft','m','cm','in'])units.append(dom('option',{value:unit},unit));units.value=m.width?.unit||'ft';
+      const quality=dom('select');quality.append(dom('option',{value:'rough_guess'},'Approximate'),dom('option',{value:'user_measured'},'Measured'));quality.value=m.width?.quality||'rough_guess';
+      const b=dom('button',{class:'mini',type:'button'},'Save width');b.addEventListener('click',()=>{
+        const n=Number(input.value);if(!Number.isFinite(n)||n<=0||n>1000){notify('Enter a valid positive width.');return;}
+        stamp({type:'material_set',target:m.id,prop:'width',value:{value:n,unit:units.value,quality:quality.value}});
+      });
+      const measureRow=dom('div',{class:'row'});measureRow.append(input,units,quality,b);card.append(measureRow);
+      if(routes.length){
+        const chooser=dom('select',{class:'mini'});
+        routes.forEach(t=>chooser.append(dom('option',{value:t.id},t.label.slice(0,50))));
+        const preview=dom('button',{type:'button',class:'mini'},'Preview position');
+        const place=dom('button',{type:'button',class:'mini'},'Place tentative copy');
+        preview.addEventListener('click',()=>previewMaterial(m,routes.find(x=>x.id===chooser.value)));
+        place.addEventListener('click',()=>placeMaterial(m,routes.find(x=>x.id===chooser.value)));
+        const row=dom('div',{class:'row'});row.append(chooser,preview,place);card.append(row);
+      }else card.append(dom('p',{class:'micro'},'Trace a desired route to explore where a copy might go.'));
+      host.append(card);
+    });
+  }
   function displayPhotos(){const root=byId('photolist');root.replaceChildren();photos.forEach((p,idx)=>{
     const b=dom('button',{type:'button',title:p.name});const im=dom('img',{alt:'Photo '+(idx+1)+' thumbnail',src:p.url});b.append(im,dom('span',{class:'micro'},p.name.slice(0,13)));
-    b.addEventListener('click',()=>{byId('photoViewer').src=p.url;byId('photoViewer').alt=p.name;
-      byId('photoNotice').textContent=`${p.name} — separate photo witness; not registered to sketch coordinates.`;});root.append(b);
-  });}
+    b.addEventListener('click',()=>selectPhoto(p));root.append(b);
+  });if(photos.length&&!activePhoto)selectPhoto(photos[0]);}
   byId('photoUpload').addEventListener('change',e=>{Array.from(e.target.files||[]).slice(0,20).forEach(file=>{
     if(!/^image\/(png|jpeg|webp)$/.test(file.type)||file.size>15*1024*1024)return;
     const rd=new FileReader();rd.onload=()=>{photos.push({name:file.name,url:rd.result});displayPhotos();};rd.readAsDataURL(file);
@@ -361,5 +501,5 @@
     }catch(ex){notify('Preloaded draft held: '+ex.message);}})();
   }
   window.MOTIF010_DEBUG = {getProject:()=>D(project),getState:()=>D(state),getBranches:()=>D({solverData,interfaceData}),
-    apply:stamp, tool:setTool};
+    getObjectGhost:()=>D(ghost),apply:stamp, tool:setTool,previewMaterial,placeMaterial};
 })();

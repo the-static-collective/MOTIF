@@ -18,6 +18,23 @@
         i.points.length !== (i.kind === 'support' ? 1 : 2) || !i.points.every(goodPoint)) throw Error('Invalid object or coordinate');
     return i;
   }
+  function validMaterial(m){
+    if(!m || typeof m.id!=='string' || !/^material-[a-zA-Z0-9_-]{1,80}$/.test(m.id) ||
+       typeof m.label!=='string'||!m.label.trim()||m.label.length>120 ||
+       !['boundary_module','support_candidate','flexible_barrier','visual_cue','unknown'].includes(m.role) ||
+       !['tentative','user_confirmed','user_rejected'].includes(m.status) ||
+       !['unknown','movable','fixed'].includes(m.mobility) || m.source_frame!=='photo_normalized' ||
+       typeof m.photo_id!=='string'||!m.photo_id||m.photo_id.length>120 ||
+       !/^[a-f0-9]{64}$/.test(m.photo_sha256) ||
+       !['LOCAL_VLM_TENTATIVE','HUMAN_REGION_TAG'].includes(m.provenance) ||
+       !Array.isArray(m.bbox)||m.bbox.length!==4||!m.bbox.every(x=>finite(x)&&x>=0&&x<=1) ||
+       m.bbox[2]-m.bbox[0]<=.005 ||m.bbox[3]-m.bbox[1]<=.005 ||
+       m.registered_to_sketch!==false||m.certified_safe!==false ||
+       m.width!=null && (!finite(m.width.value)||m.width.value<=0||m.width.value>1000 ||
+           !['ft','m','cm','in'].includes(m.width.unit)||!['rough_guess','user_measured'].includes(m.width.quality)))
+      throw Error('Untrusted photo material or geometry');
+    return m;
+  }
   function replay(project) {
     if (!project || project.schema !== 'motif.field010.v1' || !project.base ||
         project.base.coordinate_frame !== 'sketch_normalized' ||
@@ -28,7 +45,7 @@
     const clone = x => JSON.parse(JSON.stringify(x));
     const items = {};
     project.base.items.forEach(i => { validItem(i); if (items[i.id]) throw Error('Duplicate object'); items[i.id] = clone(i); });
-    const measure = {}, relations = [];
+    const measure = {}, relations = [], materials = {};
     let proportional = false, tolerance = null;
     const suppressed = new Set(project.events.filter(e => e.type === 'revert').map(e => e.target_event));
     const seen = new Set();
@@ -55,6 +72,17 @@
           if (!i || i.points.length !== 2 || !finite(e.value) || e.value <= 0 || e.value > 1e7 ||
               !['ft','m'].includes(e.unit) || !['user_measured','rough_guess'].includes(e.quality)) throw Error('Invalid measurement');
           measure[e.target] = { value:e.value, unit:e.unit, quality:e.quality, event_id:e.id }; break;
+        case 'material_add':
+          validMaterial(e.material);
+          if(materials[e.material.id])throw Error('Material already recorded');
+          materials[e.material.id]=clone(e.material);break;
+        case 'material_set':
+          if(!materials[e.target] || !['label','role','status','mobility','width'].includes(e.prop))throw Error('Invalid material update');
+          materials[e.target][e.prop]=clone(e.value);
+          validMaterial(materials[e.target]);break;
+        case 'material_remove':
+          if(!materials[e.target])throw Error('Material not found');
+          delete materials[e.target];break;
         case 'ratio':
           if (!i || !items[e.other] || !finite(e.value) || e.value < .05 || e.value > 20) throw Error('Invalid relative ratio');
           relations.push({ target:e.target, other:e.other, ratio:e.value, event_id:e.id, status:'user_relation_not_measured' }); break;
@@ -67,7 +95,7 @@
     const alive = new Set(Object.keys(items));
     return {items:Object.values(items), measurements:Object.fromEntries(Object.entries(measure).filter(([k])=>alive.has(k))),
       relations:relations.filter(r=>alive.has(r.target)&&alive.has(r.other)), proportional,tolerance,
-      source:project.base.source, sketch_size:size, version:project.events.length};
+      materials:Object.values(materials), source:project.base.source, sketch_size:size, version:project.events.length};
   }
   function computeSolver(state) {
     // Keep no external references except `span`; sent into a dedicated Web Worker.
@@ -115,7 +143,24 @@
       if(m && m.quality==='user_measured')Object.assign(cue,{implied_nominal:Math.round(m.value*r.ratio*100)/100,
         unit:m.unit,status:'hypothesis from approximate relation and human-measured reference'});
       return cue;});
-    return {branch:'A',version:state.version,hypotheses,ratios,ratioCues,estimates,warnings,
+    const materialSuggestions=[];
+    for(const m of (state.materials||[])){
+      if(m.status==='user_rejected')continue;
+      if(m.role==='boundary_module' && desired.length) materialSuggestions.push({material:m.id,target:desired[0].id,
+        title:'Examine '+m.label+' as a candidate boundary section',
+        reason:'A photo-region role could be reassigned as a boundary module; dimensions and physical fitting remain unverified.',
+        status:'TENTATIVE_NOT_PHOTO_REGISTERED'});
+      if(m.role==='support_candidate' && desired.length) materialSuggestions.push({material:m.id,target:desired[0].id,
+        title:'Consider '+m.label+' as a candidate support',
+        reason:'Connecting separate modules might change support geometry; actual stability is UNKNOWN.',
+        status:'TENTATIVE_NOT_STRUCTURAL_PROOF'});
+      if(m.role==='flexible_barrier')warnings.push(m.label+' may present entanglement hazards; do not infer containment from a photo.');
+    }
+    if(materialSuggestions.length) hypotheses.push({id:'photo-objects',title:'Photo inventory creates new possible arrangements',
+      why:'Pictured objects are candidates for alternative roles and connector networks; photo bounding boxes do not provide map positions.',
+      evidence:materialSuggestions.slice(0,4).map(x=>x.material),
+      hold:'Review physical widths, mobility, sharp edges, anchors and dog safety before any construction.'});
+    return {branch:'A',version:state.version,hypotheses,materialSuggestions,ratios,ratioCues,estimates,warnings,
       verified_physical_assembly:false, photo_georegistered:false};
   }
   function computeInterface(state) {
@@ -138,10 +183,19 @@
         why:'Stability, snags and anchor movement remain unverified.'});
     if(!current.length) a.push({id:'current',title:'Trace existing fence segments',tool:'current',score:59,
       why:'Existing boundaries can become movable inventory.'});
+    const materials=(state.materials||[]).filter(m=>m.status!=='user_rejected');
+    if(!materials.length)a.push({id:'photo-material',title:'Mark useful objects directly on a photo',tool:'photo-region',score:80,
+      why:'Photographs may reveal reusable pieces; keep their coordinates separate from the yard sketch.'});
+    if(materials.some(m=>m.role==='unknown'))a.push({id:'material-role',title:'Identify a pictured object',tool:'photo-region',score:82,
+      why:'A useful role may be present without having to describe it in language.'});
+    if(materials.some(m=>m.mobility==='unknown'))a.push({id:'material-mobility',title:'Which pictured materials can move?',tool:'photo-region',score:75,
+      why:'Movable materials can support different counterfactual arrangements.'});
+    if(materials.length&&desired.length)a.push({id:'material-preview',title:'Try a hypothetical object placement',tool:'material-preview',score:78,
+      why:'Preview against a boundary without inventing physical fit or photo-to-map coordinates.'});
     a.sort((x,y)=>y.score-x.score);
     return {branch:'B',version:state.version,actions:a.slice(0,4),compulsory:false};
   }
-  const api={span,validItem,replay,computeSolver,computeInterface};
+  const api={span,validItem,validMaterial,replay,computeSolver,computeInterface};
   if (typeof module !== 'undefined' && module.exports) module.exports=api;
   root.MOTIF010=api;
 })(typeof window !== 'undefined'?window:globalThis);
