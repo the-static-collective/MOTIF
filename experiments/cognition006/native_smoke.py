@@ -166,8 +166,7 @@ def main():
                       "NATIVE_WORLD_EXECUTED_BASELINE_NOT_PROVEN")
     report["sha256"]=checksum(report)
     args.output.parent.mkdir(parents=True,exist_ok=True)
-    args.output.write_text(json.dumps(report,sort_keys=True,indent=2)+"
-")
+    args.output.write_text(json.dumps(report,sort_keys=True,indent=2)+"\n")
     if failure:
         raise SystemExit("Native upstream execution had errors; see saved report.")
 
