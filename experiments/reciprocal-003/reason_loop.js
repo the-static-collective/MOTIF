@@ -198,7 +198,28 @@
       transfer_exercise:"Before reading any future answer, predict which conclusion could change and what would *falsify* your preferred explanation.",
       not_measured_human_learning:true};
   }
-  const api={SCHEMA,CANDIDATE_SCHEMA,SOURCE_PIN,entropy,plurality,toGraph,previewOneMore,methodCandidate,lesson};
+  function authoredDemo(now){
+    check(Number.isInteger(now)&&now>0,"BAD_TIME");
+    const start=now-60000;
+    let s=M.addQuestion(M.empty(),{
+      title:"Why do two groups experience the same entrance differently?",
+      why:"Check whether one instruction works equally well across contexts.",
+      decision:"Decide whether to make separate introductory explanations for newcomers and makers.",
+      options:["The opening directions confuse me","The evidence instructions confuse me",
+        "Neither explanation confuses me"],
+      roles:["newcomer","maker"],priority:4,minRoots:3,maxRoots:12,
+      openAt:start,closeAt:start+7*86400000,seed:true
+    },start,"fixture_role_divergence");
+    for(let i=0;i<4;i++)for(const [r,choice,offset] of [
+      ["newcomer",0,0],["maker",1,1]]){
+      const root=r+"_fictional_"+i;
+      s=M.event(s,{id:"fixture_"+root,questionId:"fixture_role_divergence",
+        root,role:r,at:start+100+i*2+offset,kind:"ANSWER",
+        choice,method:"experience",note:"Author-designed report, not a human.",revises:null});
+    }
+    return s;
+  }
+  const api={SCHEMA,CANDIDATE_SCHEMA,SOURCE_PIN,entropy,plurality,toGraph,previewOneMore,methodCandidate,lesson,authoredDemo};
   if(typeof module==="object"&&module.exports)module.exports=api;
   else root.ReciprocalLoop=api;
 })(typeof window==="undefined"?globalThis:window);
