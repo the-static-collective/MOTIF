@@ -147,7 +147,7 @@
     for(const q of state.questions){
       const a=inspect(state,q.id,now);
       if(!["OPEN","NEED_OTHER_ROLE"].includes(a.status))continue;
-      const matching=q.roles.includes("anyone")||person.roles.includes("anyone")||
+      const matching=q.roles.includes("anyone")||
         q.roles.some(role=>person.roles.includes(role));
       if(!matching)continue;
       const e=effective(state,q.id);
