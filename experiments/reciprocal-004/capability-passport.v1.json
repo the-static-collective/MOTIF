@@ -1,0 +1,155 @@
+{
+  "schema": "motif.reciprocal-capability-passport/v1",
+  "edition": "RECIPROCAL-004-2026-11-12",
+  "owner": "the-static-collective/MOTIF",
+  "source": {
+    "branch": "experiment/reciprocal-004-ecosystem-crosswire-20261112",
+    "inheritedResearchHead": "4cd625daea43d48248a062d6c686cc42940f2f01",
+    "relativeFiles": [
+      "experiments/reciprocal-002/two_doors.js",
+      "experiments/reciprocal-003/reason_loop.js",
+      "experiments/reciprocal-003/lab.html"
+    ],
+    "deployed": false,
+    "mergedToMain": false,
+    "realHumanData": false
+  },
+  "capabilities": [
+    {
+      "id": "two-doors",
+      "kind": "local-offline-web-app",
+      "scope": "ask_or_volunteer_one_question",
+      "schema": "motif.reciprocal002/v1",
+      "runtimeAvailable": "on_explicit_local_file_open"
+    },
+    {
+      "id": "reason-field",
+      "kind": "source-scoped-graph",
+      "scope": "review_reported_claims_and_hypothetical_forks",
+      "schema": "motif.reciprocal003.reason-field/v0",
+      "runtimeAvailable": "local_fixture_only"
+    },
+    {
+      "id": "method-foundry",
+      "kind": "bounded-classical-experiment",
+      "scope": "role_conditioned_heldout_choice_prediction",
+      "schema": "motif.reciprocal003.method-candidate/v0",
+      "runtimeAvailable": "local_synthetic_fixture_only"
+    }
+  ],
+  "exchange": {
+    "schema": "motif.reciprocal-crosswire/v1",
+    "status": "PROPOSAL_ONLY",
+    "admissible": "PUBLIC_SYNTHETIC_FIXTURE_SUMMARY_ONLY",
+    "blocked": [
+      "raw_human_answers",
+      "pseudonyms",
+      "contact_details",
+      "unverified_independent_source_counts_as_truth",
+      "auto_cartridge_install",
+      "external_actions",
+      "third_party_notifications",
+      "shared_production_database",
+      "unsolicited_questions",
+      "cross_repo_write_authority",
+      "model_weight_change"
+    ],
+    "producedBy": "experiments/reciprocal-004/ecosystem-crosswire.mjs",
+    "reviewedReceiverRequired": true,
+    "humanActionRequired": true
+  },
+  "neighboringDoors": [
+    {
+      "repository": "the-static-collective/JAR-VIS",
+      "role": "human_front_door_and_source_reader",
+      "proposed": "read_only_pinned_passport",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/GRAFT",
+      "role": "donor_nursery",
+      "proposed": "held_candidate_index_only",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/free-graph",
+      "role": "portable_attributed_graph_packet",
+      "proposed": "validate_synthetic_fixture_packet_only",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/planZ",
+      "role": "reviewed_plans_and_alternative_gates",
+      "proposed": "review_only_pointer",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/MEMENTO",
+      "role": "observer_local_understory_residue",
+      "proposed": "source_event_locator_only",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/ALEX.2",
+      "role": "independent_external_research",
+      "proposed": "separate_sources_for_falsification",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/CANNON",
+      "role": "independent_admission_selection",
+      "proposed": "must_report_unknown_until_owner_review",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "role": "compute_and_resource_budget",
+      "proposed": "operator_reviewed_budget_only",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/webZ",
+      "role": "optional_discovery_surface",
+      "proposed": "no_public_link_before_host_verified",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/reLATTE",
+      "role": "sovereign_evidence_transport",
+      "proposed": "future_receiver_held_crossing",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/project0",
+      "role": "semantic_contracts",
+      "proposed": "cross_project_extension_review",
+      "crossed": false
+    },
+    {
+      "repository": "the-static-collective/tranchnode",
+      "role": "source_lineage",
+      "proposed": "no_rejection_loss_on_adapter",
+      "crossed": false
+    }
+  ],
+  "claims": {
+    "status": "TESTED_SYNTHETIC_RESEARCH_NOT_PRODUCTION",
+    "sourceRootsVerified": false,
+    "independentPersonsVerified": false,
+    "humanSkillImprovementVerified": false,
+    "generalizedAlgorithmDiscoveryVerified": false,
+    "strongClassicalOutperformanceVerified": false
+  },
+  "gate": {
+    "disposition": "HOLD_FOR_OWNER_REVIEW",
+    "request": "Review a public-only reciprocal reasoning donor contract; do not execute, send questions, or use human response data.",
+    "requires": [
+      "per_project_owner_review",
+      "exact_source_commit_pin",
+      "importer_schema_check",
+      "no_private_personal_data",
+      "independent_test_against_classical_baseline"
+    ],
+    "autoApproval": false
+  }
+}
