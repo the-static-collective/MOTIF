@@ -39,3 +39,18 @@ The artifacts contain **one author-designed eight-report toy fixture**, not a vo
 A cross-repo adopter must pin the source commit, validate the exact file/bytes and schema, independently decide what the source can contribute to its local purpose, and document what it cannot prove. An imported description is not permission to contact anyone or ask them questions. Raw human responses require their own privacy, consent, revocation and owner-governed transport design—this donor cannot be used for that.
 
 **Native GitHub Actions at the 004 implementation SHA `efb9fe46ebad1b0fc1da91bd7834b7c9fac00707` succeeded** after executing tests, actual producer, and original Free Graph validator. Following README changes remain documentation-only until a new exact-head CI run completes.
+
+## The wider public Git horizon
+
+The additional `public-git-horizon.v1.json` contains **86 individually observed public repository-name/default-branch pointers** discovered through the connected GitHub repository metadata reader on November 12, 2026. It explicitly excludes private repository entries, does not claim completeness, and contains no branch contents, issues, participant data, access tokens or implementation permissions.
+
+`repo-horizon.mjs` offers deterministic, query-triggered source *leads* across that partial public index without a network request:
+
+```bash
+node experiments/reciprocal-004/repo-horizon.mjs --query 'MOTIF'
+node experiments/reciprocal-004/repo-horizon.mjs --query 'free graph'
+```
+
+Every lead says `PENCIL_LEAD_NOT_INSPECTED` and asks whether the project-owned source really relates to the question. It does **not** claim that a repository implements the feature suggested by its name. Follow-up code/issue inspection and owner disposition remain separate explicit actions. Tests enforce a bounded, public-only inventory, source-address-only output and no contact details.
+
+**An indexed address is not a living integration.** The actual currently demonstrated technical junctions remain MOTIF's native Free Graph validation, JAR;VIS's independent pinned passport observation, and GRAFT's separately tested HELD native donor branch. No bulk autoediting or assumed cross-repository sovereignty.
