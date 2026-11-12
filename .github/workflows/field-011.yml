@@ -1,0 +1,40 @@
+name: FIELD-011 offline auto-draft to editable board
+on:
+  push:
+    paths:
+      - 'experiments/field011/**'
+      - 'experiments/field010/app.js'
+      - 'experiments/field010/index.html'
+      - '.github/workflows/field-011.yml'
+  pull_request:
+    paths:
+      - 'experiments/field011/**'
+      - 'experiments/field010/app.js'
+      - 'experiments/field010/index.html'
+      - '.github/workflows/field-011.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install FIELD-007 classical vision dependencies
+        run: python -m pip install -r experiments/field007/requirements.txt
+      - name: FIELD-011 source-bound draft tests
+        working-directory: experiments/field011
+        run: |
+          python -m unittest discover -v
+          node test_draft.js
+      - name: FIELD-010 regressions
+        working-directory: experiments/field010
+        run: |
+          python -m unittest discover -v
+          node test_core.js

@@ -18,13 +18,19 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
 </head>
 <body>
 <header>
- <div><h1>MOTIF <span style="color:#d7e57f">/ FIELD-010</span> — Shared Board</h1><small>Two reasoning branches. One editable visual evidence surface.</small></div>
+ <div><h1>MOTIF <span style="color:#d7e57f">/ FIELD-011</span> — Shared Board</h1><small>Sketch → tentative editable draft → two reasoning branches → your corrections.</small></div>
  <div class="row"><span class="tag">Local-only prototype · no network calls</span><button id="exportBtn" class="primary">Save board JSON</button><button id="svgBtn">Export annotated SVG</button></div>
 </header>
 <main>
  <div class="leftcol">
   <section class="card">
    <div class="head"><h2>Shared canvas</h2><div class="row"><label for="sketchUpload" class="small">Source sketch:</label><input id="sketchUpload" type="file" accept="image/jpeg,image/png,image/webp" style="max-width:210px;font-size:12px"></div></div>
+   <div class="tools" id="autoTools" aria-label="Source perception tools">
+     <button id="autoDraftBtn" class="primary">Auto-draft from sketch</button>
+     <button id="draftImportBtn">Import local vision draft</button>
+     <input id="draftImportFile" type="file" accept="application/json" hidden>
+     <span class="small">Tentative ink only — confirm or reject before treating it as intended geometry.</span>
+   </div>
    <div class="tools" id="tools" aria-label="Editing tools">
      <button data-tool="select" class="active">Select / move</button>
      <button data-tool="desired">+ Desired boundary</button><button data-tool="current">+ Existing fence</button>
@@ -50,6 +56,8 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
   <section class="card"><div class="head"><h2>Reference photographs</h2><label class="small">Add locally <input id="photoUpload" type="file" accept="image/png,image/jpeg,image/webp" multiple style="max-width:220px"></label></div><div class="body"><p class="small" style="margin:0">Photos remain separate witness views; no unverified photo pixel becomes a yard coordinate.</p><div id="photolist"></div><img id="photoViewer" alt="Selected reference photo"><p id="photoNotice" class="micro">Choose images from your device. They are not exported with board JSON.</p></div></section>
  </div>
  <div class="rightcol">
+  <section class="card"><div class="head"><h2>Auto-draft evidence review</h2><span id="draftCount" class="pill">No draft</span></div>
+    <div class="body"><p class="small">Suggestions are editable, not confirmed. Candidate lines are drawn between possible ink marks; no verified complete fence or actual physical scale is inferred.</p><div id="draftReview" class="tiles"></div></div></section>
   <section class="card"><div class="head"><h2>Object / measurement inspector</h2></div><div class="body" id="inspector"><p class="small">Select a segment to edit its label, mobility, status, and length. You can correct missing geometry directly on the canvas.</p></div></section>
   <section class="card"><div class="head"><h2>Ratio & uncertainty controls</h2></div><div class="body"><label class="check"><input id="proportional" type="checkbox"><span>Assume this sketch is roughly proportional</span></label><label class="field">Possible nonuniformity in sketch (assumed ±%)<input id="tolerance" type="number" min="0" max="85" step="5" value="40"></label><p class="small">A physical length remains unknown unless a human supplies a same-sketch measured reference. Even then, resulting ranges are conditional assumptions, not calibrated statistical confidence.</p><div id="scaleSummary" class="note warn">No physical scale. Drawn ratios only.</div><div class="separate"><div class="small"><strong>Measurable spans · blank until entered</strong></div><div id="measurementQueue" style="margin:7px 0 12px"></div></div><label class="field">Use a relational constraint (choose a segment)<select id="ratioTarget"><option value="">— select target —</option></select></label><div class="split"><label class="field">Relative to<select id="ratioOther"><option value="">— reference —</option></select></label><label class="field">Approximate multiplier<input id="ratioValue" type="number" min=".05" max="20" step=".25" value="2"></label></div><button id="ratioBtn" class="mini">Add ratio relation</button><div id="ratios" class="small" style="margin-top:8px"></div></div></section>
   <section class="card"><div class="head"><h2>Evidence & revision trail</h2><button id="importBtn" class="mini">Import board JSON</button><input type="file" id="importFile" accept="application/json" hidden></div><div class="body"><p class="small" style="margin:0">Every edit creates a named, replayable event. Undo appends a compensating event; it does not erase history.</p><p class="micro" id="editCount">0 edits</p></div><div class="events" id="events"></div><div class="body"><div class="note bad">Engineering HOLD: zip ties, loose mesh, chairs and trampoline parts are unverified supports. A visual boundary is not automatically safe pet containment.</div></div></section>
@@ -57,5 +65,6 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
 </main>
 <script src="core.js"></script>
 <script src="fixture.js"></script>
+<script src="../field011/draft.js"></script>
 <script src="app.js"></script>
 </body></html>

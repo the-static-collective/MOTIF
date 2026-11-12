@@ -1,0 +1,34 @@
+const assert=require('assert');
+const M=require('./draft.js');
+const digest='a'.repeat(64);
+function gray(w=800,h=420){
+ const v=new Uint8Array(w*h).fill(205);
+ for(let y=25;y<h;y+=25)for(let x=15;x<w-15;x++)v[y*w+x]=170;
+ for(let x=100;x<430;x+=42)for(let j=0;j<14;j++)for(let k=-1;k<=1;k++)v[(105+k)*w+x+j]=27;
+ for(let y=170;y<350;y+=32)for(let j=0;j<14;j++)for(let k=-1;k<=1;k++)v[(y+j)*w+630+k]=24;
+ return v;
+}
+const pkt=M.fromGray(gray(),800,420,digest);
+assert.equal(pkt.asserts_safety,false);
+assert.equal(pkt.asserts_complete_desired_boundary,false);
+assert.equal(pkt.photo_to_sketch_registration,'NOT_PERFORMED');
+assert(pkt.items.every(i=>i.status==='tentative'));
+assert(pkt.items.length>=1,'pixel draft should find at least a tentative axis cluster');
+assert(pkt.items.some(i=>i.evidence.axis==='H'),'should identify the horizontal segmented ink');
+M.validate(pkt,digest);
+assert.throws(()=>M.validate(pkt,'b'.repeat(64)));
+assert.throws(()=>M.validate({...pkt,asserts_physical_scale:true}));
+assert.throws(()=>M.validate({...pkt,items:[{...pkt.items[0],status:'user_confirmed'}]}));
+const project={schema:'motif.field010.v1',base:{source:'user_sketch',coordinate_frame:'sketch_normalized',sketch_size:[1000,450],items:[]},events:[]};
+const entries=M.toEvents(project,pkt,()=>`x${Math.random().toString(36).slice(2)}`);
+assert.equal(entries.length,pkt.items.length);
+assert(entries.every(e=>e.source==='LOCAL_VISION_DRAFT_NOT_OBSERVED_PHYSICAL_EVIDENCE'));
+project.events.push(...entries);
+assert.equal(M.toEvents(project,pkt).length,0,'double import should not duplicate proposals');
+assert.throws(()=>M.toEvents({...project,base:{...project.base,source:'synthetic'}},pkt));
+assert.deepEqual(M.fitPoint([0,0],900,900),[.275,0]);
+assert.deepEqual(M.fitPoint([1,1],900,900),[.725,1]);
+assert.equal(M.fromGray(new Uint8Array(800*400).fill(240),800,400,digest).items.length,0);
+const original=JSON.stringify(project);
+assert.equal(original,JSON.stringify(project),'import should not mutate inputs');
+console.log(`FIELD-011 browser pixel tests passed, ${pkt.items.length} tentative candidates`);
