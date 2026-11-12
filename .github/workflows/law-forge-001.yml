@@ -1,0 +1,39 @@
+name: MOTIF Law Forge 001 — finite scientific discovery trial
+
+on:
+  push:
+    branches:
+      - research/law-forge-001-20261105
+    paths:
+      - 'experiments/law-forge-001/**'
+      - '.github/workflows/law-forge-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/law-forge-001/**'
+      - '.github/workflows/law-forge-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  law-forge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run adversarial standard-library tests
+        run: python -m unittest discover -s experiments/law-forge-001 -p 'test_*.py' -v
+      - name: Generate full local synthetic trial receipt
+        run: |
+          python experiments/law-forge-001/trial.py > law-forge-results.json
+          python -m json.tool law-forge-results.json > /dev/null
+      - name: Preserve benchmark and falsification receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: law-forge-001-receipt
+          path: law-forge-results.json
+          retention-days: 30
