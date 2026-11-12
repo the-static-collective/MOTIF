@@ -1,0 +1,28 @@
+name: FIELD-014 3D spatial cognition offline tests
+on:
+  push:
+    paths:
+      - 'experiments/field014/**'
+      - '.github/workflows/field-014.yml'
+  pull_request:
+    paths:
+      - 'experiments/field014/**'
+      - '.github/workflows/field-014.yml'
+permissions:
+  contents: read
+jobs:
+  source-and-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Geometric proof-gate and state-replay regressions
+        run: node experiments/field014/test_scene3d.js
+      - name: JavaScript syntax checks
+        run: |
+          node --check experiments/field014/scene3d.js
+          node --check experiments/field014/camera3d.js
+          node --check experiments/field014/app.js
