@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MOTIF 019 | Three-way geometry</title>
+<style>
+:root{color-scheme:dark;--bg:#111717;--panel:#1d2624;--border:#394843;--ink:#eef0e4;--muted:#a8b4ad;--mint:#a6d5b5;--orange:#f2c28d;--bad:#eda698}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:21px 24px;border-bottom:1px solid var(--border);background:#17211e}h1{font:650 clamp(22px,3.5vw,36px)/1.2 Georgia,serif;letter-spacing:-.03em;margin:2px 0 7px}h2{margin:0 0 10px;font-size:17px}h3{margin:6px 0;font-size:14px}small,.sub{color:var(--muted)}code{color:var(--mint)}main{padding:18px 20px;max-width:1700px;margin:auto}.tag{display:inline-block;color:var(--mint);letter-spacing:.11em;font-weight:650;font-size:11px;text-transform:uppercase}
+.toolbar,.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.toolbar{margin:0 0 15px;padding:12px 14px;background:var(--panel);border:1px solid var(--border);border-radius:12px}
+button,select,input{font:inherit;color:var(--ink);background:#25322e;border:1px solid #52655d;border-radius:7px;padding:7px 10px;max-width:100%}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--mint)}button.primary{background:#2f6551;border-color:#5b9677}button:disabled{opacity:.5;cursor:not-allowed}input[type=number]{width:91px}input[type=checkbox]{accent-color:#8eceaa}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden}.panel .head{padding:12px;border-bottom:1px solid var(--border);min-height:64px}.stage{position:relative;background:#0b100f;min-height:230px;max-height:570px;display:grid;place-items:center;overflow:hidden}
+.stage img{width:100%;max-height:560px;object-fit:contain;display:block;pointer-events:none}.stage svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;touch-action:manipulation;cursor:crosshair}.panel .foot{padding:9px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)}.hint{display:block;padding:6px 8px;color:#e4c5a4;background:#342c27;border-radius:5px;margin-top:4px}
+.details{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:12px;margin-top:14px}.details>.panel{padding:16px}.status{padding:12px;border:1px solid #745d49;border-radius:8px;background:#302a22;color:#ffdaaa;margin:9px 0}.status.ok{color:#c2ebc9;border-color:#4f8764;background:#20392c}.measure{padding:5px 0;border-bottom:1px dashed #485e52}.tiny{font-size:12px}.events{max-height:215px;overflow-y:auto;color:var(--muted);font:12px/1.6 ui-monospace,monospace;white-space:pre-wrap}.check{display:flex;gap:9px;align-items:flex-start;margin:10px 0}.check input{margin-top:4px}.source-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}#sketchfile,#photofileA,#photofileB{max-width:180px;font-size:11px}.no-mobile{display:inline}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.details{grid-template-columns:1fr}.stage{max-height:420px}.stage img{max-height:420px}.no-mobile{display:none}} 
+</style></head><body>
+<header><span class="tag">MOTIF · FIELD-019 / Three-way geometry</span><h1>One scene. Three representations.</h1><div class="sub">Rough sketch ⇄ source photographs ⇄ conditional camera + 3D hypothesis. Shared-landmark taps become structured evidence, not guesses.</div></header>
+<main><div class="toolbar"><strong>Review mode:</strong> <button id="synthetic" class="primary">Solved synthetic demonstration</button><button id="real">Real-source review / HOLD</button><span style="margin-left:auto;color:var(--muted)">Click to place <b style="color:var(--ink)">landmark</b>:</span>
+<label>Post <select id="post"></select></label><label>Mark <select id="kind"><option value="base">Post base</option><option value="top">Post top</option></select></label><button id="undo">Undo</button><button id="clear">Clear draft marks</button></div>
+<div class="grid">
+<section class="panel"><div class="head"><h2>01 / Drawing space</h2><small>Not a surveyed plan. Tap a known landmark on the paper.</small></div><div class="stage" id="stageS"><img id="imageS" alt="Sketch source"><svg id="overlayS"></svg></div><div class="foot"><span id="srcS"></span> <label>Import <input id="sketchfile" type="file" accept="image/*"></label></div></section>
+<section class="panel"><div class="head"><h2>02 / Camera A</h2><small>Tap post base/top. Pixel coordinates stay in image A.</small></div><div class="stage" id="stageA"><img id="imageA" alt="First camera source"><svg id="overlayA"></svg></div><div class="foot"><span id="srcA"></span><div class="source-row"><label>Photo <select id="chooseA"></select></label><label>Import <input id="photofileA" type="file" accept="image/*"></label></div></div></section>
+<section class="panel"><div class="head"><h2>03 / Camera B</h2><small>Independent viewpoint, same physical landmark identity.</small></div><div class="stage" id="stageB"><img id="imageB" alt="Second camera source"><svg id="overlayB"></svg></div><div class="foot"><span id="srcB"></span><div class="source-row"><label>Photo <select id="chooseB"></select></label><label>Import <input id="photofileB" type="file" accept="image/*"></label></div></div></section>
+</div>
+<div class="details">
+<section class="panel"><h2>Cross-domain calibration</h2><div class="measure">Reference panel height: <input type="number" id="heightft" min="0.1" step="0.1" value="6"> ft <small>user-reported approximate</small></div>
+<div class="measure">Camera A focal estimate: <input type="number" id="focalA" min="1" placeholder="unknown"> px</div><div class="measure">Camera B focal estimate: <input type="number" id="focalB" min="1" placeholder="unknown"> px</div><div class="measure">Sketch proportionality tolerance: <input type="number" id="tol" min="0" max="30" value="12">% <small>assumption, not calibrated uncertainty</small></div>
+<label class="check"><input type="checkbox" id="assumptions"><span>The traced post-top/post-base pairs are the <b>same physical posts</b> in both photos, are approximately 6 ft tall, and the focal values above come from an independent calibration/prior. These points were reviewed by a human.</span></label><button class="primary" id="export">Export solver packet (JSON)</button> <button id="resetdemo">Reset synthetic snapshot</button>
+<div class="hint tiny">A camera is a geometric hypothesis, <b>not</b> a second independently measured dimension. A single photo generally does not uniquely determine camera pose or scale.</div></section>
+<section class="panel"><h2>Live evidence gate</h2><div id="status" class="status"></div><div id="counts"></div><div id="scale" class="tiny" style="margin-top:12px"></div><h3>What would change the result?</h3><div id="next" class="sub"></div><h3>Most recent actions</h3><div class="events" id="events"></div></section>
+<section class="panel"><h2>What the experiment has actually shown</h2><div id="snapshot"></div><div class="sub tiny" style="margin-top:12px">The synthetic inverse solver ran in Python (OpenCV + SciPy). This offline board gathers correspondences but does <b>not</b> run nonlinear camera optimization in the browser. Export a reviewed packet and run <code>python run.py --input packet.json</code> from the supplied code package.</div><div class="hint tiny">A low reprojection error is internal model consistency, not independent physical verification. Do not use hypothetical fence geometry as safe containment or a structural rating.</div></section>
+</div><p class="sub tiny">Privacy: all review operations stay in this local HTML page. Uploaded files are not transmitted. Do not publish the private version containing property photos. The solver remains conditional on calibrated intrinsics, matched landmarks, approximate ground plane, and valid height selection.</p></main>
+<script>
+const SOURCES=__SOURCES__,SYNTHETIC=__SYNTHETIC__,RECEIPT=__RECEIPT__;
+const ids=['p1','p2','p3','p4','p5','p6']; let mode='synthetic',marks={},history=[],dirty=false;
+const $=id=>document.getElementById(id);const post=$('post');ids.forEach(k=>{let o=document.createElement('option');o.value=k;o.textContent=k;post.appendChild(o)});
+let sourceState={};
+function copy(x){return JSON.parse(JSON.stringify(x))}
+function setSources(src){sourceState=src;for(let k of ['S','A','B']){
+ let o=src[k], im=$('image'+k); im.src=o.url; im.onload=()=>{draw(k)}; $('src'+k).textContent=o.name;
+ }}
+function initialSynthetic(){mode='synthetic';marks={};for(let [name,pt] of Object.entries(SYNTHETIC.landmarks)){marks[name]={S:{base:[pt[0],pt[1]]}};}
+ for(let ix=0;ix<2;ix++){let camera=SYNTHETIC.views[ix];for(let [name,pair] of Object.entries(camera.points)){
+  if(!marks[name])marks[name]={}; marks[name][ix?'B':'A']={top:pair[0],base:pair[1]};}}
+ $('focalA').value=SYNTHETIC.views[0].focal_px;$('focalB').value=SYNTHETIC.views[1].focal_px;$('assumptions').checked=true;$('heightft').value=(SYNTHETIC.height_reference_m/0.3048).toFixed(1);$('tol').value=10;
+ setSources({S:SOURCES.demoS,A:SOURCES.demoA,B:SOURCES.demoB});
+ history=[];dirty=false;$('synthetic').classList.add('primary');$('real').classList.remove('primary');update();}
+function initialReal(){mode='real';marks={};history=[];dirty=false; $('focalA').value='';$('focalB').value='';$('assumptions').checked=false;$('heightft').value=6;$('tol').value=12;
+ const real=SOURCES.real||[];setSources({S:real.length?SOURCES.realSketch:SOURCES.demoS,A:real.length?real[0]:SOURCES.demoA,B:real.length?real[Math.min(1,real.length-1)]:SOURCES.demoB});
+ for(let side of ['A','B']){let el=$('choose'+side);el.innerHTML='';(real.length?real:[SOURCES.demoA,SOURCES.demoB]).forEach((source,i)=>{let opt=document.createElement('option');opt.value=i;opt.textContent=source.name;el.appendChild(opt)});el.value=side==='A'?0:Math.min(1,real.length?real.length-1:1);}
+ $('real').classList.add('primary');$('synthetic').classList.remove('primary');update();}
+function imageRect(k){let im=$('image'+k),svg=$('overlay'+k),stage=$('stage'+k);let ir=im.getBoundingClientRect(),sr=stage.getBoundingClientRect();
+ svg.style.left=(ir.left-sr.left)+'px';svg.style.top=(ir.top-sr.top)+'px';svg.style.width=ir.width+'px';svg.style.height=ir.height+'px';
+ svg.setAttribute('viewBox',`0 0 ${im.naturalWidth||960} ${im.naturalHeight||720}`);return im;}
+function draw(k){let svg=$('overlay'+k),im=imageRect(k);let raw='';for(let [id,item] of Object.entries(marks)){if(!item[k])continue;
+ let a=item[k];let pairs=k==='S'?[['base',a.base]]:[['base',a.base],['top',a.top]];
+ for(let [t,p] of pairs){if(!p)continue;let col=t==='top'?'#ffc88e':'#92ddbd';raw+=`<circle cx="${p[0]}" cy="${p[1]}" r="${Math.max(5,im.naturalWidth/185)}" fill="${col}" stroke="#1f2825" stroke-width="2"/><text x="${p[0]+11}" y="${p[1]-7}" fill="${col}" stroke="#15221d" stroke-width="3" paint-order="stroke" font-size="${Math.max(15,im.naturalWidth/53)}" font-weight="bold">${id}${t==='top'?'↑':''}</text>`}}
+ svg.innerHTML=raw;}
+function mark(k,ev){let im=$('image'+k),box=$('overlay'+k).getBoundingClientRect();let x=(ev.clientX-box.left)/box.width*(im.naturalWidth||960),y=(ev.clientY-box.top)/box.height*(im.naturalHeight||720);
+ if(x<0||y<0||x>im.naturalWidth||y>im.naturalHeight)return;
+ history.push(copy(marks));let id=post.value; marks[id]??={};marks[id][k]??={};marks[id][k][k==='S'?'base':$('kind').value]=[Math.round(x),Math.round(y)];dirty=true;update();}
+for(let k of ['S','A','B'])$('overlay'+k).addEventListener('pointerup',ev=>mark(k,ev));
+function update(){for(let k of ['S','A','B'])draw(k);
+ const shared=ids.filter(n=>marks[n]?.S?.base&&marks[n]?.A?.base&&marks[n]?.A?.top&&marks[n]?.B?.base&&marks[n]?.B?.top);
+ let sk=ids.filter(n=>marks[n]?.S?.base).length,a=ids.filter(n=>marks[n]?.A?.base&&marks[n]?.A?.top).length,b=ids.filter(n=>marks[n]?.B?.base&&marks[n]?.B?.top).length;
+ let issues=[];if(shared.length<5)issues.push(`Mark five shared noncollinear posts; only ${shared.length}/5 have a sketch position and both base/top image pairs.`);
+ if(!$('assumptions').checked)issues.push('Confirm that the same upright ~6-ft posts are genuinely identifiable in both views, and that focal intrinsics are independently supported.');
+ if(!Number($('focalA').value)||!Number($('focalB').value))issues.push('Obtain independently justified camera focal-pixel values; EXIF is absent from these supplied photos.');
+ if(!Number($('heightft').value)||Number($('heightft').value)<=0)issues.push('Correct the height reference.');
+ let ready=issues.length===0; $('status').className='status'+(ready?' ok':'');
+ $('status').textContent=ready?'READY FOR CONDITIONAL PYTHON FIT — NOT A CERTIFIED 3-D SITE PLAN':'HOLD — DO NOT INFER GLOBAL 3-D GEOMETRY';
+ $('counts').innerHTML=`<div class="measure">Sketch labels: <b>${sk}</b> · photo A paired posts: <b>${a}</b> · photo B paired posts: <b>${b}</b></div><div class="measure">Posts in all three: <b>${shared.join(', ')||'none'}</b></div>`;
+ $('next').textContent=ready?'Export the pixel packet, run the solver, inspect reprojection residuals, and verify at least one horizontal distance in the yard.':issues[0];
+ $('scale').textContent=mode==='synthetic'&&!dirty?'The displayed synthetic scale and camera fit below are from an executed solver snapshot.':'No current global scale has been computed from these edits.';
+ const r=RECEIPT.output;
+ $('snapshot').innerHTML=mode==='synthetic'&&!dirty?`<p><b>${r.status}</b></p><div class="measure">Recovered horizontal scale: <b>${r.horizontal_m_per_sketch_unit} m / sketch unit</b></div><div class="measure">Simulated ground-truth scale: <b>2.8000 m / sketch unit</b></div><div class="measure">Reprojection RMS: <b>${r.reprojection_rms_px} px</b></div><p class="tiny">This result uses generated camera images, supplied calibrated focal values and explicitly identified simulated landmarks. Not a result from your yard.</p>`:
+ '<p><b>NO METRIC SOLUTION FOR THESE SOURCE IMAGES.</b></p><p class="sub">Mark matched physical points and review camera assumptions. A numerical solver cannot recover reliable dimensions from missing or contradictory evidence.</p>';
+ $('events').textContent=(history.length?`${history.length} point correction(s) recorded.\n`:'')+Object.entries(marks).slice(0,6).map(([n,row])=>`${n}: ${Object.keys(row).join(' · ')}`).join('\n');
+}
+function setPhoto(k,source){history.push(copy(marks));for(let name of Object.keys(marks))delete marks[name][k];sourceState[k]=source;$('image'+k).src=source.url;$('src'+k).textContent=source.name;dirty=true;update();}
+for(let k of ['A','B'])$('choose'+k).addEventListener('change',e=>setPhoto(k,(SOURCES.real||[SOURCES.demoA,SOURCES.demoB])[Number(e.target.value)]));
+function useFile(id,k){$(id).addEventListener('change',evt=>{let file=evt.target.files?.[0];if(!file||!file.type.startsWith('image/'))return;let reader=new FileReader();reader.onload=()=>{
+ let next={url:reader.result,name:file.name};if(k==='S'){history.push(copy(marks));for(let name in marks)delete marks[name].S;sourceState.S=next;$('imageS').src=next.url;$('srcS').textContent=next.name;}else setPhoto(k,next);
+ dirty=true;update();};reader.readAsDataURL(file);});}
+useFile('sketchfile','S');useFile('photofileA','A');useFile('photofileB','B');
+for(let id of ['heightft','focalA','focalB','tol','assumptions'])$(id).addEventListener('change',()=>{dirty=true;update()});
+$('undo').onclick=()=>{if(history.length){marks=history.pop();dirty=true;update()}};
+$('clear').onclick=()=>{history.push(copy(marks));marks={};dirty=true;update()};
+$('synthetic').onclick=initialSynthetic;$('real').onclick=initialReal;$('resetdemo').onclick=initialSynthetic;
+function exportPacket(){let names=Object.keys(marks).filter(n=>marks[n]?.S?.base&&marks[n]?.A?.base&&marks[n]?.A?.top&&marks[n]?.B?.base&&marks[n]?.B?.top);
+ let trace={height_reference_m:Number($('heightft').value)*.3048,
+ height_source:mode==='real'?'USER_REPORTED_APPROX_NOT_VERIFIED_EVERY_POST':'SYNTHETIC_CERTAIN',
+ sketch_proportionality:$('assumptions').checked?'ASSUMED_WITH_TOLERANCE':'UNKNOWN',
+ sketch_tolerance_fraction:Number($('tol').value)/100,
+ landmarks:Object.fromEntries(names.map(n=>[n,marks[n].S.base.map((v,i)=>v/(i?($('imageS').naturalHeight||1):($('imageS').naturalWidth||1)))])),views:[]};
+ for(let k of ['A','B']){let im=$('image'+k);trace.views.push({source:sourceState[k].name,size:[im.naturalWidth,im.naturalHeight],focal_px:Number($('focal'+k).value)||null,
+ correspondences_source:$('assumptions').checked?'USER_REVIEWED':'MODEL_TENTATIVE',
+ points:Object.fromEntries(names.map(n=>[n,[marks[n][k].top,marks[n][k].base]]))});}
+ trace.review_note='Coordinates are human annotations. No physical height or camera calibration is independently verified by this UI. No model auto-registered camera poses.';
+ const blob=new Blob([JSON.stringify(trace,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='motif_field019_candidate_correspondences.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500);}
+$('export').onclick=exportPacket;
+window.addEventListener('resize',()=>['S','A','B'].forEach(draw));
+// initial mode overridden per generated standalone variant
+if(__PRIVATE__)initialReal();else initialSynthetic();
+</script></body></html>
