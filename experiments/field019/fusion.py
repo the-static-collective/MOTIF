@@ -39,6 +39,8 @@ class Candidate:
 
 def K_from_camera(cam):
     w,h=cam['size']; f=cam.get('focal_px')
+    if cam.get('focal_provenance') not in {'SYNTHETIC_CERTAIN','INDEPENDENT_CALIBRATED','USER_REVIEWED_CALIBRATION'}:
+        raise EvidenceError('Camera focal prior lacks reviewed provenance; single uncalibrated photo cannot set geometry')
     if f is None or not isinstance(f,(float,int)) or not isfinite(f) or f <=0:
         raise EvidenceError('Independent camera calibration unavailable: focal length needed before metric inference')
     return np.array([[f,0,w/2.],[0,f,h/2.],[0,0,1.]],float)
@@ -184,6 +186,7 @@ def fuse(packet, *, max_rms_px=6., scale_grid=None, allow_sketch_correction=True
     outlier_count=int(np.sum(xnorm>max_rms_px*2))
     info={ 'height_source':packet['height_source'],'sketch_proportionality':'ASSUMED_WITH_TOLERANCE',
           'camera_intrinsics':'EXTERNALLY_SUPPLIED_NOT_INFERRED',
+          'camera_focal_provenance':[v.get('focal_provenance') for v in packet['views']],
           'max_reprojection_rms_px':max_rms_px,'worst_point_error_px':round(float(np.max(xnorm)),3),
           'large_residual_point_count':outlier_count,'scale_sensitivity':scale_test,
           'independent_ground_truth':False,'assumed_sketch_distortion_fraction':packet['sketch_tolerance_fraction'],
@@ -204,6 +207,10 @@ def fuse(packet, *, max_rms_px=6., scale_grid=None, allow_sketch_correction=True
         pose=fit.x[1+i*6:1+(i+1)*6];R=cv2.Rodrigues(pose[:3])[0];C=-R.T@pose[3:]
         pose_packets.append({'source':cam['source'],'rvec_world_to_camera':[round(float(x),5) for x in pose[:3]],
                              'camera_center_m':[round(float(x),3) for x in C]})
+    if len(pose_packets)>=2:
+        center_a=np.asarray(pose_packets[0]['camera_center_m'])
+        center_b=np.asarray(pose_packets[1]['camera_center_m'])
+        info['camera_baseline_m_conditional']=round(float(np.linalg.norm(center_b-center_a)),3)
     w=world_points(ground+raw_offsets,local_s,packet['height_reference_m'])
     modeled=[{'id':name,'base_m':[round(float(t),3) for t in w[j,1]],'top_m':[round(float(t),3) for t in w[j,0]]} for j,name in enumerate(ids)]
     # Suppress apparently exact geometry when hold
