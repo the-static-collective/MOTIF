@@ -13,7 +13,7 @@ from pathlib import Path
 import json, sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'field015'))
-from physics import Panel, screen, assembly_screen, Joint  # actual prior code
+import physics as field015_physics  # actual parent GitHub module; contract differences handled explicitly
 
 TRUTH = {'USER_REPORTED', 'MEASURED', 'MODEL_TENTATIVE', 'HYPOTHETICAL'}
 CATEGORY = {'RIGID_PANEL', 'POROUS_PANEL', 'PRIVACY_PANEL'}
@@ -90,14 +90,49 @@ class Scene:
         return self
 
 
-def _panel(p:Piece)->Panel:
-    return Panel(id=p.id,width_m=p.width_m,height_m=p.height_m,mass_kg=p.mass_kg,
+def _panel(p:Piece):
+    """Use the parent FIELD-015 physical-screen API, including its published form.
+
+    The earlier standalone source archive and public GitHub branch use different
+    names; this bridge deliberately supports both without relaxing evidence gates.
+    """
+    if hasattr(field015_physics,'assembly'):
+        return field015_physics.Panel(name=p.id,width=p.width_m,height=p.height_m,
+             mass=p.mass_kg,base_depth=p.base_depth_m,opacity=p.opacity,
+             drag=1.4 if p.opacity is not None else None,friction=.6,
+             anchor_type='FREESTANDING')
+    return field015_physics.Panel(id=p.id,width_m=p.width_m,height_m=p.height_m,mass_kg=p.mass_kg,
                 base_depth_m=p.base_depth_m,opacity=p.opacity,
                 drag_coefficient=1.4 if p.opacity is not None else None,
                 friction_coefficient=.6, support_type='FREESTANDING',
-                # do not invent a certified connector strength
                 evidence={'width_m':'MEASURED' if p.measured_width else 'GUESSED',
                           'height_m':'GUESSED','opacity':'GUESSED'})
+
+
+def _normalize_screen(raw:dict)->dict:
+    """Source-preserving normalization of two FIELD-015 schemas."""
+    value=raw.get('force_n')
+    if value is None and raw.get('load') is not None:
+        value=raw['load'].get('force_n')
+    return {'id':raw.get('panel_id',raw.get('panel')),
+            'status':raw['status'],
+            'failures':raw.get('failures',raw.get('failure_modes',[])),
+            'force_n':value,
+            'unknowns':raw.get('missing',[])}
+
+
+def _assembly_topology(grouping,wind_mps):
+    panels=[_panel(p) for p in grouping]
+    if hasattr(field015_physics,'assembly'):
+        links=[(a.id,b.id,'ZIP_TIE') for a,b in zip(grouping,grouping[1:])]
+        raw=field015_physics.assembly(panels,links,wind_mps)
+        return {'status':'HOLD_FULL_ASSEMBLY_NOT_MODELED',
+                'load_sharing_solved':bool(raw.get('joint_shear_peel_fatigue_verified',False)) and bool(raw.get('overall_stability_verified',False))}
+    links=[field015_physics.Joint(a.id,b.id,'ZIP_TIE','SYNTHETIC_TENTATIVE_CONNECTION',None,False)
+           for a,b in zip(grouping,grouping[1:])]
+    raw=field015_physics.assembly_screen(panels,links,wind_mps)
+    return {'status':raw['status'],
+            'load_sharing_solved':all(x['load_sharing_solved'] for x in raw['components'])}
 
 
 def _piece_candidates(scene:Scene, route:Route):
@@ -114,7 +149,7 @@ def _piece_candidates(scene:Scene, route:Route):
 
 
 def evaluate(scene:Scene, route:Route, grouping:tuple[Piece,...], span_flag:str)->dict:
-    numeric=[screen(_panel(p),scene.wind_mps) for p in grouping]
+    numeric=[_normalize_screen(field015_physics.screen(_panel(p),scene.wind_mps)) for p in grouping]
     model_failure=any(x['status']=='MODEL_FAILS_ASSUMED_LOAD_CASE' for x in numeric)
     unknowns=[]
     if span_flag.startswith('HOLD'):unknowns.append('unverified_coverage_length')
@@ -142,8 +177,8 @@ def evaluate(scene:Scene, route:Route, grouping:tuple[Piece,...], span_flag:str)
     if model_failure:verdict='MODEL_FAILS_STATED_SCENARIO'
     else:verdict='HOLD_PHYSICAL_INSTALLATION_UNVERIFIED'
     # Can compare wind screens; must never interpret conditional model result as a structurally safe object.
-    simplified=sum((x['load'] or {}).get('force_n',0) for x in numeric)
-    load_complete=all(x['load'] is not None for x in numeric)
+    simplified=sum(x['force_n'] or 0 for x in numeric)
+    load_complete=all(x['force_n'] is not None for x in numeric)
     effort=len(grouping)*2 + int(route.requires_moving_fence)*4
     # Place these modules in an *invented* 3D frame: x=along run, y=height, z=arbitrary 0.
     # Actual property coordinates and panel clearance remain source-unknown.
@@ -155,18 +190,14 @@ def evaluate(scene:Scene, route:Route, grouping:tuple[Piece,...], span_flag:str)
                            'y_top_m':round(scene.piece_clearance_m[p.id]+p.height_m,3) if scene.piece_clearance_m.get(p.id) is not None and p.height_m is not None else None,
                            'z_m':0.0,'coordinate_status':'HYPOTHETICAL_LOCAL_FRAME_NOT_SITE_REGISTERED'})
         x+=p.width_m or 0
-    topology=None
-    if len(grouping)>1:
-        proposed_joints=[Joint(a.id,b.id,'ZIP_TIE','SYNTHETIC_TENTATIVE_CONNECTION',None,False)
-                         for a,b in zip(grouping,grouping[1:])]
-        topology=assembly_screen([_panel(p) for p in grouping],proposed_joints,scene.wind_mps)
+    topology=_assembly_topology(grouping,scene.wind_mps) if len(grouping)>1 else None
     return {'route_id':route.id,'pieces':[p.id for p in grouping],'nominal_coverage_m':round(sum((p.width_m or 0) for p in grouping),3),
             'target_span_m':route.span_m,'span_status':span_flag,'status':verdict,
-            'model_failures':[{'id':x['panel_id'],'failures':x.get('failures',[])} for x in numeric if x['status']=='MODEL_FAILS_ASSUMED_LOAD_CASE'],
+            'model_failures':[{'id':x['id'],'failures':x.get('failures',[])} for x in numeric if x['status']=='MODEL_FAILS_ASSUMED_LOAD_CASE'],
             'model_wind_force_n':round(simplified,2) if load_complete else None,
-            'physics_sources':['FIELD-015:physics.screen','FIELD-015:physics.assembly_screen'],
+            'physics_sources':['FIELD-015:physics.screen','FIELD-015:physics.assembly or assembly_screen'],
             'local_3d_schematic':positioned,
-            'joint_topology':{'status':topology['status'],'load_sharing_solved':topology['components'][0]['load_sharing_solved']} if topology else None,
+            'joint_topology':topology if topology else None,
             'uncertainties':sorted(set(unknowns)),
             'estimated_relative_assembly_effort':effort,
             'wind_scenario_mps':scene.wind_mps,
