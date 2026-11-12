@@ -1,0 +1,125 @@
+name: COGNITION-009 locked generic adaptive policies on untouched NovelGym novelties
+on:
+  push:
+    paths:
+      - 'experiments/cognition009/**'
+      - 'experiments/cognition008/adapt.py'
+      - 'experiments/cognition008/aperture_probe.py'
+      - '.github/workflows/cognition-009.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition009/**'
+      - 'experiments/cognition008/adapt.py'
+      - 'experiments/cognition008/aperture_probe.py'
+      - '.github/workflows/cognition-009.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-unseen-native-tasks:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+      OMP_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Check protocol frozen before test code and invariant policy core
+        run: |
+          git show 8ea0c7642d0f409d763a5c413c41e5d5e7ef01c2:experiments/cognition009/PREREGISTRATION.md >/tmp/cog009-frozen.md
+          cmp /tmp/cog009-frozen.md experiments/cognition009/PREREGISTRATION.md
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          path='experiments/cognition008/adapt.py'
+          prior=subprocess.check_output(
+              ['git','show','76f797e920aee74bfab065744b051eb5fd34084a:'+path],
+              text=True)
+          current=Path(path).read_text()
+          def policy_body(s):
+              return s[s.index('def proposer('):s.index('def run_policy(')]
+          assert policy_body(prior)==policy_body(current), 'BEHAVIORAL_POLICY_CORE_CHANGED_AFTER_LOCK'
+          print('Original two adaptive action-grammar, MOTIF-003 and Free Graph policies byte-for-byte locked.')
+          PY
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: sources/free-graph
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - name: Verify original environment owner code remains unchanged
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+          for f in             novelties/evaluation1/fence/fence_easy.yaml             novelties/evaluation1/axe_to_break/axe_to_break.yaml             novelties/evaluation1/chest_shortcut/chest_shortcut.yaml             novelties/evaluation1/dist_trade/dist_trade.yaml; do
+              test -f "sources/novelgym/$f"
+          done
+      - name: Install original world dependencies
+        run: |
+          python -m pip install --upgrade 'pip<25'
+          python -m pip install 'numpy<2' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'pygame==2.5.2' 'PyYAML>=6'
+          python -m pip install -e ./sources/novelgridworldsv2
+      - name: Compile original GPLv2 Metric-FF with diagnosed conservative build flags
+        run: |
+          make -C sources/novelgym/planners/Metric-FF-v2.1 CFLAGS="-O0 -ansi -fno-strict-aliasing -g"
+          test -x sources/novelgym/planners/Metric-FF-v2.1/ff
+      - name: Run original native policy unit tests with unchanged core
+        timeout-minutes: 3
+        working-directory: sources/novelgym
+        run: python -m unittest discover -s ../../experiments/cognition008 -p test_adapt.py -v
+      - name: Execute 24 previously unseen novelty/seed/policy native owner episodes
+        timeout-minutes: 12
+        working-directory: sources/novelgym
+        run: |
+          python ../../experiments/cognition009/batch.py --output ../../cognition009-unseen-native.json
+      - name: Audit native source truth and negative results without discarding cases
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('cognition009-unseen-native.json').read_text())
+          assert d['n']==24 and len(d['rows'])==24
+          assert len(d['paired'])==12
+          assert tuple(d['seeds'])==(31001,31021,31041)
+          assert set(d['novelties'])=={'fence','axe','chest','dist_trade'}
+          assert not any(r['verified_owner_success'] is None for r in d['rows'])
+          assert all(r['real_world_external_actions']==0 and
+                     not r['private_understory_imported'] for r in d['rows'])
+          assert all(r['attempts_used']<=10 for r in d['rows'])
+          print(json.dumps(d['summary'],sort_keys=True,indent=2))
+          PY
+      - name: Archive all source-owned outcomes including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition009-unseen-four-original-novelties-owner-receipts
+          path: cognition009-unseen-native.json
+          retention-days: 30
+          if-no-files-found: warn
