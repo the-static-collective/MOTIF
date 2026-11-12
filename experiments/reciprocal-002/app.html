@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOTIF — Two Doors</title>
+<style>
+:root{--ink:#142f2d;--sage:#416e61;--gold:#c9a76b;--paper:#f7f3e9;--bg:#e6e3d8;--line:#9aada3;--soft:#e5eee8;--red:#8b4843}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.45}
+main,header,footer{max-width:1060px;margin:auto;padding:0 20px}header{padding-top:31px}h1,h2,h3{font-family:Georgia,serif;font-weight:500;letter-spacing:-.035em;line-height:1.15}h1{font-size:clamp(2.4rem,6vw,4.6rem);margin:.12em 0 .2em}h2{font-size:2rem;margin:0 0 .3em}h3{font-size:1.4rem;margin:.25em 0}
+small,.fine{color:#51645c;font-size:.85rem}p{max-width:75ch}header>p{margin-bottom:20px}button,select,input,textarea{font:inherit}button{border:1px solid var(--sage);border-radius:2px;background:var(--paper);color:var(--ink);padding:10px 14px;cursor:pointer;min-height:42px}button:hover{background:var(--soft)}button.primary{background:#275449;color:#fff}button.danger{color:var(--red);border-color:var(--red)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #cc7c31;outline-offset:2px}
+button:disabled{cursor:default;opacity:.45}.eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--sage)}
+.intro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}
+.door{padding:20px;text-align:left;background:var(--paper);border:1px solid #8da89a;box-shadow:4px 4px 0 #c4c8b9;min-height:155px}
+.door strong{display:block;font-family:Georgia,serif;font-size:1.8rem;font-weight:500}.door small{display:block;margin-top:8px;max-width:30ch}.door.active{border:2px solid #20483b;background:#e2eee4}
+article.panel,section.panel{background:var(--paper);border:1px solid #9ea89e;padding:21px;margin:20px 0;box-shadow:3px 3px 0 #d1d1c6}
+[data-door]{display:none}[data-door].show{display:block}.field{margin:12px 0}label{display:block;font-weight:600;margin-bottom:5px}
+input[type=text],input[type=number],select,textarea{width:100%;border:1px solid #a5ada0;border-radius:2px;background:white;padding:9px;min-height:41px;color:var(--ink)}
+textarea{min-height:86px;resize:vertical}input[type=checkbox],input[type=radio]{accent-color:#2a6957}.tags,.row,.buttons{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.tags label{font-size:.9rem;font-weight:400;border:1px solid #bbc8bc;padding:5px 8px;display:flex;gap:5px;margin:0}.tags input{margin:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.notice{padding:12px 14px;background:#e3e8dd;border-left:4px solid var(--sage)}.warning{border-left-color:var(--gold);background:#f1e9d5}.status{font-weight:750;letter-spacing:.02em;font-size:.8rem}.feedback{white-space:pre-wrap;background:#e3ece5;border-left:4px solid #779d8c;padding:11px;min-height:40px}
+.question{border-top:1px solid var(--line);padding:16px 0}.question:first-child{border-top:0}.choice{display:flex;align-items:flex-start;gap:9px;border:1px solid #c8d0c4;padding:10px;margin:9px 0;cursor:pointer;background:#fff}.choice input{margin-top:4px}.choice span{flex:1}
+.muted{color:#587065}.badge{display:inline-block;background:#e2e8dc;padding:4px 8px;margin:2px 4px 2px 0;font-size:.74rem;font-weight:700}
+.results{border-left:3px solid #758f82;padding-left:12px;white-space:pre-line}
+footer{padding:22px 20px 52px;font-size:.8rem}a{color:#245749}
+@media(max-width:670px){.intro,.grid2,.grid3{grid-template-columns:1fr}.door{min-height:120px}h1{font-size:2.8rem}article.panel,section.panel{padding:17px}}
+</style></head><body>
+<header>
+ <span class="eyebrow">STATIC COLLECTIVE / MOTIF / RECIPROCAL-002</span>
+ <h1>Two Doors.<br>One growing intelligence.</h1>
+ <p>Come with a question—or help answer one worth asking. Every question must say <em>what answering it could change</em>. MOTIF tries to select who to ask, when, how many times, and when to stop.</p>
+ <div class="notice warning"><strong>Research prototype:</strong> On this device only. No live shared database, accounts, messages, hidden profiling, or automatic truth claims. To compare answers from other devices, people must voluntarily export and exchange their JSON data files.</div>
+ <nav class="intro" aria-label="Choose an entrance">
+  <button class="door active" id="askDoor" aria-controls="askPanel" aria-pressed="true"><span class="eyebrow">01 / Bring a question</span><strong>Ask MOTIF</strong><small>Start with a problem. Specify which decision the answer could improve.</small></button>
+  <button class="door" id="answerDoor" aria-controls="answerPanel" aria-pressed="false"><span class="eyebrow">02 / Offer a perspective</span><strong>Let MOTIF ask</strong><small>Opt in. Answer a useful, bounded inquiry selected for your role.</small></button>
+ </nav>
+</header>
+<main>
+ <section class="panel show" data-door="ask" id="askPanel">
+   <div class="eyebrow">01 / From curiosity to consequential inquiry</div>
+   <h2>What's worth discovering?</h2>
+   <p class="fine">A question doesn't enter the asking queue until it names what could be learned and what useful decision may change. MOTIF won't invent those motives for you.</p>
+   <form id="questionForm">
+     <div class="field"><label for="questionTitle">Your question</label><textarea id="questionTitle" maxlength="170" required placeholder="What makes the first encounter confusing for a newcomer?"></textarea></div>
+     <div class="grid2">
+      <div class="field"><label for="questionWhy">Why does it matter?</label><textarea id="questionWhy" maxlength="320" required placeholder="We want people to understand the system before they participate."></textarea></div>
+      <div class="field"><label for="questionDecision">What decision could an answer change?</label><textarea id="questionDecision" maxlength="320" required placeholder="Which part of the introduction to rewrite or test."></textarea></div>
+     </div>
+     <div class="field"><label for="questionOptions">Distinct answer choices (one per line, 2–5)</label><textarea id="questionOptions" required placeholder="I don't know where to begin&#10;I don't know what my answer will do&#10;It makes sense to me"></textarea><small>For now, these are bounded answer categories. Complex free-form questions need a better question design before this finite engine can analyze them.</small></div>
+     <div class="field"><label>Whose *voluntary expertise or experience* would help?</label><div class="tags" id="questionRoles"></div><small>Not demographics; never inferred or used to contact someone.</small></div>
+     <div class="grid3">
+       <div class="field"><label for="priority">Decision importance</label><select id="priority"><option value="1">1 · exploratory</option><option value="2">2</option><option value="3" selected>3 · useful</option><option value="4">4</option><option value="5">5 · important</option></select></div>
+       <div class="field"><label for="minRoots">Minimum independent claimed sources</label><select id="minRoots"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option></select></div>
+       <div class="field"><label for="maxRoots">Maximum times to ask</label><select id="maxRoots"><option value="5">5</option><option value="8" selected>8</option><option value="12">12</option><option value="20">20</option></select></div>
+     </div>
+     <div class="field"><label for="days">How long should this question remain open?</label><select id="days"><option value="1">1 day</option><option value="3">3 days</option><option value="7" selected>7 days</option><option value="14">14 days</option><option value="30">30 days</option></select></div>
+     <button class="primary" type="submit">Add to useful question queue</button>
+   </form>
+   <p class="feedback" id="askFeedback" role="status" aria-live="polite">No question submitted yet.</p>
+ </section>
+ <section class="panel" data-door="answer" id="answerPanel">
+   <span class="eyebrow">02 / Voluntary reciprocal inquiry</span>
+   <h2>Answer a question worth asking.</h2>
+   <div class="grid2">
+     <div class="field"><label for="sourceRoot">A local pseudonym for this source (not your real name)</label><input id="sourceRoot" type="text" maxlength="72" placeholder="e.g. neighbor_17"><small>It only prevents counting one claimed source twice on this device. It does not verify identity.</small></div>
+     <div class="field"><label>Which perspectives do you choose to offer?</label><div class="tags" id="personRoles"></div></div>
+   </div>
+   <div class="field"><label class="row" style="font-weight:400"><input type="checkbox" id="willing"> Yes, offer me one question now. I can refuse without explanation.</label></div>
+   <button class="primary" id="next" type="button">Find my most useful question</button>
+   <div class="feedback" id="answerFeedback" role="status" aria-live="polite">Opt in to see a question. MOTIF does not send notifications or approach anyone on its own.</div>
+   <div id="current" hidden>
+     <div class="question"><span class="eyebrow" id="questionStatus"></span><h3 id="currentTitle"></h3>
+      <p id="currentWhy"></p>
+      <div class="notice"><strong>What this could change:</strong> <span id="currentDecision"></span><br><strong>Why this question now:</strong> <span id="currentWhyNow"></span></div>
+      <form id="answerForm">
+       <div id="answerChoices"></div>
+       <div class="field"><label for="answerMethod">Basis of your response</label><select id="answerMethod"><option value="experience">Personal experience (not a measurement)</option><option value="observation">Direct observation</option><option value="experiment">A test I performed</option><option value="reasoning">My reasoning or estimate</option></select></div>
+       <div class="field"><label for="answerNote">Optional evidence / counterexample / what could change your mind</label><textarea id="answerNote" maxlength="500" placeholder="No identifying information. Optional; stays on this device unless exported."></textarea></div>
+       <div class="buttons"><button class="primary" type="submit">Offer this response</button><button type="button" id="decline">Decline this question</button></div>
+      </form>
+     </div>
+   </div>
+ </section>
+ <section class="panel" id="ledgerPanel">
+   <span class="eyebrow">03 / Not a popularity contest</span><h2>Reasoning field</h2>
+   <p>The engine compares claimed independent sources, watches for disagreement, respects asking limits, and proposes when to review or reframe. A leading response is <strong>not automatically true</strong>.</p>
+   <div class="buttons"><button id="addDemo">Load two example questions</button><button id="refreshLedger">Refresh analysis</button></div>
+   <div id="ledger"></div>
+ </section>
+ <section class="panel">
+   <span class="eyebrow">04 / Human-controlled evidence</span><h2>Keep the trace. Own the trace.</h2>
+   <p>Responses live in this browser session by default. You can explicitly save locally, export all source-scoped events, or import voluntary contributions from other devices. No data is automatically sent to MOTIF, GitHub, or another person.</p>
+   <label class="row" style="font-weight:400"><input type="checkbox" id="saveLocally"> Opt in to saving question cards and replies in this browser's local storage</label>
+   <div class="buttons" style="margin:12px 0"><button id="export">Export JSON</button><button id="importButton">Import JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden><button class="danger" id="clear">Erase this local session and saved copy</button></div>
+   <p id="storageFeedback" class="feedback" role="status" aria-live="polite">Nothing is automatically shared.</p>
+   <p class="fine">Importing data never means authentication: pseudonyms, roles, and evidence claims are unverified. Same-source conflicts are retained rather than silently counted as independent confirmations. Do not collect sensitive personal details in this prototype.</p>
+ </section>
+</main>
+<footer>RECIPROCAL-002 · Research HOLD · Open questions have purposes and budgets · Claimed sources are not verified identity · Agreement is not truth · Independent human review retains authority · No automatic outreach.</footer>
+<script src="./two_doors.js"></script>
+<script>
+"use strict";
+const M=window.TwoDoors,$=id=>document.getElementById(id),DAY=86400000,CACHE="motif.reciprocal002.opted-state.v1";
+let state=M.empty(),selected=null,lastContribution=null;
+function now(){return Date.now();}
+function id(prefix){return prefix+"_"+now().toString(36)+"_"+Math.floor(Math.random()*1e12).toString(36);}
+function feedback(which,text){$(which).textContent=text;}
+function mk(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;}
+function mkRoleBoxes(id,defaultChecked){
+  for(const role of M.ROLES){const label=mk("label");const cb=document.createElement("input");cb.type="checkbox";cb.value=role;
+    cb.checked=defaultChecked===role;label.append(cb,mk("span",role));$(id).appendChild(label);}
+}
+mkRoleBoxes("questionRoles","anyone");mkRoleBoxes("personRoles","anyone");
+// The first doorway is deliberately conversational: one question first,
+// then only the clarifications needed to make its answer consequential.
+const askForm=$("questionForm"),askParts=[...askForm.children];
+const titlePart=askParts[0],intentPart=askParts[1],askRemainder=askParts.slice(2);
+const askStage1=mk("button","Continue → what would this change?");
+askStage1.type="button";titlePart.after(askStage1);
+const askStage2=mk("button","Continue → define the answers and asking limits");
+askStage2.type="button";intentPart.after(askStage2);
+function resetAskStages(){
+  intentPart.hidden=true;askRemainder.forEach(x=>x.hidden=true);
+  askStage1.hidden=false;askStage2.hidden=true;
+}
+askStage1.addEventListener("click",()=>{
+  if(!$("questionTitle").value.trim()){feedback("askFeedback","Start with a question in your own words.");$("questionTitle").focus();return;}
+  intentPart.hidden=false;askStage1.hidden=true;askStage2.hidden=false;
+  feedback("askFeedback","MOTIF asks: What would answering that question make possible? And what actual decision could change?");
+  $("questionWhy").focus();
+});
+askStage2.addEventListener("click",()=>{
+  if(!$("questionWhy").value.trim()||!$("questionDecision").value.trim()){
+    feedback("askFeedback","Before asking other people, name why the answer matters and which decision it could change.");
+    (!$("questionWhy").value.trim()?$("questionWhy"):$("questionDecision")).focus();return;
+  }
+  askRemainder.forEach(x=>x.hidden=false);askStage2.hidden=true;
+  feedback("askFeedback","Now give this inquiry a finite set of possible answers, an opt-in audience, and a stopping budget.");
+  $("questionOptions").focus();
+});
+resetAskStages();
+function rolesFrom(id){return [...$(id).querySelectorAll("input:checked")].map(x=>x.value);}
+function showDoor(which){
+ for(const x of ["ask","answer"]){
+   const yes=x===which;
+   $(x+"Panel").classList.toggle("show",yes);
+   $(x+"Door").classList.toggle("active",yes);
+   $(x+"Door").setAttribute("aria-pressed",yes?"true":"false");
+ }
+}
+$("askDoor").addEventListener("click",()=>showDoor("ask"));
+$("answerDoor").addEventListener("click",()=>showDoor("answer"));
+function persist(){
+ if($("saveLocally").checked){
+   try{localStorage.setItem(CACHE,JSON.stringify(state));}
+   catch(e){feedback("storageFeedback","Device storage unavailable: "+e.message);}
+ }
+}
+try{const cached=localStorage.getItem(CACHE);if(cached){const obj=JSON.parse(cached);M.validateState(obj);state=obj;$("saveLocally").checked=true;feedback("storageFeedback","Loaded the locally saved session. Nothing was sent anywhere.");}}
+catch(e){feedback("storageFeedback","Could not read previously saved data. No network access was attempted.");}
+function changeState(next){M.validateState(next);state=next;persist();renderLedger();}
+function profile(){
+ const root=$("sourceRoot").value.trim(),roles=rolesFrom("personRoles");
+ return {root,roles,willing:$("willing").checked};
+}
+$("questionForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ try{
+   const roles=rolesFrom("questionRoles");const options=$("questionOptions").value.split("\n").map(x=>x.trim()).filter(Boolean);
+   const at=now();
+   const question={title:$("questionTitle").value,why:$("questionWhy").value,
+     decision:$("questionDecision").value,options,roles,
+     priority:Number($("priority").value),minRoots:Number($("minRoots").value),
+     maxRoots:Number($("maxRoots").value),
+     openAt:at,closeAt:at+DAY*Number($("days").value)};
+   changeState(M.addQuestion(state,question,at,id("q")));
+   feedback("askFeedback","Question accepted for local inquiry. It is not published or sent. MOTIF will ask only when a willing participant chooses the Answer door.");
+   $("questionForm").reset();
+   resetAskStages();
+   document.querySelectorAll("#questionRoles input").forEach(x=>x.checked=x.value==="anyone");
+ }catch(e){feedback("askFeedback","Question held: "+e.message+". Add a clear use, 2–5 distinct answers, and valid asking limits.");}
+});
+function clearSelection(){selected=null;$("current").hidden=true;}
+$("next").addEventListener("click",()=>{
+ try{
+   const match=M.choose(state,profile(),now());
+   if(!match){clearSelection();feedback("answerFeedback","No eligible open questions: a window may be closed, your perspective may not match, or you may have answered/declined already.");return;}
+   selected=match;const q=match.question;
+   $("current").hidden=false;
+   $("questionStatus").textContent="QUESTION "+q.id+" · "+match.analysis.status+" · "+match.analysis.n+" claimed sources";
+   $("currentTitle").textContent=q.title;$("currentWhy").textContent=q.why;
+   $("currentDecision").textContent=q.decision;$("currentWhyNow").textContent=match.why.join(" · ");
+   const choices=$("answerChoices");choices.replaceChildren();
+   for(let i=0;i<q.options.length;i++){
+     const label=mk("label",undefined,"choice"),input=document.createElement("input");
+     input.type="radio";input.name="answerChoice";input.value=String(i);input.required=true;
+     label.append(input,mk("span",q.options[i]));choices.appendChild(label);
+   }
+   $("answerForm").reset();
+   feedback("answerFeedback","Selected a question using its purpose, self-declared roles, unresolved uncertainty and remaining asking budget. Refusal is always available.");
+ }catch(e){clearSelection();feedback("answerFeedback","Not asking: "+e.message+". Enter a local pseudonym, choose a role, and opt in.");}
+});
+function roleFor(q,p){
+ return p.roles.find(r=>q.roles.includes(r)&&r!=="anyone")||
+   p.roles.find(r=>r!=="anyone")||"anyone";
+}
+$("answerForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ if(!selected)return;
+ try{
+   const p=profile();if(!p.willing)throw Error("CONSENT_WITHDRAWN");
+   const choice=$("answerChoices").querySelector("input:checked");
+   if(!choice)throw Error("CHOOSE_ONE_ANSWER");
+   // Recheck current eligibility immediately before admission.
+   const fresh=M.choose(state,p,now());
+   if(!fresh||fresh.question.id!==selected.question.id)throw Error("QUESTION_NO_LONGER_ELIGIBLE");
+   const e={id:id("e"),questionId:fresh.question.id,root:p.root,role:roleFor(fresh.question,p),
+     at:now(),kind:"ANSWER",choice:Number(choice.value),method:$("answerMethod").value,note:$("answerNote").value};
+   changeState(M.event(state,e));
+   lastContribution={root:p.root,questionId:e.questionId,eventId:e.id};
+   clearSelection();
+   const analysis=M.inspect(state,e.questionId,now());
+   feedback("answerFeedback","Response recorded locally, not verified as truth. "+analysis.n+" claimed distinct sources; status "+analysis.status+". "+analysis.reason+
+    " To correct your answer, use the Correct control in its reasoning card below.");
+ }catch(e){feedback("answerFeedback","Response not recorded: "+e.message);}
+});
+$("decline").addEventListener("click",()=>{
+ if(!selected)return;
+ try{
+   const p=profile(),q=selected.question;
+   changeState(M.event(state,{id:id("d"),questionId:q.id,root:p.root,role:roleFor(q,p),at:now(),kind:"DECLINE"}));
+   clearSelection();
+   feedback("answerFeedback","Decline recorded locally. MOTIF will not offer that question again to this claimed source.");
+ }catch(e){feedback("answerFeedback","Unable to record decline: "+e.message);}
+});
+function renderLedger(){
+ const dest=$("ledger");dest.replaceChildren();
+ if(!state.questions.length){dest.append(mk("p","There are no questions. Add one through Ask MOTIF or load the explicitly fictional examples.","muted"));return;}
+ for(const q of state.questions){
+   const a=M.inspect(state,q.id,now()),card=mk("article",undefined,"question");
+   card.append(mk("span",(q.seed?"SAMPLE / ":"")+"STATUS: "+a.status+" · "+a.n+"/"+q.maxRoots+" claimed sources · "+a.remaining+" remaining","eyebrow"));
+   card.append(mk("h3",q.title),mk("p",q.why));
+   card.append(mk("p","Decision this could change: "+q.decision,"fine"));
+   const bins=mk("div",undefined,"results");
+   for(let i=0;i<q.options.length;i++)bins.append(mk("div",q.options[i]+" — "+a.counts[i]+" claimed independent sources"));
+   card.append(bins);
+   card.append(mk("p",a.reason,"muted"));
+   card.append(mk("p","The largest response group is "+(a.n?(100*a.leadShare).toFixed(0)+"%":"not yet observed")+
+     ". Source identities and independence are NOT authenticated. "+(a.contested?" Contested source records: "+a.contested+".":"")+
+     " None of this establishes truth.","fine"));
+   const actions=mk("div",undefined,"buttons");
+   const explain=mk("button","Why ask / stop?");explain.type="button";
+   const reasoning=mk("p",undefined,"notice");reasoning.hidden=true;
+   reasoning.textContent="Role request: "+q.roles.join(", ")+
+     " · Opens "+new Date(q.openAt).toLocaleString()+
+     " · Closes "+new Date(q.closeAt).toLocaleString()+
+     " · Minimum roots "+q.minRoots+
+     " · Maximum roots "+q.maxRoots+
+     " · Current claimed role diversity "+a.diversity+"/"+a.requiredRoles+
+     " · Current methods "+(a.methods.join(", ")||"none")+".";
+   explain.addEventListener("click",()=>{reasoning.hidden=!reasoning.hidden;});actions.append(explain);
+   // An individual claimed source can revise only its own latest source-scoped response.
+   const p=profile();const source=M.effective(state,q.id).answers.find(x=>x.root===p.root);
+   if(source){
+     const revise=mk("button","Correct my response");
+     revise.type="button";
+     revise.addEventListener("click",()=>{
+       const chosen=prompt("Correction: enter the number of the replacement answer (1–"+q.options.length+").\\n"+
+           q.options.map((x,i)=>(i+1)+". "+x).join("\\n"));
+       if(chosen===null)return;
+       try{
+         const newChoice=Number(chosen)-1;
+         if(!Number.isInteger(newChoice)||newChoice<0||newChoice>=q.options.length)throw Error("INVALID_CHOICE");
+         changeState(M.event(state,{id:id("r"),questionId:q.id,root:p.root,role:source.role,
+           at:now(),kind:"REVISE",choice:newChoice,method:source.method,note:"Explicit user correction",
+           revises:source.id}));
+         feedback("storageFeedback","A new corrected source event was added; the earlier observation remains in the event history.");
+       }catch(e){feedback("storageFeedback","Correction held: "+e.message);}
+     });actions.append(revise);
+   }
+   card.append(actions,reasoning);dest.append(card);
+ }
+}
+$("sourceRoot").addEventListener("change",renderLedger);
+$("addDemo").addEventListener("click",()=>{
+ if(state.questions.length){feedback("askFeedback","Sample questions only load into an empty session. Export or erase this session first if you want to start fresh.");return;}
+ changeState(M.demo(now()));
+ feedback("askFeedback","Two synthetic-purpose sample questions loaded locally. Neither has any responses. Switch to the Answer door and opt in to try the routing.");
+});
+$("refreshLedger").addEventListener("click",renderLedger);
+$("saveLocally").addEventListener("change",()=>{
+ try{
+  if($("saveLocally").checked){localStorage.setItem(CACHE,JSON.stringify(state));feedback("storageFeedback","Opted in: your data is saved only in this browser.");}
+  else{localStorage.removeItem(CACHE);feedback("storageFeedback","Local saved copy erased. Current browser-session data remains until you close/reload.");}
+ }catch(e){feedback("storageFeedback","Local storage unavailable: "+e.message);}
+});
+$("export").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),link=document.createElement("a");
+ link.href=url;link.download="motif-two-doors-evidence.json";link.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+ feedback("storageFeedback","Exported a local JSON file. Sharing it is entirely your choice. Review it for personal details before sharing.");
+});
+$("importButton").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async()=>{
+ const file=$("importFile").files[0];if(!file)return;
+ try{
+   if(file.size>1600000)throw Error("FILE_TOO_LARGE");
+   const imported=JSON.parse(await file.text());
+   M.validateState(imported);
+   const merged=M.merge(state,imported);
+   changeState(merged);
+   feedback("storageFeedback","Imported "+imported.questions.length+" question records and "+imported.events.length+
+     " source events; matched identifiers were deduplicated. Identities and claims remain unverified.");
+ }catch(e){feedback("storageFeedback","Import held, nothing changed: "+e.message);}
+ $("importFile").value="";
+});
+$("clear").addEventListener("click",()=>{
+ if(!confirm("Erase this device's entire current question and response session, including local saved copy?"))return;
+ try{localStorage.removeItem(CACHE);}catch(e){}
+ $("saveLocally").checked=false;
+ state=M.empty();clearSelection();lastContribution=null;renderLedger();
+ feedback("storageFeedback","Session cleared locally. Exported copies or files on other devices are not affected.");
+});
+renderLedger();
+</script>
+</body></html>

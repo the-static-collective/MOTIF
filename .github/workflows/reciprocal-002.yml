@@ -1,0 +1,55 @@
+name: RECIPROCAL-002 — Purposeful Two-Door Inquiry
+on:
+  push:
+    branches:
+      - experiment/reciprocal-002-two-doors-20261112
+  pull_request:
+    paths:
+      - "experiments/reciprocal-002/**"
+      - ".github/workflows/reciprocal-002.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Execute deterministic consent, comparison, scheduling and source safety suite
+        run: |
+          node --check experiments/reciprocal-002/two_doors.js
+          node --check experiments/reciprocal-002/test_engine.cjs
+          node experiments/reciprocal-002/test_engine.cjs
+      - name: Bundle actual mobile app offline and check browser script
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          directory=Path('experiments/reciprocal-002')
+          core=(directory/'two_doors.js').read_text()
+          page=(directory/'app.html').read_text()
+          assert '<script src="./two_doors.js"></script>' in page
+          blocks=re.findall(r'<script(?:[^>]*)>(.*?)</script>',page,re.S)
+          assert len(blocks)==2 and not blocks[0] and len(blocks[1])>1000
+          for script in (core,blocks[1]):
+              assert not re.search(r'\b(?:fetch|XMLHttpRequest|WebSocket|sendBeacon)\s*\(',script)
+          assert 'localStorage.setItem(CACHE' in blocks[1]
+          assert 'saveLocally' in blocks[1]
+          inline=page.replace('<script src="./two_doors.js"></script>',
+              '<script>\n'+core+'\n</script>',1)
+          assert '<script src=' not in inline
+          assert inline.count('<script>')==2
+          (directory/'motif-two-doors-offline.html').write_text(inline)
+          Path('/tmp/two-doors-ui.js').write_text(blocks[1])
+          print('OFFLINE_ONEFILE_BYTES',len(inline.encode()))
+          PY
+          node --check /tmp/two-doors-ui.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-two-doors-offline
+          path: experiments/reciprocal-002/motif-two-doors-offline.html
+          retention-days: 30
