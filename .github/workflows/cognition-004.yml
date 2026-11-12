@@ -1,0 +1,105 @@
+name: COGNITION-004 Unwritten Analogy vs Strong Graph Edit Retrieval
+on:
+  push:
+    paths:
+      - 'experiments/cognition004/**'
+      - '.github/workflows/cognition-004.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition004/**'
+      - '.github/workflows/cognition-004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cross-domain-typed-analogy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: sources/free-graph
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate protocol frozen before implementation and native source pins
+        run: |
+          git show a41ea5b91bd05298025fdab7f4df00e5805559d7:experiments/cognition004/PREREGISTRATION.md > /tmp/frozen-cognition004.md
+          cmp /tmp/frozen-cognition004.md experiments/cognition004/PREREGISTRATION.md
+          test "$(git -C sources/free-graph rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
+          test "$(git -C sources/ghot rev-parse HEAD)" = "9748a0772c4a13135421c4fa84a9991e0a51e05f"
+          test -f experiments/003/affordance.py
+      - name: Run native organ, owner-truth and false-analogy falsifiers
+        run: python -m unittest discover -s experiments/cognition004 -p 'test_*.py' -v
+      - name: Separate development run
+        run: python experiments/cognition004/analogy.py --split development --full > cognition004-development.json
+      - name: Run original 768 heldout cross-domain tasks with receipts
+        run: python experiments/cognition004/analogy.py --split heldout --full > cognition004-heldout.json
+      - name: Independently audit verified effects and matched graph-edit baseline
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0,'experiments/cognition004')
+          from analogy import TEST_SEEDS,DEV_SEEDS,POLICIES,REGIMES,OWNER,MAX_PROBES,seal
+          for path,split,seeds in [
+            ('cognition004-development.json','development',DEV_SEEDS),
+            ('cognition004-heldout.json','heldout',TEST_SEEDS)]:
+            d=json.loads(pathlib.Path(path).read_text())
+            assert d['seal']==seal({k:v for k,v in d.items() if k!='seal'})
+            assert d['cases']==len(seeds)*len(REGIMES)*len(POLICIES)
+            assert d['real_external_actions']==d['model_calls']==0
+            assert set((r['seed'],r['regime'],r['policy']) for r in d['rows'])=={
+              (s,g,p) for s in seeds for g in REGIMES for p in POLICIES}
+            for row in d['rows']:
+              assert row['seal']==seal({k:v for k,v in row.items() if k!='seal'})
+              assert row['target_entity_overlap']==0 and row['typed_ontology_shared']
+              assert row['historical_archive_unchanged']
+              assert row['real_external_actions']==row['model_calls']==0
+              assert not row['personal_data_processed'] and not row['app_deployed']
+              assert row['owner_tests']<=MAX_PROBES and row['owner_repairs']<=1
+              assert row['unverified_repairs']==0
+              assert len(row['owner_receipts'])==row['owner_tests']+row['owner_repairs']
+              assert row['verified_success']==(row['owner_repairs']==1)
+              assert not row['native_private_understory']['validated']
+              for i,r in enumerate(row['owner_receipts'],1):
+                assert r['source']==OWNER and r['sequence']==i
+                assert r['seal']==seal({k:v for k,v in r.items() if k!='seal'})
+              if row['owner_repairs']:
+                assert row['owner_receipts'][-1]['kind']=='REPAIR'
+                assert row['owner_receipts'][-1]['independently_verified']
+                action=row['owner_receipts'][-1]['action']
+                assert any(x['kind']=='TEST' and x['action']==action and x['positive']
+                           for x in row['owner_receipts'])
+              if row['regime'] in ('echo_source','unfamiliar_structure'):
+                assert row['owner_tests']==0 and not row['verified_success']
+              if row['policy']=='motif_council' and row['credible_candidates']:
+                assert row['native_free_graph_checks']>=1
+                assert row['native_private_understory']['status']=='HOLD_NATIVE_MEMENTO_UNAVAILABLE'
+            for pair in d['paired']:
+              assert pair['motif_minus_strong_classical_success']==0
+              assert pair['motif_minus_strong_classical_tests']==0
+            print(split,json.dumps(d['summary'],sort_keys=True))
+          PY
+      - name: Archive full synthetic source/target owner receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition004-768-cross-domain-analogy-evidence
+          path: |
+            cognition004-development.json
+            cognition004-heldout.json
+          retention-days: 30
+          if-no-files-found: warn
