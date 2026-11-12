@@ -7,7 +7,7 @@ This is a public author-designed toy stress case, NOT real LLM inference.
 """
 from __future__ import annotations
 import copy,json
-from odyssey import LongChain,SCENARIO_SEEDS,POLICIES,MINIMUM_ACTIONS,REQUIRED_GATES,digest
+from odyssey import LongChain,SCENARIO_SEEDS,POLICIES,REAL_MODEL_POLICIES,MINIMUM_ACTIONS,REQUIRED_GATES,digest
 
 GROUPS=(
  (8001,8002,8003,8004),
@@ -23,10 +23,13 @@ ACTION_CAP=1350
 COST_CAP=1800
 
 class Marathon:
-    def __init__(self,seeds=GROUPS[0],policy="hypermap_voi"):
+    def __init__(self,seeds=GROUPS[0],policy="hypermap_voi",decision_adapter=None):
         if not isinstance(seeds,tuple) or seeds not in GROUPS:raise ValueError("BAD_REGISTERED_GROUP")
-        if policy not in POLICIES:raise ValueError("BAD_POLICY")
+        if policy not in POLICIES+REAL_MODEL_POLICIES:raise ValueError("BAD_POLICY")
+        if (policy in REAL_MODEL_POLICIES)!=(decision_adapter is not None):
+            raise ValueError("MISSING_REAL_MODEL_OR_UNEXPECTED_ADAPTER")
         self.seeds=seeds;self.policy=policy
+        self.decision_adapter=decision_adapter
         self.children=[];self.events=[];self.status="PENDING"
         self.hash="0"*64;self.cost=0
         self.stop_reason=None
@@ -53,7 +56,7 @@ class Marathon:
                 raise ValueError("CHAIN_SEGMENT_SKIPPED")
             if i>0 and len(self.handoffs)!=i:
                 raise ValueError("HANDOFF_REQUIRED")
-            runner=LongChain(seed,self.policy)
+            runner=LongChain(seed,self.policy,decision_adapter=self.decision_adapter)
             outcome=runner.execute()
             # Append only actual performed actions; unfinished child is not
             # considered a completed segment or a valid next-segment origin.
@@ -112,7 +115,11 @@ class Marathon:
            "audits":sum(c["summary"]["metrics"]["half_audits"]+
                         c["summary"]["metrics"]["terminal_audits"] for c in self.children),
            "relays":sum(c["summary"]["metrics"]["relays"] for c in self.children),
-           "source_authority":"fictional-only","real_llm":False,
+           "real_model_forwards":sum(c["summary"].get("real_model_forwards",0) for c in self.children),
+           "real_model_prompt_tokens":sum(c["summary"].get("real_model_prompt_tokens",0) for c in self.children),
+           "real_model_inference_seconds":round(sum(c["summary"].get("real_model_inference_seconds",0) for c in self.children),4),
+           "source_authority":"fictional-only","decision_adapter_used":self.decision_adapter is not None,
+           "real_llm":getattr(self.decision_adapter,"is_real_pretrained",False) is True,
            "external_actions":False,"hidden_owner_truth_excluded":True}
     def public_record(self):
         return copy.deepcopy({"schema":"motif.odyssey-marathon/v0",

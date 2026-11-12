@@ -33,6 +33,7 @@ REPAIR_COST=2.
 AUDIT_COST=1.5
 RELAY_COST=2.
 POLICIES=("static","classical_bayes","hypermap_voi","contrarian")
+REAL_MODEL_POLICIES=("llm_flat","llm_memory","llm_verification")
 SCENARIO_SEEDS=HELDOUT[:64]
 DEV_SEEDS=DEV[:8]
 
@@ -55,14 +56,21 @@ class BudgetError(RuntimeError):pass
 class GateError(RuntimeError):pass
 
 class LongChain:
-    def __init__(self,seed,policy="classical_bayes",action_limit=ACTION_LIMIT,cost_limit=COST_LIMIT):
+    def __init__(self,seed,policy="classical_bayes",action_limit=ACTION_LIMIT,cost_limit=COST_LIMIT,decision_adapter=None):
         if seed not in DEV_SEEDS+SCENARIO_SEEDS:raise ValueError("SEED_NOT_REGISTERED")
-        if policy not in POLICIES:raise ValueError("UNKNOWN_POLICY")
+        if policy not in POLICIES+REAL_MODEL_POLICIES:raise ValueError("UNKNOWN_POLICY")
+        if (policy in REAL_MODEL_POLICIES)!=(decision_adapter is not None):
+            raise ValueError("REAL_MODEL_ADAPTER_REQUIRED_OR_UNEXPECTED")
         if not isinstance(action_limit,int) or action_limit<1 or action_limit>2000:
             raise ValueError("BAD_ACTION_LIMIT")
         if not isfinite(cost_limit) or cost_limit<=0 or cost_limit>5000:
             raise ValueError("BAD_COST_LIMIT")
         self.seed=seed;self.policy=policy
+        self.decision_adapter=decision_adapter
+        self.last_model_proposal=None
+        self.real_model_calls=0
+        self.real_model_prompt_tokens=0
+        self.real_model_inference_seconds=0.0
         self.action_limit=action_limit;self.cost_limit=cost_limit
         self.owner=[];self.maps=[];self.order=[]
         for sector in range(SECTORS):
@@ -134,6 +142,33 @@ class LongChain:
         if x==self.owner[sector].start_x:
             return int(self.owner[sector].initial["value"]),1.
         m=self.maps[sector]
+        if self.policy in REAL_MODEL_POLICIES:
+            packet=self._model_packet(sector,x)
+            answer=self.decision_adapter(packet)
+            if not isinstance(answer,dict) or answer.get("prediction") not in (0,1):
+                raise ValueError("INVALID_REAL_MODEL_RESULT")
+            p_one=answer.get("p_one")
+            if not isinstance(p_one,(int,float)) or not isfinite(p_one) or not 0<=p_one<=1:
+                raise ValueError("INVALID_REAL_MODEL_PROBABILITY")
+            if not isinstance(answer.get("token_count"),int) or answer["token_count"]<1:
+                raise ValueError("REAL_MODEL_MISSING_TOKEN_COUNT")
+            if not isinstance(answer.get("inference_seconds"),(int,float)) or answer["inference_seconds"]<0:
+                raise ValueError("REAL_MODEL_MISSING_INFERENCE_TIME")
+            self.real_model_calls+=1
+            self.real_model_prompt_tokens+=answer["token_count"]
+            self.real_model_inference_seconds+=answer["inference_seconds"]
+            self.last_model_proposal={
+                "model":str(answer.get("model","UNKNOWN_REAL_MODEL")),
+                "revision":str(answer.get("revision","UNKNOWN_REVISION")),
+                "prompt_sha256":str(answer.get("prompt_sha256","")),
+                "source_roots_used":packet["source_roots"],
+                "observations_used":len(packet["observations"]),
+                "token_count":answer["token_count"],
+                "p_zero":round(1-p_one,6),"p_one":round(p_one,6),
+                "prediction":answer["prediction"],
+                "inference_seconds":round(answer["inference_seconds"],6),
+                "status":"PENCIL_ONLY_NOT_A_WITNESS"}
+            return int(answer["prediction"]),max(p_one,1-p_one)
         w=initial_posterior(self.owner[sector]) if self.policy=="static" else m.weights
         p=sum(float(w[i]) for i in range(8) if outputs(i,x))
         prediction=int(p>=.5)
@@ -141,6 +176,34 @@ class LongChain:
         if self.policy=="contrarian" and confidence<.999:
             prediction=1-prediction
         return prediction,confidence
+    def _model_packet(self,sector,x):
+        """Only observed unique within-sector owner receipts, never owner truth.
+
+        A local PENCIL graph hypothesis is *not* a witness. No unverified
+        survey rumor or earlier sector's hidden rule is included.
+        """
+        m=self.maps[sector]
+        observations=[{"x":list(m.initial_x),"value":int(m.initial_value),
+                       "source_root":m._first_source,"kind":"INITIAL_OWNER_RECEIPT"}]
+        if self.policy!="llm_flat":
+            for e in m.events:
+                if e.get("independent") and e.get("response_kind")=="SOURCE_REPORT":
+                    root=e.get("source_root")
+                    if isinstance(root,str) and all(a["source_root"]!=root for a in observations):
+                        observations.append({"x":list(e["x"]),"value":int(e["reported_value"]),
+                                             "source_root":root,"kind":"INDEPENDENT_OWNER_RECEIPT"})
+        if len(observations)>8 or len({a["source_root"] for a in observations})!=len(observations):
+            raise ValueError("DUPLICATED_OR_OVERSIZED_MODEL_EVIDENCE")
+        if any(e["x"]==list(x) for e in observations):
+            raise ValueError("TARGET_ALREADY_SOURCED_MODEL_UNNECESSARY")
+        return {"schema":"motif.real-model-evidence/v0",
+                "sector":sector,"checkpoint":self.gate,"x":list(x),
+                "observations":observations,
+                "source_roots":[e["source_root"] for e in observations],
+                "no_future_owner_truth":True,
+                "rumor_sources_excluded":True,
+                "real_world_authority":"none"}
+
     def _verification(self,sector,x,kind):
         m=self.maps[sector]
         if x==m.initial_x:
@@ -158,7 +221,7 @@ class LongChain:
         grade_result=grade(self.owner[sector],(before,m.weights),event)
         if grade_result["verified_counterexample"]:
             if grade_result["wrong_helpful_net"]:
-                if self.policy=="static":self.metrics["unrealized_counterexamples"]+=1
+                if self.policy in ("static","llm_flat"):self.metrics["unrealized_counterexamples"]+=1
                 else:self.metrics["learned_counterexamples"]+=1
         if grade_result["regression"]:self.metrics["actual_regressions"]+=1
         self.information_gains.append({"sector":sector,"gate":self.gate,"test_kind":kind,
@@ -177,7 +240,7 @@ class LongChain:
         x=self.order[sector][gate]
         guessed,confidence=self._prediction(sector,x)
         m=self.maps[sector]
-        if self.policy=="hypermap_voi" and x!=m.initial_x:
+        if self.policy in ("hypermap_voi","llm_verification") and x!=m.initial_x:
             expected_failure=(1-confidence)*(WRONG_PENALTY+REPAIR_COST)
             if expected_failure>PROBE_COST:
                 truth,receipt,root=self._verification(sector,x,"optional-before-commit")
@@ -210,7 +273,9 @@ class LongChain:
              "source_root":root or self.owner[sector].initial["root"],
              "source_node":receipt,
              "unverified_rumor_ignored":True,
-             "confidence_before_verification":round(confidence,5)},
+             "confidence_before_verification":round(confidence,5),
+             "real_model_pencil_proposal":copy.deepcopy(self.last_model_proposal) if
+                self.policy in REAL_MODEL_POLICIES and x!=m.initial_x else None},
             COMMIT_COST+(0 if correct else WRONG_PENALTY))
         if correct:
             self.metrics["correct_commits"]+=1
@@ -333,7 +398,11 @@ class LongChain:
           "distinct_calibration_origins":len({o.initial["root"] for o in self.owner}),
           "source_verified_actions":self.metrics["source_verified"],
           "metrics":copy.deepcopy(self.metrics),
-          "side_effects":0,"real_llm_used":False,
+          "side_effects":0,"decision_adapter_used":self.decision_adapter is not None,
+          "real_llm_used":getattr(self.decision_adapter,"is_real_pretrained",False) is True,
+          "real_model_forwards":self.real_model_calls,
+          "real_model_prompt_tokens":self.real_model_prompt_tokens,
+          "real_model_inference_seconds":round(self.real_model_inference_seconds,4),
           "scorecard":"AUTHOR_SYNTHETIC_LONG_HORIZON_NOT_EXTERNAL_BENCHMARK"}
     def public_trace(self):
         return {"schema":SCHEMA,"scenario_seed":self.seed,"policy":self.policy,
