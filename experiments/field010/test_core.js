@@ -1,0 +1,27 @@
+const assert=require('node:assert/strict');
+const M=require('./core.js'), F=require('./fixture.json');
+const P=()=>structuredClone(F);
+const ev=(p,type,options)=>{p.events.push({id:'e'+(p.events.length+1),type,...options});return M.replay(p);};
+let n=0;function check(name,fn){fn();n++;console.log('ok',n,name);}
+check('no edits',()=>assert.equal(M.replay(P()).version,0));
+check('branch version agreement',()=>{const s=M.replay(P());assert.equal(M.computeSolver(s).version,M.computeInterface(s).version)});
+check('three ideas on demo',()=>assert.equal(M.computeSolver(M.replay(P())).hypotheses.length,3));
+check('move positive',()=>{const p=P();assert.equal(ev(p,'move',{target:'current-west',delta:[.04,0]}).items[0].points[0][0],.17)});
+check('move negative',()=>{const p=P();assert.equal(ev(p,'move',{target:'current-west',delta:[-.02,0]}).items[0].points[0][0],.11)});
+check('rigid move out of bounds held',()=>{const p=P();assert.throws(()=>ev(p,'move',{target:'current-west',delta:[-2,0]}))});
+check('endpoint changed',()=>{const p=P();assert.equal(ev(p,'endpoint',{target:'target-one',index:1,point:[.7,.4]}).items[2].points[1][0],.7)});
+check('source stays unchanged',()=>{const p=P(),orig=JSON.stringify(p.base);ev(p,'set',{target:'target-one',prop:'label',value:'New'});assert.equal(orig,JSON.stringify(p.base))});
+check('ratio not a measurement',()=>{const p=P();ev(p,'ratio',{target:'target-one',other:'target-two',value:2});assert.equal(M.computeSolver(M.replay(p)).estimates.length,0)});
+check('rough guess does not calibrate',()=>{const p=P();ev(p,'measure',{target:'target-one',value:5,quality:'rough_guess',unit:'ft'});ev(p,'proportional',{value:true,tolerance:.4});assert.equal(M.computeSolver(M.replay(p)).estimates.length,0)});
+check('measured but disproportionate no scale',()=>{const p=P();ev(p,'measure',{target:'target-one',value:5,quality:'user_measured',unit:'ft'});assert.equal(M.computeSolver(M.replay(p)).estimates.length,0)});
+check('measured and proportional conditional bounds',()=>{const p=P();ev(p,'measure',{target:'target-one',value:5,quality:'user_measured',unit:'ft'});ev(p,'proportional',{value:true,tolerance:.4});const a=M.computeSolver(M.replay(p));assert.equal(a.estimates.length,2);assert.equal(a.estimates[0].low,5);assert.equal(a.verified_physical_assembly,false)});
+check('contradictory anchors hold',()=>{const p=P();ev(p,'measure',{target:'target-one',value:5,quality:'user_measured',unit:'ft'});ev(p,'measure',{target:'target-two',value:200,quality:'user_measured',unit:'ft'});ev(p,'proportional',{value:true,tolerance:.4});assert.equal(M.computeSolver(M.replay(p)).estimates.length,0)});
+check('mixed units hold',()=>{const p=P();ev(p,'measure',{target:'target-one',value:5,quality:'user_measured',unit:'ft'});ev(p,'measure',{target:'target-two',value:10,quality:'user_measured',unit:'m'});ev(p,'proportional',{value:true,tolerance:.4});assert.equal(M.computeSolver(M.replay(p)).estimates.length,0)});
+check('revert recovers view',()=>{const p=P(),orig=JSON.stringify(M.replay(p).items);ev(p,'move',{target:'current-west',delta:[.04,0]});ev(p,'revert',{target_event:'e1'});assert.equal(JSON.stringify(M.replay(p).items),orig);assert.equal(p.events.length,2)});
+check('missing desired drives trace',()=>{const p=P();p.base.items=p.base.items.filter(x=>x.kind!=='desired');assert.equal(M.computeInterface(M.replay(p)).actions[0].tool,'desired')});
+check('reject candidate not counted in plans',()=>{const p=P();ev(p,'set',{target:'target-two',prop:'status',value:'user_rejected'});assert.equal(M.computeSolver(M.replay(p)).ratios.length,0)});
+check('bad photo frame rejected',()=>{const p=P();p.base.coordinate_frame='photo';assert.throws(()=>M.replay(p))});
+check('invalid intended support rejected',()=>{const p=P();assert.throws(()=>ev(p,'add',{item:{id:'s',kind:'support',label:'s',status:'tentative',movable:false,points:[[.1,.2],[.4,.8]]}}))});
+check('ratio-propagation is only tentative',()=>{const p=P();ev(p,'ratio',{target:'target-two',other:'target-one',value:2});ev(p,'measure',{target:'target-one',value:4,quality:'user_measured',unit:'ft'});const result=M.computeSolver(M.replay(p));assert.equal(result.ratioCues[0].implied_nominal,8);assert.equal(result.estimates.length,0)});
+check('no claims of physical completion',()=>{const r=M.computeSolver(M.replay(P()));assert.equal(r.verified_physical_assembly,false);assert.equal(r.photo_georegistered,false)});
+console.log(n+' browser-core test assertions passed.');
