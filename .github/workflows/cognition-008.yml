@@ -1,0 +1,84 @@
+name: COGNITION-008 original NovelGym ten-attempt adaptation (development)
+on:
+  push:
+    paths:
+      - 'experiments/cognition008/**'
+      - '.github/workflows/cognition-008.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition008/**'
+      - '.github/workflows/cognition-008.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-fire-adaptation:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+      OMP_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Verify protocol frozen before any action adapter
+        run: |
+          git show 024754f80c07a38eda49d8fa7c63f3531a28c7f9:experiments/cognition008/PREREGISTRATION.md > /tmp/cog008-protocol.md
+          cmp /tmp/cog008-protocol.md experiments/cognition008/PREREGISTRATION.md
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - name: Check unmodified native upstream checkout
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+      - name: Install native NovelGridWorlds dependencies
+        run: |
+          python -m pip install --upgrade 'pip<25'
+          python -m pip install 'numpy<2' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'pygame==2.5.2' 'PyYAML>=6'
+          python -m pip install -e ./sources/novelgridworldsv2
+      - name: Compile original Metric-FF without upstream source modifications
+        run: |
+          make -C sources/novelgym/planners/Metric-FF-v2.1 CFLAGS="-O0 -ansi -fno-strict-aliasing -g"
+          test -x sources/novelgym/planners/Metric-FF-v2.1/ff
+      - name: Read publicly allowed native observation after failed original plan
+        timeout-minutes: 4
+        working-directory: sources/novelgym
+        run: |
+          python ../../experiments/cognition008/inspect.py > ../../cognition008-dev-observation.json
+      - name: Audit no hidden owner state in controller observation
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('cognition008-dev-observation.json'))
+          assert not d['policy_actions_taken'] and d['development_seed']==1
+          assert d['original_prefix'][-1]['success'] is False
+          assert d['native_public_aperture'][0]['public_observation']
+          print("NATIVE DEVELOPMENT ACTIONS",d['native_public_aperture'][0]['new_action_names'])
+          print("PUBLIC SENSOR",json.dumps(d['native_public_aperture'][0]['public_observation'],default=str)[:2200])
+          PY
+      - name: Archive source-native action aperture, development-only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition008-native-public-observation-probe
+          path: cognition008-dev-observation.json
+          retention-days: 30
+          if-no-files-found: warn
