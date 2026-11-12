@@ -152,9 +152,11 @@ def prefill(model,tokens,ctx):
     return Cache(tokens,keys,values,scope_hash,model.model_fingerprint,
                  cache_signature(tokens,keys,values,scope_hash,model.model_fingerprint),ops)
 
-def branch(model,cache,ctx,token,features,adapter=None):
+def branch(model,cache,ctx,token,features,adapter=None,expected_prefix=None):
     if not isinstance(cache,Cache) or cache.model_fingerprint!=model.model_fingerprint or seal(ctx)!=cache.scope_hash:
         raise ValueError("CACHE_SCOPE_MISMATCH")
+    if not isinstance(expected_prefix,tuple) or expected_prefix!=cache.tokens:
+        raise ValueError('PREFIX_IDENTITY_MISMATCH')
     if len(cache.keys)!=len(cache.tokens) or len(cache.values)!=len(cache.tokens):
         raise ValueError("CACHE_SHAPE_MISMATCH")
     if cache.cache_seal!=cache_signature(cache.tokens,cache.keys,cache.values,
@@ -236,7 +238,7 @@ def demo():
     for tool,permission,action in ((0,0,"probe"),(1,1,"use"),(0,1,"publish"),
                                   (0,1,"use"),(1,0,"use")):
         f=graph_features(tool=tool,permission=permission,action=action)
-        c=branch(m,cache,ctx,action,f,a);n=full(m,tokens,ctx,action,f,a)
+        c=branch(m,cache,ctx,action,f,a,expected_prefix=tokens);n=full(m,tokens,ctx,action,f,a)
         forks.append({"action":action,"tool":tool,"permission":permission,
                       "logit_difference":abs(c["logit"]-n["logit"]),"pencil":c["state"]})
     flat_ops=sum(full(m,tokens,ctx,v["action"],
