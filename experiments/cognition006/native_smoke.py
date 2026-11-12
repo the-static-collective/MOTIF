@@ -33,6 +33,11 @@ def smoke_case(novelty, seed=SEED):
     root=Path.cwd()
     if not (root/"config"/"polycraft_gym_rl_single.yaml").is_file():
         raise RuntimeError("ORIGINAL_NOVELGYM_CWD_REQUIRED")
+    # Upstream YAML refers to top-level "agents" and "novelties" packages.
+    # Python invoked on a script outside the upstream checkout omits cwd from
+    # sys.path, so expose the pinned checkout explicitly (no code copying).
+    if str(root) not in sys.path:
+        sys.path.insert(0,str(root))
     from gym_novel_gridworlds2.envs.sequential import NovelGridWorldSequentialEnv
     from gym_novel_gridworlds2.utils.json_parser import load_json
     config_paths=["config/polycraft_gym_rl_single.yaml"]
@@ -161,7 +166,8 @@ def main():
                       "NATIVE_WORLD_EXECUTED_BASELINE_NOT_PROVEN")
     report["sha256"]=checksum(report)
     args.output.parent.mkdir(parents=True,exist_ok=True)
-    args.output.write_text(json.dumps(report,sort_keys=True,indent=2)+"\n")
+    args.output.write_text(json.dumps(report,sort_keys=True,indent=2)+"
+")
     if failure:
         raise SystemExit("Native upstream execution had errors; see saved report.")
 
