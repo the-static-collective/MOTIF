@@ -118,6 +118,38 @@ def smoke_case(novelty, seed=SEED):
         elif end_reason=="NOT_STARTED":
             end_reason="LOOP_STOPPED_UNCLASSIFIED"
         state=env.internal_state
+        ff_probe=None
+        if planner_failed:
+            # Diagnostic only: inspect why the upstream BasePlanningAgent got
+            # stuck at the original 0.1-second FF timeout. Do not issue actions.
+            import subprocess
+            import tempfile
+            from utils.plan_utils import FF_PATH
+            main=env.agent_manager.agents["agent_0"].agent
+            domain=getattr(main,"pddl_domain",None)
+            problem=getattr(main,"pddl_problem",None)
+            if isinstance(domain,str) and isinstance(problem,str):
+                with tempfile.TemporaryDirectory() as tmp:
+                    dfile=Path(tmp)/"domain.pddl"
+                    pfile=Path(tmp)/"problem.pddl"
+                    dfile.write_text(domain)
+                    pfile.write_text(problem)
+                    try:
+                        pstart=time.monotonic()
+                        proc=subprocess.run([FF_PATH,"-o",str(dfile),"-f",str(pfile),"-s","0"],
+                                            timeout=8,stdout=subprocess.PIPE,
+                                            stderr=subprocess.PIPE,text=True)
+                        ff_probe={"status":"COMPLETED",
+                                  "returncode":proc.returncode,
+                                  "elapsed":round(time.monotonic()-pstart,4),
+                                  "stdout_tail":proc.stdout[-1400:],
+                                  "stderr_tail":proc.stderr[-700:],
+                                  "pddl_domain_sha256":sha256(domain.encode()).hexdigest(),
+                                  "pddl_problem_sha256":sha256(problem.encode()).hexdigest()}
+                    except subprocess.TimeoutExpired:
+                        ff_probe={"status":"TIMED_OUT_AFTER_8S"}
+            else:
+                ff_probe={"status":"NO_GENERATED_PDDL"}
         return {
             "phase":"NATIVE_EXTERNAL_WORLD_SMOKE_NOT_MOTIF_EVALUATION",
             "novelty":novelty,"seed":seed,"config_paths":config_paths,
@@ -125,6 +157,7 @@ def smoke_case(novelty, seed=SEED):
             "native_owner_goal_achieved":bool(state._goal_achieved),
             "native_owner_given_up":bool(state._given_up),
             "planner_failed":planner_failed,
+            "planner_debug_probe_no_actions":ff_probe,
             "end_reason":end_reason,
             "main_actions":main_actions,"total_actions":total_actions,
             "elapsed_wall_seconds":round(time.monotonic()-start,3),
