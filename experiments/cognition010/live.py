@@ -176,7 +176,7 @@ def execute_native_step(env,chosen,mode,iteration,attempt,memory,failed):
     """Native owner is read by outer evaluator ONLY after the policy action."""
     if chosen not in safe_actions(main_actions(env)):
         raise ValueError("NOT_A_PERMITTED_ACTION")
-    if env.agent_selection!="agent_0":
+    if env.agent_selection!="agent_0" and not advance_npcs(env):
         raise RuntimeError("ENGINE_MAIN_TURN_NOT_ACTIVE")
     before=public_observe(env)
     status=native_step(env,chosen)
