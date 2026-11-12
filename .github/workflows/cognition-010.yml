@@ -1,0 +1,122 @@
+name: COGNITION-010 LIVE adaptive NovelGym failure-to-plan-resume ten-attempt trial
+on:
+  push:
+    paths:
+      - 'experiments/cognition010/**'
+      - '.github/workflows/cognition-010.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition010/**'
+      - '.github/workflows/cognition-010.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-live-model-forge:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 28
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+      OMP_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Verify frozen protocol before writing live learner
+        run: |
+          git show 0f616b7d6062295669df4b2dea8e1a16c4cb84e1:experiments/cognition010/PREREGISTRATION.md >/tmp/cog010-frozen.md
+          cmp /tmp/cog010-frozen.md experiments/cognition010/PREREGISTRATION.md
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: sources/free-graph
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - name: Assert exact unmodified external world sources
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+          test "$(git -C sources/free-graph rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
+      - name: Install native source-owner dependencies
+        run: |
+          python -m pip install --upgrade 'pip<25'
+          python -m pip install 'numpy<2' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'pygame==2.5.2' 'PyYAML>=6'
+          python -m pip install -e ./sources/novelgridworldsv2
+      - name: Compile identical original Metric-FF source with previously audited flags
+        run: |
+          make -C sources/novelgym/planners/Metric-FF-v2.1 CFLAGS="-O0 -ansi -fno-strict-aliasing -g"
+          test -x sources/novelgym/planners/Metric-FF-v2.1/ff
+      - name: Source-only falsifiers — no hidden novelty solution
+        working-directory: sources/novelgym
+        run: python -m unittest discover -s ../../experiments/cognition010 -p test_live.py -v
+      - name: Live source-owned six-run development challenge, ten attempts per unsolved case
+        timeout-minutes: 14
+        working-directory: sources/novelgym
+        run: |
+          python ../../experiments/cognition010/live.py --output ../../cognition010-live-development.json
+      - name: Audit actual native owner goal and no premature abandonment
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('cognition010-live-development.json'))
+          assert d['experiment']=='COGNITION-010'
+          assert len(d['cases'])==6
+          assert d['no_premature_give_up']
+          for x in d['cases']:
+              assert x['integration_status']=='NATIVE_WORLD_EXECUTED'
+              assert x['max_attempts']==10 and x['attempts_used']<=10
+              assert x['all_remaining_attempts_spent_if_unsolved']
+              assert x['real_world_actions']==0
+              assert x['success_only_from_original_owner']
+              assert x['no_automatic_app_deployment']
+              if x['policy']=='motif_live' and x['source_bound_model']['tested_programs']>0:
+                  assert x['genuine_motif003_hypothetical_options']>0
+                  assert x['native_free_graph_proposals']
+                  assert all(g['native_validated'] and not g['owner_admission']
+                             for g in x['native_free_graph_proposals'])
+                  assert not any(ev['event']=='NATIVE_ORGAN_DIAGNOSTIC_HOLD'
+                                 for attempt in x['attempts']
+                                 for ev in attempt.get('cognitive_events',[]))
+              assert len(x['attempts'])==x['attempts_used']
+              assert all(a.get('post_failure_actions',0)<=80 for a in x['attempts'])
+              if not x['native_owner_goal']:
+                  assert x['attempts_used']==10
+              for a in x['attempts']:
+                  assert a.get('post_failure_actions',0)==len(a.get('source_receipts',[]))
+          print(json.dumps([{k:x[k] for k in ('policy','novelty','native_owner_goal',
+                      'attempts_used','total_post_failure_actions','subgoals_locally_recovered',
+                      'original_plan_resumes','stop_reason')} for x in d['cases']],indent=2))
+          PY
+      - name: Archive all original-native action/transition/model receipts even if CI fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition010-live-native-failure-revision-original-owner-receipts
+          path: cognition010-live-development.json
+          if-no-files-found: warn
+          retention-days: 30
