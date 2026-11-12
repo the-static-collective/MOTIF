@@ -69,7 +69,8 @@ jobs:
           test -f sources/novelgym/whole_system_run.py
           test -f sources/novelgym/manual_novelty_test1.py
           test -f sources/novelgym/args.py
-          grep -q "fire" sources/novelgym/args.py
+          grep -q '"fire"' sources/novelgym/config.py
+          test -f sources/novelgym/novelties/evaluation1/fire/fire_crafting_table.yaml
           test -d sources/novelgym/planners/Metric-FF-v2.1
           echo 'Pinned external benchmark source trees present. No episodes, planning or training executed.'
       - name: Archive non-scored, non-personal readiness audit
