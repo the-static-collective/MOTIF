@@ -1,0 +1,39 @@
+name: LLM-003 Error Dividend source-owner experiments
+on:
+  push:
+    branches:
+      - experiment/llm003-error-dividend-openweights-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm003/**'
+      - '.github/workflows/llm-003-error.yml'
+  workflow_dispatch:
+jobs:
+  synthetic-owner-matched-policies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s experiments/llm003 -p 'test_error_dividend.py' -v
+      - run: python experiments/llm003/error_dividend.py > llm003-error-results.json
+      - name: Report a bounded heldout summary
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('llm003-error-results.json'))
+          print('HELDOUT_SEEDS',r['seed_count'])
+          for c in r['conditions']:
+              if c['budget'] in (1,3) and c['regime'] in ('truthful','noise20','no_feedback'):
+                  print('ARM',c['regime'],c['budget'],c['policy'],'ACC',c['end_accuracy'],'NET',c['net_utility'],'VERIFIED_WRONG',c['verified_wrong'],'USEFUL_WRONG',c['wrong_helpful_net'])
+          print('WINNERS',json.dumps(r['winners'],sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: llm003-error-dividend-heldout
+          path: llm003-error-results.json
+          retention-days: 30
