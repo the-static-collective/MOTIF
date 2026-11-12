@@ -334,8 +334,7 @@ def run_case(seed,regime,policy,*,memento_root=None,full=False,state=DEFAULT_STA
     else:
         # Fair conventional on-event graph search with all old source data.
         proposals=current_paths
-        wake_ops=graph_ops
-    offered=[p for p in proposals if p["independent"]]
+        # Include the starting cue lookup even if it has no graph neighbors.\n        wake_ops=graph_ops+1\n    offered=[p for p in proposals if p["independent"]]
     excluded=[p for p in proposals if not p["independent"]]
     if policy=="motif_resurface" and cached is not None:
         offered,affordances=_motif_hypothetical_order(proposals)
