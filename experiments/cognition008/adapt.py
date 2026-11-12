@@ -228,9 +228,11 @@ def action_owner_receipt(env,name,step,attempt):
     return receipt
 
 
-def run_policy(policy,seed=1):
-    if policy not in POLICIES or seed!=1:
-        raise ValueError("UNREGISTERED_DEVELOPMENT_CASE")
+def run_policy(policy,seed=1,novelty="fire"):
+    if policy not in POLICIES or not ((novelty=="fire" and seed==1) or
+            (novelty in ("fence","axe","chest","dist_trade") and
+             seed in (31001,31021,31041))):
+        raise ValueError("UNREGISTERED_NOVELGYM_EVALUATION_CASE")
     start_cpu=time.process_time()
     old=make("none",seed)
     old_actions=main_actions(old)
@@ -243,7 +245,7 @@ def run_policy(policy,seed=1):
     native_graph=None
     success=False
     for attempt in range(1,MAX_ATTEMPTS+1):
-        env=make("fire",seed)
+        env=make(novelty,seed)
         try:
             native=main_actions(env)
             prefix=original_prefix(env)
@@ -294,9 +296,13 @@ def run_policy(policy,seed=1):
                 break
         finally:
             env.close()
-    return {"policy":policy,"seed":seed,"task":"original NovelGym fire",
+    return {"policy":policy,"seed":seed,"novelty":novelty,
+            "task":"original NovelGym "+novelty,
             "source":"ORIGINAL_NOVELGYM_NATIVE_OWNER",
             "verified_owner_success":success,
+            "original_planner_owner_success":bool(all_attempts and all_attempts[0].get("baseline_finished") and success),
+            "recovery_owner_success":bool(success and all_attempts and not all_attempts[0].get("baseline_finished")),
+            "recovery_attempted":bool(attempted),
             "first_successful_attempt":(len(all_attempts) if success else None),
             "attempts_used":len(all_attempts),
             "novel_action_candidates":len(source_programs),
