@@ -6,7 +6,7 @@ from copy import deepcopy
 from analogy import (
     DEV_SEEDS,TEST_SEEDS,REGIMES,POLICIES,FIXES,UNSEEN_FIX,MAX_PROBES,
     RELATIONS,Owner,STATE,AppState,baseline,edit_cost,candidates,
-    free_graph_proposal,_native_graph,native_motif_test_affordances,
+    free_graph_proposal,_native_graph,native_motif_test_affordances,question_portfolio,
     understory_envelope,validate_understory_owner,run_case,benchmark,seal
 )
 
@@ -125,6 +125,20 @@ class UnwrittenAnalogyTests(unittest.TestCase):
         possible=candidates(lib,event)[0]
         self.assertEqual(native_motif_test_affordances(possible),1)
         self.assertEqual(native_motif_test_affordances([]),0)
+
+    def test_equal_question_budget_five_lenses_vs_single_critic(self):
+        lib,event,_=baseline(DEV_SEEDS[0],"renamed_permuted")
+        rows=candidates(lib,event)[0]
+        five=question_portfolio(rows,"motif_council")
+        classical=question_portfolio(rows,"classical_graph_edit")
+        self.assertEqual(len(five),len(classical))
+        self.assertEqual(len(five),5)
+        self.assertEqual(len(set(c["perspective"] for c in five)),5)
+        self.assertEqual(set(c["perspective"] for c in classical),{"skeptic"})
+        self.assertTrue(all(x["status"]=="PENCIL_UNTESTED" and
+                            not x["permits_action"] and not x["owner_result_seen"]
+                            for x in five+classical))
+        self.assertEqual(question_portfolio([],"motif_council"),[])
 
     def test_private_understory_owner_hold_and_read_only_structure(self):
         lib,event,p=baseline(DEV_SEEDS[0],"renamed_permuted")
