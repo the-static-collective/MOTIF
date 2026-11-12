@@ -142,6 +142,15 @@ test("unrecognized question refuses graph, test or method generation",()=>{
   assert.throws(()=>f(s,"missing",T+1),/UNKNOWN_QUESTION/);
  }
 });
+test("authored example is explicitly fictional and demonstrates proposed learner without network people",()=>{
+ const s=R.authoredDemo(T);
+ assert.equal(s.questions.length,1);
+ assert.equal(s.questions[0].seed,true);
+ assert.equal(s.events.length,8);
+ assert.ok(s.events.every(e=>e.root.includes("fictional")));
+ assert.equal(R.methodCandidate(s,"fixture_role_divergence",T).status,"PROPOSED_FOR_HUMAN_REVIEW");
+ assert.equal(R.previewOneMore(s,"fixture_role_divergence",T).branches.length,3);
+});
 test("no raw report note is exported as graph label or inferred as verified fact",()=>{
  let s=initial();
  s=add(s,{root:"newcomer_01",role:"newcomer",choice:0,at:T+100});
