@@ -131,7 +131,7 @@ def test_model_revision(model,tokenizer):
             "dtype":str(next(model.parameters()).dtype)}
 
 @torch.inference_mode()
-def error_feedback_trial(model,tokenizer,count=8):
+def error_feedback_trial(model,tokenizer,count=64):
     # The model is not given the hidden owner program. Two strategies receive
     # one independently verified NEW example each, with equal probe count.
     # A wrong model answer is never published. Negative examples are PENCIL.
@@ -160,7 +160,16 @@ def error_feedback_trial(model,tokenizer,count=8):
                 "verified_example_from_independent_owner":True,
                 "prompt_tokens":tokens}
         rows.append(each)
-    return {"cases":len(rows),"same_one_probe_budget_each":True,
+    import statistics
+    diffs=[int(x["challenge"]["correct"])-int(x["random"]["correct"]) for x in rows]
+    rng=random.Random(20261112)
+    boots=sorted(statistics.mean(diffs[rng.randrange(len(diffs))] for _ in diffs) for _ in range(1500))
+    paired_ci={"challenge_minus_random_mean":round(statistics.mean(diffs),5),
+               "paired_95_low":round(boots[37],5),
+               "paired_95_high":round(boots[1461],5),
+               "zero_within_interval":boots[37]<=0<=boots[1461],
+               "exploratory_posthoc_after_8_case_pilot":True}
+    return {"cases":len(rows),"same_one_probe_budget_each":True,"paired_ci":paired_ci,
             "baseline_correct":sum(x["baseline_correct"] for x in rows),
             "challenge_correct":sum(x["challenge"]["correct"] for x in rows),
             "random_correct":sum(x["random"]["correct"] for x in rows),
