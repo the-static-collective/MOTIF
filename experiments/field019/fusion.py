@@ -180,7 +180,7 @@ def fuse(packet, *, max_rms_px=6., scale_grid=None, allow_sketch_correction=True
     local_s=np.exp(fit.x[0]);
     scale_test=[]
     for factor in (.7,1.0,1.3):
-        poses,e=_solve_one_scale(packet,ids,ground,local_s*factor)
+        poses,e=_solve_one_scale(packet,ids,ground+raw_offsets,local_s*factor)
         scale_test.append({'factor':factor,'rms_px':round(e,4)})
     xnorm=np.linalg.norm(res.reshape(-1,2),axis=1)
     outlier_count=int(np.sum(xnorm>max_rms_px*2))
@@ -188,12 +188,14 @@ def fuse(packet, *, max_rms_px=6., scale_grid=None, allow_sketch_correction=True
           'camera_intrinsics':'EXTERNALLY_SUPPLIED_NOT_INFERRED',
           'camera_focal_provenance':[v.get('focal_provenance') for v in packet['views']],
           'max_reprojection_rms_px':max_rms_px,'worst_point_error_px':round(float(np.max(xnorm)),3),
-          'large_residual_point_count':outlier_count,'scale_sensitivity':scale_test,
+          'large_residual_point_count':outlier_count,'scale_sensitivity_given_fitted_sketch_correction':scale_test,
           'independent_ground_truth':False,'assumed_sketch_distortion_fraction':packet['sketch_tolerance_fraction'],
           'photo_pair_auto_registered':False, 'real_model_inference':False,
           'initial_fit_rms_px':round(initial_rms,3),
           'sketch_correction_max_fraction_of_extent':round(float(np.max(np.linalg.norm(raw_offsets,axis=1)) / max(1e-6,np.linalg.norm(np.ptp(ground,axis=0)))),4),
           'sketch_correction_proposed_not_observed':True}
+    # A scale profile holds fitted sketch offsets fixed: conditional local check,
+    # not a global identifiability proof when sketch corrections are free.
     # An unusually wide scale ambiguity remains a HOLD even if the best error is small.
     # Use a relative increase threshold of 0.6px at +/-30% scale as an illustrative identifiability probe.
     sensitivity=min(scale_test[0]['rms_px']-scale_test[1]['rms_px'],scale_test[2]['rms_px']-scale_test[1]['rms_px'])
