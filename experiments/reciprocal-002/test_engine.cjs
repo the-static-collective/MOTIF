@@ -119,7 +119,7 @@ test("conflicting question identifiers and conflicting event identifiers refuse 
  assert.throws(()=>M.merge(a,b),/QUESTION_SOURCE_CONFLICT/);
  b=newState();
  a=contribute(a,"source1",0,T+100);
- b=contribute(b,"source2",0,T+101,{});
+ b=contribute(b,"source2",0,T+101);
  // Both events use different IDs, still merge.
  assert.equal(M.merge(a,b).events.length,2);
  b=JSON.parse(JSON.stringify(a));
