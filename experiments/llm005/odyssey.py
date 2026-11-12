@@ -85,6 +85,7 @@ class LongChain:
         self.per_sector_receipts=[set([o.initial["root"]]) for o in self.owner]
         self.initial_rules_in_trace=False
         self.completed_stage_hashes=[]
+        self.rumor_roots_seen=set()
     def _step(self,kind,sector=None,gate=None,metadata=None,cost=0):
         if self.status!="RUNNING":raise GateError("TERMINAL_STATE")
         if len(self.events)>=self.action_limit:raise BudgetError("ACTION_BUDGET_EXCEEDED")
@@ -120,6 +121,9 @@ class LongChain:
         # An adversarial echo can look like a corroborating report. Its source
         # root is identical within this sector, and is never owner testimony.
         rumor_origin=f"unverified-rumor-{self.seed}-{sector}"
+        if rumor_origin in self.rumor_roots_seen:
+            self.metrics["root_echoes_ignored"]+=1
+        else:self.rumor_roots_seen.add(rumor_origin)
         hint=(x[0]^x[1]^(sector%2))
         self.surveyed=True;self.metrics["surveys"]+=1
         self._step("survey",sector,gate,{"x":list(x),
@@ -248,12 +252,25 @@ class LongChain:
             raise GateError("AUDIT_REQUIRES_COMPLETE_VERIFIED_GATES")
         if any((s,j) not in self.completed for j in range(threshold)):
             raise GateError("MISSING_GATES")
-        roots=self.per_sector_receipts[s]
-        if len(roots)!=threshold:raise GateError("AUDIT_SOURCE_RECEIPT_COUNT_MISMATCH")
+        # The initial calibration can occur AFTER the half-way point;
+        # audit only roots actually tied to completed cells. Optional probes
+        # for other future cells must not count toward this gate.
+        relevant=[]
+        for j in range(threshold):
+            x=self.order[s][j]
+            if x==self.owner[s].start_x:
+                root=self.owner[s].initial["root"]
+            else:
+                matches=[e for e in self.maps[s].events if tuple(e["x"])==tuple(x)]
+                if len(matches)!=1 or not matches[0]["independent"]:
+                    raise GateError("AUDIT_MISSING_INDEPENDENT_REPORT")
+                root=matches[0]["source_root"]
+            relevant.append(root)
+        if len(set(relevant))!=threshold:raise GateError("AUDIT_SOURCE_RECEIPT_COUNT_MISMATCH")
         # "Roots" are fixture roots, NOT signed real-world permissions.
         self.audits.add((s,which))
         self._step(which+"_audit",s,threshold-1,
-            {"verified_gates":threshold,"distinct_source_roots":len(roots),
+            {"verified_gates":threshold,"distinct_source_roots":len(set(relevant)),
              "no_synthetic_permission_promotion":True},AUDIT_COST)
         self.metrics["half_audits" if which=="half" else "terminal_audits"]+=1
         if which=="terminal":
