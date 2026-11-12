@@ -1,0 +1,33 @@
+name: FIELD-017 bounded revision and material critic
+on:
+  push:
+    paths:
+      - 'experiments/field017/**'
+      - '.github/workflows/field-017.yml'
+  pull_request:
+    paths:
+      - 'experiments/field017/**'
+      - '.github/workflows/field-017.yml'
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run FIELD-017 source-safe Python tests
+        working-directory: experiments/field017
+        run: python -m unittest -v test_search.py
+      - name: Run FIELD-017 browser reasoning tests
+        working-directory: experiments/field017
+        run: node test_loop.js
+      - name: Reproduce fair budget comparison
+        working-directory: experiments/field017
+        run: python benchmark.py
