@@ -33,4 +33,18 @@ test('invalid negative height refused',()=>{assert.throws(()=>S.stamp(model(),{t
 test('export OBJ includes genuine z and height vertices',()=>{const txt=S.exportObj(S.build(model()));assert.ok(txt.includes('\nf '));assert.ok(txt.includes('\nv '));assert.ok(txt.includes('not actual geometry'));});
 test('next best questions include height and scale',()=>{const q=S.nextQuestions(S.build(model()));assert.ok(q.some(x=>x.kind==='height'));assert.ok(q.some(x=>x.kind==='measurement'));});
 test('event indexes are append only',()=>{let m=S.stamp(model(),{type:'height',id:'line1',value:2,quality:'human_rough'});m=S.stamp(m,{type:'clearance',id:'line1',value:.2,quality:'human_rough'});assert.deepEqual(m.events.map(x=>x.index),[1,2]);});
+test('revert is append-only and restores original position',()=>{let m=S.stamp(model(),{type:'position',id:'line1',points:[[.20,.25],[.60,.25]]});
+const moved=S.build(m).objects.find(x=>x.id==='line1').points;
+m=S.stamp(m,{type:'revert',target_index:1});
+assert.notDeepEqual(moved,S.build(m).objects.find(x=>x.id==='line1').points);
+assert.deepEqual(S.build(m).objects.find(x=>x.id==='line1').points,fixture.base.items[0].points);assert.equal(m.events.length,2);});
+test('staged material remains unregistered and schematic',()=>{let f=JSON.parse(JSON.stringify(fixture));
+f.events=[{id:'ev1',type:'material_add',material:{id:'material-test1',label:'Cage panel?',role:'boundary_module',status:'tentative',mobility:'unknown',
+source_frame:'photo_normalized',photo_id:'test-photo',photo_sha256:'a'.repeat(64),provenance:'LOCAL_VLM_TENTATIVE',bbox:[.1,.2,.4,.6],registered_to_sketch:false,certified_safe:false}}];
+let m=S.create(f);m=S.stamp(m,{type:'add_barrier',id:'stage-1',material_id:'material-test1',label:'Cage panel?',points:[[.5,.4],[.63,.4]]});
+const stage=S.build(m).objects.find(x=>x.id==='stage-1');assert.equal(stage.source,'PHOTO_MATERIAL_UNREGISTERED:material-test1');assert.equal(stage.height_quality,'diagram_assumption');});
+test('cannot undo a revert event',()=>{let m=S.stamp(model(),{type:'height',id:'line1',value:2,quality:'human_rough'});
+m=S.stamp(m,{type:'revert',target_index:1});assert.throws(()=>S.stamp(m,{type:'revert',target_index:2}));});
+test('cannot duplicate a compensating revert',()=>{let m=S.stamp(model(),{type:'height',id:'line1',value:2,quality:'human_rough'});
+m=S.stamp(m,{type:'revert',target_index:1});assert.throws(()=>S.stamp(m,{type:'revert',target_index:1}));});
 console.log(`PASS ${tests} FIELD-014 tests`);
