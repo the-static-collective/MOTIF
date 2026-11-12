@@ -16,8 +16,20 @@ from utils.diarc_json_utils import generate_diarc_json_from_state
 
 def make(novelty,seed):
     paths=["config/polycraft_gym_rl_single.yaml"]
-    if novelty=="fire":
-        paths.append("novelties/evaluation1/fire/fire_crafting_table.yaml")
+    # Only the TEST HARNESS sees these original source-owned config paths.
+    # None of the adaptive action-proposer functions receives this mapping.
+    variants={
+        "none":None,
+        "fire":"novelties/evaluation1/fire/fire_crafting_table.yaml",
+        "axe":"novelties/evaluation1/axe_to_break/axe_to_break.yaml",
+        "fence":"novelties/evaluation1/fence/fence_easy.yaml",
+        "chest":"novelties/evaluation1/chest_shortcut/chest_shortcut.yaml",
+        "dist_trade":"novelties/evaluation1/dist_trade/dist_trade.yaml",
+    }
+    if novelty not in variants:
+        raise ValueError("UNREGISTERED_ORIGINAL_NOVELGYM_VARIANT")
+    if variants[novelty]:
+        paths.append(variants[novelty])
     cfg=load_json(config_json={"extends":paths},verbose=False)
     env=NovelGridWorldSequentialEnv(config_dict=cfg,render_mode=None,
                                    run_name="cog008-probe",max_time_step=700,seed=seed)
