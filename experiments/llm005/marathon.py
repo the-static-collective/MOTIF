@@ -118,7 +118,8 @@ class Marathon:
            "real_model_forwards":sum(c["summary"].get("real_model_forwards",0) for c in self.children),
            "real_model_prompt_tokens":sum(c["summary"].get("real_model_prompt_tokens",0) for c in self.children),
            "real_model_inference_seconds":round(sum(c["summary"].get("real_model_inference_seconds",0) for c in self.children),4),
-           "source_authority":"fictional-only","real_llm":self.decision_adapter is not None,
+           "source_authority":"fictional-only","decision_adapter_used":self.decision_adapter is not None,
+           "real_llm":getattr(self.decision_adapter,"is_real_pretrained",False) is True,
            "external_actions":False,"hidden_owner_truth_excluded":True}
     def public_record(self):
         return copy.deepcopy({"schema":"motif.odyssey-marathon/v0",
