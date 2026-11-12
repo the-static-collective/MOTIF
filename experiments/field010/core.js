@@ -26,7 +26,7 @@
        !['unknown','movable','fixed'].includes(m.mobility) || m.source_frame!=='photo_normalized' ||
        typeof m.photo_id!=='string'||!m.photo_id||m.photo_id.length>120 ||
        !/^[a-f0-9]{64}$/.test(m.photo_sha256) ||
-       !['LOCAL_VLM_TENTATIVE','HUMAN_REGION_TAG'].includes(m.provenance) ||
+       !['LOCAL_VLM_TENTATIVE','HUMAN_REGION_TAG','LOCAL_CV_TENTATIVE'].includes(m.provenance) ||
        !Array.isArray(m.bbox)||m.bbox.length!==4||!m.bbox.every(x=>finite(x)&&x>=0&&x<=1) ||
        m.bbox[2]-m.bbox[0]<=.005 ||m.bbox[3]-m.bbox[1]<=.005 ||
        m.registered_to_sketch!==false||m.certified_safe!==false ||

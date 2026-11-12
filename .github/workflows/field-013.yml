@@ -1,0 +1,36 @@
+name: FIELD-013 zero-turn source-scoped material candidates
+on:
+  push:
+    paths:
+      - 'experiments/field013/**'
+      - 'experiments/field012/material.js'
+      - 'experiments/field010/core.js'
+      - 'experiments/field010/app.js'
+      - 'experiments/field010/index.html'
+      - '.github/workflows/field-013.yml'
+  pull_request:
+    paths:
+      - 'experiments/field013/**'
+      - 'experiments/field012/material.js'
+      - 'experiments/field010/**'
+      - '.github/workflows/field-013.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run FIELD-013 region, provenance and planning tests
+        run: node experiments/field013/test_scan.js
+      - name: Run FIELD-013 opt-in batch VLM protocol tests (mock only)
+        run: python -m unittest discover -v -s experiments/field013 -p 'test_*.py'
+      - name: Run existing material and workbench regression tests
+        run: |
+          node experiments/field012/test_material.js
+          node experiments/field010/test_core.js
+          python -m unittest discover -v -s experiments/field012 -p 'test_*.py'

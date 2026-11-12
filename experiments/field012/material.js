@@ -14,7 +14,7 @@
       typeof x.label!=='string'||!x.label.trim()||x.label.length>120||
       !ROLES.includes(x.role)||!STATUS.includes(x.status)||!MOBILITY.includes(x.mobility)||
       x.source_frame!=='photo_normalized'||typeof x.photo_id!=='string'||!x.photo_id||x.photo_id.length>120||
-      !hash(x.photo_sha256)||!['HUMAN_REGION_TAG','LOCAL_VLM_TENTATIVE'].includes(x.provenance)||
+      !hash(x.photo_sha256)||!['HUMAN_REGION_TAG','LOCAL_VLM_TENTATIVE','LOCAL_CV_TENTATIVE'].includes(x.provenance)||
       !Array.isArray(x.bbox)||x.bbox.length!==4||!x.bbox.every(bounded)||
       !(x.bbox[2]-x.bbox[0]>.005&&x.bbox[3]-x.bbox[1]>.005)||
       x.registered_to_sketch!==false||x.certified_safe!==false||
