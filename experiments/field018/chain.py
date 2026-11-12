@@ -127,6 +127,21 @@ def reframe_hints(hints):
     return hypotheses
 
 
+def selection_gate(search_report):
+    """Never treat 'minimum score' as 'feasible' when all searched cases fail."""
+    best=search_report['selected']
+    failed=best['verdict']=='REJECTED_UNDER_STATED_MODEL' or bool(best['failures'])
+    return {
+        'status':'HOLD_NO_MODEL_ADMISSIBLE_LAYOUT' if failed else 'HOLD_CONDITIONAL_REVIEW_ONLY',
+        'operational_recommendation':None,
+        'least_bad_candidate_id':best['layout']['route']+'|'+','.join(best['layout']['pieces']),
+        'known_model_failures':list(best['failures']),
+        'verified_real_world_safety':False,
+        'note':('Every considered candidate failed stated model constraints; the selected least-bad candidate is NOT a viable plan.'
+                if failed else 'The candidate does not fail this simplified model, but no installable/safe plan is certified.')
+    }
+
+
 def synthetic_chain(budget=16):
     """Strict integration of REAL predecessor code on an authored synthetic world."""
     scene=f16.invented_scene()
@@ -149,6 +164,7 @@ def synthetic_chain(budget=16):
                'winner':initial['selected']['layout'],
                'winner_verdict':initial['selected']['verdict'],
                'winner_model_failures':initial['selected']['failures'],
+               'selection_gate':selection_gate(initial),
                'winner_unknowns':initial['selected']['unknowns'],
                'next_question':initial['next_input'],
                'iterations':[{'candidate':x['candidate'], 'operator':x['operator'],
@@ -161,8 +177,11 @@ def synthetic_chain(budget=16):
                 'winner':after['selected']['layout'],
                 'winner_verdict':after['selected']['verdict'],
                 'winner_unknowns':after['selected']['unknowns'],
+                'winner_model_failures':after['selected']['failures'],
+                'selection_gate':selection_gate(after),
                 'next_question':after['next_input']},
       'winning_layout_changed':initial['selected']['layout']!=after['selected']['layout'],
+      'revision_found_any_non_rejected_candidate':after['selected']['verdict']!='REJECTED_UNDER_STATED_MODEL',
       'world_changed_only_by_declared_observation':True,
       'physical_assembly_executed':0,
       'real_model_reconstruction_calls':0,
@@ -181,7 +200,7 @@ def module_gates(real,sim):
        {'name':'Automatic image-semantic inventory','status':'BLOCKED','evidence':'No installed/running VLM; photo objects not independently identified'},
        {'name':'Multi-view registered metric 3D','status':'BLOCKED','evidence':f"{p['photo_pairs_held']} photo pairs held; MapAnything and Depth Anything 3 not run"},
        {'name':'Source-grounded yard physical calculation','status':'BLOCKED','evidence':'Real material and geometric dimensions unknown'},
-       {'name':'Synthetic 3D mechanics + recursive revision','status':'PASS_SYNTHETIC_ONLY','evidence':f"{sim['first']['evaluated']} critic calls, revision changed winner={sim['winning_layout_changed']}"},
+       {'name':'Synthetic 3D mechanics + recursive revision','status':'PASS_SYNTHETIC_ONLY','evidence':f"{sim['first']['evaluated']} critic calls; after revision admissible candidate={sim['revision_found_any_non_rejected_candidate']}"},
        {'name':'Verified safe physical construction','status':'NOT_TESTED','evidence':'No installed materials or independent engineering/animal safety inspection'},
     ]
 
