@@ -23,11 +23,14 @@ jobs:
         run: |
           node --check experiments/reciprocal-004/ecosystem-crosswire.mjs
           node --test experiments/reciprocal-004/test-crosswire.mjs
+          node --check experiments/reciprocal-004/repo-horizon.mjs
+          node --test experiments/reciprocal-004/test-horizon.mjs
           node experiments/reciprocal-002/test_engine.cjs
           node experiments/reciprocal-003/test_research.cjs
       - name: Actually execute source-owned exporter
         run: |
           node experiments/reciprocal-004/ecosystem-crosswire.mjs --out /tmp/motif-crosswire
+          node experiments/reciprocal-004/repo-horizon.mjs --query MOTIF > /tmp/motif-crosswire/motif-public-source-leads.json
       - name: Checkout original publicly pinned Free Graph validator only
         uses: actions/checkout@v4
         with:
