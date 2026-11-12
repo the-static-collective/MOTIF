@@ -1,0 +1,106 @@
+name: COGNITION-003 resurfacing versus matched classical precompute
+on:
+  push:
+    paths:
+      - 'experiments/cognition003/**'
+      - '.github/workflows/cognition-003.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition003/**'
+      - '.github/workflows/cognition-003.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-two-day-resurfacing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: sources/free-graph
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: sources/ghot
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate preregistered question and actual source versions
+        run: |
+          git show 2af4905777eeeadd7ab213db323ce12fe5b92a45:experiments/cognition003/PREREGISTRATION.md > /tmp/cognition003-frozen.md
+          cmp /tmp/cognition003-frozen.md experiments/cognition003/PREREGISTRATION.md
+          test "$(git -C sources/free-graph rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
+          test "$(git -C sources/ghot rev-parse HEAD)" = "9748a0772c4a13135421c4fa84a9991e0a51e05f"
+          test -f experiments/003/affordance.py
+      - name: Test 16 owner/safety/graph provenance falsifiers
+        run: python -m unittest discover -s experiments/cognition003 -p 'test_*.py' -v
+      - name: Development-only dry evaluation (not heldout scores)
+        run: python experiments/cognition003/resurface.py --split development > cognition003-development.json
+      - name: Run original new 640-case heldout design and collect all owner action receipts
+        run: python experiments/cognition003/resurface.py --split heldout --full > cognition003-heldout.json
+      - name: Independently audit source packets, repair receipts and paired comparisons
+        run: |
+          python - <<'PY'
+          import json,pathlib,sys
+          sys.path.insert(0,'experiments/cognition003')
+          from resurface import DEV_SEEDS,TEST_SEEDS,REGIMES,POLICIES,OWNER,seal,BUDGET
+          for fn,split,seeds in (
+            ('cognition003-development.json','development',DEV_SEEDS),
+            ('cognition003-heldout.json','heldout',TEST_SEEDS)):
+            d=json.loads(pathlib.Path(fn).read_text())
+            assert d['seal']==seal({k:v for k,v in d.items() if k!='seal'})
+            assert d['split']==split and d['n']==len(seeds)*len(REGIMES)*len(POLICIES)
+            assert len(d['paired'])==len(seeds)*len(REGIMES)
+            assert set((r['seed'],r['regime'],r['policy']) for r in d['rows'])=={
+              (s,g,p) for s in seeds for g in REGIMES for p in POLICIES}
+            for row in d['rows']:
+              assert row['seal']==seal({k:v for k,v in row.items() if k!='seal'})
+              assert row['source_cut']=='UNRESOLVED' and row['graph_native_validated']
+              assert row['no_source_truth_promoted'] and row['archive_unchanged']
+              assert row['real_external_actions']==row['model_calls']==0
+              assert row['probes']<=BUDGET and row['repair_attempts']<=1
+              assert row['unsafe_repairs']==0
+              assert row['verified_success']==(row['repair_attempts']==1)
+              assert row['native_understory']['validated']==False
+              assert row['native_understory']['status'] in (
+                'HOLD_NATIVE_MEMENTO_UNAVAILABLE','NOT_INVOKED_FOR_POLICY')
+              receipts=row['owner_verified_receipts']
+              assert len(receipts)==row['probes']+row['repair_attempts']
+              for i,receipt in enumerate(receipts,1):
+                assert receipt['source']==OWNER and receipt['sequence']==i
+                assert receipt['seal']==seal({k:v for k,v in receipt.items() if k!='seal'})
+              if row['repair_attempts']:
+                assert receipts[-1]['kind']=='REPAIR' and receipts[-1]['independently_verified']
+                assert any(x['kind']=='TEST' and x['positive'] and
+                           x['component']==receipts[-1]['component'] for x in receipts)
+              else:
+                assert not row['verified_success']
+              assert row['incident']['question_from_user'] is False
+            # Same owner truth and same info across matched arms; never secretly
+            # claim a source-aware cached controller lost despite identical data.
+            for x in d['paired']:
+              assert x['motif_minus_classical_cached_success']==0
+              assert x['motif_minus_classical_online_success']==0
+              assert x['motif_minus_cached_wake_ops']==0
+            print(split,json.dumps(d['summary'],sort_keys=True))
+          PY
+      - name: Archive all synthetic owner TEST and REPAIR receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition003-640-worlds-associative-resurfacing-native-graph
+          path: |
+            cognition003-development.json
+            cognition003-heldout.json
+          if-no-files-found: warn
+          retention-days: 30
