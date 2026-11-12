@@ -65,7 +65,7 @@ the verified learning it might produce.</p>
 <aside><strong>Public synthetic specimen only.</strong> Every named hypothesis and
 report in this visualization comes from an authored simulator. No real user,
 person, permission, engineering measurement, or project decision is represented.
-Changing a lens does not change evidence or confer authority.</aside>
+This display case was deliberately selected by an independent fixture grader to illustrate a useful counterexample; it is not a random or representative sample. Changing a lens does not change evidence or confer authority.</aside>
 </header>
 <div class="controls">
 <label>Reasoning lens<select id="lens">
