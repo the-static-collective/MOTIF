@@ -1,6 +1,6 @@
 # MOTIF FIELD‑016 — REVISION IN MATTER
 
-**Research status:** executable authored planner; no deployed vision-model inference, no ground-truthed site reconstruction, no structural safety certification, no observed construction. Stacked on FIELD‑015, whose `physics.screen`, `physics.assembly_screen`, and `reconstruction.report_pair` are **actually imported and executed**, not merely described.
+**Research status:** executable authored planner; no deployed vision-model inference, no ground-truthed site reconstruction, no structural safety certification, no observed construction. Stacked on FIELD‑015, whose `physics.screen`, `physics.assembly (or compatible assembly_screen)`, and `reconstruction.report_pair` are **actually imported and executed**, not merely described.
 
 ## Scientific question
 
@@ -36,7 +36,7 @@ These fixture values are **not drawn from the user's actual property**. The save
 ## Critical safety/epistemic fences
 
 1. **Strong zip ties ≠ structural joint proof.** A package label's 200-lb advertised tensile rating is not installed working capacity, peel, creep, UV/cold response, load sharing, or support stability.
-2. **Topology ≠ bracing.** A connected network of panels isn't assumed to be a rigid, stable frame. `assembly_screen` explicitly returns unverified load sharing.
+2. **Topology ≠ bracing.** A connected network of panels isn't assumed to be a rigid, stable frame. `assembly` / compatible `assembly_screen` explicitly returns unverified load sharing.
 3. **Mesh needs animal hazard review.** Thin netting and large openings can entangle paws, heads or collars, regardless of nominal wind-screen results.
 4. **One hand-drawn ratio ≠ 3D survey.** The UI's local x/y/z coordinates are hypothetical; neither MapAnything nor DA3 was run or approved as geometric truth.
 5. **Free-body screen ≠ structural engineering analysis.** The model ignores gust factors, design standards, complex connection forces, torsion, soil anchorage, impact, fatigue, and actual materials.
