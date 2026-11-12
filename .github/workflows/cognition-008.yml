@@ -62,7 +62,7 @@ jobs:
         timeout-minutes: 4
         working-directory: sources/novelgym
         run: |
-          python ../../experiments/cognition008/inspect.py > ../../cognition008-dev-observation.json
+          python ../../experiments/cognition008/aperture_probe.py > ../../cognition008-dev-observation.json
       - name: Audit no hidden owner state in controller observation
         run: |
           python - <<'PY'
