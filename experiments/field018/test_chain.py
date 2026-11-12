@@ -2,7 +2,7 @@ import json,sys,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import cv2
-from chain import inspect_source,synthetic_chain,reframe_hints,run
+from chain import inspect_source,synthetic_chain,reframe_hints,run,selection_gate
 
 class ChainTests(unittest.TestCase):
     def setUp(self):
@@ -87,6 +87,18 @@ class ChainTests(unittest.TestCase):
         self.assertIn('FIELD-017',str(r['engines_actually_invoked']))
         self.assertEqual(r['first']['evaluated'],16)
         self.assertTrue(r['winning_layout_changed'])
+
+    def test_rejected_least_bad_not_presented_as_usable(self):
+        r=synthetic_chain(16)
+        self.assertTrue(r['winning_layout_changed'])
+        self.assertFalse(r['revision_found_any_non_rejected_candidate'])
+        self.assertEqual(r['second']['selection_gate']['status'],'HOLD_NO_MODEL_ADMISSIBLE_LAYOUT')
+        self.assertIsNone(r['second']['selection_gate']['operational_recommendation'])
+
+    def test_conditional_before_still_not_installable(self):
+        r=synthetic_chain(16)
+        self.assertEqual(r['first']['selection_gate']['status'],'HOLD_CONDITIONAL_REVIEW_ONLY')
+        self.assertIsNone(r['first']['selection_gate']['operational_recommendation'])
 
     def test_synthetic_no_source_fraud(self):
         r=synthetic_chain(16)
