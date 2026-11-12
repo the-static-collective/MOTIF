@@ -131,16 +131,19 @@ class ReasonHypermap:
         return copy.deepcopy({"state_id":self.state_id(),"posterior":self.weights,
                               "events":self.events,"queries":sorted(self.queries)})
     def choose_test(self,policy="challenge_favorite",allow_costly=False):
-        if policy not in (*POLICIES,"decision_gain"):
+        if policy not in (*POLICIES,"decision_gain","classical_ig_stop"):
             raise ValueError("UNKNOWN_POLICY")
         if self.active is not None:raise ValueError("ONE_OUTSTANDING_TEST")
         if len(self.events)>=MAX_EVENTS or policy=="no_probe":return None
         remaining=tuple(x for x in INPUTS if x!=self.initial_x and x not in self.queries)
         if not remaining:return None
         noise=.2 if self.regime=="noise20" else 0.
-        if policy=="decision_gain":
-            x=max(remaining,key=lambda q:(round(decision_gain(self.weights,q,noise),12),
-                                          tuple(-v for v in q)))
+        if policy in ("decision_gain","classical_ig_stop"):
+            x=(max(remaining,key=lambda q:(round(decision_gain(self.weights,q,noise),12),
+                                            tuple(-v for v in q)))
+               if policy=="decision_gain"
+               else choose("classical_ig",self.weights,remaining,self.seed,len(self.events),noise))
+            # Same stopping criterion for both: only *choice* differs.
             if decision_gain(self.weights,x,noise)<=self.cost and not allow_costly:
                 return None
         else:x=choose(policy,self.weights,remaining,self.seed,len(self.events),noise)
@@ -149,7 +152,8 @@ class ReasonHypermap:
         predicted=outputs(favored,x)
         prior=self.state_id()
         rationale=("counterexample-search" if policy=="challenge_favorite" else
-                   "bayes-decision-value" if policy=="decision_gain" else policy)
+                   "bayes-decision-value" if policy=="decision_gain" else
+                   "classical-IG-cost-stop" if policy=="classical_ig_stop" else policy)
         predicted_node=self._node("prediction",f"PENCIL: H{favored} predicts {predicted} for {x}",
             "proposed",[self._model_source],{"world":self.seed,"x":list(x),
                   "answer":predicted,"favorite":favored,"not_verified":True})
