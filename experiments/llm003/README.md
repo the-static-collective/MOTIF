@@ -54,6 +54,35 @@ A wrong **hypothesis** can be valuable when it creates a *test that changes the 
 
 Before running it, we separately froze [PREREGISTRATION-TRAINING-ADDENDUM](PREREGISTRATION-TRAINING-ADDENDUM.md). It compares frozen pretrained weights + trained low-rank graph adapter under verified positive-and-negative examples, positive-only examples, and deliberately corrupted negative labels at identical update budgets. It also tests withheld synthetic prompt phrasings, feature shuffling and a 100%-accurate engineer-authored classical rule. The training attempt is not the same as the original numerical cache-equivalence test. Its results must be reported independently; no claim is made until its CI receipt has been inspected.
 
+## Real pretrained learning tests: a shortcut found, then falsified
+
+After the primary real KV experiment, two separately preregistered **post-hoc** follow-ups asked whether the graph actually *caused* the pretrained model's answers.
+
+First ([LLM-003B](PREREGISTRATION-TRAINING-ADDENDUM.md)): with 48 held-out author-defined cases using 'probe/use/publish', the 48-update verified-labeled rank-2 adapter scored **44/48 (91.7%)** versus the unadapted pretrained model **28/48 (58.3%)**, positive-only training **20/48 (41.7%)**, and corrupted-negative training **31/48 (64.6%)**. HOWEVER, when the tool/permission graph bits were deliberately flipped, verified training STILL scored **44/48**. That positive-looking result was compatible with the model using action-word shortcuts, not the graph. Strong classical authored rule: 48/48.
+
+The follow-up ([LLM-003C](PREREGISTRATION-GRAPH-CAUSALITY.md), [successful run](https://github.com/the-static-collective/MOTIF/actions/runs/43247789523)) removed that confound: **every prompt proposed exactly the same action word, 'use'**. Only the binary graph-provided tool and permission facts varied. The test owner labeled an action 1 only when both were present (AND). Training balanced true and false examples at 48 updates on the same frozen 135M-parameter model; four held-out phrasings × four source-graph cases = 16 tests.
+
+| Graph-only author task | Correct / 16 | Accuracy |
+| --- | ---: | ---: |
+| Frozen pretrained model, no graph adapter | 12 | 75% |
+| Trained rank-2 adapter, verified labels | **16** | **100%** |
+| Same verified adapter, tool+permission graph bits flipped at inference | 8 | 50% |
+| Same pretrained model, positive-only adapter training | 4 | 25% |
+| Same model, 50%-corrupted negative reports during training | 4 | 25% |
+| Exact engineer-authored classical AND rule | **16** | **100%** |
+
+Unlike the first test, the graph-feature flip actually degraded predictions. This is **mechanistic evidence that the real pretrained model's suffix hidden-state response can be controlled by typed graph input** on this narrow toy task, not evidence of novel reasoning, generalization, or superiority to logic. Exact classical reasoning matched at 100%. The adverse corruption result supports investigating truthful negative feedback, but it is also consistent with ordinary supervised learning and is not proof of a new error-learning algorithm.
+
+### Core synthesis / proposed decision rule
+
+- Generate as many speculative alternatives as the available computation budget reasonably supports, but label them PENCIL.
+- Prefer *discriminating tests* whose independent results would alter later action choices. An incorrect provisional candidate can have positive value **only if falsification changes the next decision**.
+- Retain one immutable shared source prefix; branch-specific graph changes belong in suffix hidden states or require a new prefix KV computation.
+- Return verified observations and their source lineage, never a language model's unverified claim. Unknown consent or physical fit stays HOLD.
+- Score net verified progress per time, model tokens, oracle probes, and human correction cost; compare against strong exact logic/planning controls. Under absent or deceptive feedback, deliberate error-hunting can lose.
+
+**No external-source, multi-model, or adversarial generalization result has yet been established.**
+
 ## Reproduce / read
 
 - Dependency-free synthetic oracle: `python -m unittest discover -s experiments/llm003 -p test_error_dividend.py -v` and `python experiments/llm003/error_dividend.py`.
