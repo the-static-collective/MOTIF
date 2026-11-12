@@ -216,11 +216,25 @@ def run_real_first_marathon():
        "not_generalized":True}
 
 def main():
+    import argparse
+    from pathlib import Path
+    a=argparse.ArgumentParser()
+    a.add_argument("--out",default="/tmp/llm006")
+    args=a.parse_args()
+    out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     r=run_real_first_marathon()
+    summary={**r,"arms":{k:{t:v for t,v in x.items() if t!="record"}
+                         for k,x in r["arms"].items()}}
+    (out/"real-model-summary.json").write_text(json.dumps(summary,sort_keys=True,indent=2)+"\n")
+    (out/"real-model-traces.json").write_text(json.dumps({
+        "schema":"motif.llm006.model-traces/v0",
+        "model":r["model"],"revision":r["revision"],"group":r["research_group"],
+        "arms":{k:x["record"] for k,x in r["arms"].items()},
+        "public_fixtures_only":True,"external_actions":False},sort_keys=True)+"\n")
     print("LLM006_RESULT_BEGIN",flush=True)
-    print(json.dumps({**r,"arms":{k:{t:v for t,v in x.items() if t!="record"}
-                           for k,x in r["arms"].items()}},sort_keys=True),flush=True)
+    print(json.dumps(summary,sort_keys=True),flush=True)
     print("LLM006_RESULT_END",flush=True)
+    print("LLM006_TRACE_FILE_BYTES",(out/"real-model-traces.json").stat().st_size,flush=True)
     return r
 
 if __name__=="__main__":
