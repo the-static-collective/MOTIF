@@ -18,7 +18,7 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
 </head>
 <body>
 <header>
- <div><h1>MOTIF <span style="color:#d7e57f">/ FIELD-011</span> — Shared Board</h1><small>Sketch → tentative editable draft → two reasoning branches → your corrections.</small></div>
+ <div><h1>MOTIF <span style="color:#d7e57f">/ FIELD-012</span> — Shared Board</h1><small>Sketch + photographs → tentative objects and geometry → co-editable counterfactuals.</small></div>
  <div class="row"><span class="tag">Local-only prototype · no network calls</span><button id="exportBtn" class="primary">Save board JSON</button><button id="svgBtn">Export annotated SVG</button></div>
 </header>
 <main>
@@ -58,6 +58,22 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
  <div class="rightcol">
   <section class="card"><div class="head"><h2>Auto-draft evidence review</h2><span id="draftCount" class="pill">No draft</span></div>
     <div class="body"><p class="small">Suggestions are editable, not confirmed. Candidate lines are drawn between possible ink marks; no verified complete fence or actual physical scale is inferred.</p><div id="draftReview" class="tiles"></div></div></section>
+  <section class="card"><div class="head"><h2>Photo → movable material hypotheses</h2><span id="materialCount" class="pill">0 materials</span></div>
+    <div class="body">
+      <p class="small">Select a reference photograph, drag a box around a visible object, and assign a possible use. The box stays in <strong>photo coordinates</strong>. Dragging a hypothetical copy onto the yard is a separate action.</p>
+      <svg id="objectPhotoCanvas" viewBox="0 0 600 360" aria-label="Drag on selected photo to tag a material" style="width:100%;max-height:340px;touch-action:none;background:#101d27;border:1px solid #485967;border-radius:8px;cursor:crosshair">
+        <image id="objectPhotoImage" x="0" y="0" width="600" height="360" preserveAspectRatio="none"></image>
+        <g id="objectPhotoRegions"></g><rect id="objectRegionDraft" x="0" y="0" width="0" height="0" fill="#d2ef9b" fill-opacity=".14" stroke="#d2ef9b" stroke-width="3" stroke-dasharray="7 4" pointer-events="none"/>
+      </svg>
+      <p class="micro" id="regionHint">Choose a photo above, then drag a rectangle here. No photo-to-yard registration is assumed.</p>
+      <label class="field">What might the selected object do?<select id="materialRole"><option value="boundary_module">Rigid boundary / panel candidate</option><option value="support_candidate">Possible support / brace</option><option value="flexible_barrier">Flexible mesh / netting</option><option value="visual_cue">Visual boundary cue</option><option value="unknown">Unknown — investigate</option></select></label>
+      <label class="field">Short working label<input type="text" id="materialLabel" maxlength="120" placeholder="e.g. cage panel; unverified"></label>
+      <div class="row"><button id="addMaterialBtn" class="primary mini">Add photo-region hypothesis</button><button id="materialImportBtn" class="mini">Import local VLM candidates</button><input hidden id="materialImportFile" type="file" accept="application/json"></div>
+      <p class="micro">An optional separate localhost VLM may produce tentative photo boxes. No VLM or image upload occurs automatically in this browser.</p>
+      <div id="materials" class="tiles" style="margin-top:11px"></div>
+      <div class="note warn">All placements are schematic. An image, a connector rating or mutual bracing concept cannot verify safe dog containment or actual loads.</div>
+    </div>
+  </section>
   <section class="card"><div class="head"><h2>Object / measurement inspector</h2></div><div class="body" id="inspector"><p class="small">Select a segment to edit its label, mobility, status, and length. You can correct missing geometry directly on the canvas.</p></div></section>
   <section class="card"><div class="head"><h2>Ratio & uncertainty controls</h2></div><div class="body"><label class="check"><input id="proportional" type="checkbox"><span>Assume this sketch is roughly proportional</span></label><label class="field">Possible nonuniformity in sketch (assumed ±%)<input id="tolerance" type="number" min="0" max="85" step="5" value="40"></label><p class="small">A physical length remains unknown unless a human supplies a same-sketch measured reference. Even then, resulting ranges are conditional assumptions, not calibrated statistical confidence.</p><div id="scaleSummary" class="note warn">No physical scale. Drawn ratios only.</div><div class="separate"><div class="small"><strong>Measurable spans · blank until entered</strong></div><div id="measurementQueue" style="margin:7px 0 12px"></div></div><label class="field">Use a relational constraint (choose a segment)<select id="ratioTarget"><option value="">— select target —</option></select></label><div class="split"><label class="field">Relative to<select id="ratioOther"><option value="">— reference —</option></select></label><label class="field">Approximate multiplier<input id="ratioValue" type="number" min=".05" max="20" step=".25" value="2"></label></div><button id="ratioBtn" class="mini">Add ratio relation</button><div id="ratios" class="small" style="margin-top:8px"></div></div></section>
   <section class="card"><div class="head"><h2>Evidence & revision trail</h2><button id="importBtn" class="mini">Import board JSON</button><input type="file" id="importFile" accept="application/json" hidden></div><div class="body"><p class="small" style="margin:0">Every edit creates a named, replayable event. Undo appends a compensating event; it does not erase history.</p><p class="micro" id="editCount">0 edits</p></div><div class="events" id="events"></div><div class="body"><div class="note bad">Engineering HOLD: zip ties, loose mesh, chairs and trampoline parts are unverified supports. A visual boundary is not automatically safe pet containment.</div></div></section>
@@ -66,5 +82,6 @@ main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid
 <script src="core.js"></script>
 <script src="fixture.js"></script>
 <script src="../field011/draft.js"></script>
+<script src="../field012/material.js"></script>
 <script src="app.js"></script>
 </body></html>
