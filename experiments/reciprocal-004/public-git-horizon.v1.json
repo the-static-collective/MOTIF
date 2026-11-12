@@ -1,0 +1,449 @@
+{
+  "schema": "motif.reciprocal-public-repository-horizon/v1",
+  "edition": "HORIZON-2026-11-12-001",
+  "owner": "the-static-collective",
+  "source": "Explicitly public GitHub repository metadata",
+  "sourceDate": "2026-11-12",
+  "coverage": "PARTIAL_PUBLIC_ONLY_UNVERIFIED_COMPLETENESS",
+  "constraints": {
+    "metadataIsNotCodeInspection": true,
+    "privateRepositoriesExcluded": true,
+    "branchExistsDoesNotMeanMerged": true,
+    "sourceOwnerPreserved": true,
+    "automatedOutreach": false,
+    "bulkDataImport": false,
+    "issueContentsNotInspected": true
+  },
+  "records": [
+    {
+      "repository": "the-static-collective/100pies",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/3rdi",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/ALEX.2",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/appliance-prophet-king",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/autodiscography-vault",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/BananaDash",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/BananaGram-Gram-to-Fork",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/BananaSpork",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/band-runtime",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/BnanaGram",
+      "default_branch": "master",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/CANNON",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/ChronoQuest",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/cloudflare-control",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/convergent-codec",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/corpus-os",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/cUps",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Dogram",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/DVOTE",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/fogGlass",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/founder-node",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/free-graph",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/freeport",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/full-measure-world-layer",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/GOATnote",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/GRAFT",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/GrO",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Human-Witness",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/iron-lung",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/JAR-VIS",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/jubilee-authority-kit",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Jubilee-Campfire",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Jubilee-Engine-VM",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Jubilee-treasury",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/jublEchat",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/LampPost",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/lemonPRESS",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/LOADOUT",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/love",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/MOTIF",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/mundaneWORMHOLE",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/national-treasure",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Nourish-Kids",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/pies",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/planZ",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/playdeck",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/project0",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/reCOreturn",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/reCURV",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/reCURVrePAIR",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/reLATTE",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/reMIX-reCURVrePAIR",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/revival",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/ROroomOM",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/SEAMforge",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/seedforge",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/seedforge-v0",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/seedFORK",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/SIA",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/static-field",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/static-live",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/static-os",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/static-workbench",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/STORYSHIP",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-autodisco",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/The-AutodiscoV.20.-question-marks-",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-daily-slice",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-haunted-blender",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-haunted-phonography",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-haunted-pol-ish-roids",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-haunted-toaster",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/the-static-collective",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/toaster-lab",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/toaster-lab2",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/toaster-oracle",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/tranchnode",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/tranchNode-v1",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/tranchNOSE",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/trust",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/unfolding-ledger",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/Upper-room",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/vidmage",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/webZ",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/WITNESS",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    },
+    {
+      "repository": "the-static-collective/WORLDSEED",
+      "default_branch": "main",
+      "observed_from": "public-repository-metadata"
+    }
+  ]
+}

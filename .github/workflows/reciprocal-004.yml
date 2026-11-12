@@ -1,0 +1,61 @@
+name: RECIPROCAL-004 Ecosystem Crosswire — source-owned public donor gate
+on:
+  push:
+    branches:
+      - experiment/reciprocal-004-ecosystem-crosswire-20261112
+  pull_request:
+    paths:
+      - 'experiments/reciprocal-004/**'
+      - '.github/workflows/reciprocal-004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-donor-to-free-graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Source-owner reciprocal 002–004 regression checks
+        run: |
+          node --check experiments/reciprocal-004/ecosystem-crosswire.mjs
+          node --test experiments/reciprocal-004/test-crosswire.mjs
+          node --check experiments/reciprocal-004/repo-horizon.mjs
+          node --test experiments/reciprocal-004/test-horizon.mjs
+          node experiments/reciprocal-002/test_engine.cjs
+          node experiments/reciprocal-003/test_research.cjs
+      - name: Actually execute source-owned exporter
+        run: |
+          node experiments/reciprocal-004/ecosystem-crosswire.mjs --out /tmp/motif-crosswire
+          node experiments/reciprocal-004/repo-horizon.mjs --query MOTIF > /tmp/motif-crosswire/motif-public-source-leads.json
+      - name: Checkout original publicly pinned Free Graph validator only
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: _external/free-graph
+          persist-credentials: false
+      - name: Validate exported original Free Graph v0 contract and provenance
+        run: |
+          python3 _external/free-graph/scripts/fg.py validate /tmp/motif-crosswire/motif-reciprocal-free-graph.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          packet=json.loads(Path('/tmp/motif-crosswire/motif-reciprocal-free-graph.json').read_text())
+          x=json.loads(Path('/tmp/motif-crosswire/motif-reciprocal-crosswire.json').read_text())
+          passport=json.loads(Path('/tmp/motif-crosswire/motif-reciprocal-passport.json').read_text())
+          assert packet['extensions']['projection_only'] if 'projection_only' in packet['extensions'] else packet['extensions']['reviewedReceiverRequired']
+          assert not any(l['verb']=='constitutes' for l in packet['links'])
+          assert x['crossing']['status']=='HOLD_FOR_OWNER_REVIEW'
+          assert all(v['crossed'] is False for v in passport['neighboringDoors'])
+          assert x['trial']['strongMatchedClassical']=='exact_tie'
+          print('PUBLIC_FIXTURE_ONLY_HOLD_CONFIRMED')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-crosswire-public-graph-and-passport
+          path: /tmp/motif-crosswire/*.json
+          retention-days: 30
