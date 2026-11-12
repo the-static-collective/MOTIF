@@ -1,0 +1,61 @@
+name: RECIPROCAL-003 — Reason Hypermap to Method Foundry
+on:
+  push:
+    branches:
+      - experiment/reciprocal-003-hypermap-foundry-20261112
+  pull_request:
+    paths:
+      - "experiments/reciprocal-003/**"
+      - ".github/workflows/reciprocal-003.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reason-cycle-and-offline-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate native Two Doors and new research module
+        run: |
+          node --check experiments/reciprocal-002/two_doors.js
+          node --check experiments/reciprocal-003/reason_loop.js
+          node --check experiments/reciprocal-003/test_research.cjs
+          node experiments/reciprocal-002/test_engine.cjs
+          node experiments/reciprocal-003/test_research.cjs
+      - name: Build and audit offline single-file reason lab
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path("experiments")
+          old=(root/"reciprocal-002/two_doors.js").read_text()
+          new=(root/"reciprocal-003/reason_loop.js").read_text()
+          html=(root/"reciprocal-003/lab.html").read_text()
+          assert '<script src="../reciprocal-002/two_doors.js"></script>' in html
+          assert '<script src="./reason_loop.js"></script>' in html
+          blocks=re.findall(r'<script(?:[^>]*)>(.*?)</script>',html,re.S)
+          assert len(blocks)==3 and not blocks[0] and not blocks[1] and len(blocks[2])>1000
+          for script in (old,new,blocks[2]):
+              assert not re.search(r'\b(?:fetch|XMLHttpRequest|WebSocket|sendBeacon)\s*\(',script)
+          assert "saveLocally" in blocks[2] and "researchInspect" in blocks[2]
+          single=html.replace('<script src="../reciprocal-002/two_doors.js"></script>',
+               '<script>\n'+old+'\n</script>',1).replace(
+               '<script src="./reason_loop.js"></script>',
+               '<script>\n'+new+'\n</script>',1)
+          assert single.count('<script>')==3
+          assert '<script src=' not in single
+          output=root/"reciprocal-003/motif-reason-loop-offline.html"
+          output.write_text(single)
+          Path('/tmp/reciprocal003-ui.js').write_text(blocks[2])
+          print('RECIPROCAL003_APP_BYTES',len(single.encode()))
+          PY
+          node --check /tmp/reciprocal003-ui.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-reason-loop-offline-lab
+          path: experiments/reciprocal-003/motif-reason-loop-offline.html
+          retention-days: 30
