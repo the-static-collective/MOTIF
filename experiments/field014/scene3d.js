@@ -21,7 +21,15 @@
  function validate(model){
    if(!model||model.schema!=='motif.field014.v1'||!Array.isArray(model.events)||model.events.length>3000)throw Error('Invalid FIELD-014 record');
    checkProject(model.original);
-   model.events.forEach((e,i)=>{if(!e||!['position','height','clearance','thickness','annotation','calibrate','add_support','add_barrier','remove_support','confirm','revert'].includes(e.type)||e.index!==i+1)throw Error('Invalid event record');});
+   const undone=new Set();
+   model.events.forEach((e,i)=>{
+     if(!e||!['position','height','clearance','thickness','annotation','calibrate','add_support','add_barrier','remove_support','confirm','revert'].includes(e.type)||e.index!==i+1)throw Error('Invalid event record');
+     if(e.type==='revert'){
+       if(!Number.isInteger(e.target_index)||e.target_index<1||e.target_index>i||
+          model.events[e.target_index-1]?.type==='revert'||undone.has(e.target_index))throw Error('Invalid compensating event');
+       undone.add(e.target_index);
+     }
+   });
    return model;
  }
  function build(model){
@@ -51,7 +59,7 @@
      }
      if(e.type==='add_barrier'){
        if(!e.id||!/^stage-[0-9]{1,4}$/.test(e.id)||objs.has(e.id)||supports[e.id]||
-          !state.materials.some(m=>m.id===e.material_id&&m.status!=='user_rejected')||!Array.isArray(e.points)||e.points.length!==2||
+          !state.materials.some(m=>m.id===e.material_id&&m.status!=='user_rejected'&&['boundary_module','support_candidate'].includes(m.role))||!Array.isArray(e.points)||e.points.length!==2||
           !e.points.every(p=>Array.isArray(p)&&p.length===2&&p.every(v=>finite(v)&&v>=0&&v<=1)))throw Error('Invalid material staging');
        supports[e.id]=true;
        objs.set(e.id,{id:e.id,kind:'panel',label:String(e.label||'Tentative salvage').slice(0,120),points:e.points.map(p=>[...p]),movable:true,status:'tentative',
