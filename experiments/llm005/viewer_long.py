@@ -113,6 +113,15 @@ reset the hidden rule. Every fourth sector also requires a relay before proceedi
 <h2>Current witnessed transition</h2>
 <div id="current"></div>
 <h3>Source-bound reasoning detail</h3>
+<label style="margin:8px 0">Reason Hypermap lens
+<select id="lens">
+<option value="causal">Causal — tests and consequences</option>
+<option value="epistemic">Epistemic — rivals and evidence</option>
+<option value="decision">Decision — what changed?</option>
+<option value="lineage">Lineage — hypothesis ancestry</option>
+<option value="narrative">Narrative — revision and error</option>
+</select>
+</label>
 <div id="reasonLink" class="muted">Select an action to inspect the evidence that changed the next possible decision.</div>
 <h3>Exact event record</h3>
 <pre id="eventJson"></pre>
@@ -241,6 +250,22 @@ function inspectEvidence(e){
  const maps=DATA.reason_maps||{};
  const ownerMap=maps[String(e.sector)];
  if(active==="hypermap_voi"&&ownerMap){
+   const lens=$("lens").value;
+   const allowed={
+     causal:["test-revises-possibilities","proposes-test"],
+     epistemic:["report-bears-on-rivals","report-supports-rivals"],
+     decision:["test-revises-possibilities"],
+     lineage:["proposes-test"],
+     narrative:["test-revises-possibilities"]
+   }[lens]||[];
+   const allEdges=Object.values(ownerMap.hyperedges||{});
+   const chosen=allEdges.filter(h=>allowed.includes(h.relation));
+   msg.push("LENS "+lens+": "+chosen.length+" recorded local hyperedges. Selecting a lens does not change any source or authority.");
+   const preview=chosen.slice(0,3).map(h=>(h.relation+" ["+h.status+"] "+
+     (h.tails||[]).map(id=>ownerMap.nodes[id]?.kind||"unknown").join("+")+
+     " → "+(h.heads||[]).map(id=>ownerMap.nodes[id]?.kind||"unknown").join("+")));
+   if(preview.length)msg.push("SOURCED HYPEREDGES: "+preview.join(" / "));
+
    const matching=(ownerMap.events||[]).find(r=>r.source_root===d.source_root);
    if(matching){
      const h=ownerMap.hyperedges[matching.hyperedge];
@@ -272,6 +297,7 @@ function play(){
 }
 select.addEventListener("change",()=>{stop();active=select.value;index=0;fillComparison();rebuild()});
 $("seek").addEventListener("input",e=>{stop();setIndex(e.target.value)});
+$("lens").addEventListener("change",()=>rebuild());
 $("first").addEventListener("click",()=>{stop();setIndex(0)});
 $("back").addEventListener("click",()=>{stop();setIndex(index-1)});
 $("forward").addEventListener("click",()=>{stop();setIndex(index+1)});
