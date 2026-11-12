@@ -1,0 +1,23 @@
+name: LLM-002 graph-conditioned shared-prefix fork tests
+on:
+  push:
+    branches:
+      - experiment/llm002-graph-conditioned-prefix-forks-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm002/**'
+      - '.github/workflows/llm-002.yml'
+  workflow_dispatch:
+jobs:
+  exact-fork-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s experiments/llm002 -p 'test_*.py' -v
+      - run: python experiments/llm002/engine.py
