@@ -58,7 +58,9 @@ jobs:
           python -m pip install -e ./sources/novelgridworldsv2
       - name: Compile upstream Metric-FF planner at source (GPLv2, isolated CI only)
         run: |
-          make -C sources/novelgym/planners/Metric-FF-v2.1
+          # Upstream -O6 binary segfaulted on the hosted 64-bit runner;
+          # retry identical GPLv2 source with conservative compiler flags.
+          make -C sources/novelgym/planners/Metric-FF-v2.1 CFLAGS="-O0 -ansi -fno-strict-aliasing -g"
           test -x sources/novelgym/planners/Metric-FF-v2.1/ff
       - name: Run noninteractive, bounded native owner episodes none vs fire
         timeout-minutes: 8
