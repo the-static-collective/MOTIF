@@ -1,0 +1,32 @@
+name: FIELD-010 shared board · two-branch offline checks
+on:
+  push:
+    paths:
+      - 'experiments/field010/**'
+      - '.github/workflows/field-010.yml'
+  pull_request:
+    paths:
+      - 'experiments/field010/**'
+      - '.github/workflows/field-010.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Real FIELD-009 adapter and event-ledger regressions
+        working-directory: experiments/field010
+        run: python -m unittest discover -v
+      - name: Browser reasoning-core parity and HOLD controls
+        working-directory: experiments/field010
+        run: node test_core.js
+      - name: Syntax checks (browser source)
+        working-directory: experiments/field010
+        run: |
+          node --check app.js
+          node --check core.js
