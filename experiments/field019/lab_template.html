@@ -90,6 +90,7 @@ function exportPacket(){let names=Object.keys(marks).filter(n=>marks[n]?.S?.base
  sketch_tolerance_fraction:Number($('tol').value)/100,
  landmarks:Object.fromEntries(names.map(n=>[n,marks[n].S.base.map((v,i)=>v/(i?($('imageS').naturalHeight||1):($('imageS').naturalWidth||1)))])),views:[]};
  for(let k of ['A','B']){let im=$('image'+k);trace.views.push({source:sourceState[k].name,size:[im.naturalWidth,im.naturalHeight],focal_px:Number($('focal'+k).value)||null,
+ focal_provenance:mode==='synthetic'?'SYNTHETIC_CERTAIN':($('assumptions').checked?'USER_REVIEWED_CALIBRATION':'UNVERIFIED'),
  correspondences_source:$('assumptions').checked?'USER_REVIEWED':'MODEL_TENTATIVE',
  points:Object.fromEntries(names.map(n=>[n,[marks[n][k].top,marks[n][k].base]]))});}
  trace.review_note='Coordinates are human annotations. No physical height or camera calibration is independently verified by this UI. No model auto-registered camera poses.';
