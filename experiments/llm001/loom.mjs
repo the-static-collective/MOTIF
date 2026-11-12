@@ -75,17 +75,38 @@ function rank(w,mode='affordance',goal=[],depth=3) {
     (a.goal_distance-b.goal_distance||b.immediate-a.immediate||a.id.localeCompare(b.id)));
   return {mode,preferred:rows[0]||null,rows};
 }
+function frontier(w) {
+  // Two-step opportunity set, including options reachable after one
+  // conditional successful hypothetical action. Never observed effects.
+  const ids=new Set(available(w).map(m=>m.id));
+  for(const m of available(w))for(const f of available(imagined(w,m)))ids.add(f.id);
+  return ids;
+}
+function counterfactualImpact(w,e) {
+  // Source-anchored estimate of how much ONE fact changes the safe frontier.
+  // This is decision-value *structure*, not actual information gain or value.
+  const other=copy(w);
+  if(e.kind==='observed') {
+    other.facts=other.facts.filter(x=>x!==e.fact);
+    other.unknown=[...new Set([...other.unknown,e.fact])];
+    other.evidence=other.evidence.filter(x=>!(x.kind==='observed'&&x.fact===e.fact));
+  } else {
+    other.facts=[...new Set([...other.facts,e.fact])];
+    other.unknown=other.unknown.filter(x=>x!==e.fact);
+    other.evidence=other.evidence.filter(x=>!(x.kind==='unknown'&&x.fact===e.fact));
+  }
+  const a=frontier(w),b=frontier(other);
+  return [...new Set([...a,...b])].filter(x=>a.has(x)!==b.has(x)).length;
+}
 function compile(w,{budget=8,goal=[]}={}) {
   valid(w);if(!Number.isInteger(budget)||budget<1||budget>100)throw Error('BAD_BUDGET');
   // A witness's shared root is ONE origin regardless of the number of claims.
-  const relevant=new Set(available(w).flatMap(m=>[...m.requires,...m.may_grant]));
   const origin=new Set(),selected=[],omitted=[];
-  const evidence=[...w.evidence].sort((a,b)=>{
-    const aHard=a.kind==='unknown'?2:a.kind==='observed'?1:0;
-    const bHard=b.kind==='unknown'?2:b.kind==='observed'?1:0;
-    const aRel=relevant.has(a.fact)?1:0,bRel=relevant.has(b.fact)?1:0;
-    return (bHard+bRel*2)-(aHard+aRel*2)||a.id.localeCompare(b.id);
-  });
+  const scored=w.evidence.map(e=>({...e,counterfactual_action_impact:counterfactualImpact(w,e)}));
+  const evidence=scored.sort((a,b)=>
+    b.counterfactual_action_impact-a.counterfactual_action_impact||
+    ((b.kind==='unknown'?1:0)-(a.kind==='unknown'?1:0))||
+    a.id.localeCompare(b.id));
   for(const e of evidence) {
     if(origin.has(e.root)){omitted.push({id:e.id,reason:'SAME_ORIGIN'});continue;}
     origin.add(e.root);
@@ -155,4 +176,4 @@ function field014Aperture(exported) {
 }
 // Explicitly not executable model inference. A model adapter must call compile,
 // parse structured output, and pass it through gate; ownerTest stays separate.
-export {valid,available,imagined,search,rank,compile,gate,ownerTest,field014Aperture,keyOf};
+export {valid,available,imagined,search,rank,frontier,counterfactualImpact,compile,gate,ownerTest,field014Aperture,keyOf};
