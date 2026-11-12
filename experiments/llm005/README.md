@@ -95,6 +95,23 @@ Executable files:
 - `build_marathon.py` and `viewer_marathon.py`: create `marathon-dossier.json`, `marathon-display-summary.json`, and an **offline interactive `marathon.html` replay covering all 48 sectors and more than 879 sequential events**, with policy switcher, replay and step scrubber, jumps to the next wrong guess or handoff, a 384-gate dependency lattice, exact source-rooted event history and four-group results.
 - `test_viewer_marathon.py`: explicit tests for actual long event payloads and safe offline read-only rendering.
 
+### Observed post-hoc marathon trial: 4 registered fictional groups
+
+The **actual** serialized length and source-verified outcomes are from the dedicated GitHub Actions [long-chain plus marathon run](https://github.com/the-static-collective/MOTIF/actions/runs/43260021908), using identical prepared source-owner rules and resource constraints within each group.
+
+| Policy | All 384 decisions completed | Mean actual serial steps | Mean fictional cost | Mean wrong commitments | Mean optional probes |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| STATIC, no learned memory | 3 / 4 | 1,117 | 1,487.31 | 119.75 | 0 |
+| CLASSICAL_BAYES | **4 / 4** | 967 | 959.00 | 44.00 | 0 |
+| HYPERMAP_VOI | **4 / 4** | 974 | **870.25** | **9.75** | 75.50 |
+| CONTRARIAN | **4 / 4** | 1,001 | 1,078.00 | 61.00 | 0 |
+
+This is descriptive data from just **four independently registered authored groups**; it neither proves statistical superiority nor tests a real pretrained language model. In this fixed-cost synthetic workload, cost-aware verification saved an average of **88.75 fictional cost units** compared with classical Bayes while taking **seven more serial steps**. It also committed approximately **34.25 fewer wrong provisional answers per marathon**, paid for with more independent verification. A perfect classical source-aware strategy could reproduce its decision logic.
+
+In the first preregistered group (8001→8002→8003→8004), **HYPERMAP_VOI actually completed 969 serialized actions** with 384 accepted synthetic decisions, 96 audited gates, 12 relays, 3 source handoffs, **6 wrong commitments**, **78 paid independent probes**, and total synthetic cost **849**. Classical Bayes also took 969 actions, but incurred 45 wrong commitments and cost 966. The complete 969-step trace, all original child receipt hashes, and all four policy replays appear in `marathon.html`. The viewer was independently loaded and interacted with in headless Chromium without JavaScript runtime errors.
+
+The LLM-005 job passed **79 direct long-chain/marathon/viewer tests plus 41 inherited Reason Hypermap tests**. The required causal chain was independently checked as at least 879 steps, rather than merely printing an action count.
+
 The fully generated marathon JSON and HTML are included in the same LLM-005 workflow artifact as the original 219-step viewer; actual results must be read from the successful workflow attached to the current commit, not assumed from the earlier short-chain success.
 
 **Meaning:** This is a real 879+-step *simulated causal dependency and evidence-retention chain*, not 879 tokens of model thinking, 879 natural-language reasoning conclusions, or proof that an LLM can perform a long task in the real world.
