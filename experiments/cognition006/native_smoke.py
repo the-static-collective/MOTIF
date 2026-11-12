@@ -27,7 +27,7 @@ def checksum(x):
 
 
 def smoke_case(novelty, seed=SEED):
-    if novelty not in ("none","fire") or seed!=SEED:
+    if novelty not in ("none","fire") or seed not in {SEED, *(20001 + 13*i for i in range(20))}:
         raise ValueError("SMOKE_UNREGISTERED_TASK")
     # run with CWD = pinned original NovelGym root.
     root=Path.cwd()
