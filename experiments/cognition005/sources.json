@@ -1,0 +1,66 @@
+{
+  "experiment": "COGNITION-005",
+  "status": "EXTERNAL_SOURCE_REGISTER_ONLY_NO_SCORED_MOTIF_TRIALS",
+  "created_on": "2026-11-11",
+  "research_question": "Detect and adapt to genuinely unanticipated environment change. Win only vs strong adaptive comparators, not just frozen-model planners.",
+  "sources": [
+    {
+      "id": "novelgym",
+      "title": "NovelGym: A Flexible Ecosystem for Hybrid Planning and Learning Agents Designed for Open Worlds",
+      "paper": "https://arxiv.org/abs/2401.03546",
+      "source": "https://github.com/tufts-ai-robotics-group/NovelGym",
+      "sha": "0ad2cbb656177f76ff29f86793269b14879d9b89",
+      "depends_on": "novelgridworldsv2",
+      "license_note": "Includes Metric-FF under GPLv2; isolate and do not vendor without a licensing review.",
+      "challenge_types": [
+        "fire",
+        "fence",
+        "axe",
+        "trader",
+        "chest"
+      ],
+      "original_results": "Published authors' Table 2; fire: pre-novelty success 1.0, immediate novelty impact 1.0 across tested approaches, adaptation required many timesteps.",
+      "status": "NOT_INSTALLED_OR_RUN_IN_MOTIF"
+    },
+    {
+      "id": "novelgridworldsv2",
+      "source": "https://github.com/tufts-ai-robotics-group/NovelGridWorldsV2",
+      "sha": "f5d06d4f5166ca985ca420c809129a79700d904e",
+      "status": "NOT_INSTALLED_OR_RUN_IN_MOTIF"
+    },
+    {
+      "id": "agni",
+      "paper": "https://arxiv.org/abs/2609.33870",
+      "title": "When Successful Strategies Fail: Adaptation to Environmental Novelty in Terminal Agents",
+      "published": "2026-09-27",
+      "study_population": "LLM terminal agents; do NOT report as classical symbolic planning failure",
+      "status": "PAPER_REVIEWED_RUNTIME_NOT_INTEGRATED"
+    },
+    {
+      "id": "cl_bench",
+      "paper": "https://arxiv.org/abs/2606.05661",
+      "source": "https://github.com/pgasawa/continual-learning-bench",
+      "sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+      "status": "NOT_INSTALLED_OR_RUN_IN_MOTIF"
+    },
+    {
+      "id": "novphy",
+      "paper": "https://doi.org/10.1016/j.artint.2024.104198",
+      "source": "https://github.com/phy-q/NovPhy",
+      "sha": "0da1258c9c0ebb6b437d3f6291612b1032102678",
+      "license_note": "GitHub advertises MIT; verify subdependencies before execution.",
+      "status": "NOT_INSTALLED_OR_RUN_IN_MOTIF"
+    }
+  ],
+  "predeclared_primary": "novelgym/fire",
+  "predeclared_controls": [
+    "static_pddl",
+    "strong_adaptive_classical",
+    "upstream_hybrid_rapidlearn",
+    "motif_cognition"
+  ],
+  "scoring_started": false,
+  "heldout_results": [],
+  "motif_wins": null,
+  "regime_target_successes": null
+}
