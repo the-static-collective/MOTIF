@@ -1,0 +1,30 @@
+name: LLM-003C Graph Causality Shortcut Audit
+on:
+  push:
+    branches:
+      - experiment/llm003-error-dividend-openweights-20261112
+    paths:
+      - 'experiments/llm003/RUN_GRAPH_CAUSALITY.md'
+  workflow_dispatch:
+jobs:
+  graph-only-real-pretrained:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    permissions:
+      contents: read
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install real pretrained CPU inference dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
+          python -m pip install --disable-pip-version-check --no-input 'transformers==4.49.0' 'huggingface-hub>=0.28,<1.0' 'safetensors>=0.4,<1.0'
+      - name: Train and falsify graph reliance with identical action text
+        run: python experiments/llm003/graph_causality.py
