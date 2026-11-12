@@ -1,0 +1,101 @@
+name: COGNITION-007 native NovelGym matched 20-seed static-plan fire gap
+on:
+  push:
+    paths:
+      - 'experiments/cognition007/**'
+      - 'experiments/cognition006/native_smoke.py'
+      - '.github/workflows/cognition-007.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition007/**'
+      - 'experiments/cognition006/native_smoke.py'
+      - '.github/workflows/cognition-007.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-world-twenty-matched:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+      OMP_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Prove seed/policy protocol was committed before coding
+        run: |
+          git show 587f591bd3f64ccdaa1e7f8615a6694af76b830a:experiments/cognition007/PREREGISTRATION.md > /tmp/cognition007-frozen.md
+          cmp /tmp/cognition007-frozen.md experiments/cognition007/PREREGISTRATION.md
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - name: Verify original independent source revisions
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+          test -f sources/novelgym/novelties/evaluation1/fire/fire_crafting_table.yaml
+      - name: Install original NovelGridWorlds engine
+        run: |
+          python -m pip install --upgrade 'pip<25'
+          python -m pip install 'numpy<2' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'pygame==2.5.2' 'PyYAML>=6'
+          python -m pip install -e ./sources/novelgridworldsv2
+      - name: Compile identical original Metric FF C source with previously verified conservative flags
+        run: |
+          make -C sources/novelgym/planners/Metric-FF-v2.1 CFLAGS="-O0 -ansi -fno-strict-aliasing -g"
+          test -x sources/novelgym/planners/Metric-FF-v2.1/ff
+      - name: Run exactly twenty fixed paired original owner worlds, no MOTIF
+        timeout-minutes: 9
+        working-directory: sources/novelgym
+        run: |
+          python ../../experiments/cognition007/batch.py --output ../../cognition007-20-matched.json
+      - name: Audit exact 40 native cases and prove not a MOTIF-vs-adaptive competition
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('cognition007-20-matched.json').read_text())
+          expected=[20001+13*i for i in range(20)]
+          assert list(d['seeds'])==expected
+          assert len(d['cases'])==40 and len(d['pairs'])==20
+          assert not d['runtime_errors']
+          assert d['summary']['n_scored_pairs']==20
+          assert d['summary']['motif_policy_executed'] is False
+          assert d['summary']['strong_adaptive_baseline_executed'] is False
+          for s in expected:
+              matching=[x for x in d['cases'] if x['seed']==s]
+              assert sorted(x['novelty'] for x in matching)==['fire','none']
+              for x in matching:
+                  assert type(x['native_owner_goal_achieved']) is bool
+                  assert x['main_actions']<=160
+                  assert x['total_actions']<=600
+                  assert x['real_external_actions']==0
+                  assert len(x['native_action_receipts'])==x['main_actions']
+                  assert all(type(r['native_action_success']) is bool for r in x['native_action_receipts'])
+          print(json.dumps(d['summary'],sort_keys=True,indent=2))
+          PY
+      - name: Retain all authentic native action/goal receipts and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition007-20-seed-real-NovelGym-owner-baselines
+          path: cognition007-20-matched.json
+          retention-days: 30
+          if-no-files-found: warn
