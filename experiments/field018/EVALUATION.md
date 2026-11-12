@@ -18,3 +18,5 @@ Freeze independently annotated new sketches/photos and physically measured objec
 
 ### Real demonstrated bottleneck
 The current local environment has no usable model checkpoint and no GPU. Source pixel inference runs; photo object interpretation and metric photogrammetry do not. The experiment is a diagnostic integration test with genuine partial output, not a live all-stage VLM demonstration.
+
+8. After a measurement makes every candidate fail, a least-bad scored candidate is displayed as an approved physical plan: **FAIL**. FIELD-018 adds a separate fail-closed selection gate.
