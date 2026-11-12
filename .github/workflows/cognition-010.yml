@@ -94,6 +94,14 @@ jobs:
               assert x['real_world_actions']==0
               assert x['success_only_from_original_owner']
               assert x['no_automatic_app_deployment']
+              if x['policy']=='motif_live' and x['source_bound_model']['tested_programs']>0:
+                  assert x['genuine_motif003_hypothetical_options']>0
+                  assert x['native_free_graph_proposals']
+                  assert all(g['native_validated'] and not g['owner_admission']
+                             for g in x['native_free_graph_proposals'])
+                  assert not any(ev['event']=='NATIVE_ORGAN_DIAGNOSTIC_HOLD'
+                                 for attempt in x['attempts']
+                                 for ev in attempt.get('cognitive_events',[]))
               assert len(x['attempts'])==x['attempts_used']
               assert all(a.get('post_failure_actions',0)<=80 for a in x['attempts'])
               if not x['native_owner_goal']:
