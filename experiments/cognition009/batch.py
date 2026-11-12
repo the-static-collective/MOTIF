@@ -13,6 +13,7 @@ import sys
 import traceback
 
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/"cognition008"))
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent/"cognition006"))
 from adapt import run_policy,POLICIES
 from native_smoke import checksum
 
