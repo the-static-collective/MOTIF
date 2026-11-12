@@ -56,7 +56,10 @@ class UnwrittenAnalogyTests(unittest.TestCase):
         for policy in POLICIES[:3]:
             r=run_case(DEV_SEEDS[0],"false_friend",policy,full=True)
             self.assertFalse(r["verified_success"])
-            self.assertGreater(r["owner_tests"],0)
+            if policy=="classical_exact_iso":
+                self.assertEqual(r["owner_tests"],0)  # exact matching safely abstains
+            else:
+                self.assertGreater(r["owner_tests"],0)  # approximate false friend is probed
             self.assertEqual(r["owner_repairs"],0)
             self.assertEqual(r["unverified_repairs"],0)
             self.assertTrue(all(x["owner_test_receipt"]["positive"] is False
