@@ -10,6 +10,8 @@
   let sketchFile = null, sketchDigest = null, lastDraft = null, uploadVersion = 0;
   const AUTODRAFT = window.MOTIF011;
   const MATERIAL = window.MOTIF012;
+  const PHOTO_SCAN = window.MOTIF013_SCAN;
+  const PROPOSALS = window.MOTIF013_PLAN;
   let activePhoto=null, photoRegion=null, regionStart=null, ghost=null, materialTicket=0;
   function dataDigest(bytes){
     if(typeof crypto!=='undefined'&&crypto.subtle)return crypto.subtle.digest('SHA-256',bytes).then(data=>Array.from(new Uint8Array(data),x=>x.toString(16).padStart(2,'0')).join(''));
@@ -273,7 +275,7 @@
     else {host.textContent=state.proportional?'No independently entered measured span; geometry remains unscaled.':'Drawn proportions only. The sketch is not asserted to be at physical scale.';host.className='note warn';}
   }
   function render(){state=M.replay(project);if(selected && !state.items.some(i=>i.id===selected))selected=null;
-    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();renderDraftReview();renderMaterials();updateSummary();}
+    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();renderDraftReview();renderMaterials();renderPossibilities();updateSummary();}
   const workers=[];
   function makeWorker(fn){
     const source=`const span=${M.span.toString()};const compute=${fn.toString()};onmessage=e=>{try{postMessage({version:e.data.version,value:compute(e.data.state)})}catch(err){postMessage({version:e.data.version,error:String(err)})}};`;
@@ -341,6 +343,61 @@
     elt.setAttribute('x',bbox[0]*vb.width);elt.setAttribute('y',bbox[1]*vb.height);
     elt.setAttribute('width',(bbox[2]-bbox[0])*vb.width);elt.setAttribute('height',(bbox[3]-bbox[1])*vb.height);
   }
+  async function scanMaterialPhoto(p,{force=false}={}){
+    if(!PHOTO_SCAN||!p)throw Error('Missing local photo scan or photograph');
+    if(p.scanDone&&!force)return 0;
+    if(!p.digest)p.digest=await shaDataURL(p.url);
+    if(!p.id)p.id='photo-'+photos.indexOf(p);
+    const data=await decodeToPixels(p.url);
+    // Reusable deterministic pixel-region detector: NOT a material/object labeler.
+    const regions=PHOTO_SCAN.scanRGBA(data.pixels,data.width,data.height,{maxCandidates:4});
+    const old=new Set(state.materials.map(m=>m.id));let added=0;
+    for(let i=0;i<regions.length;i++){
+      const id=`material-cv-${p.digest.slice(0,10)}-${p.id.replace(/[^a-zA-Z0-9_-]/g,'').slice(0,20)}-${i}`;
+      if(old.has(id))continue;
+      const entry=PHOTO_SCAN.materialRegion(regions[i],p.id,p.digest,id);
+      MATERIAL.validateMaterial(entry);
+      stamp({type:'material_add',material:entry});added++;
+    }
+    p.scanDone=true;
+    if(activePhoto===p)renderMaterials();
+    return added;
+  }
+  async function scanAllPhotos(){
+    const status=byId('autoPhotoStatus');
+    if(!photos.length){notify('Add a photograph first.');return;}
+    byId('autoAllPhotosBtn').disabled=true;let total=0,completed=0;
+    try {
+      for(const p of photos){
+        status.textContent=`Scanning ${++completed}/${photos.length} locally…`;
+        total+=await scanMaterialPhoto(p);
+        await new Promise(resolve=>setTimeout(resolve,0));
+      }
+      status.textContent=`${total} unclassified pixel regions proposed across ${photos.length} photo(s).`;
+      notify(status.textContent+' Regions are not identified objects. Select one and correct its role.');
+    }catch(err){status.textContent='Scan held: '+err.message;notify(status.textContent);}
+    finally{byId('autoAllPhotosBtn').disabled=false;}
+  }
+  function renderPossibilities(){
+    const host=byId('possibilityTiles');if(!host||!PROPOSALS)return;
+    host.replaceChildren();const report=PROPOSALS.evaluate(state);
+    const header=dom('p',{class:'micro'},`${report.candidate_count} conditional possibilities · ${report.questions.length} clarification opportunities · no physical fit checked`);
+    host.append(header);
+    for(const p of report.candidates.slice(0,7)){
+      const card=tile(p.title,p.status,p.hold[0]);
+      if(p.material_id && p.route_id){
+        const m=state.materials.find(m=>m.id===p.material_id),target=state.items.find(t=>t.id===p.route_id);
+        if(m&&target){
+          const btn=dom('button',{type:'button',class:'mini'},'Preview unscaled');
+          btn.addEventListener('click',()=>previewMaterial(m,target));card.append(btn);
+        }
+      }else card.append(dom('small',{},'Idea only — no source geometry changed.'));
+      host.append(card);
+    }
+    if(report.questions.length){
+      const q=report.questions[0];host.append(tile('Most useful missing input',q.question,`Material ${q.material_id} · no prose explanation required: edit the photo-region card.`));
+    }
+  }
   async function selectPhoto(p){
     const ticket=++materialTicket;activePhoto=p;photoRegion=null;regionStart=null;
     if(!p.digest){try{p.digest=await shaDataURL(p.url);}catch(err){notify('Photo hash failed: '+err.message);return;}}
@@ -357,6 +414,9 @@
     byId('photoNotice').textContent=`${p.name} — separate source. No automatic location on sketch.`;
     byId('regionHint').textContent='Drag around an object directly on this photo. Bounds are PHOTO pixels, not yard coordinates.';
     renderMaterials();
+    // Progressive, on-device region candidates. No semantic model or external call.
+    if(!p.scanDone) {try{const n=await scanMaterialPhoto(p);if(ticket===materialTicket)byId('autoPhotoStatus').textContent=`${n} unclassified regions proposed for selected photo.`;}
+      catch(ex){notify('Automatic photo-region scan held: '+ex.message);}}
   }
   const photoBoard=byId('objectPhotoCanvas');
   photoBoard.addEventListener('pointerdown',e=>{
@@ -384,16 +444,30 @@
     try{MATERIAL.validateMaterial(material);}catch(err){notify('Object held: '+err.message);return;}
     stamp({type:'material_add',material});photoRegion=null;svgBox(byId('objectRegionDraft'),[0,0,0,0]);
   });
+  byId('autoPhotoBtn').addEventListener('click',async()=>{if(!activePhoto)return notify('Select a photo first.');
+    try{const n=await scanMaterialPhoto(activePhoto);notify(`${n} new local visual regions. Review before assigning object roles.`);}
+    catch(e){notify('Photo scan held: '+e.message);}});
+  byId('autoAllPhotosBtn').addEventListener('click',scanAllPhotos);
   byId('materialImportBtn').addEventListener('click',()=>byId('materialImportFile').click());
   byId('materialImportFile').addEventListener('change',async e=>{
     const file=e.target.files?.[0];if(!file)return;
     if(file.size>500000){notify('Model packet too large.');return;}
     try{
       const packet=JSON.parse(await file.text());
-      MATERIAL.validatePacket(packet,activePhoto?.id,activePhoto?.digest);
+      const packets=packet?.schema==='motif.field013.batch.v1'?packet.packets:[packet];
+      if(!Array.isArray(packets)||packets.length>20)throw Error('Invalid bounded photo packet set');
       const existing=new Set(state.materials.map(m=>m.id));let n=0;
-      for(const m of packet.items){if(existing.has(m.id))continue;stamp({type:'material_add',material:m});n++;}
-      notify(`${n} tentative imported photo objects. They are unverified hypotheses, not yard placements.`);
+      for(const part of packets){
+        const p=photos.find((photo,idx)=>(photo.id||('photo-'+idx))===part.photo_id);
+        if(!p)throw Error('No loaded photograph matches packet ID: '+part.photo_id);
+        p.id||='photo-'+photos.indexOf(p);
+        if(!p.digest)p.digest=await shaDataURL(p.url);
+        MATERIAL.validatePacket(part,p.id,p.digest);
+      }
+      for(const part of packets)for(const m of part.items){
+        if(existing.has(m.id))continue;stamp({type:'material_add',material:m});existing.add(m.id);n++;
+      }
+      notify(`${n} tentative local model photo objects imported. Source checks passed; labels, physical dimensions and usefulness remain unverified.`);
     }catch(err){notify('Vision candidates held: '+err.message);}
   });
   function renderPhotoRegions(){const host=byId('objectPhotoRegions');host.replaceChildren();
@@ -465,10 +539,15 @@
     const b=dom('button',{type:'button',title:p.name});const im=dom('img',{alt:'Photo '+(idx+1)+' thumbnail',src:p.url});b.append(im,dom('span',{class:'micro'},p.name.slice(0,13)));
     b.addEventListener('click',()=>selectPhoto(p));root.append(b);
   });if(photos.length&&!activePhoto)selectPhoto(photos[0]);}
-  byId('photoUpload').addEventListener('change',e=>{Array.from(e.target.files||[]).slice(0,20).forEach(file=>{
-    if(!/^image\/(png|jpeg|webp)$/.test(file.type)||file.size>15*1024*1024)return;
-    const rd=new FileReader();rd.onload=()=>{photos.push({name:file.name,url:rd.result});displayPhotos();};rd.readAsDataURL(file);
-  });});
+  byId('photoUpload').addEventListener('change',async e=>{
+    const uploads=Array.from(e.target.files||[]).slice(0,20).filter(file=>/^image\/(png|jpeg|webp)$/.test(file.type)&&file.size<=15*1024*1024);
+    for(const file of uploads){
+      const url=await new Promise((res,rej)=>{const rd=new FileReader();rd.onerror=rej;rd.onload=()=>res(String(rd.result));rd.readAsDataURL(file);});
+      photos.push({name:file.name,url});
+    }
+    displayPhotos();
+    if(uploads.length)void scanAllPhotos();
+  });
 
   byId('autoDraftBtn').addEventListener('click',()=>runAutoDraft());
   byId('draftImportBtn').addEventListener('click',()=>byId('draftImportFile').click());
@@ -491,6 +570,8 @@
   if (sketchSrc){loadSketch(sketchSrc);project.base.source='user_sketch';project.base.items=[];}
   if (Array.isArray(window.MOTIF010_PRIVATE_PHOTOS)) {
     window.MOTIF010_PRIVATE_PHOTOS.forEach(p=>photos.push(p));displayPhotos();
+    // Illustrative private demonstration begins scanning its images without asking users to outline objects.
+    void scanAllPhotos();
   }
   render();recompute();
   if (sketchSrc){
@@ -501,5 +582,5 @@
     }catch(ex){notify('Preloaded draft held: '+ex.message);}})();
   }
   window.MOTIF010_DEBUG = {getProject:()=>D(project),getState:()=>D(state),getBranches:()=>D({solverData,interfaceData}),
-    getObjectGhost:()=>D(ghost),apply:stamp, tool:setTool,previewMaterial,placeMaterial};
+    getObjectGhost:()=>D(ghost),apply:stamp, tool:setTool,previewMaterial,placeMaterial,scanMaterialPhoto,scanAllPhotos,visualPossibilities:()=>PROPOSALS.evaluate(state)};
 })();
