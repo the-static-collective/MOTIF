@@ -38,6 +38,28 @@ jobs:
               print('ARM',arm)
           print('WINNER_RANK',data['ranking'])
           PY
+      - name: Build the complete offline interactive 219+ action viewer
+        run: python experiments/llm005/build_viewer.py --out /tmp/odyssey240 --study-file /tmp/odyssey240/benchmark.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax-check shipped interactive longchain script and confirm causal depth
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          folder=Path('/tmp/odyssey240')
+          data=json.loads((folder/'odyssey240-dossier.json').read_text())
+          assert all(t['summary']['completed'] for t in data['traces'].values())
+          assert all(t['summary']['actions']>=219 for t in data['traces'].values())
+          assert data['real_model'] is False and data['external_actions'] is False
+          raw=(folder/'odyssey240.html').read_text()
+          js=re.findall(r'<script>(.*?)</script>',raw,re.S)
+          assert len(js)==1 and '__PAYLOAD__' not in raw
+          (folder/'odyssey-script.js').write_text(js[0])
+          print('ODYSSEY_OFFLINE_ACTIONS',{p:t['summary']['actions'] for p,t in data['traces'].items()})
+          PY
+          node --check /tmp/odyssey240/odyssey-script.js
       - uses: actions/upload-artifact@v4
         with:
           name: odyssey240-longchain-results
