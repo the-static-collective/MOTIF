@@ -236,12 +236,14 @@ class ReasonHypermap:
             # One result may bear differently on several rival hypotheses.
             conflicting=[i for i in range(8) if outputs(i,proposal.x)!=response["value"]]
             supporting=[i for i in range(8) if outputs(i,proposal.x)==response["value"]]
-            self._edge("report-bears-on-rivals",[receipt],
-                [self.hypotheses[i] for i in conflicting], [new_source],"tested",
-                {"bearing":"refuses","reported_not_truth":True})
-            self._edge("report-supports-rivals",[receipt],
-                [self.hypotheses[i] for i in supporting], [new_source],"tested",
-                {"bearing":"supports","reported_not_truth":True})
+            if conflicting:
+                self._edge("report-bears-on-rivals",[receipt],
+                    [self.hypotheses[i] for i in conflicting], [new_source],"tested",
+                    {"bearing":"refuses","reported_not_truth":True})
+            if supporting:
+                self._edge("report-supports-rivals",[receipt],
+                    [self.hypotheses[i] for i in supporting], [new_source],"tested",
+                    {"bearing":"supports","reported_not_truth":True})
         old_state=proposal.prior_state
         e={"id":numbered("hmev",{"step":proposal.step,"proposal":proposal.id,
                 "response_kind":response.get("kind"),"root":root,
