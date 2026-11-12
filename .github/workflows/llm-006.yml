@@ -84,9 +84,32 @@ jobs:
                 'COST',v['summary']['synthetic_cost'])
           print('PAIRED_MODEL_MEMORY',r['paired_memory_comparison'])
           PY
+      - name: Generate real-pretrained interactive 879+ step comparison
+        run: python experiments/llm006/build_real_viewer.py --out /tmp/llm006
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate actual shipped browser JavaScript and real model provenance
+        run: |
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          folder=Path('/tmp/llm006')
+          html=(folder/'real-model-marathon.html').read_text()
+          assert 'THIS RUN REALLY EXECUTED FROZEN PRETRAINED' in html
+          assert '__PAYLOAD__' not in html
+          script=re.findall(r'<script>(.*?)</script>',html,re.S)
+          assert len(script)==1
+          (folder/'real-model-viewer.js').write_text(script[0])
+          assert (folder/'real-model-viewer-study.json').exists()
+          print('REAL_PRETRAINED_VIEWER_BYTES',len(html.encode()))
+          PY
+          node --check /tmp/llm006/real-model-viewer.js
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: llm006-real-pretrained-odyssey-reports
-          path: /tmp/llm006/*.json
+          path: |
+            /tmp/llm006/*.json
+            /tmp/llm006/*.html
           retention-days: 30
