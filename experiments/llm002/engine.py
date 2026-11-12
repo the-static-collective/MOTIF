@@ -50,7 +50,7 @@ class TinyCausal:
     def __init__(self,seed=1902):
         r=random.Random(seed)
         self.emb={t:tuple(r.uniform(-.65,.65) for _ in range(D))
-                  for t in (*PREFIX,"probe","use","publish","wait","replan")}
+                  for t in (*PREFIX,*(f"scene{i}" for i in range(8)),"probe","use","publish","wait","replan")}
         self.wq=[[r.uniform(-.4,.4) for _ in range(D)] for _ in range(D)]
         self.wk=[[r.uniform(-.4,.4) for _ in range(D)] for _ in range(D)]
         self.wv=[[r.uniform(-.4,.4) for _ in range(D)] for _ in range(D)]
@@ -180,10 +180,10 @@ def full(model,tokens,ctx,token,features,adapter=None):
     return {"logit":logit,"qk_ops_total":ops+len(tokens)+1,"state":"PENCIL"}
 
 def examples(prefixes=8):
-    # Full-factorial coverage, split by held-out prefix variant, NOT action
-    # combinations. This is weak domain transfer, never external validation.
+    # Full-factorial coverage, split by held-out *distinct* prefix tokens, NOT
+    # action combinations. Synthetic shift is weak domain transfer.
     for p in range(prefixes):
-        tokens=PREFIX[:3]+(PREFIX[3 if p%2==0 else 4],)+PREFIX[4:]
+        tokens=PREFIX[:3]+(f"scene{p}",)+PREFIX[3:]
         for tool in (0,1):
             for permission in (0,1):
                 for action in ("probe","use","publish"):
