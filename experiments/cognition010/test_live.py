@@ -1,10 +1,12 @@
 """COGNITION-010 source-only live learning/control falsifiers."""
 import ast
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 import unittest
 
 from live import (TransitionMemory, programs_for_failure, public_signature,
-                  safe_actions, MAX_ATTEMPTS, MAX_RECOVERY, POLICIES)
+                  safe_actions, MAX_ATTEMPTS, MAX_RECOVERY, POLICIES,run_case)
 
 
 def sensor(selected="tree_tap",counts=None):
@@ -79,6 +81,41 @@ class LiveTests(unittest.TestCase):
         self.assertIn('main.stuck=False',source)
         self.assertIn('source_bound_model',source)
         self.assertIn('all_remaining_attempts_spent_if_unsolved',source)
+
+    def test_unresolved_live_failure_consumes_all_ten_attempts(self):
+        """A pure fake outcome source checks scheduler, NOT game competence."""
+        class FakeEnv:
+            agent_selection="agent_0"
+            terminations={"agent_0":False}
+            truncations={"agent_0":False}
+            internal_state=SimpleNamespace(_goal_achieved=False,_given_up=False)
+            def close(self):pass
+        fake_actions=["craft_widget","move_forward","move_backward",
+                      "move_left","move_right","rotate_left","rotate_right"]
+        view=sensor(counts={})
+        def step(env,name,mode,iteration,attempt,memory,failed):
+            row={"action":name,"native_action_success":False,
+                 "native_message":"synthetic stubborn failure",
+                 "selected_item_before":"tree_tap",
+                 "selected_item_after":"tree_tap",
+                 "visible_inventory_delta":{},
+                 "public_position_after":["3","9"]}
+            memory.observe(row,failed)
+            return row,view,False,False
+        with patch("live.make",side_effect=lambda *_:FakeEnv()),\
+             patch("live.main_actions",return_value=fake_actions),\
+             patch("live.original_prefix",return_value=[
+                {"action":"craft_widget","success":False,
+                 "message":"independently mocked failure"}]),\
+             patch("live.public_observe",return_value=view),\
+             patch("live.execute_native_step",side_effect=step):
+            actual=run_case("axe","classical_live")
+        self.assertFalse(actual["native_owner_goal"])
+        self.assertEqual(actual["attempts_used"],10)
+        self.assertEqual(actual["total_post_failure_actions"],10*80)
+        self.assertEqual(actual["stop_reason"],"ATTEMPT_RECOVERY_BUDGET_EXHAUSTED")
+        self.assertTrue(actual["all_remaining_attempts_spent_if_unsolved"])
+        self.assertTrue(all(x["post_failure_actions"]==80 for x in actual["attempts"]))
 
     def test_budgets_and_equal_baseline_controllers(self):
         self.assertEqual(MAX_ATTEMPTS,10)
