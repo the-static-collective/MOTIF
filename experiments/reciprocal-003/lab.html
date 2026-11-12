@@ -101,7 +101,8 @@ footer{padding:22px 20px 52px;font-size:.8rem}a{color:#245749}
         <option value="human">Teach me the reasoning move</option>
       </select></div>
   </div>
-  <div class="buttons"><button id="reasonCheck" class="primary" type="button">Reason about this question</button>
+  <div class="buttons"><button id="loadLearningDemo" type="button">Load fictional learning example</button>
+    <button id="reasonCheck" class="primary" type="button">Reason about this question</button>
     <button id="reasonExport" type="button">Export research receipt</button></div>
   <div class="feedback" role="status" aria-live="polite" id="researchStatus">Select a question to inspect. Nothing here modifies source answers or silently adopts a method.</div>
   <div id="researchFindings" class="results" style="margin-top:18px"></div>
@@ -432,6 +433,13 @@ function researchInspect(){
    feedback("researchStatus","Inspected source-scoped evidence. No external action, truth promotion or method installation occurred.");
  }catch(e){feedback("researchStatus","Research HOLD: "+e.message);}
 }
+$("loadLearningDemo").addEventListener("click",()=>{
+ if(state.questions.length){feedback("researchStatus","Fictional example can only load into an empty session. Export or erase this session first.");return;}
+ changeState(R.authoredDemo(now()));
+ $("researchAction").value="foundry";
+ researchInspect();
+ feedback("researchStatus","Eight clearly fictional source reports loaded. The role-conditioned method is a proposed research hypothesis, never a verified fact about people.");
+});
 $("reasonCheck").addEventListener("click",researchInspect);
 $("researchAction").addEventListener("change",researchInspect);
 $("researchSelect").addEventListener("change",researchInspect);
