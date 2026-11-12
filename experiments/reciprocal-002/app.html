@@ -4,7 +4,7 @@
 <title>MOTIF — Two Doors</title>
 <style>
 :root{--ink:#142f2d;--sage:#416e61;--gold:#c9a76b;--paper:#f7f3e9;--bg:#e6e3d8;--line:#9aada3;--soft:#e5eee8;--red:#8b4843}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.45}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.45}
 main,header,footer{max-width:1060px;margin:auto;padding:0 20px}header{padding-top:31px}h1,h2,h3{font-family:Georgia,serif;font-weight:500;letter-spacing:-.035em;line-height:1.15}h1{font-size:clamp(2.4rem,6vw,4.6rem);margin:.12em 0 .2em}h2{font-size:2rem;margin:0 0 .3em}h3{font-size:1.4rem;margin:.25em 0}
 small,.fine{color:#51645c;font-size:.85rem}p{max-width:75ch}header>p{margin-bottom:20px}button,select,input,textarea{font:inherit}button{border:1px solid var(--sage);border-radius:2px;background:var(--paper);color:var(--ink);padding:10px 14px;cursor:pointer;min-height:42px}button:hover{background:var(--soft)}button.primary{background:#275449;color:#fff}button.danger{color:var(--red);border-color:var(--red)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #cc7c31;outline-offset:2px}
@@ -111,6 +111,34 @@ function mkRoleBoxes(id,defaultChecked){
     cb.checked=defaultChecked===role;label.append(cb,mk("span",role));$(id).appendChild(label);}
 }
 mkRoleBoxes("questionRoles","anyone");mkRoleBoxes("personRoles","anyone");
+// The first doorway is deliberately conversational: one question first,
+// then only the clarifications needed to make its answer consequential.
+const askForm=$("questionForm"),askParts=[...askForm.children];
+const titlePart=askParts[0],intentPart=askParts[1],askRemainder=askParts.slice(2);
+const askStage1=mk("button","Continue → what would this change?");
+askStage1.type="button";titlePart.after(askStage1);
+const askStage2=mk("button","Continue → define the answers and asking limits");
+askStage2.type="button";intentPart.after(askStage2);
+function resetAskStages(){
+  intentPart.hidden=true;askRemainder.forEach(x=>x.hidden=true);
+  askStage1.hidden=false;askStage2.hidden=true;
+}
+askStage1.addEventListener("click",()=>{
+  if(!$("questionTitle").value.trim()){feedback("askFeedback","Start with a question in your own words.");$("questionTitle").focus();return;}
+  intentPart.hidden=false;askStage1.hidden=true;askStage2.hidden=false;
+  feedback("askFeedback","MOTIF asks: What would answering that question make possible? And what actual decision could change?");
+  $("questionWhy").focus();
+});
+askStage2.addEventListener("click",()=>{
+  if(!$("questionWhy").value.trim()||!$("questionDecision").value.trim()){
+    feedback("askFeedback","Before asking other people, name why the answer matters and which decision it could change.");
+    (!$("questionWhy").value.trim()?$("questionWhy"):$("questionDecision")).focus();return;
+  }
+  askRemainder.forEach(x=>x.hidden=false);askStage2.hidden=true;
+  feedback("askFeedback","Now give this inquiry a finite set of possible answers, an opt-in audience, and a stopping budget.");
+  $("questionOptions").focus();
+});
+resetAskStages();
 function rolesFrom(id){return [...$(id).querySelectorAll("input:checked")].map(x=>x.value);}
 function showDoor(which){
  for(const x of ["ask","answer"]){
@@ -148,6 +176,7 @@ $("questionForm").addEventListener("submit",event=>{
    changeState(M.addQuestion(state,question,at,id("q")));
    feedback("askFeedback","Question accepted for local inquiry. It is not published or sent. MOTIF will ask only when a willing participant chooses the Answer door.");
    $("questionForm").reset();
+   resetAskStages();
    document.querySelectorAll("#questionRoles input").forEach(x=>x.checked=x.value==="anyone");
  }catch(e){feedback("askFeedback","Question held: "+e.message+". Add a clear use, 2–5 distinct answers, and valid asking limits.");}
 });
