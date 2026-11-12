@@ -11,7 +11,7 @@ from error_dividend import Owner,HELDOUT,REGIMES,BUDGETS,accuracy
 from hypermap import ReasonHypermap,grade
 from free_graph_adapter import packet_from_hypermap
 
-POLICIES=("classical_ig","challenge_favorite","decision_gain","no_probe")
+POLICIES=("classical_ig","classical_ig_stop","challenge_favorite","decision_gain","no_probe")
 
 def one(seed,regime,policy,budget):
     owner=Owner(seed,regime)
@@ -60,7 +60,8 @@ def run(seeds=HELDOUT):
         "author_synthetic_only":True,"hidden_truth_unavailable_to_policy":True,
         "n_seeded_worlds":len(seeds),"n_conditions":len(rows),
         "score_definition":"actual owner prediction accuracy - 0.04 per attempted probe",
-        "not_real_model_benchmark":True,"arms":rows,"winners":wins}
+        "not_real_model_benchmark":True,"posthoc_arm":"classical_ig_stop",
+        "arms":rows,"winners":wins}
 
 def specimen(seed=8001,regime="truthful"):
     o=Owner(seed,regime);m=ReasonHypermap(o)
