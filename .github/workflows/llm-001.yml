@@ -19,4 +19,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node --test experiments/llm001/test.mjs
+      - run: node --test experiments/llm001/test.mjs experiments/llm001/local-model.test.mjs
