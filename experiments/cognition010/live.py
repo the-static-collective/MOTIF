@@ -25,7 +25,7 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 sys.path.insert(0,str(HERE.parent/"cognition008"))
 from adapt import (make, public_observe, main_actions, native_to_main,
-                   original_prefix, safe_inventory,
+                   original_prefix, safe_inventory, advance_npcs,
                    native_motif_hypothetical_programs,
                    public_free_graph_hypothesis)
 from aperture_probe import native_to_main as native_step
