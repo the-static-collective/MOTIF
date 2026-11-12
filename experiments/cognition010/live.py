@@ -206,7 +206,7 @@ def execute_native_step(env,chosen,mode,iteration,attempt,memory,failed):
 
 def original_plan_step(env,memory,attempt,stepno,failed):
     main=env.agent_manager.agents["agent_0"].agent
-    if env.agent_selection!="agent_0":
+    if env.agent_selection!="agent_0" and not advance_npcs(env):
         raise RuntimeError("ORIGINAL_PLAN_NPC_TURN_NOT_AVAILABLE")
     # Existing upstream action_buffer was *not cleared on failure*; resuming
     # it is how a local repair returns to the original task.
