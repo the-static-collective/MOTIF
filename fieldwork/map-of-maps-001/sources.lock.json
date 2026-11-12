@@ -1,0 +1,103 @@
+{
+  "schema": "motif.map-sources-lock/v1",
+  "policy": {
+    "public_sources_only": true,
+    "authority": "NONE",
+    "automatic_promotion": false,
+    "network_reads_by_engine": 0
+  },
+  "sources": [
+    {
+      "id": "atlas-families",
+      "tier": 1,
+      "checkout": "atlas",
+      "repo": "the-static-collective/What-is-the-static-collective-",
+      "commit": "7de5e95a1dc04ead1790d91dd6326430008d954f",
+      "path": "atlas/constellations.json",
+      "blob": "e834ffaf431adc42672f95bbf0b73777e1f7dcdd",
+      "kind": "json",
+      "max_bytes": 12000
+    },
+    {
+      "id": "atlas-relations",
+      "tier": 1,
+      "checkout": "atlas",
+      "repo": "the-static-collective/What-is-the-static-collective-",
+      "commit": "7de5e95a1dc04ead1790d91dd6326430008d954f",
+      "path": "atlas/relations.json",
+      "blob": "8265f1b4dc606655b2e9c5360bf4b3f43673d38c",
+      "kind": "json",
+      "max_bytes": 12000
+    },
+    {
+      "id": "atlas-visibility",
+      "tier": 1,
+      "checkout": "atlas",
+      "repo": "the-static-collective/What-is-the-static-collective-",
+      "commit": "7de5e95a1dc04ead1790d91dd6326430008d954f",
+      "path": "atlas/visibility-policy.json",
+      "blob": "544e970d631978551237498df8f8cdb98347e451",
+      "kind": "json",
+      "max_bytes": 12000
+    },
+    {
+      "id": "atlas-inventory-summary",
+      "tier": 1,
+      "checkout": "atlas",
+      "repo": "the-static-collective/What-is-the-static-collective-",
+      "commit": "7de5e95a1dc04ead1790d91dd6326430008d954f",
+      "path": "atlas/generated/README.md",
+      "blob": "5055c16c7eb1217997525d7b74123163d5960917",
+      "kind": "markdown",
+      "max_bytes": 25000
+    },
+    {
+      "id": "planz-attention",
+      "tier": 2,
+      "checkout": "planz",
+      "repo": "the-static-collective/planZ",
+      "commit": "5b6df7fb2a3a0c57d0fff8381108589ec2765a94",
+      "path": "public/attention-v1.json",
+      "blob": "49e70c0caeaf0bca430338829b69d51c8c617385",
+      "kind": "json",
+      "max_bytes": 25000
+    },
+    {
+      "id": "graft-donor-registry",
+      "tier": 3,
+      "checkout": "graft",
+      "repo": "the-static-collective/GRAFT",
+      "commit": "265fd538266a742d033ba2f5b408a78610d0a75c",
+      "path": "candidate-registry.json",
+      "blob": "3b03496659645ab604c54147c29ffb9d0941011c",
+      "kind": "json",
+      "max_bytes": 25000
+    },
+    {
+      "id": "cannon-question-field",
+      "tier": 3,
+      "checkout": "cannon",
+      "repo": "the-static-collective/CANNON",
+      "commit": "8e641a8aecee4e1cc9c9a6a3e62e02e0f3f5e5cc",
+      "path": "registry/multi-repo-question-field-v1.json",
+      "blob": "6c1b4e26c8892ed84aa3f48e2b2de168427050c2",
+      "kind": "json",
+      "max_bytes": 25000
+    }
+  ],
+  "future_horizons": [
+    {
+      "tier": 4,
+      "source": "atlas/generated/public-index.json",
+      "observed_blob": "7595ecea5bd40f14cb8c86c9feb4c34225131bc4",
+      "status": "NOT_READ",
+      "reason": "1MB public snapshot requires independently reviewed bounded parser"
+    },
+    {
+      "tier": 5,
+      "source": "owner-selected Git branches",
+      "status": "NOT_READ",
+      "reason": "selection, rights, and manifest review required before broad reading"
+    }
+  ]
+}
