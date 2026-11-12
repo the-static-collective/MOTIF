@@ -10,6 +10,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Test MOTIF-015 consented observation and webZ aggregate adapter
+        working-directory: experiments/015
+        run: python -m unittest -v test_observer.py test_webz_bridge.py
+      - name: Reproduce MOTIF-015 synthetic review example
+        working-directory: experiments/015
+        run: python observer.py example-observation.json --now 2026-11-06T09:00:00Z
       - name: Test 001
         working-directory: experiments/001
         run: python -m unittest -v test_motif.py

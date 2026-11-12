@@ -1,0 +1,25 @@
+{
+  "schema": "motif.observation.015.v1",
+  "source": {
+    "provider": "posthog",
+    "query_ref": "fixture:synthetic-funnel-001",
+    "window_start": "2026-11-05T00:00:00Z",
+    "window_end": "2026-11-05T22:00:00Z",
+    "exported_at": "2026-11-06T08:00:00Z",
+    "method": "same_cohort_funnel",
+    "unique_actors": true,
+    "same_cohort": true,
+    "collection_consent": "explicit_opt_in",
+    "personal_data_in_packet": false,
+    "source_reviewed": true
+  },
+  "prediction": {
+    "metric": "artifact_completion_rate",
+    "expected_rate": 0.7,
+    "minimum_n": 30
+  },
+  "observation": {
+    "entry_count": 100,
+    "completed_count": 40
+  }
+}
