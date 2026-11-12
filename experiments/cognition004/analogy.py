@@ -18,7 +18,7 @@ ROOT=HERE.parents[1]
 sys.path.insert(0,str(HERE.parent/"cognition001"))
 sys.path.insert(0,str(HERE.parent/"cognition002"))
 sys.path.insert(0,str(HERE.parent/"cognition003"))
-from circuit import AppState, admission, native_affordance, seal
+from circuit import AppState, admission, native_affordance, seal, LENSES
 from bridge import validate_understory_owner
 from resurface import _native_graph
 
@@ -223,6 +223,40 @@ def native_motif_test_affordances(rows):
     return len(options)
 
 
+
+def question_portfolio(eligible, policy):
+    """Equal five-card *heuristic* portfolios, not independent model agents.
+
+    These cards cannot select TESTs or access hidden owner outcomes. This is
+    an observable qualitative comparison, not a measured intelligence gain.
+    """
+    if not eligible:
+        return []
+    exemplar=eligible[0]
+    messages={
+        "skeptic":("Could superficial structural similarity conceal a different cause?",
+                   "Request an independent target TEST, not an analogy vote."),
+        "systems":("Which directed dependency survives a cross-domain role mapping?",
+                   "Remove or reverse an edge and check the predicted transfer."),
+        "story":("Does today's incident reinterpret an older, unresolved observation?",
+                 "Retain the original encounter and test the new interpretation."),
+        "planner":("Which source-proven intervention is now worth a bounded test?",
+                   "Compare the owner TEST with a null intervention."),
+        "experimenter":("What small test can discriminate analogy from coincidence?",
+                        "Predeclare the expected target response before repair."),
+    }
+    portfolio=[]
+    for i in range(5):
+        lens=LENSES[i] if policy=="motif_council" else "skeptic"
+        q,falsifier=messages[lens]
+        portfolio.append({
+            "perspective":lens, "question":q, "falsifier":falsifier,
+            "source_case":exemplar["sid"],"status":"PENCIL_UNTESTED",
+            "owner_result_seen":False,"permits_action":False,
+            "independent_agent":False})
+    return portfolio
+
+
 class Owner:
     """Separate simulator observes real test/repair; never supplies hidden truth."""
     def __init__(self,correct_action):
@@ -312,6 +346,7 @@ def run_case(seed,regime,policy,*,state=STATE,memento_root=None,full=False):
     # graph-indexed classical baseline gets exactly the same opportunities.
     motif_options=(native_motif_test_affordances(eligible)
                    if policy=="motif_council" and idle else 0)
+    portfolio=question_portfolio(eligible,policy)
     native_graph_checks=0
     graph_ids=[]
     for candidate in eligible[:MAX_PROBES]:
@@ -353,6 +388,9 @@ def run_case(seed,regime,policy,*,state=STATE,memento_root=None,full=False):
         "native_free_graph_checks":native_graph_checks,
         "native_graph_packet_ids":graph_ids,
         "native_motif003_test_affordances":motif_options,
+        "equal_budget_question_cards":len(portfolio),
+        "question_portfolio":portfolio if full else [],
+        "portfolio_effect_on_owner_actions":0,
         "native_private_understory":native_memento,
         "hypotheses_tested":[a["sid"] for a in attempted],
         "owner_tests":owner.probes,
