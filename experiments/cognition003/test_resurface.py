@@ -5,8 +5,7 @@ import unittest
 from unittest.mock import patch
 from datetime import datetime
 
-from circuit import AppState
-from resurface import (DEV_SEEDS,TEST_SEEDS,REGIMES,POLICIES,BUDGET,
+from resurface import (AppState,DEV_SEEDS,TEST_SEEDS,REGIMES,POLICIES,BUDGET,
                        DEFAULT_STATE,OWNER,archive,new_incident,RepairOwner,
                        packet_for,eligible_paths,_native_graph,_cached_paths,
                        _motif_hypothetical_order,owner_understory_envelope,
