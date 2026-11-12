@@ -32,6 +32,22 @@ jobs:
         run: python -m unittest discover -s experiments/llm004 -p 'test_*.py' -v
       - name: Produce independent owner study and a public hypermap specimen
         run: python experiments/llm004/run_experiment.py --out /tmp/llm004
+      - name: Generate the offline interactive visual hypermap
+        run: python experiments/llm004/viewer.py /tmp/llm004/specimen-map.json /tmp/llm004/reason-hypermap.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax-check shipped inline interactive viewer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          raw=Path('/tmp/llm004/reason-hypermap.html').read_text()
+          js=re.findall(r'<script>(.*?)</script>',raw,re.S)
+          assert len(js)==1
+          Path('/tmp/llm004/viewer-script.js').write_text(js[0])
+          PY
+          node --check /tmp/llm004/viewer-script.js
       - name: Validate exact generated Free Graph packet with real owning project's validator
         run: python external/free-graph-contract/scripts/fg.py validate /tmp/llm004/specimen-free-graph.json
       - name: Check nonpromotion and distribution boundary
@@ -52,5 +68,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: llm004-public-reason-hypermap-and-free-graph
-          path: /tmp/llm004/*.json
+          path: |
+            /tmp/llm004/*.json
+            /tmp/llm004/reason-hypermap.html
           retention-days: 30
