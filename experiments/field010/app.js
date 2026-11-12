@@ -504,6 +504,15 @@
     state.materials.forEach(m=>{
       const card=tile(m.label,`${m.role.replaceAll('_',' ')} · ${m.mobility} · ${m.status}`,
         `${m.provenance} / ${m.photo_id} · photo box only (not a yard position)`);
+      // A person can correct a detected *region* into an actual object without language back-and-forth.
+      const objectLabel=dom('input',{type:'text',maxlength:120,placeholder:'Name this visible object'});
+      objectLabel.value=m.label;
+      objectLabel.setAttribute('aria-label','Correct object name for '+m.id);
+      objectLabel.addEventListener('change',()=>{
+        const val=objectLabel.value.trim();
+        if(val)stamp({type:'material_set',target:m.id,prop:'label',value:val.slice(0,120)});
+      });
+      card.append(objectLabel);
       const s=dom('select',{class:'mini'});
       for(const role of MATERIAL.ROLES){const o=dom('option',{value:role},role.replaceAll('_',' '));s.append(o);}
       s.value=m.role;s.addEventListener('change',()=>stamp({type:'material_set',target:m.id,prop:'role',value:s.value}));card.append(s);
@@ -513,6 +522,13 @@
         ['Movable','mobility','movable'],['Fixed','mobility','fixed']]){
         const b=dom('button',{type:'button',class:'mini'},name);b.addEventListener('click',()=>stamp({type:'material_set',target:m.id,prop,value:val}));actions.append(b);
       }
+      const focus=dom('button',{type:'button',class:'mini'},'Show on photo');
+      focus.addEventListener('click',async()=>{
+        const p=photos.find(x=>x.id===m.photo_id&&x.digest===m.photo_sha256);
+        if(!p)return notify('This photo is not loaded in the current session.');
+        await selectPhoto(p);svgBox(byId('objectRegionDraft'),m.bbox);
+        byId('regionHint').textContent='Selected proposed region: '+m.label+' — correct the name/role or reject it.';
+      });actions.append(focus);
       card.append(actions);
       const input=dom('input',{type:'number',min:'.01',max:'1000',step:'.25',placeholder:'Width (optional)' });
       input.value=m.width?.value||'';
