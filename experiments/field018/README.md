@@ -12,7 +12,7 @@ Give MOTIF the sketch and nine yard photographs, and have it: parse the ink and 
 - REAL-source pass: **9 photos / 36 image-pair ORB+RANSAC tests**; all 36 HOLD rather than inventing shared 3D/yard coordinates.
 - REAL-source semantic model: **NONE executed**. There is no installed Qwen3-VL semantic model and neither MapAnything nor Depth Anything 3 checkpoint was available in this local environment. The initial materials, if supplied as words, remain **USER_STATEMENT** rather than model-found photo objects.
 - REAL-source 3D/physics: **HOLD**. No yard metric scale, panel sizes, verified camera poses or connectors. A schematic height or advertised 200-lb zip tie claim cannot become load capacity.
-- CONTROLLED authored synthetic pass: **actual FIELD-017 search calls FIELD-016 evaluator, which calls FIELD-015 physics**. At budget 16, one hypothetical arrangement is revised when a hypothetical porous panel width changes from 1.50 to 1.32 m; the model-preferred layout changes. No actual object is moved or verified. The `MODEL_TENTATIVE` event **does not** become a measured fact.
+- CONTROLLED authored synthetic pass: **actual FIELD-017 search calls FIELD-016 evaluator, which calls FIELD-015 physics**. At budget 16, the nominal best-scored arrangement changes after a hypothetical porous panel width changes from 1.50 to 1.32 m. **The new best-scored candidate also FAILS the simplified physics screen; all evaluated alternatives are rejected.** FIELD-018 therefore adds a fail-closed \`selection_gate\`: the numerical winner is never offered as an operational recommendation. No actual object is moved or verified. The `MODEL_TENTATIVE` event **does not** become a measured fact.
 
 These are **two separately reported runs**, not a claimed end-to-end successful fully autonomous real task. Their only shared semantics are the general problem type and architecture.
 
@@ -44,7 +44,7 @@ Paths and private property images are never committed. Source code is public. Pr
 
 ## Reusable result
 
-A real source did *not* pass the complete autonomy chain; it was stopped honestly at semantic interpretation and metric reconstruction. The synthetic mechanics→revision portion does work. **The next work should prioritize actual local semantic visual inference and source registration**, not another layer of more intricate search on invented coordinates. Compare a real Qwen3-VL interpreter, CV-only, VLM-only, and VLM+critic on withheld images; require independent measured ground-truth and safety review. MapAnything and Depth Anything 3 are optional model adapters; no inference or CPU download happened here.
+A real source did *not* pass the complete autonomy chain; it was stopped honestly at semantic interpretation and metric reconstruction. The synthetic mechanics→revision portion executes, but the follow-up exposed a critical distinction between *finding the least-bad scored layout* and *finding any viable layout*. FIELD-018 now reports `HOLD_NO_MODEL_ADMISSIBLE_LAYOUT` when the latter is absent. **The next work should prioritize actual local semantic visual inference and source registration**, not another layer of more intricate search on invented coordinates. Compare a real Qwen3-VL interpreter, CV-only, VLM-only, and VLM+critic on withheld images; require independent measured ground-truth and safety review. MapAnything and Depth Anything 3 are optional model adapters; no inference or CPU download happened here.
 
 ## Context
 
