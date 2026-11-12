@@ -152,6 +152,8 @@
       if(!matching)continue;
       const e=effective(state,q.id);
       if(e.answers.some(x=>x.root===person.root)||e.declined.includes(person.root))continue;
+      if(a.status==="NEED_OTHER_ROLE" && !person.roles.some(role =>
+          q.roles.includes(role) && !e.answers.some(x=>x.role===role)))continue;
       // Role variety, urgency and remaining decision impact are deliberate
       // authored heuristics, not a learned optimal policy.
       const gap=Math.max(0,q.minRoots-a.n);
