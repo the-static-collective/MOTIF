@@ -116,8 +116,8 @@ test("revisions remain visible; only current latest event influences learning",(
    role:"maker",at:T+2000,kind:"REVISE",choice:0,method:"reasoning",
    note:"fictional correction",revises:old.id});
  const m=R.methodCandidate(s,"q_003",T+2001),g=R.toGraph(s,"q_003",T+2001);
- assert.equal(m.status,"HOLD"); // gain falls from 2 to 1
- assert.equal(m.gain_over_global_on_later_reports,1);
+ assert.equal(m.status,"HOLD"); // later correction removes observed gain
+ assert.equal(m.gain_over_global_on_later_reports,0);
  assert.equal(g.hyperedges.filter(x=>x.kind==="revises_record").length,1);
  assert.ok(g.nodes.some(x=>x.id==="event:"+old.id&&x.status==="superseded"));
  assert.ok(g.nodes.some(x=>x.id==="event:rev_maker_3"&&x.status==="reported"));
