@@ -40,6 +40,18 @@ jobs:
           PY
       - name: Build the complete offline interactive 219+ action viewer
         run: python experiments/llm005/build_viewer.py --out /tmp/odyssey240 --study-file /tmp/odyssey240/benchmark.json
+      - name: Execute 4 registered marathon scenarios (879+ minimum steps each)
+        run: |
+          python experiments/llm005/marathon.py > /tmp/odyssey240/marathon-study.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/odyssey240/marathon-study.json'))
+          assert a['sequential_minimum']==879 and a['required_decision_gates']==384
+          print('MARATHON_WORLDS',a['independent_registered_groups'])
+          for x in a['arms']:print('MARATHON_ARM',x)
+          PY
+      - name: Publish first registered complete marathon's global hash-linked replay
+        run: python experiments/llm005/build_marathon.py --out /tmp/odyssey240 --study-file /tmp/odyssey240/marathon-study.json
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -60,6 +72,25 @@ jobs:
           print('ODYSSEY_OFFLINE_ACTIONS',{p:t['summary']['actions'] for p,t in data['traces'].items()})
           PY
           node --check /tmp/odyssey240/odyssey-script.js
+      - name: Syntax-check all 879+ stage marathon browser code
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,re
+          folder=Path('/tmp/odyssey240')
+          data=json.loads((folder/'marathon-dossier.json').read_text())
+          first=data['records']['hypermap_voi']['summary']
+          assert first['completed'] and first['actual_serial_actions']>=879
+          assert first['completed_decision_gates']==384
+          assert first['mandatory_handoffs_completed']==3
+          html=(folder/'marathon.html').read_text()
+          js=re.findall(r'<script>(.*?)</script>',html,re.S)
+          assert len(js)==1 and '__PAYLOAD__' not in html
+          (folder/'marathon-script.js').write_text(js[0])
+          print('MARATHON_ACTUAL_STEPS',first['actual_serial_actions'])
+          print('MARATHON_REASONING_WORLDS',first['distinct_source_owner_seeds'])
+          PY
+          node --check /tmp/odyssey240/marathon-script.js
       - uses: actions/upload-artifact@v4
         with:
           name: odyssey240-longchain-results
