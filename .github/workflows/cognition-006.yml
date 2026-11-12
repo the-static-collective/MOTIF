@@ -1,0 +1,101 @@
+name: COGNITION-006 native NovelGym original planner and fire-world smoke
+on:
+  push:
+    paths:
+      - 'experiments/cognition006/**'
+      - '.github/workflows/cognition-006.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition006/**'
+      - '.github/workflows/cognition-006.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authentic-fire-native-smoke:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Check preregistration was frozen before implementation
+        run: |
+          git show 7da0363fed243a1b18b38b48562331533106ebe2:experiments/cognition006/PREREGISTRATION.md > /tmp/cognition006-protocol-original.md
+          cmp /tmp/cognition006-protocol-original.md experiments/cognition006/PREREGISTRATION.md
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - name: Verify immutable source owners
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+          test -f sources/novelgym/novelties/evaluation1/fire/fire_crafting_table.yaml
+          test -f sources/novelgym/agents/base_planning.py
+      - name: Install upstream Python engine on original tested Python 3.10
+        run: |
+          python -m pip install --upgrade 'pip<25'
+          python -m pip install 'numpy<2' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'pygame==2.5.2' 'PyYAML>=6'
+          python -m pip install -e ./sources/novelgridworldsv2
+      - name: Compile upstream Metric-FF planner at source (GPLv2, isolated CI only)
+        run: |
+          make -C sources/novelgym/planners/Metric-FF-v2.1
+          test -x sources/novelgym/planners/Metric-FF-v2.1/ff
+      - name: Run noninteractive, bounded native owner episodes none vs fire
+        timeout-minutes: 8
+        working-directory: sources/novelgym
+        run: |
+          python ../../experiments/cognition006/native_smoke.py --output ../../cognition006-native-smoke.json
+      - name: Verify original owner receipts exist and do not claim MOTIF scored
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('cognition006-native-smoke.json'))
+          assert d['status']=='NATIVE_WORLD_EXECUTED_BASELINE_NOT_PROVEN'
+          assert len(d['cases'])==2
+          assert [x['novelty'] for x in d['cases']]==['none','fire']
+          assert all(x['motif_policy_loaded'] is False and
+                     x['model_adaptation_not_tested'] is True for x in d['cases'])
+          for x in d['cases']:
+              assert x['main_actions']<=160 and x['total_actions']<=600
+              assert x['end_reason'] in (
+                'ORIGINAL_OWNER_GOAL_ACHIEVED',
+                'ORIGINAL_OWNER_GIVEN_UP',
+                'MAIN_ACTION_CAP',
+                'TOTAL_ACTION_CAP',
+                'ORIGINAL_PLAN_ACTION_FAILED',
+                'ORIGINAL_PLANNER_STUCK',
+                'OWNER_EPISODE_TERMINATED_OR_TRUNCATED')
+              assert all(type(rec['native_action_success']) is bool
+                         for rec in x['native_action_receipts'])
+          print(json.dumps({x['novelty']: {'goal':x['native_owner_goal_achieved'],
+                   'main_actions':x['main_actions'],'end':x['end_reason']}
+                   for x in d['cases']},sort_keys=True))
+          PY
+      - name: Archive original environment diagnosis, including failure details
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition006-real-novelgym-original-owner-smoke
+          path: cognition006-native-smoke.json
+          retention-days: 30
+          if-no-files-found: warn
