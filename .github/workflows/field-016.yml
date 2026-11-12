@@ -1,0 +1,35 @@
+name: FIELD-016 revised physical hypotheses
+on:
+  push:
+    paths:
+      - 'experiments/field016/**'
+      - '.github/workflows/field-016.yml'
+  pull_request:
+    paths:
+      - 'experiments/field016/**'
+      - '.github/workflows/field-016.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install numerical dependency for FIELD-015 bridge
+        run: python -m pip install 'numpy>=1.24,<3'
+      - name: Python source/evidence/physics regression tests
+        working-directory: experiments/field016
+        run: python -m unittest discover -v
+      - name: JavaScript offline UI logic tests
+        working-directory: experiments/field016
+        run: node test_ui.js
+      - name: Reproducible hypothetical study
+        working-directory: experiments/field016
+        run: python engine.py > /dev/null
