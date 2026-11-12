@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOTIF • Shared Board — FIELD-010</title>
+<style>
+:root {color-scheme:dark;--bg:#121923;--panel:#1d2732;--panel2:#243341;--ink:#edf0e8;--muted:#a6b9b9;--line:#3b4d5b;--accent:#d7e57f;--green:#77d9bb;--blue:#87bce8;--purple:#cfa5ee;--amber:#f3c37a;--red:#ef928f;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}
+header{padding:16px clamp(15px,3vw,34px);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}header h1{font-size:19px;font-weight:760;letter-spacing:.015em;margin:0}header small{color:var(--muted);display:block;line-height:1.5}.tag{border:1px solid #54786a;background:#253a35;color:#a8ebbe;padding:6px 10px;border-radius:40px;font-size:12px}
+button,input,select{font:inherit}button{border:1px solid #526573;background:#304452;color:var(--ink);border-radius:8px;padding:9px 13px;cursor:pointer;min-height:39px}button:hover{background:#3b5360}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}.primary,.active{background:#455e38;border-color:#a4ba68;color:#f4f8d9}.danger{border-color:#87545d;color:#ffc3c2}.ghost{background:transparent}.mini{min-height:32px;padding:5px 8px;font-size:12px}
+main{max-width:1600px;margin:auto;padding:20px clamp(12px,2vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(295px,330px);gap:16px;align-items:start}.leftcol,.rightcol{min-width:0;display:grid;gap:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}.card h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#d5ddc8;margin:0}.head{padding:13px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.body{padding:14px}.small{font-size:12px;color:var(--muted);line-height:1.55}.micro{font-size:11px;color:var(--muted)}.muted{color:var(--muted)}
+.tools{display:flex;gap:7px;flex-wrap:wrap;padding:12px 13px;border-bottom:1px solid var(--line)}.tools button{font-size:12px;min-height:36px}.boardwrap{overflow:auto;background:#0f1b22;scrollbar-color:#6b8389 #15222b}.board{display:block;width:100%;min-width:720px;aspect-ratio:1000/450;cursor:crosshair;touch-action:pan-x pan-y}.board line,.board circle{vector-effect:non-scaling-stroke}.board .item-hit{cursor:grab}.board .node{cursor:grab;touch-action:none}.board .endpoint{cursor:crosshair;touch-action:none}.board .item-hit{touch-action:none}.board .picked{filter:drop-shadow(0 0 4px rgba(235,244,171,.85))}.guide{background:#152834;padding:10px 13px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);font-size:12px}.guide span{display:inline-flex;align-items:center;gap:5px;color:var(--muted)}.swatch{width:12px;height:4px;display:inline-block;border-radius:5px}.toast{padding:9px 12px;color:#d2ddc5;background:#223840;font-size:12px;min-height:34px}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row>label{flex:1}.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.field{display:grid;gap:4px;color:var(--muted);font-size:12px;margin:9px 0}.field input,.field select{width:100%;min-width:0;background:#121f2a;border:1px solid #5a7078;color:var(--ink);padding:9px 10px;border-radius:7px;font-size:16px;min-height:38px}.check{display:flex;align-items:center;gap:9px;font-size:13px;color:#dce3df}.check input{width:18px;height:18px;accent-color:#a3cd6e}.check span{line-height:1.4}.separate{border-top:1px solid var(--line);padding-top:10px;margin-top:13px}.note{border-left:3px solid #718c7c;padding:8px 12px;background:#263845;font-size:12px;line-height:1.5;color:#d9e4df;margin:8px 0}.warn{border-left-color:var(--amber)}.bad{border-left-color:var(--red)}
+.tiles{display:grid;gap:10px}.tile{padding:11px;border:1px solid #405664;background:#243544;border-radius:9px}.tile strong{font-size:13px;line-height:1.4}.tile p{font-size:12px;color:#bfced0;margin:5px 0;line-height:1.5}.tile small{color:#a9c1b6;font-size:11px}.tile button{margin-top:8px}.branchhead{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:flex;gap:6px;align-items:center;margin:12px 0 8px}.branchhead:first-child{margin-top:0}.pill{font-size:11px;padding:2px 7px;border-radius:30px;background:#324741;color:#b3deb2}
+#photolist{display:flex;gap:8px;overflow-x:auto;padding:9px 0}#photolist button{padding:4px;background:var(--panel2);border:1px solid var(--line);min-width:88px}#photolist img{display:block;max-width:82px;height:55px;object-fit:cover}#photoViewer{max-width:100%;display:block;max-height:250px;margin:0 auto;object-fit:contain}#photoViewer:empty{display:none}.events{max-height:175px;overflow:auto;padding:10px 14px;font-size:12px}.events div{border-bottom:1px solid #384b56;padding:4px 0;color:#b0c6c0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:1060px){main{grid-template-columns:minmax(0,1fr)}.rightcol{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:670px){.rightcol{grid-template-columns:minmax(0,1fr)}.split{grid-template-columns:minmax(0,1fr)}header{padding:12px}main{padding:10px}header h1{font-size:16px}.board{min-width:700px}.body{padding:12px}}
+</style>
+</head>
+<body>
+<header>
+ <div><h1>MOTIF <span style="color:#d7e57f">/ FIELD-010</span> — Shared Board</h1><small>Two reasoning branches. One editable visual evidence surface.</small></div>
+ <div class="row"><span class="tag">Local-only prototype · no network calls</span><button id="exportBtn" class="primary">Save board JSON</button><button id="svgBtn">Export annotated SVG</button></div>
+</header>
+<main>
+ <div class="leftcol">
+  <section class="card">
+   <div class="head"><h2>Shared canvas</h2><div class="row"><label for="sketchUpload" class="small">Source sketch:</label><input id="sketchUpload" type="file" accept="image/jpeg,image/png,image/webp" style="max-width:210px;font-size:12px"></div></div>
+   <div class="tools" id="tools" aria-label="Editing tools">
+     <button data-tool="select" class="active">Select / move</button>
+     <button data-tool="desired">+ Desired boundary</button><button data-tool="current">+ Existing fence</button>
+     <button data-tool="panel">+ Salvaged panel</button><button data-tool="support">+ Support</button><button data-tool="access">+ Access gap</button>
+     <button id="undoBtn" class="ghost">Undo edit</button>
+   </div>
+   <div class="boardwrap"><svg class="board" id="board" viewBox="0 0 1000 450" role="img" aria-label="Editable schematic board with movable fence segments and landmarks">
+     <defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" stroke="#36515b" stroke-width="1" fill="none" opacity=".65"/></pattern></defs>
+     <rect width="1000" height="450" fill="#132430"/><rect width="1000" height="450" fill="url(#grid)"/>
+     <image id="sourceImage" x="0" y="0" width="1000" height="450" opacity=".57" preserveAspectRatio="xMidYMid meet"/>
+     <g id="objects"></g><g id="draft"></g>
+   </svg></div>
+   <div class="guide"><span><i class="swatch" style="background:#70d9b1"></i> Existing</span><span><i class="swatch" style="background:#e4d278"></i> Desired</span><span><i class="swatch" style="background:#83b8e9"></i> Salvage</span><span><i class="swatch" style="background:#d7a3ed"></i> Support</span><span>Dashed = proposed, not verified</span></div>
+   <div class="toast" id="toast" role="status" aria-live="polite">Select a tool, then click two endpoints. Drag a line or its handles to correct it. Pan sideways on small screens.</div>
+  </section>
+  <section class="card">
+   <div class="head"><h2>Two independent reasoning tracks</h2><span class="pill" id="version">Edit 0</span></div>
+   <div class="body"><div class="split">
+     <div><div class="branchhead">A · autonomous hypotheses <span class="pill" id="solverState">ready</span></div><div class="tiles" id="solverTiles"></div></div>
+     <div><div class="branchhead">B · useful interactions <span class="pill" id="interfaceState">ready</span></div><div class="tiles" id="interfaceTiles"></div></div>
+   </div><p class="small" style="margin:10px 0 0">Both tracks read the same event-replayed board. Proposed arrangements do not change the original drawing or prove physical feasibility.</p></div>
+  </section>
+  <section class="card"><div class="head"><h2>Reference photographs</h2><label class="small">Add locally <input id="photoUpload" type="file" accept="image/png,image/jpeg,image/webp" multiple style="max-width:220px"></label></div><div class="body"><p class="small" style="margin:0">Photos remain separate witness views; no unverified photo pixel becomes a yard coordinate.</p><div id="photolist"></div><img id="photoViewer" alt="Selected reference photo"><p id="photoNotice" class="micro">Choose images from your device. They are not exported with board JSON.</p></div></section>
+ </div>
+ <div class="rightcol">
+  <section class="card"><div class="head"><h2>Object / measurement inspector</h2></div><div class="body" id="inspector"><p class="small">Select a segment to edit its label, mobility, status, and length. You can correct missing geometry directly on the canvas.</p></div></section>
+  <section class="card"><div class="head"><h2>Ratio & uncertainty controls</h2></div><div class="body"><label class="check"><input id="proportional" type="checkbox"><span>Assume this sketch is roughly proportional</span></label><label class="field">Possible nonuniformity in sketch (assumed ±%)<input id="tolerance" type="number" min="0" max="85" step="5" value="40"></label><p class="small">A physical length remains unknown unless a human supplies a same-sketch measured reference. Even then, resulting ranges are conditional assumptions, not calibrated statistical confidence.</p><div id="scaleSummary" class="note warn">No physical scale. Drawn ratios only.</div><div class="separate"><div class="small"><strong>Measurable spans · blank until entered</strong></div><div id="measurementQueue" style="margin:7px 0 12px"></div></div><label class="field">Use a relational constraint (choose a segment)<select id="ratioTarget"><option value="">— select target —</option></select></label><div class="split"><label class="field">Relative to<select id="ratioOther"><option value="">— reference —</option></select></label><label class="field">Approximate multiplier<input id="ratioValue" type="number" min=".05" max="20" step=".25" value="2"></label></div><button id="ratioBtn" class="mini">Add ratio relation</button><div id="ratios" class="small" style="margin-top:8px"></div></div></section>
+  <section class="card"><div class="head"><h2>Evidence & revision trail</h2><button id="importBtn" class="mini">Import board JSON</button><input type="file" id="importFile" accept="application/json" hidden></div><div class="body"><p class="small" style="margin:0">Every edit creates a named, replayable event. Undo appends a compensating event; it does not erase history.</p><p class="micro" id="editCount">0 edits</p></div><div class="events" id="events"></div><div class="body"><div class="note bad">Engineering HOLD: zip ties, loose mesh, chairs and trampoline parts are unverified supports. A visual boundary is not automatically safe pet containment.</div></div></section>
+ </div>
+</main>
+<script src="core.js"></script>
+<script src="fixture.js"></script>
+<script src="app.js"></script>
+</body></html>
