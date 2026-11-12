@@ -21,6 +21,8 @@ class ViewerLongTest(unittest.TestCase):
         self.assertIn('id="sectors"',page)
         self.assertIn('id="jumpError"',page)
         self.assertIn('id="compare"',page)
+        self.assertIn('id="lens"',page)
+        self.assertIn("report-bears-on-rivals",page)
         self.assertIn("function inspectEvidence",page)
     def test_02_contains_real_219_plus_event_data(self):
         page=render(self.data)
