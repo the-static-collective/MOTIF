@@ -1,0 +1,26 @@
+name: FIELD-011 source-to-editable-board offline test
+on:
+  push:
+    paths:
+      - 'experiments/field011/**'
+      - '.github/workflows/field-011.yml'
+  pull_request:
+    paths:
+      - 'experiments/field011/**'
+      - '.github/workflows/field-011.yml'
+permissions:
+  contents: read
+jobs:
+  source-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install classical pixel dependencies
+        run: python -m pip install -r experiments/field007/requirements.txt
+      - name: Run FIELD-011 tests
+        working-directory: experiments/field011
+        run: python -m unittest discover -v
