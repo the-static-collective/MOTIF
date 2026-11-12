@@ -1,0 +1,90 @@
+name: LLM-006 REAL PRETRAINED ODYSSEY MARATHON
+on:
+  push:
+    branches:
+      - experiment/llm006-real-weights-odyssey-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm006/**'
+      - 'experiments/llm005/odyssey.py'
+      - 'experiments/llm005/marathon.py'
+      - '.github/workflows/llm-006.yml'
+  workflow_dispatch:
+jobs:
+  source-boundary-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    env:
+      PYTHONPATH: experiments/llm003:experiments/llm004:experiments/llm005:experiments/llm006
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run 19 model-owner boundary falsifiers with explicitly fake callback
+        run: python -m unittest discover -s experiments/llm006 -p 'test_binding.py' -v
+      - name: Ensure earlier 879+ causal chain & 41 Hypermap checks still work
+        run: |
+          python -m unittest discover -s experiments/llm005 -p 'test_*.py' -v
+          python -m unittest discover -s experiments/llm004 -p 'test_*.py' -v
+  real-pretrained-384-gates:
+    needs: source-boundary-contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    permissions:
+      contents: read
+    env:
+      PYTHONPATH: experiments/llm003:experiments/llm004:experiments/llm005:experiments/llm006
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      HF_HUB_ETAG_TIMEOUT: '20'
+      HF_HUB_DOWNLOAD_TIMEOUT: '90'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen CPU pretrained-model stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-input --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
+          python -m pip install --disable-pip-version-check --no-input 'transformers==4.49.0' 'huggingface-hub>=0.28,<1.0' 'safetensors>=0.4,<1.0'
+      - name: Execute three REAL model policies across 384 sequential source-verified decisions each
+        run: |
+          python experiments/llm006/real_marathon.py --out /tmp/llm006
+      - name: Audit real weights use, source coordinates and compare classical reference
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('/tmp/llm006/real-model-summary.json').read_text())
+          assert r['pretrained_model_was_actually_loaded'] is True
+          assert r['model_parameters'] > 100000000
+          assert r['model_forwards']>0
+          assert r['no_external_actions'] is True
+          assert list(r['research_group'])==[8001,8002,8003,8004]
+          for k,v in r['arms'].items():
+              assert v['summary']['real_llm'] is True
+              assert v['audit']['model_forwards_verified'] == v['model_stats']['forwards']
+              assert v['summary']['real_model_forwards']==v['model_stats']['forwards']
+              if v['summary']['completed']:
+                  assert v['summary']['completed_decision_gates']==384
+                  assert v['model_stats']['forwards']==336
+              print('REALLY_PRETRAINED_ARM',k,'STATUS',v['summary']['state'],
+                'SERIAL_STEPS',v['summary']['actual_serial_actions'],
+                'CORRECT_GATES',v['summary']['completed_decision_gates'],
+                'MODEL_FORWARDS',v['model_stats']['forwards'],
+                'WRONG_COMMITS',v['summary']['wrong_commitments'],
+                'OPTIONAL_PROBES',v['summary']['optional_independent_probes'],
+                'COST',v['summary']['synthetic_cost'])
+          print('PAIRED_MODEL_MEMORY',r['paired_memory_comparison'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm006-real-pretrained-odyssey-reports
+          path: /tmp/llm006/*.json
+          retention-days: 30
