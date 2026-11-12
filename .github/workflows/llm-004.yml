@@ -1,0 +1,74 @@
+name: LLM-004 Reason Hypermap & Free Graph Contract
+on:
+  push:
+    branches:
+      - experiment/llm004-reason-hypermap-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm004/**'
+      - '.github/workflows/llm-004.yml'
+  workflow_dispatch:
+jobs:
+  exact-reason-hypermap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    permissions:
+      contents: read
+    env:
+      PYTHONPATH: experiments/llm003:experiments/llm004
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source-owned Free Graph (pinned public contract, read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: external/free-graph-contract
+          persist-credentials: false
+      - name: Run reason hypermap boundary tests
+        run: python -m unittest discover -s experiments/llm004 -p 'test_*.py' -v
+      - name: Produce independent owner study and a public hypermap specimen
+        run: python experiments/llm004/run_experiment.py --out /tmp/llm004
+      - name: Generate the offline interactive visual hypermap
+        run: python experiments/llm004/viewer.py /tmp/llm004/specimen-map.json /tmp/llm004/reason-hypermap.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax-check shipped inline interactive viewer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          raw=Path('/tmp/llm004/reason-hypermap.html').read_text()
+          js=re.findall(r'<script>(.*?)</script>',raw,re.S)
+          assert len(js)==1
+          Path('/tmp/llm004/viewer-script.js').write_text(js[0])
+          PY
+          node --check /tmp/llm004/viewer-script.js
+      - name: Validate exact generated Free Graph packet with real owning project's validator
+        run: python external/free-graph-contract/scripts/fg.py validate /tmp/llm004/specimen-free-graph.json
+      - name: Check nonpromotion and distribution boundary
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/llm004/specimen-free-graph.json'))
+          b=json.load(open('/tmp/llm004/specimen-map.json'))
+          assert a['schema']=='free-graph.packet/v0'
+          assert all(e['verb']!='constitutes' and e['authority']=='none' for e in a['links'])
+          assert all(s['access']=='public' and s['export']=='portable' for s in a['sources'])
+          assert b['owner_hidden_truth_excluded'] is True
+          assert b['external_actions'] is False
+          assert len(a['nodes'])>=len(b['nodes'])
+          print('VALIDATED_HYPERMAP_NODES',len(b['nodes']))
+          print('VALIDATED_HYPEREDGES',len(b['hyperedges']))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: llm004-public-reason-hypermap-and-free-graph
+          path: |
+            /tmp/llm004/*.json
+            /tmp/llm004/reason-hypermap.html
+          retention-days: 30
