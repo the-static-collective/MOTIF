@@ -1,0 +1,27 @@
+const assert=require('node:assert/strict');
+const F16=require('../field016/ui.js');
+const F17=require('./loop.js');
+function T(test,fn){fn();console.log('OK',test)}
+const base=F16.initial();const seed={route:'original',pieces:['privacy']};
+T('Field16 physical critic loaded',()=>assert.ok(F16.calculate(base).length>0));
+T('failing seed rejected',()=>assert.equal(F17.inspect(base,seed).verdict,'REJECTED_UNDER_STATED_MODEL'));
+T('budget one tests only seed',()=>{const x=F17.run(base,seed,1);assert.equal(x.evaluated,1);assert.equal(x.selected.id,'original|privacy')});
+T('bounded search 16 tests 16',()=>assert.equal(F17.run(base,seed,16).evaluated,16));
+T('default finds improved arrangement',()=>{const x=F17.run(base,seed,16);assert.equal(x.selected.id,'repositioned|porous');assert.ok(x.improved);assert.equal(x.selected.verdict,'CONDITIONAL_HOLD_NOT_CERTIFIED')});
+T('no safety certification',()=>{const x=F17.run(base,seed);assert.equal(x.safety_certified,false);assert.equal(x.selected.safety_certified,false)});
+T('actual world not mutated',()=>{const before=JSON.stringify(base);F17.run(base,seed);assert.equal(JSON.stringify(base),before)});
+T('no duplicate candidate evaluations',()=>{const r=F17.run(base,seed,35);assert.equal(new Set(r.trace.map(t=>t.id)).size,r.evaluated)});
+T('changes fallible when physical width updated',()=>{const s=structuredClone(base);s.pieces[2].width=1.32;s.pieces[2].measured=true;assert.notEqual(F17.run(s,seed,16).selected.id,'repositioned|porous')});
+T('unknown dimension stays HOLD',()=>{const s=structuredClone(base);s.pieces[2].width=null;const r=F17.run(s,seed,16);assert.equal(r.safety_certified,false)});
+T('known access exclusion is a failure',()=>{const s=structuredClone(base);s.routes.forEach(r=>r.access=false);const r=F17.run(s,seed);assert.ok(r.selected.failures.some(f=>f.includes('access')))});
+T('question direct instead of chat',()=>assert.equal(F17.run(base,seed).nextInput.widget,'yes-no-unknown'));
+T('no joints if unavailable',()=>{const s=structuredClone(base);s.connections=false;assert.ok(!F17.neighbors(s,seed).some(x=>x.operation==='COMPOSE_PANELS'))});
+T('wind remains unchanged',()=>{const s=structuredClone(base);s.wind=20;F17.run(s,seed);assert.equal(s.wind,20)});
+T('no fabricated routes',()=>assert.ok(F17.neighbors(base,seed).every(x=>base.routes.some(y=>y.id===x.route))));
+T('no fabricated materials',()=>assert.ok(F17.neighbors(base,seed).every(x=>x.pieces.every(y=>base.pieces.some(p=>p.id===y)))));
+T('reject fabricated material',()=>assert.throws(()=>F17.inspect(base,{route:'original',pieces:['dragon']})));
+T('reject negative budget',()=>assert.throws(()=>F17.run(base,seed,0)));
+T('reject nonsense wind',()=>{const s=structuredClone(base);s.wind=-1;assert.throws(()=>F17.run(s,seed))});
+T('disabled gaslight through missing physics',()=>{const s=structuredClone(base);s.pieces.forEach(p=>p.mass=null);assert.equal(F17.run(s,seed,16).safety_certified,false)});
+T('deterministic result',()=>assert.equal(JSON.stringify(F17.run(base,seed,14)),JSON.stringify(F17.run(base,seed,14))));
+console.log('21 JS checks passed');
