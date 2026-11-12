@@ -206,6 +206,17 @@ class HypermapTests(unittest.TestCase):
         o,m,p,e,before=self.fire()
         self.assertEqual(len(m.sources),3)
         self.assertEqual(len({s["root"] for s in m.sources.values()}),3)
+    def test_36_cost_stopped_information_gain_selects_same_initial_test_as_ig(self):
+        o,m=self.make()
+        expected=m.choose_test("classical_ig")
+        o2,m2=self.make()
+        actual=m2.choose_test("classical_ig_stop",allow_costly=True)
+        self.assertEqual(expected.x,actual.x)
+    def test_37_stopped_baseline_uses_same_cost_threshold(self):
+        o,m=self.make()
+        p=m.choose_test("classical_ig_stop")
+        if p is not None:
+            self.assertGreater(decision_gain(m.weights,p.x),m.cost)
     def test_35_zero_probe_retains_initial_sourced_memory(self):
         o,m=self.make()
         self.assertIsNone(m.choose_test("no_probe"))
