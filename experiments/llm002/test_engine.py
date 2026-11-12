@@ -14,7 +14,7 @@ class ForkTests(unittest.TestCase):
     def fork(self,*,ctx=None,cache=None,token="use",tool=1,permission=1,adapter=None):
         f=graph_features(tool=tool,permission=permission,action=token)
         return branch(self.model,cache or self.cache,ctx or self.ctx,token,f,
-                      self.adapter if adapter is None else adapter)
+                      self.adapter if adapter is None else adapter,expected_prefix=PREFIX)
     def test_01_actual_qk_not_mocked(self):
         self.assertEqual(self.cache.qk_ops, sum(range(1,len(PREFIX)+1)))
         self.assertEqual(len(self.cache.keys),len(PREFIX))
@@ -22,7 +22,7 @@ class ForkTests(unittest.TestCase):
     def test_02_cached_uncached_equivalence_5_forks(self):
         for tool,permission,action in [(0,0,"probe"),(0,0,"use"),(1,1,"use"),(1,0,"use"),(0,0,"publish")]:
             f=graph_features(tool=tool,permission=permission,action=action)
-            a=branch(self.model,self.cache,self.ctx,action,f,self.adapter)
+            a=branch(self.model,self.cache,self.ctx,action,f,self.adapter,expected_prefix=PREFIX)
             b=full(self.model,PREFIX,self.ctx,action,f,self.adapter)
             self.assertAlmostEqual(a["logit"],b["logit"],places=12)
             self.assertEqual(a["state"],"PENCIL")
@@ -46,7 +46,7 @@ class ForkTests(unittest.TestCase):
     def test_08_model_weight_change_rejected(self):
         m2=TinyCausal(seed=42)
         with self.assertRaisesRegex(ValueError,"CACHE_SCOPE_MISMATCH"):
-            branch(m2,self.cache,self.ctx,"probe",graph_features(tool=0,permission=0,action="probe"),self.adapter)
+            branch(m2,self.cache,self.ctx,"probe",graph_features(tool=0,permission=0,action="probe"),self.adapter,expected_prefix=PREFIX)
     def test_09_tokenizer_change_rejected(self):
         with self.assertRaisesRegex(ValueError,"CACHE_SCOPE_MISMATCH"):
             self.fork(ctx=dict(self.ctx,tokenizer="different"))
@@ -58,6 +58,12 @@ class ForkTests(unittest.TestCase):
             prefill(self.model,PREFIX,dict(self.ctx,prefix_graph="different-state"))
         with self.assertRaisesRegex(ValueError,"CACHE_SCOPE_MISMATCH"):
             self.fork(ctx=dict(self.ctx,prefix_graph="different-state"))
+    def test_11b_missing_or_changed_prefix_must_fail_closed(self):
+        f=graph_features(tool=1,permission=1,action="use")
+        with self.assertRaisesRegex(ValueError,"PREFIX_IDENTITY_MISMATCH"):
+            branch(self.model,self.cache,self.ctx,"use",f,self.adapter)
+        with self.assertRaisesRegex(ValueError,"PREFIX_IDENTITY_MISMATCH"):
+            branch(self.model,self.cache,self.ctx,"use",f,self.adapter,expected_prefix=PREFIX[:-1]+("changed",))
     def test_12_mutated_kv_cannot_be_used(self):
         broken=replace(self.cache,keys=(tuple([3.0]*D),)+self.cache.keys[1:])
         with self.assertRaisesRegex(ValueError,"CACHE_TAMPERED"):self.fork(cache=broken)
