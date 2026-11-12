@@ -1,0 +1,53 @@
+name: RECIPROCAL-001 — Local Two-Way Apprentice
+on:
+  push:
+    branches:
+      - experiment/reciprocal-001-mutual-apprentice-20261112
+  pull_request:
+    paths:
+      - "experiments/reciprocal-001/**"
+      - ".github/workflows/reciprocal-001.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  independent-local-reasoning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check executable source and run deterministic two-way tests
+        run: |
+          node --check experiments/reciprocal-001/reciprocal.js
+          node --check experiments/reciprocal-001/test_reciprocal.cjs
+          node experiments/reciprocal-001/test_reciprocal.cjs
+      - name: Audit offline contract, browser JavaScript, and package one-file human room
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          folder = Path("experiments/reciprocal-001")
+          js = (folder / "reciprocal.js").read_text()
+          html = (folder / "demo.html").read_text()
+          assert '<script src="./reciprocal.js"></script>' in html
+          ui = re.findall(r"<script(?:[^>]*)>(.*?)</script>", html, flags=re.S)
+          assert len(ui) == 2 and ui[0] == "" and len(ui[1]) > 100
+          for code in (js, ui[1]):
+              assert not re.search(r"\b(?:fetch|XMLHttpRequest|WebSocket|localStorage|sessionStorage|sendBeacon)\s*\(", code)
+          output = html.replace('<script src="./reciprocal.js"></script>',
+              '<script>\n' + js + '\n</script>', 1)
+          assert '<script src=' not in output
+          assert output.count('<script>') == 2
+          (folder / "reciprocal-apprentice-offline.html").write_text(output)
+          Path("/tmp/reciprocal-ui.js").write_text(ui[1])
+          print("PACKAGED_SINGLE_FILE_BYTES", len(output.encode("utf-8")))
+          PY
+          node --check /tmp/reciprocal-ui.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reciprocal-001-offline-room
+          path: experiments/reciprocal-001/reciprocal-apprentice-offline.html
+          retention-days: 30
