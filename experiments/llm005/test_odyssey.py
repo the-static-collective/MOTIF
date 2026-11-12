@@ -173,7 +173,8 @@ class OdysseyTest(unittest.TestCase):
         p=m.public_trace()
         self.assertTrue(p["hidden_owner_truth_excluded"])
         self.assertFalse(p["external_actions"])
-        self.assertNotIn("_truth",json.dumps(p))
+        self.assertNotIn('"_truth":',json.dumps(p))
+        self.assertNotIn('"owner_program_index":',json.dumps(p))
         self.assertTrue(all(g["owner_hidden_rule_excluded"] for g in p["per_sector"]))
     def test_31_mutating_copy_never_modifies_record_history(self):
         m=self.make();m.execute()
