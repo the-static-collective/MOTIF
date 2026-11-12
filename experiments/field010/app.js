@@ -7,6 +7,59 @@
   let tool = 'select', selected = null, pending = null, drag = null, seq = 1;
   let sketchSrc = window.MOTIF010_PRIVATE_SOURCE || '';
   let solverData = null, interfaceData = null, latest = 0;
+  let sketchFile = null, sketchDigest = null, lastDraft = null, uploadVersion = 0;
+  const AUTODRAFT = window.MOTIF011;
+  function dataDigest(bytes){
+    if(typeof crypto!=='undefined'&&crypto.subtle)return crypto.subtle.digest('SHA-256',bytes).then(data=>Array.from(new Uint8Array(data),x=>x.toString(16).padStart(2,'0')).join(''));
+    return Promise.resolve(AUTODRAFT.sha256Bytes(new Uint8Array(bytes)));
+  }
+  async function shaDataURL(str){
+    const part=str.split(',');if(part.length!==2||!part[0].includes('base64'))throw Error('Sketch image must be base64 encoded');
+    const s=atob(part[1]);const bytes=new Uint8Array(s.length);for(let i=0;i<s.length;i++)bytes[i]=s.charCodeAt(i);
+    return dataDigest(bytes.buffer);
+  }
+  async function decodeToPixels(source){
+    const img=new Image();img.src=source;
+    await img.decode();
+    const max=1050,k=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+    const w=Math.max(90,Math.round(img.naturalWidth*k)),h=Math.max(90,Math.round(img.naturalHeight*k));
+    const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);
+    return {pixels:ctx.getImageData(0,0,w,h).data,width:w,height:h};
+  }
+  function installDraft(packet){
+    if(!AUTODRAFT)throw Error('Missing FIELD-011 draft engine');
+    AUTODRAFT.validate(packet,sketchDigest);
+    if(project.base.source==='synthetic')throw Error('Sketch must be loaded first');
+    if(lastDraft && lastDraft.source_sha256!==packet.source_sha256)throw Error('Draft belongs to a different image');
+    const entries=AUTODRAFT.toEvents(project,packet,()=>uid('guess'));
+    if(project.events.length+entries.length>5000)throw Error('Event limit exceeded');
+    const snapshot=D(project);
+    project.events.push(...entries);
+    try{state=M.replay(project);}catch(error){project=snapshot;state=M.replay(project);throw error;}
+    lastDraft=packet;recompute();render();
+    notify(`${packet.items.length} tentative visual hypotheses; ${entries.length} new editable strokes. None is a verified route or dimension.`);
+    return entries.length;
+  }
+  async function runAutoDraft(){
+    if(!sketchSrc){notify('Load a source sketch before drafting.');return;}
+    const ticket=uploadVersion;byId('draftCount').textContent='Inspecting local pixels…';
+    try {
+      if(!sketchDigest)sketchDigest=await shaDataURL(sketchSrc);
+      if(lastDraft?.source_sha256===sketchDigest){
+        byId('draftCount').textContent=`${state.items.filter(i=>i.evidence && i.status!=='tentative').length}/${state.items.filter(i=>i.evidence).length} reviewed`;
+        notify('This sketch already has tentative proposals. Edit or reject them rather than duplicating a second detector pass.');return;
+      }
+      const data=await decodeToPixels(sketchSrc);if(ticket!==uploadVersion)return;
+      // Only local OpenCV-style browser short-stroke detector. No VLM or server.
+      const packet=AUTODRAFT.fromRGBA(data.pixels,data.width,data.height,sketchDigest,
+        {desiredDottedRule:false,sourceId:'sketch-1'});
+      // A preview with zero detected lines is an honest HOLD, not a fabricated route.
+      installDraft(packet);
+      if(!packet.items.length)notify('No defensible dashed stroke group identified. Trace directly or import an explicitly sourced local vision draft.');
+    }catch(ex){notify('Automatic visual draft held: '+ex.message);byId('draftCount').textContent='HOLD';}
+  }
+
   const photos = [];
   const byId = id => document.getElementById(id);
   const svg = byId('board'), svgNS = 'http://www.w3.org/2000/svg';
@@ -104,7 +157,12 @@
     opts.forEach(([k,text])=>{const o=dom('option',{value:k},text);inp.append(o);});inp.value=val;inp.addEventListener('change',()=>callback(inp.value));l.append(inp);return l;}
   function renderInspector(){const host=byId('inspector');host.replaceChildren(); const item=state.items.find(i=>i.id===selected);
     if(!item){host.append(dom('p',{class:'small'},'Tap a line, endpoint or support to inspect. Create or correct the visual model without describing it in words.'));return;}
-    host.append(dom('strong',{},item.label));host.append(inputField('Name','text',item.label,v=>stamp({type:'set',target:item.id,prop:'label',value:v.slice(0,120)})));
+    host.append(dom('strong',{},item.label));
+    if(item.evidence){
+      const e=item.evidence;
+      host.append(dom('div',{class:'note warn'},`Tentative source ${e.method||'unverified model'} · ${e.semantic_status||'unknown'} · original pixels preserved. Grouped strokes need not form a physically continuous boundary. Source pin ${String(e.source_sha256||'').slice(0,12)}.`));
+    }
+    host.append(inputField('Name','text',item.label,v=>stamp({type:'set',target:item.id,prop:'label',value:v.slice(0,120)})));
     const nudges=dom('div',{class:'row',style:'margin:10px 0'});nudges.append(dom('span',{class:'small'},'Nudge:'));
     [['←',-.015,0],['→',.015,0],['↑',0,-.03],['↓',0,.03]].forEach(([txt,dx,dy])=>{const b=dom('button',{type:'button',class:'mini','aria-label':'Move '+txt},txt);
       b.addEventListener('click',()=>stamp({type:'move',target:item.id,delta:[dx,dy]}));nudges.append(b);});host.append(nudges);
@@ -154,6 +212,24 @@
       const m=state.measurements[i.id];row.append(dom('span',{class:'small',style:'flex:1'},i.label+': '+(m?m.value+' '+m.unit+' ['+m.quality+']':'_____ ft / m')));
       const b=dom('button',{class:'mini',type:'button'},'Edit');b.addEventListener('click',()=>{selected=i.id;render();byId('lenInput')?.focus();});row.append(b);host.append(row);});
   }
+  function renderDraftReview(){
+    const root=byId('draftReview');if(!root)return;
+    root.replaceChildren();const guesses=state.items.filter(i=>i.evidence && i.evidence.semantic_status==='POSSIBLE_MARK__NOT_CONFIRMED_BOUNDARY');
+    const reviewed=guesses.filter(x=>x.status!=='tentative').length;
+    byId('draftCount').textContent=guesses.length?`${reviewed}/${guesses.length} reviewed`:'No candidates';
+    guesses.slice(0,18).forEach(i=>{
+      const t=tile(i.label,`Status: ${i.status}. Provenance: ${i.evidence.method}. Not a verified intended fence.`,
+                   'Edit it directly, then choose confirm or reject.');
+      const row=dom('div',{class:'row'});
+      const edit=dom('button',{type:'button',class:'mini'},'Edit line');edit.addEventListener('click',()=>{selected=i.id;setTool('select');render();});row.append(edit);
+      if(i.status==='tentative'){
+        const yes=dom('button',{type:'button',class:'mini'},'Confirm mark');yes.addEventListener('click',()=>stamp({type:'set',target:i.id,prop:'status',value:'user_confirmed'}));row.append(yes);
+        const no=dom('button',{type:'button',class:'mini danger'},'Reject');no.addEventListener('click',()=>stamp({type:'set',target:i.id,prop:'status',value:'user_rejected'}));row.append(no);
+      }
+      t.append(row);root.append(t);
+    });
+    if(!guesses.length)root.append(dom('p',{class:'small'},'No tentative line groups found. Use the canvas or import a local model proposal packet.'));
+  }
   function renderEvents(){byId('version').textContent=`Edit ${state.version}`;byId('editCount').textContent=`${project.events.length} ledger entries`;
     const container=byId('events');container.replaceChildren();
     project.events.slice().reverse().slice(0,16).forEach(e=>container.append(dom('div',{},`${e.id.slice(-5)} · ${e.type} ${e.target||e.item?.id||''}`)));
@@ -186,7 +262,7 @@
     else {host.textContent=state.proportional?'No independently entered measured span; geometry remains unscaled.':'Drawn proportions only. The sketch is not asserted to be at physical scale.';host.className='note warn';}
   }
   function render(){state=M.replay(project);if(selected && !state.items.some(i=>i.id===selected))selected=null;
-    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();updateSummary();}
+    draw();renderInspector();renderRatioControls();renderMeasurementQueue();renderEvents();renderDraftReview();updateSummary();}
   const workers=[];
   function makeWorker(fn){
     const source=`const span=${M.span.toString()};const compute=${fn.toString()};onmessage=e=>{try{postMessage({version:e.data.version,value:compute(e.data.state)})}catch(err){postMessage({version:e.data.version,error:String(err)})}};`;
@@ -202,7 +278,7 @@
     else{interfaceData=msg.value;renderInterface(interfaceData);}
   }
   workers.forEach((w,idx)=>w.onmessage=e=>receive(idx,e.data));
-  function recompute(){latest=state.version;const v=latest;const snapshot=D(state);
+  function recompute(){latest=`${uploadVersion}:${state.version}`;const v=latest;const snapshot=D(state);
     [0,1].forEach(idx=>{
       if(workers.length===2)workers[idx].postMessage({version:v,state:snapshot});
       else setTimeout(()=>{try{receive(idx,{version:v,value:branchFns[idx](snapshot)});}catch(ex){notify(String(ex));}},idx*7);
@@ -233,12 +309,15 @@
   function loadSketch(src){sketchSrc=src;byId('sourceImage').setAttribute('href',src);}
   byId('sketchUpload').addEventListener('change',e=>{
     const file=e.target.files?.[0];if(!file)return;if(file.size>15*1024*1024||!/^image\/(png|jpeg|webp)$/.test(file.type)){notify('Sketch must be PNG/JPEG/WebP under 15MB.');return;}
+    if(project.base.source==='user_sketch' && project.events.length && !window.confirm('Replace the source sketch? Existing edits belong to the old image and will be cleared. Export board JSON first to save them.')){
+      e.target.value='';notify('Original board preserved; choose a source replacement only after saving edits.');return;
+    }
     const reader=new FileReader();reader.onload=()=>{
-      if(project.base.source==='synthetic'){
-        project.base.source='user_sketch';project.base.items=[];project.events=[];selected=null;seq=1;
-      }
-      project.base.sketch_name=file.name;
-      loadSketch(String(reader.result));state=M.replay(project);recompute();render();notify('Original sketch preserved as a non-scaling background. Trace corrected geometry directly; no automatic interpretation claimed.');
+      project.base.source='user_sketch';project.base.items=[];project.events=[];selected=null;seq=1;
+      project.base.sketch_name=file.name;sketchFile=file;sketchDigest=null;lastDraft=null;uploadVersion++;
+      loadSketch(String(reader.result));state=M.replay(project);recompute();render();
+      notify('Sketch loaded locally. Inspecting pixels and proposing editable tentative marks.');
+      runAutoDraft();
     };reader.readAsDataURL(file);
   });
   function displayPhotos(){const root=byId('photolist');root.replaceChildren();photos.forEach((p,idx)=>{
@@ -250,6 +329,17 @@
     if(!/^image\/(png|jpeg|webp)$/.test(file.type)||file.size>15*1024*1024)return;
     const rd=new FileReader();rd.onload=()=>{photos.push({name:file.name,url:rd.result});displayPhotos();};rd.readAsDataURL(file);
   });});
+
+  byId('autoDraftBtn').addEventListener('click',()=>runAutoDraft());
+  byId('draftImportBtn').addEventListener('click',()=>byId('draftImportFile').click());
+  byId('draftImportFile').addEventListener('change',e=>{
+    const file=e.target.files?.[0];if(!file)return;
+    if(file.size>1800000){notify('Draft JSON too large.');return;}
+    const reader=new FileReader();reader.onload=async()=>{try{
+      if(!sketchDigest && sketchSrc)sketchDigest=await shaDataURL(sketchSrc);
+      const packet=JSON.parse(String(reader.result));installDraft(packet);
+    }catch(ex){notify('Draft import held: '+ex.message);}};reader.readAsText(file);
+  });
   byId('importBtn').addEventListener('click',()=>byId('importFile').click());
   byId('importFile').addEventListener('change',e=>{
     const file=e.target.files?.[0];if(!file)return;if(file.size>2e6){notify('Board JSON too large.');return;}
@@ -258,11 +348,18 @@
       notify('Board loaded. If it used a private sketch, select that sketch again; images are intentionally excluded from JSON exports.');
     }catch(ex){notify('Invalid board JSON: '+ex.message);}};reader.readAsText(file);
   });
-  if (sketchSrc)loadSketch(sketchSrc);
+  if (sketchSrc){loadSketch(sketchSrc);project.base.source='user_sketch';project.base.items=[];}
   if (Array.isArray(window.MOTIF010_PRIVATE_PHOTOS)) {
     window.MOTIF010_PRIVATE_PHOTOS.forEach(p=>photos.push(p));displayPhotos();
   }
   render();recompute();
+  if (sketchSrc){
+    (async()=>{try{
+      sketchDigest=await shaDataURL(sketchSrc);
+      if(window.MOTIF011_PRIVATE_DRAFT){installDraft(window.MOTIF011_PRIVATE_DRAFT);}
+      else{await runAutoDraft();}
+    }catch(ex){notify('Preloaded draft held: '+ex.message);}})();
+  }
   window.MOTIF010_DEBUG = {getProject:()=>D(project),getState:()=>D(state),getBranches:()=>D({solverData,interfaceData}),
     apply:stamp, tool:setTool};
 })();
