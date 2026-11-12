@@ -93,7 +93,7 @@ jobs:
               assert x['all_remaining_attempts_spent_if_unsolved']
               assert x['real_world_actions']==0
               assert x['success_only_from_original_owner']
-              assert not x['no_automatic_app_deployment']
+              assert x['no_automatic_app_deployment']
               assert len(x['attempts'])==x['attempts_used']
               assert all(a.get('post_failure_actions',0)<=80 for a in x['attempts'])
               if not x['native_owner_goal']:
