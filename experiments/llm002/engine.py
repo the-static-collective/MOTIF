@@ -109,10 +109,10 @@ class LowRankGraph:
         dv=[[back[j]*f[i] for i in range(F)] for j in range(R)]
         for i in range(D):
             for j in range(R):
-                self.u[i][j]-=rate*(du[i][j]+0.0005*self.u[i][j])
+                self.u[i][j]=max(-.55,min(.55,self.u[i][j]-rate*(du[i][j]+0.0005*self.u[i][j])))
         for j in range(R):
             for i in range(F):
-                self.v[j][i]-=rate*(dv[j][i]+0.0005*self.v[j][i])
+                self.v[j][i]=max(-.55,min(.55,self.v[j][i]-rate*(dv[j][i]+0.0005*self.v[j][i])))
 
 def graph_features(*,tool,permission,action):
     if tool not in (0,1) or permission not in (0,1) or action not in ("probe","use","publish"):
@@ -206,7 +206,7 @@ def evaluate(model,adapter,split):
     return {"accuracy":sum(x[0] for x in results)/len(results),
             "loss":sum(losses)/len(losses),"n":len(results)}
 
-def train(model,adapter,epochs=80,lr=.11):
+def train(model,adapter,epochs=80,lr=.035):
     if epochs<1 or epochs>400:raise ValueError("BAD_EPOCHS")
     for epoch in range(epochs):
         for p,tokens,tool,permission,action,y in examples():
