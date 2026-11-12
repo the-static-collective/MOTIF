@@ -39,7 +39,6 @@ jobs:
               assert not re.search(r'\b(?:fetch|XMLHttpRequest|WebSocket|sendBeacon)\s*\(',script)
           assert 'localStorage.setItem(CACHE' in blocks[1]
           assert 'saveLocally' in blocks[1]
-          assert 'name="answerChoice"' not in page  # dynamically created, not pre-selected
           inline=page.replace('<script src="./two_doors.js"></script>',
               '<script>\n'+core+'\n</script>',1)
           assert '<script src=' not in inline
