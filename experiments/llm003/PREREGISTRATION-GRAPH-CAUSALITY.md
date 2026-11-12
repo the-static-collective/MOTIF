@@ -1,0 +1,11 @@
+# LLM-003C — Shortcut-Resistance Addendum / Graph Causality Probe
+2026-11-12, frozen after reviewing LLM-003B's post-hoc training results.
+
+**Triggering negative evidence:** verified-labeled arm scored 44/48=91.7%, but after both tool and permission graph bits were flipped at evaluation it STILL scored 44/48. Original 12-case rule is dominated by action-class text (probe always positive, publish always negative, only one use case positive). Thus apparent 91.7% is NOT evidence of learned graph dependence. A careful counterfactual test is required before claiming graph-based cognitive improvement.
+
+## New falsifiable controlled graph-only task
+Fix the suffix candidate action to 'use' for every example, same words for all scenarios. Only graph-provided binary tool_present and permission_granted vary. Author-written independent owner rule is tool_present AND permission_granted. This rule is transparent to the scientist, but unavailable to the model except through labeled training. Train 48 equal steps with balancing 1 positive (1,1) to 3 negatives with replacement and exactly 50% positives, same initial U/V. Prefixes used for testing are never used in training. Measure accuracy on 4 heldout prompt phrasings x4 graph states =16 cases.
+
+Controls: unadapted frozen pretrained model; verified-trained rank2 graph adapter; positive-only; corrupted-negatives with 50% fixed flipped negative labels; shuffled counterfactual graph at evaluation (flip both bits, preserving the rest); exact classical AND =100%. Scores and case-by-case labels must be recorded. If shuffled graphs fail to degrade accuracy, claim no evidence of graph use. An actual graph effect requires both (i) better than constant majority-rule 75% and (ii) a measured degradation under purposeful counterfactual graph flipping. Post-hoc exploratory only, no generalized external benchmark claim.
+
+Zero user data, no external actions, no production integration, model frozen, exact pretrained checkpoint pinned as original LLM-003B. Even a successful toy graph transfer is not evidence of open-world language understanding.
