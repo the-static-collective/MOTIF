@@ -145,7 +145,7 @@ class HypermapTests(unittest.TestCase):
         o,m,p,e,before=self.fire()
         packet=packet_from_hypermap(m)
         self.assertEqual(packet["schema"],"free-graph.packet/v0")
-        self.assertEqual(packet["packet_id"],record_id("fgp",packet))
+        self.assertEqual(packet["packet_id"],record_id("fgp",{k:v for k,v in packet.items() if k!="packet_id"}))
         for kind,prefix in (("sources","fgs"),("nodes","fgn"),("links","fgl")):
             self.assertTrue(all(x["id"]==record_id(prefix,x) for x in packet[kind]))
     def test_23_all_portable_links_use_only_existing_5_verbs(self):
