@@ -25,7 +25,7 @@ def packet(seed=0,sketch_noise=0.,pixel_noise=.4,height=HEIGHT_M,corrupt=False, 
         pix=pix+rng.normal(0,pixel_noise,pix.shape)
         if corrupt and c==1: pix[2,0]+=np.array([70,-60])
         packet['views'].append({'source':f'synthetic_camera_{c+1}','size':[960,720],
-                                'focal_px':float(f),'correspondences_source':'INDEPENDENT_REVIEWED',
+                                'focal_px':float(f),'focal_provenance':'SYNTHETIC_CERTAIN','correspondences_source':'INDEPENDENT_REVIEWED',
                                 'points':{n:np.clip(pix[j],[0,0],[960,720]).tolist() for j,n in enumerate(NAMES)}})
     return packet
 
