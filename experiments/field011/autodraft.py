@@ -72,7 +72,8 @@ def main():
     a=p.parse_args()
     packet=propose(a.sketch,source_id=a.source_id)
     target=Path(a.out);target.parent.mkdir(parents=True,exist_ok=True)
-    target.write_text(json.dumps({'packet':packet,'board':to_board(packet)},indent=2))
+    target.write_text(json.dumps(to_board(packet),indent=2))
+    target.with_suffix('.draft.json').write_text(json.dumps(packet,indent=2))
     print(json.dumps({'tentative_fragments':len(packet['items']),
                       'status':'EDITABLE_DRAFT__NOT_VERIFIED_GEOMETRY'}))
 if __name__=='__main__':main()
