@@ -1,6 +1,6 @@
 {
   "project": "MOTIF FIELD019",
-  "input_hash": "d4a115576f4363d6b06d4edbc6d0b762978d678233e69da3fa120ca2aea1af29",
+  "input_hash": "5896db9cd03d018d96c4b5243c6b3986b165e48e8d4cac270ed7b02d6129c3cc",
   "output": {
     "status": "CONDITIONAL_CROSS_DOMAIN_GEOMETRY",
     "reason": "Reprojection internally consistent under supplied correspondence, sketch and camera assumptions; not surveyed",
@@ -118,6 +118,10 @@
       "height_source": "SYNTHETIC_CERTAIN",
       "sketch_proportionality": "ASSUMED_WITH_TOLERANCE",
       "camera_intrinsics": "EXTERNALLY_SUPPLIED_NOT_INFERRED",
+      "camera_focal_provenance": [
+        "SYNTHETIC_CERTAIN",
+        "SYNTHETIC_CERTAIN"
+      ],
       "max_reprojection_rms_px": 6.0,
       "worst_point_error_px": 1.57,
       "large_residual_point_count": 0,
@@ -141,8 +145,9 @@
       "real_model_inference": false,
       "initial_fit_rms_px": 8.717,
       "sketch_correction_max_fraction_of_extent": 0.0592,
-      "sketch_correction_proposed_not_observed": true
+      "sketch_correction_proposed_not_observed": true,
+      "camera_baseline_m_conditional": 3.556
     }
   },
-  "receipt_hash": "8b6cd44aaf2a6d227152e307993cbb1e45abd131f12728d371b68246ea8ece36"
+  "receipt_hash": "ee449acad3f5c541f4773c623819f636badb27047204d919b4f7a865da60f23e"
 }
