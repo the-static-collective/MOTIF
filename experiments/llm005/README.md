@@ -80,6 +80,25 @@ PYTHONPATH=experiments/llm003:experiments/llm004:experiments/llm005 \
 
 The latest completed GitHub Actions execution passed **53 LLM-005 tests + 41 inherited LLM-004 tests**, independently ran the 64-world experiment, built all artifacts, and syntax-checked the actual generated browser script.
 
+## Post-hoc length escalation: ODYSSEY MARATHON (879+ REQUIRED steps)
+
+Following the initial successful 219-action result, we froze a **separate** [MARATHON-PREREGISTRATION](MARATHON-PREREGISTRATION.md) before implementing a more severe challenge: four complete ODYSSEY-240 chains connected by three **mandatory source-bound handoff actions**. A later chain cannot start before the preceding one has passed all 96 gates and returned its terminal state digest.
+
+The minimum serial critical path is **4 × 219 + 3 = 879 mandatory actions**, involving **384 source-verified decisions, 48 changing rule contexts, 96 audits, 12 relays and 3 inter-world handoffs**. Each global event commits to the original child's event hash and the preceding global event hash. All previous mistakes, corrections and separate source roots are preserved. The marathon has hard 1,350-action and 1,800-cost global ceilings. No invented cryptographic identity or owner authorization is assigned to those consistency digests.
+
+The marathon uses **four separately preregistered groups of four distinct synthetic scenario seeds** (8001–8016), compares the same four policies, and preserves any incomplete chain as an incomplete result rather than treating early termination as efficient completion. This is an additional length/integrity challenge, not a new pretrained-model test.
+
+Executable files:
+
+- `marathon.py`: executes the genuine preceding source-owned LongChain four times in sequence; requires each segment's source-hash handoff; provides one global monotonically hashed immutable event ledger.
+- `test_marathon.py`: 20 direct falsifiers for mandatory causal order, replay, 48 distinct synthetic owner source coordinates, full 384-correct-decision acceptance, and budget stops.
+- `build_marathon.py` and `viewer_marathon.py`: create `marathon-dossier.json`, `marathon-display-summary.json`, and an **offline interactive `marathon.html` replay covering all 48 sectors and more than 879 sequential events**, with policy switcher, replay and step scrubber, jumps to the next wrong guess or handoff, a 384-gate dependency lattice, exact source-rooted event history and four-group results.
+- `test_viewer_marathon.py`: explicit tests for actual long event payloads and safe offline read-only rendering.
+
+The fully generated marathon JSON and HTML are included in the same LLM-005 workflow artifact as the original 219-step viewer; actual results must be read from the successful workflow attached to the current commit, not assumed from the earlier short-chain success.
+
+**Meaning:** This is a real 879+-step *simulated causal dependency and evidence-retention chain*, not 879 tokens of model thinking, 879 natural-language reasoning conclusions, or proof that an LLM can perform a long task in the real world.
+
 ## Falsification next
 
 The above is a long **classical synthetic reason chain**, not a pretrained LLM test. Its unresolved research task is to connect LLM-003's actual pinned pretrained model to select these provisional candidate decisions *without passing in the hidden rule or direct labels*, then test whether source-scoped Hypermap memory improves later independently graded decisions against classical Bayesian planning, a similarly equipped model without memory, and cost-aware optimal inquiry. Also test adversarial false independent owner reports, changing hidden worlds mid-sector, more options than Boolean rules, long attention context loss and real measured GPU/CPU inference costs.
