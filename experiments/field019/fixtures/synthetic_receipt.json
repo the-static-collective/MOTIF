@@ -125,18 +125,18 @@
       "max_reprojection_rms_px": 6.0,
       "worst_point_error_px": 1.57,
       "large_residual_point_count": 0,
-      "scale_sensitivity": [
+      "scale_sensitivity_given_fitted_sketch_correction": [
         {
           "factor": 0.7,
-          "rms_px": 23.2557
+          "rms_px": 20.9376
         },
         {
           "factor": 1.0,
-          "rms_px": 8.7466
+          "rms_px": 0.551
         },
         {
           "factor": 1.3,
-          "rms_px": 15.1784
+          "rms_px": 13.1096
         }
       ],
       "independent_ground_truth": false,
@@ -149,5 +149,5 @@
       "camera_baseline_m_conditional": 3.556
     }
   },
-  "receipt_hash": "ee449acad3f5c541f4773c623819f636badb27047204d919b4f7a865da60f23e"
+  "receipt_hash": "b1b7fbd9e9df1c717b43b3f1f879bd16a7d8f520b580d65b8c9f9a126db229d8"
 }
