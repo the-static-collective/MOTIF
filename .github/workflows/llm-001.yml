@@ -19,4 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node --test experiments/llm001/test.mjs experiments/llm001/local-model.test.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: node --test experiments/llm001/test.mjs experiments/llm001/local-model.test.mjs experiments/llm001/native-bridge.test.mjs
