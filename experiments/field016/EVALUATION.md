@@ -6,7 +6,7 @@
 | First synthetic route | `test_first_uses_relocation...` | Decision changes relative to direct-only route | Real yard layout practicality |
 | One changed measurement | `test_measured_width_can_falsify_first` | The leading proposal is invalidated and alternatives reconsidered | Any subsequent proposal is safe |
 | Free-body numerical model | Actual FIELD‑015 `physics.screen` | Correct invocation and consistency of the simplified load equations | Dynamic wind/fastener/soil/failure physics |
-| Connected panels | Actual FIELD‑015 `assembly_screen` | Connectivity and unverified load sharing are distinct | Structural stability or installed tie capacity |
+| Connected panels | Actual FIELD‑015 `assembly` / compatible `assembly_screen` | Connectivity and unverified load sharing are distinct | Structural stability or installed tie capacity |
 | Source and 3D model bridge | Actual FIELD‑015 `reconstruction.report_pair` | Model frame agreement cannot silently become surveyed geometry | Real reconstruction quality; both inference engines unexecuted |
 | Browser UI | Playwright interaction | Editable material width affects candidate list; 3D sketch renders | Cross-device deployed performance |
 | Sketch/privacy | No private user images in public code | Public experiment synthetic only | Any inferred property dimension |
