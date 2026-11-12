@@ -1,0 +1,83 @@
+name: COGNITION-005 external NovelGym gap-hunt readiness (NO scored world)
+on:
+  push:
+    paths:
+      - 'experiments/cognition005/**'
+      - '.github/workflows/cognition-005.yml'
+  pull_request:
+    paths:
+      - 'experiments/cognition005/**'
+      - '.github/workflows/cognition-005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-source-readiness-and-claim-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify frozen protocol before scoring and no claimed results
+        run: |
+          git show f5b331c7904d92b75bfc01b64b40b53689ffea36:experiments/cognition005/PREREGISTRATION.md > /tmp/gap-hunt-frozen.md
+          cmp /tmp/gap-hunt-frozen.md experiments/cognition005/PREREGISTRATION.md
+          python - <<'PY'
+          import json
+          data=json.load(open('experiments/cognition005/sources.json'))
+          assert not data['scoring_started'] and not data['heldout_results']
+          assert data['motif_wins'] is None and data['regime_target_successes'] is None
+          assert data['predeclared_primary']=='novelgym/fire'
+          print('No MOTIF novelty benchmark run is claimed.')
+          PY
+      - name: Verify strict independently reported trial gates with fake fixture tests
+        run: python -m unittest discover -s experiments/cognition005 -p 'test_*.py' -v
+      - name: Demonstrate that no external owner evidence means HOLD, not a victory
+        run: |
+          python experiments/cognition005/gap_gate.py > cognition005-readiness.json
+          python - <<'PY'
+          import json
+          d=json.load(open('cognition005-readiness.json'))
+          assert d['status']=='HOLD_NO_EXTERNAL_TRIALS'
+          assert d['motif_outperformed_strong_classical'] is None
+          print('HOLD: no externally executed MOTIF or classical novelty trials yet.')
+          PY
+      - name: Clone exact external NovelGym upstream source (not execute)
+        uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGym
+          ref: 0ad2cbb656177f76ff29f86793269b14879d9b89
+          path: sources/novelgym
+          persist-credentials: false
+      - name: Clone exact actual NovelGridWorldsV2 engine source (not execute)
+        uses: actions/checkout@v4
+        with:
+          repository: tufts-ai-robotics-group/NovelGridWorldsV2
+          ref: f5d06d4f5166ca985ca420c809129a79700d904e
+          path: sources/novelgridworldsv2
+          persist-credentials: false
+      - name: Verify original sources, fire challenge, unmodified benchmark entry
+        run: |
+          test "$(git -C sources/novelgym rev-parse HEAD)" = "0ad2cbb656177f76ff29f86793269b14879d9b89"
+          test "$(git -C sources/novelgridworldsv2 rev-parse HEAD)" = "f5d06d4f5166ca985ca420c809129a79700d904e"
+          test -f sources/novelgym/train.py
+          test -f sources/novelgym/whole_system_run.py
+          test -f sources/novelgym/manual_novelty_test1.py
+          test -f sources/novelgym/args.py
+          grep -q '"fire"' sources/novelgym/config.py
+          test -f sources/novelgym/novelties/evaluation1/fire/fire_crafting_table.yaml
+          test -d sources/novelgym/planners/Metric-FF-v2.1
+          echo 'Pinned external benchmark source trees present. No episodes, planning or training executed.'
+      - name: Archive non-scored, non-personal readiness audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognition005-external-source-readiness-not-a-benchmark-result
+          path: cognition005-readiness.json
+          retention-days: 30
+          if-no-files-found: warn
