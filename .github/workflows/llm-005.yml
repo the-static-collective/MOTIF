@@ -1,0 +1,45 @@
+name: LLM-005 ODYSSEY-240 Long Causal Chain
+on:
+  push:
+    branches:
+      - experiment/llm005-odyssey-240-reason-chain-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm005/**'
+      - 'experiments/llm004/hypermap.py'
+      - '.github/workflows/llm-005.yml'
+  workflow_dispatch:
+jobs:
+  pressure-reason-chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    env:
+      PYTHONPATH: experiments/llm003:experiments/llm004:experiments/llm005
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Long chain state-boundary tests
+        run: python -m unittest discover -s experiments/llm005 -p 'test_*.py' -v
+      - name: Retest inherited Reason Hypermap
+        run: python -m unittest discover -s experiments/llm004 -p 'test_*.py' -v
+      - name: Run 64 heldout authored 219+ step causal worlds, compare all strategies
+        run: |
+          mkdir -p /tmp/odyssey240
+          python experiments/llm005/odyssey.py > /tmp/odyssey240/benchmark.json
+          python - <<'PY'
+          import json
+          data=json.load(open('/tmp/odyssey240/benchmark.json'))
+          print('WORLD_COUNT',data['seed_count'],'MIN_REQUIRED_ACTIONS',data['sequential_required_actions'])
+          for arm in data['arms']:
+              print('ARM',arm)
+          print('WINNER_RANK',data['ranking'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: odyssey240-longchain-results
+          path: /tmp/odyssey240/*
+          retention-days: 30
