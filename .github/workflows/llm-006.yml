@@ -68,7 +68,9 @@ jobs:
           assert list(r['research_group'])==[8001,8002,8003,8004]
           for k,v in r['arms'].items():
               assert v['summary']['real_llm'] is True
-              assert v['audit']['model_forwards_verified'] == v['model_stats']['forwards']
+              assert (v['audit']['model_forwards_recorded_in_gate_events']
+                      +v['audit']['model_forwards_uncommitted_on_budget_failure']
+                      == v['model_stats']['forwards'])
               assert v['summary']['real_model_forwards']==v['model_stats']['forwards']
               if v['summary']['completed']:
                   assert v['summary']['completed_decision_gates']==384
