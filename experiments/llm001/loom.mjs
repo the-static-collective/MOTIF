@@ -44,7 +44,7 @@ function imagined(w,move) {
   const out=copy(w);
   out.facts=[...new Set([...out.facts,...move.may_grant])].sort();
   out.unknown=out.unknown.filter(x=>!out.facts.includes(x));
-  out.evidence=out.evidence.filter(e=>e.kind!=='unknown'||!out.facts.includes(e.fact));
+  out.evidence=out.evidence.filter(e=>!['unknown','assumed'].includes(e.kind)||!out.facts.includes(e.fact));
   // Crucial: imagined facts are NEVER written as observed testimony.
   return out;
 }
@@ -93,7 +93,7 @@ function counterfactualImpact(w,e) {
   } else {
     other.facts=[...new Set([...other.facts,e.fact])];
     other.unknown=other.unknown.filter(x=>x!==e.fact);
-    other.evidence=other.evidence.filter(x=>!(x.kind==='unknown'&&x.fact===e.fact));
+    other.evidence=other.evidence.filter(x=>!(['unknown','assumed'].includes(x.kind)&&x.fact===e.fact));
   }
   const a=frontier(w),b=frontier(other);
   return [...new Set([...a,...b])].filter(x=>a.has(x)!==b.has(x)).length;
@@ -155,7 +155,7 @@ function ownerTest(w,held,receipt) {
   if(receipt.passed) {
     next.facts=[...new Set([...next.facts,...receipt.grants])].sort();
     next.unknown=next.unknown.filter(x=>!next.facts.includes(x));
-    next.evidence=next.evidence.filter(e=>e.kind!=='unknown'||!next.facts.includes(e.fact));
+    next.evidence=next.evidence.filter(e=>!['unknown','assumed'].includes(e.kind)||!next.facts.includes(e.fact));
     // Simulated receipts are not real observations. Never relabel them as actual field evidence.
     for(const fact of receipt.grants)next.evidence.push({id:'sim-'+receipt.id+'-'+fact,root:'sim-owner-'+receipt.id,kind:'observed',fact});
   }
