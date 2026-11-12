@@ -1,0 +1,309 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOTIF · FIELD-015 / Matter & Two Reconstructions</title>
+<style>
+:root{color-scheme:dark;--ink:#e7ece5;--muted:#9ab2b0;--bg:#101a20;--box:#1b2b31;--edge:#405862;--lime:#b6da9f;--gold:#f0cc89;--red:#d99888;--blue:#98b8e2}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 system-ui, sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0,#2c3b3d,#101a20 55%)}
+header{padding:19px 24px;border-bottom:1px solid var(--edge);display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;align-items:center}header h1{margin:0;font-size:clamp(22px,3.4vw,32px);letter-spacing:.025em}header h1 em{color:var(--lime);font-style:normal}.strap{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--gold)}
+.tag{display:inline-block;border:1px solid #698078;color:#c9ddce;border-radius:20px;padding:5px 10px;font-size:11px}main{max-width:1600px;margin:auto;padding:14px;display:grid;gap:12px;grid-template-columns:minmax(0,1fr) minmax(330px,385px)}
+section{background:#1a292fdd;border:1px solid var(--edge);border-radius:9px;overflow:hidden}section h2{margin:0;background:#243841;padding:11px 13px;font-size:14px;display:flex;justify-content:space-between}section h2 small{font-weight:400;color:var(--muted)}.inside{padding:12px 14px}
+.worlds{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:9px}.view{position:relative;border:1px solid #5a6b6b;border-radius:6px;background:#0e1b22;min-height:350px;overflow:hidden}.view canvas{width:100%;height:350px;display:block;touch-action:none}.vlabel{position:absolute;left:10px;top:9px;background:#15232cdb;padding:4px 8px;font-size:11px;border:1px solid #52656c;border-radius:4px;pointer-events:none}.hint{padding:9px 13px;color:var(--muted);font-size:12px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fact{background:#132228;border:1px solid #425b5f;border-radius:6px;padding:11px;margin:6px 0;font-size:12px}.fact strong{color:var(--gold);display:block;margin-bottom:4px}.stat{font-size:25px;color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums}.sub{font-size:11px;color:var(--muted)}
+label{display:block;color:var(--muted);font-size:12px;margin:8px 0}input,select,button{font:inherit;color:var(--ink)}input:not([type=checkbox]):not([type=file]):not([type=range]),select{background:#10212a;border:1px solid #556c72;border-radius:5px;padding:7px;width:100%;margin-top:4px}input[type=range]{width:100%;accent-color:var(--lime)}input[type=file]{width:100%;font-size:12px}input[type=checkbox]{accent-color:var(--lime)}button{border:1px solid #536e70;background:#314e53;border-radius:5px;padding:7px 10px;cursor:pointer}button:hover{background:#41686a}button.primary{background:#42715e;color:#f0fff7;border-color:#82b397}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}.controls{display:flex;gap:7px;flex-wrap:wrap;margin:9px}.legend{display:flex;gap:12px;flex-wrap:wrap;padding:3px 10px 11px;font-size:11px;color:var(--muted)}.line{display:inline-block;width:13px;border-top:3px solid var(--gold);margin-right:4px;vertical-align:middle}.warning{color:#e6b3a2}.positive{color:#bbdcaa}.pill{background:#354b4e;padding:3px 7px;border-radius:10px;font-size:11px}
+.photo{max-width:100%;max-height:230px;object-fit:contain;display:none;border:1px solid #61777c;background:#17282d;border-radius:6px}.foot{padding:17px 19px;font-size:11px;color:#9bb1b6}.readonly{font:11px/1.4 ui-monospace,monospace;color:#b8ccbf;white-space:pre-wrap;max-height:210px;overflow:auto;margin:7px 0 0}#reconDetail{max-height:150px;overflow:auto}.gates{display:grid;gap:5px}.gate{padding:9px;background:#1b2d31;border-left:3px solid var(--red);border-radius:4px;font-size:12px}#statusMessage{font-size:12px;min-height:25px;color:#dcdcb5}canvas{cursor:crosshair}
+@media(max-width:1080px){main{grid-template-columns:1fr}.view canvas{height:290px}.view{min-height:290px}}@media(max-width:650px){.worlds,.cards,.twocol{grid-template-columns:1fr}.view canvas{height:280px}.view{min-height:280px}}
+</style></head><body>
+<header><div><div class="strap">The Static Collective / MOTIF / FIELD–015</div><h1>Matter has <em>consequences.</em></h1><div class="sub">Two visual reconstruction witnesses × physical material constraints × a shared editable hypothesis.</div></div><div><span class="tag">OFFLINE INTERACTIVE RESEARCH</span> <span class="tag">NO SAFETY CERTIFICATION</span></div></header>
+<main><div style="display:grid;gap:12px;align-content:start">
+<section><h2>One working scene · two views <small>Drag panel endpoints · orbit right view</small></h2><div class="worlds"><div class="view"><canvas id="plan"></canvas><span class="vlabel">01 · schematic plan / editable</span></div><div class="view"><canvas id="perspective"></canvas><span class="vlabel">02 · 3D / drag to orbit</span></div></div><div class="legend"><span><i class="line" style="border-color:#f0cc89"></i> selected panel</span><span><i class="line" style="border-color:#a7d7ca"></i> other panel</span><span><i class="line" style="border-color:#b9a0d8"></i> candidate support</span><span>3D panel thickness/height illustrative</span></div><div class="controls"><button id="addPanel">+ Boundary segment</button><button id="addSupport">+ Potential support</button><button id="resetScene">Reset synthetic scene</button><button id="topCam">Top view</button><button id="isoCam">Perspective view</button></div><div class="hint" id="statusMessage">Click endpoints in plan to move one; nothing here is a physically surveyed yard.</div></section>
+<section><h2>Split reasoning <small>A · Explore &nbsp;&nbsp; B · Ask useful questions</small></h2><div class="inside cards"><div><div class="fact"><strong>A / Physical consequences</strong><div id="critique"></div></div><div class="fact"><strong>A / Alternative uses</strong><div id="reframe"></div></div></div><div><div class="fact"><strong>B / Best next input</strong><div id="nextQuestion"></div></div><div class="fact"><strong>B / Edit evidence, not language</strong>Change one dimension, drag an endpoint or import a second reconstruction witness. Both analysis streams update.</div></div></div></section>
+<section><h2>Dual reconstruction witnesses <small>MapAnything · Depth Anything 3</small></h2><div class="inside"><div class="twocol"><label>MapAnything packet (local JSON)<input id="mapFile" type="file" accept=".json,application/json"></label><label>Depth Anything 3 packet (local JSON)<input id="depthFile" type="file" accept=".json,application/json"></label></div><div class="gates"><div class="gate" id="mapGate">MapAnything: NO REAL INFERENCE RESULT PROVIDED</div><div class="gate" id="depthGate">DA3: NO REAL INFERENCE RESULT PROVIDED</div><div class="gate" id="fusionGate">Cross-model comparison: HOLD, no shared verified coordinate frame</div></div><p class="sub">Imports are private/local. Point clouds stay in their own model coordinate systems, not automatically placed in the property scene. Matching guesses from two models do not equal a surveyed measurement.</p><pre id="reconDetail" class="readonly"></pre></div></section>
+<section><h2>Original evidence <small>Source is never replaced by the drawing</small></h2><div class="inside"><div class="twocol"><label>Upload sketch/photo<input id="evidenceFile" type="file" accept="image/*"></label><label>Load saved scene JSON<input id="savedFile" type="file" accept=".json,application/json"></label></div><img id="evidencePreview" class="photo" alt="Original sketch evidence; unregistered to model geometry"><div class="controls" style="padding-left:0"><button id="exportState" class="primary">Save editable hypothesis (.json)</button><button id="exportReceipt">Export physics screening (.json)</button></div></div></section>
+</div><div style="display:grid;gap:12px;align-content:start">
+<section><h2>Selected material <small id="picked">Fence 1</small></h2><div class="inside">
+<label>Object's possible function<select id="material"><option value="privacy">Privacy screen / opaque</option><option value="cage">Cage panel / open metal mesh</option><option value="chain">Chain link / porous</option><option value="netting">Flexible netting / snag risk</option></select></label>
+<div class="twocol"><label>Width (m; assumed)<input id="width" type="number" step="0.05" min="0.01" value="1.5"></label><label>Height (m; assumed)<input id="height" type="number" step="0.05" min="0.01" value="1"></label></div>
+<div class="twocol"><label>Mass (kg; assumed)<input id="mass" type="number" step="0.25" min="0" value="5"></label><label>Footprint depth (m; assumed)<input id="base" type="number" step="0.05" min="0" value="0.35"></label></div>
+<div class="twocol"><label>Surface solidity (0–1)<input id="opacity" type="number" step="0.05" min="0" max="1" value="1"></label><label>Drag coefficient (assumed)<input id="drag" type="number" step="0.05" min="0" value="1.4"></label></div>
+<div class="twocol"><label>Ground friction µ (assumed)<input id="friction" type="number" step="0.05" min="0" max="1" value="0.6"></label><label>Support mechanism<select id="anchor"><option value="freestanding">Freestanding / friction</option><option value="unknown">Unknown · HOLD</option><option value="verified">Independently characterized anchor</option></select></label></div>
+<label>Anchor resisting torque (N·m; only if independently known)<input id="anchorTorque" type="number" min="0" step="1" placeholder="unknown"></label>
+<div class="fact"><strong>Evidence status</strong>All default numbers are <b>synthetic assumptions</b>. The photograph or a 200-lb advertised zip tie does not verify mass, structural connections, fastener capacity or anchoring.</div>
+</div></section>
+<section><h2>Change the load case <small>Not a weather forecast</small></h2><div class="inside"><label>Hypothetical wind speed <strong id="windRead">8 m/s</strong><input id="wind" type="range" min="0" max="30" value="8" step="1"></label><div class="twocol"><div class="fact"><strong>Lateral pressure × area</strong><span class="stat" id="force">—</span><div class="sub">newtons, simplified uniform loading</div></div><div class="fact"><strong>Overturning / restoring</strong><span class="stat" id="moment">—</span><div class="sub">N·m, simplified rigid panel</div></div></div><div class="fact"><strong id="verdict">HOLD: UNKNOWN</strong><div id="physicsExplain" class="sub"></div></div></div></section>
+<section><h2>Connections are not automatically anchors <small>Physics of assembly</small></h2><div class="inside"><div class="fact"><strong>Zip ties, chairs, trampoline legs</strong>A strong advertised tie is a connector claim, not an installed-system load rating. Joint orientation, load sharing, peel, cold, UV exposure, impact, fatigue, anchorage and tipping require separate evidence.</div><div id="jointGraph" class="sub"></div><div class="gate" style="margin-top:9px">No real finite-element contact or multibody dynamics performed. The browser uses simplified free-body equations only.</div></div></section>
+</div></main><div class="foot">FIELD-015 · Research instrument, not an engineering design or animal enclosure rating. Unregistered photos ≠ metric world coordinates. A simulated pass ≠ permission to use a structure.</div>
+<script>
+/* FIELD-015 deterministic optional hypothetical mechanics. Does not certify assemblies. */
+(function(root){'use strict';
+ const isNum=x=>typeof x==='number'&&Number.isFinite(x);
+ const g=9.80665,rho=1.225;
+ function screen(p, wind){
+   if(!isNum(wind)||wind<0||wind>100)throw Error('Wind must be finite 0..100 m/s');
+   const necessary=['width','height','mass','base','opacity','drag','friction'];
+   for(const k of necessary){if(p[k]!=null&&(!isNum(p[k])||p[k]<0))throw Error('Invalid '+k);}
+   if(p.opacity!=null&&p.opacity>1||p.friction!=null&&p.friction>1)throw Error('Fraction out of range');
+   const missing=necessary.filter(k=>p[k]==null),out={status:'HOLD_UNKNOWN_INPUTS',missing,
+        hypothesis:true,verifiedPhysicalSafety:false,verifiedPetContainment:false};
+   if(missing.length)return out;
+   const F=.5*rho*wind*wind*p.drag*p.width*p.height*p.opacity;
+   const moment=F*p.height/2;
+   const restore=p.mass*g*p.base/2+(p.anchor==='verified'&&isNum(p.anchorTorque)?p.anchorTorque:0);
+   const slide=p.mass*g*p.friction;
+   out.force=F;out.moment=moment;out.restoring=restore;out.slidingResistance=slide;
+   out.overturningRatio=moment>1e-9?restore/moment:null;
+   out.slidingRatio=F>1e-9?slide/F:null;
+   out.failures=[];
+   if(p.anchor==='unknown'||!p.anchor){out.status='HOLD_UNKNOWN_SUPPORT';return out;}
+   if(p.anchor==='verified'&&!isNum(p.anchorTorque)){out.status='HOLD_UNKNOWN_ANCHOR_CAPACITY';return out;}
+   if(moment>restore)out.failures.push('OVERTURNING_SCENARIO');
+   if(F>slide&&p.anchor==='freestanding')out.failures.push('SLIDING_SCENARIO');
+   out.status=out.failures.length?'MODEL_FAILS_ASSUMED_LOAD_CASE':'HOLD_UNRESOLVED_MECHANISMS';
+   out.missing.push('connector_distribution','member_deflection','soil_and_dynamic_effects');
+   return out;
+ }
+ function topology(count,edges,anchors){
+   if(!Number.isInteger(count)||count<1||count>30)throw Error('Bad node count');
+   const groups=Array.from({length:count},(_,i)=>i);
+   function find(i){while(groups[i]!==i)i=groups[i];return i;}
+   for(const [a,b] of edges){if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a>=count||b>=count||a===b)throw Error('Bad joint');groups[find(a)]=find(b);}
+   const comp=new Map();
+   for(let i=0;i<count;i++){const parent=find(i);if(!comp.has(parent))comp.set(parent,[]);comp.get(parent).push(i);}
+   return [...comp.values()].map(items=>({ids:items,anchorKnown:items.some(i=>anchors.includes(i)),
+     structuralSafetyVerified:false,jointStrengthCertified:false}));
+ }
+ const api={screen,topology};
+ if(typeof module!=='undefined'&&module.exports)module.exports=api;
+ root.MOTIF015_PHYSICS=api;
+})(typeof window!=='undefined'?window:globalThis);
+
+</script><script>
+/* Deterministic pinhole camera & world-ground unprojection. No WebGL/CDN.
+ * Real 3-dimensional scene vertices, depth sorting and perspective. */
+(function(root){'use strict';
+ const norm = v=>{const n=Math.hypot(v.x,v.y,v.z)||1;return {x:v.x/n,y:v.y/n,z:v.z/n};};
+ const sub=(a,b)=>({x:a.x-b.x,y:a.y-b.y,z:a.z-b.z});
+ const dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z;
+ const cross=(a,b)=>({x:a.y*b.z-a.z*b.y,y:a.z*b.x-a.x*b.z,z:a.x*b.y-a.y*b.x});
+ const add=(a,b,k=1)=>({x:a.x+b.x*k,y:a.y+b.y*k,z:a.z+b.z*k});
+ const camera=(yaw=.80,pitch=.64,distance=17,target={x:5,y:.45,z:2.25})=>({yaw,pitch,distance,target});
+ function basis(c){
+  const eye={x:c.target.x+c.distance*Math.cos(c.pitch)*Math.sin(c.yaw),
+    y:c.target.y+c.distance*Math.sin(c.pitch),
+    z:c.target.z+c.distance*Math.cos(c.pitch)*Math.cos(c.yaw)};
+  const forward=norm(sub(c.target,eye)),right=norm(cross(forward,{x:0,y:1,z:0})),up=cross(right,forward);
+  return {eye,forward,right,up};
+ }
+ function project(p,c,w,h){
+   const b=basis(c),q=sub(p,b.eye),z=dot(q,b.forward),f=Math.min(w,h)*1.25;
+   if(z<=.08)return null;
+   return {x:w/2+(dot(q,b.right)*f)/z,y:h/2-(dot(q,b.up)*f)/z,depth:z};
+ }
+ function rayGround(px,py,c,w,h,groundY=0){
+   const b=basis(c),f=Math.min(w,h)*1.25,
+     dir=norm(add(add(b.forward,b.right,(px-w/2)/f),b.up,-(py-h/2)/f));
+   if(Math.abs(dir.y)<1e-6)return null;
+   const t=(groundY-b.eye.y)/dir.y;
+   if(t<=0)return null;
+   const p=add(b.eye,dir,t);return {x:p.x,z:p.z,y:groundY};
+ }
+ function panelFaces(o, S){
+   const a=S.world(o.points[0]),b=S.world(o.points[1]);
+   const dx=b.x-a.x,dz=b.z-a.z,L=Math.hypot(dx,dz)||.01;
+   const t=Math.max(.015,o.thickness)/2,nx=-dz/L*t,nz=dx/L*t,low=o.clearance,hi=low+o.height;
+   const pts=[
+      {x:a.x+nx,y:low,z:a.z+nz},{x:b.x+nx,y:low,z:b.z+nz},
+      {x:b.x+nx,y:hi,z:b.z+nz},{x:a.x+nx,y:hi,z:a.z+nz},
+      {x:a.x-nx,y:low,z:a.z-nz},{x:b.x-nx,y:low,z:b.z-nz},
+      {x:b.x-nx,y:hi,z:b.z-nz},{x:a.x-nx,y:hi,z:a.z-nz}];
+   return [[0,1,2,3],[5,4,7,6],[3,2,6,7],[4,5,1,0],[0,3,7,4],[1,5,6,2]].map((f,i)=>({verts:f.map(id=>pts[id]),tone:i}));
+ }
+ function supportFaces(o,S){
+   const p=S.world(o.points[0]),r=Math.max(.05,o.thickness*.6),verts=[],n=8;
+   for(let j=0;j<n;j++){
+     const angle=j*2*Math.PI/n;
+     verts.push({x:p.x+Math.cos(angle)*r,z:p.z+Math.sin(angle)*r,y:0});
+   }
+   const faces=[];for(let j=0;j<n;j++){
+     const k=(j+1)%n,a=verts[j],b=verts[k];
+     faces.push({verts:[a,b,{...b,y:o.height},{...a,y:o.height}],tone:j%2});
+   }
+   faces.push({verts:verts.map(v=>({...v,y:o.height})),tone:1});return faces;
+ }
+ function polygons(objects,S,cam,w,h){
+   const out=[];
+   for(const o of objects){
+     if(o.kind==='access')continue;
+     const faces=o.points.length===2?panelFaces(o,S):supportFaces(o,S);
+     for(const f of faces){const points=f.verts.map(v=>project(v,cam,w,h));if(points.some(p=>p===null))continue;
+       out.push({id:o.id,kind:o.kind,status:o.status,depth:points.reduce((sum,p)=>sum+p.depth,0)/points.length,
+           points,tone:f.tone,style:o.kind==='desired'?'hypothetical':o.status==='tentative'?'tentative':'human'});
+     }
+   }
+   return out.sort((a,b)=>b.depth-a.depth);
+ }
+ const api={camera,basis,project,rayGround,polygons};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.MOTIF014_CAMERA=api;
+})(typeof window!=='undefined'?window:globalThis);
+
+</script><script>
+/* FIELD-015 interactive 2D/3D free-body research bench. NO external services.
+ * Every point and size starts as a synthetic assumption, not reconstructed fact.
+ */
+(function(){'use strict';
+const $=id=>document.getElementById(id),P=window.MOTIF015_PHYSICS,C=window.MOTIF014_CAMERA;
+const defaults={width:1.5,height:1,mass:5,base:.35,opacity:1,drag:1.4,friction:.6,anchor:'freestanding',anchorTorque:null};
+const fresh=()=>[{id:'fence-1',label:'Tentative privacy panel',material:'privacy',a:{x:1.2,z:2.2},b:{x:3.6,z:2.2},...defaults},
+{id:'fence-2',label:'Tentative mesh',material:'chain',a:{x:3.6,z:2.2},b:{x:5.6,z:3.4},...defaults,opacity:.2},
+{id:'support-1',label:'Candidate chair support',kind:'support',pos:{x:5.6,z:3.4},status:'UNVERIFIED_SUPPORT'}];
+let items=fresh(),selected='fence-1',wind=8,cam=C.camera(.78,.60,16,{x:5,y:.8,z:4}),recon={map:null,da3:null};
+let pointer=null,redrawQueued=false;
+const fmt=n=>Number.isFinite(n)?n.toFixed(1):'—';
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const panel=()=>items.find(x=>x.id===selected && !x.kind);
+function color(item){return item.id===selected?'#efc981':item.kind==='support'?'#bca9dd':'#a9cfc3';}
+function canv(id){const el=$(id),r=el.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+  if(el.width!==Math.round(r.width*dpr)||el.height!==Math.round(r.height*dpr)){
+    el.width=Math.round(r.width*dpr);el.height=Math.round(r.height*dpr);
+  }
+  const ctx=el.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,r.width,r.height);
+  return {ctx,w:r.width,h:r.height};}
+const xy=(x,z,w,h)=>({x:22+x/10*(w-44),y:h-24-z/8*(h-48)});
+const ground=(x,y,w,h)=>({x:(x-22)/(w-44)*10,z:(h-24-y)/(h-48)*8});
+function drawPlan(){const {ctx,w,h}=canv('plan');ctx.lineWidth=1;
+  ctx.strokeStyle='#304b55';for(let x=0;x<=10;x++){let a=xy(x,0,w,h),b=xy(x,8,w,h);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+  for(let z=0;z<=8;z++){let a=xy(0,z,w,h),b=xy(10,z,w,h);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+  items.forEach(o=>{ctx.strokeStyle=color(o);ctx.fillStyle=color(o);ctx.lineWidth=o.id===selected?5:3;
+    if(o.kind==='support'){let p=xy(o.pos.x,o.pos.z,w,h);ctx.beginPath();ctx.arc(p.x,p.y,8,0,2*Math.PI);ctx.stroke();return;}
+    let a=xy(o.a.x,o.a.z,w,h),b=xy(o.b.x,o.b.z,w,h);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+    for(const p of [a,b]){ctx.beginPath();ctx.arc(p.x,p.y,5,0,2*Math.PI);ctx.fill();}
+    ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText(o.label,(a.x+b.x)/2+7,(a.y+b.y)/2-10);
+  });ctx.fillStyle='#91a8a8';ctx.font='10px system-ui';ctx.fillText('SCHEMATIC COORDINATES • NOT METERS',10,h-7);
+}
+function project(p,w,h){return C.project(p,cam,w,h);}
+function poly(ctx,pts,fill,stroke){if(pts.some(p=>!p))return;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=1.2;ctx.stroke();}
+function draw3d(){const {ctx,w,h}=canv('perspective');
+  ctx.fillStyle='#111f26';ctx.fillRect(0,0,w,h);
+  for(let x=0;x<=10;x++){const a=project({x,y:0,z:0},w,h),b=project({x,y:0,z:8},w,h);if(a&&b){ctx.strokeStyle='#334750';ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+  for(let z=0;z<=8;z++){const a=project({x:0,y:0,z},w,h),b=project({x:10,y:0,z},w,h);if(a&&b){ctx.strokeStyle='#334750';ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+  const faces=[];
+  items.forEach(o=>{
+    if(o.kind==='support'){const a=project({x:o.pos.x,y:0,z:o.pos.z},w,h),b=project({x:o.pos.x,y:1.1,z:o.pos.z},w,h);if(a&&b)faces.push({depth:(a.depth+b.depth)/2,pts:[a,b],o,stick:true});return;}
+    const ah=project({x:o.a.x,y:o.height,z:o.a.z},w,h),bh=project({x:o.b.x,y:o.height,z:o.b.z},w,h),
+          ag=project({x:o.a.x,y:0,z:o.a.z},w,h),bg=project({x:o.b.x,y:0,z:o.b.z},w,h);
+    if([ah,bh,ag,bg].every(Boolean))faces.push({depth:(ah.depth+bh.depth)/2,pts:[ag,bg,bh,ah],o});
+  });
+  faces.sort((a,b)=>b.depth-a.depth);
+  for(const f of faces){
+    if(f.stick){const [a,b]=f.pts;ctx.strokeStyle=color(f.o);ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();continue;}
+    let op=f.o.opacity;
+    if(f.o.id===selected)poly(ctx,f.pts,'#dcb880a1','#f4d19b');
+    else poly(ctx,f.pts,op>.6?'#78a8ab89':'#6b9b9947','#9ccbc1');
+    if(op<.7){const [a,b,c,d]=f.pts;
+      ctx.strokeStyle='#aed4ce88';ctx.lineWidth=1;
+      for(let i=.15;i<1;i+=.16){ctx.beginPath();ctx.moveTo(a.x+(d.x-a.x)*i,a.y+(d.y-a.y)*i);
+        ctx.lineTo(b.x+(c.x-b.x)*i,b.y+(c.y-b.y)*i);ctx.stroke();}
+    }
+  }
+  ctx.fillStyle='#95b9b6';ctx.font='11px system-ui';ctx.fillText('3D geometric hypothesis — perspective orbit',10,h-10);
+}
+function selectedToForm(){const p=panel();$('picked').textContent=p?p.label:'Support candidate';
+  for(const id of ['material','width','height','mass','base','opacity','drag','friction','anchor'])$(id).value=p?p[id]:'unknown';
+  $('anchorTorque').value=p&&p.anchorTorque!=null?p.anchorTorque:'';
+  const inputs=['material','width','height','mass','base','opacity','drag','friction','anchor','anchorTorque'];
+  inputs.forEach(id=>$(id).disabled=!p);
+}
+function updateFromForm(){const p=panel();if(!p)return;
+ p.material=$('material').value;
+ const presets={privacy:1,cage:.23,chain:.2,netting:.12};
+ for(const id of ['width','height','mass','base','opacity','drag','friction']){
+   const v=$(id).value.trim();p[id]=v===''?null:Number(v);
+ }
+ p.anchor=$('anchor').value;
+ p.anchorTorque=$('anchorTorque').value.trim()===''?null:Number($('anchorTorque').value);
+ render();
+}
+function choose(id){selected=id;selectedToForm();render();}
+function physics(){const p=panel();if(!p)return;
+ let result;try{result=P.screen(p,wind)}catch(e){$('verdict').textContent='INVALID: '+e.message;return;}
+ $('force').textContent=result.force!=null?fmt(result.force)+' N':'?';
+ $('moment').textContent=result.moment!=null?fmt(result.moment)+' / '+fmt(result.restoring):'?';
+ $('verdict').textContent=result.status.replaceAll('_',' ');
+ let message='This result holds even if force calculations look favorable. ';
+ if(result.failures?.length)message+='Failures: '+result.failures.join(', ')+'. ';
+ if(result.missing?.length)message+='Unresolved: '+result.missing.join(', ')+'. ';
+ $('physicsExplain').textContent=message+'No assembly certified.';
+ $('critique').innerHTML=result.failures?.length?'<span class="warning">This load case violates at least one simplified assumed stability condition.</span>':'<span class="positive">The current simplified numbers do not establish safe installed performance.</span>';
+ $('critique').innerHTML+='<div class="sub">No verified connection mechanics, foundation/soil conditions or impact dynamics.</div>';
+ $('reframe').textContent= p.material==='privacy'?'An opaque screen catches more hypothetical lateral wind force than a porous panel. Consider a more open material or a different route; test with real conditions.':
+   'A porous panel can reduce assumed wind loading, but its openings, flexure, edges and support remain separate constraints.';
+ $('nextQuestion').textContent= result.failures?.length?'What independent support or lower-load geometry can be physically verified before the dogs approach it?':
+    result.missing?.includes('connector_distribution')?'What are the actual installed support points and connection failure modes?':
+    'Which single dimension or material property would most affect this hypothesis?';
+}
+function render(){if(redrawQueued)return;redrawQueued=true;requestAnimationFrame(()=>{redrawQueued=false;drawPlan();draw3d();physics();$('jointGraph').textContent=`${items.filter(x=>!x.kind).length} hypothetical panel(s), ${items.filter(x=>x.kind==='support').length} possible support(s). No evidenced fastener load path or soil anchorage.`;});}
+function changeSelected(id){const p=panel();if(!p)return;
+ const n=$(id).value.trim();p[id]=n===''?null:Number(n);render();}
+function attach(){
+ const cvs=$('plan');cvs.addEventListener('pointerdown',e=>{
+   const b=cvs.getBoundingClientRect(),mx=e.clientX-b.left,my=e.clientY-b.top;
+   const points=[];items.forEach(o=>{
+      if(o.kind==='support')points.push({o,key:'pos',p:o.pos});
+      else points.push({o,key:'a',p:o.a},{o,key:'b',p:o.b});});
+   let best=null,bestd=22;
+   for(const q of points){let p=xy(q.p.x,q.p.z,b.width,b.height),d=Math.hypot(mx-p.x,my-p.y);if(d<bestd){best=q;bestd=d;}}
+   if(best){pointer={type:'point',best,el:cvs};cvs.setPointerCapture(e.pointerId);choose(best.o.id);}
+ });
+ cvs.addEventListener('pointermove',e=>{if(!pointer||pointer.type!=='point')return;
+   const b=cvs.getBoundingClientRect();const p=ground(e.clientX-b.left,e.clientY-b.top,b.width,b.height);
+   pointer.best.o[pointer.best.key]={x:Math.max(0,Math.min(10,p.x)),z:Math.max(0,Math.min(8,p.z))};render();});
+ for(const type of ['pointerup','pointercancel'])cvs.addEventListener(type,()=>pointer=null);
+ const v=$('perspective');v.addEventListener('pointerdown',e=>{v.setPointerCapture(e.pointerId);pointer={type:'orbit',x:e.clientX,y:e.clientY};});
+ v.addEventListener('pointermove',e=>{if(pointer?.type==='orbit'){cam.yaw+=(e.clientX-pointer.x)*.009;cam.pitch=Math.min(1.4,Math.max(.10,cam.pitch+(e.clientY-pointer.y)*.006));pointer.x=e.clientX;pointer.y=e.clientY;render();}});
+ for(const type of ['pointerup','pointercancel'])v.addEventListener(type,()=>pointer=null);
+ v.addEventListener('wheel',e=>{e.preventDefault();cam.distance=Math.min(55,Math.max(5,cam.distance*(e.deltaY>0?1.1:.91)));render();},{passive:false});
+ for(const id of ['material','width','height','mass','base','opacity','drag','friction','anchor','anchorTorque']){
+  $(id).addEventListener('input',()=>{
+    if(id==='material'){const op={privacy:1,cage:.23,chain:.2,netting:.12};$('opacity').value=op[$('material').value];}
+    updateFromForm();
+  });
+ }
+ $('wind').addEventListener('input',()=>{wind=Number($('wind').value);$('windRead').textContent=wind+' m/s';render();});
+ $('addPanel').onclick=()=>{const n=items.filter(x=>!x.kind).length+1;const p={id:'fence-'+n,label:'Tentative panel '+n,material:'privacy',a:{x:1,z:1+n*.45},b:{x:3,z:1+n*.45},...defaults};items.push(p);choose(p.id);};
+ $('addSupport').onclick=()=>{const n=items.filter(x=>x.kind==='support').length+1;const s={id:'support-'+n,label:'Candidate support '+n,kind:'support',pos:{x:7,z:2+n*.5},status:'UNVERIFIED_SUPPORT'};items.push(s);choose(s.id);};
+ $('resetScene').onclick=()=>{items=fresh();choose('fence-1');};
+ $('topCam').onclick=()=>{cam=C.camera(0,1.48,18,{x:5,y:0,z:4});render();};
+ $('isoCam').onclick=()=>{cam=C.camera(.78,.6,16,{x:5,y:.8,z:4});render();};
+ $('evidenceFile').addEventListener('change',ev=>{const f=ev.target.files?.[0];if(!f)return;
+  if(f.size>14_000_000){$('statusMessage').textContent='Source too large to display locally';return;}
+  const r=new FileReader();r.onload=()=>{$('evidencePreview').src=r.result;$('evidencePreview').style.display='block';$('statusMessage').textContent='Original evidence shown. NOT automatically registered to 3D.';};r.readAsDataURL(f);
+ });
+ $('mapFile').addEventListener('change',e=>loadWitness(e,'map'));
+ $('depthFile').addEventListener('change',e=>loadWitness(e,'da3'));
+ $('savedFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{
+  const o=JSON.parse(await f.text());if(o.schema!=='motif.field015.v1'||!Array.isArray(o.items)||o.items.length>30)throw Error('wrong schema');
+  items=o.items;wind=Number(o.wind)||8;selected=items.find(q=>!q.kind)?.id;selectedToForm();render();
+  $('statusMessage').textContent='Saved hypothesis reloaded; physical evidence not established by a file.';
+ }catch(x){$('statusMessage').textContent='Import held: '+x.message;}});
+ $('exportState').onclick=()=>download('FIELD-015-scene.json',{schema:'motif.field015.v1',items,wind,source_note:'Illustrative assumptions. Evidence is separate.',physical_safety_verified:false});
+ $('exportReceipt').onclick=()=>download('FIELD-015-physics.json',{schema:'motif.field015.physics.v1',wind,panels:items.filter(x=>!x.kind).map(p=>({id:p.id,result:P.screen(p,wind)})),
+             model_comparison:'HOLD_UNKNOWN_COMMON_FRAME',mechanics_is_simplified:true,verified_pet_containment:false});
+ window.addEventListener('resize',render);
+}
+async function loadWitness(e,which){let file=e.target.files?.[0];if(!file)return;
+ try{if(file.size>3_000_000)throw Error('Packet too large');let obj=JSON.parse(await file.text());
+   if(!Array.isArray(obj.image_sha256)||!obj.image_sha256.every(x=>/^[a-f0-9]{64}$/.test(x))||!Array.isArray(obj.xyz)||obj.xyz.length>12000||obj.xyz.length<3||
+     !obj.xyz.every(p=>Array.isArray(p)&&p.length===3&&p.every(n=>Number.isFinite(n)))||
+     (which==='map'&&obj.engine!=='MAPANYTHING')||(which==='da3'&&obj.engine!=='DEPTH_ANYTHING_3')||obj.registered_to_site!==false)throw Error('Unsupported or unregistered witness packet');
+   recon[which]=obj;
+   $(which==='map'?'mapGate':'depthGate').textContent=obj.engine+': '+obj.xyz.length+' MODEL-LOCAL points / '+obj.scale+' / '+(obj.inference_executed?'checkpoint execution claimed in packet':'no real inference claimed');
+   if(recon.map&&recon.da3){let match=JSON.stringify(recon.map.image_sha256)===JSON.stringify(recon.da3.image_sha256);
+     $('fusionGate').textContent=match?'HOLD: Same image hashes, but point correspondence, scale and common frame unverified.':'HOLD: The two model witnesses refer to different input images.';
+   }
+   $('reconDetail').textContent='Imported point hypotheses only. No physical pose registration or certifying geometry.\n'+
+      Object.entries(recon).map(([k,v])=>k+': '+(v?`${v.xyz.length} sampled points • ${v.checkpoint}`:'none')).join('\n');
+ }catch(err){$('statusMessage').textContent='Witness import held: '+err.message;}
+}
+function download(name,content){let data=JSON.stringify(content,null,2),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+attach();selectedToForm();render();
+})();
+
+</script></body></html>

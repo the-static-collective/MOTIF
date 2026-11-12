@@ -1,0 +1,29 @@
+name: FIELD-015 two reconstructions and mechanics contracts
+on:
+  push:
+    paths:
+      - 'experiments/field015/**'
+      - '.github/workflows/field-015.yml'
+  pull_request:
+    paths:
+      - 'experiments/field015/**'
+      - '.github/workflows/field-015.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install minimal testing dependencies
+        run: python -m pip install 'numpy>=1.26,<3'
+      - name: Python source and contract regression tests
+        working-directory: experiments/field015
+        run: python -m unittest -v test_field015.py
+      - name: Synthetic mechanical screens (no real models)
+        working-directory: experiments/field015
+        run: python physics.py && python truss.py
