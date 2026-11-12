@@ -32,8 +32,20 @@ jobs:
                   print('ARM',c['regime'],c['budget'],c['policy'],'ACC',c['end_accuracy'],'NET',c['net_utility'],'VERIFIED_WRONG',c['verified_wrong'],'USEFUL_WRONG',c['wrong_helpful_net'])
           print('WINNERS',json.dumps(r['winners'],sort_keys=True))
           PY
+      - run: python experiments/llm003/posthoc_ci.py > llm003-posthoc-bootstrap.json
+      - name: Display exploratory paired confidence checks
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('llm003-posthoc-bootstrap.json'))
+          for a in r['analyses']:
+              if a['regime'] in ('truthful','noise20') and a['budget'] in (1,3) and 'classical_ig' in a['contrast']:
+                  print('PAIRED_BOOTSTRAP',a)
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: llm003-error-dividend-heldout
-          path: llm003-error-results.json
+          path: |
+            llm003-error-results.json
+            llm003-posthoc-bootstrap.json
           retention-days: 30
