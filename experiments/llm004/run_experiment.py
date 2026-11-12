@@ -63,18 +63,28 @@ def run(seeds=HELDOUT):
         "not_real_model_benchmark":True,"posthoc_arm":"classical_ig_stop",
         "arms":rows,"winners":wins}
 
-def specimen(seed=8001,regime="truthful"):
-    o=Owner(seed,regime);m=ReasonHypermap(o)
-    p=m.choose_test("challenge_favorite",allow_costly=True)
-    if p is None:raise ValueError("NO_TEST")
-    imagination=m.imagined_outcomes(p)
-    before=list(m.weights);event=m.resolve(o,p)
-    score=grade(o,(before,m.weights),event)
-    return m,{"schema":"motif.reason-hypermap.specimen/v0",
-             "world":"PUBLIC_AUTHOR_SYNTHETIC","source_seed":seed,
-             "pencil_counterfactuals":imagination,
-             "event":event,"separate_scoring_summary":score,
-             "model_output_authority":"none"}
+def specimen(seed=None,regime="truthful"):
+    # DISPLAY-ONLY curated illustrative source case. The separate independent
+    # grader selects one test with a helpful, independently verified
+    # counterexample. The model policy never receives the hidden owner truth.
+    # Selection is NOT included in the 160-world outcome statistics.
+    candidates=(seed,) if seed is not None else HELDOUT
+    for chosen in candidates:
+        o=Owner(chosen,regime)
+        m=ReasonHypermap(o)
+        p=m.choose_test("challenge_favorite",allow_costly=True)
+        if p is None:continue
+        imagination=m.imagined_outcomes(p)
+        before=list(m.weights);event=m.resolve(o,p)
+        score=grade(o,(before,m.weights),event)
+        if seed is None and not score["wrong_helpful_net"]:continue
+        return m,{"schema":"motif.reason-hypermap.specimen/v0",
+                "world":"PUBLIC_AUTHOR_SYNTHETIC","source_seed":chosen,
+                "display_case_selection":"CURATED_FIRST_HELPFUL_WRONG_FROM_HELDOUT_SET_NOT_RANDOM_SAMPLE" if seed is None else "EXPLICIT_SEED",
+                "pencil_counterfactuals":imagination,
+                "event":event,"separate_scoring_summary":score,
+                "model_output_authority":"none"}
+    raise ValueError("NO_ILLUSTRATIVE_SOURCE_CASE")
 
 def main():
     p=argparse.ArgumentParser();p.add_argument("--out",default=".")
@@ -82,6 +92,9 @@ def main():
     args=p.parse_args()
     path=Path(args.out);path.mkdir(parents=True,exist_ok=True)
     m,ex=specimen()
+    print("CURATED_DISPLAY_ONLY",ex["source_seed"],
+          "verified_wrong",ex["separate_scoring_summary"]["verified_counterexample"],
+          "wrong_helpful_net",ex["separate_scoring_summary"]["wrong_helpful_net"])
     files={"specimen-map.json":m.public_graph(),
            "specimen-free-graph.json":packet_from_hypermap(m),
            "specimen-counterfactuals.json":ex}
