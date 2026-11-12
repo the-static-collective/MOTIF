@@ -359,7 +359,9 @@ def run_case(novelty,policy,seed=DEVELOPMENT_SEED):
                         # Native MOTIF-003 evaluates hypothetical test options;
                         # it gets NO hidden source truth. No extra game actions.
                         from adapt import native_motif_hypothetical_programs,public_free_graph_hypothesis
-                        limited=remaining[:8]
+                        limited=[{**p,"hypothesis":p.get("hypothesis",
+                                  p["kind"]+":"+"/".join(p["actions"]))}
+                                 for p in remaining[:8]]
                         try:
                             native_motif_calls+=native_motif_hypothetical_programs(limited)
                             if len(graph_receipts)<3:
