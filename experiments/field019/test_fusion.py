@@ -12,6 +12,12 @@ class CrossDomainTest(unittest.TestCase):
         self.assertAlmostEqual(self.good.horizontal_m_per_sketch_unit,TRUE_SCALE,delta=.12)
     def test_two_cameras(self):
         self.assertEqual(len(self.good.camera_poses),2)
+    def test_relative_camera_baseline_estimated(self):
+        from synthetic import CAMS
+        import numpy as np
+        g=fuse(packet(2,sketch_noise=.06,pixel_noise=.7))
+        true=float(np.linalg.norm(CAMS[1][0]-CAMS[0][0]))
+        self.assertAlmostEqual(g.diagnostics['camera_baseline_m_conditional'],true,delta=.3)
     def test_height_correct(self):
         self.assertAlmostEqual(self.good.predicted_world[0]['top_m'][1],-HEIGHT_M,delta=.001)
     def test_no_verification_claim(self):
@@ -21,6 +27,16 @@ class CrossDomainTest(unittest.TestCase):
     def test_wrong_or_unknown_focal_holds(self):
         d=packet(1); d['views'][1].pop('focal_px')
         self.assertEqual(fuse(d).status,'HOLD_UNDERCONSTRAINED')
+    def test_unproven_focal_source_holds(self):
+        d=packet(1);d['views'][1].pop('focal_provenance')
+        self.assertEqual(fuse(d).status,'HOLD_UNDERCONSTRAINED')
+    def test_false_calibration_can_bias_a_low_residual_fit(self):
+        d=packet(1,sketch_noise=.03)
+        for v in d['views']:v['focal_px']*=1.2
+        wrong=fuse(d)
+        self.assertEqual(wrong.status,'CONDITIONAL_CROSS_DOMAIN_GEOMETRY')
+        self.assertGreater(abs(wrong.horizontal_m_per_sketch_unit-TRUE_SCALE),.12)
+        self.assertLess(wrong.reprojection_rms_px,2.)
     def test_single_view_holds(self):
         self.assertEqual(fuse(packet(1,views=1)).status,'HOLD_UNDERCONSTRAINED')
     def test_unconfirmed_pixels_hold(self):
