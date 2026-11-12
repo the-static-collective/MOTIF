@@ -1,0 +1,25 @@
+name: LLM-001 source-bound convergence
+on:
+  push:
+    branches:
+      - experiment/llm001-proof-carrying-branch-compiler-20261112
+  pull_request:
+    paths:
+      - 'experiments/llm001/**'
+      - '.github/workflows/llm-001.yml'
+  workflow_dispatch:
+jobs:
+  offline-source-bound-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: node --test experiments/llm001/test.mjs experiments/llm001/local-model.test.mjs experiments/llm001/native-bridge.test.mjs
