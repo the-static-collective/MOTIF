@@ -121,8 +121,14 @@ def audit_real_marathon(marathon:Marathon,model_policy:RealSmolLMPolicy):
         e["payload"]["child_kind"] in ("commit_correct","commit_wrong")]
     model_proposals=[e for e in verified_source_commits if
         isinstance(e["payload"]["child_meta"].get("real_model_pencil_proposal"),dict)]
-    if len(model_proposals)!=model_policy.forwards:
-        raise ValueError("REAL_MODEL_FORWARD_COUNT_MISMATCH")
+    # If the exact action/cost budget is exhausted AFTER inference but BEFORE
+    # a commit can be recorded, preserve the unmatched attempt as a failure.
+    # NEVER silently classify such a partially attempted chain as complete.
+    if len(model_proposals)>model_policy.forwards:
+        raise ValueError("MORE_PROPOSALS_THAN_REAL_MODEL_FORWARDS")
+    outstanding_forwards=model_policy.forwards-len(model_proposals)
+    if record["summary"]["completed"] and outstanding_forwards:
+        raise ValueError("COMPLETED_RUN_HAS_UNCOMMITTED_MODEL_FORWARD")
     if any(e["payload"]["child_meta"]["real_model_pencil_proposal"].get("status")
            !="PENCIL_ONLY_NOT_A_WITNESS" for e in model_proposals):
         raise ValueError("MODEL_RESULT_FALSE_PROMOTION")
@@ -139,7 +145,8 @@ def audit_real_marathon(marathon:Marathon,model_policy:RealSmolLMPolicy):
         # other checkpoints require one genuine pretrained forward.
         if model_policy.forwards!=336:
             raise ValueError("MODEL_SKIPPED_UNVERIFIED_GATE")
-    return {"model_forwards_verified":len(model_proposals),
+    return {"model_forwards_recorded_in_gate_events":len(model_proposals),
+        "model_forwards_uncommitted_on_budget_failure":outstanding_forwards,
         "real_model_inference_seconds":round(model_policy.seconds,4),
         "model_pencil_correct_before_owner_receipt":sum(
           e["payload"]["child_meta"]["real_model_pencil_proposal"]["prediction"]==
