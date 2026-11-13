@@ -277,6 +277,8 @@ def main(argv=None):
             if source.stat().st_size > MAX_RECEIPT:
                 raise HoldError("Oversized retained receipt")
             prior = json.loads(source.read_text("utf-8"))
+            if isinstance(prior, dict) and "held_receipt" in prior:
+                prior = prior["held_receipt"]
         result = run(args.repo, args.query, args.execute, prior)
         payload = json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n"
         if args.out:
