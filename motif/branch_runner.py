@@ -62,7 +62,9 @@ def _extract_safe_tar(blob, directory, prefixes):
             name = member.name.rstrip("/")
             path = PurePosixPath(name)
             if (path.is_absolute() or ".." in path.parts or
-                    not any(name == p or name.startswith(p + "/") for p in prefixes)):
+                    not any(name == p or name.startswith(p + "/") or
+                            (member.isdir() and p.startswith(name + "/"))
+                            for p in prefixes)):
                 raise HoldError("Unsafe or unexpected Git archive path")
             if not (member.isdir() or member.isfile()):
                 raise HoldError("Git archive contains an unsupported link/device")
