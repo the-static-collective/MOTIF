@@ -1,0 +1,45 @@
+{
+  "schema": "motif.reason-case/v1",
+  "question": "Which invented relation explains the mismatch between two drawings?",
+  "goal": "Choose the least burdensome discriminating observation before revising a hypothetical diagram.",
+  "context": "FICTIONAL illustration; no physical engineering or field safety conclusion.",
+  "hypotheses": [
+    {
+      "id": "camera",
+      "predictions": {
+        "angle": "yes",
+        "post": "no"
+      },
+      "plan": "Recheck camera orientation."
+    },
+    {
+      "id": "post",
+      "predictions": {
+        "angle": "no",
+        "post": "yes"
+      },
+      "plan": "Recheck fictional post alignment."
+    },
+    {
+      "id": "corner",
+      "predictions": {
+        "angle": "no",
+        "post": "no"
+      },
+      "plan": "Recheck the drawing origin."
+    }
+  ],
+  "tests": [
+    {
+      "id": "angle",
+      "cost": 0.04,
+      "risk": 0
+    },
+    {
+      "id": "post",
+      "cost": 0.12,
+      "risk": 0.1
+    }
+  ],
+  "reports": []
+}
