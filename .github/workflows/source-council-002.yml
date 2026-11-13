@@ -1,0 +1,57 @@
+name: MOTIF Source Council 002 — evidence before branch selection
+
+on:
+  push:
+    paths:
+      - 'motif/source_council.py'
+      - 'tests/test_source_council.py'
+      - 'docs/SOURCE-COUNCIL-002.md'
+      - '.github/workflows/source-council-002.yml'
+  pull_request:
+    paths:
+      - 'motif/source_council.py'
+      - 'tests/test_source_council.py'
+      - 'docs/SOURCE-COUNCIL-002.md'
+      - '.github/workflows/source-council-002.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-competition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run all exact source and reasoning boundary tests
+        run: python -m unittest discover -s tests -v
+      - name: Actually inspect a bounded group of original unmerged source documents
+        run: |
+          python -m motif.source_council --query "reciprocal" --budget 3 > /tmp/motif-source-council.json
+          python - <<'PY'
+          import json
+          c=json.load(open('/tmp/motif-source-council.json'))
+          assert c['all_remote_heads_observed'] >= 4
+          assert c['automatic_branch_execution'] is False
+          assert c['automatic_merge'] is False
+          assert len(c['candidates']) <= 3
+          for item in c['candidates']:
+              assert item['executable'] is False
+              assert item['automatic_merge'] is False
+              if item.get('phase') == 'PENCIL_SOURCE_EVIDENCE':
+                  assert all(w['sha256'] and w['bytes']>0 for w in item['evidence']['source_witnesses'])
+          print('LIVE UNMERGED SOURCE CARDS:',len(c['candidates']))
+          for x in c['candidates']:
+              print(x['branch'],x['phase'],x.get('recommendation'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-source-council-002-held-evidence
+          path: /tmp/motif-source-council.json
+          retention-days: 14
