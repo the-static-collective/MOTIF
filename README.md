@@ -2,7 +2,23 @@
 
 **Experimental, graph-native research for JAR;VIS.** The native unit is a change to a typed relational field—not a text token. MOTIF explores what happens when a system learns reusable transformation schemas and composes them into hypothetical futures.
 
-This is a research sandbox, **not** a pretrained LLM, a real-world causal model, an autonomous agent, or evidence of permission. All demonstrations are deliberately invented. No external calls or actions occur.
+This is a research sandbox, **not** a pretrained LLM, a verified real-world causal model, an autonomous agent, or evidence of permission. The numbered core experiments use invented fixtures. The optional Reasoning Spine and Branch Garden tools below can make **explicit operator-requested** Git reads or isolated no-network synthetic test runs; they do not automatically contact people, execute arbitrary branches or perform merges.
+
+
+
+## Reasoning Spine 001 — use experimental branches without merging
+
+The main branch now has a small, tested standard-library reasoning coordinator in [motif/reason_spine.py](motif/reason_spine.py) and a source-pinned [Branch Garden](motif/branch_garden.py). Its phases are OBSERVE → HYPOTHESIZE → PROBE → REVISE → PLAN → VERIFY with five explainable roles: Explorer, Skeptic, Architect, Historian and Governor. The finite policy uses classical information gain minus declared synthetic cost/risk; independent pretrained-LLM and human-transfer performance are **not** yet measured.
+
+- **All visible Git heads:** python -m motif.cli branches --all. Read-only remote inventory. The existing scheduled census remains independent.
+- **Select a particular experimental branch:** python -m motif.cli branches --query "reciprocal".
+- **Read original unmerged source:** python -m motif.branch_source --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 --path experiments/reciprocal-003/reason_loop.js (or --list). Its commit and SHA-256 are retained.
+- **Use an existing nonmerged method as a HELD lens:** python -m motif.cli inspect --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 --path experiments/reciprocal-004/capability-passport.v1.json --case examples/reason-spine-001.json. A limited source-owned capability description influences proposed opt-in questions, without importing JS.
+- **Actually test selected original unmerged JS in an isolated container:** python -m motif.branch_runner --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 --profile reciprocal-004-smoke --execute. Only an explicitly reviewed fixed profile can execute, with no network, read-only mount, CPU/RAM/time limits and no credentials.
+- **Compare policies:** python -m motif.cli compare --case examples/reason-spine-001.json.
+- **Assess merge candidacy:** python -m motif.cli verdict --evidence examples/merge-evidence-held.json. This can only recommend a merge *review*. It never merges automatically.
+
+Run local spine tests with python -m unittest discover -s tests -v. The linked [integration guide](docs/REASONING-SPINE-BRANCH-GARDEN-001.md) and [sandbox guide](docs/BRANCH-SANDBOX-001.md) describe original-source pinning and limits. Dedicated CI independently tested an actual unmerged reciprocal method under an explicitly controlled runtime. **Most indexed branches are read-only source leads, not executable cartridges.** They can stay unmerged indefinitely while main learns what they contain. Branch use, owner admission, and merge authority remain separate.
 
 ## Working experiments
 
