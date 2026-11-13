@@ -1,0 +1,9 @@
+{
+  "pinned_source": true,
+  "independent_tests": false,
+  "strong_baseline_compared": false,
+  "no_known_regressions": true,
+  "owner_review": false,
+  "measured_transfer_gain": null,
+  "notes": "Hold the candidate unmerged while independent transfer evidence is missing."
+}
