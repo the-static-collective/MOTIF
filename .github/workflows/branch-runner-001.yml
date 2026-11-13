@@ -59,10 +59,11 @@ jobs:
           PY
       - name: Execute original nonmerged Node test suites with isolated resources
         run: |
+          set -o pipefail
           python -m motif.branch_runner \
             --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 \
             --profile reciprocal-004-smoke \
-            --execute > /tmp/branch-test-result.json
+            --execute | tee /tmp/branch-test-result.json
           python - <<'PY'
           import json
           v=json.load(open('/tmp/branch-test-result.json'))
