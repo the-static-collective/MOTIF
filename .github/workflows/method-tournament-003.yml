@@ -1,0 +1,100 @@
+name: MOTIF Tournament 003 — actual unmerged method versus held-out controls
+
+on:
+  pull_request:
+    paths:
+      - 'motif/method_tournament.py'
+      - 'experiments/method-tournament-003/**'
+      - 'tests/test_method_tournament.py'
+      - '.github/workflows/method-tournament-003.yml'
+  push:
+    paths:
+      - 'motif/method_tournament.py'
+      - 'experiments/method-tournament-003/**'
+      - 'tests/test_method_tournament.py'
+      - '.github/workflows/method-tournament-003.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-held-method:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test source/receipt safeguards, failure cases and existing core
+        run: python -m unittest discover -s tests -v
+      - name: Syntax-check externally authored comparison harness
+        run: node --check experiments/method-tournament-003/evaluate.cjs
+      - name: Preview source-pinned donor selection without execution
+        run: |
+          python -m motif.method_tournament \
+            --query "reciprocal role conditioned prediction" \
+            --out /tmp/motif-tournament-preview.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-tournament-preview.json'))
+          assert r['status']=='PREVIEW_NO_DONOR_EXECUTION'
+          assert r['source']['ref']=='experiment/reciprocal-004-ecosystem-crosswire-20261112'
+          assert r['selection']['document_terms_matched']
+          assert r['automatic_merge'] is False
+          print('ORIGINAL SOURCE VERIFIED BEFORE EXECUTION:',r['source']['sha'])
+          PY
+      - name: Prepare exact reviewed Node image (container itself has no network)
+        run: docker pull node:22-alpine
+      - name: Execute original unmerged donor tests and independently authored transfer tournament
+        run: |
+          python -m motif.method_tournament \
+            --query "reciprocal role conditioned prediction" --execute \
+            --out /tmp/motif-method-tournament-evidence.json > /dev/null
+          python - <<'PY'
+          import json
+          v=json.load(open('/tmp/motif-method-tournament-evidence.json'))
+          assert v['status']=='ORIGINAL_DONOR_EXECUTED_AND_STRONG_CLASSICAL_TOURNAMENT_COMPLETE'
+          assert len(v['native_runs'])==3
+          c=v['scorecard']
+          assert c['original_native_algorithm_executed'] is True
+          assert c['independent_future_separate_from_candidate_input'] is True
+          assert c['reliable_improvement_over_strong_classical'] is False
+          assert c['aggregate_on_proposed_only']['candidate_minus_strong_correct']==0
+          assert len(c['aggregate_on_proposed_only']['cases_regressing_vs_global'])>=1
+          assert v['held_receipt']['content']['method_installed'] is False
+          assert v['held_receipt']['content']['automatic_merge'] is False
+          print('ORIGINAL EXPERIMENT REALLY RAN:',v['source']['ref'],v['source']['sha'])
+          print('Independent synthetic future scored:',c['aggregate_on_proposed_only'])
+          print('Evidence disposition:',c['disposition'])
+          PY
+      - name: Actually reuse the retained receipt without merging or rerunning source
+        run: |
+          python -m motif.method_tournament \
+            --receipt /tmp/motif-method-tournament-evidence.json \
+            --query "reciprocal role conditioned prediction" \
+            --out /tmp/motif-retained-method-preview.json > /dev/null
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/motif-retained-method-preview.json'))
+          assert r['status']=='PREVIEW_NO_DONOR_EXECUTION'
+          assert r['retained_receipt_reused'] is True
+          assert r['method_installed'] is False
+          assert r['automatic_merge'] is False
+          print('UNMERGED METHOD LOCATOR REUSED IN FRESH INVOCATION WITHOUT CODE EXECUTION')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-003-original-method-future-transfer-held
+          path: |
+            /tmp/motif-tournament-preview.json
+            /tmp/motif-method-tournament-evidence.json
+            /tmp/motif-retained-method-preview.json
+          retention-days: 14

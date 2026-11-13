@@ -1,0 +1,195 @@
+{
+  "schema": "motif.method-tournament-fixture/v1",
+  "ownership": "MOTIF_INDEPENDENT_COMPARISON_HARNESS_NOT_DONOR",
+  "sample_kind": "AUTHORED_SYNTHETIC_NO_HUMANS",
+  "training_protocol": "First two reports per role train candidate; later calibration reports decide whether to propose; future is supplied only after methodCandidate returns.",
+  "task": "Predict future volunteered categorical report; NOT a causal fact, impact, or true identity.",
+  "roles": [
+    "newcomer",
+    "maker"
+  ],
+  "options": [
+    "choice_zero",
+    "choice_one"
+  ],
+  "cases": [
+    {
+      "id": "stable-role-separation",
+      "why": "Synthetic environment retains role signal.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "future": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "inverted-role-signal",
+      "why": "Synthetic environment reverses the signal after calibration.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "future": {
+        "newcomer": [
+          1,
+          1,
+          1
+        ],
+        "maker": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "collapsed-context-signal",
+      "why": "The later label ceases to depend on role.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "future": {
+        "newcomer": [
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "balanced-context-noise",
+      "why": "Equal future accuracy with balanced role noise.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "future": {
+        "newcomer": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "maker": [
+          1,
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "id": "no-useful-role-signal",
+      "why": "Calibration should HOLD the candidate; baseline remains useful.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "future": {
+        "newcomer": [
+          0,
+          0,
+          0
+        ],
+        "maker": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "insufficient-calibration",
+      "why": "Too few source roots must HOLD; no fake predictions.",
+      "calibration": {
+        "newcomer": [
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1
+        ]
+      },
+      "future": {
+        "newcomer": [
+          0,
+          0
+        ],
+        "maker": [
+          1,
+          1
+        ]
+      }
+    }
+  ]
+}
