@@ -26,6 +26,7 @@ from .source_council import score_docs
 PROFILE = {
     "id": "reciprocal-003-role-predictor",
     "source_branch": "experiment/reciprocal-004-ecosystem-crosswire-20261112",
+    "reviewed_source_commit": "586be3530d2b5b4d41f810515f9c457d2a27a371",
     "module": "experiments/reciprocal-003/reason_loop.js",
     "source_paths": (
         "experiments/reciprocal-002",
@@ -80,6 +81,8 @@ def select_reviewed_source(repo, query):
     if not isinstance(query, str) or not 3 <= len(query) <= 180 or not query.strip():
         raise HoldError("A bounded consequential research query is required")
     source = observe(repo, PROFILE["source_branch"])
+    if source.sha != PROFILE["reviewed_source_commit"]:
+        raise HoldError("Donor head changed since source review; refuse unreviewed code execution")
     docs = [read_text(repo, source, p, include_text=True)
             for p in PROFILE["source_docs"]]
     signals = score_docs(query, docs, list(PROFILE["source_paths"]) + [PROFILE["module"]])
