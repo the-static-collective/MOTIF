@@ -10,7 +10,7 @@ from unittest.mock import patch
 from motif.branch_garden import HoldError, Pointer
 from motif.method_tournament import (
     PROFILE, RECEIPT_SCHEMA, _digest, _verified_scorecard,
-    assemble_held_receipt, run, verify_receipt,
+    assemble_held_receipt, run, verify_receipt, select_reviewed_source,
     FIXTURE, EVALUATOR,
 )
 
@@ -139,6 +139,16 @@ class MethodTournamentTests(unittest.TestCase):
                    return_value=(changed,self.signals)):
             with self.assertRaises(HoldError):
                 run(".", "reciprocal prediction", True, receipt)
+
+    def test_changed_live_donor_head_is_rejected_before_reading_source_files(self):
+        self.assertEqual(PROFILE["reviewed_source_commit"],
+                         "586be3530d2b5b4d41f810515f9c457d2a27a371")
+        moved = Pointer(PROFILE["source_branch"], "c" * 40)
+        with patch("motif.method_tournament.observe", return_value=moved):
+            with patch("motif.method_tournament.read_text") as reader:
+                with self.assertRaises(HoldError):
+                    select_reviewed_source(".", "reciprocal role prediction")
+                reader.assert_not_called()
 
     def test_reviewed_profile_accepts_only_one_original_fixed_source(self):
         self.assertEqual(PROFILE["module"],
