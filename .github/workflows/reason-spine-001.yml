@@ -1,0 +1,93 @@
+name: MOTIF Reasoning Spine 001 + unmerged branch garden
+
+on:
+  pull_request:
+    paths:
+      - 'motif/**'
+      - 'tests/test_spine.py'
+      - 'examples/reason-spine-001.json'
+      - 'examples/merge-evidence-held.json'
+      - 'docs/REASONING-SPINE-BRANCH-GARDEN-001.md'
+      - '.github/workflows/reason-spine-001.yml'
+  push:
+    paths:
+      - 'motif/**'
+      - 'tests/test_spine.py'
+      - 'examples/reason-spine-001.json'
+      - 'examples/merge-evidence-held.json'
+      - '.github/workflows/reason-spine-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pure-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Audit and execute authored local tests
+        run: python -m unittest discover -s tests -v
+      - name: Run independent classical and MOTIF planning policies
+        run: |
+          python -m motif.cli compare --case examples/reason-spine-001.json > /tmp/motif-comparison.json
+          python -m motif.cli verdict --evidence examples/merge-evidence-held.json > /tmp/motif-verdict.json
+          python - <<'PY'
+          import json
+          matrix = json.load(open('/tmp/motif-comparison.json'))
+          assert matrix['motif_spine']['result'] == 'PROPOSE_PROBE'
+          assert matrix['real_pretrained_llm']['status'].startswith('NOT_RUN')
+          assert json.load(open('/tmp/motif-verdict.json'))['automatic_merge'] is False
+          print('LOCAL COMPARISON: passed; NO claimed LLM result, NO automatic merge')
+          PY
+
+  live-readonly-branch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Discover all remote branch heads (no execution)
+        run: |
+          python -m motif.cli branches --all > /tmp/motif-visible-branches.json
+          python - <<'PY'
+          import json
+          v = json.load(open('/tmp/motif-visible-branches.json'))
+          assert v['total_observed'] >= 1
+          assert all(p['status'] == 'PENCIL_SOURCE_POINTER_NOT_ADMITTED' for p in v['entries'])
+          print('LIVE SOURCE POINTERS:', v['total_observed'])
+          PY
+      - name: Read actual unmerged MOTIF passport and use only its held planning lens
+        run: |
+          python -m motif.cli inspect \
+            --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 \
+            --path experiments/reciprocal-004/capability-passport.v1.json \
+            --case examples/reason-spine-001.json > /tmp/motif-held-influence.json
+          python - <<'PY'
+          import json
+          v = json.load(open('/tmp/motif-held-influence.json'))
+          assert v['inspection']['execution'] == 'NONE'
+          assert v['inspection']['disposition'] == 'HELD_SOURCE_DATA_ONLY'
+          assert v['advisory_lens']['execution'] == 'NONE'
+          assert v['reasoning']['next_voluntary_question']['requires_opt_in'] is True
+          assert v['reasoning']['external_action'] == 'NONE'
+          print('NONMERGED BRANCH ACTUALLY INFLUENCED HELD PLAN; NO SOURCE EXECUTION')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-spine-001-held-branch-evidence
+          path: |
+            /tmp/motif-visible-branches.json
+            /tmp/motif-held-influence.json
+          retention-days: 14
