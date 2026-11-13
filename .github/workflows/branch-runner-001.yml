@@ -1,0 +1,81 @@
+name: MOTIF branch algorithms — reviewed sandbox trial 001
+
+on:
+  pull_request:
+    paths:
+      - 'motif/branch_source.py'
+      - 'motif/branch_runner.py'
+      - 'tests/test_branch_runtime.py'
+      - '.github/workflows/branch-runner-001.yml'
+  push:
+    paths:
+      - 'motif/branch_source.py'
+      - 'motif/branch_runner.py'
+      - 'tests/test_branch_runtime.py'
+      - '.github/workflows/branch-runner-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  held-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify source, path and archive boundaries
+        run: python -m unittest discover -s tests -v
+      - name: Actually inspect original JS on nonmerged research branch
+        run: |
+          python -m motif.branch_source \
+            --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 \
+            --path experiments/reciprocal-003/reason_loop.js > /tmp/branch-code-witness.json
+          python - <<'PY'
+          import json
+          v=json.load(open('/tmp/branch-code-witness.json'))
+          assert v['bytes'] > 0
+          assert v['execution'] is False
+          assert v['status'] == 'HELD_UNMERGED_CODE_WITNESS_NOT_EXECUTED'
+          print('ACTUAL UNMERGED SOURCE PINNED:', v['source']['sha'], v['sha256'])
+          PY
+      - name: Preview independent runtime profile (must not execute)
+        run: |
+          python -m motif.branch_runner \
+            --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 \
+            --profile reciprocal-004-smoke > /tmp/branch-profile.json
+          python - <<'PY'
+          import json
+          v=json.load(open('/tmp/branch-profile.json'))
+          assert v['execution_requested'] is False
+          assert v['automatic_merge'] is False
+          print('SAFE EXECUTION PLAN:', v['profile'])
+          PY
+      - name: Execute original nonmerged Node test suites with isolated resources
+        run: |
+          python -m motif.branch_runner \
+            --ref experiment/reciprocal-004-ecosystem-crosswire-20261112 \
+            --profile reciprocal-004-smoke \
+            --execute > /tmp/branch-test-result.json
+          python - <<'PY'
+          import json
+          v=json.load(open('/tmp/branch-test-result.json'))
+          assert v['status'] == 'HELD_NATIVE_TESTS_PASSED'
+          assert v['executed_source_code_in_isolated_container'] is True
+          assert v['automatic_merge'] is False
+          print('ORIGINAL NONMERGED ALGORITHMS ACTUALLY TESTED:', v['source']['sha'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motif-reviewed-unmerged-runtime-001
+          path: |
+            /tmp/branch-code-witness.json
+            /tmp/branch-profile.json
+            /tmp/branch-test-result.json
+          retention-days: 14
