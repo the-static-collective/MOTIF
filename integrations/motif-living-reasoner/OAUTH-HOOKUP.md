@@ -70,3 +70,24 @@ Tests reject missing/wrong token, wrong signer, audience, issuer, user, scope, e
 - [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server)
 - [MCP server development](https://developers.openai.com/plugins/build/mcp-server)
 - [Auth0 MCP resource parameter compatibility](https://support.auth0.com/center/s/article/mcp-audience-error-with-auth0)
+
+## Skills-only plugin packaging seam (2026-11-14)
+
+There is a **separate, already installed personal MOTIF · Living Reasoner plugin** containing research workflows and source-grounded branch inspection. Its skills-only v0.2.0 release adds an `mcp-hookup` readiness workflow pointing here; it **does not** attach an actual MCP server or install these 11 tools.
+
+Current [OpenAI plugin submission guidance](https://developers.openai.com/plugins/deploy/submission) says that adding an MCP server to an existing skills-only plugin is **not yet supported**. Accordingly, do not patch an `mcp.json` onto the existing skills-only installed release and announce it as connected. Once the server has an authenticated, tested stable endpoint, package the *same reviewed skills* into a **new MCP-backed plugin** with remote streamable-HTTP server configuration from the initial ZIP, or use another explicitly supported platform migration flow if guidance changes. Preserve the previous plugin until its successor demonstrably works.
+
+A deployment recipe is not itself a deployed URL. A CI-passing stub verifier is not an IdP authorization-code/PKCE handshake. The exact external host, provider, OAuth registration, signed access-token claims, ChatGPT plugin creation/installation and owner acceptance still need independent verification. First live release remains **11 read-only tools**, with all seven existing write/native-execution capabilities explicitly denied.
+
+### Release verification before declaring READY
+
+- [ ] GitHub source ref, 18-tool package SHA-256 and current gateway SHA are pinned.
+- [ ] Pinned package and security CI complete successfully on current head.
+- [ ] Real OAuth provider registration/metadata, audience binding and one-owner signed-token checks pass.
+- [ ] HTTPS `/healthz`, protected-resource metadata and unauthenticated `/mcp` 401 challenge pass.
+- [ ] One authenticated `initialize → tools/list → forest_goals` ChatGPT invocation works; exactly 11 read tools appear.
+- [ ] Negative calls to feedback, session-start and native-execute tools are blocked.
+- [ ] Private `/data` persistence and secret-free logs survive a controlled restart; no Docker socket is exposed.
+- [ ] The MCP-backed plugin was created/installed as a supported new package; original skills-only release was not silently replaced.
+
+**Status when authored:** source prepared and prior CI observed green; identity provider, deployed host, and live ChatGPT binding not yet verified.
