@@ -184,14 +184,26 @@ def call_tool(name, args):
         hypotheses = args["hypotheses"]
         if not isinstance(test_id, str) or not 1 <= len(test_id) <= 100:
             raise ValueError("test_id required (max 100 characters)")
+        if not isinstance(hypotheses, list) or not 1 <= len(hypotheses) <= 32:
+            raise ValueError("1–32 authored hypotheses required")
+        # Information gain is about ONE target test. Other authored predictions
+        # may remain in the input but cannot introduce unrecognized test IDs.
+        projected = []
+        for h in hypotheses:
+            if not isinstance(h, dict) or not isinstance(h.get("predictions"), dict):
+                raise ValueError("Each hypothesis must contain predictions")
+            projected.append({
+                "id": h.get("id"),
+                "predictions": {test_id: h["predictions"].get(test_id, "unknown")},
+            })
         case = {"question": "Authored information-gain calculation",
                 "goal": "Compare purely hypothetical test outcomes",
-                "hypotheses": hypotheses, "tests": [{"id": test_id}]}
+                "hypotheses": projected, "tests": [{"id": test_id}]}
         validate_case(case)
         payload = {
             "schema": "motif.information-gain/v1",
             "test_id": test_id,
-            "bits": round(information_gain(hypotheses, test_id), 8),
+            "bits": round(information_gain(projected, test_id), 8),
             "truth_status": "ASSUMED_EQUAL_PRIORS_AUTHOR_SUPPLIED_PREDICTIONS",
         }
     elif name == "motif_merge_review":
