@@ -1,0 +1,50 @@
+name: MOTIF native read-only MCP aperture
+on:
+  pull_request:
+    paths:
+      - 'api/mcp.py'
+      - 'motif/**'
+      - 'tests/test_native_mcp.py'
+      - '.python-version'
+      - 'vercel.json'
+      - 'docs/MOTIF-NATIVE-READONLY-MCP-001.md'
+      - '.github/workflows/motif-native-readonly-mcp.yml'
+  push:
+    paths:
+      - 'api/mcp.py'
+      - 'motif/**'
+      - 'tests/test_native_mcp.py'
+      - '.python-version'
+      - 'vercel.json'
+      - '.github/workflows/motif-native-readonly-mcp.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile native MCP entrypoint
+        run: python -m py_compile api/mcp.py
+      - name: Run native source plus HTTP and strict security tests
+        run: |
+          python -m unittest discover -s tests -p 'test_native_mcp.py' -v
+          python -m unittest discover -s tests -p 'test_spine.py' -v
+      - name: Contracted tool count and no native execution
+        run: |
+          python - <<'PY'
+          from api.mcp import dispatch
+          tools=dispatch({"jsonrpc":"2.0","id":1,"method":"tools/list"})["result"]["tools"]
+          assert len(tools)==5
+          assert all(x["annotations"]["readOnlyHint"] for x in tools)
+          blocked=dispatch({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"forest_execute_reviewed","arguments":{"approval":"yes"}}})
+          assert blocked["error"]["code"]==-32602
+          print("FIVE actual read-only MOTIF tools; NO method executor exposed")
+          PY
