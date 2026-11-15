@@ -1,0 +1,77 @@
+name: MOTIF live native MCP HTTP smoke (public read-only only)
+on:
+  push:
+    paths:
+      - '.github/workflows/motif-native-live-http-smoke.yml'
+      - 'api/mcp.py'
+      - 'motif/reason_spine.py'
+      - 'motif/branch_garden.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Actual HTTPS GET and POST against deployed MOTIF native Python
+        env:
+          MOTIF_ORIGIN: https://motif-native-spine-readonly-theotherlucasv-1250s-projects.vercel.app
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          origin=os.environ["MOTIF_ORIGIN"]
+          def get(path):
+              with urllib.request.urlopen(origin+path,timeout=15) as r:
+                  assert r.status==200
+                  return json.load(r)
+          def post(method, params=None):
+              req=urllib.request.Request(
+                 origin+"/mcp",
+                 data=json.dumps({"jsonrpc":"2.0","id":7,"method":method,
+                                  "params":params or {}}).encode(),
+                 headers={"Content-Type":"application/json",
+                          "Accept":"application/json","MCP-Protocol-Version":"2025-06-18"})
+              with urllib.request.urlopen(req,timeout=15) as r:
+                  assert r.status==200
+                  return json.load(r)
+          health=get("/health")
+          assert health["status"]=="READY_READONLY",health
+          assert health["forest_oauth_gateway"]=="NOT_CONNECTED"
+          init=post("initialize",{"protocolVersion":"2025-06-18",
+                 "clientInfo":{"name":"motif-remote-smoke","version":"1"},
+                 "capabilities":{}})
+          assert init["result"]["protocolVersion"]=="2025-06-18",init
+          tools=post("tools/list")["result"]["tools"]
+          assert len(tools)==5,[x["name"] for x in tools]
+          assert all(x["annotations"]["readOnlyHint"] for x in tools)
+          case={"schema":"motif.reason-case/v1",
+                "question":"Which synthetic drawing change explains mismatch?",
+                "goal":"Choose a low-cost next observation",
+                "hypotheses":[
+                  {"id":"camera","predictions":{"angle":"yes","post":"no"}},
+                  {"id":"post","predictions":{"angle":"no","post":"yes"}},
+                  {"id":"corner","predictions":{"angle":"no","post":"no"}}],
+                "tests":[{"id":"angle","cost":0.04,"risk":0},
+                         {"id":"post","cost":0.12,"risk":0.1}]}
+          result=post("tools/call",{"name":"motif_analyze_case",
+             "arguments":{"case":case}})["result"]
+          assert not result["isError"],result
+          assert result["structuredContent"]["next_probe"]["id"]=="angle",result
+          assert result["structuredContent"]["external_action"]=="NONE"
+          comparison=post("tools/call",{"name":"motif_compare_policies",
+             "arguments":{"case":case}})["result"]["structuredContent"]
+          assert comparison["real_pretrained_llm"]["status"].startswith("NOT_RUN")
+          blocked=post("tools/call",{"name":"forest_execute_reviewed",
+             "arguments":{"approval":"yes"}})
+          assert blocked["error"]["code"]==-32602,blocked
+          hold=post("tools/call",{"name":"motif_analyze_case",
+             "arguments":{"case":{"invalid":"yes"}}})["result"]
+          assert hold["isError"] and hold["structuredContent"]["status"]=="HOLD"
+          print("NATIVE_RUN_VERIFIED: actual deployed Python MCP endpoint")
+          print("5 exposed read-only tools; native analyze/compare executed; unsafe execution denied.")
+          print("No OAuth Forest, no private data, no merges.")
+          PY
