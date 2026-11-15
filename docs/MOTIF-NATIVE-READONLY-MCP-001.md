@@ -26,7 +26,7 @@ This is a **small independent, safe first live aperture**: a stateless HTTPS MCP
 - `POST /api/mcp`: equivalent underlying Python function.
 - `vercel.json` rewrites `/mcp` and `/health` to that Python function.
 
-**Host:** Vercel project linked to `the-static-collective/MOTIF`, production branch main, Python 3.11. Project name can be `motif-native-readonly-mcp`. This project is independent of an unmerged OAuth gateway and requires no Railway persistent disk.
+**Host:** Vercel project linked to `the-static-collective/MOTIF`, production branch main, Python 3.12 (Vercel-supported runtime; CI also tests canonical source on 3.11). Project name can be `motif-native-readonly-mcp`. This project is independent of an unmerged OAuth gateway and requires no Railway persistent disk.
 
 ## Security/operating boundary
 
