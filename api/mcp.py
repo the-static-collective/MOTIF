@@ -262,7 +262,7 @@ def dispatch(envelope):
         return result(id_, {"tools": TOOL_SPECS})
     if method == "tools/call":
         name = params.get("name")
-        if name not in TOOLS_BY_NAME:
+        if not isinstance(name, str) or name not in TOOLS_BY_NAME:
             return rpc_error(id_, -32602, "Tool is unavailable: no writes or unreviewed execution")
         try:
             payload = call_tool(name, params.get("arguments", {}))
