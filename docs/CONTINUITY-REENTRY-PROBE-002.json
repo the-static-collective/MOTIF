@@ -1,0 +1,73 @@
+{
+  "schema": "motif.continuity-probe-descendant/v1",
+  "parent": "docs/CONTINUITY-REENTRY-REASONING-001.json",
+  "owner": "the-static-collective/MOTIF",
+  "date": "2026-11-19",
+  "status": "MANUAL_AND_LOCAL_TEST_ONLY",
+  "question": "Can a source-driven return packet reliably work across one garden of public and authorized private organs without creating false status or a self-refresh loop?",
+  "goal": "Preserve owner decisions and current code status without README upkeep and measure actual re-entry in fresh chats.",
+  "observations": [
+    {
+      "kind": "USER_REPORTED",
+      "claim": "One garden with many organs; do not force conventional product divisions. Private repos count. README can be optional."
+    },
+    {
+      "kind": "OBSERVED",
+      "claim": "Authenticated GitHub listing returned 110 visible repositories, including 18 private, in two pages; public atlas reported 92 public."
+    },
+    {
+      "kind": "OBSERVED",
+      "claim": "GHoT Garden Pulse #139 merged, includes source-driven generator and read-only private-aware inventory.",
+      "source": "https://github.com/the-static-collective/GHoT/pull/139"
+    },
+    {
+      "kind": "LOCAL_TESTED",
+      "claim": "Three Python unittest fixture tests passed: include private repos, paginate 110 entries, and exclude source-refresh commit from generated status.",
+      "source": "https://github.com/the-static-collective/GHoT/blob/main/garden/tests/test_pulse.py"
+    },
+    {
+      "kind": "HELD",
+      "claim": "Scheduled workflow, private cross-repo runtime discovery and fresh-chat end-to-end retrieval remain unverified."
+    }
+  ],
+  "rival_models": [
+    {
+      "id": "H1",
+      "hypothesis": "The missing trigger is retrieval, not persistence.",
+      "falsifier": "Fresh chat correctly retrieves sources unaided but still loses recorded intent."
+    },
+    {
+      "id": "H2",
+      "hypothesis": "Status pages mislead because they are static or self-refreshing.",
+      "falsifier": "Stable deterministic pulse with explicit PR/deployment distinctions still drifts at the same rate."
+    },
+    {
+      "id": "H3",
+      "hypothesis": "Private repo exclusion was responsible for missing cross-project context.",
+      "falsifier": "Full authorized private/public retrieval adds no relevant missing decisions in matched prompts."
+    },
+    {
+      "id": "H4",
+      "hypothesis": "Foundation/intent capture remains the limiting step even with auto status.",
+      "falsifier": "Source-derived GitHub facts alone recover all recorded user corrections."
+    },
+    {
+      "id": "H5",
+      "hypothesis": "One high-level navigator is enough.",
+      "falsifier": "Task-specific source retrieval consistently outperforms a global index dump, keeping authority and privacy bounded."
+    }
+  ],
+  "next_probe": "Blind new conversation: ask about a current HUMKIN radio requirement and its relationship to private Groove Rooms return-address and GHoT task receipts; compare with baseline that sees only public GitBook. Require exact private/public coverage, source version, latest correction, PR state and next test.",
+  "expected_failure_modes": [
+    "Private repo not discovered despite authorization",
+    "Unmerged PR treated as deployed",
+    "Owner intent replaced by inferred promotional README",
+    "Public metadata leakage",
+    "Source-refresh infinite loop",
+    "Model claims successful tool run without evidence"
+  ],
+  "native_motif_executed": false,
+  "baseline_executed": false,
+  "field_tested": false,
+  "admission": "none"
+}
