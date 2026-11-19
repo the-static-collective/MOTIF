@@ -1,0 +1,167 @@
+{
+  "schema": "motif.plugin-reasoning-receipt/v0.1",
+  "note": "Manually coordinated MOTIF-inspired hypothesis receipt; NOT a native MOTIF run, graph admission, trained-model result, or verified intervention.",
+  "created_at": "2026-11-19T19:07:35Z",
+  "question": "What explains rapid loss of foundational Static Collective project context between chats or within hours, and which intervention can measurably improve re-entry?",
+  "consequential_goal": "Recover latest project truth and explicit corrections without burdening the human with historical reconstruction or promoting proposals into deployed facts.",
+  "owner": "the-static-collective/MOTIF (proposed experiment; owner approval required)",
+  "status": "HELD",
+  "observed_sources": [
+    {
+      "repository": "the-static-collective/MOTIF",
+      "ref": "main",
+      "path": "README.md",
+      "commit_sha": "",
+      "content_blob_sha": "3b2fd5e866757b3735000e94ca670e5b00e7b285",
+      "observed_at": "2026-11-19",
+      "scope": "MOTIF reasoning spine and source/test boundaries"
+    },
+    {
+      "repository": "the-static-collective/MOTIF",
+      "ref": "main",
+      "path": "docs/REASONING-SPINE-BRANCH-GARDEN-001.md",
+      "commit_sha": "",
+      "content_blob_sha": "2e01102c9ebbc9c7b9fbe9a7bd2a18a80ba23641",
+      "observed_at": "2026-11-19"
+    },
+    {
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "ref": "main",
+      "path": "witness/README.md",
+      "commit_sha": "",
+      "content_blob_sha": "321ee228ec52f636acd6cedaa6fbf4c2b1096978",
+      "observed_at": "2026-11-19"
+    },
+    {
+      "repository": "the-static-collective/What-is-the-static-collective-",
+      "ref": "main",
+      "path": "atlas/generated/README.md",
+      "commit_sha": "",
+      "observed_at": "2026-11-19",
+      "source_locator": "https://the-static-collective.gitbook.io/the-static-collective-docs/living-git-map/atlas/generated"
+    },
+    {
+      "repository": "the-static-collective/HUMKIN",
+      "ref": "unknown",
+      "path": "PR #166",
+      "commit_sha": "",
+      "observed_at": "2026-11-19",
+      "source_locator": "https://github.com/the-static-collective/HUMKIN/pull/166"
+    },
+    {
+      "repository": "the-static-collective/HUMKIN",
+      "ref": "unknown",
+      "path": "PR #165",
+      "commit_sha": "",
+      "observed_at": "2026-11-19",
+      "source_locator": "https://github.com/the-static-collective/HUMKIN/pull/165"
+    }
+  ],
+  "claims": [
+    {
+      "id": "O1",
+      "kind": "OBSERVED",
+      "text": "Existing witness notes explicitly warn that external persistence is not automatic retrieval.",
+      "source_roots": [
+        "witness-index"
+      ],
+      "scope": "Cross-chat return"
+    },
+    {
+      "id": "O2",
+      "kind": "OBSERVED",
+      "text": "Public atlas cut contained 92 public repos, 3127 branch refs, 1739 open PRs; proposed code is abundant and can be confused with accepted implementation.",
+      "source_roots": [
+        "public-atlas"
+      ],
+      "scope": "Public inventory only"
+    },
+    {
+      "id": "O3",
+      "kind": "OBSERVED",
+      "text": "HUMKIN PR #166 was open and PR #165 merged when checked; these do not establish live behavior.",
+      "source_roots": [
+        "humkin-pr-166",
+        "humkin-pr-165"
+      ],
+      "scope": "Same-day snapshot"
+    },
+    {
+      "id": "H1",
+      "kind": "HYPOTHESIS",
+      "text": "Missing fresh-chat retrieval is the dominant cause of reported continuity failures.",
+      "source_roots": [
+        "user-report",
+        "witness-index"
+      ],
+      "scope": "Requires blind re-entry study"
+    },
+    {
+      "id": "H2",
+      "kind": "HYPOTHESIS",
+      "text": "Source freshness and status misclassification are dominant: agents cite stale summaries or treat open PRs as deployed.",
+      "source_roots": [
+        "public-atlas",
+        "humkin-pr-166",
+        "humkin-pr-165"
+      ],
+      "scope": "Requires truth-labeled status transitions"
+    },
+    {
+      "id": "H3",
+      "kind": "HYPOTHESIS",
+      "text": "Important human corrections and foundational decisions never reach a durable project-owned carrier.",
+      "source_roots": [
+        "user-report"
+      ],
+      "scope": "Requires per-work-unit correction capture audit"
+    },
+    {
+      "id": "H4",
+      "kind": "HYPOTHESIS",
+      "text": "A recent model or product update independently reduced re-entry fidelity.",
+      "source_roots": [
+        "user-report"
+      ],
+      "scope": "No controlled before/after data; don't attribute causality"
+    },
+    {
+      "id": "P1",
+      "kind": "DERIVED",
+      "text": "Any adequate remedy must independently test persistence, retrieval, state reconciliation, and correction retention. Saving more pages alone cannot guarantee re-entry.",
+      "source_roots": [
+        "witness-index",
+        "public-atlas",
+        "user-report"
+      ],
+      "scope": "Reasoned design conclusion, not measured intervention"
+    }
+  ],
+  "actual_executions": [],
+  "baselines": [],
+  "counterexamples": [
+    "An assistant that can retrieve an old status page but not check the PR state will still drift.",
+    "An assistant with fresh GitHub status but no recorded human constraint can still violate the foundational design.",
+    "A fresh chat that uses a supplied link is not an unbiased test of whether discovery works independently.",
+    "Two repeated wiki summaries copying one same repo are not independent evidence.",
+    "An open pull request, test fixture, successful merge, and field test are four different observations."
+  ],
+  "unresolved_conditions": [
+    "Unknown frequency and causal breakdown of reported drift; no platform-internals access.",
+    "No native MOTIF solver run on this case; no matched classical-control outcome.",
+    "Need owner-approved policy for private/public project metadata and action triggers.",
+    "Need blind multi-chat replication and time-bounded source checks before declaring solution."
+  ],
+  "authorization": {
+    "status": "REVIEW_PENDING",
+    "owner": "Per-project owners / human reviewer",
+    "scope": "Prototype receipts and read-only evaluation; no automatic merge, public disclosure of private state, or memory-ledger admission."
+  },
+  "next_voluntary_probe": {
+    "question": "In a fresh, unbriefed chat, can the proposed source-link and status packet recover three projects' last verified state, latest correction, held PRs and next lawful move after a same-day PR change?",
+    "expected_decision_change": "If retrieval, state accuracy, and correction retention succeed across pilot projects, consider adopting a project-owner approved minimal handoff contract; otherwise revise the trigger or source layout.",
+    "budget": "Pilot 3 projects; 2 cuts/project; compare against normal chat-reentry baseline with same question and access, blinded to expected facts.",
+    "stop_condition": "HOLD if a private source would be exposed, project status cannot be independently verified, or the agent fabricates a field test."
+  },
+  "return_condition": "Reinspect exact source state and live PR metadata before reuse. New evidence creates a descendant receipt, never edits the historical outcome."
+}
