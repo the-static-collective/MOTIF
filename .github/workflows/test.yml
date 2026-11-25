@@ -37,6 +37,11 @@ jobs:
       - name: Test 009
         working-directory: experiments/009
         run: python -m unittest -v test_experimenter.py
+      - name: Test 015 joint multiplex inquiry
+        working-directory: experiments/015
+        run: |
+          python -m unittest -v test_multiplex.py
+          python demo.py
       - name: Reproduce 014W exact joint uncertain-witness inference
         working-directory: experiments/014w
         run: |
