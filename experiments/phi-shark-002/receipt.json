@@ -1,0 +1,91 @@
+{
+  "version": 2,
+  "seed": 261126,
+  "histories": 128,
+  "statesPerHistory": 14,
+  "roundTrips": 512,
+  "results": [
+    {
+      "regime": "lucas",
+      "cases": 32,
+      "exact": 128,
+      "meanArchiveBytes": {
+        "lucas": 2571.1875,
+        "linear": 1838.59375,
+        "delta": 1357.34375,
+        "snapshot": 2545.4375
+      }
+    },
+    {
+      "regime": "linear",
+      "cases": 32,
+      "exact": 128,
+      "meanArchiveBytes": {
+        "lucas": 2863.5625,
+        "linear": 1575.4375,
+        "delta": 1374.1875,
+        "snapshot": 2543.03125
+      }
+    },
+    {
+      "regime": "walk",
+      "cases": 32,
+      "exact": 128,
+      "meanArchiveBytes": {
+        "lucas": 2850.28125,
+        "linear": 1755.15625,
+        "delta": 1227.40625,
+        "snapshot": 2538.5625
+      }
+    },
+    {
+      "regime": "independent",
+      "cases": 32,
+      "exact": 128,
+      "meanArchiveBytes": {
+        "lucas": 2851.90625,
+        "linear": 1830.40625,
+        "delta": 1320.9375,
+        "snapshot": 2538.375
+      }
+    }
+  ],
+  "tamper": {
+    "removedScar": 128,
+    "independentWitnessRefusals": 128,
+    "validButWrongWithoutWitness": 16,
+    "projectionCollisions": 128
+  },
+  "transfer": {
+    "hypotheses": [
+      "a",
+      "b",
+      "and",
+      "or",
+      "never",
+      "always"
+    ],
+    "trainingCases": 4,
+    "selected": [
+      "and"
+    ],
+    "heldOut": 64,
+    "scores": {
+      "a": 48,
+      "b": 48,
+      "and": 64,
+      "or": 32,
+      "never": 48,
+      "always": 16
+    },
+    "newProposedEdges": 16,
+    "scope": "finite hypothesis family; fresh identities only; no authority, semantic emergence or out-of-family transfer"
+  },
+  "limits": [
+    "Synthetic graph generator constructed with known regimes; not independently authored heldouts.",
+    "Edge weights are synthetic counts, not beliefs; contradictory signed stances coexist.",
+    "Canonical graph strings held externally as independent exact witness; witness storage excluded from archive sizes, no cryptographic authentication claimed.",
+    "A raw snapshot and delta are strong controls; no universal phi advantage.",
+    "A learned two-hop rule proposes edges only; no graph mutation or model continuity claim."
+  ]
+}
