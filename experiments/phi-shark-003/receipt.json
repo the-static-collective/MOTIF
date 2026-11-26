@@ -1,0 +1,148 @@
+{
+  "version": 3,
+  "seed": 26112603,
+  "histories": 48,
+  "queries": 1430,
+  "representationReplays": 192,
+  "newEdgeEvents": 184,
+  "results": [
+    {
+      "kind": "binary",
+      "worlds": 16,
+      "methods": {
+        "uniform": {
+          "neighborRecall": 0.4838709677419355,
+          "relativeDistanceError": 0.21082336140420824,
+          "meanRecipeBytes": 210,
+          "meanMaterializedCoordinateBytes": 1272,
+          "crosslinkRecall": null,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "phi": {
+          "neighborRecall": 0.1935483870967739,
+          "relativeDistanceError": 0.26956881011480105,
+          "meanRecipeBytes": 206,
+          "meanMaterializedCoordinateBytes": 1312,
+          "crosslinkRecall": null,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "hyperbolic": {
+          "neighborRecall": 1,
+          "relativeDistanceError": 0.17848206793969712,
+          "meanRecipeBytes": 213,
+          "meanMaterializedCoordinateBytes": 1286,
+          "crosslinkRecall": null,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "graph": {
+          "neighborRecall": 1,
+          "relativeDistanceError": 0,
+          "meanRecipeBytes": 208,
+          "meanMaterializedCoordinateBytes": 0,
+          "crosslinkRecall": null,
+          "queries": 496,
+          "meanCandidateScan": 62
+        }
+      }
+    },
+    {
+      "kind": "irregular",
+      "worlds": 16,
+      "methods": {
+        "uniform": {
+          "neighborRecall": 0.43835616438356145,
+          "relativeDistanceError": 0.24560594446443526,
+          "meanRecipeBytes": 187.625,
+          "meanMaterializedCoordinateBytes": 1004.6875,
+          "crosslinkRecall": null,
+          "queries": 438,
+          "meanCandidateScan": 77.56392694063926
+        },
+        "phi": {
+          "neighborRecall": 0.2136605783866059,
+          "relativeDistanceError": 0.2834193935244004,
+          "meanRecipeBytes": 183.625,
+          "meanMaterializedCoordinateBytes": 1107.125,
+          "crosslinkRecall": null,
+          "queries": 438,
+          "meanCandidateScan": 77.56392694063926
+        },
+        "hyperbolic": {
+          "neighborRecall": 0.7617960426179605,
+          "relativeDistanceError": 0.15476855377918228,
+          "meanRecipeBytes": 190.625,
+          "meanMaterializedCoordinateBytes": 1072.875,
+          "crosslinkRecall": null,
+          "queries": 438,
+          "meanCandidateScan": 77.56392694063926
+        },
+        "graph": {
+          "neighborRecall": 1,
+          "relativeDistanceError": 0,
+          "meanRecipeBytes": 185.625,
+          "meanMaterializedCoordinateBytes": 0,
+          "crosslinkRecall": null,
+          "queries": 438,
+          "meanCandidateScan": 77.56392694063926
+        }
+      }
+    },
+    {
+      "kind": "crosslinked",
+      "worlds": 16,
+      "methods": {
+        "uniform": {
+          "neighborRecall": 0.4491359447004608,
+          "relativeDistanceError": 0.33638857119556415,
+          "meanRecipeBytes": 297.6875,
+          "meanMaterializedCoordinateBytes": 1272,
+          "crosslinkRecall": 0.02127659574468085,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "phi": {
+          "neighborRecall": 0.19558851766513038,
+          "relativeDistanceError": 0.3730544605961715,
+          "meanRecipeBytes": 293.6875,
+          "meanMaterializedCoordinateBytes": 1312,
+          "crosslinkRecall": 0.031914893617021274,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "hyperbolic": {
+          "neighborRecall": 0.8718990015360985,
+          "relativeDistanceError": 0.2918557597229347,
+          "meanRecipeBytes": 300.6875,
+          "meanMaterializedCoordinateBytes": 1286,
+          "crosslinkRecall": 0.015957446808510637,
+          "queries": 496,
+          "meanCandidateScan": 62
+        },
+        "graph": {
+          "neighborRecall": 1,
+          "relativeDistanceError": 0,
+          "meanRecipeBytes": 295.6875,
+          "meanMaterializedCoordinateBytes": 0,
+          "crosslinkRecall": 1,
+          "queries": 496,
+          "meanCandidateScan": 62
+        }
+      }
+    }
+  ],
+  "collision": {
+    "sameCoordinates": true,
+    "differentTopology": true
+  },
+  "limitations": [
+    "Synthetic rooted growth, fixed depth five, fixed angular interval recipe; not optimized embeddings.",
+    "Uniform and phi use Euclidean distance; hyperbolic uses Poincare disk distance with fixed log(2) radial scale; no curvature tuning.",
+    "Graph uses exact shortest paths on the authoritative edge set and is a reference, not a learned embedding.",
+    "Scale fitted on even-source pairs; odd-source evaluation shares the same graphs, not independent heldout worlds. All methods scan every candidate; no latency claims.",
+    "Recipe bytes include parent list, extra links and view label; angular intervals and arity reconstructed from ordered parent children in principle, not independently replayed here; only topology replay tested. Coordinate byte counts rounded for illustrative materialization, not included in recipe size.",
+    "No historical source commitments, graph deletions, semantic retrieval or novel relationship prediction; crosslinks are supplied events, not discoveries."
+  ]
+}
