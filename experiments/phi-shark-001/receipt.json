@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "seed": 240611,
+  "dimensions": 4,
+  "statesPerCase": 16,
+  "cases": 200,
+  "roundTrips": 800,
+  "results": [
+    {
+      "regime": "lucas_exact",
+      "cases": 40,
+      "methods": {
+        "lucas": {
+          "exact": 40,
+          "meanJSONBytes": 96.3,
+          "meanResidualEvents": 0
+        },
+        "linear": {
+          "exact": 40,
+          "meanJSONBytes": 361.875,
+          "meanResidualEvents": 14
+        },
+        "delta": {
+          "exact": 40,
+          "meanJSONBytes": 371.2,
+          "meanResidualEvents": 15
+        },
+        "snapshot": {
+          "exact": 40,
+          "meanJSONBytes": 293.875,
+          "meanResidualEvents": 0
+        }
+      }
+    },
+    {
+      "regime": "lucas_innovations",
+      "cases": 40,
+      "methods": {
+        "lucas": {
+          "exact": 40,
+          "meanJSONBytes": 144.975,
+          "meanResidualEvents": 3
+        },
+        "linear": {
+          "exact": 40,
+          "meanJSONBytes": 360.75,
+          "meanResidualEvents": 14
+        },
+        "delta": {
+          "exact": 40,
+          "meanJSONBytes": 368.75,
+          "meanResidualEvents": 15
+        },
+        "snapshot": {
+          "exact": 40,
+          "meanJSONBytes": 291.475,
+          "meanResidualEvents": 0
+        }
+      }
+    },
+    {
+      "regime": "linear_innovations",
+      "cases": 40,
+      "methods": {
+        "lucas": {
+          "exact": 40,
+          "meanJSONBytes": 343.35,
+          "meanResidualEvents": 14
+        },
+        "linear": {
+          "exact": 40,
+          "meanJSONBytes": 133.625,
+          "meanResidualEvents": 3
+        },
+        "delta": {
+          "exact": 40,
+          "meanJSONBytes": 317.675,
+          "meanResidualEvents": 15
+        },
+        "snapshot": {
+          "exact": 40,
+          "meanJSONBytes": 266.025,
+          "meanResidualEvents": 0
+        }
+      }
+    },
+    {
+      "regime": "random_walk",
+      "cases": 40,
+      "methods": {
+        "lucas": {
+          "exact": 40,
+          "meanJSONBytes": 320.475,
+          "meanResidualEvents": 14
+        },
+        "linear": {
+          "exact": 40,
+          "meanJSONBytes": 308.325,
+          "meanResidualEvents": 14
+        },
+        "delta": {
+          "exact": 40,
+          "meanJSONBytes": 308.225,
+          "meanResidualEvents": 15
+        },
+        "snapshot": {
+          "exact": 40,
+          "meanJSONBytes": 232.525,
+          "meanResidualEvents": 0
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "cases": 40,
+      "methods": {
+        "lucas": {
+          "exact": 40,
+          "meanJSONBytes": 307.425,
+          "meanResidualEvents": 14
+        },
+        "linear": {
+          "exact": 40,
+          "meanJSONBytes": 318.8,
+          "meanResidualEvents": 14
+        },
+        "delta": {
+          "exact": 40,
+          "meanJSONBytes": 306.525,
+          "meanResidualEvents": 15
+        },
+        "snapshot": {
+          "exact": 40,
+          "meanJSONBytes": 219.6,
+          "meanResidualEvents": 0
+        }
+      }
+    }
+  ],
+  "controls": {
+    "cassiniChecks": 22,
+    "singleStateCollision": [
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "missingResidual": {
+      "original": [
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0,
+          0
+        ]
+      ],
+      "decoded": [
+        [
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          9,
+          0,
+          0,
+          0
+        ]
+      ],
+      "detectedByIndependentComparison": true,
+      "detectedByDecoderAlone": false
+    },
+    "limitations": [
+      "Synthetic integer vectors, not semantic memory or model identity",
+      "JSON character count (ASCII fixtures) is representation-specific, not entropy or compression optimum",
+      "No cryptographic integrity or authenticated provenance; absence of residual is ambiguous without independent evidence",
+      "Exact reversibility is also available to other matched codecs; no special phi advantage is presumed"
+    ]
+  }
+}
